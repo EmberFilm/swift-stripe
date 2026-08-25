@@ -148,7 +148,7 @@ this. Run it locally with
 ### Stack frames
 
 `Stripe.Events.Event.Object` is an `indirect` enum whose decode is split across small
-`@inline(never)` `decodeGroupN` helpers. Both are load-bearing, not style.
+`@inline(never)` `decodeGroupN` helpers.
 
 A direct enum with 54 large payloads made the compiler reserve one frame sized for all of
 them: `init(from:)` was 47 KB in release (311 KB in debug) and `==` was 473 KB. musl gives a
@@ -156,15 +156,25 @@ pthread a **128 KiB** stack and NIO runs channel handlers on those threads, so a
 statically-linked Linux build segfaulted — exit 139, no Swift error — on any webhook event
 carrying a `data.object`. glibc and Darwin give 8 MiB and never showed it, tests included.
 
-Measure before changing this:
+Measured on aarch64-musl release, decoding one event on a thread of the given stack size:
 
-```bash
-swift build -c release --swift-sdk aarch64-swift-linux-musl
-# then disassemble and sum `sub sp, sp, #N` (including `, lsl #12`) per symbol
-```
+| | 128 KiB | 64 KiB |
+|---|---|---|
+| neither | segfault | segfault |
+| **`indirect` only** | **ok** | segfault |
+| split only | segfault | segfault |
+| both | ok | ok |
 
-Keep decode frames in the single-digit KB. `encode(to:)` is still ~41 KB — fine for the
-encode path, which nothing hot uses, but do not let the decode path regress to match it.
+**`indirect` is the fix**; the split on its own does nothing. The split is kept because
+`indirect` alone clears 128 KiB with no headroom, and the real call chain sits deeper than a
+bare decode — Hummingbird and NIO frames are already on the stack under it.
+
+To re-measure, build a small executable that decodes an event on a `Thread` with an explicit
+`stackSize` and run it on the target. Per-symbol frames come from disassembling the release
+build and summing `sub sp, sp, #N` (including `, lsl #12`).
+
+`encode(to:)` is still ~41 KB — fine for the encode path, which nothing hot uses, but do not
+let the decode path regress to match it.
 
 ## Behaviour worth knowing before changing it
 

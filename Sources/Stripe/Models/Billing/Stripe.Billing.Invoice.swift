@@ -50,8 +50,9 @@ extension Stripe.Billing {
         public var status: Stripe.Billing.Invoice.Status?
         /// The subscription that this invoice was prepared for, if any.
         ///
-        /// Removed from the top level in API version `2025-03-31.basil`; on that version and
-        /// later read ``parent`` instead, where Stripe now reports it.
+        /// Removed from the Invoice object in API version `2025-03-31.basil`. On that version
+        /// and later it always decodes to `nil` — read ``parent`` instead, where Stripe reports
+        /// it now. Kept for accounts still pinned to an older version.
         @ExpandableOf<Stripe.Billing.Subscription> public var subscription
         /// Details about the subscription that created this invoice.
         public var subscriptionDetails: Stripe.Billing.Invoice.SubscriptionDetails?
@@ -836,20 +837,26 @@ extension Stripe.Billing.Invoice {
         /// The subscription that generated this invoice.
         @ExpandableOf<Stripe.Billing.Subscription> public var subscription:
             Stripe.Billing.Subscription.ID?
-        /// The subscription's metadata as of the moment the invoice was created.
+        /// An immutable snapshot of the subscription's metadata as of invoice finalization.
+        /// Populated only for invoices created on or after 2023-06-29.
         public var metadata: [String: String]?
+        /// Only set on upcoming invoices that preview prorations: the time used to calculate them.
+        public var subscriptionProrationDate: Date?
 
         private enum CodingKeys: String, CodingKey {
             case subscription
             case metadata
+            case subscriptionProrationDate
         }
 
         public init(
             subscription: Stripe.Billing.Subscription.ID? = nil,
-            metadata: [String: String]? = nil
+            metadata: [String: String]? = nil,
+            subscriptionProrationDate: Date? = nil
         ) {
             self._subscription = Expandable(id: subscription)
             self.metadata = metadata
+            self.subscriptionProrationDate = subscriptionProrationDate
         }
     }
 

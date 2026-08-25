@@ -409,28 +409,36 @@ extension Stripe.Checkout.Sessions.Create {
     /// session will create — notably its `metadata`, which is what `customer.subscription.*`
     /// webhooks later carry, and the trial, which cannot be set after the fact.
     public struct SubscriptionData: Codable, Hashable, Sendable {
-        /// Anchors the billing cycle to a fixed date rather than the subscription's start.
+        /// A non-negative decimal between 0 and 100, with at most two decimal places. Requires
+        /// the request to be made on behalf of another account.
+        public let applicationFeePercent: Double?
+        /// A future timestamp to anchor the subscription's billing cycle.
         public let billingCycleAnchor: Date?
-        /// Tax rates applied to every line item on the subscription.
+        /// Tax rates applied to every subscription item that does not set its own.
         public let defaultTaxRates: [String]?
-        /// Displayed to the customer on invoices.
+        /// Displayed to the customer, including in the customer portal. Max 500 characters.
         public let description: String?
         /// Set on the created Subscription, not on the Session.
         public let metadata: [String: String]?
-        /// The connected account the subscription is created on behalf of.
+        /// The account on behalf of which to charge each of the subscription's invoices.
         public let onBehalfOf: String?
-        /// How to handle prorations when the billing cycle is anchored.
-        public let prorationBehavior: Stripe.Billing.Subscription.ProrationBehavior?
-        /// Splits each invoice with a connected account.
+        /// How to handle prorations resulting from ``billingCycleAnchor``.
+        public let prorationBehavior: ProrationBehavior?
+        /// Transfers each invoice's funds to a connected account.
         public let transferData: TransferData?
-        /// Ends the trial at a fixed date. Mutually exclusive with ``trialPeriodDays``.
+        /// Unix timestamp ending the trial. At least 48 hours out. Exclusive with
+        /// ``trialPeriodDays``.
         public let trialEnd: Date?
-        /// Trial length in days. Mutually exclusive with ``trialEnd``.
+        /// Trial length in days, at least 1. Exclusive with ``trialEnd``.
         public let trialPeriodDays: Int?
         /// What happens when a trial ends with no payment method on file.
-        public let trialSettings: Stripe.Billing.Subscription.Trial.Settings?
+        public let trialSettings: TrialSettings?
+
+        // Not modelled: `billing_cycle_anchor_config`, `billing_mode`, `invoice_settings` and
+        // `pending_invoice_item_interval`.
 
         private enum CodingKeys: String, CodingKey {
+            case applicationFeePercent
             case billingCycleAnchor
             case defaultTaxRates
             case description
@@ -444,17 +452,19 @@ extension Stripe.Checkout.Sessions.Create {
         }
 
         public init(
+            applicationFeePercent: Double? = nil,
             billingCycleAnchor: Date? = nil,
             defaultTaxRates: [String]? = nil,
             description: String? = nil,
             metadata: [String: String]? = nil,
             onBehalfOf: String? = nil,
-            prorationBehavior: Stripe.Billing.Subscription.ProrationBehavior? = nil,
+            prorationBehavior: ProrationBehavior? = nil,
             transferData: TransferData? = nil,
             trialEnd: Date? = nil,
             trialPeriodDays: Int? = nil,
-            trialSettings: Stripe.Billing.Subscription.Trial.Settings? = nil
+            trialSettings: TrialSettings? = nil
         ) {
+            self.applicationFeePercent = applicationFeePercent
             self.billingCycleAnchor = billingCycleAnchor
             self.defaultTaxRates = defaultTaxRates
             self.description = description
@@ -467,20 +477,59 @@ extension Stripe.Checkout.Sessions.Create {
             self.trialSettings = trialSettings
         }
 
-        /// Request-side transfer data: unlike the model's, `destination` is a plain id, never
-        /// an expanded account.
+        /// Checkout accepts only these two, unlike `Subscription.ProrationBehavior`, which also
+        /// has `always_invoice`.
+        public enum ProrationBehavior: String, Codable, Sendable {
+            case createProrations = "create_prorations"
+            case none
+        }
+
+        /// Request-side transfer data: `destination` is required and is a plain id, never an
+        /// expanded account.
         public struct TransferData: Codable, Hashable, Sendable {
             public let destination: Stripe.Connect.Account.ID
-            public let amountPercent: Int?
+            /// A non-negative decimal between 0 and 100, with at most two decimal places.
+            public let amountPercent: Double?
 
             private enum CodingKeys: String, CodingKey {
                 case destination
                 case amountPercent
             }
 
-            public init(destination: Stripe.Connect.Account.ID, amountPercent: Int? = nil) {
+            public init(
+                destination: Stripe.Connect.Account.ID,
+                amountPercent: Double? = nil
+            ) {
                 self.destination = destination
                 self.amountPercent = amountPercent
+            }
+        }
+
+        /// Request-side trial settings. Stripe requires both levels, so unlike the response
+        /// model's all-optional shape these are non-optional and cannot be sent half-built.
+        public struct TrialSettings: Codable, Hashable, Sendable {
+            public let endBehavior: EndBehavior
+
+            public init(endBehavior: EndBehavior) {
+                self.endBehavior = endBehavior
+            }
+
+            public struct EndBehavior: Codable, Hashable, Sendable {
+                public let missingPaymentMethod: MissingPaymentMethod
+
+                private enum CodingKeys: String, CodingKey {
+                    case missingPaymentMethod
+                }
+
+                public init(missingPaymentMethod: MissingPaymentMethod) {
+                    self.missingPaymentMethod = missingPaymentMethod
+                }
+            }
+
+            public enum MissingPaymentMethod: String, Codable, Sendable {
+                case cancel
+                case createInvoice = "create_invoice"
+                case pause
             }
         }
     }

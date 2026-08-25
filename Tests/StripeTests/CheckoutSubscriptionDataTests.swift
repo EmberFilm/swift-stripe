@@ -74,6 +74,28 @@ struct CheckoutSubscriptionDataTests {
         )
     }
 
+    @Test("a fractional percentage keeps its decimals on the wire")
+    func fractionalPercentages() throws {
+        // Stripe documents both of these as "a non-negative decimal between 0 and 100, with at
+        // most two decimal places" — an integer type would silently truncate them.
+        let pairs = try Self.pairs(
+            .init(
+                applicationFeePercent: 2.75,
+                transferData: .init(destination: "acct_1", amountPercent: 87.5)
+            )
+        )
+        #expect(pairs["subscription_data[application_fee_percent]"] == "2.75")
+        #expect(pairs["subscription_data[transfer_data][amount_percent]"] == "87.5")
+    }
+
+    @Test("a whole percentage does not gain a decimal point")
+    func wholePercentages() throws {
+        let pairs = try Self.pairs(
+            .init(transferData: .init(destination: "acct_1", amountPercent: 80))
+        )
+        #expect(pairs["subscription_data[transfer_data][amount_percent]"] == "80")
+    }
+
     @Test("a session without subscription data sends none of it")
     func omitted() throws {
         let pairs = try Self.pairs(nil)
