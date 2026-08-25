@@ -22,11 +22,14 @@ nested type instead.
 """
 import json, re, pathlib, sys
 
-def snake(name: str) -> str:
-    out = ""
-    for i, c in enumerate(name):
-        out += ("_" if i and c.isupper() else "") + c.lower()
-    return out
+def camel(key: str) -> str:
+    """The wire key as JSONDecoder.convertFromSnakeCase and the generator both spell it.
+
+    Comparing on this side is exact; reversing a camelCase name is not — `ssnLast4Provided`
+    cannot know that the spec wrote `ssn_last_4_provided`.
+    """
+    parts = key.split("_")
+    return parts[0] + "".join(w[:1].upper() + w[1:] for w in parts[1:])
 
 def swift_fields(path: pathlib.Path, struct: str) -> set[str]:
     src = path.read_text()
@@ -37,7 +40,7 @@ def swift_fields(path: pathlib.Path, struct: str) -> set[str]:
     # `public var `type`: …` — a keyword used as a property name is back-ticked.
     names = set(re.findall(r"public (?:var|let) `?(\w+)`?\s*:", body))
     names |= set(re.findall(r"public (?:var|let) `?(\w+)`?\s*$", body, re.M))
-    return {snake(n) for n in names}
+    return names
 
 # Properties this package adds on purpose, which will never appear in the spec.
 INTENTIONAL_EXTRA: dict[str, set[str]] = {
@@ -120,17 +123,17 @@ def main() -> int:
         if schema is None:
             print(f"{name:<20}    schema not found in spec")
             continue
-        spec_fields = set(schema.get("properties", {}).keys())
+        spec_fields = {camel(k) for k in schema.get("properties", {}).keys()}
         try:
             model = swift_fields(pathlib.Path(path), struct)
         except (OSError, ValueError):
             print(f"{name:<20}    could not parse {path}")
             continue
-        missing = sorted(spec_fields - model - set(ACKNOWLEDGED_MISSING.get(name, {})))
+        missing = sorted(spec_fields - model - {camel(k) for k in ACKNOWLEDGED_MISSING.get(name, {})})
         stale = sorted(
             model - spec_fields
-            - INTENTIONAL_EXTRA.get(name, set())
-            - set(VERSION_GATED.get(name, {}))
+            - {camel(k) for k in INTENTIONAL_EXTRA.get(name, set())}
+            - {camel(k) for k in VERSION_GATED.get(name, {})}
         )
         worst += len(missing) + len(stale)
         detail = ", ".join(missing[:4]) + ("…" if len(missing) > 4 else "")
