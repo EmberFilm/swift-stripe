@@ -9,9 +9,8 @@ import FoundationEssentials
 #else
 import Foundation
 #endif
-import Stripe
 
-extension Generated.Customers {
+extension Stripe.Customers {
     /// This object represents a customer of your business.
     public struct Customer: Codable, Hashable, Sendable, Identifiable {
         public typealias ID = String
@@ -37,7 +36,7 @@ extension Generated.Customers {
         /// An arbitrary string attached to the object.
         public var description: String?
         /// Describes the current discount active on the customer, if there is one.
-        public var discount: Generated.Shared.Discount?
+        public var discount: Stripe.Shared.Discount?
         /// The customer's email address.
         public var email: String?
         /// The customer's individual name.
@@ -121,7 +120,7 @@ extension Generated.Customers {
             defaultSource: String? = nil,
             delinquent: Bool? = nil,
             description: String? = nil,
-            discount: Generated.Shared.Discount? = nil,
+            discount: Stripe.Shared.Discount? = nil,
             email: String? = nil,
             individualName: String? = nil,
             invoiceCreditBalance: [String: Int]? = nil,
@@ -184,7 +183,7 @@ extension Generated.Customers {
 
         public struct InvoiceSettings: Codable, Hashable, Sendable {
             /// Default custom fields to be displayed on invoices for this customer.
-            public var customFields: [Generated.Shared.CustomFields]?
+            public var customFields: [Stripe.Shared.CustomFields]?
             /// ID of a payment method that's attached to the customer, to be used as the customer's default payment method for subscr…
             @Expandable<Stripe.PaymentMethods.PaymentMethod, String> public var defaultPaymentMethod: String?
             /// Default footer to be displayed on invoices for this customer.
@@ -200,7 +199,7 @@ extension Generated.Customers {
             }
 
             public init(
-                customFields: [Generated.Shared.CustomFields]? = nil,
+                customFields: [Stripe.Shared.CustomFields]? = nil,
                 defaultPaymentMethod: String? = nil,
                 footer: String? = nil,
                 renderingOptions: RenderingOptions? = nil
@@ -266,7 +265,7 @@ extension Generated.Customers {
         /// The customer's current subscriptions, if any.
         public struct Subscriptions: Codable, Hashable, Sendable {
             /// Details about each object.
-            public var data: [Generated.Billing.Subscription]?
+            public var data: [Stripe.Billing.Subscription]?
             /// True if this list has another page of items after this one that can be fetched.
             public var hasMore: Bool?
             /// String representing the object's type.
@@ -282,7 +281,7 @@ extension Generated.Customers {
             }
 
             public init(
-                data: [Generated.Billing.Subscription]? = nil,
+                data: [Stripe.Billing.Subscription]? = nil,
                 hasMore: Bool? = nil,
                 object: String? = nil,
                 url: String? = nil

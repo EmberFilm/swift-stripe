@@ -14,3 +14,127 @@ extension Stripe {
     public enum Shared {}
 }
 
+// invoice_setting_custom_field
+extension Stripe.Shared {
+    public struct CustomFields: Codable, Hashable, Sendable {
+        /// The name of the custom field.
+        public var name: String?
+        /// The value of the custom field.
+        public var value: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case name
+            case value
+        }
+
+        public init(
+            name: String? = nil,
+            value: String? = nil
+        ) {
+            self.name = name
+            self.value = value
+        }
+    }
+}
+
+// discount
+extension Stripe.Shared {
+    /// A discount represents the actual application of a coupon or promotion code.
+    public struct Discount: Codable, Hashable, Sendable, Identifiable {
+        public typealias ID = String
+        public let id: ID
+        /// The Checkout session that this coupon is applied to, if it is applied to a particular session in payment mode.
+        public var checkoutSession: String?
+        /// The ID of the customer associated with this discount.
+        @Expandable<Stripe.Customers.Customer, String> public var customer: String?
+        /// The ID of the account representing the customer associated with this discount.
+        public var customerAccount: String?
+        /// If the coupon has a duration of `repeating`, the date that this discount will end.
+        public var end: Date?
+        /// The invoice that the discount's coupon was applied to, if it was applied directly to a particular invoice.
+        public var invoice: String?
+        /// The invoice item `id` (or invoice line item `id` for invoice line items of type='subscription') that the discount's co…
+        public var invoiceItem: String?
+        /// String representing the object's type.
+        public var object: String?
+        /// The promotion code applied to create this discount.
+        @Expandable<Promotion.Code, String> public var promotionCode: String?
+        public var source: Stripe.Shared.Source?
+        /// Date that the coupon was applied.
+        public var start: Date?
+        /// The subscription that this coupon is applied to, if it is applied to a particular subscription.
+        public var subscription: String?
+        /// The subscription item that this coupon is applied to, if it is applied to a particular subscription item.
+        public var subscriptionItem: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case id
+            case checkoutSession
+            case customer
+            case customerAccount
+            case end
+            case invoice
+            case invoiceItem
+            case object
+            case promotionCode
+            case source
+            case start
+            case subscription
+            case subscriptionItem
+        }
+
+        public init(
+            id: ID,
+            checkoutSession: String? = nil,
+            customer: String? = nil,
+            customerAccount: String? = nil,
+            end: Date? = nil,
+            invoice: String? = nil,
+            invoiceItem: String? = nil,
+            object: String? = nil,
+            promotionCode: String? = nil,
+            source: Stripe.Shared.Source? = nil,
+            start: Date? = nil,
+            subscription: String? = nil,
+            subscriptionItem: String? = nil
+        ) {
+            self.id = id
+            self.checkoutSession = checkoutSession
+            self._customer = Expandable(id: customer)
+            self.customerAccount = customerAccount
+            self.end = end
+            self.invoice = invoice
+            self.invoiceItem = invoiceItem
+            self.object = object
+            self._promotionCode = Expandable(id: promotionCode)
+            self.source = source
+            self.start = start
+            self.subscription = subscription
+            self.subscriptionItem = subscriptionItem
+        }
+    }
+}
+
+// discount_source
+extension Stripe.Shared {
+    public struct Source: Codable, Hashable, Sendable {
+        /// The coupon that was redeemed to create this discount.
+        @Expandable<Stripe.Products.Coupon, String> public var coupon: String?
+        /// The source type of the discount.
+        public var `type`: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case coupon
+            case `type`
+        }
+
+        public init(
+            coupon: String? = nil,
+            `type`: String? = nil
+        ) {
+            self._coupon = Expandable(id: coupon)
+            self.`type` = `type`
+        }
+    }
+}
+

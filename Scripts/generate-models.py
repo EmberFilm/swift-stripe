@@ -85,7 +85,9 @@ RESOURCE_TYPES: dict[str, str] = {
     "bank_account": "BankAccount",
     "billing.credit_balance_transaction": "Stripe.Billing.Credit.Balance.Transaction",
     "card": "Card",
-    "cash_balance": "CashBalance",
+    # Not the top-level `CashBalance`: inside Customer that name resolves to the empty request
+    # namespace `Stripe.Customers.CashBalance`. This is the type the hand Customer used.
+    "cash_balance": "Stripe.Customers.CustomerCashBalance",
     "coupon": "Stripe.Products.Coupon",
     "discount": "Stripe.Products.Discount",
     "deleted_discount": "Stripe.Products.Discount",
@@ -324,6 +326,17 @@ class Generator:
             return "[String: String]"
         return "String"
 
+    @staticmethod
+    def qualified(hand_type: str) -> str:
+        """Hand types are named as they resolve from inside `Stripe`.
+
+        The module and the root enum share the name `Stripe`, and inside the module the enum
+        shadows the module completely, so a top-level type cannot be reached as `Stripe.X`. A
+        bare name is right unless a nested namespace shadows it — then RESOURCE_TYPES must name
+        a type that lives under the enum, as `cash_balance` does.
+        """
+        return hand_type
+
     def type_for_ref(self, ref: str, prop: str, owner: "Struct") -> str:
         if ref in ID_ONLY_RESOURCES:
             return "String"
@@ -331,9 +344,9 @@ class Generator:
             if ref not in RESOURCE_TYPES:
                 self.unmapped.add(ref)
                 return "String"
-            return RESOURCE_TYPES[ref]
+            return self.qualified(RESOURCE_TYPES[ref])
         if ref in SHARED_TYPES:
-            return SHARED_TYPES[ref]
+            return self.qualified(SHARED_TYPES[ref])
         if self.is_shared(ref):
             name = self.shared_type_name(ref)
             self.emit_shared(ref, name)
