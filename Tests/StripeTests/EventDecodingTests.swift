@@ -63,6 +63,27 @@ struct EventDecodingTests {
         #expect(event.data?.object == .unknown(type: "some_future_resource"))
     }
 
+    @Test("every modelled object type is still reachable after the decoder split")
+    func allObjectTypesReachable() throws {
+        // The decoder is split across groups by hand; this guards against a case being dropped.
+        for (object, expected) in [
+            ("charge", "charge"), ("customer", "customer"), ("invoice", "invoice"),
+            ("subscription", "subscription"), ("checkout.session", "checkoutSession"),
+            ("payment_intent", "paymentIntent"), ("transfer", "transfer"),
+            ("account", "account"), ("payout", "payout"), ("refund", "refund"),
+        ] {
+            let event = try Self.event(#"""
+            {"id":"evt_x","object":"event","created":1,"type":"charge.succeeded",
+             "data":{"object":{"id":"obj_1","object":"\#(object)","created":1}}}
+            """#)
+            let decoded = try #require(event.data?.object)
+            #expect(
+                String(describing: decoded).hasPrefix(expected),
+                "\(object) decoded as \(String(describing: decoded).prefix(30))"
+            )
+        }
+    }
+
     @Test("a subscription invoice reports its subscription under parent")
     func invoiceParent() throws {
         // Where `subscription` has lived since API version 2025-03-31.basil.

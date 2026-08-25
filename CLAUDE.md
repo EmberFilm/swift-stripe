@@ -145,6 +145,27 @@ The `musl` CI job builds with the static SDK and is the only thing that catches
 this. Run it locally with
 `swift build --swift-sdk aarch64-swift-linux-musl`.
 
+### Stack frames
+
+`Stripe.Events.Event.Object` is an `indirect` enum whose decode is split across small
+`@inline(never)` `decodeGroupN` helpers. Both are load-bearing, not style.
+
+A direct enum with 54 large payloads made the compiler reserve one frame sized for all of
+them: `init(from:)` was 47 KB in release (311 KB in debug) and `==` was 473 KB. musl gives a
+pthread a **128 KiB** stack and NIO runs channel handlers on those threads, so a
+statically-linked Linux build segfaulted — exit 139, no Swift error — on any webhook event
+carrying a `data.object`. glibc and Darwin give 8 MiB and never showed it, tests included.
+
+Measure before changing this:
+
+```bash
+swift build -c release --swift-sdk aarch64-swift-linux-musl
+# then disassemble and sum `sub sp, sp, #N` (including `, lsl #12`) per symbol
+```
+
+Keep decode frames in the single-digit KB. `encode(to:)` is still ~41 KB — fine for the
+encode path, which nothing hot uses, but do not let the decode path regress to match it.
+
 ## Behaviour worth knowing before changing it
 
 - **Retries**: `429` and `5xx` except `501`, exponential backoff (0.5s, 1s, 2s,

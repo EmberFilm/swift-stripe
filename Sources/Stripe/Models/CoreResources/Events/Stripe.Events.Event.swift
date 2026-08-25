@@ -118,7 +118,13 @@ extension Stripe.Events.Event {
 }
 
 extension Stripe.Events.Event {
-    public enum Object: Codable, Hashable, Sendable {
+    /// `indirect` on purpose: the payloads are large models (`Charge` alone is ~3.8 KB), and a
+    /// direct enum makes every synthesised operation reserve a frame sized for all of them at
+    /// once — `init(from:)` came to 311 KB and `==` to 473 KB of stack. musl gives a pthread
+    /// 128 KiB, and NIO runs channel handlers on those threads, so a statically-linked Linux
+    /// build segfaulted on any event carrying a `data.object`. Boxing the payloads keeps the
+    /// enum pointer-sized and the frames small.
+    public indirect enum Object: Codable, Hashable, Sendable {
         /// An object whose `object` type this package does not model.
         case unknown(type: String)
         case account(Stripe.Connect.Account)
@@ -175,6 +181,13 @@ extension Stripe.Events.Event {
         case reader(Stripe.Terminal.Readers.Reader)
         case verificationSession(VerificationSession)
 
+        // Split across small `@inline(never)` groups on purpose, and paired with `indirect`
+        // above. A single `switch` over all 54 cases compiled to a ~47 KB frame in release
+        // (311 KB in debug), and the decode chain around it — JSONDecoder, `Event`, `Data`,
+        // then the model itself — pushed total depth past the 128 KiB musl gives a pthread.
+        // NIO runs channel handlers on those threads, so a statically-linked Linux build
+        // segfaulted on any event carrying a `data.object`. Keep the groups small.
+        //
         // REASON: every failure this can produce originates in a `Decoder`/`Encoder` standard
         // library call, whose requirements are declared with untyped `throws`. Narrowing the
         // thrown type here would misdescribe the standard library's error domain.
@@ -187,186 +200,321 @@ extension Stripe.Events.Event {
                 try decoder
                 .container(keyedBy: CodingKeys.self)
                 .decode(String.self, forKey: .object)
+
+            if let value = try Self.decodeGroup0(object, decoder) {
+                self = value
+                return
+            }
+            if let value = try Self.decodeGroup1(object, decoder) {
+                self = value
+                return
+            }
+            if let value = try Self.decodeGroup2(object, decoder) {
+                self = value
+                return
+            }
+            if let value = try Self.decodeGroup3(object, decoder) {
+                self = value
+                return
+            }
+            if let value = try Self.decodeGroup4(object, decoder) {
+                self = value
+                return
+            }
+            if let value = try Self.decodeGroup5(object, decoder) {
+                self = value
+                return
+            }
+            if let value = try Self.decodeGroup6(object, decoder) {
+                self = value
+                return
+            }
+            if let value = try Self.decodeGroup7(object, decoder) {
+                self = value
+                return
+            }
+            if let value = try Self.decodeGroup8(object, decoder) {
+                self = value
+                return
+            }
+
+            // Stripe sends whatever object the event carries, including resources this
+            // package does not model yet. Reporting the type beats rejecting the delivery.
+            self = .unknown(type: object)
+        }
+
+        @inline(never)
+        private static func decodeGroup0(
+            _ object: String,
+            _ decoder: any Decoder
+        ) throws -> Stripe.Events.Event.Object? {
             switch object {
             case "account":
-                self = try .account(Stripe.Connect.Account(from: decoder))
+                return try .account(Stripe.Connect.Account(from: decoder))
 
             case "application":
-                self = try .application(Stripe.Connect.Application(from: decoder))
+                return try .application(Stripe.Connect.Application(from: decoder))
 
             case "application_fee":
-                self = try .applicationFee(Stripe.Connect.Application.Fee(from: decoder))
+                return try .applicationFee(Stripe.Connect.Application.Fee(from: decoder))
 
             case "card":
-                self = try .card(Card(from: decoder))
+                return try .card(Card(from: decoder))
 
             case "cash_balance":
-                self = try .cashBalance(CashBalance(from: decoder))
+                return try .cashBalance(CashBalance(from: decoder))
 
             case "bank_account":
-                self = try .bankAccount(BankAccount(from: decoder))
+                return try .bankAccount(BankAccount(from: decoder))
 
+            default:
+                return nil
+            }
+        }
+
+        @inline(never)
+        private static func decodeGroup1(
+            _ object: String,
+            _ decoder: any Decoder
+        ) throws -> Stripe.Events.Event.Object? {
+            switch object {
             case "billingPortal.configuration":
-                self = try .configuration(
+                return try .configuration(
                     Stripe.Billing.Customer.Portal.Configuration(from: decoder)
                 )
 
             case "billingPortal.session":
-                self = try .billingPortalSession(
+                return try .billingPortalSession(
                     Stripe.Billing.Customer.Portal.Session(from: decoder)
                 )
 
             case "fee_refund":
-                self = try .applicationFeeRefund(
+                return try .applicationFeeRefund(
                     Stripe.Connect.Application.Fee.Refund(from: decoder)
                 )
 
             case "balance":
-                self = try .balance(Stripe.Balance(from: decoder))
+                return try .balance(Stripe.Balance(from: decoder))
 
             case "capability":
-                self = try .capability(Stripe.Connect.Capability(from: decoder))
+                return try .capability(Stripe.Connect.Capability(from: decoder))
 
             case "charge":
-                self = try .charge(Stripe.Charges.Charge(from: decoder))
+                return try .charge(Stripe.Charges.Charge(from: decoder))
 
+            default:
+                return nil
+            }
+        }
+
+        @inline(never)
+        private static func decodeGroup2(
+            _ object: String,
+            _ decoder: any Decoder
+        ) throws -> Stripe.Events.Event.Object? {
+            switch object {
             case "dispute":
-                self = try .dispute(Stripe.Disputes.Dispute(from: decoder))
+                return try .dispute(Stripe.Disputes.Dispute(from: decoder))
 
             case "refund":
-                self = try .refund(Stripe.Refunds.Refund(from: decoder))
+                return try .refund(Stripe.Refunds.Refund(from: decoder))
 
             case "checkout.session":
-                self = try .checkoutSession(Stripe.Checkout.Session(from: decoder))
+                return try .checkoutSession(Stripe.Checkout.Session(from: decoder))
 
             case "coupon":
-                self = try .coupon(Stripe.Products.Coupon(from: decoder))
+                return try .coupon(Stripe.Products.Coupon(from: decoder))
 
             case "credit_note":
-                self = try .creditNote(Stripe.Billing.Credit.Note(from: decoder))
+                return try .creditNote(Stripe.Billing.Credit.Note(from: decoder))
 
             case "customer":
-                self = try .customer(Stripe.Customers.Customer(from: decoder))
+                return try .customer(Stripe.Customers.Customer(from: decoder))
 
+            default:
+                return nil
+            }
+        }
+
+        @inline(never)
+        private static func decodeGroup3(
+            _ object: String,
+            _ decoder: any Decoder
+        ) throws -> Stripe.Events.Event.Object? {
+            switch object {
             case "discount":
-                self = try .discount(Stripe.Products.Discount(from: decoder))
+                return try .discount(Stripe.Products.Discount(from: decoder))
 
             case "subscription":
-                self = try .subscription(Stripe.Billing.Subscription(from: decoder))
+                return try .subscription(Stripe.Billing.Subscription(from: decoder))
 
             case "tax_id":
-                self = try .taxId(Stripe.Tax.ID(from: decoder))
+                return try .taxId(Stripe.Tax.ID(from: decoder))
 
             case "file":
-                self = try .file(Stripe.Files.File(from: decoder))
+                return try .file(Stripe.Files.File(from: decoder))
 
             case "identity.verification_session":
-                self = try .verificationSession(VerificationSession(from: decoder))
+                return try .verificationSession(VerificationSession(from: decoder))
 
             case "invoice":
-                self = try .invoice(Stripe.Billing.Invoice(from: decoder))
+                return try .invoice(Stripe.Billing.Invoice(from: decoder))
 
+            default:
+                return nil
+            }
+        }
+
+        @inline(never)
+        private static func decodeGroup4(
+            _ object: String,
+            _ decoder: any Decoder
+        ) throws -> Stripe.Events.Event.Object? {
+            switch object {
             case "invoice_payment":
                 // invoice_payment is a legacy event type that contains an invoice
-                self = try .invoice(Stripe.Billing.Invoice(from: decoder))
+                return try .invoice(Stripe.Billing.Invoice(from: decoder))
 
             case "invoiceitem":
-                self = try .invoiceItem(Stripe.Billing.Invoice.Item(from: decoder))
+                return try .invoiceItem(Stripe.Billing.Invoice.Item(from: decoder))
 
             case "issuing.authorization":
-                self = try .issuingAuthorization(Authorization(from: decoder))
+                return try .issuingAuthorization(Authorization(from: decoder))
 
             case "issuing.card":
-                self = try .issuingCard(IssuingCard(from: decoder))
+                return try .issuingCard(IssuingCard(from: decoder))
 
             case "issuing.cardholder":
-                self = try .issuingCardHolder(Cardholder(from: decoder))
+                return try .issuingCardHolder(Cardholder(from: decoder))
 
             case "issuing.dispute":
-                self = try .issuingDispute(IssuingDispute(from: decoder))
+                return try .issuingDispute(IssuingDispute(from: decoder))
 
+            default:
+                return nil
+            }
+        }
+
+        @inline(never)
+        private static func decodeGroup5(
+            _ object: String,
+            _ decoder: any Decoder
+        ) throws -> Stripe.Events.Event.Object? {
+            switch object {
             case "issuing.transaction":
-                self = try .issuingTransaction(Transaction(from: decoder))
+                return try .issuingTransaction(Transaction(from: decoder))
 
             case "mandate":
-                self = try .mandate(Stripe.Mandates.Mandate(from: decoder))
+                return try .mandate(Stripe.Mandates.Mandate(from: decoder))
 
             case "payment_intent":
-                self = try .paymentIntent(Stripe.PaymentIntents.PaymentIntent(from: decoder))
+                return try .paymentIntent(Stripe.PaymentIntents.PaymentIntent(from: decoder))
 
             case "payment_link":
-                self = try .paymentLink(Stripe.PaymentLink(from: decoder))
+                return try .paymentLink(Stripe.PaymentLink(from: decoder))
 
             case "payment_method":
-                self = try .paymentMethod(Stripe.PaymentMethods.PaymentMethod(from: decoder))
+                return try .paymentMethod(Stripe.PaymentMethods.PaymentMethod(from: decoder))
 
             case "payout":
-                self = try .payout(Stripe.Payouts.Payout(from: decoder))
+                return try .payout(Stripe.Payouts.Payout(from: decoder))
 
+            default:
+                return nil
+            }
+        }
+
+        @inline(never)
+        private static func decodeGroup6(
+            _ object: String,
+            _ decoder: any Decoder
+        ) throws -> Stripe.Events.Event.Object? {
+            switch object {
             case "person":
-                self = try .person(Stripe.Connect.Person(from: decoder))
+                return try .person(Stripe.Connect.Person(from: decoder))
 
             case "plan":
-                self = try .plan(Stripe.Billing.Plan(from: decoder))
+                return try .plan(Stripe.Billing.Plan(from: decoder))
 
             case "price":
-                self = try .price(Stripe.Products.Price(from: decoder))
+                return try .price(Stripe.Products.Price(from: decoder))
 
             case "product":
-                self = try .product(Stripe.Products.Product(from: decoder))
+                return try .product(Stripe.Products.Product(from: decoder))
 
             case "promotion_code":
-                self = try .promotionCode(Promotion.Code(from: decoder))
+                return try .promotionCode(Promotion.Code(from: decoder))
 
             case "radar.early_fraud_warning":
-                self = try .earlyFraudWarning(
+                return try .earlyFraudWarning(
                     Stripe.Fraud.EarlyFraudWarnings.EarlyFraudWarning(from: decoder)
                 )
 
+            default:
+                return nil
+            }
+        }
+
+        @inline(never)
+        private static func decodeGroup7(
+            _ object: String,
+            _ decoder: any Decoder
+        ) throws -> Stripe.Events.Event.Object? {
+            switch object {
             case "quote":
-                self = try .quote(Stripe.Billing.Quote(from: decoder))
+                return try .quote(Stripe.Billing.Quote(from: decoder))
 
             case "reporting.report_run":
-                self = try .reportRun(ReportRun(from: decoder))
+                return try .reportRun(ReportRun(from: decoder))
 
             case "reporting.report_type":
-                self = try .reportType(ReportType(from: decoder))
+                return try .reportType(ReportType(from: decoder))
 
             case "review":
-                self = try .review(Stripe.Fraud.Reviews.Review(from: decoder))
+                return try .review(Stripe.Fraud.Reviews.Review(from: decoder))
 
             case "setup_intent":
-                self = try .setupIntent(Stripe.Setup.Intent(from: decoder))
+                return try .setupIntent(Stripe.Setup.Intent(from: decoder))
 
             case "scheduled_query_run":
-                self = try .scheduledQueryRun(ScheduledQueryRun(from: decoder))
+                return try .scheduledQueryRun(ScheduledQueryRun(from: decoder))
 
+            default:
+                return nil
+            }
+        }
+
+        @inline(never)
+        private static func decodeGroup8(
+            _ object: String,
+            _ decoder: any Decoder
+        ) throws -> Stripe.Events.Event.Object? {
+            switch object {
             case "subscription_schedule":
-                self = try .subscriptionSchedule(
+                return try .subscriptionSchedule(
                     Stripe.Billing.Subscription.Schedule(from: decoder)
                 )
 
             case "tax_rate":
-                self = try .taxRate(Stripe.Tax.Rate(from: decoder))
+                return try .taxRate(Stripe.Tax.Rate(from: decoder))
 
             case "testHelpers.test_clock":
-                self = try .testClock(Stripe.Billing.TestClocks.TestClock(from: decoder))
+                return try .testClock(Stripe.Billing.TestClocks.TestClock(from: decoder))
 
             case "terminal.reader":
-                self = try .reader(Stripe.Terminal.Readers.Reader(from: decoder))
+                return try .reader(Stripe.Terminal.Readers.Reader(from: decoder))
 
             case "topup":
-                self = try .topup(Stripe.Connect.TopUp(from: decoder))
+                return try .topup(Stripe.Connect.TopUp(from: decoder))
 
             case "transfer":
-                self = try .transfer(Stripe.Connect.Transfer(from: decoder))
+                return try .transfer(Stripe.Connect.Transfer(from: decoder))
 
             default:
-                // Stripe sends whatever object the event carries, including resources this
-                // package does not model yet. Reporting the type beats rejecting the delivery.
-                self = .unknown(type: object)
+                return nil
             }
         }
+
 
         // REASON: this is the exact `Swift.Decodable`/`Swift.Encodable` protocol requirement
         // signature. The standard library declares the requirement with untyped `throws`, so
