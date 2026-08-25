@@ -212,4 +212,71 @@ struct AddedFieldDecodingTests {
         #expect(pairs["ui_mode"] == "hosted_page")
     }
 
+
+    @Test("invoice gains its 2026 fields")
+    func invoice() throws {
+        let invoice = try Self.decode(Stripe.Billing.Invoice.self, #"""
+        {"object":"invoice","created":1,
+         "amount_overpaid":50,"amount_paid_off_stripe":200,
+         "automatically_finalizes_at":1700000000,"effective_at":1700001000,
+         "confirmation_secret":{"client_secret":"in_1_secret_x","type":"payment_intent"},
+         "customer_account":"acct_c",
+         "discounts":["di_1","di_2"],
+         "issuer":{"type":"account","account":"acct_i"},
+         "rendering":{"amount_tax_display":"exclude_tax","template":"inrtem_1","template_version":3,
+                      "pdf":{"page_size":"a4"}},
+         "shipping_details":{"name":"Ada","carrier":"DHL","tracking_number":"T1",
+                             "address":{"city":"London","country":"GB"}},
+         "total_pretax_credit_amounts":[{"amount":100,"type":"discount","discount":"di_1"}],
+         "total_taxes":[{"amount":120,"tax_behavior":"exclusive","taxable_amount":600,
+                         "taxability_reason":"standard_rated","type":"tax_rate_details",
+                         "tax_rate_details":{"tax_rate":"txr_1"}}],
+         "payments":{"object":"list","has_more":false,"url":"/v1/invoice_payments",
+                     "data":[{"id":"inpay_1","object":"invoice_payment","created":1,"currency":"gbp",
+                              "amount_paid":600,"amount_requested":600,"is_default":true,
+                              "invoice":"in_1","status":"paid",
+                              "payment":{"type":"payment_intent","payment_intent":"pi_1"},
+                              "status_transitions":{"paid_at":1700002000}}]}}
+        """#)
+
+        #expect(invoice.amountOverpaid == 50)
+        #expect(invoice.amountPaidOffStripe == 200)
+        #expect(invoice.automaticallyFinalizesAt == Date(timeIntervalSince1970: 1_700_000_000))
+        #expect(invoice.effectiveAt == Date(timeIntervalSince1970: 1_700_001_000))
+        #expect(invoice.confirmationSecret?.clientSecret == "in_1_secret_x")
+        #expect(invoice.customerAccount == "acct_c")
+        #expect(invoice.discounts == ["di_1", "di_2"])
+        #expect(invoice.issuer?.type == .account)
+        #expect(invoice.issuer?.account == "acct_i")
+        #expect(invoice.rendering?.template == "inrtem_1")
+        #expect(invoice.rendering?.templateVersion == 3)
+        #expect(invoice.rendering?.pdf?.pageSize == .a4)
+        #expect(invoice.shippingDetails?.carrier == "DHL")
+        #expect(invoice.shippingDetails?.address?.country == "GB")
+        #expect(invoice.totalPretaxCreditAmounts?.first?.type == .discount)
+        #expect(invoice.totalPretaxCreditAmounts?.first?.discount == "di_1")
+        let tax = try #require(invoice.totalTaxes?.first)
+        #expect(tax.amount == 120)
+        #expect(tax.taxBehavior == .exclusive)
+        #expect(tax.taxabilityReason == .standardRated)
+        #expect(tax.taxRateDetails?.taxRate == "txr_1")
+        let payment = try #require(invoice.payments?.data?.first)
+        #expect(payment.id == "inpay_1")
+        #expect(payment.amountPaid == 600)
+        #expect(payment.status == "paid")
+        #expect(payment.isDefault == true)
+        #expect(payment.payment?.type == .paymentIntent)
+        #expect(payment.payment?.paymentIntent == "pi_1")
+        #expect(payment.statusTransitions?.paidAt == Date(timeIntervalSince1970: 1_700_002_000))
+    }
+
+    @Test("an invoice issued by the requesting account reads as self")
+    func invoiceIssuerSelf() throws {
+        let invoice = try Self.decode(Stripe.Billing.Invoice.self, #"""
+        {"object":"invoice","created":1,"issuer":{"type":"self"}}
+        """#)
+        #expect(invoice.issuer?.type == .self)
+        #expect(invoice.issuer?.account == nil)
+    }
+
 }

@@ -78,6 +78,20 @@ VERSION_GATED: dict[str, dict[str, str]] = {
         "shipping_details": "moved to collected_information.shipping_details in 2025-03-31.basil",
         "shipping_rate": "replaced by shipping_cost.shipping_rate in 2025-03-31.basil",
     },
+    "invoice": {
+        "application_fee_amount": "removed in 2025-03-31.basil",
+        "charge": "moved to payments[].payment.charge in 2025-03-31.basil",
+        "paid": "removed in 2025-03-31.basil; read `status`",
+        "paid_out_of_band": "moved to amount_paid_off_stripe in 2025-03-31.basil",
+        "payment_intent": "moved to payments[].payment.payment_intent in 2025-03-31.basil",
+        "quote": "moved to parent.quote_details.quote in 2025-03-31.basil",
+        "rendering_options": "replaced by `rendering` in 2025-03-31.basil",
+        "subscription_details": "moved under `parent` in 2025-03-31.basil",
+        "subscription_proration_date": "moved under parent.subscription_details in 2025-03-31.basil",
+        "tax": "replaced by total_taxes in 2025-03-31.basil",
+        "total_tax_amounts": "replaced by total_taxes in 2025-03-31.basil",
+        "transfer_data": "removed in 2025-03-31.basil",
+    },
 }
 
 M = "Sources/Stripe/Models/"

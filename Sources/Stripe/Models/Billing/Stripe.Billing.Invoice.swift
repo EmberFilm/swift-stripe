@@ -183,6 +183,32 @@ extension Stripe.Billing {
         public var transferData: Stripe.Billing.Invoice.TransferData?
         /// The time at which webhooks for this invoice were successfully delivered (if the invoice had no webhooks to deliver, this will match `created`). Invoice payment is delayed until webhooks are delivered, or until all webhook delivery attempts have been exhausted.
         public var webhooksDeliveredAt: Date?
+        /// Amount paid beyond the total, in the smallest currency unit.
+        public var amountOverpaid: Int?
+        /// Amount paid outside Stripe, in the smallest currency unit.
+        public var amountPaidOffStripe: Int?
+        /// When a draft invoice will finalize automatically.
+        public var automaticallyFinalizesAt: Date?
+        /// A client secret for confirming payment of this invoice from the client.
+        public var confirmationSecret: ConfirmationSecret?
+        /// The ID of the account representing the customer.
+        public var customerAccount: String?
+        /// Discounts applied to the invoice, as ids or expanded objects.
+        @ExpandableCollection<Stripe.Products.Discount> public var discounts: [String]?
+        /// When the invoice took effect: finalization, or an explicit override.
+        public var effectiveAt: Date?
+        /// The account that issues the invoice.
+        public var issuer: Stripe.ConnectAccountReference?
+        /// Payments made against this invoice.
+        public var payments: PaymentList?
+        /// Settings controlling how the invoice is rendered.
+        public var rendering: Rendering?
+        /// Where the invoice's goods are shipped to.
+        public var shippingDetails: ShippingLabel?
+        /// Credits applied before tax, by source.
+        public var totalPretaxCreditAmounts: [PretaxCreditAmount]?
+        /// Taxes applied to the invoice, by rate.
+        public var totalTaxes: [TotalTax]?
 
         public init(
             id: ID? = nil,
@@ -262,7 +288,20 @@ extension Stripe.Billing {
             totalExcludingTax: Int? = nil,
             totalTaxAmounts: [Stripe.Billing.Invoice.TotalTaxAmount]? = nil,
             transferData: Stripe.Billing.Invoice.TransferData? = nil,
-            webhooksDeliveredAt: Date? = nil
+            webhooksDeliveredAt: Date? = nil,
+            amountOverpaid: Int? = nil,
+            amountPaidOffStripe: Int? = nil,
+            automaticallyFinalizesAt: Date? = nil,
+            confirmationSecret: ConfirmationSecret? = nil,
+            customerAccount: String? = nil,
+            discounts: [String]? = nil,
+            effectiveAt: Date? = nil,
+            issuer: Stripe.ConnectAccountReference? = nil,
+            payments: PaymentList? = nil,
+            rendering: Rendering? = nil,
+            shippingDetails: ShippingLabel? = nil,
+            totalPretaxCreditAmounts: [PretaxCreditAmount]? = nil,
+            totalTaxes: [TotalTax]? = nil
         ) {
             self.id = id
             self.autoAdvance = autoAdvance
@@ -342,6 +381,19 @@ extension Stripe.Billing {
             self.totalTaxAmounts = totalTaxAmounts
             self.transferData = transferData
             self.webhooksDeliveredAt = webhooksDeliveredAt
+            self.amountOverpaid = amountOverpaid
+            self.amountPaidOffStripe = amountPaidOffStripe
+            self.automaticallyFinalizesAt = automaticallyFinalizesAt
+            self.confirmationSecret = confirmationSecret
+            self.customerAccount = customerAccount
+            self._discounts = ExpandableCollection(ids: discounts)
+            self.effectiveAt = effectiveAt
+            self.issuer = issuer
+            self.payments = payments
+            self.rendering = rendering
+            self.shippingDetails = shippingDetails
+            self.totalPretaxCreditAmounts = totalPretaxCreditAmounts
+            self.totalTaxes = totalTaxes
         }
     }
 }
@@ -867,6 +919,313 @@ extension Stripe.Billing.Invoice {
 
         public init(quote: Stripe.Billing.Quote.ID? = nil) {
             self.quote = quote
+        }
+    }
+}
+
+// MARK: - Fields added through API version 2026-07-29.dahlia
+extension Stripe.Billing.Invoice {
+    /// A client secret for confirming payment of an invoice from the client.
+    public struct ConfirmationSecret: Codable, Hashable, Sendable {
+        public var clientSecret: String?
+        public var type: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case clientSecret
+            case type
+        }
+
+        public init(clientSecret: String? = nil, type: String? = nil) {
+            self.clientSecret = clientSecret
+            self.type = type
+        }
+    }
+
+    /// Settings controlling how an invoice is rendered.
+    public struct Rendering: Codable, Hashable, Sendable {
+        /// How tax is displayed on line items: `exclude_tax` or `include_inclusive_tax`.
+        public var amountTaxDisplay: String?
+        public var pdf: PDF?
+        public var template: String?
+        public var templateVersion: Int?
+
+        private enum CodingKeys: String, CodingKey {
+            case amountTaxDisplay
+            case pdf
+            case template
+            case templateVersion
+        }
+
+        public init(
+            amountTaxDisplay: String? = nil,
+            pdf: PDF? = nil,
+            template: String? = nil,
+            templateVersion: Int? = nil
+        ) {
+            self.amountTaxDisplay = amountTaxDisplay
+            self.pdf = pdf
+            self.template = template
+            self.templateVersion = templateVersion
+        }
+
+        public struct PDF: Codable, Hashable, Sendable {
+            public var pageSize: PageSize?
+
+            private enum CodingKeys: String, CodingKey {
+                case pageSize
+            }
+
+            public init(pageSize: PageSize? = nil) {
+                self.pageSize = pageSize
+            }
+
+            public enum PageSize: String, Codable, Sendable {
+                case a4
+                case auto
+                case letter
+            }
+        }
+    }
+
+    /// A credit applied to an invoice before tax.
+    public struct PretaxCreditAmount: Codable, Hashable, Sendable {
+        public var amount: Int?
+        @ExpandableOf<Stripe.Billing.Credit.Balance.Transaction> public var creditBalanceTransaction:
+            Stripe.Billing.Credit.Balance.Transaction.ID?
+        @ExpandableOf<Stripe.Products.Discount> public var discount: Stripe.Products.Discount.ID?
+        public var type: `Type`?
+
+        private enum CodingKeys: String, CodingKey {
+            case amount
+            case creditBalanceTransaction
+            case discount
+            case type
+        }
+
+        public init(
+            amount: Int? = nil,
+            creditBalanceTransaction: Stripe.Billing.Credit.Balance.Transaction.ID? = nil,
+            discount: Stripe.Products.Discount.ID? = nil,
+            type: `Type`? = nil
+        ) {
+            self.amount = amount
+            self._creditBalanceTransaction = Expandable(id: creditBalanceTransaction)
+            self._discount = Expandable(id: discount)
+            self.type = type
+        }
+
+        public enum `Type`: String, Codable, Sendable {
+            case creditBalanceTransaction = "credit_balance_transaction"
+            case discount
+        }
+    }
+
+    /// A tax applied to an invoice, by rate.
+    public struct TotalTax: Codable, Hashable, Sendable {
+        public var amount: Int?
+        public var taxBehavior: TaxBehavior?
+        public var taxRateDetails: TaxRateDetails?
+        public var taxabilityReason: TaxabilityReason?
+        public var taxableAmount: Int?
+        public var type: `Type`?
+
+        private enum CodingKeys: String, CodingKey {
+            case amount
+            case taxBehavior
+            case taxRateDetails
+            case taxabilityReason
+            case taxableAmount
+            case type
+        }
+
+        public init(
+            amount: Int? = nil,
+            taxBehavior: TaxBehavior? = nil,
+            taxRateDetails: TaxRateDetails? = nil,
+            taxabilityReason: TaxabilityReason? = nil,
+            taxableAmount: Int? = nil,
+            type: `Type`? = nil
+        ) {
+            self.amount = amount
+            self.taxBehavior = taxBehavior
+            self.taxRateDetails = taxRateDetails
+            self.taxabilityReason = taxabilityReason
+            self.taxableAmount = taxableAmount
+            self.type = type
+        }
+
+        public enum TaxBehavior: String, Codable, Sendable {
+            case exclusive
+            case inclusive
+        }
+
+        public enum `Type`: String, Codable, Sendable {
+            case taxRateDetails = "tax_rate_details"
+        }
+
+        public enum TaxabilityReason: String, Codable, Sendable {
+            case customerExempt = "customer_exempt"
+            case notAvailable = "not_available"
+            case notCollecting = "not_collecting"
+            case notSubjectToTax = "not_subject_to_tax"
+            case notSupported = "not_supported"
+            case portionProductExempt = "portion_product_exempt"
+            case portionReducedRated = "portion_reduced_rated"
+            case portionStandardRated = "portion_standard_rated"
+            case productExempt = "product_exempt"
+            case productExemptHoliday = "product_exempt_holiday"
+            case proportionallyRated = "proportionally_rated"
+            case reducedRated = "reduced_rated"
+            case reverseCharge = "reverse_charge"
+            case standardRated = "standard_rated"
+            case taxableBasisReduced = "taxable_basis_reduced"
+            case zeroRated = "zero_rated"
+        }
+
+        public struct TaxRateDetails: Codable, Hashable, Sendable {
+            @ExpandableOf<Stripe.Tax.Rate> public var taxRate: Stripe.Tax.Rate.ID?
+
+            private enum CodingKeys: String, CodingKey {
+                case taxRate
+            }
+
+            public init(taxRate: Stripe.Tax.Rate.ID? = nil) {
+                self._taxRate = Expandable(id: taxRate)
+            }
+        }
+    }
+
+    /// The payments made against an invoice.
+    public struct PaymentList: Codable, Hashable, Sendable {
+        public var object: String?
+        public var data: [Payment]?
+        public var hasMore: Bool?
+        public var url: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case object
+            case data
+            case hasMore
+            case url
+        }
+
+        public init(object: String? = nil, data: [Payment]? = nil, hasMore: Bool? = nil, url: String? = nil) {
+            self.object = object
+            self.data = data
+            self.hasMore = hasMore
+            self.url = url
+        }
+    }
+
+    /// A payment made against an invoice.
+    public struct Payment: Codable, Hashable, Sendable, Identifiable {
+        public typealias ID = String
+        public var id: ID
+        public var object: String?
+        public var amountPaid: Int?
+        public var amountRequested: Int?
+        public var created: Date?
+        public var currency: String?
+        @Expandable<Stripe.Billing.Invoice, String> public var invoice: String?
+        public var isDefault: Bool?
+        public var livemode: Bool?
+        public var payment: Source?
+        /// `open`, `paid` or `canceled`. The spec types this as a free string, so it is kept as
+        /// one rather than an enum that would reject a value Stripe adds later.
+        public var status: String?
+        public var statusTransitions: StatusTransitions?
+
+        private enum CodingKeys: String, CodingKey {
+            case id
+            case object
+            case amountPaid
+            case amountRequested
+            case created
+            case currency
+            case invoice
+            case isDefault
+            case livemode
+            case payment
+            case status
+            case statusTransitions
+        }
+
+        public init(
+            id: ID,
+            object: String? = nil,
+            amountPaid: Int? = nil,
+            amountRequested: Int? = nil,
+            created: Date? = nil,
+            currency: String? = nil,
+            invoice: String? = nil,
+            isDefault: Bool? = nil,
+            livemode: Bool? = nil,
+            payment: Source? = nil,
+            status: String? = nil,
+            statusTransitions: StatusTransitions? = nil
+        ) {
+            self.id = id
+            self.object = object
+            self.amountPaid = amountPaid
+            self.amountRequested = amountRequested
+            self.created = created
+            self.currency = currency
+            self._invoice = Expandable(id: invoice)
+            self.isDefault = isDefault
+            self.livemode = livemode
+            self.payment = payment
+            self.status = status
+            self.statusTransitions = statusTransitions
+        }
+
+        /// What the payment was made with. Exactly one of the references is set, per `type`.
+        public struct Source: Codable, Hashable, Sendable {
+            @ExpandableOf<Stripe.Charges.Charge> public var charge: Stripe.Charges.Charge.ID?
+            @ExpandableOf<Stripe.PaymentIntents.PaymentIntent> public var paymentIntent:
+                Stripe.PaymentIntents.PaymentIntent.ID?
+            /// A PaymentRecord id. Not expandable here: this package does not model PaymentRecord.
+            public var paymentRecord: String?
+            public var type: `Type`?
+
+            private enum CodingKeys: String, CodingKey {
+                case charge
+                case paymentIntent
+                case paymentRecord
+                case type
+            }
+
+            public init(
+                charge: Stripe.Charges.Charge.ID? = nil,
+                paymentIntent: Stripe.PaymentIntents.PaymentIntent.ID? = nil,
+                paymentRecord: String? = nil,
+                type: `Type`? = nil
+            ) {
+                self._charge = Expandable(id: charge)
+                self._paymentIntent = Expandable(id: paymentIntent)
+                self.paymentRecord = paymentRecord
+                self.type = type
+            }
+
+            public enum `Type`: String, Codable, Sendable {
+                case charge
+                case paymentIntent = "payment_intent"
+                case paymentRecord = "payment_record"
+            }
+        }
+
+        public struct StatusTransitions: Codable, Hashable, Sendable {
+            public var canceledAt: Date?
+            public var paidAt: Date?
+
+            private enum CodingKeys: String, CodingKey {
+                case canceledAt
+                case paidAt
+            }
+
+            public init(canceledAt: Date? = nil, paidAt: Date? = nil) {
+                self.canceledAt = canceledAt
+                self.paidAt = paidAt
+            }
         }
     }
 }
