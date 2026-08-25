@@ -83,8 +83,22 @@ extension Stripe.Tax {
 
 extension Stripe.Tax.Rate {
     public enum TaxType: String, Codable, Sendable {
-        case vat
+        case amusementTax = "amusement_tax"
+        case communicationsTax = "communications_tax"
+        case gst
+        case hst
+        case igst
+        case jct
+        case leaseTax = "lease_tax"
+        case massTransitParkingTax = "mass_transit_parking_tax"
+        case parkingTax = "parking_tax"
+        case pst
+        case qst
+        case retailDeliveryFee = "retail_delivery_fee"
+        case rst
         case salesTax = "sales_tax"
+        case serviceTax = "service_tax"
+        case vat
     }
 }
 

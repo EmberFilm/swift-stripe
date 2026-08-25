@@ -34,8 +34,9 @@ def swift_fields(path: pathlib.Path, struct: str) -> set[str]:
     cut = body.find("public init(")
     body = body[:cut] if cut > 0 else body
     # `let` as well as `var`: immutable ids are declared `public let id: ID`.
-    names = set(re.findall(r"public (?:var|let) (\w+)\s*:", body))
-    names |= set(re.findall(r"public (?:var|let) (\w+)\s*$", body, re.M))
+    # `public var `type`: …` — a keyword used as a property name is back-ticked.
+    names = set(re.findall(r"public (?:var|let) `?(\w+)`?\s*:", body))
+    names |= set(re.findall(r"public (?:var|let) `?(\w+)`?\s*$", body, re.M))
     return {snake(n) for n in names}
 
 # Properties this package adds on purpose, which will never appear in the spec.
@@ -95,18 +96,20 @@ VERSION_GATED: dict[str, dict[str, str]] = {
 }
 
 M = "Sources/Stripe/Models/"
+G = M + "Generated/"   # emitted by generate-models.py; event stays hand-written
 # schema name, model file, struct name
 TARGETS = [
-    ("checkout.session", M + "Checkout/Stripe.Checkout.Session.swift", "Session"),
-    ("subscription", M + "Billing/Stripe.Billing.Subscription.swift", "Subscription"),
-    ("subscription_item", M + "Billing/Stripe.Billing.Subscription.Item.swift", "Item"),
-    ("customer", M + "CoreResources/Customers/Stripe.Customers.swift", "Customer"),
-    ("invoice", M + "Billing/Stripe.Billing.Invoice.swift", "Invoice"),
-    ("price", M + "Products/Prices/Stripe.Products.Price.swift", "Price"),
-    ("product", M + "Products/Products/Stripe.Products.Product.swift", "Product"),
+    ("checkout.session", G + "Stripe.Checkout.Session.swift", "Session"),
+    ("subscription", G + "Stripe.Billing.Subscription.swift", "Subscription"),
+    ("subscription_item", G + "Stripe.Billing.Subscription.Item.swift", "Item"),
+    ("customer", G + "Stripe.Customers.Customer.swift", "Customer"),
+    ("invoice", G + "Stripe.Billing.Invoice.swift", "Invoice"),
+    ("invoice_payment", G + "Stripe.Billing.Invoice.Payment.swift", "Payment"),
+    ("price", G + "Stripe.Products.Price.swift", "Price"),
+    ("product", G + "Stripe.Products.Product.swift", "Product"),
     ("event", M + "CoreResources/Events/Stripe.Events.Event.swift", "Event"),
-    ("payment_intent", M + "CoreResources/PaymentIntents/Stripe.PaymentIntents.PaymentIntent.swift", "PaymentIntent"),
-    ("charge", M + "CoreResources/Charges/Stripe.Charges.Charge.swift", "Charge"),
+    ("payment_intent", G + "Stripe.PaymentIntents.PaymentIntent.swift", "PaymentIntent"),
+    ("charge", G + "Stripe.Charges.Charge.swift", "Charge"),
 ]
 
 def main() -> int:

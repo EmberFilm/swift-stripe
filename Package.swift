@@ -26,10 +26,9 @@ let package = Package(
         ),
         // Stage 2 of the model-fidelity plan: models generated from the OpenAPI spec, kept out of
         // the library product until they match the hand-written types field for field.
-        .target(name: "StripeGenerated", dependencies: ["Stripe"], path: "Sources/StripeGenerated"),
         .testTarget(
             name: "StripeTests",
-            dependencies: ["Stripe", "StripeGenerated"],
+            dependencies: ["Stripe"],
             resources: [.copy("Fixtures")]
         ),
     ],

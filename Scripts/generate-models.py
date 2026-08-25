@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """Generates Swift model types from Stripe's OpenAPI spec.
 
-    Scripts/generate-models.py spec3.sdk.json            # emit into Sources/StripeGenerated
+    Scripts/generate-models.py spec3.sdk.json            # emit into Sources/Stripe/Models/Generated
     Scripts/generate-models.py spec3.sdk.json --check    # only report what it cannot map
 
-Stage 2 of the model-fidelity plan. The output lives under the `Generated` namespace in its own
-target, so it can be compared field-for-field against the hand-written `Stripe` types before
-anything is cut over. The generated files are committed; there is no build plugin.
+The generated files are committed; there is no build plugin. Each resource's former hand file
+survives as *.Retained.swift, holding only the nested types the request layer still names that
+the generator spells differently (see Scripts/cutover.py).
 
 Mapping rules, in the order they apply to a property:
 
@@ -177,7 +177,7 @@ def doc(description: str | None) -> str | None:
 # --------------------------------------------------------------------------------------------
 
 class Generator:
-    def __init__(self, spec: dict, namespace: str = "Generated", only: set[str] | None = None):
+    def __init__(self, spec: dict, namespace: str = "Stripe", only: set[str] | None = None):
         self.ns = namespace
         self.only = only
         self.schemas: dict = spec["components"]["schemas"]
@@ -541,8 +541,8 @@ class Struct:
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("spec")
-    ap.add_argument("--out", default="Sources/StripeGenerated")
-    ap.add_argument("--namespace", default="Generated",
+    ap.add_argument("--out", default="Sources/Stripe/Models/Generated")
+    ap.add_argument("--namespace", default="Stripe",
                     help="root namespace for the emitted types (Stripe, or Generated for side-by-side)")
     ap.add_argument("--check", action="store_true", help="report unmapped refs and unions; write nothing")
     ap.add_argument("--only", nargs="*", help="emit only these schemas (Shared is always emitted)")
