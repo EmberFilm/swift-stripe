@@ -36,6 +36,7 @@ public struct StripeClient: Sendable {
     public let products: any ProductsAPI
     public let prices: any PricesAPI
     public let subscriptions: any SubscriptionsAPI
+    public let portalSessions: any PortalSessionsAPI
 
     public init(configuration: StripeConfiguration, httpClient: HTTPClient = .shared) {
         let api = StripeAPI(configuration: configuration, httpClient: httpClient)
@@ -46,5 +47,6 @@ public struct StripeClient: Sendable {
         self.products = ProductsClient(api: api)
         self.prices = PricesClient(api: api)
         self.subscriptions = SubscriptionsClient(api: api)
+        self.portalSessions = PortalSessionsClient(api: api)
     }
 }

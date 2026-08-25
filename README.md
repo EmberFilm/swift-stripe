@@ -162,6 +162,7 @@ stripe.checkoutSessions // any CheckoutSessionsAPI
 stripe.products         // any ProductsAPI
 stripe.prices           // any PricesAPI
 stripe.subscriptions    // any SubscriptionsAPI
+stripe.portalSessions   // any PortalSessionsAPI
 ```
 
 Each is a protocol, which is also the seam for test doubles — see
@@ -438,9 +439,9 @@ regression.
 
 The request engine, form encoding, error handling, retries, idempotency keys,
 and webhook verification are complete and covered by tests. Typed resource clients currently
-cover Customers, PaymentIntents, Checkout Sessions, Products, Prices, and
-Subscriptions; every other endpoint is reachable through `stripe.api` with the
-modelled request and response types.
+cover Customers, PaymentIntents, Checkout Sessions, Products, Prices,
+Subscriptions, and Billing Portal Sessions; every other endpoint is reachable
+through `stripe.api` with the modelled request and response types.
 
 Not yet implemented:
 
