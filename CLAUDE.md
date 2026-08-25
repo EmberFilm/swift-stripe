@@ -148,7 +148,9 @@ this. Run it locally with
 ### Stack frames
 
 `Stripe.Events.Event.Object` is an `indirect` enum whose decode is split across small
-`@inline(never)` `decodeGroupN` helpers.
+`@inline(never)` `decodeGroupN` helpers. After the generated Charge (spec-complete, larger than
+the hand one) a full `charge.succeeded` decodes within 128 KiB on aarch64-musl but not 64 KiB,
+so the margin is real but not generous; re-measure if a payload type grows.
 
 A direct enum with 54 large payloads made the compiler reserve one frame sized for all of
 them: `init(from:)` was 47 KB in release (311 KB in debug) and `==` was 473 KB. musl gives a
@@ -196,6 +198,47 @@ let the decode path regress to match it.
   (commit `deb8c27`); don't add validation back without asking.
 - **Config keys are read unscoped** (`secretKey`, not `stripe.secretKey`) so the
   caller chooses the namespace. Don't scope inside the library.
+
+## Generated models
+
+Ten resources are generated from Stripe's OpenAPI spec; do not edit the files under
+`Sources/Stripe/Models/Generated/` by hand — regenerate them:
+
+```bash
+curl -sSLO https://raw.githubusercontent.com/stripe/openapi/<pinned commit>/openapi/spec3.sdk.json
+Scripts/generate-models.py spec3.sdk.json          # all generated resources
+Scripts/generate-models.py spec3.sdk.json --only price --keep   # one, leaving the rest
+```
+
+Each resource's former hand file survives as `*.Retained.swift`, holding only the nested types
+the request layer still names and the generator spells differently (`Price.Tier`,
+`Subscription.PaymentBehavior`, `Session.PaymentMethod.Options`). A nested type that exists in
+both is the generated one; the retained file must not redeclare it.
+
+To cut a further resource over: add it to `RESOURCES` and `RESOURCE_TYPES`, generate it with
+`--only … --keep`, run `Scripts/cutover.py <hand file> <struct> <namespace> <generated file>`,
+delete any sibling hand file that extends a nested type the generator now declares, and fix
+the request layer's references the compiler reports. The collision set is computed, not listed.
+
+Rules the generator enforces, and why:
+
+- `format: currency` is `Stripe.Currency`; callers rely on the enum.
+- A `$ref` with a `type: string` alternative is `@Expandable`; Stripe's `x-expandableFields`
+  lists every object-valued property, so membership alone is not the signal.
+- A full resource embedded in another is `@Boxed` — `PaymentIntent → ApiErrors → PaymentIntent`
+  is a cycle a struct cannot contain.
+- A root resource always gets `typealias ID`, but `id` is optional where the spec says so; an
+  upcoming-invoice preview has none.
+- Mapped hand types are named as they resolve from inside `Stripe`; there is no
+  module-qualified spelling, because inside the module the root enum shadows the module name.
+  A nested namespace that shadows a top-level name (`Stripe.Customers.CashBalance`) is handled
+  by mapping to a type that lives under the enum.
+- `event` is retained by hand; see README.
+
+`Tests/StripeTests/FixtureDecodingTests.swift` decodes every generated resource from a fixture
+with every spec field populated (`Scripts/spec-fixture.py`). A hand type the generated ones
+reference that rejects a spec-valid value fails there — regenerate the enum's cases from the
+spec rather than adding the one value that failed.
 
 ## Measuring model drift
 

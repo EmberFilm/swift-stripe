@@ -471,20 +471,20 @@ regression.
 The request engine, form encoding, error handling, retries, idempotency keys,
 and webhook verification are complete and covered by tests.
 
-**The model types are a vendored snapshot, not a tracked mirror of the API.**
-They came from swift-stripe-standard and have not been regenerated since, so on
-a recent pinned version expect fields Stripe has added to be absent and fields
-it has moved to decode as `nil`. Diffing the models against live responses on
-`2026-06-24.dahlia` found, per object, roughly: 15 unmodelled keys on
-Checkout Session, 12 on Invoice, 3 on Subscription and Customer, 0 on Price —
-plus a dozen properties on Invoice that the API no longer returns at all
-(`charge`, `paid`, `payment_intent`, `subscription`, `tax`, `transfer_data`
-and friends, all relocated in `2025-03-31.basil`).
+**The models EmberFilm depends on are generated from Stripe's OpenAPI spec.** Checkout
+Session, Subscription, Subscription Item, Customer, Invoice, Invoice Payment, Price, Product,
+PaymentIntent and Charge are emitted by `Scripts/generate-models.py` into
+`Sources/Stripe/Models/Generated/` from `spec3.sdk.json`, pinned by commit in CI. Every
+field the spec describes is present, every enum carries the spec's cases, and each struct's
+`CodingKeys` is emitted from the same list as its properties. `Event` stays hand-written:
+it decodes an unknown event type without rejecting the delivery and models `data.object`
+as a discriminated union, neither of which the generator expresses yet.
 
-Nothing there breaks decoding — every field is optional — but a missing field is
-silent, so check the object you depend on before trusting it. The quickest check
-is to fetch a live object and compare its keys against the model's properties,
-snake-cased. Typed resource clients currently
+Every other model is still the vendored snapshot from swift-stripe-standard, and drifts.
+`Scripts/model-drift.py` measures the tracked set; a hand type the generated ones reference
+(a `Tax.Rate`, a `Tax.ID`) can still reject a value Stripe has since added, and
+`Tests/StripeTests/FixtureDecodingTests.swift` — which decodes a fixture with every spec
+field populated per resource — is what catches that. Typed resource clients currently
 cover Customers, PaymentIntents, Checkout Sessions, Products, Prices,
 Subscriptions, and Billing Portal Sessions; every other endpoint is reachable
 through `stripe.api` with the modelled request and response types.
