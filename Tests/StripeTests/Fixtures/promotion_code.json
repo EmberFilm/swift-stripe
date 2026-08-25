@@ -1,0 +1,30 @@
+{
+ "active": true,
+ "code": "code_1",
+ "created": 1700000000,
+ "customer": "customer_1",
+ "customer_account": "customer_account_1",
+ "expires_at": 1700000000,
+ "id": "promotion_code_1",
+ "livemode": true,
+ "max_redemptions": 1,
+ "metadata": {
+  "key": "metadata_1"
+ },
+ "object": "promotion_code",
+ "promotion": {
+  "coupon": "coupon_1",
+  "type": "coupon"
+ },
+ "restrictions": {
+  "currency_options": {
+   "usd": {
+    "minimum_amount": 1
+   }
+  },
+  "first_time_transaction": true,
+  "minimum_amount": 1,
+  "minimum_amount_currency": "usd"
+ },
+ "times_redeemed": 1
+}

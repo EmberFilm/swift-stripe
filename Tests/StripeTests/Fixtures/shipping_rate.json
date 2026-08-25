@@ -1,0 +1,34 @@
+{
+ "active": true,
+ "created": 1700000000,
+ "delivery_estimate": {
+  "maximum": {
+   "unit": "business_day",
+   "value": 1
+  },
+  "minimum": {
+   "unit": "business_day",
+   "value": 1
+  }
+ },
+ "display_name": "display_name_1",
+ "fixed_amount": {
+  "amount": 1,
+  "currency": "usd",
+  "currency_options": {
+   "usd": {
+    "amount": 1,
+    "tax_behavior": "exclusive"
+   }
+  }
+ },
+ "id": "shipping_rate_1",
+ "livemode": true,
+ "metadata": {
+  "key": "metadata_1"
+ },
+ "object": "shipping_rate",
+ "tax_behavior": "exclusive",
+ "tax_code": "tax_code_1",
+ "type": "fixed_amount"
+}

@@ -1,0 +1,34 @@
+{
+ "amount": 1,
+ "application_fee": "application_fee_1",
+ "application_fee_amount": 1,
+ "arrival_date": 1700000000,
+ "automatic": true,
+ "balance_transaction": "balance_transaction_1",
+ "created": 1700000000,
+ "currency": "usd",
+ "description": "description_1",
+ "destination": "external_account_1",
+ "failure_balance_transaction": "balance_transaction_1",
+ "failure_code": "failure_code_1",
+ "failure_message": "failure_message_1",
+ "id": "payout_1",
+ "livemode": true,
+ "metadata": {
+  "key": "metadata_1"
+ },
+ "method": "standard",
+ "object": "payout",
+ "original_payout": "payout_1",
+ "payout_method": "payout_method_1",
+ "reconciliation_status": "completed",
+ "reversed_by": "payout_1",
+ "source_type": "card",
+ "statement_descriptor": "EMBERFILM",
+ "status": "paid",
+ "trace_id": {
+  "status": "pending",
+  "value": "supported"
+ },
+ "type": "bank_account"
+}

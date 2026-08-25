@@ -1,0 +1,41 @@
+{
+ "amount": 1,
+ "amount_reversed": 1,
+ "balance_transaction": "balance_transaction_1",
+ "created": 1700000000,
+ "currency": "usd",
+ "description": "description_1",
+ "destination": "account_1",
+ "destination_payment": "charge_1",
+ "id": "transfer_1",
+ "livemode": true,
+ "metadata": {
+  "key": "metadata_1"
+ },
+ "object": "transfer",
+ "reversals": {
+  "data": [
+   {
+    "amount": 1,
+    "balance_transaction": "balance_transaction_1",
+    "created": 1700000000,
+    "currency": "usd",
+    "destination_payment_refund": "refund_1",
+    "id": "id_1",
+    "metadata": {
+     "key": "metadata_1"
+    },
+    "object": "transfer_reversal",
+    "source_refund": "refund_1",
+    "transfer": "transfer_1"
+   }
+  ],
+  "has_more": true,
+  "object": "list",
+  "url": "url_1"
+ },
+ "reversed": true,
+ "source_transaction": "charge_1",
+ "source_type": "card",
+ "transfer_group": "transfer_group_1"
+}

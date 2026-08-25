@@ -1,0 +1,38 @@
+{
+ "created": 1700000000,
+ "id": "forwarding.request_1",
+ "livemode": true,
+ "metadata": {
+  "key": "metadata_1"
+ },
+ "object": "forwarding.request",
+ "payment_method": "payment_method_1",
+ "replacements": [
+  "card_cvc"
+ ],
+ "request_context": {
+  "destination_duration": 1,
+  "destination_ip_address": "destination_ip_address_1"
+ },
+ "request_details": {
+  "body": "body_1",
+  "headers": [
+   {
+    "name": "name_1",
+    "value": "value_1"
+   }
+  ],
+  "http_method": "POST"
+ },
+ "response_details": {
+  "body": "body_1",
+  "headers": [
+   {
+    "name": "name_1",
+    "value": "value_1"
+   }
+  ],
+  "status": 1
+ },
+ "url": "url_1"
+}

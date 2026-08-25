@@ -1,0 +1,543 @@
+{
+ "business_profile": {
+  "annual_revenue": {
+   "amount": 1,
+   "currency": "usd",
+   "fiscal_year_end": "fiscal_year_end_1"
+  },
+  "estimated_worker_count": 1,
+  "mcc": "mcc_1",
+  "minority_owned_business_designation": [
+   "lgbtqi_owned_business"
+  ],
+  "monthly_estimated_revenue": {
+   "amount": 1,
+   "currency": "usd"
+  },
+  "name": "name_1",
+  "product_description": "product_description_1",
+  "support_address": {
+   "city": "city_1",
+   "country": "country_1",
+   "line1": "line1_1",
+   "line2": "line2_1",
+   "postal_code": "postal_code_1",
+   "state": "state_1"
+  },
+  "support_email": "support_email_1",
+  "support_phone": "support_phone_1",
+  "support_url": "support_url_1",
+  "url": "url_1"
+ },
+ "business_type": "company",
+ "capabilities": {
+  "acss_debit_payments": "active",
+  "affirm_payments": "active",
+  "afterpay_clearpay_payments": "active",
+  "alma_payments": "active",
+  "amazon_pay_payments": "active",
+  "app_distribution": "active",
+  "au_becs_debit_payments": "active",
+  "bacs_debit_payments": "active",
+  "bancontact_payments": "active",
+  "bank_transfer_payments": "active",
+  "billie_payments": "active",
+  "bizum_payments": "active",
+  "blik_payments": "active",
+  "boleto_payments": "active",
+  "card_issuing": "active",
+  "card_payments": "active",
+  "cartes_bancaires_payments": "active",
+  "cashapp_payments": "active",
+  "crypto_payments": "active",
+  "eps_payments": "active",
+  "fpx_payments": "active",
+  "gb_bank_transfer_payments": "active",
+  "giropay_payments": "active",
+  "grabpay_payments": "active",
+  "ideal_payments": "active",
+  "india_international_payments": "active",
+  "jcb_payments": "active",
+  "jp_bank_transfer_payments": "active",
+  "kakao_pay_payments": "active",
+  "klarna_payments": "active",
+  "konbini_payments": "active",
+  "kr_card_payments": "active",
+  "legacy_payments": "active",
+  "link_payments": "active",
+  "mb_way_payments": "active",
+  "mobilepay_payments": "active",
+  "multibanco_payments": "active",
+  "mx_bank_transfer_payments": "active",
+  "naver_pay_payments": "active",
+  "nz_bank_account_becs_debit_payments": "active",
+  "oxxo_payments": "active",
+  "p24_payments": "active",
+  "pay_by_bank_payments": "active",
+  "payco_payments": "active",
+  "paynow_payments": "active",
+  "payto_payments": "active",
+  "pix_payments": "active",
+  "promptpay_payments": "active",
+  "revolut_pay_payments": "active",
+  "samsung_pay_payments": "active",
+  "satispay_payments": "active",
+  "scalapay_payments": "active",
+  "sepa_bank_transfer_payments": "active",
+  "sepa_debit_payments": "active",
+  "sofort_payments": "active",
+  "sunbit_payments": "active",
+  "swish_payments": "active",
+  "tax_reporting_us_1099_k": "active",
+  "tax_reporting_us_1099_misc": "active",
+  "transfers": "active",
+  "treasury": "active",
+  "twint_payments": "active",
+  "upi_payments": "active",
+  "us_bank_account_ach_payments": "active",
+  "us_bank_transfer_payments": "active",
+  "zip_payments": "active"
+ },
+ "charges_enabled": true,
+ "company": {
+  "address": {
+   "city": "city_1",
+   "country": "country_1",
+   "line1": "line1_1",
+   "line2": "line2_1",
+   "postal_code": "postal_code_1",
+   "state": "state_1"
+  },
+  "address_kana": {
+   "city": "city_1",
+   "country": "country_1",
+   "line1": "line1_1",
+   "line2": "line2_1",
+   "postal_code": "postal_code_1",
+   "state": "state_1",
+   "town": "town_1"
+  },
+  "address_kanji": {
+   "city": "city_1",
+   "country": "country_1",
+   "line1": "line1_1",
+   "line2": "line2_1",
+   "postal_code": "postal_code_1",
+   "state": "state_1",
+   "town": "town_1"
+  },
+  "administrative_address": {
+   "city": "city_1",
+   "country": "country_1",
+   "line1": "line1_1",
+   "line2": "line2_1",
+   "postal_code": "postal_code_1",
+   "state": "state_1"
+  },
+  "directors_provided": true,
+  "directorship_declaration": {
+   "date": 1700000000,
+   "ip": "ip_1",
+   "user_agent": "user_agent_1"
+  },
+  "executives_provided": true,
+  "export_license_id": "export_license_id_1",
+  "export_purpose_code": "export_purpose_code_1",
+  "name": "stripe",
+  "name_kana": "stripe",
+  "name_kanji": "stripe",
+  "owners_provided": true,
+  "ownership_declaration": {
+   "date": 1700000000,
+   "ip": "ip_1",
+   "user_agent": "user_agent_1"
+  },
+  "ownership_exemption_reason": "qualified_entity_exceeds_ownership_threshold",
+  "phone": "phone_1",
+  "principal_place_of_business": {
+   "city": "city_1",
+   "country": "country_1",
+   "line1": "line1_1",
+   "line2": "line2_1",
+   "postal_code": "postal_code_1",
+   "state": "state_1"
+  },
+  "registration_date": {
+   "day": 1,
+   "month": 1,
+   "year": 1
+  },
+  "representative_declaration": {
+   "date": 1700000000,
+   "ip": "ip_1",
+   "user_agent": "user_agent_1"
+  },
+  "structure": "free_zone_establishment",
+  "tax_id_provided": true,
+  "tax_id_registrar": "tax_id",
+  "vat_id_provided": true,
+  "verification": {
+   "document": {
+    "back": "file_1",
+    "details": "details_1",
+    "details_code": "document_corrupt",
+    "front": "file_1"
+   }
+  }
+ },
+ "controller": {
+  "fees": {
+   "payer": "account"
+  },
+  "is_controller": true,
+  "losses": {
+   "payments": "application"
+  },
+  "requirement_collection": "application",
+  "stripe_dashboard": {
+   "type": "express"
+  },
+  "type": "account"
+ },
+ "country": "country_1",
+ "created": 1700000000,
+ "default_currency": "usd",
+ "details_submitted": true,
+ "email": "email_1",
+ "external_accounts": {
+  "data": [],
+  "has_more": true,
+  "object": "list",
+  "url": "url_1"
+ },
+ "future_requirements": {
+  "alternatives": [
+   {
+    "alternative_fields_due": [
+     "alternative_fields_due_1"
+    ],
+    "original_fields_due": [
+     "original_fields_due_1"
+    ]
+   }
+  ],
+  "current_deadline": 1700000000,
+  "currently_due": [
+   "currently_due_1"
+  ],
+  "disabled_reason": "action_required.requested_capabilities",
+  "errors": [
+   {
+    "code": "external_request",
+    "reason": "reason_1",
+    "requirement": "requirement_1"
+   }
+  ],
+  "eventually_due": [
+   "eventually_due_1"
+  ],
+  "past_due": [
+   "past_due_1"
+  ],
+  "pending_verification": [
+   "pending_verification_1"
+  ]
+ },
+ "groups": {
+  "payments_pricing": "payments_pricing_1"
+ },
+ "id": "account_1",
+ "individual": {
+  "account": "account_1",
+  "additional_tos_acceptances": {
+   "account": {
+    "date": 1700000000,
+    "ip": "ip_1",
+    "user_agent": "user_agent_1"
+   }
+  },
+  "address": {
+   "city": "city_1",
+   "country": "country_1",
+   "line1": "line1_1",
+   "line2": "line2_1",
+   "postal_code": "postal_code_1",
+   "state": "state_1"
+  },
+  "address_kana": {
+   "city": "city_1",
+   "country": "country_1",
+   "line1": "line1_1",
+   "line2": "line2_1",
+   "postal_code": "postal_code_1",
+   "state": "state_1",
+   "town": "town_1"
+  },
+  "address_kanji": {
+   "city": "city_1",
+   "country": "country_1",
+   "line1": "line1_1",
+   "line2": "line2_1",
+   "postal_code": "postal_code_1",
+   "state": "state_1",
+   "town": "town_1"
+  },
+  "created": 1700000000,
+  "dob": {
+   "day": 1,
+   "month": 1,
+   "year": 1
+  },
+  "email": "stripe",
+  "first_name": "stripe",
+  "first_name_kana": "stripe",
+  "first_name_kanji": "stripe",
+  "full_name_aliases": [
+   "full_name_aliases_1"
+  ],
+  "future_requirements": {
+   "alternatives": [
+    {
+     "alternative_fields_due": [
+      "alternative_fields_due_1"
+     ],
+     "original_fields_due": [
+      "original_fields_due_1"
+     ]
+    }
+   ],
+   "currently_due": [
+    "currently_due_1"
+   ],
+   "errors": [
+    {
+     "code": "external_request",
+     "reason": "reason_1",
+     "requirement": "requirement_1"
+    }
+   ],
+   "eventually_due": [
+    "eventually_due_1"
+   ],
+   "past_due": [
+    "past_due_1"
+   ],
+   "pending_verification": [
+    "pending_verification_1"
+   ]
+  },
+  "gender": "gender_1",
+  "id": "id_1",
+  "id_number_provided": true,
+  "id_number_secondary_provided": true,
+  "last_name": "stripe",
+  "last_name_kana": "stripe",
+  "last_name_kanji": "stripe",
+  "maiden_name": "maiden_name_1",
+  "metadata": {
+   "key": "metadata_1"
+  },
+  "nationality": "nationality_1",
+  "object": "person",
+  "phone": "phone_1",
+  "political_exposure": "existing",
+  "registered_address": {
+   "city": "city_1",
+   "country": "country_1",
+   "line1": "line1_1",
+   "line2": "line2_1",
+   "postal_code": "postal_code_1",
+   "state": "state_1"
+  },
+  "relationship": {
+   "authorizer": true,
+   "director": true,
+   "executive": true,
+   "legal_guardian": true,
+   "owner": true,
+   "percent_ownership": 1.5,
+   "representative": true,
+   "title": "title_1"
+  },
+  "requirements": {
+   "alternatives": [
+    {
+     "alternative_fields_due": [
+      "alternative_fields_due_1"
+     ],
+     "original_fields_due": [
+      "original_fields_due_1"
+     ]
+    }
+   ],
+   "currently_due": [
+    "currently_due_1"
+   ],
+   "errors": [
+    {
+     "code": "external_request",
+     "reason": "reason_1",
+     "requirement": "requirement_1"
+    }
+   ],
+   "eventually_due": [
+    "eventually_due_1"
+   ],
+   "past_due": [
+    "past_due_1"
+   ],
+   "pending_verification": [
+    "pending_verification_1"
+   ]
+  },
+  "ssn_last_4_provided": true,
+  "us_cfpb_data": {
+   "ethnicity_details": {
+    "ethnicity": [
+     "cuban"
+    ],
+    "ethnicity_other": "ethnicity_other_1"
+   },
+   "race_details": {
+    "race": [
+     "african_american"
+    ],
+    "race_other": "race_other_1"
+   },
+   "self_identified_gender": "self_identified_gender_1"
+  },
+  "verification": {
+   "additional_document": {
+    "back": "file_1",
+    "details": "details_1",
+    "details_code": "document_corrupt",
+    "front": "file_1"
+   },
+   "details": "details_1",
+   "details_code": "document_address_mismatch",
+   "document": {
+    "back": "file_1",
+    "details": "details_1",
+    "details_code": "document_corrupt",
+    "front": "file_1"
+   },
+   "status": "unverified"
+  }
+ },
+ "metadata": {
+  "key": "metadata_1"
+ },
+ "object": "account",
+ "payouts_enabled": true,
+ "requirements": {
+  "alternatives": [
+   {
+    "alternative_fields_due": [
+     "alternative_fields_due_1"
+    ],
+    "original_fields_due": [
+     "original_fields_due_1"
+    ]
+   }
+  ],
+  "current_deadline": 1700000000,
+  "currently_due": [
+   "currently_due_1"
+  ],
+  "disabled_reason": "action_required.requested_capabilities",
+  "errors": [
+   {
+    "code": "external_request",
+    "reason": "reason_1",
+    "requirement": "requirement_1"
+   }
+  ],
+  "eventually_due": [
+   "eventually_due_1"
+  ],
+  "past_due": [
+   "past_due_1"
+  ],
+  "pending_verification": [
+   "pending_verification_1"
+  ]
+ },
+ "settings": {
+  "bacs_debit_payments": {
+   "display_name": "display_name_1",
+   "service_user_number": "service_user_number_1"
+  },
+  "branding": {
+   "icon": "file_1",
+   "logo": "file_1",
+   "primary_color": "primary_color_1",
+   "secondary_color": "secondary_color_1"
+  },
+  "card_issuing": {
+   "tos_acceptance": {
+    "date": 1,
+    "ip": "ip_1",
+    "user_agent": "user_agent_1"
+   }
+  },
+  "card_payments": {
+   "decline_on": {
+    "avs_failure": true,
+    "cvc_failure": true
+   },
+   "statement_descriptor_prefix": "EMBERFILM",
+   "statement_descriptor_prefix_kana": "EMBERFILM",
+   "statement_descriptor_prefix_kanji": "EMBERFILM"
+  },
+  "dashboard": {
+   "display_name": "display_name_1",
+   "timezone": "timezone_1"
+  },
+  "invoices": {
+   "default_account_tax_ids": [
+    "tax_id_1"
+   ],
+   "hosted_payment_method_save": "always"
+  },
+  "payments": {
+   "statement_descriptor": "EMBERFILM",
+   "statement_descriptor_kana": "EMBERFILM",
+   "statement_descriptor_kanji": "EMBERFILM",
+   "statement_descriptor_prefix_kana": "EMBERFILM",
+   "statement_descriptor_prefix_kanji": "EMBERFILM"
+  },
+  "payouts": {
+   "debit_negative_balances": true,
+   "schedule": {
+    "delay_days": 1,
+    "interval": "manual",
+    "monthly_anchor": 1,
+    "monthly_payout_days": [
+     1
+    ],
+    "weekly_anchor": "weekly_anchor_1",
+    "weekly_payout_days": [
+     "friday"
+    ]
+   },
+   "statement_descriptor": "EMBERFILM"
+  },
+  "sepa_debit_payments": {
+   "creditor_id": "creditor_id_1"
+  },
+  "treasury": {
+   "tos_acceptance": {
+    "date": 1,
+    "ip": "ip_1",
+    "user_agent": "user_agent_1"
+   }
+  }
+ },
+ "tos_acceptance": {
+  "date": 1700000000,
+  "ip": "ip_1",
+  "service_agreement": "service_agreement_1",
+  "user_agent": "user_agent_1"
+ },
+ "type": "custom"
+}

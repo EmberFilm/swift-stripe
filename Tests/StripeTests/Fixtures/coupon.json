@@ -1,0 +1,29 @@
+{
+ "amount_off": 1,
+ "applies_to": {
+  "products": [
+   "products_1"
+  ]
+ },
+ "created": 1700000000,
+ "currency": "usd",
+ "currency_options": {
+  "usd": {
+   "amount_off": 1
+  }
+ },
+ "duration": "forever",
+ "duration_in_months": 1,
+ "id": "coupon_1",
+ "livemode": true,
+ "max_redemptions": 1,
+ "metadata": {
+  "key": "metadata_1"
+ },
+ "name": "name_1",
+ "object": "coupon",
+ "percent_off": 1.5,
+ "redeem_by": 1700000000,
+ "times_redeemed": 1,
+ "valid": true
+}

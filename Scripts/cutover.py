@@ -127,7 +127,7 @@ for b in body:
 assert any(f"struct {struct_name}" in d for d in dropped), "struct not found"
 if not re.search(r"^\s*(public|extension)\s", head + "".join(kept), re.M):
     hand_p.unlink(); print(f"{struct_name}: nothing to retain; hand file removed"); sys.exit(0)
-new_p = hand_p.with_name(hand_p.name.replace(".swift", ".Retained.swift"))
+new_p = hand_p if hand_p.name.endswith(".Retained.swift") else hand_p.with_name(hand_p.name.replace(".swift", ".Retained.swift"))
 out = head.replace(hand_p.name, new_p.name).rstrip("\n") + \
       f"\n\n// The {struct_name} struct is generated (Models/Generated). These are the nested types the\n" \
       f"// request layer still names under `{namespace}` that the generator spells differently.\n\n" + "".join(kept)

@@ -253,6 +253,34 @@ extension Stripe.Shared {
     }
 }
 
+// payment_method_affirm
+extension Stripe.Shared {
+    public struct Affirm: Codable, Hashable, Sendable {
+        public init() {}
+    }
+}
+
+// payment_method_afterpay_clearpay
+extension Stripe.Shared {
+    public struct AfterpayClearpay: Codable, Hashable, Sendable {
+        public init() {}
+    }
+}
+
+// payment_flows_private_payment_methods_alipay
+extension Stripe.Shared {
+    public struct Alipay: Codable, Hashable, Sendable {
+        public init() {}
+    }
+}
+
+// payment_method_alma
+extension Stripe.Shared {
+    public struct Alma: Codable, Hashable, Sendable {
+        public init() {}
+    }
+}
+
 // account_requirements_alternative
 extension Stripe.Shared {
     public struct Alternatives: Codable, Hashable, Sendable {
@@ -273,6 +301,20 @@ extension Stripe.Shared {
             self.alternativeFieldsDue = alternativeFieldsDue
             self.originalFieldsDue = originalFieldsDue
         }
+    }
+}
+
+// payment_method_amazon_pay
+extension Stripe.Shared {
+    public struct AmazonPay: Codable, Hashable, Sendable {
+        public init() {}
+    }
+}
+
+// payment_method_card_wallet_amex_express_checkout
+extension Stripe.Shared {
+    public struct AmexExpressCheckout: Codable, Hashable, Sendable {
+        public init() {}
     }
 }
 
@@ -298,12 +340,12 @@ extension Stripe.Shared {
         /// If the error is parameter-specific, the parameter related to the error.
         public var param: String?
         @Boxed public var paymentIntent: Stripe.PaymentIntents.PaymentIntent?
-        public var paymentMethod: Stripe.PaymentMethods.PaymentMethod?
+        @Boxed public var paymentMethod: Stripe.PaymentMethods.PaymentMethod?
         /// If the error is specific to the type of payment method, the payment method type that had a problem.
         public var paymentMethodType: String?
         /// A URL to the request log entry in your dashboard.
         public var requestLogUrl: String?
-        public var setupIntent: Stripe.Setup.Intent?
+        @Boxed public var setupIntent: Stripe.Setup.Intent?
         public var source: StripePaymentSource?
         /// The type of error returned.
         public var `type`: Type?
@@ -355,10 +397,10 @@ extension Stripe.Shared {
             self.networkDeclineCode = networkDeclineCode
             self.param = param
             self._paymentIntent = Boxed(wrappedValue: paymentIntent)
-            self.paymentMethod = paymentMethod
+            self._paymentMethod = Boxed(wrappedValue: paymentMethod)
             self.paymentMethodType = paymentMethodType
             self.requestLogUrl = requestLogUrl
-            self.setupIntent = setupIntent
+            self._setupIntent = Boxed(wrappedValue: setupIntent)
             self.source = source
             self.`type` = `type`
         }
@@ -607,6 +649,62 @@ extension Stripe.Shared {
     }
 }
 
+// payment_method_au_becs_debit
+extension Stripe.Shared {
+    public struct AuBecsDebit: Codable, Hashable, Sendable {
+        /// Six-digit number identifying bank and branch associated with this bank account.
+        public var bsbNumber: String?
+        /// Uniquely identifies this particular bank account.
+        public var fingerprint: String?
+        /// Last four digits of the bank account number.
+        public var last4: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case bsbNumber
+            case fingerprint
+            case last4
+        }
+
+        public init(
+            bsbNumber: String? = nil,
+            fingerprint: String? = nil,
+            last4: String? = nil
+        ) {
+            self.bsbNumber = bsbNumber
+            self.fingerprint = fingerprint
+            self.last4 = last4
+        }
+    }
+}
+
+// payment_method_bacs_debit
+extension Stripe.Shared {
+    public struct BacsDebit: Codable, Hashable, Sendable {
+        /// Uniquely identifies this particular bank account.
+        public var fingerprint: String?
+        /// Last four digits of the bank account number.
+        public var last4: String?
+        /// Sort code of the bank account.
+        public var sortCode: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case fingerprint
+            case last4
+            case sortCode
+        }
+
+        public init(
+            fingerprint: String? = nil,
+            last4: String? = nil,
+            sortCode: String? = nil
+        ) {
+            self.fingerprint = fingerprint
+            self.last4 = last4
+            self.sortCode = sortCode
+        }
+    }
+}
+
 // treasury_transactions_resource_balance_impact
 extension Stripe.Shared {
     /// Change to a FinancialAccount's balance
@@ -681,6 +779,13 @@ extension Stripe.Shared {
             self.euBankTransfer = euBankTransfer
             self.`type` = `type`
         }
+    }
+}
+
+// payment_method_billie
+extension Stripe.Shared {
+    public struct Billie: Codable, Hashable, Sendable {
+        public init() {}
     }
 }
 
@@ -810,6 +915,221 @@ extension Stripe.Shared {
             self.name = name
             self.phone = phone
             self.taxId = taxId
+        }
+    }
+}
+
+// payment_method_bizum
+extension Stripe.Shared {
+    public struct Bizum: Codable, Hashable, Sendable {
+        /// A unique identifier for the buyer as determined by the local payment processor.
+        public var buyerId: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case buyerId
+        }
+
+        public init(
+            buyerId: String? = nil
+        ) {
+            self.buyerId = buyerId
+        }
+    }
+}
+
+// payment_method_blik
+extension Stripe.Shared {
+    public struct Blik: Codable, Hashable, Sendable {
+        /// A unique and immutable identifier assigned by BLIK to every buyer.
+        public var buyerId: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case buyerId
+        }
+
+        public init(
+            buyerId: String? = nil
+        ) {
+            self.buyerId = buyerId
+        }
+    }
+}
+
+// payment_intent_next_action_blik_authorize
+extension Stripe.Shared {
+    public struct BlikAuthorize: Codable, Hashable, Sendable {
+        public init() {}
+    }
+}
+
+// payment_method_us_bank_account_blocked
+extension Stripe.Shared {
+    public struct Blocked: Codable, Hashable, Sendable {
+        /// The ACH network code that resulted in this block.
+        public var networkCode: NetworkCode?
+        /// The reason why this PaymentMethod's fingerprint has been blocked
+        public var reason: Reason?
+
+        private enum CodingKeys: String, CodingKey {
+            case networkCode
+            case reason
+        }
+
+        public init(
+            networkCode: NetworkCode? = nil,
+            reason: Reason? = nil
+        ) {
+            self.networkCode = networkCode
+            self.reason = reason
+        }
+
+        /// The ACH network code that resulted in this block.
+        public enum NetworkCode: String, Codable, Hashable, Sendable {
+            case R02
+            case R03
+            case R04
+            case R05
+            case R07
+            case R08
+            case R10
+            case R11
+            case R16
+            case R20
+            case R29
+            case R31
+        }
+
+        /// The reason why this PaymentMethod's fingerprint has been blocked
+        public enum Reason: String, Codable, Hashable, Sendable {
+            case bankAccountClosed = "bank_account_closed"
+            case bankAccountFrozen = "bank_account_frozen"
+            case bankAccountInvalidDetails = "bank_account_invalid_details"
+            case bankAccountRestricted = "bank_account_restricted"
+            case bankAccountUnusable = "bank_account_unusable"
+            case debitNotAuthorized = "debit_not_authorized"
+            case tokenizedAccountNumberDeactivated = "tokenized_account_number_deactivated"
+        }
+    }
+}
+
+// payment_method_boleto
+extension Stripe.Shared {
+    public struct Boleto: Codable, Hashable, Sendable {
+        /// Uniquely identifies the customer tax id (CNPJ or CPF)
+        public var taxId: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case taxId
+        }
+
+        public init(
+            taxId: String? = nil
+        ) {
+            self.taxId = taxId
+        }
+    }
+}
+
+// payment_method_card
+extension Stripe.Shared {
+    public struct Card: Codable, Hashable, Sendable {
+        /// Card brand.
+        public var brand: String?
+        /// Checks on Card address and CVC if provided.
+        public var checks: Stripe.Shared.Checks?
+        /// Two-letter ISO code representing the country of the card.
+        public var country: String?
+        /// A high-level description of the type of cards issued in this range.
+        public var description: String?
+        /// The brand to use when displaying the card, this accounts for customer's brand choice on dual-branded cards.
+        public var displayBrand: String?
+        /// Two-digit number representing the card's expiration month.
+        public var expMonth: Int?
+        /// Four-digit number representing the card's expiration year.
+        public var expYear: Int?
+        /// Uniquely identifies this particular card number.
+        public var fingerprint: String?
+        /// Card funding type.
+        public var funding: String?
+        /// Details of the original PaymentMethod that created this object.
+        public var generatedFrom: Stripe.Shared.GeneratedFrom?
+        /// Issuer identification number of the card.
+        public var iin: String?
+        /// The name of the card's issuing bank.
+        public var issuer: String?
+        /// The last four digits of the card.
+        public var last4: String?
+        /// Contains information about card networks that can be used to process the payment.
+        public var networks: Stripe.Shared.Networks?
+        /// Status of a card based on the card issuer.
+        public var regulatedStatus: RegulatedStatus?
+        /// Contains details on how this Card may be used for 3D Secure authentication.
+        public var threeDSecureUsage: Stripe.Shared.ThreeDSecureUsage?
+        /// If this Card is part of a card wallet, this contains the details of the card wallet.
+        public var wallet: Stripe.Shared.PaymentMethodCardWallet?
+
+        private enum CodingKeys: String, CodingKey {
+            case brand
+            case checks
+            case country
+            case description
+            case displayBrand
+            case expMonth
+            case expYear
+            case fingerprint
+            case funding
+            case generatedFrom
+            case iin
+            case issuer
+            case last4
+            case networks
+            case regulatedStatus
+            case threeDSecureUsage
+            case wallet
+        }
+
+        public init(
+            brand: String? = nil,
+            checks: Stripe.Shared.Checks? = nil,
+            country: String? = nil,
+            description: String? = nil,
+            displayBrand: String? = nil,
+            expMonth: Int? = nil,
+            expYear: Int? = nil,
+            fingerprint: String? = nil,
+            funding: String? = nil,
+            generatedFrom: Stripe.Shared.GeneratedFrom? = nil,
+            iin: String? = nil,
+            issuer: String? = nil,
+            last4: String? = nil,
+            networks: Stripe.Shared.Networks? = nil,
+            regulatedStatus: RegulatedStatus? = nil,
+            threeDSecureUsage: Stripe.Shared.ThreeDSecureUsage? = nil,
+            wallet: Stripe.Shared.PaymentMethodCardWallet? = nil
+        ) {
+            self.brand = brand
+            self.checks = checks
+            self.country = country
+            self.description = description
+            self.displayBrand = displayBrand
+            self.expMonth = expMonth
+            self.expYear = expYear
+            self.fingerprint = fingerprint
+            self.funding = funding
+            self.generatedFrom = generatedFrom
+            self.iin = iin
+            self.issuer = issuer
+            self.last4 = last4
+            self.networks = networks
+            self.regulatedStatus = regulatedStatus
+            self.threeDSecureUsage = threeDSecureUsage
+            self.wallet = wallet
+        }
+
+        /// Status of a card based on the card issuer.
+        public enum RegulatedStatus: String, Codable, Hashable, Sendable {
+            case regulated
+            case unregulated
         }
     }
 }
@@ -966,6 +1286,84 @@ extension Stripe.Shared {
             case contactlessMagstripeMode = "contactless_magstripe_mode"
             case magneticStripeFallback = "magnetic_stripe_fallback"
             case magneticStripeTrack2 = "magnetic_stripe_track2"
+        }
+    }
+}
+
+// payment_method_cashapp
+extension Stripe.Shared {
+    public struct Cashapp: Codable, Hashable, Sendable {
+        /// A unique and immutable identifier assigned by Cash App to every buyer.
+        public var buyerId: String?
+        /// A public identifier for buyers using Cash App.
+        public var cashtag: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case buyerId
+            case cashtag
+        }
+
+        public init(
+            buyerId: String? = nil,
+            cashtag: String? = nil
+        ) {
+            self.buyerId = buyerId
+            self.cashtag = cashtag
+        }
+    }
+}
+
+// payment_intent_next_action_cashapp_handle_redirect_or_display_qr_code
+extension Stripe.Shared {
+    public struct CashappHandleRedirectOrDisplayQrCode: Codable, Hashable, Sendable {
+        /// The URL to the hosted Cash App Pay instructions page, which allows customers to view the QR code, and supports QR code…
+        public var hostedInstructionsUrl: String?
+        /// The url for mobile redirect based auth
+        public var mobileAuthUrl: String?
+        public var qrCode: Stripe.Shared.QrCode?
+
+        private enum CodingKeys: String, CodingKey {
+            case hostedInstructionsUrl
+            case mobileAuthUrl
+            case qrCode
+        }
+
+        public init(
+            hostedInstructionsUrl: String? = nil,
+            mobileAuthUrl: String? = nil,
+            qrCode: Stripe.Shared.QrCode? = nil
+        ) {
+            self.hostedInstructionsUrl = hostedInstructionsUrl
+            self.mobileAuthUrl = mobileAuthUrl
+            self.qrCode = qrCode
+        }
+    }
+}
+
+// payment_method_card_checks
+extension Stripe.Shared {
+    public struct Checks: Codable, Hashable, Sendable {
+        /// If a address line1 was provided, results of the check, one of `pass`, `fail`, `unavailable`, or `unchecked`.
+        public var addressLine1Check: String?
+        /// If a address postal code was provided, results of the check, one of `pass`, `fail`, `unavailable`, or `unchecked`.
+        public var addressPostalCodeCheck: String?
+        /// If a CVC was provided, results of the check, one of `pass`, `fail`, `unavailable`, or `unchecked`.
+        public var cvcCheck: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case addressLine1Check
+            case addressPostalCodeCheck
+            case cvcCheck
+        }
+
+        public init(
+            addressLine1Check: String? = nil,
+            addressPostalCodeCheck: String? = nil,
+            cvcCheck: String? = nil
+        ) {
+            self.addressLine1Check = addressLine1Check
+            self.addressPostalCodeCheck = addressPostalCodeCheck
+            self.cvcCheck = cvcCheck
         }
     }
 }
@@ -1186,6 +1584,39 @@ extension Stripe.Shared {
     }
 }
 
+// deleted_application
+extension Stripe.Shared {
+    public struct DeletedApplication: Codable, Hashable, Sendable, Identifiable {
+        public typealias ID = String
+        public let id: ID
+        /// String representing the object's type.
+        public let object: String
+        /// Always true for a deleted object
+        public var deleted: Bool?
+        /// The name of the application.
+        public var name: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case id
+            case object
+            case deleted
+            case name
+        }
+
+        public init(
+            id: ID,
+            object: String,
+            deleted: Bool? = nil,
+            name: String? = nil
+        ) {
+            self.id = id
+            self.object = object
+            self.deleted = deleted
+            self.name = name
+        }
+    }
+}
+
 // discount
 extension Stripe.Shared {
     /// A discount represents the actual application of a coupon or promotion code.
@@ -1305,6 +1736,84 @@ extension Stripe.Shared {
         ) {
             self.amount = amount
             self._discount = Expandable(id: discount)
+        }
+    }
+}
+
+// payment_flows_private_payment_methods_klarna_dob
+extension Stripe.Shared {
+    public struct Dob: Codable, Hashable, Sendable {
+        /// The day of birth, between 1 and 31.
+        public var day: Int?
+        /// The month of birth, between 1 and 12.
+        public var month: Int?
+        /// The four-digit year of birth.
+        public var year: Int?
+
+        private enum CodingKeys: String, CodingKey {
+            case day
+            case month
+            case year
+        }
+
+        public init(
+            day: Int? = nil,
+            month: Int? = nil,
+            year: Int? = nil
+        ) {
+            self.day = day
+            self.month = month
+            self.year = year
+        }
+    }
+}
+
+// payment_method_eps
+extension Stripe.Shared {
+    public struct Eps: Codable, Hashable, Sendable {
+        /// The customer's bank.
+        public var bank: Bank?
+
+        private enum CodingKeys: String, CodingKey {
+            case bank
+        }
+
+        public init(
+            bank: Bank? = nil
+        ) {
+            self.bank = bank
+        }
+
+        /// The customer's bank.
+        public enum Bank: String, Codable, Hashable, Sendable {
+            case arzteUndApothekerBank = "arzte_und_apotheker_bank"
+            case austrianAnadiBankAg = "austrian_anadi_bank_ag"
+            case bankAustria = "bank_austria"
+            case bankhausCarlSpangler = "bankhaus_carl_spangler"
+            case bankhausSchelhammerUndSchatteraAg = "bankhaus_schelhammer_und_schattera_ag"
+            case bawagPskAg = "bawag_psk_ag"
+            case bksBankAg = "bks_bank_ag"
+            case brullKallmusBankAg = "brull_kallmus_bank_ag"
+            case btvVierLanderBank = "btv_vier_lander_bank"
+            case capitalBankGraweGruppeAg = "capital_bank_grawe_gruppe_ag"
+            case deutscheBankAg = "deutsche_bank_ag"
+            case dolomitenbank
+            case easybankAg = "easybank_ag"
+            case ersteBankUndSparkassen = "erste_bank_und_sparkassen"
+            case hypoAlpeadriabankInternationalAg = "hypo_alpeadriabank_international_ag"
+            case hypoBankBurgenlandAktiengesellschaft = "hypo_bank_burgenland_aktiengesellschaft"
+            case hypoNoeLbFurNiederosterreichUWien = "hypo_noe_lb_fur_niederosterreich_u_wien"
+            case hypoOberosterreichSalzburgSteiermark = "hypo_oberosterreich_salzburg_steiermark"
+            case hypoTirolBankAg = "hypo_tirol_bank_ag"
+            case hypoVorarlbergBankAg = "hypo_vorarlberg_bank_ag"
+            case marchfelderBank = "marchfelder_bank"
+            case oberbankAg = "oberbank_ag"
+            case raiffeisenBankengruppeOsterreich = "raiffeisen_bankengruppe_osterreich"
+            case schoellerbankAg = "schoellerbank_ag"
+            case spardaBankWien = "sparda_bank_wien"
+            case volksbankGruppe = "volksbank_gruppe"
+            case volkskreditbankAg = "volkskreditbank_ag"
+            case vrBankBraunau = "vr_bank_braunau"
         }
     }
 }
@@ -1801,6 +2310,41 @@ extension Stripe.Shared {
     }
 }
 
+// payment_method_card_generated_card
+extension Stripe.Shared {
+    public struct GeneratedFrom: Codable, Hashable, Sendable {
+        /// The charge that created this object.
+        public var charge: String?
+        /// Transaction-specific details of the payment method used in the payment.
+        public var paymentMethodDetails: Stripe.Shared.PaymentMethodDetails?
+        /// The ID of the SetupAttempt that generated this PaymentMethod, if any.
+        @Expandable<Stripe.Setup.Attempt, String> public var setupAttempt: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case charge
+            case paymentMethodDetails
+            case setupAttempt
+        }
+
+        public init(
+            charge: String? = nil,
+            paymentMethodDetails: Stripe.Shared.PaymentMethodDetails? = nil,
+            setupAttempt: String? = nil
+        ) {
+            self.charge = charge
+            self.paymentMethodDetails = paymentMethodDetails
+            self._setupAttempt = Expandable(id: setupAttempt)
+        }
+    }
+}
+
+// payment_method_giropay
+extension Stripe.Shared {
+    public struct Giropay: Codable, Hashable, Sendable {
+        public init() {}
+    }
+}
+
 // payment_method_details_card_wallet_google_pay
 extension Stripe.Shared {
     public struct GooglePay: Codable, Hashable, Sendable {
@@ -1864,6 +2408,78 @@ extension Stripe.Shared {
             self.bic = bic
             self.country = country
             self.iban = iban
+        }
+    }
+}
+
+// payment_method_ideal
+extension Stripe.Shared {
+    public struct Ideal: Codable, Hashable, Sendable {
+        /// The customer's bank, if provided.
+        public var bank: Bank?
+        /// The Bank Identifier Code of the customer's bank, if the bank was provided.
+        public var bic: Bic?
+
+        private enum CodingKeys: String, CodingKey {
+            case bank
+            case bic
+        }
+
+        public init(
+            bank: Bank? = nil,
+            bic: Bic? = nil
+        ) {
+            self.bank = bank
+            self.bic = bic
+        }
+
+        /// The customer's bank, if provided.
+        public enum Bank: String, Codable, Hashable, Sendable {
+            case abnAmro = "abn_amro"
+            case adyen
+            case asnBank = "asn_bank"
+            case bunq
+            case buut
+            case finom
+            case handelsbanken
+            case ing
+            case knab
+            case mollie
+            case moneyou
+            case n26
+            case nn
+            case rabobank
+            case regiobank
+            case revolut
+            case snsBank = "sns_bank"
+            case triodosBank = "triodos_bank"
+            case vanLanschot = "van_lanschot"
+            case yoursafe
+        }
+
+        /// The Bank Identifier Code of the customer's bank, if the bank was provided.
+        public enum Bic: String, Codable, Hashable, Sendable {
+            case ABNANL2A
+            case ADYBNL2A
+            case ASNBNL21
+            case BITSNL2A
+            case BUNQNL2A
+            case BUUTNL2A
+            case FNOMNL22
+            case FVLBNL22
+            case HANDNL2A
+            case INGBNL2A
+            case KNABNL2H
+            case MLLENL2A
+            case MOYONL21
+            case NNBANL2G
+            case NTSBDEB1
+            case RABONL2U
+            case RBRBNL21
+            case REVOIE23
+            case REVOLT21
+            case SNSBNL2A
+            case TRIONL2U
         }
     }
 }
@@ -2323,6 +2939,31 @@ extension Stripe.Shared {
     }
 }
 
+// payment_method_kakao_pay
+extension Stripe.Shared {
+    public struct KakaoPay: Codable, Hashable, Sendable {
+        public init() {}
+    }
+}
+
+// payment_method_klarna
+extension Stripe.Shared {
+    public struct Klarna: Codable, Hashable, Sendable {
+        /// The customer's date of birth, if provided.
+        public var dob: Stripe.Shared.Dob?
+
+        private enum CodingKeys: String, CodingKey {
+            case dob
+        }
+
+        public init(
+            dob: Stripe.Shared.Dob? = nil
+        ) {
+            self.dob = dob
+        }
+    }
+}
+
 // invoice_payment_method_options_konbini
 extension Stripe.Shared {
     public struct Konbini: Codable, Hashable, Sendable {
@@ -2437,6 +3078,13 @@ extension Stripe.Shared {
     }
 }
 
+// payment_method_card_wallet_link
+extension Stripe.Shared {
+    public struct Link: Codable, Hashable, Sendable {
+        public init() {}
+    }
+}
+
 // smor_resource_managed_payments
 extension Stripe.Shared {
     public struct ManagedPayments: Codable, Hashable, Sendable {
@@ -2529,6 +3177,46 @@ extension Stripe.Shared {
     }
 }
 
+// payment_method_card_wallet_masterpass
+extension Stripe.Shared {
+    public struct Masterpass: Codable, Hashable, Sendable {
+        /// Owner's verified billing address.
+        public var billingAddress: Address?
+        /// Owner's verified email.
+        public var email: String?
+        /// Owner's verified full name.
+        public var name: String?
+        /// Owner's verified shipping address.
+        public var shippingAddress: Address?
+
+        private enum CodingKeys: String, CodingKey {
+            case billingAddress
+            case email
+            case name
+            case shippingAddress
+        }
+
+        public init(
+            billingAddress: Address? = nil,
+            email: String? = nil,
+            name: String? = nil,
+            shippingAddress: Address? = nil
+        ) {
+            self.billingAddress = billingAddress
+            self.email = email
+            self.name = name
+            self.shippingAddress = shippingAddress
+        }
+    }
+}
+
+// payment_method_mb_way
+extension Stripe.Shared {
+    public struct MbWay: Codable, Hashable, Sendable {
+        public init() {}
+    }
+}
+
 // issuing_authorization_merchant_data
 extension Stripe.Shared {
     public struct MerchantData: Codable, Hashable, Sendable {
@@ -2597,6 +3285,13 @@ extension Stripe.Shared {
     }
 }
 
+// payment_method_mobilepay
+extension Stripe.Shared {
+    public struct Mobilepay: Codable, Hashable, Sendable {
+        public init() {}
+    }
+}
+
 // billing_credit_grants_resource_monetary_amount
 extension Stripe.Shared {
     public struct Monetary: Codable, Hashable, Sendable {
@@ -2616,6 +3311,65 @@ extension Stripe.Shared {
         ) {
             self.currency = currency
             self.value = value
+        }
+    }
+}
+
+// payment_method_multibanco
+extension Stripe.Shared {
+    public struct Multibanco: Codable, Hashable, Sendable {
+        public init() {}
+    }
+}
+
+// payment_method_naver_pay
+extension Stripe.Shared {
+    public struct NaverPay: Codable, Hashable, Sendable {
+        /// Uniquely identifies this particular Naver Pay account.
+        public var buyerId: String?
+        /// Whether to fund this transaction with Naver Pay points or a card.
+        public var funding: Funding?
+
+        private enum CodingKeys: String, CodingKey {
+            case buyerId
+            case funding
+        }
+
+        public init(
+            buyerId: String? = nil,
+            funding: Funding? = nil
+        ) {
+            self.buyerId = buyerId
+            self.funding = funding
+        }
+
+        /// Whether to fund this transaction with Naver Pay points or a card.
+        public enum Funding: String, Codable, Hashable, Sendable {
+            case card
+            case points
+        }
+    }
+}
+
+// networks
+extension Stripe.Shared {
+    public struct Networks: Codable, Hashable, Sendable {
+        /// All networks available for selection via payment_method_options.card.network.
+        public var available: [String]?
+        /// The preferred network for co-branded cards.
+        public var preferred: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case available
+            case preferred
+        }
+
+        public init(
+            available: [String]? = nil,
+            preferred: String? = nil
+        ) {
+            self.available = available
+            self.preferred = preferred
         }
     }
 }
@@ -2691,6 +3445,353 @@ extension Stripe.Shared {
     }
 }
 
+// payment_method_oxxo
+extension Stripe.Shared {
+    public struct Oxxo: Codable, Hashable, Sendable {
+        public init() {}
+    }
+}
+
+// payment_method_p24
+extension Stripe.Shared {
+    public struct P24: Codable, Hashable, Sendable {
+        /// The customer's bank, if provided.
+        public var bank: Bank?
+
+        private enum CodingKeys: String, CodingKey {
+            case bank
+        }
+
+        public init(
+            bank: Bank? = nil
+        ) {
+            self.bank = bank
+        }
+
+        /// The customer's bank, if provided.
+        public enum Bank: String, Codable, Hashable, Sendable {
+            case aliorBank = "alior_bank"
+            case bankMillennium = "bank_millennium"
+            case bankNowyBfgSa = "bank_nowy_bfg_sa"
+            case bankPekaoSa = "bank_pekao_sa"
+            case bankiSpbdzielcze = "banki_spbdzielcze"
+            case blik
+            case bnpParibas = "bnp_paribas"
+            case boz
+            case citiHandlowy = "citi_handlowy"
+            case creditAgricole = "credit_agricole"
+            case envelobank
+            case etransferPocztowy24 = "etransfer_pocztowy24"
+            case getinBank = "getin_bank"
+            case ideabank
+            case ing
+            case inteligo
+            case mbankMtransfer = "mbank_mtransfer"
+            case nestPrzelew = "nest_przelew"
+            case noblePay = "noble_pay"
+            case pbacZIpko = "pbac_z_ipko"
+            case plusBank = "plus_bank"
+            case santanderPrzelew24 = "santander_przelew24"
+            case tmobileUsbugiBankowe = "tmobile_usbugi_bankowe"
+            case toyotaBank = "toyota_bank"
+            case velobank
+            case volkswagenBank = "volkswagen_bank"
+        }
+    }
+}
+
+// payment_method_pay_by_bank
+extension Stripe.Shared {
+    public struct PayByBank: Codable, Hashable, Sendable {
+        public init() {}
+    }
+}
+
+// payment_method_payco
+extension Stripe.Shared {
+    public struct Payco: Codable, Hashable, Sendable {
+        public init() {}
+    }
+}
+
+// payment_intent_next_action_upiqr_code
+extension Stripe.Shared {
+    public struct PaymentIntentNextActionUpiqrCode: Codable, Hashable, Sendable {
+        /// The date (unix timestamp) when the QR code expires.
+        public var expiresAt: Date?
+        /// The image_url_png string used to render QR code
+        public var imageUrlPng: String?
+        /// The image_url_svg string used to render QR code
+        public var imageUrlSvg: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case expiresAt
+            case imageUrlPng
+            case imageUrlSvg
+        }
+
+        public init(
+            expiresAt: Date? = nil,
+            imageUrlPng: String? = nil,
+            imageUrlSvg: String? = nil
+        ) {
+            self.expiresAt = expiresAt
+            self.imageUrlPng = imageUrlPng
+            self.imageUrlSvg = imageUrlSvg
+        }
+    }
+}
+
+// payment_method_acss_debit
+extension Stripe.Shared {
+    public struct PaymentMethodAcssDebit: Codable, Hashable, Sendable {
+        /// Name of the bank associated with the bank account.
+        public var bankName: String?
+        /// Uniquely identifies this particular bank account.
+        public var fingerprint: String?
+        /// Institution number of the bank account.
+        public var institutionNumber: String?
+        /// Last four digits of the bank account number.
+        public var last4: String?
+        /// Transit number of the bank account.
+        public var transitNumber: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case bankName
+            case fingerprint
+            case institutionNumber
+            case last4
+            case transitNumber
+        }
+
+        public init(
+            bankName: String? = nil,
+            fingerprint: String? = nil,
+            institutionNumber: String? = nil,
+            last4: String? = nil,
+            transitNumber: String? = nil
+        ) {
+            self.bankName = bankName
+            self.fingerprint = fingerprint
+            self.institutionNumber = institutionNumber
+            self.last4 = last4
+            self.transitNumber = transitNumber
+        }
+    }
+}
+
+// payment_method_bancontact
+extension Stripe.Shared {
+    public struct PaymentMethodBancontact: Codable, Hashable, Sendable {
+        public init() {}
+    }
+}
+
+// payment_method_card_present
+extension Stripe.Shared {
+    public struct PaymentMethodCardPresent: Codable, Hashable, Sendable {
+        /// Card brand.
+        public var brand: String?
+        /// The product code that identifies the specific program or product associated with a card.
+        public var brandProduct: String?
+        /// The cardholder name as read from the card, in ISO 7813 format.
+        public var cardholderName: String?
+        /// Two-letter ISO code representing the country of the card.
+        public var country: String?
+        /// A high-level description of the type of cards issued in this range.
+        public var description: String?
+        /// Two-digit number representing the card's expiration month.
+        public var expMonth: Int?
+        /// Four-digit number representing the card's expiration year.
+        public var expYear: Int?
+        /// Uniquely identifies this particular card number.
+        public var fingerprint: String?
+        /// Card funding type.
+        public var funding: String?
+        /// Issuer identification number of the card.
+        public var iin: String?
+        /// The name of the card's issuing bank.
+        public var issuer: String?
+        /// The last four digits of the card.
+        public var last4: String?
+        /// Contains information about card networks that can be used to process the payment.
+        public var networks: Stripe.Shared.PaymentMethodCardPresentNetworks?
+        /// Details about payment methods collected offline.
+        public var offline: Stripe.Shared.Offline?
+        /// The languages that the issuing bank recommends using for localizing any customer-facing text, as read from the card.
+        public var preferredLocales: [String]?
+        /// How card details were read in this transaction.
+        public var readMethod: ReadMethod?
+        public var wallet: Stripe.Shared.Wallet?
+
+        private enum CodingKeys: String, CodingKey {
+            case brand
+            case brandProduct
+            case cardholderName
+            case country
+            case description
+            case expMonth
+            case expYear
+            case fingerprint
+            case funding
+            case iin
+            case issuer
+            case last4
+            case networks
+            case offline
+            case preferredLocales
+            case readMethod
+            case wallet
+        }
+
+        public init(
+            brand: String? = nil,
+            brandProduct: String? = nil,
+            cardholderName: String? = nil,
+            country: String? = nil,
+            description: String? = nil,
+            expMonth: Int? = nil,
+            expYear: Int? = nil,
+            fingerprint: String? = nil,
+            funding: String? = nil,
+            iin: String? = nil,
+            issuer: String? = nil,
+            last4: String? = nil,
+            networks: Stripe.Shared.PaymentMethodCardPresentNetworks? = nil,
+            offline: Stripe.Shared.Offline? = nil,
+            preferredLocales: [String]? = nil,
+            readMethod: ReadMethod? = nil,
+            wallet: Stripe.Shared.Wallet? = nil
+        ) {
+            self.brand = brand
+            self.brandProduct = brandProduct
+            self.cardholderName = cardholderName
+            self.country = country
+            self.description = description
+            self.expMonth = expMonth
+            self.expYear = expYear
+            self.fingerprint = fingerprint
+            self.funding = funding
+            self.iin = iin
+            self.issuer = issuer
+            self.last4 = last4
+            self.networks = networks
+            self.offline = offline
+            self.preferredLocales = preferredLocales
+            self.readMethod = readMethod
+            self.wallet = wallet
+        }
+
+        /// How card details were read in this transaction.
+        public enum ReadMethod: String, Codable, Hashable, Sendable {
+            case contactEmv = "contact_emv"
+            case contactlessEmv = "contactless_emv"
+            case contactlessMagstripeMode = "contactless_magstripe_mode"
+            case magneticStripeFallback = "magnetic_stripe_fallback"
+            case magneticStripeTrack2 = "magnetic_stripe_track2"
+        }
+    }
+}
+
+// payment_method_card_present_networks
+extension Stripe.Shared {
+    public struct PaymentMethodCardPresentNetworks: Codable, Hashable, Sendable {
+        /// All networks available for selection via payment_method_options.card.network.
+        public var available: [String]?
+        /// The preferred network for the card.
+        public var preferred: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case available
+            case preferred
+        }
+
+        public init(
+            available: [String]? = nil,
+            preferred: String? = nil
+        ) {
+            self.available = available
+            self.preferred = preferred
+        }
+    }
+}
+
+// payment_method_card_wallet
+extension Stripe.Shared {
+    public struct PaymentMethodCardWallet: Codable, Hashable, Sendable {
+        public var amexExpressCheckout: Stripe.Shared.AmexExpressCheckout?
+        public var applePay: Stripe.Shared.PaymentMethodCardWalletApplePay?
+        /// (For tokenized numbers only.) The last four digits of the device account number.
+        public var dynamicLast4: String?
+        public var googlePay: Stripe.Shared.PaymentMethodCardWalletGooglePay?
+        public var link: Stripe.Shared.Link?
+        public var masterpass: Stripe.Shared.Masterpass?
+        public var samsungPay: Stripe.Shared.SamsungPay?
+        /// The type of the card wallet, one of `amex_express_checkout`, `apple_pay`, `google_pay`, `masterpass`, `samsung_pay`, `…
+        public var `type`: Type?
+        public var visaCheckout: Stripe.Shared.VisaCheckout?
+
+        private enum CodingKeys: String, CodingKey {
+            case amexExpressCheckout
+            case applePay
+            case dynamicLast4
+            case googlePay
+            case link
+            case masterpass
+            case samsungPay
+            case `type`
+            case visaCheckout
+        }
+
+        public init(
+            amexExpressCheckout: Stripe.Shared.AmexExpressCheckout? = nil,
+            applePay: Stripe.Shared.PaymentMethodCardWalletApplePay? = nil,
+            dynamicLast4: String? = nil,
+            googlePay: Stripe.Shared.PaymentMethodCardWalletGooglePay? = nil,
+            link: Stripe.Shared.Link? = nil,
+            masterpass: Stripe.Shared.Masterpass? = nil,
+            samsungPay: Stripe.Shared.SamsungPay? = nil,
+            `type`: Type? = nil,
+            visaCheckout: Stripe.Shared.VisaCheckout? = nil
+        ) {
+            self.amexExpressCheckout = amexExpressCheckout
+            self.applePay = applePay
+            self.dynamicLast4 = dynamicLast4
+            self.googlePay = googlePay
+            self.link = link
+            self.masterpass = masterpass
+            self.samsungPay = samsungPay
+            self.`type` = `type`
+            self.visaCheckout = visaCheckout
+        }
+
+        /// The type of the card wallet, one of `amex_express_checkout`, `apple_pay`, `google_pay`, `masterpass`, `samsung_pay`, `…
+        public enum `Type`: String, Codable, Hashable, Sendable {
+            case amexExpressCheckout = "amex_express_checkout"
+            case applePay = "apple_pay"
+            case googlePay = "google_pay"
+            case link
+            case masterpass
+            case samsungPay = "samsung_pay"
+            case visaCheckout = "visa_checkout"
+        }
+    }
+}
+
+// payment_method_card_wallet_apple_pay
+extension Stripe.Shared {
+    public struct PaymentMethodCardWalletApplePay: Codable, Hashable, Sendable {
+        public init() {}
+    }
+}
+
+// payment_method_card_wallet_google_pay
+extension Stripe.Shared {
+    public struct PaymentMethodCardWalletGooglePay: Codable, Hashable, Sendable {
+        public init() {}
+    }
+}
+
 // payment_method_config_biz_payment_method_configuration_details
 extension Stripe.Shared {
     public struct PaymentMethodConfigurationDetails: Codable, Hashable, Sendable, Identifiable {
@@ -2710,6 +3811,42 @@ extension Stripe.Shared {
         ) {
             self.id = id
             self.parent = parent
+        }
+    }
+}
+
+// payment_method_crypto
+extension Stripe.Shared {
+    public struct PaymentMethodCrypto: Codable, Hashable, Sendable {
+        public init() {}
+    }
+}
+
+// payment_method_customer_balance
+extension Stripe.Shared {
+    public struct PaymentMethodCustomerBalance: Codable, Hashable, Sendable {
+        public init() {}
+    }
+}
+
+// card_generated_from_payment_method_details
+extension Stripe.Shared {
+    public struct PaymentMethodDetails: Codable, Hashable, Sendable {
+        public var cardPresent: Stripe.Shared.CardPresent?
+        /// The type of payment method transaction-specific details from the transaction that generated this `card` payment method…
+        public var `type`: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case cardPresent
+            case `type`
+        }
+
+        public init(
+            cardPresent: Stripe.Shared.CardPresent? = nil,
+            `type`: String? = nil
+        ) {
+            self.cardPresent = cardPresent
+            self.`type` = `type`
         }
     }
 }
@@ -2821,6 +3958,504 @@ extension Stripe.Shared {
     }
 }
 
+// payment_method_fpx
+extension Stripe.Shared {
+    public struct PaymentMethodFpx: Codable, Hashable, Sendable {
+        /// Account holder type, if provided.
+        public var accountHolderType: AccountHolderType?
+        /// The customer's bank, if provided.
+        public var bank: Bank?
+
+        private enum CodingKeys: String, CodingKey {
+            case accountHolderType
+            case bank
+        }
+
+        public init(
+            accountHolderType: AccountHolderType? = nil,
+            bank: Bank? = nil
+        ) {
+            self.accountHolderType = accountHolderType
+            self.bank = bank
+        }
+
+        /// Account holder type, if provided.
+        public enum AccountHolderType: String, Codable, Hashable, Sendable {
+            case company
+            case individual
+        }
+
+        /// The customer's bank, if provided.
+        public enum Bank: String, Codable, Hashable, Sendable {
+            case affinBank = "affin_bank"
+            case agrobank
+            case allianceBank = "alliance_bank"
+            case ambank
+            case bankIslam = "bank_islam"
+            case bankMuamalat = "bank_muamalat"
+            case bankOfChina = "bank_of_china"
+            case bankRakyat = "bank_rakyat"
+            case bnpParibas = "bnp_paribas"
+            case bsn
+            case cimb
+            case citibank
+            case deutscheBank = "deutsche_bank"
+            case hongLeongBank = "hong_leong_bank"
+            case hsbc
+            case kfh
+            case maybank2e
+            case maybank2u
+            case mbsbBank = "mbsb_bank"
+            case ocbc
+            case pbEnterprise = "pb_enterprise"
+            case publicBank = "public_bank"
+            case rhb
+            case standardChartered = "standard_chartered"
+            case uob
+        }
+    }
+}
+
+// payment_method_grabpay
+extension Stripe.Shared {
+    public struct PaymentMethodGrabpay: Codable, Hashable, Sendable {
+        public init() {}
+    }
+}
+
+// payment_method_interac_present
+extension Stripe.Shared {
+    public struct PaymentMethodInteracPresent: Codable, Hashable, Sendable {
+        /// Card brand.
+        public var brand: String?
+        /// The cardholder name as read from the card, in ISO 7813 format.
+        public var cardholderName: String?
+        /// Two-letter ISO code representing the country of the card.
+        public var country: String?
+        /// A high-level description of the type of cards issued in this range.
+        public var description: String?
+        /// Two-digit number representing the card's expiration month.
+        public var expMonth: Int?
+        /// Four-digit number representing the card's expiration year.
+        public var expYear: Int?
+        /// Uniquely identifies this particular card number.
+        public var fingerprint: String?
+        /// Card funding type.
+        public var funding: String?
+        /// Issuer identification number of the card.
+        public var iin: String?
+        /// The name of the card's issuing bank.
+        public var issuer: String?
+        /// The last four digits of the card.
+        public var last4: String?
+        /// Contains information about card networks that can be used to process the payment.
+        public var networks: Stripe.Shared.PaymentMethodCardPresentNetworks?
+        /// The languages that the issuing bank recommends using for localizing any customer-facing text, as read from the card.
+        public var preferredLocales: [String]?
+        /// How card details were read in this transaction.
+        public var readMethod: ReadMethod?
+
+        private enum CodingKeys: String, CodingKey {
+            case brand
+            case cardholderName
+            case country
+            case description
+            case expMonth
+            case expYear
+            case fingerprint
+            case funding
+            case iin
+            case issuer
+            case last4
+            case networks
+            case preferredLocales
+            case readMethod
+        }
+
+        public init(
+            brand: String? = nil,
+            cardholderName: String? = nil,
+            country: String? = nil,
+            description: String? = nil,
+            expMonth: Int? = nil,
+            expYear: Int? = nil,
+            fingerprint: String? = nil,
+            funding: String? = nil,
+            iin: String? = nil,
+            issuer: String? = nil,
+            last4: String? = nil,
+            networks: Stripe.Shared.PaymentMethodCardPresentNetworks? = nil,
+            preferredLocales: [String]? = nil,
+            readMethod: ReadMethod? = nil
+        ) {
+            self.brand = brand
+            self.cardholderName = cardholderName
+            self.country = country
+            self.description = description
+            self.expMonth = expMonth
+            self.expYear = expYear
+            self.fingerprint = fingerprint
+            self.funding = funding
+            self.iin = iin
+            self.issuer = issuer
+            self.last4 = last4
+            self.networks = networks
+            self.preferredLocales = preferredLocales
+            self.readMethod = readMethod
+        }
+
+        /// How card details were read in this transaction.
+        public enum ReadMethod: String, Codable, Hashable, Sendable {
+            case contactEmv = "contact_emv"
+            case contactlessEmv = "contactless_emv"
+            case contactlessMagstripeMode = "contactless_magstripe_mode"
+            case magneticStripeFallback = "magnetic_stripe_fallback"
+            case magneticStripeTrack2 = "magnetic_stripe_track2"
+        }
+    }
+}
+
+// payment_method_konbini
+extension Stripe.Shared {
+    public struct PaymentMethodKonbini: Codable, Hashable, Sendable {
+        public init() {}
+    }
+}
+
+// payment_method_kr_card
+extension Stripe.Shared {
+    public struct PaymentMethodKrCard: Codable, Hashable, Sendable {
+        /// The local credit or debit card brand.
+        public var brand: Brand?
+        /// The last four digits of the card.
+        public var last4: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case brand
+            case last4
+        }
+
+        public init(
+            brand: Brand? = nil,
+            last4: String? = nil
+        ) {
+            self.brand = brand
+            self.last4 = last4
+        }
+
+        /// The local credit or debit card brand.
+        public enum Brand: String, Codable, Hashable, Sendable {
+            case bc
+            case citi
+            case hana
+            case hyundai
+            case jeju
+            case jeonbuk
+            case kakaobank
+            case kbank
+            case kdbbank
+            case kookmin
+            case kwangju
+            case lotte
+            case mg
+            case nh
+            case post
+            case samsung
+            case savingsbank
+            case shinhan
+            case shinhyup
+            case suhyup
+            case tossbank
+            case woori
+        }
+    }
+}
+
+// payment_method_link
+extension Stripe.Shared {
+    public struct PaymentMethodLink: Codable, Hashable, Sendable {
+        /// Account owner's email address.
+        public var email: String?
+        /// [Deprecated] This is a legacy parameter that no longer has any function.
+        public var persistentToken: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case email
+            case persistentToken
+        }
+
+        public init(
+            email: String? = nil,
+            persistentToken: String? = nil
+        ) {
+            self.email = email
+            self.persistentToken = persistentToken
+        }
+    }
+}
+
+// payment_method_nz_bank_account
+extension Stripe.Shared {
+    public struct PaymentMethodNzBankAccount: Codable, Hashable, Sendable {
+        /// The name on the bank account.
+        public var accountHolderName: String?
+        /// The numeric code for the bank account's bank.
+        public var bankCode: String?
+        /// The name of the bank.
+        public var bankName: String?
+        /// The numeric code for the bank account's bank branch.
+        public var branchCode: String?
+        /// Last four digits of the bank account number.
+        public var last4: String?
+        /// The suffix of the bank account number.
+        public var suffix: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case accountHolderName
+            case bankCode
+            case bankName
+            case branchCode
+            case last4
+            case suffix
+        }
+
+        public init(
+            accountHolderName: String? = nil,
+            bankCode: String? = nil,
+            bankName: String? = nil,
+            branchCode: String? = nil,
+            last4: String? = nil,
+            suffix: String? = nil
+        ) {
+            self.accountHolderName = accountHolderName
+            self.bankCode = bankCode
+            self.bankName = bankName
+            self.branchCode = branchCode
+            self.last4 = last4
+            self.suffix = suffix
+        }
+    }
+}
+
+// payment_method_options_us_bank_account_mandate_options
+extension Stripe.Shared {
+    public struct PaymentMethodOptionsUsBankAccountMandateOptions: Codable, Hashable, Sendable {
+        /// Mandate collection method
+        public var collectionMethod: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case collectionMethod
+        }
+
+        public init(
+            collectionMethod: String? = nil
+        ) {
+            self.collectionMethod = collectionMethod
+        }
+    }
+}
+
+// payment_method_paypal
+extension Stripe.Shared {
+    public struct PaymentMethodPaypal: Codable, Hashable, Sendable {
+        /// Two-letter ISO code representing the buyer's country.
+        public var country: String?
+        /// Owner's email.
+        public var payerEmail: String?
+        /// PayPal account PayerID.
+        public var payerId: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case country
+            case payerEmail
+            case payerId
+        }
+
+        public init(
+            country: String? = nil,
+            payerEmail: String? = nil,
+            payerId: String? = nil
+        ) {
+            self.country = country
+            self.payerEmail = payerEmail
+            self.payerId = payerId
+        }
+    }
+}
+
+// payment_method_payto
+extension Stripe.Shared {
+    public struct PaymentMethodPayto: Codable, Hashable, Sendable {
+        /// Bank-State-Branch number of the bank account.
+        public var bsbNumber: String?
+        /// Last four digits of the bank account number.
+        public var last4: String?
+        /// The PayID alias for the bank account.
+        public var payId: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case bsbNumber
+            case last4
+            case payId
+        }
+
+        public init(
+            bsbNumber: String? = nil,
+            last4: String? = nil,
+            payId: String? = nil
+        ) {
+            self.bsbNumber = bsbNumber
+            self.last4 = last4
+            self.payId = payId
+        }
+    }
+}
+
+// payment_method_samsung_pay
+extension Stripe.Shared {
+    public struct PaymentMethodSamsungPay: Codable, Hashable, Sendable {
+        public init() {}
+    }
+}
+
+// payment_method_sepa_debit
+extension Stripe.Shared {
+    public struct PaymentMethodSepaDebit: Codable, Hashable, Sendable {
+        /// Bank code of bank associated with the bank account.
+        public var bankCode: String?
+        /// Branch code of bank associated with the bank account.
+        public var branchCode: String?
+        /// Two-letter ISO code representing the country the bank account is located in.
+        public var country: String?
+        /// Uniquely identifies this particular bank account.
+        public var fingerprint: String?
+        /// Information about the object that generated this PaymentMethod.
+        public var generatedFrom: Stripe.Shared.SepaDebitGeneratedFrom?
+        /// Last four characters of the IBAN.
+        public var last4: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case bankCode
+            case branchCode
+            case country
+            case fingerprint
+            case generatedFrom
+            case last4
+        }
+
+        public init(
+            bankCode: String? = nil,
+            branchCode: String? = nil,
+            country: String? = nil,
+            fingerprint: String? = nil,
+            generatedFrom: Stripe.Shared.SepaDebitGeneratedFrom? = nil,
+            last4: String? = nil
+        ) {
+            self.bankCode = bankCode
+            self.branchCode = branchCode
+            self.country = country
+            self.fingerprint = fingerprint
+            self.generatedFrom = generatedFrom
+            self.last4 = last4
+        }
+    }
+}
+
+// payment_method_upi
+extension Stripe.Shared {
+    public struct PaymentMethodUpi: Codable, Hashable, Sendable {
+        /// Customer's unique Virtual Payment Address
+        public var vpa: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case vpa
+        }
+
+        public init(
+            vpa: String? = nil
+        ) {
+            self.vpa = vpa
+        }
+    }
+}
+
+// payment_method_us_bank_account
+extension Stripe.Shared {
+    public struct PaymentMethodUsBankAccount: Codable, Hashable, Sendable {
+        /// Account holder type: individual or company.
+        public var accountHolderType: AccountHolderType?
+        /// Account type: checkings or savings.
+        public var accountType: AccountType?
+        /// The name of the bank.
+        public var bankName: String?
+        /// The ID of the Financial Connections Account used to create the payment method.
+        public var financialConnectionsAccount: String?
+        /// Uniquely identifies this particular bank account.
+        public var fingerprint: String?
+        /// Last four digits of the bank account number.
+        public var last4: String?
+        /// Contains information about US bank account networks that can be used.
+        public var networks: Stripe.Shared.UsBankAccountNetworks?
+        /// Routing number of the bank account.
+        public var routingNumber: String?
+        /// Contains information about the future reusability of this PaymentMethod.
+        public var statusDetails: Stripe.Shared.StatusDetails?
+
+        private enum CodingKeys: String, CodingKey {
+            case accountHolderType
+            case accountType
+            case bankName
+            case financialConnectionsAccount
+            case fingerprint
+            case last4
+            case networks
+            case routingNumber
+            case statusDetails
+        }
+
+        public init(
+            accountHolderType: AccountHolderType? = nil,
+            accountType: AccountType? = nil,
+            bankName: String? = nil,
+            financialConnectionsAccount: String? = nil,
+            fingerprint: String? = nil,
+            last4: String? = nil,
+            networks: Stripe.Shared.UsBankAccountNetworks? = nil,
+            routingNumber: String? = nil,
+            statusDetails: Stripe.Shared.StatusDetails? = nil
+        ) {
+            self.accountHolderType = accountHolderType
+            self.accountType = accountType
+            self.bankName = bankName
+            self.financialConnectionsAccount = financialConnectionsAccount
+            self.fingerprint = fingerprint
+            self.last4 = last4
+            self.networks = networks
+            self.routingNumber = routingNumber
+            self.statusDetails = statusDetails
+        }
+
+        /// Account holder type: individual or company.
+        public enum AccountHolderType: String, Codable, Hashable, Sendable {
+            case company
+            case individual
+        }
+
+        /// Account type: checkings or savings.
+        public enum AccountType: String, Codable, Hashable, Sendable {
+            case checking
+            case savings
+        }
+    }
+}
+
+// payment_method_paynow
+extension Stripe.Shared {
+    public struct Paynow: Codable, Hashable, Sendable {
+        public init() {}
+    }
+}
+
 // payment_method_details_paypal
 extension Stripe.Shared {
     public struct Paypal: Codable, Hashable, Sendable {
@@ -2900,6 +4535,24 @@ extension Stripe.Shared {
         ) {
             self.end = end
             self.start = start
+        }
+    }
+}
+
+// payment_method_pix
+extension Stripe.Shared {
+    public struct Pix: Codable, Hashable, Sendable {
+        /// Uniquely identifies this particular Pix account.
+        public var fingerprint: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case fingerprint
+        }
+
+        public init(
+            fingerprint: String? = nil
+        ) {
+            self.fingerprint = fingerprint
         }
     }
 }
@@ -3016,6 +4669,60 @@ extension Stripe.Shared {
     }
 }
 
+// payment_method_promptpay
+extension Stripe.Shared {
+    public struct Promptpay: Codable, Hashable, Sendable {
+        public init() {}
+    }
+}
+
+// payment_intent_next_action_cashapp_qr_code
+extension Stripe.Shared {
+    public struct QrCode: Codable, Hashable, Sendable {
+        /// The date (unix timestamp) when the QR code expires.
+        public var expiresAt: Date?
+        /// The image_url_png string used to render QR code
+        public var imageUrlPng: String?
+        /// The image_url_svg string used to render QR code
+        public var imageUrlSvg: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case expiresAt
+            case imageUrlPng
+            case imageUrlSvg
+        }
+
+        public init(
+            expiresAt: Date? = nil,
+            imageUrlPng: String? = nil,
+            imageUrlSvg: String? = nil
+        ) {
+            self.expiresAt = expiresAt
+            self.imageUrlPng = imageUrlPng
+            self.imageUrlSvg = imageUrlSvg
+        }
+    }
+}
+
+// radar_radar_options
+extension Stripe.Shared {
+    /// Options to configure Radar.
+    public struct RadarOptions: Codable, Hashable, Sendable {
+        /// A Radar Session is a snapshot of the browser metadata and device details that help Radar make more accurate prediction…
+        public var session: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case session
+        }
+
+        public init(
+            session: String? = nil
+        ) {
+            self.session = session
+        }
+    }
+}
+
 // payment_method_details_card_present_receipt
 extension Stripe.Shared {
     public struct Receipt: Codable, Hashable, Sendable {
@@ -3079,6 +4786,34 @@ extension Stripe.Shared {
             case prepaid
             case unknown
         }
+    }
+}
+
+// payment_method_revolut_pay
+extension Stripe.Shared {
+    public struct RevolutPay: Codable, Hashable, Sendable {
+        public init() {}
+    }
+}
+
+// payment_method_card_wallet_samsung_pay
+extension Stripe.Shared {
+    public struct SamsungPay: Codable, Hashable, Sendable {
+        public init() {}
+    }
+}
+
+// payment_method_satispay
+extension Stripe.Shared {
+    public struct Satispay: Codable, Hashable, Sendable {
+        public init() {}
+    }
+}
+
+// payment_method_scalapay
+extension Stripe.Shared {
+    public struct Scalapay: Codable, Hashable, Sendable {
+        public init() {}
     }
 }
 
@@ -3152,6 +4887,29 @@ extension Stripe.Shared {
     }
 }
 
+// sepa_debit_generated_from
+extension Stripe.Shared {
+    public struct SepaDebitGeneratedFrom: Codable, Hashable, Sendable {
+        /// The ID of the Charge that generated this PaymentMethod, if any.
+        @Expandable<Stripe.Charges.Charge, String> public var charge: String?
+        /// The ID of the SetupAttempt that generated this PaymentMethod, if any.
+        @Expandable<Stripe.Setup.Attempt, String> public var setupAttempt: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case charge
+            case setupAttempt
+        }
+
+        public init(
+            charge: String? = nil,
+            setupAttempt: String? = nil
+        ) {
+            self._charge = Expandable(id: charge)
+            self._setupAttempt = Expandable(id: setupAttempt)
+        }
+    }
+}
+
 // tax_product_resource_ship_from_details
 extension Stripe.Shared {
     public struct ShipFromDetails: Codable, Hashable, Sendable {
@@ -3203,6 +4961,24 @@ extension Stripe.Shared {
             self.amountTotal = amountTotal
             self._shippingRate = Expandable(id: shippingRate)
             self.taxes = taxes
+        }
+    }
+}
+
+// payment_method_sofort
+extension Stripe.Shared {
+    public struct Sofort: Codable, Hashable, Sendable {
+        /// Two-letter ISO code representing the country the bank account is located in.
+        public var country: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case country
+        }
+
+        public init(
+            country: String? = nil
+        ) {
+            self.country = country
         }
     }
 }
@@ -3309,9 +5085,33 @@ extension Stripe.Shared {
     }
 }
 
+// payment_method_us_bank_account_status_details
+extension Stripe.Shared {
+    public struct StatusDetails: Codable, Hashable, Sendable {
+        public var blocked: Stripe.Shared.Blocked?
+
+        private enum CodingKeys: String, CodingKey {
+            case blocked
+        }
+
+        public init(
+            blocked: Stripe.Shared.Blocked? = nil
+        ) {
+            self.blocked = blocked
+        }
+    }
+}
+
 // payment_method_details_stripe_account
 extension Stripe.Shared {
     public struct StripeAccount: Codable, Hashable, Sendable {
+        public init() {}
+    }
+}
+
+// payment_method_sunbit
+extension Stripe.Shared {
+    public struct Sunbit: Codable, Hashable, Sendable {
         public init() {}
     }
 }
@@ -3360,6 +5160,13 @@ extension Stripe.Shared {
             self.bankName = bankName
             self.swiftCode = swiftCode
         }
+    }
+}
+
+// payment_method_swish
+extension Stripe.Shared {
+    public struct Swish: Codable, Hashable, Sendable {
+        public init() {}
     }
 }
 
@@ -3692,6 +5499,24 @@ extension Stripe.Shared {
     }
 }
 
+// three_d_secure_usage
+extension Stripe.Shared {
+    public struct ThreeDSecureUsage: Codable, Hashable, Sendable {
+        /// Whether 3D Secure is supported on this card.
+        public var supported: Bool?
+
+        private enum CodingKeys: String, CodingKey {
+            case supported
+        }
+
+        public init(
+            supported: Bool? = nil
+        ) {
+            self.supported = supported
+        }
+    }
+}
+
 // treasury_shared_resource_billing_details
 extension Stripe.Shared {
     public struct TreasurySharedResourceBillingDetails: Codable, Hashable, Sendable {
@@ -3747,6 +5572,13 @@ extension Stripe.Shared {
     }
 }
 
+// payment_method_twint
+extension Stripe.Shared {
+    public struct Twint: Codable, Hashable, Sendable {
+        public init() {}
+    }
+}
+
 // invoice_payment_method_options_upi
 extension Stripe.Shared {
     public struct Upi: Codable, Hashable, Sendable {
@@ -3760,6 +5592,28 @@ extension Stripe.Shared {
             mandateOptions: Stripe.Shared.InvoicePaymentMethodOptionsMandateOptionsUpi? = nil
         ) {
             self.mandateOptions = mandateOptions
+        }
+    }
+}
+
+// payment_intent_next_action_upi_handle_redirect_or_display_qr_code
+extension Stripe.Shared {
+    public struct UpiHandleRedirectOrDisplayQrCode: Codable, Hashable, Sendable {
+        /// The URL to the hosted UPI instructions page, which allows customers to view the QR code.
+        public var hostedInstructionsUrl: String?
+        public var qrCode: Stripe.Shared.PaymentIntentNextActionUpiqrCode?
+
+        private enum CodingKeys: String, CodingKey {
+            case hostedInstructionsUrl
+            case qrCode
+        }
+
+        public init(
+            hostedInstructionsUrl: String? = nil,
+            qrCode: Stripe.Shared.PaymentIntentNextActionUpiqrCode? = nil
+        ) {
+            self.hostedInstructionsUrl = hostedInstructionsUrl
+            self.qrCode = qrCode
         }
     }
 }
@@ -3793,6 +5647,67 @@ extension Stripe.Shared {
     }
 }
 
+// us_bank_account_networks
+extension Stripe.Shared {
+    public struct UsBankAccountNetworks: Codable, Hashable, Sendable {
+        /// The preferred network.
+        public var preferred: String?
+        /// All supported networks.
+        public var supported: [Supported]?
+
+        private enum CodingKeys: String, CodingKey {
+            case preferred
+            case supported
+        }
+
+        public init(
+            preferred: String? = nil,
+            supported: [Supported]? = nil
+        ) {
+            self.preferred = preferred
+            self.supported = supported
+        }
+
+        public enum Supported: String, Codable, Hashable, Sendable {
+            case ach
+            case usDomesticWire = "us_domestic_wire"
+        }
+    }
+}
+
+// payment_method_card_wallet_visa_checkout
+extension Stripe.Shared {
+    public struct VisaCheckout: Codable, Hashable, Sendable {
+        /// Owner's verified billing address.
+        public var billingAddress: Address?
+        /// Owner's verified email.
+        public var email: String?
+        /// Owner's verified full name.
+        public var name: String?
+        /// Owner's verified shipping address.
+        public var shippingAddress: Address?
+
+        private enum CodingKeys: String, CodingKey {
+            case billingAddress
+            case email
+            case name
+            case shippingAddress
+        }
+
+        public init(
+            billingAddress: Address? = nil,
+            email: String? = nil,
+            name: String? = nil,
+            shippingAddress: Address? = nil
+        ) {
+            self.billingAddress = billingAddress
+            self.email = email
+            self.name = name
+            self.shippingAddress = shippingAddress
+        }
+    }
+}
+
 // payment_flows_private_payment_methods_card_present_common_wallet
 extension Stripe.Shared {
     public struct Wallet: Codable, Hashable, Sendable {
@@ -3822,6 +5737,13 @@ extension Stripe.Shared {
 // payment_method_details_wechat
 extension Stripe.Shared {
     public struct Wechat: Codable, Hashable, Sendable {
+        public init() {}
+    }
+}
+
+// payment_method_wechat_pay
+extension Stripe.Shared {
+    public struct WechatPay: Codable, Hashable, Sendable {
         public init() {}
     }
 }
@@ -3880,6 +5802,13 @@ extension Stripe.Shared {
             self.branchCode = branchCode
             self.branchName = branchName
         }
+    }
+}
+
+// payment_method_zip
+extension Stripe.Shared {
+    public struct Zip: Codable, Hashable, Sendable {
+        public init() {}
     }
 }
 

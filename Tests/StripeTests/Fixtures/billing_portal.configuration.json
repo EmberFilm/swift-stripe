@@ -1,0 +1,79 @@
+{
+ "active": true,
+ "application": "application_1",
+ "business_profile": {
+  "headline": "headline_1",
+  "privacy_policy_url": "privacy_policy_url_1",
+  "terms_of_service_url": "terms_of_service_url_1"
+ },
+ "created": 1700000000,
+ "default_return_url": "default_return_url_1",
+ "features": {
+  "customer_update": {
+   "allowed_updates": [
+    "address"
+   ],
+   "enabled": true
+  },
+  "invoice_history": {
+   "enabled": true
+  },
+  "payment_method_update": {
+   "enabled": true,
+   "payment_method_configuration": "payment_method_configuration_1"
+  },
+  "subscription_cancel": {
+   "cancellation_reason": {
+    "enabled": true,
+    "options": [
+     "customer_service"
+    ]
+   },
+   "enabled": true,
+   "mode": "at_period_end",
+   "proration_behavior": "always_invoice"
+  },
+  "subscription_update": {
+   "billing_cycle_anchor": "now",
+   "default_allowed_updates": [
+    "price"
+   ],
+   "enabled": true,
+   "products": [
+    {
+     "adjustable_quantity": {
+      "enabled": true,
+      "maximum": 1,
+      "minimum": 1
+     },
+     "prices": [
+      "prices_1"
+     ],
+     "product": "product_1"
+    }
+   ],
+   "proration_behavior": "always_invoice",
+   "schedule_at_period_end": {
+    "conditions": [
+     {
+      "type": "decreasing_item_amount"
+     }
+    ]
+   },
+   "trial_update_behavior": "continue_trial"
+  }
+ },
+ "id": "billing_portal.configuration_1",
+ "is_default": true,
+ "livemode": true,
+ "login_page": {
+  "enabled": true,
+  "url": "url_1"
+ },
+ "metadata": {
+  "key": "metadata_1"
+ },
+ "name": "name_1",
+ "object": "billing_portal.configuration",
+ "updated": 1700000000
+}

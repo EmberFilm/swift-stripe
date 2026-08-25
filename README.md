@@ -471,15 +471,14 @@ regression.
 The request engine, form encoding, error handling, retries, idempotency keys,
 and webhook verification are complete and covered by tests.
 
-**Nearly every model is generated from Stripe's OpenAPI spec.** 117 of the 137 root resources
+**Nearly every model is generated from Stripe's OpenAPI spec.** 129 of the 137 root resources
 are emitted by `Scripts/generate-models.py` into `Sources/Stripe/Models/Generated/` from
 `spec3.sdk.json`, pinned by commit in CI. Every field the spec describes is present, every enum
 carries the spec's cases, and each struct's `CodingKeys` is emitted from the same list as its
 properties. `Event` stays hand-written: it decodes an unknown event type without rejecting the
 delivery and models `data.object` as a discriminated union, neither of which the generator
-expresses yet. A handful of resources the request layer is deeply entangled with (`Account`,
-`PaymentMethod`, `PaymentLink`, `SubscriptionSchedule`, `Coupon`, `Plan`, …) are still hand
-models and are being cut over one at a time.
+expresses yet. `PaymentLink` and `SubscriptionSchedule`, which the request layer is deeply entangled with,
+are still hand models and are next to be cut over.
 
 `Scripts/model-drift.py` measures every generated resource against the spec, and
 `Tests/StripeTests/FixtureDecodingTests.swift` — which decodes a fixture with every spec

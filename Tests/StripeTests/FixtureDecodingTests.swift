@@ -164,6 +164,18 @@ struct FixtureDecodingTests {
     @Test("tax_rate") func taxRate() throws { try Self.decodes("tax_rate", as: Stripe.Tax.Rate.self) }
     @Test("terminal.location") func terminalLocation() throws { try Self.decodes("terminal.location", as: Stripe.Terminal.Locations.Location.self) }
     @Test("transfer_reversal") func transferReversal() throws { try Self.decodes("transfer_reversal", as: Stripe.Connect.Transfer.Reversal.self) }
+    @Test("account") func account() throws { try Self.decodes("account", as: Stripe.Connect.Account.self) }
+    @Test("billing.credit_grant") func billingCreditGrant() throws { try Self.decodes("billing.credit_grant", as: Stripe.Billing.Credit.Grant.self) }
+    @Test("billing_portal.configuration") func billingPortalConfiguration() throws { try Self.decodes("billing_portal.configuration", as: Stripe.Billing.Customer.Portal.Configuration.self) }
+    @Test("coupon") func coupon() throws { try Self.decodes("coupon", as: Stripe.Products.Coupon.self) }
+    @Test("forwarding.request") func forwardingRequest() throws { try Self.decodes("forwarding.request", as: Stripe.Forwarding.Request.self) }
+    @Test("payment_method") func paymentMethod() throws { try Self.decodes("payment_method", as: Stripe.PaymentMethods.PaymentMethod.self) }
+    @Test("payout") func payout() throws { try Self.decodes("payout", as: Stripe.Payouts.Payout.self) }
+    @Test("plan") func plan() throws { try Self.decodes("plan", as: Stripe.Billing.Plan.self) }
+    @Test("promotion_code") func promotionCode() throws { try Self.decodes("promotion_code", as: Promotion.Code.self) }
+    @Test("setup_intent") func setupIntent() throws { try Self.decodes("setup_intent", as: Stripe.Setup.Intent.self) }
+    @Test("shipping_rate") func shippingRate() throws { try Self.decodes("shipping_rate", as: Stripe.Products.Shipping.Rate.self) }
+    @Test("transfer") func transfer() throws { try Self.decodes("transfer", as: Stripe.Connect.Transfer.self) }
     @Test("climate.order") func climateOrder() throws { try Self.decodes("climate.order", as: Stripe.Climate.Order.self) }
     @Test("climate.product") func climateProduct() throws { try Self.decodes("climate.product", as: Stripe.Climate.Product.self) }
     @Test("tax.settings") func taxSettings() throws { try Self.decodes("tax.settings", as: Stripe.Tax.Settings.self) }

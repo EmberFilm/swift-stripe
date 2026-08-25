@@ -12,10 +12,6 @@ import Foundation
 #endif
 
 // Namespace for Transfer Reversals
-extension Stripe.Connect.Transfer {
-    public enum Reversals {}
-}
-
 extension Stripe.Connect.Transfer.Reversals {
     // https://docs.stripe.com/api/transfer_reversals/create.md
     public enum Create {}

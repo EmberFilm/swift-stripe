@@ -1,0 +1,36 @@
+{
+ "amount": {
+  "monetary": {
+   "currency": "usd",
+   "value": 1
+  },
+  "type": "monetary"
+ },
+ "applicability_config": {
+  "scope": {
+   "price_type": "metered",
+   "prices": [
+    {
+     "id": "id_1"
+    }
+   ]
+  }
+ },
+ "category": "paid",
+ "created": 1700000000,
+ "customer": "customer_1",
+ "customer_account": "customer_account_1",
+ "effective_at": 1700000000,
+ "expires_at": 1700000000,
+ "id": "billing.credit_grant_1",
+ "livemode": true,
+ "metadata": {
+  "key": "metadata_1"
+ },
+ "name": "name_1",
+ "object": "billing.credit_grant",
+ "priority": 1,
+ "test_clock": "test_helpers.test_clock_1",
+ "updated": 1700000000,
+ "voided_at": 1700000000
+}
