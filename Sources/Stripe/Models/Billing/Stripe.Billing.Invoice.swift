@@ -49,9 +49,17 @@ extension Stripe.Billing {
         /// The status of the invoice, one of `draft`, `open`, `paid`, `uncollectible`, or `void`. [Learn more](https://stripe.com/docs/billing/invoices/workflow#workflow-overview)
         public var status: Stripe.Billing.Invoice.Status?
         /// The subscription that this invoice was prepared for, if any.
+        ///
+        /// Removed from the top level in API version `2025-03-31.basil`; on that version and
+        /// later read ``parent`` instead, where Stripe now reports it.
         @ExpandableOf<Stripe.Billing.Subscription> public var subscription
         /// Details about the subscription that created this invoice.
-        public var subscriptionDetails: Stripe.Billing.Subscription.Details?
+        public var subscriptionDetails: Stripe.Billing.Invoice.SubscriptionDetails?
+        /// What caused this invoice to be created.
+        ///
+        /// As of API version `2025-03-31.basil` this is where a subscription invoice reports the
+        /// subscription it belongs to: `parent.subscriptionDetails.subscription`.
+        public var parent: Stripe.Billing.Invoice.Parent?
         /// Total after discount.
         public var total: Int?
         /// String representing the object’s type. Objects of the same type share the same value.
@@ -191,7 +199,8 @@ extension Stripe.Billing {
             periodStart: Date? = nil,
             status: Stripe.Billing.Invoice.Status? = nil,
             subscription: Stripe.Billing.Subscription.ID? = nil,
-            subscriptionDetails: Stripe.Billing.Subscription.Details? = nil,
+            subscriptionDetails: Stripe.Billing.Invoice.SubscriptionDetails? = nil,
+            parent: Stripe.Billing.Invoice.Parent? = nil,
             total: Int? = nil,
             object: String,
             accountCountry: String? = nil,
@@ -270,6 +279,7 @@ extension Stripe.Billing {
             self.status = status
             self._subscription = Expandable(id: subscription)
             self.subscriptionDetails = subscriptionDetails
+            self.parent = parent
             self.total = total
             self.object = object
             self.accountCountry = accountCountry
@@ -787,6 +797,69 @@ extension Stripe.Billing.Invoice {
             self.hasMore = hasMore
             self.url = url
             self.data = data
+        }
+    }
+}
+
+// MARK: - Parent
+extension Stripe.Billing.Invoice {
+    /// The parent that generated an invoice.
+    ///
+    /// Stripe moved a subscription invoice's `subscription` here in API version
+    /// `2025-03-31.basil`; on that version and later, the top-level `subscription` is absent.
+    public struct Parent: Codable, Hashable, Sendable {
+        /// Present when `type` is `subscription_details`.
+        public var subscriptionDetails: Stripe.Billing.Invoice.SubscriptionDetails?
+        /// Present when `type` is `quote_details`.
+        public var quoteDetails: Stripe.Billing.Invoice.QuoteDetails?
+        /// The type of parent that generated this invoice.
+        public var type: Stripe.Billing.Invoice.Parent.`Type`?
+
+        public init(
+            subscriptionDetails: Stripe.Billing.Invoice.SubscriptionDetails? = nil,
+            quoteDetails: Stripe.Billing.Invoice.QuoteDetails? = nil,
+            type: Stripe.Billing.Invoice.Parent.`Type`? = nil
+        ) {
+            self.subscriptionDetails = subscriptionDetails
+            self.quoteDetails = quoteDetails
+            self.type = type
+        }
+
+        public enum `Type`: String, Codable, Sendable {
+            case subscriptionDetails = "subscription_details"
+            case quoteDetails = "quote_details"
+        }
+    }
+
+    /// Details about the subscription that created an invoice.
+    public struct SubscriptionDetails: Codable, Hashable, Sendable {
+        /// The subscription that generated this invoice.
+        @ExpandableOf<Stripe.Billing.Subscription> public var subscription:
+            Stripe.Billing.Subscription.ID?
+        /// The subscription's metadata as of the moment the invoice was created.
+        public var metadata: [String: String]?
+
+        private enum CodingKeys: String, CodingKey {
+            case subscription
+            case metadata
+        }
+
+        public init(
+            subscription: Stripe.Billing.Subscription.ID? = nil,
+            metadata: [String: String]? = nil
+        ) {
+            self._subscription = Expandable(id: subscription)
+            self.metadata = metadata
+        }
+    }
+
+    /// Details about the quote that created an invoice.
+    public struct QuoteDetails: Codable, Hashable, Sendable {
+        /// The quote that generated this invoice.
+        public var quote: Stripe.Billing.Quote.ID?
+
+        public init(quote: Stripe.Billing.Quote.ID? = nil) {
+            self.quote = quote
         }
     }
 }

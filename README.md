@@ -403,6 +403,26 @@ On the way back, responses decode with `.convertFromSnakeCase` and
 `.secondsSince1970`, so models declare plain camelCase properties and carry no
 redundant `CodingKeys` raw values.
 
+### Metadata keys do not round-trip through camelCase
+
+The encoder cannot tell a dictionary key from a field name, so it snake-cases
+both: `metadata: ["userId": x]` goes out as `metadata[user_id]=x`.
+`JSONDecoder.convertFromSnakeCase` deliberately does *not* touch dictionary
+keys, so it comes back as `"user_id"`, not `"userId"` — writing and reading with
+the same Swift constant silently misses.
+
+**Keep metadata keys lowercase or `snake_case`**, matching Stripe's own
+convention. Those pass through both directions unchanged.
+
+### Event decoding is deliberately lenient
+
+A webhook endpoint receives whatever event types are enabled on it, and Stripe
+adds new ones over time. `Stripe.Events.Event` therefore never fails on an
+unrecognised payload: an event type this package does not model leaves `type`
+`nil` (with the wire string in `rawType`), and an object it does not model
+decodes as `Event.Object.unknown(type:)`. Rejecting the delivery would just have
+Stripe redeliver the same event until it gave up.
+
 ### Corrections to the vendored models
 
 The model types were vendored from swift-stripe-standard and, before it,
@@ -414,6 +434,14 @@ format and are corrected here:
 | `Checkout.Session` custom fields | `mininumLength` | `minimumLength` | `minimum_length` |
 | `PaymentIntent` | `onBehalfOn` | `onBehalfOf` | `on_behalf_of` |
 | `PaymentLink` … confirmation | `message` | `customMessage` | `custom_message` |
+| `Billing.Invoice` | `subscriptionDetails: Subscription.Details` | `…: Invoice.SubscriptionDetails` | `subscription_details` |
+
+`Billing.Invoice.subscriptionDetails` was typed as the subscription's
+*cancellation* details, so `subscription` and `metadata` decoded to nothing. It
+now has its own type. `Billing.Invoice.parent` was missing entirely: API version
+`2025-03-31.basil` moved a subscription invoice's `subscription` from the top
+level to `parent.subscription_details.subscription`, so on any modern version
+that is the only place to read it.
 
 Separately, the vendored decoder used `.useDefaultKeys` on the assumption that
 every model declared explicit `CodingKeys`; roughly half did not, so multi-word

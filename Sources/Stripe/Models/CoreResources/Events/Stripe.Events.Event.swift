@@ -37,6 +37,11 @@ extension Stripe.Events {
         public var livemode: Bool?
         /// Number of webhooks that have yet to be successfully delivered (i.e., to return a 20x response) to the URLs you've specified.
         public var pendingWebhooks: Int?
+        /// The event type exactly as Stripe sent it, including types this package does not model.
+        ///
+        /// ``type`` is `nil` for an event Stripe has added since this package was built; this
+        /// carries the string either way, so an unrecognised event can still be logged or routed.
+        public var rawType: String?
 
         public init(
             id: ID,
@@ -48,7 +53,8 @@ extension Stripe.Events {
             account: String? = nil,
             created: Date? = nil,
             livemode: Bool? = nil,
-            pendingWebhooks: Int? = nil
+            pendingWebhooks: Int? = nil,
+            rawType: String? = nil
         ) {
             self.id = id
             self.apiVersion = apiVersion
@@ -60,6 +66,36 @@ extension Stripe.Events {
             self.created = created
             self.livemode = livemode
             self.pendingWebhooks = pendingWebhooks
+            self.rawType = rawType ?? type?.rawValue
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case id, apiVersion, data, request, type, object, account, created, livemode
+            case pendingWebhooks
+        }
+
+        /// Decodes an event without letting an unrecognised payload reject the delivery.
+        ///
+        /// A webhook endpoint receives whatever event types are enabled on it, and Stripe adds new
+        /// ones over time. Failing to decode one means answering Stripe with an error and being
+        /// redelivered the same event forever, so ``type`` and ``data`` degrade to `nil` rather
+        /// than throwing; ``rawType`` still reports what arrived.
+        // REASON: the `Swift.Decodable` requirement is declared with untyped `throws`, so the
+        // thrown type cannot be narrowed here without failing to satisfy it.
+        // swiftlint:disable:next typed_throws_required
+        public init(from decoder: any Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            self.id = try container.decode(ID.self, forKey: .id)
+            self.object = try container.decode(String.self, forKey: .object)
+            self.apiVersion = try container.decodeIfPresent(String.self, forKey: .apiVersion)
+            self.request = try container.decodeIfPresent(Request.self, forKey: .request)
+            self.account = try container.decodeIfPresent(String.self, forKey: .account)
+            self.created = try container.decodeIfPresent(Date.self, forKey: .created)
+            self.livemode = try container.decodeIfPresent(Bool.self, forKey: .livemode)
+            self.pendingWebhooks = try container.decodeIfPresent(Int.self, forKey: .pendingWebhooks)
+            self.rawType = try container.decodeIfPresent(String.self, forKey: .type)
+            self.type = try? container.decodeIfPresent(`Type`.self, forKey: .type)
+            self.data = try? container.decodeIfPresent(Data.self, forKey: .data)
         }
     }
 }
@@ -83,6 +119,8 @@ extension Stripe.Events.Event {
 
 extension Stripe.Events.Event {
     public enum Object: Codable, Hashable, Sendable {
+        /// An object whose `object` type this package does not model.
+        case unknown(type: String)
         case account(Stripe.Connect.Account)
         case application(Stripe.Connect.Application)
         case card(Card)
@@ -324,13 +362,9 @@ extension Stripe.Events.Event {
                 self = try .transfer(Stripe.Connect.Transfer(from: decoder))
 
             default:
-                throw DecodingError.keyNotFound(
-                    CodingKeys.object,
-                    DecodingError.Context(
-                        codingPath: [CodingKeys.object],
-                        debugDescription: "Missing type '\(object)' cannot be decoded."
-                    )
-                )
+                // Stripe sends whatever object the event carries, including resources this
+                // package does not model yet. Reporting the type beats rejecting the delivery.
+                self = .unknown(type: object)
             }
         }
 
@@ -340,6 +374,10 @@ extension Stripe.Events.Event {
         // swiftlint:disable:next typed_throws_required
         public func encode(to encoder: Encoder) throws {
             switch self {
+            case .unknown(let type):
+                var container = encoder.container(keyedBy: CodingKeys.self)
+                try container.encode(type, forKey: .object)
+
             case .account(let connectAccount):
                 try connectAccount.encode(to: encoder)
 

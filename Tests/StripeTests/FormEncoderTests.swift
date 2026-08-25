@@ -57,6 +57,25 @@ struct FormEncoderTests {
         #expect(pairs.contains { $0.key == "metadata[order_id]" && $0.value == "abc" })
     }
 
+    @Test("a camelCase metadata key is snake-cased on the way out, but not on the way back")
+    func metadataKeysAreNotSymmetric() throws {
+        // The encoder cannot tell a dictionary key from a field name, so it snake-cases both.
+        // `JSONDecoder.convertFromSnakeCase` deliberately skips dictionary keys, so the two do
+        // not round-trip. Keep metadata keys lowercase or snake_case and both sides agree.
+        struct Request: Encodable { let metadata: [String: String] }
+        let pairs = try StripeFormEncoder().pairs(of: Request(metadata: ["userId": "u_1"]))
+        #expect(pairs.contains { $0.key == "metadata[user_id]" })
+
+        struct Response: Decodable { let metadata: [String: String] }
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        let decoded = try decoder.decode(
+            Response.self, from: Data(#"{"metadata":{"user_id":"u_1"}}"#.utf8)
+        )
+        #expect(decoded.metadata["user_id"] == "u_1")
+        #expect(decoded.metadata["userId"] == nil)
+    }
+
     @Test("booleans render as true/false, not 1/0")
     func booleans() throws {
         struct Request: Encodable { let livemode: Bool }
