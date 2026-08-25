@@ -13,7 +13,9 @@ import Stripe
 
 extension Generated.Billing {
     /// Invoices are statements of amounts owed by a customer, and are either generated one-off, or generated periodically fro…
-    public struct Invoice: Codable, Hashable, Sendable {
+    public struct Invoice: Codable, Hashable, Sendable, Identifiable {
+        public typealias ID = String
+        public let id: ID
         /// The country of the business associated with this invoice, most often the business creating the invoice.
         public var accountCountry: String?
         /// The public name of the business associated with this invoice, most often the business creating the invoice.
@@ -95,8 +97,6 @@ extension Generated.Billing {
         public var fromInvoice: FromInvoice?
         /// The URL for the hosted invoice page, which allows customers to view and pay an invoice.
         public var hostedInvoiceUrl: String?
-        /// Unique identifier for the object.
-        public var id: String?
         /// The link to download the PDF for the invoice.
         public var invoicePdf: String?
         public var issuer: Generated.Shared.ConnectAccountReference?
@@ -168,6 +168,7 @@ extension Generated.Billing {
         public var webhooksDeliveredAt: Date?
 
         private enum CodingKeys: String, CodingKey {
+            case id
             case accountCountry
             case accountName
             case accountTaxIds
@@ -209,7 +210,6 @@ extension Generated.Billing {
             case footer
             case fromInvoice
             case hostedInvoiceUrl
-            case id
             case invoicePdf
             case issuer
             case lastFinalizationError
@@ -250,6 +250,7 @@ extension Generated.Billing {
         }
 
         public init(
+            id: ID,
             accountCountry: String? = nil,
             accountName: String? = nil,
             accountTaxIds: [String]? = nil,
@@ -291,7 +292,6 @@ extension Generated.Billing {
             footer: String? = nil,
             fromInvoice: FromInvoice? = nil,
             hostedInvoiceUrl: String? = nil,
-            id: String? = nil,
             invoicePdf: String? = nil,
             issuer: Generated.Shared.ConnectAccountReference? = nil,
             lastFinalizationError: Generated.Shared.ApiErrors? = nil,
@@ -330,6 +330,7 @@ extension Generated.Billing {
             totalTaxes: [TotalTaxes]? = nil,
             webhooksDeliveredAt: Date? = nil
         ) {
+            self.id = id
             self.accountCountry = accountCountry
             self.accountName = accountName
             self._accountTaxIds = ExpandableCollection(ids: accountTaxIds)
@@ -371,7 +372,6 @@ extension Generated.Billing {
             self.footer = footer
             self.fromInvoice = fromInvoice
             self.hostedInvoiceUrl = hostedInvoiceUrl
-            self.id = id
             self.invoicePdf = invoicePdf
             self.issuer = issuer
             self.lastFinalizationError = lastFinalizationError

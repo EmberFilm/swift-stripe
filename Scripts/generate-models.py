@@ -175,8 +175,9 @@ def doc(description: str | None) -> str | None:
 # --------------------------------------------------------------------------------------------
 
 class Generator:
-    def __init__(self, spec: dict, namespace: str = "Generated"):
+    def __init__(self, spec: dict, namespace: str = "Generated", only: set[str] | None = None):
         self.ns = namespace
+        self.only = only
         self.schemas: dict = spec["components"]["schemas"]
         self.version: str = spec["info"]["version"]
         self.unmapped: set[str] = set()
@@ -347,12 +348,14 @@ class Generator:
         self.shared_done[ref] = None   # reserve first: shared types can reference each other
         self.shared_done[ref] = self.build_struct(name, self.schemas[ref], f"Generated.Shared.{name}")
 
-    def build_struct(self, name: str, schema: dict, path: str) -> "Struct":
+    def build_struct(self, name: str, schema: dict, path: str, root: bool = False) -> "Struct":
         s = Struct(name, path, doc(schema.get("description")))
         expandable = set(schema.get("x-expandableFields", []))
         required = set(schema.get("required", []))
         for prop, node in schema.get("properties", {}).items():
-            if prop == "id" and "id" in required:
+            # Every Stripe resource has an id; the spec's `required` list is not the signal
+            # (a draft invoice omits it), and half the package keys on `Resource.ID`.
+            if prop == "id" and (root or "id" in required):
                 s.has_id = True
                 continue
             s.fields.append(self.resolve(node, prop, expandable, s))
@@ -366,12 +369,17 @@ class Generator:
             self.survey(name, name, set())
         files: dict[str, str] = {}
         for name, swift_path in RESOURCES.items():
-            root = self.build_struct(swift_path.split(".")[-1], self.schemas[name], f"{self.ns}.{swift_path}")
+            if self.only and name not in self.only:
+                continue
+            root = self.build_struct(swift_path.split(".")[-1], self.schemas[name], f"{self.ns}.{swift_path}", root=True)
             files[f"{self.ns}.{swift_path}.swift"] = self.render_resource(name, swift_path, root)
         files[f"{self.ns}.Shared.swift"] = self.render_shared()
         if self.ns != "Stripe":
             files[f"{self.ns}.swift"] = self.render_namespace()
-        return {k: v.replace("Generated.", f"{self.ns}.") for k, v in files.items()}
+        files = {k: v.replace("Generated.", f"{self.ns}.") for k, v in files.items()}
+        if self.ns == "Stripe":
+            files = {k: v.replace("#endif\nimport Stripe\n", "#endif\n") for k, v in files.items()}
+        return files
 
     # ---- rendering ------------------------------------------------------------------------
 
@@ -512,9 +520,11 @@ def main() -> int:
     ap.add_argument("--namespace", default="Generated",
                     help="root namespace for the emitted types (Stripe, or Generated for side-by-side)")
     ap.add_argument("--check", action="store_true", help="report unmapped refs and unions; write nothing")
+    ap.add_argument("--only", nargs="*", help="emit only these schemas (Shared is always emitted)")
+    ap.add_argument("--keep", action="store_true", help="do not delete other generated files in --out")
     args = ap.parse_args()
 
-    gen = Generator(json.load(open(args.spec)), namespace=args.namespace)
+    gen = Generator(json.load(open(args.spec)), namespace=args.namespace, only=set(args.only or []) or None)
     files = gen.run()
 
     print(f"spec {gen.version}: {len(RESOURCES)} resources, {len(gen.shared_done)} shared types")
@@ -532,8 +542,9 @@ def main() -> int:
 
     out = pathlib.Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
-    for stale in out.glob("Generated.*.swift"):
-        stale.unlink()
+    if not args.keep:
+        for stale in out.glob(f"{args.namespace}.*.swift"):
+            stale.unlink()
     for name, content in files.items():
         (out / name).write_text(content)
     print(f"\nwrote {len(files)} files to {out}/")
