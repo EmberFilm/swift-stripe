@@ -109,6 +109,9 @@ reintroduce wrapper types.
    the endpoint isn't covered yet.
 4. Use `api.send(_:_:body:)` for writes and `api.list(_:parameters:)` for list
    endpoints — Stripe wants list filters in the query string, not the body.
+5. Give each write an `idempotencyKey: String?` parameter, forward it to
+   `api.send`, and add the unkeyed overload to the protocol extension at the
+   foot of the file.
 
 The protocol is the mocking seam. There is no transport abstraction to stub.
 
@@ -128,8 +131,14 @@ that aren't about retrying.
 ## Behaviour worth knowing before changing it
 
 - **Retries**: `429` and `5xx` except `501`, exponential backoff (0.5s, 1s, 2s,
-  … capped at 8s), `maxRetries` attempts *after* the first. No idempotency-key
-  support yet, so retrying writes is on the caller.
+  … capped at 8s), `maxRetries` attempts *after* the first — but only for
+  requests `StripeAPI.isSafeToRetry` accepts: reads, and writes carrying an
+  `Idempotency-Key`. An unkeyed write is never retried; don't loosen that
+  without a reason, it is what stops a retried `POST` creating a second charge.
+- **Idempotency keys** are an optional trailing `idempotencyKey: String?` on
+  every write. It is a *protocol requirement*; the previous unkeyed arity lives
+  on as a protocol extension that passes `nil`. Conforming doubles implement the
+  keyed form.
 - **`timeout` is per attempt**, not per call.
 - **Webhooks verify against raw bytes.** Never decode-and-re-encode a payload
   before verification. Signature comparison is constant-time; multiple `v1`

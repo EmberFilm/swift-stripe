@@ -25,6 +25,7 @@ let customer = try await stripe.customers.create(
 - [Configuration](#configuration)
 - [Resource clients](#resource-clients)
 - [Error handling](#error-handling)
+- [Idempotency](#idempotency)
 - [Retries and timeouts](#retries-and-timeouts)
 - [Stripe Connect](#stripe-connect)
 - [Webhooks](#webhooks)
@@ -232,16 +233,46 @@ when contacting Stripe support. `StripeClientError` conforms to
 `CustomStringConvertible`, and its description truncates response bodies to 500
 characters so log lines stay bounded.
 
+## Idempotency
+
+Every write takes an optional idempotency key. Stripe stores the first response
+under that key for 24 hours and replays it for any repeat, so a retried create
+returns the original object instead of making a second one:
+
+```swift
+let customer = try await stripe.customers.create(
+    .init(email: "ada@example.com"),
+    idempotencyKey: "customer-\(userID)"
+)
+```
+
+Derive the key from the thing being created, not from the attempt — the point is
+that two attempts at the same operation collide. A UUID generated per call keys
+nothing and is the same as passing none.
+
+The key reaches `Idempotency-Key` on the request. Endpoints without a typed
+client take it too:
+
+```swift
+try await stripe.api.send(
+    .POST, "v1/billing_portal/sessions", body: request, idempotencyKey: key
+)
+```
+
+Omitting it leaves the header off, which is what every call did before this
+existed.
+
 ## Retries and timeouts
 
 Requests are retried on `429` and on `5xx` other than `501`, with exponential
 backoff (0.5s, 1s, 2s, … capped at 8s). `maxRetries` defaults to `2`, i.e. three
 attempts in total; set it to `0` to disable.
 
-Retries are **not** idempotency-key aware. The default policy is safe for reads;
-for non-idempotent writes under an aggressive retry budget, prefer
-`maxRetries: 0` and handle the retry at the call site until idempotency keys
-land (see [Status](#status)).
+**Only requests that are safe to repeat are retried**: reads always, and writes
+only when they carry an idempotency key. An unkeyed write that fails with a
+`429` or `5xx` surfaces the error on the first attempt rather than risking a
+second charge, customer, or subscription — losing the error is the lesser
+problem. Key your writes and they retry like everything else.
 
 `timeout` is per attempt, not per call: the worst case is
 `(maxRetries + 1) × timeout` plus backoff.
@@ -295,7 +326,10 @@ stubbing:
 
 ```swift
 struct StubCustomers: CustomersAPI {
-    func create(_: Stripe.Customers.Create.Request) async throws -> Stripe.Customers.Customer {
+    func create(
+        _: Stripe.Customers.Create.Request,
+        idempotencyKey: String?
+    ) async throws -> Stripe.Customers.Customer {
         .init(id: "cus_stub", object: "customer", created: .now, livemode: false)
     }
     // ...
@@ -303,6 +337,9 @@ struct StubCustomers: CustomersAPI {
 
 let customers: any CustomersAPI = StubCustomers()
 ```
+
+A double implements the keyed form of each write; the unkeyed overload is a
+protocol extension that forwards to it, so `create(request)` still resolves.
 
 To exercise the real stack — URL building, form encoding, decoding, retries —
 point a client at a local server and assert on the bytes it received.
@@ -399,15 +436,14 @@ regression.
 
 ## Status
 
-The request engine, form encoding, error handling, retries, and webhook
-verification are complete and covered by tests. Typed resource clients currently
+The request engine, form encoding, error handling, retries, idempotency keys,
+and webhook verification are complete and covered by tests. Typed resource clients currently
 cover Customers, PaymentIntents, Checkout Sessions, Products, Prices, and
 Subscriptions; every other endpoint is reachable through `stripe.api` with the
 modelled request and response types.
 
 Not yet implemented:
 
-- idempotency-key support on writes;
 - `swift-log` / `swift-distributed-tracing` instrumentation;
 - automatic pagination helpers (`AsyncSequence` over list endpoints);
 - file uploads (`files.stripe.com` multipart).

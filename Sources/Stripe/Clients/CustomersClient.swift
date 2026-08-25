@@ -15,14 +15,19 @@ import NIOHTTP1
 /// A protocol so tests can substitute a double; ``CustomersClient`` is the
 /// implementation that talks to Stripe.
 public protocol CustomersAPI: Sendable {
-    func create(_ request: Stripe.Customers.Create.Request) async throws -> Stripe.Customers.Customer
+    func create(
+        _ request: Stripe.Customers.Create.Request,
+        idempotencyKey: String?
+    ) async throws -> Stripe.Customers.Customer
     func retrieve(id: Stripe.Customers.Customer.ID) async throws -> Stripe.Customers.Customer
     func update(
         id: Stripe.Customers.Customer.ID,
-        _ request: Stripe.Customers.Update.Request
+        _ request: Stripe.Customers.Update.Request,
+        idempotencyKey: String?
     ) async throws -> Stripe.Customers.Customer
     func delete(
-        id: Stripe.Customers.Customer.ID
+        id: Stripe.Customers.Customer.ID,
+        idempotencyKey: String?
     ) async throws -> DeletedObject<Stripe.Customers.Customer>
     func list(_ request: Stripe.Customers.List.Request) async throws -> Stripe.Customers.List.Response
     func search(
@@ -36,9 +41,10 @@ public struct CustomersClient: CustomersAPI {
     public init(api: StripeAPI) { self.api = api }
 
     public func create(
-        _ request: Stripe.Customers.Create.Request
+        _ request: Stripe.Customers.Create.Request,
+        idempotencyKey: String?
     ) async throws -> Stripe.Customers.Customer {
-        try await api.send(.POST, "v1/customers", body: request)
+        try await api.send(.POST, "v1/customers", body: request, idempotencyKey: idempotencyKey)
     }
 
     public func retrieve(
@@ -49,15 +55,22 @@ public struct CustomersClient: CustomersAPI {
 
     public func update(
         id: Stripe.Customers.Customer.ID,
-        _ request: Stripe.Customers.Update.Request
+        _ request: Stripe.Customers.Update.Request,
+        idempotencyKey: String?
     ) async throws -> Stripe.Customers.Customer {
-        try await api.send(.POST, "v1/customers/\(id)", body: request)
+        try await api.send(
+            .POST,
+            "v1/customers/\(id)",
+            body: request,
+            idempotencyKey: idempotencyKey
+        )
     }
 
     public func delete(
-        id: Stripe.Customers.Customer.ID
+        id: Stripe.Customers.Customer.ID,
+        idempotencyKey: String?
     ) async throws -> DeletedObject<Stripe.Customers.Customer> {
-        try await api.send(.DELETE, "v1/customers/\(id)")
+        try await api.send(.DELETE, "v1/customers/\(id)", idempotencyKey: idempotencyKey)
     }
 
     public func list(
@@ -70,5 +83,28 @@ public struct CustomersClient: CustomersAPI {
         _ request: Stripe.Customers.Search.Request
     ) async throws -> Stripe.Customers.Search.Response {
         try await api.list("v1/customers/search", parameters: request)
+    }
+}
+
+// A write with no explicit key behaves as it did before idempotency keys existed: no header, and
+// no retry. See ``StripeAPI/isSafeToRetry(_:)``.
+extension CustomersAPI {
+    public func create(
+        _ request: Stripe.Customers.Create.Request
+    ) async throws -> Stripe.Customers.Customer {
+        try await create(request, idempotencyKey: nil)
+    }
+
+    public func update(
+        id: Stripe.Customers.Customer.ID,
+        _ request: Stripe.Customers.Update.Request
+    ) async throws -> Stripe.Customers.Customer {
+        try await update(id: id, request, idempotencyKey: nil)
+    }
+
+    public func delete(
+        id: Stripe.Customers.Customer.ID
+    ) async throws -> DeletedObject<Stripe.Customers.Customer> {
+        try await delete(id: id, idempotencyKey: nil)
     }
 }

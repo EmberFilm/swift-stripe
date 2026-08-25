@@ -198,6 +198,9 @@ extension Stripe.Checkout.Sessions.Create {
         public let submitType: Stripe.Checkout.Session.Submit.`Type`?
         public let taxIdCollection: Stripe.Checkout.Session.TaxId.Collection?
         public let uiMode: Stripe.Checkout.Session.Mode?
+        /// Applies only in `subscription` mode. Metadata set here lands on the Subscription
+        /// object rather than the Session, which is what later subscription webhooks carry.
+        public let subscriptionData: Stripe.Checkout.Sessions.Create.SubscriptionData?
 
         private enum CodingKeys: String, CodingKey {
             case automaticTax
@@ -226,6 +229,7 @@ extension Stripe.Checkout.Sessions.Create {
             case submitType
             case taxIdCollection
             case uiMode
+            case subscriptionData
         }
 
         public init(
@@ -254,7 +258,8 @@ extension Stripe.Checkout.Sessions.Create {
             shippingRates: [String]? = nil,
             submitType: Stripe.Checkout.Session.Submit.`Type`? = nil,
             taxIdCollection: Stripe.Checkout.Session.TaxId.Collection? = nil,
-            uiMode: Stripe.Checkout.Session.Mode? = nil
+            uiMode: Stripe.Checkout.Session.Mode? = nil,
+            subscriptionData: Stripe.Checkout.Sessions.Create.SubscriptionData? = nil
         ) {
             self.automaticTax = automaticTax
             self.successUrl = successUrl
@@ -282,6 +287,7 @@ extension Stripe.Checkout.Sessions.Create {
             self.submitType = submitType
             self.taxIdCollection = taxIdCollection
             self.uiMode = uiMode
+            self.subscriptionData = subscriptionData
         }
     }
 }
@@ -391,6 +397,91 @@ extension Stripe.Checkout.Sessions.Create {
             self.quantity = quantity
             self.dynamicTaxRates = dynamicTaxRates
             self.taxRates = taxRates
+        }
+    }
+}
+
+extension Stripe.Checkout.Sessions.Create {
+    /// `subscription_data` on checkout-session create.
+    ///
+    /// Only honoured when the session's `mode` is `.subscription`; Stripe rejects it on a
+    /// one-time `payment` session. This is the only way to reach the Subscription object the
+    /// session will create — notably its `metadata`, which is what `customer.subscription.*`
+    /// webhooks later carry, and the trial, which cannot be set after the fact.
+    public struct SubscriptionData: Codable, Hashable, Sendable {
+        /// Anchors the billing cycle to a fixed date rather than the subscription's start.
+        public let billingCycleAnchor: Date?
+        /// Tax rates applied to every line item on the subscription.
+        public let defaultTaxRates: [String]?
+        /// Displayed to the customer on invoices.
+        public let description: String?
+        /// Set on the created Subscription, not on the Session.
+        public let metadata: [String: String]?
+        /// The connected account the subscription is created on behalf of.
+        public let onBehalfOf: String?
+        /// How to handle prorations when the billing cycle is anchored.
+        public let prorationBehavior: Stripe.Billing.Subscription.ProrationBehavior?
+        /// Splits each invoice with a connected account.
+        public let transferData: TransferData?
+        /// Ends the trial at a fixed date. Mutually exclusive with ``trialPeriodDays``.
+        public let trialEnd: Date?
+        /// Trial length in days. Mutually exclusive with ``trialEnd``.
+        public let trialPeriodDays: Int?
+        /// What happens when a trial ends with no payment method on file.
+        public let trialSettings: Stripe.Billing.Subscription.Trial.Settings?
+
+        private enum CodingKeys: String, CodingKey {
+            case billingCycleAnchor
+            case defaultTaxRates
+            case description
+            case metadata
+            case onBehalfOf
+            case prorationBehavior
+            case transferData
+            case trialEnd
+            case trialPeriodDays
+            case trialSettings
+        }
+
+        public init(
+            billingCycleAnchor: Date? = nil,
+            defaultTaxRates: [String]? = nil,
+            description: String? = nil,
+            metadata: [String: String]? = nil,
+            onBehalfOf: String? = nil,
+            prorationBehavior: Stripe.Billing.Subscription.ProrationBehavior? = nil,
+            transferData: TransferData? = nil,
+            trialEnd: Date? = nil,
+            trialPeriodDays: Int? = nil,
+            trialSettings: Stripe.Billing.Subscription.Trial.Settings? = nil
+        ) {
+            self.billingCycleAnchor = billingCycleAnchor
+            self.defaultTaxRates = defaultTaxRates
+            self.description = description
+            self.metadata = metadata
+            self.onBehalfOf = onBehalfOf
+            self.prorationBehavior = prorationBehavior
+            self.transferData = transferData
+            self.trialEnd = trialEnd
+            self.trialPeriodDays = trialPeriodDays
+            self.trialSettings = trialSettings
+        }
+
+        /// Request-side transfer data: unlike the model's, `destination` is a plain id, never
+        /// an expanded account.
+        public struct TransferData: Codable, Hashable, Sendable {
+            public let destination: Stripe.Connect.Account.ID
+            public let amountPercent: Int?
+
+            private enum CodingKeys: String, CodingKey {
+                case destination
+                case amountPercent
+            }
+
+            public init(destination: Stripe.Connect.Account.ID, amountPercent: Int? = nil) {
+                self.destination = destination
+                self.amountPercent = amountPercent
+            }
         }
     }
 }

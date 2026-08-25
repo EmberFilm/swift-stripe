@@ -6,10 +6,8 @@
 import AsyncHTTPClient
 #if canImport(FoundationEssentials)
 import FoundationEssentials
-import NIOFoundationEssentialsCompat
 #else
 import Foundation
-import NIOFoundationCompat
 #endif
 import NIOCore
 import NIOHTTP1
@@ -50,23 +48,35 @@ public struct StripeAPI: Sendable {
     // MARK: - Requests
 
     /// Sends a request with no body.
+    ///
+    /// - Parameter idempotencyKey: Sent as `Idempotency-Key`. Stripe replays the
+    ///   first response for a repeated key, which is also what makes this
+    ///   request safe to retry — see ``perform(_:)``.
     public func send<Response: Decodable>(
         _ method: HTTPMethod,
         _ path: String,
-        as: Response.Type = Response.self
+        as: Response.Type = Response.self,
+        idempotencyKey: String? = nil
     ) async throws -> Response {
-        try await perform(makeRequest(method, path))
+        try await perform(makeRequest(method, path, idempotencyKey: idempotencyKey))
     }
 
     /// Sends a request whose parameters are form-encoded into the body.
+    ///
+    /// - Parameter idempotencyKey: Sent as `Idempotency-Key`. Stripe replays the
+    ///   first response for a repeated key, which is also what makes this
+    ///   request safe to retry — see ``perform(_:)``.
     public func send<Body: Encodable, Response: Decodable>(
         _ method: HTTPMethod,
         _ path: String,
         body: Body,
-        as: Response.Type = Response.self
+        as: Response.Type = Response.self,
+        idempotencyKey: String? = nil
     ) async throws -> Response {
         let encoded = try formEncoder.encode(body)
-        return try await perform(makeRequest(method, path, body: Data(encoded.utf8)))
+        return try await perform(
+            makeRequest(method, path, body: Data(encoded.utf8), idempotencyKey: idempotencyKey)
+        )
     }
 
     /// Sends a `GET` whose parameters are form-encoded into the query string.
@@ -92,7 +102,8 @@ public struct StripeAPI: Sendable {
         _ method: HTTPMethod,
         _ path: String,
         query: [(key: String, value: String)] = [],
-        body: Data? = nil
+        body: Data? = nil,
+        idempotencyKey: String? = nil
     ) throws -> HTTPClientRequest {
         guard var components = URLComponents(
             url: configuration.baseURL.appendingPathComponent(path),
@@ -119,6 +130,9 @@ public struct StripeAPI: Sendable {
         if let account = configuration.connectedAccount {
             request.headers.add(name: "Stripe-Account", value: account)
         }
+        if let idempotencyKey {
+            request.headers.add(name: Self.idempotencyKeyHeader, value: idempotencyKey)
+        }
         if let body {
             request.headers.add(name: "Content-Type", value: "application/x-www-form-urlencoded")
             request.body = .bytes(ByteBuffer(data: body))
@@ -128,14 +142,29 @@ public struct StripeAPI: Sendable {
 
     // MARK: - Execution
 
+    /// The header Stripe deduplicates writes on.
+    static let idempotencyKeyHeader = "Idempotency-Key"
+
+    /// Whether a failed attempt at this request may be repeated.
+    ///
+    /// Reads always may. A write may only when it carries an idempotency key —
+    /// without one, replaying a `429`/`5xx` risks a second charge, customer, or
+    /// subscription, and losing the error is worse than surfacing it.
+    static func isSafeToRetry(_ request: HTTPClientRequest) -> Bool {
+        request.method == .GET
+            || request.method == .HEAD
+            || request.headers.contains(name: idempotencyKeyHeader)
+    }
+
     private func perform<Response: Decodable>(
         _ request: HTTPClientRequest
     ) async throws -> Response {
         var lastError: any Swift.Error = StripeClientError.unexpectedStatus(
             status: 0, body: "", requestID: nil
         )
+        let maxRetries = Self.isSafeToRetry(request) ? configuration.maxRetries : 0
 
-        for attempt in 0...max(0, configuration.maxRetries) {
+        for attempt in 0...max(0, maxRetries) {
             do {
                 let response = try await httpClient.execute(
                     request,
@@ -152,7 +181,7 @@ public struct StripeAPI: Sendable {
                 )
             } catch let error as StripeClientError where error.isRetryable {
                 lastError = error
-                guard attempt < configuration.maxRetries else { break }
+                guard attempt < maxRetries else { break }
                 // Exponential backoff with a conservative ceiling.
                 try await Task.sleep(for: .seconds(min(pow(2.0, Double(attempt)) * 0.5, 8.0)))
             }
