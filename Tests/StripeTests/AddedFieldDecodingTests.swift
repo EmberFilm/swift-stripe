@@ -42,7 +42,7 @@ struct AddedFieldDecodingTests {
         let schedule = try #require(sub.billingSchedules?.first)
         #expect(schedule.key == "bs_1")
         #expect(schedule.appliesTo?.first?.price == "price_1")
-        #expect(schedule.appliesTo?.first?.type == .price)
+        #expect(schedule.appliesTo?.first?.type == "price")   // single-value spec enum, kept as a string
         #expect(schedule.billUntil?.duration?.interval == .month)
         #expect(schedule.billUntil?.duration?.intervalCount == 3)
         #expect(schedule.billUntil?.computedTimestamp == Date(timeIntervalSince1970: 1_700_000_000))

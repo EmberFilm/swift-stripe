@@ -14,6 +14,140 @@ extension Stripe {
     public enum Shared {}
 }
 
+// invoice_payment_method_options_acss_debit
+extension Stripe.Shared {
+    public struct AcssDebit: Codable, Hashable, Sendable {
+        public var mandateOptions: Stripe.Shared.MandateOptions?
+        /// Bank account verification method.
+        public var verificationMethod: VerificationMethod?
+
+        private enum CodingKeys: String, CodingKey {
+            case mandateOptions
+            case verificationMethod
+        }
+
+        public init(
+            mandateOptions: Stripe.Shared.MandateOptions? = nil,
+            verificationMethod: VerificationMethod? = nil
+        ) {
+            self.mandateOptions = mandateOptions
+            self.verificationMethod = verificationMethod
+        }
+
+        /// Bank account verification method.
+        public enum VerificationMethod: String, Codable, Hashable, Sendable {
+            case automatic
+            case instant
+            case microdeposits
+        }
+    }
+}
+
+// application
+extension Stripe.Shared {
+    public struct Application: Codable, Hashable, Sendable, Identifiable {
+        public typealias ID = String
+        public let id: ID
+        /// The name of the application.
+        public var name: String?
+        /// String representing the object's type.
+        public var object: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case id
+            case name
+            case object
+        }
+
+        public init(
+            id: ID,
+            name: String? = nil,
+            object: String? = nil
+        ) {
+            self.id = id
+            self.name = name
+            self.object = object
+        }
+    }
+}
+
+// invoice_payment_method_options_bancontact
+extension Stripe.Shared {
+    public struct Bancontact: Codable, Hashable, Sendable {
+        /// Preferred language of the Bancontact authorization page that the customer is redirected to.
+        public var preferredLanguage: PreferredLanguage?
+
+        private enum CodingKeys: String, CodingKey {
+            case preferredLanguage
+        }
+
+        public init(
+            preferredLanguage: PreferredLanguage? = nil
+        ) {
+            self.preferredLanguage = preferredLanguage
+        }
+
+        /// Preferred language of the Bancontact authorization page that the customer is redirected to.
+        public enum PreferredLanguage: String, Codable, Hashable, Sendable {
+            case de
+            case en
+            case fr
+            case nl
+        }
+    }
+}
+
+// invoice_payment_method_options_customer_balance_bank_transfer
+extension Stripe.Shared {
+    public struct BankTransfer: Codable, Hashable, Sendable {
+        public var euBankTransfer: Stripe.Shared.EuBankTransfer?
+        /// The bank transfer type that can be used for funding.
+        public var `type`: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case euBankTransfer
+            case `type`
+        }
+
+        public init(
+            euBankTransfer: Stripe.Shared.EuBankTransfer? = nil,
+            `type`: String? = nil
+        ) {
+            self.euBankTransfer = euBankTransfer
+            self.`type` = `type`
+        }
+    }
+}
+
+// connect_account_reference
+extension Stripe.Shared {
+    public struct ConnectAccountReference: Codable, Hashable, Sendable {
+        /// The connected account being referenced when `type` is `account`.
+        @Expandable<Stripe.Connect.Account, String> public var account: String?
+        /// Type of the account referenced.
+        public var `type`: Type?
+
+        private enum CodingKeys: String, CodingKey {
+            case account
+            case `type`
+        }
+
+        public init(
+            account: String? = nil,
+            `type`: Type? = nil
+        ) {
+            self._account = Expandable(id: account)
+            self.`type` = `type`
+        }
+
+        /// Type of the account referenced.
+        public enum `Type`: String, Codable, Hashable, Sendable {
+            case account
+            case `self`
+        }
+    }
+}
+
 // invoice_setting_custom_field
 extension Stripe.Shared {
     public struct CustomFields: Codable, Hashable, Sendable {
@@ -33,6 +167,28 @@ extension Stripe.Shared {
         ) {
             self.name = name
             self.value = value
+        }
+    }
+}
+
+// invoice_payment_method_options_customer_balance
+extension Stripe.Shared {
+    public struct CustomerBalance: Codable, Hashable, Sendable {
+        public var bankTransfer: Stripe.Shared.BankTransfer?
+        /// The funding method type to be used when there are not enough funds in the customer balance.
+        public var fundingType: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case bankTransfer
+            case fundingType
+        }
+
+        public init(
+            bankTransfer: Stripe.Shared.BankTransfer? = nil,
+            fundingType: String? = nil
+        ) {
+            self.bankTransfer = bankTransfer
+            self.fundingType = fundingType
         }
     }
 }
@@ -115,6 +271,258 @@ extension Stripe.Shared {
     }
 }
 
+// invoice_payment_method_options_customer_balance_bank_transfer_eu_bank_transfer
+extension Stripe.Shared {
+    public struct EuBankTransfer: Codable, Hashable, Sendable {
+        /// The desired country code of the bank account information.
+        public var country: Country?
+
+        private enum CodingKeys: String, CodingKey {
+            case country
+        }
+
+        public init(
+            country: Country? = nil
+        ) {
+            self.country = country
+        }
+
+        /// The desired country code of the bank account information.
+        public enum Country: String, Codable, Hashable, Sendable {
+            case BE
+            case DE
+            case ES
+            case FR
+            case IE
+            case NL
+        }
+    }
+}
+
+// invoice_payment_method_options_us_bank_account_linked_account_options_filters
+extension Stripe.Shared {
+    public struct Filters: Codable, Hashable, Sendable {
+        /// The account subcategories to use to filter for possible accounts to link.
+        public var accountSubcategories: [AccountSubcategories]?
+
+        private enum CodingKeys: String, CodingKey {
+            case accountSubcategories
+        }
+
+        public init(
+            accountSubcategories: [AccountSubcategories]? = nil
+        ) {
+            self.accountSubcategories = accountSubcategories
+        }
+
+        public enum AccountSubcategories: String, Codable, Hashable, Sendable {
+            case checking
+            case savings
+        }
+    }
+}
+
+// invoice_payment_method_options_us_bank_account_linked_account_options
+extension Stripe.Shared {
+    public struct FinancialConnections: Codable, Hashable, Sendable {
+        public var filters: Stripe.Shared.Filters?
+        /// The list of permissions to request.
+        public var permissions: [Permissions]?
+        /// Data features requested to be retrieved upon account creation.
+        public var prefetch: [Prefetch]?
+
+        private enum CodingKeys: String, CodingKey {
+            case filters
+            case permissions
+            case prefetch
+        }
+
+        public init(
+            filters: Stripe.Shared.Filters? = nil,
+            permissions: [Permissions]? = nil,
+            prefetch: [Prefetch]? = nil
+        ) {
+            self.filters = filters
+            self.permissions = permissions
+            self.prefetch = prefetch
+        }
+
+        public enum Permissions: String, Codable, Hashable, Sendable {
+            case balances
+            case ownership
+            case paymentMethod = "payment_method"
+            case transactions
+        }
+
+        public enum Prefetch: String, Codable, Hashable, Sendable {
+            case balances
+            case ownership
+            case transactions
+        }
+    }
+}
+
+// invoice_mandate_options_payto
+extension Stripe.Shared {
+    public struct InvoiceMandateOptionsPayto: Codable, Hashable, Sendable {
+        /// The maximum amount that can be collected in a single invoice.
+        public var amount: Int?
+        /// Only `maximum` is supported.
+        public var amountType: AmountType?
+        /// The purpose for which payments are made.
+        public var purpose: Purpose?
+
+        private enum CodingKeys: String, CodingKey {
+            case amount
+            case amountType
+            case purpose
+        }
+
+        public init(
+            amount: Int? = nil,
+            amountType: AmountType? = nil,
+            purpose: Purpose? = nil
+        ) {
+            self.amount = amount
+            self.amountType = amountType
+            self.purpose = purpose
+        }
+
+        /// Only `maximum` is supported.
+        public enum AmountType: String, Codable, Hashable, Sendable {
+            case fixed
+            case maximum
+        }
+
+        /// The purpose for which payments are made.
+        public enum Purpose: String, Codable, Hashable, Sendable {
+            case dependantSupport = "dependant_support"
+            case government
+            case loan
+            case mortgage
+            case other
+            case pension
+            case personal
+            case retail
+            case salary
+            case tax
+            case utility
+        }
+    }
+}
+
+// invoice_payment_method_options_mandate_options_upi
+extension Stripe.Shared {
+    public struct InvoicePaymentMethodOptionsMandateOptionsUpi: Codable, Hashable, Sendable {
+        /// Amount to be charged for future payments.
+        public var amount: Int?
+        /// One of `fixed` or `maximum`.
+        public var amountType: AmountType?
+        /// A description of the mandate or subscription that is meant to be displayed to the customer.
+        public var description: String?
+        /// End date of the mandate or subscription.
+        public var endDate: Date?
+
+        private enum CodingKeys: String, CodingKey {
+            case amount
+            case amountType
+            case description
+            case endDate
+        }
+
+        public init(
+            amount: Int? = nil,
+            amountType: AmountType? = nil,
+            description: String? = nil,
+            endDate: Date? = nil
+        ) {
+            self.amount = amount
+            self.amountType = amountType
+            self.description = description
+            self.endDate = endDate
+        }
+
+        /// One of `fixed` or `maximum`.
+        public enum AmountType: String, Codable, Hashable, Sendable {
+            case fixed
+            case maximum
+        }
+    }
+}
+
+// invoice_payment_method_options_konbini
+extension Stripe.Shared {
+    public struct Konbini: Codable, Hashable, Sendable {
+        public init() {}
+    }
+}
+
+// smor_resource_managed_payments
+extension Stripe.Shared {
+    public struct ManagedPayments: Codable, Hashable, Sendable {
+        /// Set to `true` to enable Managed Payments, Stripe's merchant of record solution, for this session.
+        public var enabled: Bool?
+
+        private enum CodingKeys: String, CodingKey {
+            case enabled
+        }
+
+        public init(
+            enabled: Bool? = nil
+        ) {
+            self.enabled = enabled
+        }
+    }
+}
+
+// invoice_payment_method_options_acss_debit_mandate_options
+extension Stripe.Shared {
+    public struct MandateOptions: Codable, Hashable, Sendable {
+        /// Transaction type of the mandate.
+        public var transactionType: TransactionType?
+
+        private enum CodingKeys: String, CodingKey {
+            case transactionType
+        }
+
+        public init(
+            transactionType: TransactionType? = nil
+        ) {
+            self.transactionType = transactionType
+        }
+
+        /// Transaction type of the mandate.
+        public enum TransactionType: String, Codable, Hashable, Sendable {
+            case business
+            case personal
+        }
+    }
+}
+
+// invoice_payment_method_options_payto
+extension Stripe.Shared {
+    public struct Payto: Codable, Hashable, Sendable {
+        public var mandateOptions: Stripe.Shared.InvoiceMandateOptionsPayto?
+
+        private enum CodingKeys: String, CodingKey {
+            case mandateOptions
+        }
+
+        public init(
+            mandateOptions: Stripe.Shared.InvoiceMandateOptionsPayto? = nil
+        ) {
+            self.mandateOptions = mandateOptions
+        }
+    }
+}
+
+// invoice_payment_method_options_sepa_debit
+extension Stripe.Shared {
+    public struct SepaDebit: Codable, Hashable, Sendable {
+        public init() {}
+    }
+}
+
 // discount_source
 extension Stripe.Shared {
     public struct Source: Codable, Hashable, Sendable {
@@ -134,6 +542,52 @@ extension Stripe.Shared {
         ) {
             self._coupon = Expandable(id: coupon)
             self.`type` = `type`
+        }
+    }
+}
+
+// invoice_payment_method_options_upi
+extension Stripe.Shared {
+    public struct Upi: Codable, Hashable, Sendable {
+        public var mandateOptions: Stripe.Shared.InvoicePaymentMethodOptionsMandateOptionsUpi?
+
+        private enum CodingKeys: String, CodingKey {
+            case mandateOptions
+        }
+
+        public init(
+            mandateOptions: Stripe.Shared.InvoicePaymentMethodOptionsMandateOptionsUpi? = nil
+        ) {
+            self.mandateOptions = mandateOptions
+        }
+    }
+}
+
+// invoice_payment_method_options_us_bank_account
+extension Stripe.Shared {
+    public struct UsBankAccount: Codable, Hashable, Sendable {
+        public var financialConnections: Stripe.Shared.FinancialConnections?
+        /// Bank account verification method.
+        public var verificationMethod: VerificationMethod?
+
+        private enum CodingKeys: String, CodingKey {
+            case financialConnections
+            case verificationMethod
+        }
+
+        public init(
+            financialConnections: Stripe.Shared.FinancialConnections? = nil,
+            verificationMethod: VerificationMethod? = nil
+        ) {
+            self.financialConnections = financialConnections
+            self.verificationMethod = verificationMethod
+        }
+
+        /// Bank account verification method.
+        public enum VerificationMethod: String, Codable, Hashable, Sendable {
+            case automatic
+            case instant
+            case microdeposits
         }
     }
 }
