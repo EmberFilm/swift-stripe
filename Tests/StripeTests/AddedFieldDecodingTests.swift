@@ -122,4 +122,94 @@ struct AddedFieldDecodingTests {
         """#)
         #expect(event.context == "acct_1")
     }
+
+    @Test("checkout session gains its 2026 fields")
+    func checkoutSession() throws {
+        let session = try Self.decode(Stripe.Checkout.Session.self, #"""
+        {"id":"cs_1","object":"checkout.session","created":1,
+         "adaptive_pricing":{"enabled":true},
+         "branding_settings":{"background_color":"#ffffff","border_style":"rounded",
+                              "button_color":"#0d6b5e","display_name":"EmberFilm","font_family":"Inter",
+                              "icon":{"type":"file","file":"file_1"},
+                              "logo":{"type":"url","url":"https://x/logo.png"}},
+         "client_secret":"cs_1_secret_abc",
+         "collected_information":{"business_name":"Ada Ltd","individual_name":"Ada",
+                                  "shipping_details":{"name":"Ada","address":{"city":"London","country":"GB"}}},
+         "customer_account":"acct_1",
+         "discounts":[{"coupon":"co_1","promotion_code":"promo_1"}],
+         "excluded_payment_method_types":["link"],
+         "integration_identifier":"emberfilm-web",
+         "managed_payments":{"enabled":false},
+         "name_collection":{"business":{"enabled":true,"optional":false},
+                            "individual":{"enabled":true,"optional":true}},
+         "optional_items":[{"price":"price_2","quantity":1,
+                            "adjustable_quantity":{"enabled":true,"maximum":5,"minimum":1}}],
+         "origin_context":"mobile_app",
+         "payment_method_configuration_details":{"id":"pmc_1","parent":"pmc_0"},
+         "permissions":{"update_shipping_details":"server_only"},
+         "presentment_details":{"presentment_amount":999,"presentment_currency":"eur"},
+         "redirect_on_completion":"if_required",
+         "return_url":"https://x/return",
+         "saved_payment_method_options":{"allow_redisplay_filters":["always"],
+                                         "payment_method_remove":"enabled","payment_method_save":"disabled"},
+         "ui_mode":"embedded_page",
+         "wallet_options":{"link":{"display":"never"}}}
+        """#)
+
+        #expect(session.adaptivePricing?.enabled == true)
+        #expect(session.brandingSettings?.borderStyle == .rounded)
+        #expect(session.brandingSettings?.displayName == "EmberFilm")
+        #expect(session.brandingSettings?.icon?.type == .file)
+        #expect(session.brandingSettings?.icon?.file == "file_1")
+        #expect(session.brandingSettings?.logo?.type == .url)
+        #expect(session.brandingSettings?.logo?.url == "https://x/logo.png")
+        #expect(session.clientSecret == "cs_1_secret_abc")
+        #expect(session.collectedInformation?.businessName == "Ada Ltd")
+        #expect(session.collectedInformation?.individualName == "Ada")
+        #expect(session.collectedInformation?.shippingDetails?.name == "Ada")
+        #expect(session.collectedInformation?.shippingDetails?.address?.country == "GB")
+        #expect(session.customerAccount == "acct_1")
+        #expect(session.discounts?.first?.coupon == "co_1")
+        #expect(session.discounts?.first?.promotionCode == "promo_1")
+        #expect(session.excludedPaymentMethodTypes == ["link"])
+        #expect(session.integrationIdentifier == "emberfilm-web")
+        #expect(session.managedPayments?.enabled == false)
+        #expect(session.nameCollection?.business?.optional == false)
+        #expect(session.nameCollection?.individual?.optional == true)
+        #expect(session.optionalItems?.first?.price == "price_2")
+        #expect(session.optionalItems?.first?.adjustableQuantity?.maximum == 5)
+        #expect(session.originContext == .mobileApp)
+        #expect(session.paymentMethodConfigurationDetails?.parent == "pmc_0")
+        #expect(session.permissions?.updateShippingDetails == .serverOnly)
+        #expect(session.presentmentDetails?.presentmentAmount == 999)
+        #expect(session.redirectOnCompletion == .ifRequired)
+        #expect(session.returnUrl == "https://x/return")
+        #expect(session.savedPaymentMethodOptions?.allowRedisplayFilters == ["always"])
+        #expect(session.savedPaymentMethodOptions?.paymentMethodRemove == .enabled)
+        #expect(session.savedPaymentMethodOptions?.paymentMethodSave == .disabled)
+        #expect(session.uiMode == .embeddedPage)
+        #expect(session.walletOptions?.link?.display == .never)
+    }
+
+    @Test("an expanded discount decodes as the object, not just its id")
+    func expandedDiscount() throws {
+        let session = try Self.decode(Stripe.Checkout.Session.self, #"""
+        {"id":"cs_1","object":"checkout.session","created":1,
+         "discounts":[{"coupon":{"id":"co_1","object":"coupon","created":1,"percent_off":25,"valid":true}}]}
+        """#)
+        let discount = try #require(session.discounts?.first)
+        #expect(discount.$coupon?.id == "co_1")
+        #expect(discount.$coupon?.percentOff == 25)
+    }
+
+    @Test("the create request sends the UI mode Stripe accepts")
+    func requestUIMode() throws {
+        // `ui_mode` was typed as `Session.Mode` (payment/setup/subscription), which Stripe rejects.
+        let request = Stripe.Checkout.Sessions.Create.Request(
+            successUrl: "https://x/ok", mode: .payment, uiMode: .hostedPage
+        )
+        let pairs = Dictionary(uniqueKeysWithValues: try StripeFormEncoder().pairs(of: request))
+        #expect(pairs["ui_mode"] == "hosted_page")
+    }
+
 }

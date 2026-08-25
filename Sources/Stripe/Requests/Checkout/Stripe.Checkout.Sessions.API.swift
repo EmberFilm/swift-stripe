@@ -197,7 +197,7 @@ extension Stripe.Checkout.Sessions.Create {
         public let shippingRates: [String]?
         public let submitType: Stripe.Checkout.Session.Submit.`Type`?
         public let taxIdCollection: Stripe.Checkout.Session.TaxId.Collection?
-        public let uiMode: Stripe.Checkout.Session.Mode?
+        public let uiMode: Stripe.Checkout.Session.UIMode?
         /// Applies only in `subscription` mode. Metadata set here lands on the Subscription
         /// object rather than the Session, which is what later subscription webhooks carry.
         public let subscriptionData: Stripe.Checkout.Sessions.Create.SubscriptionData?
@@ -258,7 +258,7 @@ extension Stripe.Checkout.Sessions.Create {
             shippingRates: [String]? = nil,
             submitType: Stripe.Checkout.Session.Submit.`Type`? = nil,
             taxIdCollection: Stripe.Checkout.Session.TaxId.Collection? = nil,
-            uiMode: Stripe.Checkout.Session.Mode? = nil,
+            uiMode: Stripe.Checkout.Session.UIMode? = nil,
             subscriptionData: Stripe.Checkout.Sessions.Create.SubscriptionData? = nil
         ) {
             self.automaticTax = automaticTax
@@ -289,13 +289,6 @@ extension Stripe.Checkout.Sessions.Create {
             self.uiMode = uiMode
             self.subscriptionData = subscriptionData
         }
-    }
-}
-
-extension Stripe.Checkout.Sessions.Create.Request {
-    public enum UIMode: String, Codable, Hashable, Sendable {
-        case embedded
-        case hosted
     }
 }
 

@@ -117,6 +117,46 @@ extension Stripe.Checkout {
         public var taxIdCollection: Stripe.Checkout.Session.TaxId.Collection?
         /// Tax and discount details for the computed total amount.
         public var totalDetails: Stripe.Checkout.Session.Total.Details?
+        /// Whether prices are localised to the customer's currency.
+        public var adaptivePricing: AdaptivePricing?
+        /// Branding applied to the hosted page.
+        public var brandingSettings: BrandingSettings?
+        /// Client secret, present for `embedded_page` and `elements` UI modes.
+        public var clientSecret: String?
+        /// Information the customer entered during the session.
+        public var collectedInformation: CollectedInformation?
+        /// The ID of the account for this session.
+        public var customerAccount: String?
+        /// Discounts applied to the session.
+        public var discounts: [Discount]?
+        /// Payment method types excluded from this session.
+        public var excludedPaymentMethodTypes: [String]?
+        /// Identifies the integration that created the session; not unique per session.
+        public var integrationIdentifier: String?
+        /// Managed Payments settings for the session.
+        public var managedPayments: ManagedPayments?
+        /// Which names the session collects, and whether they are optional.
+        public var nameCollection: NameCollection?
+        /// Items the customer can add at checkout.
+        public var optionalItems: [OptionalItem]?
+        /// Where the customer came from, which informs the optimisations applied.
+        public var originContext: OriginContext?
+        /// The payment method configuration that produced the available payment methods.
+        public var paymentMethodConfigurationDetails: PaymentMethodConfigurationDetails?
+        /// Which client-side actions are permitted on the session.
+        public var permissions: Permissions?
+        /// The amount and currency the session was presented in.
+        public var presentmentDetails: Stripe.PresentmentDetails?
+        /// Whether an `embedded_page` session redirects to `returnUrl` on completion.
+        public var redirectOnCompletion: RedirectOnCompletion?
+        /// Where an `embedded_page` or `elements` session returns the customer to.
+        public var returnUrl: String?
+        /// How saved payment methods are offered and retained.
+        public var savedPaymentMethodOptions: SavedPaymentMethodOptions?
+        /// The UI mode of the session.
+        public var uiMode: UIMode?
+        /// Wallet-specific configuration.
+        public var walletOptions: WalletOptions?
 
         public init(
             id: Stripe.Checkout.Session.ID,
@@ -168,7 +208,27 @@ extension Stripe.Checkout {
             submitType: Stripe.Checkout.Session.Submit.`Type`? = nil,
             subscription: Stripe.Billing.Subscription.ID? = nil,
             taxIdCollection: Stripe.Checkout.Session.TaxId.Collection? = nil,
-            totalDetails: Stripe.Checkout.Session.Total.Details? = nil
+            totalDetails: Stripe.Checkout.Session.Total.Details? = nil,
+            adaptivePricing: AdaptivePricing? = nil,
+            brandingSettings: BrandingSettings? = nil,
+            clientSecret: String? = nil,
+            collectedInformation: CollectedInformation? = nil,
+            customerAccount: String? = nil,
+            discounts: [Discount]? = nil,
+            excludedPaymentMethodTypes: [String]? = nil,
+            integrationIdentifier: String? = nil,
+            managedPayments: ManagedPayments? = nil,
+            nameCollection: NameCollection? = nil,
+            optionalItems: [OptionalItem]? = nil,
+            originContext: OriginContext? = nil,
+            paymentMethodConfigurationDetails: PaymentMethodConfigurationDetails? = nil,
+            permissions: Permissions? = nil,
+            presentmentDetails: Stripe.PresentmentDetails? = nil,
+            redirectOnCompletion: RedirectOnCompletion? = nil,
+            returnUrl: String? = nil,
+            savedPaymentMethodOptions: SavedPaymentMethodOptions? = nil,
+            uiMode: UIMode? = nil,
+            walletOptions: WalletOptions? = nil
         ) {
             self.id = id
             self.cancelUrl = cancelUrl
@@ -220,6 +280,26 @@ extension Stripe.Checkout {
             self._subscription = Expandable(id: subscription)
             self.taxIdCollection = taxIdCollection
             self.totalDetails = totalDetails
+            self.adaptivePricing = adaptivePricing
+            self.brandingSettings = brandingSettings
+            self.clientSecret = clientSecret
+            self.collectedInformation = collectedInformation
+            self.customerAccount = customerAccount
+            self.discounts = discounts
+            self.excludedPaymentMethodTypes = excludedPaymentMethodTypes
+            self.integrationIdentifier = integrationIdentifier
+            self.managedPayments = managedPayments
+            self.nameCollection = nameCollection
+            self.optionalItems = optionalItems
+            self.originContext = originContext
+            self.paymentMethodConfigurationDetails = paymentMethodConfigurationDetails
+            self.permissions = permissions
+            self.presentmentDetails = presentmentDetails
+            self.redirectOnCompletion = redirectOnCompletion
+            self.returnUrl = returnUrl
+            self.savedPaymentMethodOptions = savedPaymentMethodOptions
+            self.uiMode = uiMode
+            self.walletOptions = walletOptions
         }
     }
 }
@@ -1165,6 +1245,296 @@ extension Stripe.Checkout.Session {
             self.hasMore = hasMore
             self.url = url
             self.data = data
+        }
+    }
+}
+
+// MARK: - Fields added through API version 2026-07-29.dahlia
+extension Stripe.Checkout.Session {
+    public enum UIMode: String, Codable, Sendable {
+        case elements
+        case embeddedPage = "embedded_page"
+        case form
+        case hostedPage = "hosted_page"
+    }
+
+    public enum OriginContext: String, Codable, Sendable {
+        case mobileApp = "mobile_app"
+        case web
+    }
+
+    public enum RedirectOnCompletion: String, Codable, Sendable {
+        case always
+        case ifRequired = "if_required"
+        case never
+    }
+
+    /// Whether prices are localised to the customer's currency.
+    public struct AdaptivePricing: Codable, Hashable, Sendable {
+        public var enabled: Bool?
+
+        public init(enabled: Bool? = nil) {
+            self.enabled = enabled
+        }
+    }
+
+    /// Managed Payments settings for a session.
+    public struct ManagedPayments: Codable, Hashable, Sendable {
+        public var enabled: Bool?
+
+        public init(enabled: Bool? = nil) {
+            self.enabled = enabled
+        }
+    }
+
+    /// Branding applied to the hosted page.
+    public struct BrandingSettings: Codable, Hashable, Sendable {
+        public var backgroundColor: String?
+        public var borderStyle: BorderStyle?
+        public var buttonColor: String?
+        public var displayName: String?
+        public var fontFamily: String?
+        public var icon: Asset?
+        public var logo: Asset?
+
+        private enum CodingKeys: String, CodingKey {
+            case backgroundColor
+            case borderStyle
+            case buttonColor
+            case displayName
+            case fontFamily
+            case icon
+            case logo
+        }
+
+        public init(
+            backgroundColor: String? = nil,
+            borderStyle: BorderStyle? = nil,
+            buttonColor: String? = nil,
+            displayName: String? = nil,
+            fontFamily: String? = nil,
+            icon: Asset? = nil,
+            logo: Asset? = nil
+        ) {
+            self.backgroundColor = backgroundColor
+            self.borderStyle = borderStyle
+            self.buttonColor = buttonColor
+            self.displayName = displayName
+            self.fontFamily = fontFamily
+            self.icon = icon
+            self.logo = logo
+        }
+
+        public enum BorderStyle: String, Codable, Sendable {
+            case pill
+            case rectangular
+            case rounded
+        }
+
+        /// An icon or logo, given either as an uploaded File or as a URL.
+        public struct Asset: Codable, Hashable, Sendable {
+            public var file: Stripe.Files.File.ID?
+            public var type: `Type`?
+            public var url: String?
+
+            public init(file: Stripe.Files.File.ID? = nil, type: `Type`? = nil, url: String? = nil) {
+                self.file = file
+                self.type = type
+                self.url = url
+            }
+
+            public enum `Type`: String, Codable, Sendable {
+                case file
+                case url
+            }
+        }
+    }
+
+    /// Information the customer entered during the session.
+    public struct CollectedInformation: Codable, Hashable, Sendable {
+        public var businessName: String?
+        public var individualName: String?
+        public var shippingDetails: AddressDetails?
+
+        private enum CodingKeys: String, CodingKey {
+            case businessName
+            case individualName
+            case shippingDetails
+        }
+
+        public init(
+            businessName: String? = nil,
+            individualName: String? = nil,
+            shippingDetails: AddressDetails? = nil
+        ) {
+            self.businessName = businessName
+            self.individualName = individualName
+            self.shippingDetails = shippingDetails
+        }
+
+        public struct AddressDetails: Codable, Hashable, Sendable {
+            public var address: Address?
+            public var name: String?
+
+            public init(address: Address? = nil, name: String? = nil) {
+                self.address = address
+                self.name = name
+            }
+        }
+    }
+
+    /// A discount applied to a session, as a coupon or a promotion code.
+    public struct Discount: Codable, Hashable, Sendable {
+        @ExpandableOf<Stripe.Products.Coupon> public var coupon: Stripe.Products.Coupon.ID?
+        @ExpandableOf<Promotion.Code> public var promotionCode: Promotion.Code.ID?
+
+        private enum CodingKeys: String, CodingKey {
+            case coupon
+            case promotionCode
+        }
+
+        public init(
+            coupon: Stripe.Products.Coupon.ID? = nil,
+            promotionCode: Promotion.Code.ID? = nil
+        ) {
+            self._coupon = Expandable(id: coupon)
+            self._promotionCode = Expandable(id: promotionCode)
+        }
+    }
+
+    /// Which names the session collects, and whether each is optional.
+    public struct NameCollection: Codable, Hashable, Sendable {
+        public var business: Setting?
+        public var individual: Setting?
+
+        public init(business: Setting? = nil, individual: Setting? = nil) {
+            self.business = business
+            self.individual = individual
+        }
+
+        public struct Setting: Codable, Hashable, Sendable {
+            public var enabled: Bool?
+            public var optional: Bool?
+
+            public init(enabled: Bool? = nil, optional: Bool? = nil) {
+                self.enabled = enabled
+                self.optional = optional
+            }
+        }
+    }
+
+    /// An item the customer can add at checkout.
+    public struct OptionalItem: Codable, Hashable, Sendable {
+        public var adjustableQuantity: AdjustableQuantity?
+        public var price: Stripe.Products.Price.ID?
+        public var quantity: Int?
+
+        private enum CodingKeys: String, CodingKey {
+            case adjustableQuantity
+            case price
+            case quantity
+        }
+
+        public init(
+            adjustableQuantity: AdjustableQuantity? = nil,
+            price: Stripe.Products.Price.ID? = nil,
+            quantity: Int? = nil
+        ) {
+            self.adjustableQuantity = adjustableQuantity
+            self.price = price
+            self.quantity = quantity
+        }
+
+        public struct AdjustableQuantity: Codable, Hashable, Sendable {
+            public var enabled: Bool?
+            public var maximum: Int?
+            public var minimum: Int?
+
+            public init(enabled: Bool? = nil, maximum: Int? = nil, minimum: Int? = nil) {
+                self.enabled = enabled
+                self.maximum = maximum
+                self.minimum = minimum
+            }
+        }
+    }
+
+    /// The payment method configuration that produced the available payment methods.
+    public struct PaymentMethodConfigurationDetails: Codable, Hashable, Sendable {
+        public var id: String?
+        /// The parent configuration this one inherits from, for connected accounts.
+        public var parent: String?
+
+        public init(id: String? = nil, parent: String? = nil) {
+            self.id = id
+            self.parent = parent
+        }
+    }
+
+    /// Which client-side actions are permitted on the session.
+    public struct Permissions: Codable, Hashable, Sendable {
+        public var updateShippingDetails: Permission?
+
+        private enum CodingKeys: String, CodingKey {
+            case updateShippingDetails
+        }
+
+        public init(updateShippingDetails: Permission? = nil) {
+            self.updateShippingDetails = updateShippingDetails
+        }
+
+        public enum Permission: String, Codable, Sendable {
+            case clientOnly = "client_only"
+            case serverOnly = "server_only"
+        }
+    }
+
+    /// How saved payment methods are offered and retained.
+    public struct SavedPaymentMethodOptions: Codable, Hashable, Sendable {
+        public var allowRedisplayFilters: [String]?
+        public var paymentMethodRemove: Toggle?
+        public var paymentMethodSave: Toggle?
+
+        private enum CodingKeys: String, CodingKey {
+            case allowRedisplayFilters
+            case paymentMethodRemove
+            case paymentMethodSave
+        }
+
+        public init(
+            allowRedisplayFilters: [String]? = nil,
+            paymentMethodRemove: Toggle? = nil,
+            paymentMethodSave: Toggle? = nil
+        ) {
+            self.allowRedisplayFilters = allowRedisplayFilters
+            self.paymentMethodRemove = paymentMethodRemove
+            self.paymentMethodSave = paymentMethodSave
+        }
+
+        public enum Toggle: String, Codable, Sendable {
+            case disabled
+            case enabled
+        }
+    }
+
+    /// Wallet-specific configuration.
+    public struct WalletOptions: Codable, Hashable, Sendable {
+        public var link: Link?
+
+        public init(link: Link? = nil) {
+            self.link = link
+        }
+
+        public struct Link: Codable, Hashable, Sendable {
+            public var display: Display?
+
+            public init(display: Display? = nil) {
+                self.display = display
+            }
+
+            public enum Display: String, Codable, Sendable {
+                case auto
+                case never
+            }
         }
     }
 }

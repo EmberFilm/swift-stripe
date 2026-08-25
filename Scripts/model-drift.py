@@ -74,6 +74,10 @@ VERSION_GATED: dict[str, dict[str, str]] = {
     "payment_intent": {
         "invoice": "removed in 2025-03-31.basil",
     },
+    "checkout.session": {
+        "shipping_details": "moved to collected_information.shipping_details in 2025-03-31.basil",
+        "shipping_rate": "replaced by shipping_cost.shipping_rate in 2025-03-31.basil",
+    },
 }
 
 M = "Sources/Stripe/Models/"
