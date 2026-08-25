@@ -1,0 +1,66 @@
+{
+ "active": true,
+ "billing_scheme": "per_unit",
+ "created": 1700000000,
+ "currency": "usd",
+ "currency_options": {
+  "usd": {
+   "custom_unit_amount": {
+    "maximum": 1,
+    "minimum": 1,
+    "preset": 1
+   },
+   "tax_behavior": "exclusive",
+   "tiers": [
+    {
+     "flat_amount": 1,
+     "flat_amount_decimal": "flat_amount",
+     "unit_amount": 1,
+     "unit_amount_decimal": "unit_amount",
+     "up_to": 1
+    }
+   ],
+   "unit_amount": 1,
+   "unit_amount_decimal": "unit_amount_decimal_1"
+  }
+ },
+ "custom_unit_amount": {
+  "maximum": 1,
+  "minimum": 1,
+  "preset": 1
+ },
+ "id": "price_1",
+ "livemode": true,
+ "lookup_key": "lookup_key_1",
+ "metadata": {
+  "key": "metadata_1"
+ },
+ "nickname": "nickname_1",
+ "object": "price",
+ "product": "product_1",
+ "recurring": {
+  "interval": "day",
+  "interval_count": 1,
+  "meter": "meter_1",
+  "trial_period_days": 1,
+  "usage_type": "licensed"
+ },
+ "tax_behavior": "exclusive",
+ "tiers": [
+  {
+   "flat_amount": 1,
+   "flat_amount_decimal": "flat_amount",
+   "unit_amount": 1,
+   "unit_amount_decimal": "unit_amount",
+   "up_to": 1
+  }
+ ],
+ "tiers_mode": "graduated",
+ "transform_quantity": {
+  "divide_by": 1,
+  "round": "down"
+ },
+ "type": "one_time",
+ "unit_amount": 1,
+ "unit_amount_decimal": "unit_amount_decimal_1"
+}

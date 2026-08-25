@@ -1,0 +1,23 @@
+{
+ "account": "account_1",
+ "api_version": "data",
+ "context": "context_1",
+ "created": 1700000000,
+ "data": {
+  "object": {
+   "key": "value"
+  },
+  "previous_attributes": {
+   "key": "value"
+  }
+ },
+ "id": "event_1",
+ "livemode": true,
+ "object": "event",
+ "pending_webhooks": 1,
+ "request": {
+  "id": "id_1",
+  "idempotency_key": "idempotency_key_1"
+ },
+ "type": "account.application.authorized"
+}

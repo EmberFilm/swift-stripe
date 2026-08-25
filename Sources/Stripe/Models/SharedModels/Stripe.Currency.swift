@@ -147,3 +147,8 @@ extension Stripe {
         // TODO: - finish adding stripe currecies
     }
 }
+
+// A `[Currency: T]` dictionary must encode as a JSON object keyed by the code. Without this,
+// Swift's synthesised Codable treats a non-String/Int key as opaque and emits an alternating
+// key/value array, so `Price.currencyOptions` could never decode what Stripe sends.
+extension Stripe.Currency: CodingKeyRepresentable {}

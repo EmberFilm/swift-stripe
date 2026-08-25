@@ -1,0 +1,753 @@
+{
+ "adaptive_pricing": {
+  "enabled": true
+ },
+ "after_expiration": {
+  "recovery": {
+   "allow_promotion_codes": true,
+   "enabled": true,
+   "expires_at": 1700000000,
+   "url": "url_1"
+  }
+ },
+ "allow_promotion_codes": true,
+ "amount_subtotal": 1,
+ "amount_total": 1,
+ "automatic_tax": {
+  "enabled": true,
+  "liability": {
+   "account": "account_1",
+   "type": "account"
+  },
+  "provider": "provider_1",
+  "status": "complete"
+ },
+ "billing_address_collection": "auto",
+ "branding_settings": {
+  "background_color": "background_color_1",
+  "border_style": "pill",
+  "button_color": "button_color_1",
+  "display_name": "display_name_1",
+  "font_family": "font_family_1",
+  "icon": {
+   "file": "business_icon",
+   "type": "file",
+   "url": "type"
+  },
+  "logo": {
+   "file": "business_logo",
+   "type": "file",
+   "url": "type"
+  }
+ },
+ "cancel_url": "cancel_url_1",
+ "client_reference_id": "client_reference_id_1",
+ "client_secret": "client_secret_1",
+ "collected_information": {
+  "business_name": "business_name_1",
+  "individual_name": "individual_name_1",
+  "shipping_details": {
+   "address": {
+    "city": "city_1",
+    "country": "country_1",
+    "line1": "line1_1",
+    "line2": "line2_1",
+    "postal_code": "postal_code_1",
+    "state": "state_1"
+   },
+   "name": "name_1"
+  }
+ },
+ "consent": {
+  "promotions": "opt_in",
+  "terms_of_service": "accepted"
+ },
+ "consent_collection": {
+  "payment_method_reuse_agreement": {
+   "position": "auto"
+  },
+  "promotions": "auto",
+  "terms_of_service": "none"
+ },
+ "created": 1700000000,
+ "currency": "usd",
+ "currency_conversion": {
+  "amount_subtotal": 1,
+  "amount_total": 1,
+  "fx_rate": "fx_rate_1",
+  "source_currency": "usd"
+ },
+ "custom_fields": [
+  {
+   "dropdown": {
+    "default_value": "default_value_1",
+    "options": [
+     {
+      "label": "label_1",
+      "value": "value_1"
+     }
+    ],
+    "value": "value_1"
+   },
+   "key": "key_1",
+   "label": {
+    "custom": "custom_1",
+    "type": "custom"
+   },
+   "numeric": {
+    "default_value": "default_value_1",
+    "maximum_length": 1,
+    "minimum_length": 1,
+    "value": "value_1"
+   },
+   "optional": true,
+   "text": {
+    "default_value": "default_value_1",
+    "maximum_length": 1,
+    "minimum_length": 1,
+    "value": "value_1"
+   },
+   "type": "dropdown"
+  }
+ ],
+ "custom_text": {
+  "after_submit": {
+   "message": "message_1"
+  },
+  "shipping_address": {
+   "message": "message_1"
+  },
+  "submit": {
+   "message": "message_1"
+  },
+  "terms_of_service_acceptance": {
+   "message": "message_1"
+  }
+ },
+ "customer": "customer_1",
+ "customer_account": "customer_account_1",
+ "customer_creation": "always",
+ "customer_details": {
+  "address": {
+   "city": "city_1",
+   "country": "country_1",
+   "line1": "line1_1",
+   "line2": "line2_1",
+   "postal_code": "postal_code_1",
+   "state": "state_1"
+  },
+  "business_name": "business_name_1",
+  "email": "email_1",
+  "individual_name": "individual_name_1",
+  "name": "name_1",
+  "phone": "phone_1",
+  "tax_exempt": "exempt",
+  "tax_ids": [
+   {
+    "type": "ad_nrt",
+    "value": "value_1"
+   }
+  ]
+ },
+ "customer_email": "customer",
+ "discounts": [
+  {
+   "coupon": "coupon_1",
+   "promotion_code": "promotion_code_1"
+  }
+ ],
+ "excluded_payment_method_types": [
+  "excluded_payment_method_types_1"
+ ],
+ "expires_at": 1700000000,
+ "id": "checkout.session_1",
+ "integration_identifier": "integration_identifier_1",
+ "invoice": "invoice_1",
+ "invoice_creation": {
+  "enabled": true,
+  "invoice_data": {
+   "account_tax_ids": [
+    "tax_id_1"
+   ],
+   "custom_fields": [
+    {
+     "name": "name_1",
+     "value": "value_1"
+    }
+   ],
+   "description": "description_1",
+   "footer": "footer_1",
+   "issuer": {
+    "account": "account_1",
+    "type": "account"
+   },
+   "metadata": {
+    "key": "metadata_1"
+   },
+   "rendering_options": {
+    "amount_tax_display": "amount_tax_display_1",
+    "template": "template_1"
+   }
+  }
+ },
+ "line_items": {
+  "data": [
+   {
+    "adjustable_quantity": {
+     "enabled": true,
+     "maximum": 1,
+     "minimum": 1
+    },
+    "amount_discount": 1,
+    "amount_subtotal": 1,
+    "amount_tax": 1,
+    "amount_total": 1,
+    "currency": "usd",
+    "description": "description_1",
+    "discounts": [
+     {
+      "amount": 1,
+      "discount": {
+       "checkout_session": "checkout_session_1",
+       "customer": "customer_1",
+       "customer_account": "customer_account_1",
+       "end": 1700000000,
+       "id": "id_1",
+       "invoice": "invoice_1",
+       "invoice_item": "id",
+       "object": "discount",
+       "promotion_code": "promotion_code_1",
+       "start": 1700000000,
+       "subscription": "subscription_1",
+       "subscription_item": "subscription_item_1"
+      }
+     }
+    ],
+    "id": "id_1",
+    "metadata": {
+     "key": "metadata_1"
+    },
+    "object": "item",
+    "price": {
+     "active": true,
+     "billing_scheme": "per_unit",
+     "created": 1700000000,
+     "currency": "usd",
+     "currency_options": {
+      "usd": {
+       "tax_behavior": "exclusive",
+       "tiers": [],
+       "unit_amount": 1,
+       "unit_amount_decimal": "unit_amount_decimal_1"
+      }
+     },
+     "custom_unit_amount": {
+      "maximum": 1,
+      "minimum": 1,
+      "preset": 1
+     },
+     "id": "id_1",
+     "livemode": true,
+     "lookup_key": "lookup_key_1",
+     "metadata": {
+      "key": "metadata_1"
+     },
+     "nickname": "nickname_1",
+     "object": "price",
+     "product": "product_1",
+     "recurring": {
+      "interval": "day",
+      "interval_count": 1,
+      "meter": "meter_1",
+      "trial_period_days": 1,
+      "usage_type": "licensed"
+     },
+     "tax_behavior": "exclusive",
+     "tiers": [
+      {
+       "flat_amount": 1,
+       "flat_amount_decimal": "flat_amount",
+       "unit_amount": 1,
+       "unit_amount_decimal": "unit_amount",
+       "up_to": 1
+      }
+     ],
+     "tiers_mode": "graduated",
+     "transform_quantity": {
+      "divide_by": 1,
+      "round": "down"
+     },
+     "type": "one_time",
+     "unit_amount": 1,
+     "unit_amount_decimal": "unit_amount_decimal_1"
+    },
+    "quantity": 1,
+    "taxes": [
+     {
+      "amount": 1,
+      "rate": {
+       "active": true,
+       "country": "country_1",
+       "created": 1700000000,
+       "description": "description_1",
+       "display_name": "display_name_1",
+       "effective_percentage": 1.5,
+       "id": "id_1",
+       "inclusive": true,
+       "jurisdiction": "jurisdiction_1",
+       "jurisdiction_level": "city",
+       "livemode": true,
+       "metadata": {
+        "key": "metadata_1"
+       },
+       "object": "tax_rate",
+       "percentage": 1.5,
+       "rate_type": "flat_amount",
+       "state": "state_1",
+       "tax_type": "amusement_tax"
+      },
+      "taxability_reason": "customer_exempt",
+      "taxable_amount": 1
+     }
+    ]
+   }
+  ],
+  "has_more": true,
+  "object": "list",
+  "url": "url_1"
+ },
+ "livemode": true,
+ "locale": "auto",
+ "managed_payments": {
+  "enabled": true
+ },
+ "metadata": {
+  "key": "metadata_1"
+ },
+ "mode": "payment",
+ "name_collection": {
+  "business": {
+   "enabled": true,
+   "optional": true
+  },
+  "individual": {
+   "enabled": true,
+   "optional": true
+  }
+ },
+ "object": "checkout.session",
+ "optional_items": [
+  {
+   "adjustable_quantity": {
+    "enabled": true,
+    "maximum": 1,
+    "minimum": 1
+   },
+   "price": "price_1",
+   "quantity": 1
+  }
+ ],
+ "origin_context": "mobile_app",
+ "payment_intent": "payment_intent_1",
+ "payment_link": "payment_link_1",
+ "payment_method_collection": "always",
+ "payment_method_configuration_details": {
+  "id": "id_1",
+  "parent": "parent_1"
+ },
+ "payment_method_options": {
+  "acss_debit": {
+   "currency": "cad",
+   "mandate_options": {
+    "custom_mandate_url": "custom_mandate_url_1",
+    "default_for": [
+     "invoice"
+    ],
+    "interval_description": "interval_description_1",
+    "payment_schedule": "combined",
+    "transaction_type": "business"
+   },
+   "setup_future_usage": "none",
+   "target_date": "target_date_1",
+   "verification_method": "automatic"
+  },
+  "affirm": {
+   "capture_method": "manual",
+   "setup_future_usage": "none"
+  },
+  "afterpay_clearpay": {
+   "capture_method": "manual",
+   "setup_future_usage": "none"
+  },
+  "alipay": {
+   "setup_future_usage": "none"
+  },
+  "alma": {
+   "capture_method": "manual"
+  },
+  "amazon_pay": {
+   "capture_method": "manual",
+   "setup_future_usage": "none"
+  },
+  "au_becs_debit": {
+   "setup_future_usage": "none",
+   "target_date": "target_date_1"
+  },
+  "bacs_debit": {
+   "mandate_options": {
+    "reference_prefix": "reference_prefix_1"
+   },
+   "setup_future_usage": "none",
+   "target_date": "target_date_1"
+  },
+  "bancontact": {
+   "setup_future_usage": "none"
+  },
+  "billie": {
+   "capture_method": "manual"
+  },
+  "boleto": {
+   "expires_after_days": 1,
+   "setup_future_usage": "none"
+  },
+  "card": {
+   "capture_method": "manual",
+   "installments": {
+    "enabled": true
+   },
+   "request_extended_authorization": "if_available",
+   "request_incremental_authorization": "if_available",
+   "request_multicapture": "if_available",
+   "request_overcapture": "if_available",
+   "request_three_d_secure": "any",
+   "restrictions": {
+    "brands_blocked": [
+     "american_express"
+    ]
+   },
+   "setup_future_usage": "none",
+   "statement_descriptor_suffix_kana": "statement_descriptor_suffix_kana_1",
+   "statement_descriptor_suffix_kanji": "statement_descriptor_suffix_kanji_1"
+  },
+  "cashapp": {
+   "capture_method": "manual",
+   "setup_future_usage": "none"
+  },
+  "customer_balance": {
+   "bank_transfer": {
+    "eu_bank_transfer": {
+     "country": "BE"
+    },
+    "requested_address_types": [
+     "aba"
+    ],
+    "type": "eu_bank_transfer"
+   },
+   "funding_type": "bank_transfer",
+   "setup_future_usage": "none"
+  },
+  "eps": {
+   "setup_future_usage": "none"
+  },
+  "fpx": {
+   "setup_future_usage": "none"
+  },
+  "giropay": {
+   "setup_future_usage": "none"
+  },
+  "grabpay": {
+   "setup_future_usage": "none"
+  },
+  "ideal": {
+   "setup_future_usage": "none"
+  },
+  "kakao_pay": {
+   "capture_method": "manual",
+   "setup_future_usage": "none"
+  },
+  "klarna": {
+   "capture_method": "manual",
+   "setup_future_usage": "none"
+  },
+  "konbini": {
+   "expires_after_days": 1,
+   "setup_future_usage": "none"
+  },
+  "kr_card": {
+   "capture_method": "manual",
+   "setup_future_usage": "none"
+  },
+  "link": {
+   "capture_method": "manual",
+   "setup_future_usage": "none"
+  },
+  "mobilepay": {
+   "capture_method": "manual",
+   "setup_future_usage": "none"
+  },
+  "multibanco": {
+   "setup_future_usage": "none"
+  },
+  "naver_pay": {
+   "capture_method": "manual",
+   "setup_future_usage": "none"
+  },
+  "oxxo": {
+   "expires_after_days": 1,
+   "setup_future_usage": "none"
+  },
+  "p24": {
+   "setup_future_usage": "none"
+  },
+  "payco": {
+   "capture_method": "manual",
+   "setup_future_usage": "none"
+  },
+  "paynow": {
+   "setup_future_usage": "none"
+  },
+  "paypal": {
+   "capture_method": "manual",
+   "preferred_locale": "preferred_locale_1",
+   "reference": "reference_1",
+   "setup_future_usage": "none"
+  },
+  "payto": {
+   "mandate_options": {
+    "amount": 1,
+    "amount_type": "fixed",
+    "end_date": "end_date_1",
+    "payment_schedule": "adhoc",
+    "payments_per_period": 1,
+    "purpose": "dependant_support",
+    "start_date": "start_date_1"
+   },
+   "setup_future_usage": "none"
+  },
+  "pix": {
+   "amount_includes_iof": "always",
+   "expires_after_seconds": 1,
+   "mandate_options": {
+    "amount": 1,
+    "amount_includes_iof": "always",
+    "amount_type": "fixed",
+    "currency": "usd",
+    "end_date": "end_date_1",
+    "payment_schedule": "halfyearly",
+    "reference": "reference_1",
+    "start_date": "start_date_1"
+   },
+   "setup_future_usage": "none"
+  },
+  "revolut_pay": {
+   "capture_method": "manual",
+   "setup_future_usage": "none"
+  },
+  "samsung_pay": {
+   "capture_method": "manual",
+   "setup_future_usage": "none"
+  },
+  "satispay": {
+   "capture_method": "manual"
+  },
+  "scalapay": {
+   "capture_method": "manual"
+  },
+  "sepa_debit": {
+   "mandate_options": {
+    "reference_prefix": "reference_prefix_1"
+   },
+   "setup_future_usage": "none",
+   "target_date": "target_date_1"
+  },
+  "sofort": {
+   "setup_future_usage": "none"
+  },
+  "sunbit": {
+   "capture_method": "manual",
+   "setup_future_usage": "none"
+  },
+  "swish": {
+   "reference": "id"
+  },
+  "twint": {
+   "setup_future_usage": "none"
+  },
+  "upi": {
+   "mandate_options": {
+    "amount": 1,
+    "amount_type": "fixed",
+    "description": "description_1",
+    "end_date": 1700000000
+   },
+   "setup_future_usage": "none"
+  },
+  "us_bank_account": {
+   "financial_connections": {
+    "filters": {
+     "account_subcategories": [
+      "checking"
+     ]
+    },
+    "permissions": [
+     "balances"
+    ],
+    "prefetch": [
+     "balances"
+    ],
+    "return_url": "return_url_1"
+   },
+   "setup_future_usage": "none",
+   "target_date": "target_date_1",
+   "verification_method": "automatic"
+  },
+  "wechat_pay": {
+   "app_id": "app_id_1",
+   "client": "android",
+   "setup_future_usage": "none"
+  }
+ },
+ "payment_method_types": [
+  "payment_method_types_1"
+ ],
+ "payment_status": "no_payment_required",
+ "permissions": {
+  "update_shipping_details": "client_only"
+ },
+ "phone_number_collection": {
+  "enabled": true
+ },
+ "presentment_details": {
+  "presentment_amount": 1,
+  "presentment_currency": "usd"
+ },
+ "recovered_from": "recovered_from_1",
+ "redirect_on_completion": "always",
+ "return_url": "return_url_1",
+ "saved_payment_method_options": {
+  "allow_redisplay_filters": [
+   "always"
+  ],
+  "payment_method_remove": "disabled",
+  "payment_method_save": "disabled"
+ },
+ "setup_intent": "setup_intent_1",
+ "shipping_address_collection": {
+  "allowed_countries": [
+   "AC"
+  ]
+ },
+ "shipping_cost": {
+  "amount_subtotal": 1,
+  "amount_tax": 1,
+  "amount_total": 1,
+  "shipping_rate": "shipping_rate_1",
+  "taxes": [
+   {
+    "amount": 1,
+    "rate": {
+     "active": true,
+     "country": "country_1",
+     "created": 1700000000,
+     "description": "description_1",
+     "display_name": "display_name_1",
+     "effective_percentage": 1.5,
+     "flat_amount": {
+      "amount": 1,
+      "currency": "usd"
+     },
+     "id": "id_1",
+     "inclusive": true,
+     "jurisdiction": "jurisdiction_1",
+     "jurisdiction_level": "city",
+     "livemode": true,
+     "metadata": {
+      "key": "metadata_1"
+     },
+     "object": "tax_rate",
+     "percentage": 1.5,
+     "rate_type": "flat_amount",
+     "state": "state_1",
+     "tax_type": "amusement_tax"
+    },
+    "taxability_reason": "customer_exempt",
+    "taxable_amount": 1
+   }
+  ]
+ },
+ "shipping_options": [
+  {
+   "shipping_amount": 1,
+   "shipping_rate": "shipping_rate_1"
+  }
+ ],
+ "status": "complete",
+ "submit_type": "auto",
+ "subscription": "subscription_1",
+ "success_url": "success_url_1",
+ "tax_id_collection": {
+  "enabled": true,
+  "required": "if_supported"
+ },
+ "total_details": {
+  "amount_discount": 1,
+  "amount_shipping": 1,
+  "amount_tax": 1,
+  "breakdown": {
+   "discounts": [
+    {
+     "amount": 1,
+     "discount": {
+      "checkout_session": "checkout_session_1",
+      "customer": "customer_1",
+      "customer_account": "customer_account_1",
+      "end": 1700000000,
+      "id": "id_1",
+      "invoice": "invoice_1",
+      "invoice_item": "id",
+      "object": "discount",
+      "promotion_code": "promotion_code_1",
+      "start": 1700000000,
+      "subscription": "subscription_1",
+      "subscription_item": "subscription_item_1"
+     }
+    }
+   ],
+   "taxes": [
+    {
+     "amount": 1,
+     "rate": {
+      "active": true,
+      "country": "country_1",
+      "created": 1700000000,
+      "description": "description_1",
+      "display_name": "display_name_1",
+      "effective_percentage": 1.5,
+      "id": "id_1",
+      "inclusive": true,
+      "jurisdiction": "jurisdiction_1",
+      "jurisdiction_level": "city",
+      "livemode": true,
+      "metadata": {
+       "key": "metadata_1"
+      },
+      "object": "tax_rate",
+      "percentage": 1.5,
+      "rate_type": "flat_amount",
+      "state": "state_1",
+      "tax_type": "amusement_tax"
+     },
+     "taxability_reason": "customer_exempt",
+     "taxable_amount": 1
+    }
+   ]
+  }
+ },
+ "ui_mode": "elements",
+ "url": "url_1",
+ "wallet_options": {
+  "link": {
+   "display": "auto"
+  }
+ }
+}

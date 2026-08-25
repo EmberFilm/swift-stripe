@@ -1,0 +1,531 @@
+{
+ "application": "application_1",
+ "application_fee_percent": 1.5,
+ "automatic_tax": {
+  "disabled_reason": "requires_location_inputs",
+  "enabled": true,
+  "liability": {
+   "account": "account_1",
+   "type": "account"
+  }
+ },
+ "billing_cycle_anchor": 1700000000,
+ "billing_cycle_anchor_config": {
+  "day_of_month": 1,
+  "hour": 1,
+  "minute": 1,
+  "month": 1,
+  "second": 1
+ },
+ "billing_mode": {
+  "flexible": {
+   "proration_discounts": "included"
+  },
+  "type": "classic",
+  "updated_at": 1700000000
+ },
+ "billing_schedules": [
+  {
+   "applies_to": [
+    {
+     "price": "price_1",
+     "type": "price"
+    }
+   ],
+   "bill_until": {
+    "computed_timestamp": 1700000000,
+    "duration": {
+     "interval": "day",
+     "interval_count": 1
+    },
+    "timestamp": 1700000000,
+    "type": "duration"
+   },
+   "key": "key_1"
+  }
+ ],
+ "billing_thresholds": {
+  "amount_gte": 1,
+  "reset_billing_cycle_anchor": true
+ },
+ "cancel_at": 1700000000,
+ "cancel_at_period_end": true,
+ "canceled_at": 1700000000,
+ "cancellation_details": {
+  "comment": "comment_1",
+  "feedback": "customer_service",
+  "reason": "canceled_by_retention_policy"
+ },
+ "collection_method": "charge_automatically",
+ "created": 1700000000,
+ "currency": "usd",
+ "customer": "customer_1",
+ "customer_account": "customer_account_1",
+ "days_until_due": 1,
+ "default_payment_method": "payment_method_1",
+ "default_source": "payment_source_1",
+ "default_tax_rates": [
+  {
+   "active": true,
+   "country": "country_1",
+   "created": 1700000000,
+   "description": "description_1",
+   "display_name": "display_name_1",
+   "effective_percentage": 1.5,
+   "flat_amount": {
+    "amount": 1,
+    "currency": "usd"
+   },
+   "id": "id_1",
+   "inclusive": true,
+   "jurisdiction": "jurisdiction_1",
+   "jurisdiction_level": "city",
+   "livemode": true,
+   "metadata": {
+    "key": "metadata_1"
+   },
+   "object": "tax_rate",
+   "percentage": 1.5,
+   "rate_type": "flat_amount",
+   "state": "state_1",
+   "tax_type": "amusement_tax"
+  }
+ ],
+ "description": "description_1",
+ "discounts": [
+  "discount_1"
+ ],
+ "ended_at": 1700000000,
+ "id": "subscription_1",
+ "invoice_settings": {
+  "account_tax_ids": [
+   "tax_id_1"
+  ],
+  "custom_fields": [
+   {
+    "name": "name_1",
+    "value": "value_1"
+   }
+  ],
+  "description": "description_1",
+  "footer": "footer_1",
+  "issuer": {
+   "account": "account_1",
+   "type": "account"
+  }
+ },
+ "items": {
+  "data": [
+   {
+    "billed_until": 1700000000,
+    "billing_thresholds": {
+     "usage_gte": 1
+    },
+    "created": 1,
+    "current_period_end": 1700000000,
+    "current_period_start": 1700000000,
+    "discounts": [
+     "discount_1"
+    ],
+    "id": "id_1",
+    "metadata": {
+     "key": "metadata_1"
+    },
+    "object": "subscription_item",
+    "plan": {
+     "active": true,
+     "amount": 1,
+     "amount_decimal": "amount_decimal_1",
+     "billing_scheme": "per_unit",
+     "created": 1700000000,
+     "currency": "usd",
+     "id": "id_1",
+     "interval": "day",
+     "interval_count": 1,
+     "livemode": true,
+     "metadata": {
+      "key": "metadata_1"
+     },
+     "meter": "meter_1",
+     "nickname": "nickname_1",
+     "object": "plan",
+     "product": "product_1",
+     "tiers": [
+      {
+       "flat_amount": 1,
+       "flat_amount_decimal": "flat_amount",
+       "unit_amount": 1,
+       "unit_amount_decimal": "unit_amount",
+       "up_to": 1
+      }
+     ],
+     "tiers_mode": "graduated",
+     "transform_usage": {
+      "divide_by": 1,
+      "round": "down"
+     },
+     "trial_period_days": 1,
+     "usage_type": "licensed"
+    },
+    "price": {
+     "active": true,
+     "billing_scheme": "per_unit",
+     "created": 1700000000,
+     "currency": "usd",
+     "currency_options": {
+      "usd": {
+       "tax_behavior": "exclusive",
+       "tiers": [],
+       "unit_amount": 1,
+       "unit_amount_decimal": "unit_amount_decimal_1"
+      }
+     },
+     "custom_unit_amount": {
+      "maximum": 1,
+      "minimum": 1,
+      "preset": 1
+     },
+     "id": "id_1",
+     "livemode": true,
+     "lookup_key": "lookup_key_1",
+     "metadata": {
+      "key": "metadata_1"
+     },
+     "nickname": "nickname_1",
+     "object": "price",
+     "product": "product_1",
+     "recurring": {
+      "interval": "day",
+      "interval_count": 1,
+      "meter": "meter_1",
+      "trial_period_days": 1,
+      "usage_type": "licensed"
+     },
+     "tax_behavior": "exclusive",
+     "tiers": [
+      {
+       "flat_amount": 1,
+       "flat_amount_decimal": "flat_amount",
+       "unit_amount": 1,
+       "unit_amount_decimal": "unit_amount",
+       "up_to": 1
+      }
+     ],
+     "tiers_mode": "graduated",
+     "transform_quantity": {
+      "divide_by": 1,
+      "round": "down"
+     },
+     "type": "one_time",
+     "unit_amount": 1,
+     "unit_amount_decimal": "unit_amount_decimal_1"
+    },
+    "quantity": 1,
+    "subscription": "subscription_item",
+    "tax_rates": [
+     {
+      "active": true,
+      "country": "country_1",
+      "created": 1700000000,
+      "description": "description_1",
+      "display_name": "display_name_1",
+      "effective_percentage": 1.5,
+      "flat_amount": {
+       "amount": 1,
+       "currency": "usd"
+      },
+      "id": "id_1",
+      "inclusive": true,
+      "jurisdiction": "jurisdiction_1",
+      "jurisdiction_level": "city",
+      "livemode": true,
+      "metadata": {
+       "key": "metadata_1"
+      },
+      "object": "tax_rate",
+      "percentage": 1.5,
+      "rate_type": "flat_amount",
+      "state": "state_1",
+      "tax_type": "amusement_tax"
+     }
+    ]
+   }
+  ],
+  "has_more": true,
+  "object": "list",
+  "url": "url_1"
+ },
+ "latest_invoice": "invoice_1",
+ "livemode": true,
+ "managed_payments": {
+  "enabled": true
+ },
+ "metadata": {
+  "key": "metadata_1"
+ },
+ "next_pending_invoice_item_invoice": 1700000000,
+ "object": "subscription",
+ "on_behalf_of": "account_1",
+ "pause_collection": {
+  "behavior": "keep_as_draft",
+  "resumes_at": 1700000000
+ },
+ "payment_settings": {
+  "payment_method_options": {
+   "acss_debit": {
+    "mandate_options": {
+     "transaction_type": "business"
+    },
+    "verification_method": "automatic"
+   },
+   "bancontact": {
+    "preferred_language": "de"
+   },
+   "card": {
+    "mandate_options": {
+     "amount": 1,
+     "amount_type": "fixed",
+     "description": "description_1"
+    },
+    "network": "amex",
+    "request_three_d_secure": "any"
+   },
+   "customer_balance": {
+    "bank_transfer": {
+     "type": "eu_bank_transfer"
+    },
+    "funding_type": "bank_transfer"
+   },
+   "konbini": {},
+   "payto": {
+    "mandate_options": {
+     "amount": 1,
+     "amount_type": "fixed",
+     "purpose": "dependant_support"
+    }
+   },
+   "pix": {
+    "expires_after_seconds": 1,
+    "mandate_options": {
+     "amount": 1,
+     "amount_includes_iof": "always",
+     "end_date": "end_date_1",
+     "payment_schedule": "halfyearly"
+    }
+   },
+   "sepa_debit": {},
+   "upi": {
+    "mandate_options": {
+     "amount": 1,
+     "amount_type": "fixed",
+     "description": "description_1",
+     "end_date": 1700000000
+    }
+   },
+   "us_bank_account": {
+    "financial_connections": {
+     "permissions": [
+      "balances"
+     ],
+     "prefetch": [
+      "balances"
+     ]
+    },
+    "verification_method": "automatic"
+   }
+  },
+  "payment_method_types": [
+   "ach_credit_transfer"
+  ],
+  "save_default_payment_method": "off"
+ },
+ "pending_invoice_item_interval": {
+  "interval": "day",
+  "interval_count": 1
+ },
+ "pending_setup_intent": "setup_intent_1",
+ "pending_update": {
+  "billing_cycle_anchor": 1700000000,
+  "discount": {
+   "checkout_session": "checkout_session_1",
+   "customer": "customer_1",
+   "customer_account": "customer_account_1",
+   "end": 1700000000,
+   "id": "id_1",
+   "invoice": "invoice_1",
+   "invoice_item": "id",
+   "object": "discount",
+   "promotion_code": "promotion_code_1",
+   "source": {
+    "coupon": "coupon_1",
+    "type": "coupon"
+   },
+   "start": 1700000000,
+   "subscription": "subscription_1",
+   "subscription_item": "subscription_item_1"
+  },
+  "discounts": [
+   "discount_1"
+  ],
+  "expires_at": 1700000000,
+  "metadata": {
+   "key": "metadata_1"
+  },
+  "subscription_items": [
+   {
+    "billed_until": 1700000000,
+    "billing_thresholds": {
+     "usage_gte": 1
+    },
+    "created": 1,
+    "current_period_end": 1700000000,
+    "current_period_start": 1700000000,
+    "discounts": [
+     "discount_1"
+    ],
+    "id": "id_1",
+    "metadata": {
+     "key": "metadata_1"
+    },
+    "object": "subscription_item",
+    "plan": {
+     "active": true,
+     "amount": 1,
+     "amount_decimal": "amount_decimal_1",
+     "billing_scheme": "per_unit",
+     "created": 1700000000,
+     "currency": "usd",
+     "id": "id_1",
+     "interval": "day",
+     "interval_count": 1,
+     "livemode": true,
+     "metadata": {
+      "key": "metadata_1"
+     },
+     "meter": "meter_1",
+     "nickname": "nickname_1",
+     "object": "plan",
+     "product": "product_1",
+     "tiers": [
+      {
+       "flat_amount": 1,
+       "flat_amount_decimal": "flat_amount",
+       "unit_amount": 1,
+       "unit_amount_decimal": "unit_amount",
+       "up_to": 1
+      }
+     ],
+     "tiers_mode": "graduated",
+     "transform_usage": {
+      "divide_by": 1,
+      "round": "down"
+     },
+     "trial_period_days": 1,
+     "usage_type": "licensed"
+    },
+    "price": {
+     "active": true,
+     "billing_scheme": "per_unit",
+     "created": 1700000000,
+     "currency": "usd",
+     "currency_options": {
+      "usd": {
+       "tax_behavior": "exclusive",
+       "tiers": [],
+       "unit_amount": 1,
+       "unit_amount_decimal": "unit_amount_decimal_1"
+      }
+     },
+     "custom_unit_amount": {
+      "maximum": 1,
+      "minimum": 1,
+      "preset": 1
+     },
+     "id": "id_1",
+     "livemode": true,
+     "lookup_key": "lookup_key_1",
+     "metadata": {
+      "key": "metadata_1"
+     },
+     "nickname": "nickname_1",
+     "object": "price",
+     "product": "product_1",
+     "recurring": {
+      "interval": "day",
+      "interval_count": 1,
+      "meter": "meter_1",
+      "trial_period_days": 1,
+      "usage_type": "licensed"
+     },
+     "tax_behavior": "exclusive",
+     "tiers": [
+      {
+       "flat_amount": 1,
+       "flat_amount_decimal": "flat_amount",
+       "unit_amount": 1,
+       "unit_amount_decimal": "unit_amount",
+       "up_to": 1
+      }
+     ],
+     "tiers_mode": "graduated",
+     "transform_quantity": {
+      "divide_by": 1,
+      "round": "down"
+     },
+     "type": "one_time",
+     "unit_amount": 1,
+     "unit_amount_decimal": "unit_amount_decimal_1"
+    },
+    "quantity": 1,
+    "subscription": "subscription_item",
+    "tax_rates": [
+     {
+      "active": true,
+      "country": "country_1",
+      "created": 1700000000,
+      "description": "description_1",
+      "display_name": "display_name_1",
+      "effective_percentage": 1.5,
+      "flat_amount": {
+       "amount": 1,
+       "currency": "usd"
+      },
+      "id": "id_1",
+      "inclusive": true,
+      "jurisdiction": "jurisdiction_1",
+      "jurisdiction_level": "city",
+      "livemode": true,
+      "metadata": {
+       "key": "metadata_1"
+      },
+      "object": "tax_rate",
+      "percentage": 1.5,
+      "rate_type": "flat_amount",
+      "state": "state_1",
+      "tax_type": "amusement_tax"
+     }
+    ]
+   }
+  ],
+  "trial_end": 1700000000,
+  "trial_from_plan": true
+ },
+ "presentment_details": {
+  "presentment_currency": "usd"
+ },
+ "schedule": "subscription_schedule_1",
+ "start_date": 1700000000,
+ "status": "active",
+ "test_clock": "test_helpers.test_clock_1",
+ "transfer_data": {
+  "amount_percent": 1.5,
+  "destination": "account_1"
+ },
+ "trial_end": 1700000000,
+ "trial_settings": {
+  "end_behavior": {
+   "missing_payment_method": "cancel"
+  }
+ },
+ "trial_start": 1700000000
+}

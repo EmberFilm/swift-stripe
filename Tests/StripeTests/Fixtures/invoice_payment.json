@@ -1,0 +1,22 @@
+{
+ "amount_paid": 1,
+ "amount_requested": 1,
+ "created": 1700000000,
+ "currency": "usd",
+ "id": "invoice_payment_1",
+ "invoice": "invoice_1",
+ "is_default": true,
+ "livemode": true,
+ "object": "invoice_payment",
+ "payment": {
+  "charge": "charge_1",
+  "payment_intent": "payment_intent_1",
+  "payment_record": "payment_record_1",
+  "type": "charge"
+ },
+ "status": "open",
+ "status_transitions": {
+  "canceled_at": 1700000000,
+  "paid_at": 1700000000
+ }
+}
