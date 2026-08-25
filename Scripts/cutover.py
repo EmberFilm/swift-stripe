@@ -31,8 +31,9 @@ def split_members(body: str):
     if buf: members.append("\n".join(buf))
     return members
 
-# `// MARK:` lines sit between blocks; splitting on them too keeps each block's tail clean.
-blocks = re.split(r"(?m)^(?=extension |// MARK)", s)
+# `// MARK:` lines and commented-out `// extension` blocks sit between blocks; splitting on them
+# too keeps each real block's tail clean. Chunks that are not a live extension pass through.
+blocks = re.split(r"(?m)^(?=extension |// MARK|// extension|//extension)", s)
 head, body = blocks[0], blocks[1:]
 kept, dropped = [], []
 for b in body:

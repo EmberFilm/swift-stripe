@@ -95,7 +95,7 @@ struct AddedFieldDecodingTests {
         {"id":"pi_1","object":"payment_intent","created":1,"amount":1000,"currency":"usd",
          "customer_account":"acct_1",
          "allowed_payment_method_types":["card"],
-         "excluded_payment_method_types":["link"],
+         "excluded_payment_method_types":["acss_debit"],
          "hooks":{"inputs":{"tax":{"calculation":"taxcalc_1"}}},
          "managed_payments":{"enabled":false},
          "payment_details":{"customer_reference":"cr_1","order_reference":"or_1"},
@@ -104,8 +104,8 @@ struct AddedFieldDecodingTests {
         """#)
 
         #expect(intent.customerAccount == "acct_1")
-        #expect(intent.allowedPaymentMethodTypes == ["card"])
-        #expect(intent.excludedPaymentMethodTypes == ["link"])
+        #expect(intent.allowedPaymentMethodTypes == [.card])   // spec enum, so typed
+        #expect(intent.excludedPaymentMethodTypes == [.acssDebit])   // link is not excludable; the enum says so
         #expect(intent.hooks?.inputs?.tax?.calculation == "taxcalc_1")
         #expect(intent.managedPayments?.enabled == false)
         #expect(intent.paymentDetails?.customerReference == "cr_1")
@@ -137,7 +137,7 @@ struct AddedFieldDecodingTests {
                                   "shipping_details":{"name":"Ada","address":{"city":"London","country":"GB"}}},
          "customer_account":"acct_1",
          "discounts":[{"coupon":"co_1","promotion_code":"promo_1"}],
-         "excluded_payment_method_types":["link"],
+         "excluded_payment_method_types":["acss_debit"],
          "integration_identifier":"emberfilm-web",
          "managed_payments":{"enabled":false},
          "name_collection":{"business":{"enabled":true,"optional":false},
@@ -171,7 +171,7 @@ struct AddedFieldDecodingTests {
         #expect(session.customerAccount == "acct_1")
         #expect(session.discounts?.first?.coupon == "co_1")
         #expect(session.discounts?.first?.promotionCode == "promo_1")
-        #expect(session.excludedPaymentMethodTypes == ["link"])
+        #expect(session.excludedPaymentMethodTypes == ["acss_debit"])
         #expect(session.integrationIdentifier == "emberfilm-web")
         #expect(session.managedPayments?.enabled == false)
         #expect(session.nameCollection?.business?.optional == false)
