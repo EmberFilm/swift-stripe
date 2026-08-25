@@ -919,6 +919,64 @@ extension Stripe.Shared {
     }
 }
 
+// subscriptions_resource_billing_mode
+extension Stripe.Shared {
+    /// The billing mode of the subscription.
+    public struct BillingMode: Codable, Hashable, Sendable {
+        /// Configure behavior for flexible billing mode
+        public var flexible: Stripe.Shared.Flexible?
+        /// Controls how prorations and invoices for subscriptions are calculated and orchestrated.
+        public var `type`: Type?
+        /// Details on when the current billing_mode was adopted.
+        public var updatedAt: Date?
+
+        private enum CodingKeys: String, CodingKey {
+            case flexible
+            case `type`
+            case updatedAt
+        }
+
+        public init(
+            flexible: Stripe.Shared.Flexible? = nil,
+            `type`: Type? = nil,
+            updatedAt: Date? = nil
+        ) {
+            self.flexible = flexible
+            self.`type` = `type`
+            self.updatedAt = updatedAt
+        }
+
+        /// Controls how prorations and invoices for subscriptions are calculated and orchestrated.
+        public enum `Type`: String, Codable, Hashable, Sendable {
+            case classic
+            case flexible
+        }
+    }
+}
+
+// subscription_billing_thresholds
+extension Stripe.Shared {
+    public struct BillingThresholds: Codable, Hashable, Sendable {
+        /// Monetary threshold that triggers the subscription to create an invoice
+        public var amountGte: Int?
+        /// Indicates if the `billing_cycle_anchor` should be reset when a threshold is reached.
+        public var resetBillingCycleAnchor: Bool?
+
+        private enum CodingKeys: String, CodingKey {
+            case amountGte
+            case resetBillingCycleAnchor
+        }
+
+        public init(
+            amountGte: Int? = nil,
+            resetBillingCycleAnchor: Bool? = nil
+        ) {
+            self.amountGte = amountGte
+            self.resetBillingCycleAnchor = resetBillingCycleAnchor
+        }
+    }
+}
+
 // payment_method_bizum
 extension Stripe.Shared {
     public struct Bizum: Codable, Hashable, Sendable {
@@ -3085,7 +3143,7 @@ extension Stripe.Shared {
     }
 }
 
-// smor_resource_managed_payments
+// payment_pages_checkout_session_managed_payments
 extension Stripe.Shared {
     public struct ManagedPayments: Codable, Hashable, Sendable {
         /// Set to `true` to enable Managed Payments, Stripe's merchant of record solution, for this session.
@@ -4789,6 +4847,29 @@ extension Stripe.Shared {
     }
 }
 
+// invoice_setting_checkout_rendering_options
+extension Stripe.Shared {
+    public struct RenderingOptions: Codable, Hashable, Sendable {
+        /// How line-item prices and amounts will be displayed with respect to tax on invoice PDFs.
+        public var amountTaxDisplay: String?
+        /// ID of the invoice rendering template to be used for the generated invoice.
+        public var template: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case amountTaxDisplay
+            case template
+        }
+
+        public init(
+            amountTaxDisplay: String? = nil,
+            template: String? = nil
+        ) {
+            self.amountTaxDisplay = amountTaxDisplay
+            self.template = template
+        }
+    }
+}
+
 // payment_method_revolut_pay
 extension Stripe.Shared {
     public struct RevolutPay: Codable, Hashable, Sendable {
@@ -4965,6 +5046,24 @@ extension Stripe.Shared {
     }
 }
 
+// smor_resource_managed_payments
+extension Stripe.Shared {
+    public struct SmorResourceManagedPayments: Codable, Hashable, Sendable {
+        /// Set to `true` to enable Managed Payments, Stripe's merchant of record solution, for this session.
+        public var enabled: Bool?
+
+        private enum CodingKeys: String, CodingKey {
+            case enabled
+        }
+
+        public init(
+            enabled: Bool? = nil
+        ) {
+            self.enabled = enabled
+        }
+    }
+}
+
 // payment_method_sofort
 extension Stripe.Shared {
     public struct Sofort: Codable, Hashable, Sendable {
@@ -5106,6 +5205,24 @@ extension Stripe.Shared {
 extension Stripe.Shared {
     public struct StripeAccount: Codable, Hashable, Sendable {
         public init() {}
+    }
+}
+
+// subscription_item_billing_thresholds
+extension Stripe.Shared {
+    public struct SubscriptionItemBillingThresholds: Codable, Hashable, Sendable {
+        /// Usage threshold that triggers the subscription to create an invoice
+        public var usageGte: Int?
+
+        private enum CodingKeys: String, CodingKey {
+            case usageGte
+        }
+
+        public init(
+            usageGte: Int? = nil
+        ) {
+            self.usageGte = usageGte
+        }
     }
 }
 
@@ -5513,6 +5630,29 @@ extension Stripe.Shared {
             supported: Bool? = nil
         ) {
             self.supported = supported
+        }
+    }
+}
+
+// subscription_transfer_data
+extension Stripe.Shared {
+    public struct TransferData: Codable, Hashable, Sendable {
+        /// A non-negative decimal between 0 and 100, with at most two decimal places.
+        public var amountPercent: Double?
+        /// The account where funds from the payment will be transferred to upon payment success.
+        @Expandable<Stripe.Connect.Account, String> public var destination: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case amountPercent
+            case destination
+        }
+
+        public init(
+            amountPercent: Double? = nil,
+            destination: String? = nil
+        ) {
+            self.amountPercent = amountPercent
+            self._destination = Expandable(id: destination)
         }
     }
 }

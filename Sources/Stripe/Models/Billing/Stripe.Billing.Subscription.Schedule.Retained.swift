@@ -11,159 +11,13 @@ import FoundationEssentials
 import Foundation
 #endif
 
+// The Schedule struct is generated (Models/Generated). These are the nested types the
+// request layer still names under `Stripe.Billing.Subscription.Schedule` that the generator spells differently.
+
+
 // https://docs.stripe.com/api/subscriptionSchedules/object.md
 
-extension Stripe.Billing.Subscription {
-    /// The [Schedule Object](https://stripe.com/docs/api/subscriptionSchedules/object)
-    public struct Schedule: Codable, Hashable, Sendable, Identifiable {
-        public typealias ID = String
-        /// Unique identifier for the object.
-        public var id: ID
-        /// Object representing the start and end dates for the current phase of the subscription schedule, if it is active.
-        public var currentPhase: CurrentPhase?
-        /// ID of the customer who owns the subscription schedule.
-        @ExpandableOf<Stripe.Customers.Customer> public var customer: Stripe.Customers.Customer.ID?
-        /// Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
-        public var metadata: [String: String]?
-        /// Configuration for the subscription schedule’s phases.
-        public var phases: [Phase]?
-        /// The present status of the subscription schedule. Possible values are `not_started`, `active`, `completed`, `released`, and `canceled`. You can read more about the different states in our behavior guide.
-        public var status: Status?
-        /// ID of the subscription managed by the subscription schedule.
-        @ExpandableOf<Stripe.Billing.Subscription> public var subscription:
-            Stripe.Billing.Subscription.ID?
-        /// String representing the object’s type. Objects of the same type share the same value.
-        public var object: String
-        /// ID of the Connect Application that created the schedule.
-        public var application: String?
-        /// Time at which the subscription schedule was canceled. Measured in seconds since the Unix epoch.
-        public var canceledAt: Date?
-        /// Time at which the subscription schedule was completed. Measured in seconds since the Unix epoch.
-        public var completedAt: Date?
-        /// Time at which the object was created. Measured in seconds since the Unix epoch.
-        public var created: Date
-        /// Object representing the subscription schedule’s default settings.
-        public var defaultSettings: DefaultSettings?
-        /// Behavior of the subscription schedule and underlying subscription when it ends.
-        public var endBehavior: EndBehavior?
-        /// Has the value true if the object exists in live mode or the value false if the object exists in test mode.
-        public var livemode: Bool?
-        /// Time at which the subscription schedule was released. Measured in seconds since the Unix epoch.
-        public var releasedAt: Date?
-        /// ID of the subscription once managed by the subscription schedule (if it is released).
-        public var releasedSubscription: Stripe.Billing.Subscription.ID?
-        /// ID of the test clock this subscription schedule belongs to.
-        @ExpandableOf<Stripe.Billing.TestClocks.TestClock> public var testClock:
-            Stripe.Billing.TestClocks.TestClock.ID?
 
-        public init(
-            id: ID,
-            currentPhase: CurrentPhase? = nil,
-            customer: Stripe.Customers.Customer.ID? = nil,
-            metadata: [String: String]? = nil,
-            phases: [Phase]? = nil,
-            status: Status? = nil,
-            subscription: Stripe.Billing.Subscription.ID? = nil,
-            object: String,
-            application: String? = nil,
-            canceledAt: Date? = nil,
-            completedAt: Date? = nil,
-            created: Date,
-            defaultSettings: DefaultSettings? = nil,
-            endBehavior: EndBehavior? = nil,
-            livemode: Bool? = nil,
-            releasedAt: Date? = nil,
-            releasedSubscription: Stripe.Billing.Subscription.ID? = nil,
-            testClock: Stripe.Billing.TestClocks.TestClock.ID? = nil
-        ) {
-            self.id = id
-            self.currentPhase = currentPhase
-            self._customer = Expandable(id: customer)
-            self.metadata = metadata
-            self.phases = phases
-            self.status = status
-            self._subscription = Expandable(id: subscription)
-            self.object = object
-            self.application = application
-            self.canceledAt = canceledAt
-            self.completedAt = completedAt
-            self.created = created
-            self.defaultSettings = defaultSettings
-            self.endBehavior = endBehavior
-            self.livemode = livemode
-            self.releasedAt = releasedAt
-            self.releasedSubscription = releasedSubscription
-            self._testClock = Expandable(id: testClock)
-        }
-    }
-}
-
-extension Stripe.Billing.Subscription.Schedule {
-    public struct CurrentPhase: Codable, Hashable, Sendable {
-        /// The end of this phase of the subscription schedule.
-        public var endDate: Date?
-        /// The start of this phase of the subscription schedule.
-        public var startDate: Date?
-
-        public init(
-            endDate: Date? = nil,
-            startDate: Date? = nil
-        ) {
-            self.endDate = endDate
-            self.startDate = startDate
-        }
-    }
-}
-
-extension Stripe.Billing.Subscription.Schedule {
-    public struct DefaultSettings: Codable, Hashable, Sendable {
-        /// A non-negative decimal between 0 and 100, with at most two decimal places. This represents the percentage of the subscription invoice subtotal that will be transferred to the application owner’s Stripe account during this phase of the schedule.
-        public var applicationFeePercent: Float?
-        /// Default settings for automatic tax computation.
-        public var automaticTax: DefaultSettingsAutomaticTax?
-        /// Possible values are `phase_start` or `automatic`. If `phase_start` then billing cycle anchor of the subscription is set to the start of the phase when entering the phase. If `automatic` then the billing cycle anchor is automatically modified as needed when entering the phase. For more information, see the billing cycle documentation.
-        public var billingCycleAnchor: BillingCycleAnchor?
-        /// Define thresholds at which an invoice will be sent, and the subscription advanced to a new billing period
-        public var billingThresholds: DefaultSettingsBillingThresholds?
-        /// Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will attempt to pay the underlying subscription at the end of each billing cycle using the default source attached to the customer. When sending an invoice, Stripe will email your customer an invoice with payment instructions.
-        public var collectionMethod: CollectionMethod?
-        /// ID of the default payment method for the subscription schedule. If not set, invoices will use the default payment method in the customer’s invoice settings.
-        @ExpandableOf<Stripe.PaymentMethods.PaymentMethod> public var defaultPaymentMethod:
-            Stripe.PaymentMethods.PaymentMethod.ID?
-        /// Subscription description, meant to be displayable to the customer. Use this field to optionally store an explanation of the subscription.
-        public var description: String?
-        /// The subscription schedule’s default invoice settings.
-        public var invoiceSettings: InvoiceSettings?
-        /// The account (if any) the charge was made on behalf of for charges associated with the schedule’s subscription. See the Connect documentation for details.
-        @ExpandableOf<Stripe.Connect.Account> public var onBehalfOf: Stripe.Connect.Account.ID?
-        /// The account (if any) the subscription’s payments will be attributed to for tax reporting, and where funds from each payment will be transferred to for each of the subscription’s invoices.
-        public var transferData: TransferData?
-
-        public init(
-            applicationFeePercent: Float? = nil,
-            automaticTax: DefaultSettingsAutomaticTax? = nil,
-            billingCycleAnchor: BillingCycleAnchor? = nil,
-            billingThresholds: DefaultSettingsBillingThresholds? = nil,
-            collectionMethod: CollectionMethod? = nil,
-            defaultPaymentMethod: Stripe.PaymentMethods.PaymentMethod.ID? = nil,
-            description: String? = nil,
-            invoiceSettings: InvoiceSettings? = nil,
-            onBehalfOf: Stripe.Connect.Account.ID? = nil,
-            transferData: TransferData? = nil
-        ) {
-            self.applicationFeePercent = applicationFeePercent
-            self.automaticTax = automaticTax
-            self.billingCycleAnchor = billingCycleAnchor
-            self.billingThresholds = billingThresholds
-            self.collectionMethod = collectionMethod
-            self._defaultPaymentMethod = Expandable(id: defaultPaymentMethod)
-            self.description = description
-            self.invoiceSettings = invoiceSettings
-            self._onBehalfOf = Expandable(id: onBehalfOf)
-            self.transferData = transferData
-        }
-    }
-}
 
 extension Stripe.Billing.Subscription.Schedule {
     public struct DefaultSettingsAutomaticTax: Codable, Hashable, Sendable {
@@ -185,12 +39,6 @@ extension Stripe.Billing.Subscription.Schedule {
     }
 }
 
-extension Stripe.Billing.Subscription.Schedule {
-    public enum EndBehavior: String, Codable, Sendable {
-        case release
-        case cancel
-    }
-}
 
 extension Stripe.Billing.Subscription.Schedule {
     public struct DefaultSettingsBillingThresholds: Codable, Hashable, Sendable {
@@ -433,15 +281,6 @@ extension Stripe.Billing.Subscription.Schedule {
     }
 }
 
-extension Stripe.Billing.Subscription.Schedule {
-    public enum Status: String, Codable, Sendable {
-        case notStarted = "not_started"
-        case active
-        case completed
-        case released
-        case canceled
-    }
-}
 
 extension Stripe.Billing.Subscription.Schedule.Phase {
     public enum ProrationBehavior: String, Codable, Sendable {

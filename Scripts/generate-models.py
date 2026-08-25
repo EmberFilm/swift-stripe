@@ -130,6 +130,9 @@ RESOURCES: dict[str, str] = {
     "setup_intent": "Setup.Intent",
     "shipping_rate": "Products.Shipping.Rate",
     "transfer": "Connect.Transfer",
+    # stage 4a: cut over from hand models (batch-cutover.py)
+    "payment_link": "/Stripe.PaymentLink",
+    "subscription_schedule": "Billing.Subscription.Schedule",
     # stage 4a: resources that had no model at all
     "climate.order": "Climate.Order",
     "climate.product": "Climate.Product",
@@ -317,6 +320,8 @@ RESOURCE_TYPES: dict[str, str] = {
     "setup_intent": "Generated.Setup.Intent",
     "shipping_rate": "Generated.Products.Shipping.Rate",
     "transfer": "Generated.Connect.Transfer",
+    "payment_link": "Stripe.PaymentLink",
+    "subscription_schedule": "Generated.Billing.Subscription.Schedule",
     # everything else is the hand-written Stripe type
     "billing_portal.configuration": "Stripe.Billing.Customer.Portal.Configuration",
     "tax_id": "Stripe.Tax.ID",
@@ -326,9 +331,7 @@ RESOURCE_TYPES: dict[str, str] = {
     # namespace `Stripe.Customers.CashBalance`. This is the type the hand Customer used.
     "discount": "Stripe.Products.Discount",
     "deleted_discount": "Stripe.Products.Discount",
-    "payment_link": "Stripe.PaymentLink",
     "payment_source": "StripePaymentSource",
-    "subscription_schedule": "Stripe.Billing.Subscription.Schedule",
 }
 
 # Resources with no Swift type at all. A reference to one is kept as its id, never expanded.

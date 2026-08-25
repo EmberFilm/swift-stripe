@@ -176,6 +176,8 @@ struct FixtureDecodingTests {
     @Test("setup_intent") func setupIntent() throws { try Self.decodes("setup_intent", as: Stripe.Setup.Intent.self) }
     @Test("shipping_rate") func shippingRate() throws { try Self.decodes("shipping_rate", as: Stripe.Products.Shipping.Rate.self) }
     @Test("transfer") func transfer() throws { try Self.decodes("transfer", as: Stripe.Connect.Transfer.self) }
+    @Test("payment_link") func paymentLink() throws { try Self.decodes("payment_link", as: Stripe.PaymentLink.self) }
+    @Test("subscription_schedule") func subscriptionSchedule() throws { try Self.decodes("subscription_schedule", as: Stripe.Billing.Subscription.Schedule.self) }
     @Test("climate.order") func climateOrder() throws { try Self.decodes("climate.order", as: Stripe.Climate.Order.self) }
     @Test("climate.product") func climateProduct() throws { try Self.decodes("climate.product", as: Stripe.Climate.Product.self) }
     @Test("tax.settings") func taxSettings() throws { try Self.decodes("tax.settings", as: Stripe.Tax.Settings.self) }
