@@ -52,7 +52,7 @@ extension Generated.Billing {
         /// Time at which the object was created.
         public var created: Date?
         /// Three-letter ISO currency code, in lowercase.
-        public var currency: String?
+        public var currency: Stripe.Currency?
         /// Custom fields displayed on the invoice.
         public var customFields: [Generated.Shared.CustomFields]?
         /// The ID of the customer to bill.
@@ -269,7 +269,7 @@ extension Generated.Billing {
             collectionMethod: CollectionMethod? = nil,
             confirmationSecret: ConfirmationSecret? = nil,
             created: Date? = nil,
-            currency: String? = nil,
+            currency: Stripe.Currency? = nil,
             customFields: [Generated.Shared.CustomFields]? = nil,
             customer: String? = nil,
             customerAccount: String? = nil,

@@ -40,7 +40,7 @@ extension Generated.Charges {
         /// Time at which the object was created.
         public var created: Date?
         /// Three-letter ISO currency code, in lowercase.
-        public var currency: String?
+        public var currency: Stripe.Currency?
         /// ID of the customer this charge is for if one exists.
         @Expandable<Generated.Customers.Customer, String> public var customer: String?
         /// An arbitrary string attached to the object.
@@ -172,7 +172,7 @@ extension Generated.Charges {
             calculatedStatementDescriptor: String? = nil,
             captured: Bool? = nil,
             created: Date? = nil,
-            currency: String? = nil,
+            currency: Stripe.Currency? = nil,
             customer: String? = nil,
             description: String? = nil,
             disputed: Bool? = nil,

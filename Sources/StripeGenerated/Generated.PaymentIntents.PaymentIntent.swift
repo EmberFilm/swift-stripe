@@ -44,7 +44,7 @@ extension Generated.PaymentIntents {
         /// Time at which the object was created.
         public var created: Date?
         /// Three-letter ISO currency code, in lowercase.
-        public var currency: String?
+        public var currency: Stripe.Currency?
         /// ID of the Customer this PaymentIntent belongs to, if one exists.
         @Expandable<Generated.Customers.Customer, String> public var customer: String?
         /// ID of the Account representing the customer that this PaymentIntent belongs to, if one exists.
@@ -168,7 +168,7 @@ extension Generated.PaymentIntents {
             clientSecret: String? = nil,
             confirmationMethod: ConfirmationMethod? = nil,
             created: Date? = nil,
-            currency: String? = nil,
+            currency: Stripe.Currency? = nil,
             customer: String? = nil,
             customerAccount: String? = nil,
             description: String? = nil,
@@ -1085,7 +1085,7 @@ extension Generated.PaymentIntents {
                 /// The remaining amount that needs to be transferred to complete the payment.
                 public var amountRemaining: Int?
                 /// Three-letter ISO currency code, in lowercase.
-                public var currency: String?
+                public var currency: Stripe.Currency?
                 /// A list of financial addresses that can be used to fund the customer balance
                 public var financialAddresses: [FinancialAddresses]?
                 /// A link to a hosted page that guides your customer through completing the transfer.
@@ -1106,7 +1106,7 @@ extension Generated.PaymentIntents {
 
                 public init(
                     amountRemaining: Int? = nil,
-                    currency: String? = nil,
+                    currency: Stripe.Currency? = nil,
                     financialAddresses: [FinancialAddresses]? = nil,
                     hostedInstructionsUrl: String? = nil,
                     reference: String? = nil,

@@ -23,7 +23,7 @@ extension Generated.Products {
         /// Time at which the object was created.
         public var created: Date?
         /// Three-letter ISO currency code, in lowercase.
-        public var currency: String?
+        public var currency: Stripe.Currency?
         /// Prices defined in each available currency option.
         public var currencyOptions: [String: CurrencyOptions]?
         /// When set, provides configuration for the amount to be adjusted by the customer during Checkout Sessions and Payment Li…
@@ -86,7 +86,7 @@ extension Generated.Products {
             active: Bool? = nil,
             billingScheme: BillingScheme? = nil,
             created: Date? = nil,
-            currency: String? = nil,
+            currency: Stripe.Currency? = nil,
             currencyOptions: [String: CurrencyOptions]? = nil,
             customUnitAmount: CustomUnitAmount? = nil,
             livemode: Bool? = nil,

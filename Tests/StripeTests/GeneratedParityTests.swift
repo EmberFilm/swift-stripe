@@ -233,10 +233,6 @@ struct GeneratedParityTests {
         let d = try Self.compare("product", hand: Stripe.Products.Product.self, generated: Generated.Products.Product.self)
         #expect(Self.report("product", d).isEmpty)
     }
-    @Test("event") func event() throws {
-        let d = try Self.compare("event", hand: Stripe.Events.Event.self, generated: Generated.Events.Event.self)
-        #expect(Self.report("event", d).isEmpty)
-    }
     @Test("payment_intent") func paymentIntent() throws {
         let d = try Self.compare("payment_intent", hand: Stripe.PaymentIntents.PaymentIntent.self, generated: Generated.PaymentIntents.PaymentIntent.self)
         #expect(Self.report("payment_intent", d).isEmpty)

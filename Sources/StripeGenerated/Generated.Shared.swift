@@ -902,7 +902,7 @@ extension Generated.Shared {
         /// Type of amount.
         public var amountType: AmountType?
         /// Three-letter ISO currency code, in lowercase.
-        public var currency: String?
+        public var currency: Stripe.Currency?
         /// Date when the mandate expires and no further payments will be charged, in `YYYY-MM-DD`.
         public var endDate: String?
         /// Schedule at which the future payments will be charged.
@@ -927,7 +927,7 @@ extension Generated.Shared {
             amount: Int? = nil,
             amountIncludesIof: AmountIncludesIof? = nil,
             amountType: AmountType? = nil,
-            currency: String? = nil,
+            currency: Stripe.Currency? = nil,
             endDate: String? = nil,
             paymentSchedule: PaymentSchedule? = nil,
             reference: String? = nil,

@@ -43,7 +43,7 @@ extension Generated.Billing {
         /// Time at which the object was created.
         public var created: Date?
         /// Three-letter ISO currency code, in lowercase.
-        public var currency: String?
+        public var currency: Stripe.Currency?
         /// ID of the customer who owns the subscription.
         @Expandable<Generated.Customers.Customer, String> public var customer: String?
         /// ID of the account representing the customer who owns the subscription.
@@ -174,7 +174,7 @@ extension Generated.Billing {
             cancellationDetails: CancellationDetails? = nil,
             collectionMethod: CollectionMethod? = nil,
             created: Date? = nil,
-            currency: String? = nil,
+            currency: Stripe.Currency? = nil,
             customer: String? = nil,
             customerAccount: String? = nil,
             daysUntilDue: Int? = nil,

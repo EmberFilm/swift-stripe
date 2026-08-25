@@ -17,7 +17,6 @@ public enum Generated {
     public enum Charges {}
     public enum Checkout {}
     public enum Customers {}
-    public enum Events {}
     public enum PaymentIntents {}
     public enum Products {}
 }

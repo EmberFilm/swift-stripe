@@ -45,7 +45,7 @@ extension Generated.Checkout {
         /// Time at which the object was created.
         public var created: Date?
         /// Three-letter ISO currency code, in lowercase.
-        public var currency: String?
+        public var currency: Stripe.Currency?
         /// Currency conversion details for Adaptive Pricing sessions created before 2025-03-31.
         public var currencyConversion: CurrencyConversion?
         /// Collect additional information from your customer using custom fields.
@@ -232,7 +232,7 @@ extension Generated.Checkout {
             consent: Consent? = nil,
             consentCollection: ConsentCollection? = nil,
             created: Date? = nil,
-            currency: String? = nil,
+            currency: Stripe.Currency? = nil,
             currencyConversion: CurrencyConversion? = nil,
             customFields: [CustomFields]? = nil,
             customText: CustomText? = nil,

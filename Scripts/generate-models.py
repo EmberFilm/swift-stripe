@@ -48,7 +48,6 @@ RESOURCES: dict[str, str] = {
     "invoice": "Billing.Invoice",
     "price": "Products.Price",
     "product": "Products.Product",
-    "event": "Events.Event",
     "payment_intent": "PaymentIntents.PaymentIntent",
     "charge": "Charges.Charge",
     "invoice_payment": "Billing.Invoice.Payment",
@@ -71,7 +70,7 @@ RESOURCE_TYPES: dict[str, str] = {
     "invoice": "Generated.Billing.Invoice",
     "price": "Generated.Products.Price",
     "product": "Generated.Products.Product",
-    "event": "Generated.Events.Event",
+    "event": "Stripe.Events.Event",
     "payment_intent": "Generated.PaymentIntents.PaymentIntent",
     "charge": "Generated.Charges.Charge",
     "invoice_payment": "Generated.Billing.Invoice.Payment",
@@ -176,7 +175,8 @@ def doc(description: str | None) -> str | None:
 # --------------------------------------------------------------------------------------------
 
 class Generator:
-    def __init__(self, spec: dict):
+    def __init__(self, spec: dict, namespace: str = "Generated"):
+        self.ns = namespace
         self.schemas: dict = spec["components"]["schemas"]
         self.version: str = spec["info"]["version"]
         self.unmapped: set[str] = set()
@@ -299,6 +299,8 @@ class Generator:
 
         t = node.get("type")
         if t == "string":
+            if node.get("format") == "currency":
+                return "Stripe.Currency"
             enum = node.get("enum")
             if enum and len(enum) > 1:
                 owner.enums.append(Enum(pascal(prop), enum, doc(node.get("description"))))
@@ -364,26 +366,27 @@ class Generator:
             self.survey(name, name, set())
         files: dict[str, str] = {}
         for name, swift_path in RESOURCES.items():
-            root = self.build_struct(swift_path.split(".")[-1], self.schemas[name], f"Generated.{swift_path}")
-            files[f"Generated.{swift_path}.swift"] = self.render_resource(name, swift_path, root)
-        files["Generated.Shared.swift"] = self.render_shared()
-        files["Generated.swift"] = self.render_namespace()
-        return files
+            root = self.build_struct(swift_path.split(".")[-1], self.schemas[name], f"{self.ns}.{swift_path}")
+            files[f"{self.ns}.{swift_path}.swift"] = self.render_resource(name, swift_path, root)
+        files[f"{self.ns}.Shared.swift"] = self.render_shared()
+        if self.ns != "Stripe":
+            files[f"{self.ns}.swift"] = self.render_namespace()
+        return {k: v.replace("Generated.", f"{self.ns}.") for k, v in files.items()}
 
     # ---- rendering ------------------------------------------------------------------------
 
     def render_resource(self, schema_name: str, swift_path: str, root: "Struct") -> str:
         parts = swift_path.split(".")
-        container = "Generated" + ("." + ".".join(parts[:-1]) if len(parts) > 1 else "")
+        container = self.ns + ("." + ".".join(parts[:-1]) if len(parts) > 1 else "")
         body = root.render(indent="    ")
         return HEADER.format(version=self.version, schema=schema_name) + \
             f"extension {container} {{\n{body}}}\n"
 
     def render_shared(self) -> str:
         out = HEADER.format(version=self.version, schema="(schemas reached from more than one resource)")
-        out += "extension Generated {\n    public enum Shared {}\n}\n\n"
+        out += f"extension {self.ns} {{\n    public enum Shared {{}}\n}}\n\n"
         for ref, s in sorted(self.shared_done.items(), key=lambda kv: kv[1].name):
-            out += f"// {ref}\nextension Generated.Shared {{\n{s.render(indent='    ')}}}\n\n"
+            out += f"// {ref}\nextension {self.ns}.Shared {{\n{s.render(indent='    ')}}}\n\n"
         return out
 
     def render_namespace(self) -> str:
@@ -506,10 +509,12 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("spec")
     ap.add_argument("--out", default="Sources/StripeGenerated")
+    ap.add_argument("--namespace", default="Generated",
+                    help="root namespace for the emitted types (Stripe, or Generated for side-by-side)")
     ap.add_argument("--check", action="store_true", help="report unmapped refs and unions; write nothing")
     args = ap.parse_args()
 
-    gen = Generator(json.load(open(args.spec)))
+    gen = Generator(json.load(open(args.spec)), namespace=args.namespace)
     files = gen.run()
 
     print(f"spec {gen.version}: {len(RESOURCES)} resources, {len(gen.shared_done)} shared types")
