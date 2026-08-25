@@ -121,7 +121,7 @@ extension Stripe.Charges {
         /// Level III card data submitted with the charge.
         public var level3: Level3?
         /// The amount and currency the charge was presented to the customer in.
-        public var presentmentDetails: PresentmentDetails?
+        public var presentmentDetails: Stripe.PresentmentDetails?
         /// A string that identifies this transaction as part of a group. See the [Connect documentation](https://stripe.com/docs/connect/charges-transfers#grouping-transactions) for details.
         public var transferGroup: String?
 
@@ -173,7 +173,7 @@ extension Stripe.Charges {
             transferData: Stripe.Charges.Charge.Transfer.Data? = nil,
             authorizationCode: String? = nil,
             level3: Level3? = nil,
-            presentmentDetails: PresentmentDetails? = nil,
+            presentmentDetails: Stripe.PresentmentDetails? = nil,
             transferGroup: String? = nil
         ) {
             self.id = id
@@ -703,19 +703,4 @@ extension Stripe.Charges.Charge {
         }
     }
 
-    /// The amount and currency a charge was presented to the customer in.
-    public struct PresentmentDetails: Codable, Hashable, Sendable {
-        public var presentmentAmount: Int?
-        public var presentmentCurrency: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case presentmentAmount
-            case presentmentCurrency
-        }
-
-        public init(presentmentAmount: Int? = nil, presentmentCurrency: String? = nil) {
-            self.presentmentAmount = presentmentAmount
-            self.presentmentCurrency = presentmentCurrency
-        }
-    }
 }

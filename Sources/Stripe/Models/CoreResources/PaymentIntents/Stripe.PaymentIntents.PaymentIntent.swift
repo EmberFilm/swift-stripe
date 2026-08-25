@@ -94,6 +94,22 @@ extension Stripe.PaymentIntents {
         public var transferData: PaymentIntent.Transfer.Data?
         /// A string that identifies the resulting payment as part of a group. See the PaymentIntents Connect usage guide for details.
         public var transferGroup: String?
+        /// ID of the account representing the customer this PaymentIntent belongs to.
+        public var customerAccount: String?
+        /// Payment method types allowed on this PaymentIntent.
+        public var allowedPaymentMethodTypes: [String]?
+        /// Payment method types excluded from this PaymentIntent.
+        public var excludedPaymentMethodTypes: [String]?
+        /// Automations that run as part of the payment.
+        public var hooks: Hooks?
+        /// Settings for Managed Payments on this PaymentIntent.
+        public var managedPayments: ManagedPayments?
+        /// References that appear on the customer's statement and in reporting.
+        public var paymentDetails: PaymentDetails?
+        /// The payment method configuration that produced the available payment methods.
+        public var paymentMethodConfigurationDetails: PaymentMethodConfigurationDetails?
+        /// The amount and currency the payment was presented to the customer in.
+        public var presentmentDetails: Stripe.PresentmentDetails?
 
         enum CodingKeys: String, CodingKey {
             case id
@@ -134,6 +150,14 @@ extension Stripe.PaymentIntents {
             case review
             case transferData
             case transferGroup
+            case customerAccount
+            case allowedPaymentMethodTypes
+            case excludedPaymentMethodTypes
+            case hooks
+            case managedPayments
+            case paymentDetails
+            case paymentMethodConfigurationDetails
+            case presentmentDetails
         }
 
         public init(
@@ -174,7 +198,15 @@ extension Stripe.PaymentIntents {
             processing: PaymentIntent.Processing? = nil,
             review: Stripe.Fraud.Reviews.Review.ID? = nil,
             transferData: PaymentIntent.Transfer.Data? = nil,
-            transferGroup: String? = nil
+            transferGroup: String? = nil,
+            customerAccount: String? = nil,
+            allowedPaymentMethodTypes: [String]? = nil,
+            excludedPaymentMethodTypes: [String]? = nil,
+            hooks: Hooks? = nil,
+            managedPayments: ManagedPayments? = nil,
+            paymentDetails: PaymentDetails? = nil,
+            paymentMethodConfigurationDetails: PaymentMethodConfigurationDetails? = nil,
+            presentmentDetails: Stripe.PresentmentDetails? = nil
         ) {
             self.id = id
             self.amount = amount
@@ -214,6 +246,14 @@ extension Stripe.PaymentIntents {
             self._review = Expandable(id: review)
             self.transferData = transferData
             self.transferGroup = transferGroup
+            self.customerAccount = customerAccount
+            self.allowedPaymentMethodTypes = allowedPaymentMethodTypes
+            self.excludedPaymentMethodTypes = excludedPaymentMethodTypes
+            self.hooks = hooks
+            self.managedPayments = managedPayments
+            self.paymentDetails = paymentDetails
+            self.paymentMethodConfigurationDetails = paymentMethodConfigurationDetails
+            self.presentmentDetails = presentmentDetails
         }
     }
 }
@@ -602,6 +642,72 @@ extension Stripe.PaymentIntents.PaymentIntent.Search {
             self.url = url
             self.nextPage = nextPage
             self.totalCount = totalCount
+        }
+    }
+}
+
+// MARK: - Added in 2026 API versions
+extension Stripe.PaymentIntents.PaymentIntent {
+    /// Automations that run as part of the payment.
+    public struct Hooks: Codable, Hashable, Sendable {
+        public var inputs: Inputs?
+
+        public init(inputs: Inputs? = nil) {
+            self.inputs = inputs
+        }
+
+        public struct Inputs: Codable, Hashable, Sendable {
+            public var tax: Tax?
+
+            public init(tax: Tax? = nil) {
+                self.tax = tax
+            }
+
+            public struct Tax: Codable, Hashable, Sendable {
+                /// The Tax Calculation used for this payment.
+                public var calculation: String?
+
+                public init(calculation: String? = nil) {
+                    self.calculation = calculation
+                }
+            }
+        }
+    }
+
+    /// Managed Payments settings for a PaymentIntent.
+    public struct ManagedPayments: Codable, Hashable, Sendable {
+        public var enabled: Bool?
+
+        public init(enabled: Bool? = nil) {
+            self.enabled = enabled
+        }
+    }
+
+    /// References that appear on the customer's statement and in reporting.
+    public struct PaymentDetails: Codable, Hashable, Sendable {
+        public var customerReference: String?
+        public var orderReference: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case customerReference
+            case orderReference
+        }
+
+        public init(customerReference: String? = nil, orderReference: String? = nil) {
+            self.customerReference = customerReference
+            self.orderReference = orderReference
+        }
+    }
+
+    /// The payment method configuration that produced the available payment methods.
+    public struct PaymentMethodConfigurationDetails: Codable, Hashable, Sendable {
+        public var id: String?
+        /// The parent configuration this one inherits from, for connected accounts.
+        public var parent: String?
+
+        public init(id: String? = nil, parent: String? = nil) {
+            self.id = id
+            self.parent = parent
         }
     }
 }

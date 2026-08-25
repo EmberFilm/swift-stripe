@@ -61,6 +61,7 @@ extension Stripe.Billing.Subscription {
             case currentPeriodStart
             case plan
             case discounts
+            case billedUntil
         }
 
         public init(

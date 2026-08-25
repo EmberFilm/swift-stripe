@@ -12,6 +12,13 @@ turns that into a number.
 
 "missing" = in the spec, not on the Swift type: the value is dropped on decode.
 "stale"   = on the Swift type, not in the spec: the property is always nil.
+
+Known blind spot: this reads property declarations, not `CodingKeys`. Where a type declares an
+explicit `CodingKeys`, a property missing from it compiles, reports zero drift here, and still
+decodes to nil forever. Adding a field is therefore not done until it is decoded in
+Tests/StripeTests/AddedFieldDecodingTests.swift — and note that most of these types have no
+`CodingKeys` of their own, so a case added to the first block in the file usually lands on a
+nested type instead.
 """
 import json, re, pathlib, sys
 
@@ -42,6 +49,9 @@ ACKNOWLEDGED_MISSING: dict[str, dict[str, str]] = {
     "charge": {
         "source": "deprecated legacy Source/Card/BankAccount union; Stripe is removing it",
     },
+    "payment_intent": {
+        "source": "deprecated legacy Source/Card/BankAccount union; Stripe is removing it",
+    },
 }
 
 # Properties the API no longer returns, kept so accounts pinned to an older version still decode.
@@ -60,6 +70,9 @@ VERSION_GATED: dict[str, dict[str, str]] = {
     },
     "product": {
         "attributes": "removed from the Product object",
+    },
+    "payment_intent": {
+        "invoice": "removed in 2025-03-31.basil",
     },
 }
 

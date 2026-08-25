@@ -169,6 +169,10 @@ extension Stripe.Billing {
             case invoiceSettings
             case plan
             case quantity
+            case customerAccount
+            case billingSchedules
+            case managedPayments
+            case presentmentDetails
         }
 
         public init(
