@@ -36,7 +36,7 @@
   }
  },
  "end_user_details": {
-  "ip_address": "present",
+  "ip_address": "true",
   "present": true
  },
  "expected_arrival_date": 1700000000,

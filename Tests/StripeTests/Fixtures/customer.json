@@ -35,7 +35,7 @@
   "end": 1700000000,
   "id": "id_1",
   "invoice": "invoice_1",
-  "invoice_item": "id",
+  "invoice_item": "invoice_item_1",
   "object": "discount",
   "promotion_code": "promotion_code_1",
   "source": {
@@ -272,7 +272,7 @@
       "end": 1700000000,
       "id": "id_1",
       "invoice": "invoice_1",
-      "invoice_item": "id",
+      "invoice_item": "invoice_item_1",
       "object": "discount",
       "promotion_code": "promotion_code_1",
       "start": 1700000000,
@@ -357,7 +357,7 @@
      "account": "account_1",
      "application": "application_1",
      "customer": "customer_1",
-     "customer_account": "type",
+     "customer_account": "customer_account_1",
      "type": "account"
     },
     "type": "ad_nrt",

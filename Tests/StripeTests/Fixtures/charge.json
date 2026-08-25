@@ -64,7 +64,7 @@
   "network_advice_code": "network_advice_code_1",
   "network_decline_code": "network_decline_code_1",
   "network_status": "approved_by_network",
-  "reason": "type",
+  "reason": "highest_risk_level",
   "risk_level": "normal",
   "risk_score": 1,
   "rule": "rule_1",
@@ -650,7 +650,7 @@
       "reference_status": "pending"
      },
      "twint": {},
-     "type": "card",
+     "type": "type_1",
      "us_bank_transfer": {
       "reference": "reference_1",
       "reference_status": "pending"

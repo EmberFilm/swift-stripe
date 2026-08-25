@@ -1,0 +1,15 @@
+{
+ "created": 1700000000,
+ "deletes_after": 1700000000,
+ "frozen_time": 1700000000,
+ "id": "test_helpers.test_clock_1",
+ "livemode": true,
+ "name": "name_1",
+ "object": "test_helpers.test_clock",
+ "status": "advancing",
+ "status_details": {
+  "advancing": {
+   "target_frozen_time": 1700000000
+  }
+ }
+}

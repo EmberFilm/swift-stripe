@@ -25,7 +25,7 @@
    "id": "id_1",
    "network": "stripe"
   },
-  "issuing_card": "type",
+  "issuing_card": "issuing_card_1",
   "type": "balance",
   "us_bank_account": {
    "bank_name": "bank_name_1",

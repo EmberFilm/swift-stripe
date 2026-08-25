@@ -1,0 +1,27 @@
+{
+ "billing_zip": "billing_zip_1",
+ "charge": "charge_1",
+ "closed_reason": "acknowledged",
+ "created": 1700000000,
+ "id": "review_1",
+ "ip_address": "ip_address_1",
+ "ip_address_location": {
+  "city": "city_1",
+  "country": "country_1",
+  "latitude": 1.5,
+  "longitude": 1.5,
+  "region": "region_1"
+ },
+ "livemode": true,
+ "object": "review",
+ "open": true,
+ "opened_reason": "manual",
+ "payment_intent": "payment_intent_1",
+ "reason": "rule",
+ "session": {
+  "browser": "browser_1",
+  "device": "device_1",
+  "platform": "platform_1",
+  "version": "version_1"
+ }
+}

@@ -1,0 +1,38 @@
+{
+ "created": 1700000000,
+ "credit": {
+  "amount": {
+   "monetary": {
+    "currency": "usd",
+    "value": 1
+   },
+   "type": "monetary"
+  },
+  "credits_application_invoice_voided": {
+   "invoice": "invoice_1",
+   "invoice_line_item": "invoice_line_item_1"
+  },
+  "type": "credits_application_invoice_voided"
+ },
+ "credit_grant": "billing.credit_grant_1",
+ "debit": {
+  "amount": {
+   "monetary": {
+    "currency": "usd",
+    "value": 1
+   },
+   "type": "monetary"
+  },
+  "credits_applied": {
+   "invoice": "invoice_1",
+   "invoice_line_item": "invoice_line_item_1"
+  },
+  "type": "credits_applied"
+ },
+ "effective_at": 1700000000,
+ "id": "billing.credit_balance_transaction_1",
+ "livemode": true,
+ "object": "billing.credit_balance_transaction",
+ "test_clock": "test_helpers.test_clock_1",
+ "type": "credit"
+}

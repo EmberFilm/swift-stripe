@@ -32,12 +32,12 @@
   "icon": {
    "file": "business_icon",
    "type": "file",
-   "url": "type"
+   "url": "url_1"
   },
   "logo": {
    "file": "business_logo",
    "type": "file",
-   "url": "type"
+   "url": "url_1"
   }
  },
  "cancel_url": "cancel_url_1",
@@ -149,7 +149,7 @@
    }
   ]
  },
- "customer_email": "customer",
+ "customer_email": "customer_email_1",
  "discounts": [
   {
    "coupon": "coupon_1",
@@ -214,7 +214,7 @@
        "end": 1700000000,
        "id": "id_1",
        "invoice": "invoice_1",
-       "invoice_item": "id",
+       "invoice_item": "invoice_item_1",
        "object": "discount",
        "promotion_code": "promotion_code_1",
        "start": 1700000000,
@@ -266,9 +266,9 @@
      "tiers": [
       {
        "flat_amount": 1,
-       "flat_amount_decimal": "flat_amount",
+       "flat_amount_decimal": "flat_amount_decimal_1",
        "unit_amount": 1,
-       "unit_amount_decimal": "unit_amount",
+       "unit_amount_decimal": "unit_amount_decimal_1",
        "up_to": 1
       }
      ],
@@ -704,7 +704,7 @@
       "end": 1700000000,
       "id": "id_1",
       "invoice": "invoice_1",
-      "invoice_item": "id",
+      "invoice_item": "invoice_item_1",
       "object": "discount",
       "promotion_code": "promotion_code_1",
       "start": 1700000000,

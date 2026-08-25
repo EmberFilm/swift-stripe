@@ -12,7 +12,7 @@
     "reason": "another_payment_associated_with_calculation"
    },
    "source": "source_1",
-   "status": "errored"
+   "status": "status_1"
   }
  ]
 }

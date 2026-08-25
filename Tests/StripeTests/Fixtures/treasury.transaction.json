@@ -427,7 +427,7 @@
    ],
    "fuel": {
     "industry_product_code": "industry_product_code_1",
-    "quantity_decimal": "unit",
+    "quantity_decimal": "quantity_decimal_1",
     "type": "diesel",
     "unit": "charging_minute",
     "unit_cost_decimal": "unit_cost_decimal_1"
@@ -600,7 +600,7 @@
     }
    },
    "end_user_details": {
-    "ip_address": "present",
+    "ip_address": "true",
     "present": true
    },
    "expected_arrival_date": 1700000000,
@@ -718,7 +718,7 @@
      "id": "id_1",
      "network": "stripe"
     },
-    "issuing_card": "type",
+    "issuing_card": "issuing_card_1",
     "type": "balance",
     "us_bank_account": {
      "bank_name": "bank_name_1",
@@ -765,7 +765,7 @@
      "id": "id_1",
      "network": "stripe"
     },
-    "issuing_card": "type",
+    "issuing_card": "issuing_card_1",
     "type": "balance",
     "us_bank_account": {
      "bank_name": "bank_name_1",

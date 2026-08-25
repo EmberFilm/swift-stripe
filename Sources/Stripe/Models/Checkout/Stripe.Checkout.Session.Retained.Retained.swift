@@ -15,6 +15,9 @@ import Foundation
 // The Session struct is generated (Models/Generated). These are the nested types the
 // request layer still names under `Stripe.Checkout.Session` that the generator spells differently.
 
+// The LineItem struct is generated (Models/Generated). These are the nested types the
+// request layer still names under `Stripe.Checkout.Session.LineItem` that the generator spells differently.
+
 extension Stripe.Checkout.Session {
     public enum Custom {}
 }
@@ -439,63 +442,6 @@ extension Stripe.Checkout.Session.Customer.Details {
         ) {
             self.type = type
             self.value = value
-        }
-    }
-}
-
-extension Stripe.Checkout.Session {
-    public struct LineItem: Codable, Hashable, Sendable {
-        /// Unique identifier for the object.
-        public var id: Stripe.Checkout.Session.ID
-        /// String representing the object’s type. Objects of the same type share the same value.
-        public var object: String
-        /// Total discount amount applied. If no discounts were applied, defaults to 0.
-        public var amountDiscount: Int?
-        /// Total before any discounts or taxes is applied.
-        public var amountSubtotal: Int?
-        /// Total tax amount applied. If no tax was applied, defaults to 0.
-        public var amountTax: Int?
-        /// Total after discounts and taxes.
-        public var amountTotal: Int?
-        /// Three-letter ISO currency code, in lowercase. Must be a supported currency.
-        public var currency: Stripe.Currency?
-        /// An arbitrary string attached to the object. Often useful for displaying to users. Defaults to product name.
-        public var description: String?
-        /// The discounts applied to the line item. This field is not included by default. To include it in the response, expand the `discounts` field.
-        public var discounts: [Stripe.Checkout.Session.LineItem.Discount]?
-        /// The price used to generate the line item.
-        public var price: Stripe.Products.Price?
-        /// The quantity of products being purchased.
-        public var quantity: Int?
-        /// The taxes applied to the line item. This field is not included by default. To include it in the response, expand the `taxes` field.
-        public var taxes: [Stripe.Checkout.Session.LineItem.Tax]?
-
-        public init(
-            id: Stripe.Checkout.Session.ID,
-            object: String,
-            amountDiscount: Int? = nil,
-            amountSubtotal: Int? = nil,
-            amountTax: Int? = nil,
-            amountTotal: Int? = nil,
-            currency: Stripe.Currency? = nil,
-            description: String? = nil,
-            discounts: [Stripe.Checkout.Session.LineItem.Discount]? = nil,
-            price: Stripe.Products.Price? = nil,
-            quantity: Int? = nil,
-            taxes: [Stripe.Checkout.Session.LineItem.Tax]? = nil
-        ) {
-            self.id = id
-            self.object = object
-            self.amountDiscount = amountDiscount
-            self.amountSubtotal = amountSubtotal
-            self.amountTax = amountTax
-            self.amountTotal = amountTotal
-            self.currency = currency
-            self.description = description
-            self.discounts = discounts
-            self.price = price
-            self.quantity = quantity
-            self.taxes = taxes
         }
     }
 }

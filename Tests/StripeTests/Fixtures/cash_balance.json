@@ -1,0 +1,14 @@
+{
+ "available": {
+  "key": 1
+ },
+ "customer": "customer_1",
+ "customer_account": "customer_account_1",
+ "id": "cash_balance_1",
+ "livemode": true,
+ "object": "cash_balance",
+ "settings": {
+  "reconciliation_mode": "automatic",
+  "using_merchant_default": true
+ }
+}

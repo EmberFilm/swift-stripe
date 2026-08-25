@@ -905,6 +905,39 @@ extension Stripe.Shared {
     }
 }
 
+// deleted_application
+extension Stripe.Shared {
+    public struct DeletedApplication: Codable, Hashable, Sendable, Identifiable {
+        public typealias ID = String
+        public let id: ID
+        /// Always true for a deleted object
+        public var deleted: Bool?
+        /// The name of the application.
+        public var name: String?
+        /// String representing the object's type.
+        public var object: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case id
+            case deleted
+            case name
+            case object
+        }
+
+        public init(
+            id: ID,
+            deleted: Bool? = nil,
+            name: String? = nil,
+            object: String? = nil
+        ) {
+            self.id = id
+            self.deleted = deleted
+            self.name = name
+            self.object = object
+        }
+    }
+}
+
 // discount
 extension Stripe.Shared {
     /// A discount represents the actual application of a coupon or promotion code.
@@ -979,6 +1012,28 @@ extension Stripe.Shared {
             self.start = start
             self.subscription = subscription
             self.subscriptionItem = subscriptionItem
+        }
+    }
+}
+
+// line_items_discount_amount
+extension Stripe.Shared {
+    public struct Discounts: Codable, Hashable, Sendable {
+        /// The amount discounted.
+        public var amount: Int?
+        public var discount: Stripe.Shared.Discount?
+
+        private enum CodingKeys: String, CodingKey {
+            case amount
+            case discount
+        }
+
+        public init(
+            amount: Int? = nil,
+            discount: Stripe.Shared.Discount? = nil
+        ) {
+            self.amount = amount
+            self.discount = discount
         }
     }
 }

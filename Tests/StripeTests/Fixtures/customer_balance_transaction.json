@@ -1,0 +1,19 @@
+{
+ "amount": 1,
+ "checkout_session": "checkout.session_1",
+ "created": 1700000000,
+ "credit_note": "credit_note_1",
+ "currency": "usd",
+ "customer": "customer_1",
+ "customer_account": "customer_account_1",
+ "description": "description_1",
+ "ending_balance": 1,
+ "id": "customer_balance_transaction_1",
+ "invoice": "invoice_1",
+ "livemode": true,
+ "metadata": {
+  "key": "metadata_1"
+ },
+ "object": "customer_balance_transaction",
+ "type": "adjustment"
+}

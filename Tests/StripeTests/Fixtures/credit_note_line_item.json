@@ -65,5 +65,5 @@
  ],
  "type": "custom_line_item",
  "unit_amount": 1,
- "unit_amount_decimal": "unit_amount"
+ "unit_amount_decimal": "unit_amount_decimal_1"
 }

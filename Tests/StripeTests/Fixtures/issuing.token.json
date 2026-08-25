@@ -1,0 +1,53 @@
+{
+ "card": "issuing.card_1",
+ "created": 1700000000,
+ "device_fingerprint": "device_fingerprint_1",
+ "id": "issuing.token_1",
+ "last4": "last4_1",
+ "livemode": true,
+ "network": "mastercard",
+ "network_data": {
+  "device": {
+   "device_fingerprint": "device_fingerprint_1",
+   "ip_address": "ip_address_1",
+   "location": "location_1",
+   "name": "name_1",
+   "phone_number": "phone_number_1",
+   "type": "other"
+  },
+  "mastercard": {
+   "card_reference_id": "card_reference_id_1",
+   "token_reference_id": "token_reference_id_1",
+   "token_requestor_id": "token_requestor_id_1",
+   "token_requestor_name": "token_requestor_name_1"
+  },
+  "type": "mastercard",
+  "visa": {
+   "card_reference_id": "card_reference_id_1",
+   "token_reference_id": "token_reference_id_1",
+   "token_requestor_id": "token_requestor_id_1",
+   "token_risk_score": "token_risk_score_1"
+  },
+  "wallet_provider": {
+   "account_id": "account_id_1",
+   "account_trust_score": 1,
+   "card_number_source": "app",
+   "cardholder_address": {
+    "line1": "line1_1",
+    "postal_code": "postal_code_1"
+   },
+   "cardholder_name": "cardholder_name_1",
+   "device_trust_score": 1,
+   "hashed_account_email_address": "hashed_account_email_address_1",
+   "reason_codes": [
+    "account_card_too_new"
+   ],
+   "suggested_decision": "approve",
+   "suggested_decision_version": "suggested_decision_version_1"
+  }
+ },
+ "network_updated_at": 1700000000,
+ "object": "issuing.token",
+ "status": "active",
+ "wallet_provider": "apple_pay"
+}

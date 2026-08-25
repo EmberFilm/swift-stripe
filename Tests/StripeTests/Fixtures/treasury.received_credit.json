@@ -25,7 +25,7 @@
    "id": "id_1",
    "network": "stripe"
   },
-  "issuing_card": "type",
+  "issuing_card": "issuing_card_1",
   "type": "balance",
   "us_bank_account": {
    "bank_name": "bank_name_1",
@@ -71,7 +71,7 @@
      "type": "financial_account"
     },
     "end_user_details": {
-     "ip_address": "present",
+     "ip_address": "true",
      "present": true
     },
     "expected_arrival_date": 1700000000,

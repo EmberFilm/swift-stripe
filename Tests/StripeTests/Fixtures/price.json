@@ -14,9 +14,9 @@
    "tiers": [
     {
      "flat_amount": 1,
-     "flat_amount_decimal": "flat_amount",
+     "flat_amount_decimal": "flat_amount_decimal_1",
      "unit_amount": 1,
-     "unit_amount_decimal": "unit_amount",
+     "unit_amount_decimal": "unit_amount_decimal_1",
      "up_to": 1
     }
    ],
@@ -49,9 +49,9 @@
  "tiers": [
   {
    "flat_amount": 1,
-   "flat_amount_decimal": "flat_amount",
+   "flat_amount_decimal": "flat_amount_decimal_1",
    "unit_amount": 1,
-   "unit_amount_decimal": "unit_amount",
+   "unit_amount_decimal": "unit_amount_decimal_1",
    "up_to": 1
   }
  ],

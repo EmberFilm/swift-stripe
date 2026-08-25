@@ -7,7 +7,7 @@ import Foundation
 // https://docs.stripe.com/api/billing/credit-grant/object.md
 
 extension Stripe.Billing.Credit {
-    public struct Grant: Codable, Equatable, Sendable, Identifiable {
+    public struct Grant: Codable, Hashable, Sendable, Identifiable {
         public typealias ID = String
 
         /// Unique identifier for the object.
@@ -58,14 +58,14 @@ extension Stripe.Billing.Credit {
         /// The time when this credit grant was voided.
         public let voidedAt: Date?
 
-        public struct Amount: Codable, Equatable, Sendable {
+        public struct Amount: Codable, Hashable, Sendable {
             /// The monetary amount.
             public let monetary: Monetary?
 
             /// The type of this amount.
             public let type: AmountType
 
-            public struct Monetary: Codable, Equatable, Sendable {
+            public struct Monetary: Codable, Hashable, Sendable {
                 /// Three-letter ISO currency code.
                 public let currency: Stripe.Currency
 
@@ -73,27 +73,27 @@ extension Stripe.Billing.Credit {
                 public let value: Int
             }
 
-            public enum AmountType: String, Codable, Equatable, Sendable {
+            public enum AmountType: String, Codable, Hashable, Sendable {
                 case monetary
             }
         }
 
-        public struct ApplicabilityConfig: Codable, Equatable, Sendable {
+        public struct ApplicabilityConfig: Codable, Hashable, Sendable {
             /// Scope of what this credit grant applies to.
             public let scope: Scope
 
-            public struct Scope: Codable, Equatable, Sendable {
+            public struct Scope: Codable, Hashable, Sendable {
                 /// The price type to which credit applies.
                 public let priceType: PriceType?
 
                 /// The specific prices to which credit applies.
                 public let prices: [Price]?
 
-                public enum PriceType: String, Codable, Equatable, Sendable {
+                public enum PriceType: String, Codable, Hashable, Sendable {
                     case metered
                 }
 
-                public struct Price: Codable, Equatable, Sendable {
+                public struct Price: Codable, Hashable, Sendable {
                     /// The price ID.
                     public let id: String?
                 }
@@ -105,7 +105,7 @@ extension Stripe.Billing.Credit {
             }
         }
 
-        public enum Category: String, Codable, Equatable, Sendable {
+        public enum Category: String, Codable, Hashable, Sendable {
             case paid
             case promotional
         }

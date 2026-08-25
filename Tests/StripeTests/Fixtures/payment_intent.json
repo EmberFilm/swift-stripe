@@ -407,7 +407,7 @@
      "return_url": "return_url_1",
      "url": "url_1"
     },
-    "type": "redirect_to_url",
+    "type": "alipay_handle_redirect",
     "upi_handle_redirect_or_display_qr_code": {
      "hosted_instructions_url": "hosted_instructions_url_1"
     },
@@ -628,7 +628,7 @@
     "image_url_svg": "image_url_svg_1"
    }
   },
-  "type": "redirect_to_url",
+  "type": "type_1",
   "upi_handle_redirect_or_display_qr_code": {
    "hosted_instructions_url": "hosted_instructions_url_1",
    "qr_code": {

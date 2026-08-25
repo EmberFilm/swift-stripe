@@ -1,0 +1,26 @@
+{
+ "amount": 1,
+ "available_on": 1700000000,
+ "balance_type": "issuing",
+ "created": 1700000000,
+ "currency": "usd",
+ "description": "description_1",
+ "exchange_rate": 1.5,
+ "fee": 1,
+ "fee_details": [
+  {
+   "amount": 1,
+   "application": "application_1",
+   "currency": "usd",
+   "description": "description_1",
+   "type": "application_fee"
+  }
+ ],
+ "id": "balance_transaction_1",
+ "net": 1,
+ "object": "balance_transaction",
+ "reporting_category": "reporting_category_1",
+ "source": "balance_transaction_source_1",
+ "status": "available",
+ "type": "adjustment"
+}

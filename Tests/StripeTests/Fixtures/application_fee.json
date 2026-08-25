@@ -1,0 +1,39 @@
+{
+ "account": "account_1",
+ "amount": 1,
+ "amount_refunded": 1,
+ "application": "application_1",
+ "balance_transaction": "balance_transaction_1",
+ "charge": "charge_1",
+ "created": 1700000000,
+ "currency": "usd",
+ "fee_source": {
+  "charge": "charge_1",
+  "payout": "payout_1",
+  "type": "charge"
+ },
+ "id": "application_fee_1",
+ "livemode": true,
+ "object": "application_fee",
+ "originating_transaction": "charge_1",
+ "refunded": true,
+ "refunds": {
+  "data": [
+   {
+    "amount": 1,
+    "balance_transaction": "balance_transaction_1",
+    "created": 1700000000,
+    "currency": "usd",
+    "fee": "application_fee_1",
+    "id": "id_1",
+    "metadata": {
+     "key": "metadata_1"
+    },
+    "object": "fee_refund"
+   }
+  ],
+  "has_more": true,
+  "object": "list",
+  "url": "url_1"
+ }
+}

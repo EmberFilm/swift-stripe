@@ -1,0 +1,177 @@
+{
+ "account": "account_1",
+ "additional_tos_acceptances": {
+  "account": {
+   "date": 1700000000,
+   "ip": "ip_1",
+   "user_agent": "user_agent_1"
+  }
+ },
+ "address": {
+  "city": "city_1",
+  "country": "country_1",
+  "line1": "line1_1",
+  "line2": "line2_1",
+  "postal_code": "postal_code_1",
+  "state": "state_1"
+ },
+ "address_kana": {
+  "city": "city_1",
+  "country": "country_1",
+  "line1": "line1_1",
+  "line2": "line2_1",
+  "postal_code": "postal_code_1",
+  "state": "state_1",
+  "town": "town_1"
+ },
+ "address_kanji": {
+  "city": "city_1",
+  "country": "country_1",
+  "line1": "line1_1",
+  "line2": "line2_1",
+  "postal_code": "postal_code_1",
+  "state": "state_1",
+  "town": "town_1"
+ },
+ "created": 1700000000,
+ "dob": {
+  "day": 1,
+  "month": 1,
+  "year": 1
+ },
+ "email": "stripe",
+ "first_name": "stripe",
+ "first_name_kana": "stripe",
+ "first_name_kanji": "stripe",
+ "full_name_aliases": [
+  "full_name_aliases_1"
+ ],
+ "future_requirements": {
+  "alternatives": [
+   {
+    "alternative_fields_due": [
+     "alternative_fields_due_1"
+    ],
+    "original_fields_due": [
+     "original_fields_due_1"
+    ]
+   }
+  ],
+  "currently_due": [
+   "currently_due_1"
+  ],
+  "errors": [
+   {
+    "code": "external_request",
+    "reason": "reason_1",
+    "requirement": "requirement_1"
+   }
+  ],
+  "eventually_due": [
+   "eventually_due_1"
+  ],
+  "past_due": [
+   "past_due_1"
+  ],
+  "pending_verification": [
+   "pending_verification_1"
+  ]
+ },
+ "gender": "gender_1",
+ "id": "person_1",
+ "id_number_provided": true,
+ "id_number_secondary_provided": true,
+ "last_name": "stripe",
+ "last_name_kana": "stripe",
+ "last_name_kanji": "stripe",
+ "maiden_name": "maiden_name_1",
+ "metadata": {
+  "key": "metadata_1"
+ },
+ "nationality": "nationality_1",
+ "object": "person",
+ "phone": "phone_1",
+ "political_exposure": "existing",
+ "registered_address": {
+  "city": "city_1",
+  "country": "country_1",
+  "line1": "line1_1",
+  "line2": "line2_1",
+  "postal_code": "postal_code_1",
+  "state": "state_1"
+ },
+ "relationship": {
+  "authorizer": true,
+  "director": true,
+  "executive": true,
+  "legal_guardian": true,
+  "owner": true,
+  "percent_ownership": 1.5,
+  "representative": true,
+  "title": "title_1"
+ },
+ "requirements": {
+  "alternatives": [
+   {
+    "alternative_fields_due": [
+     "alternative_fields_due_1"
+    ],
+    "original_fields_due": [
+     "original_fields_due_1"
+    ]
+   }
+  ],
+  "currently_due": [
+   "currently_due_1"
+  ],
+  "errors": [
+   {
+    "code": "external_request",
+    "reason": "reason_1",
+    "requirement": "requirement_1"
+   }
+  ],
+  "eventually_due": [
+   "eventually_due_1"
+  ],
+  "past_due": [
+   "past_due_1"
+  ],
+  "pending_verification": [
+   "pending_verification_1"
+  ]
+ },
+ "ssn_last_4_provided": true,
+ "us_cfpb_data": {
+  "ethnicity_details": {
+   "ethnicity": [
+    "cuban"
+   ],
+   "ethnicity_other": "ethnicity_other_1"
+  },
+  "race_details": {
+   "race": [
+    "african_american"
+   ],
+   "race_other": "race_other_1"
+  },
+  "self_identified_gender": "self_identified_gender_1"
+ },
+ "verification": {
+  "additional_document": {
+   "back": "file_1",
+   "details": "details_1",
+   "details_code": "document_corrupt",
+   "front": "file_1"
+  },
+  "details": "details_1",
+  "details_code": "document_address_mismatch",
+  "document": {
+   "back": "file_1",
+   "details": "details_1",
+   "details_code": "document_corrupt",
+   "front": "file_1"
+  },
+  "status": "unverified"
+ }
+}

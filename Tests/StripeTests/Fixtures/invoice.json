@@ -271,7 +271,7 @@
      "hosted_instructions_url": "hosted_instructions_url_1",
      "mobile_auth_url": "mobile_auth_url_1"
     },
-    "type": "redirect_to_url",
+    "type": "type_1",
     "upi_handle_redirect_or_display_qr_code": {
      "hosted_instructions_url": "hosted_instructions_url_1"
     },
@@ -910,7 +910,7 @@
      "return_url": "return_url_1",
      "url": "url_1"
     },
-    "type": "redirect_to_url",
+    "type": "alipay_handle_redirect",
     "upi_handle_redirect_or_display_qr_code": {
      "hosted_instructions_url": "hosted_instructions_url_1"
     },
@@ -1091,7 +1091,7 @@
    },
    "customer_balance": {
     "bank_transfer": {
-     "type": "eu_bank_transfer"
+     "type": "gb_bank_transfer"
     },
     "funding_type": "bank_transfer"
    },

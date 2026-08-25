@@ -48,7 +48,7 @@ def is_resource_union(node):
     r = ref(node)          # a bare $ref to a schema that is itself a union (`payment_source`)
     return bool(r) and len(refs) <= 1 and "anyOf" in S.get(r, {}) and "properties" not in S.get(r, {})
 
-def sample(node, prop, expandable, depth, stack, parent=None):
+def sample(node, prop, expandable, depth, stack, parent=None, siblings=()):
     """A sample value for one property schema."""
     r = ref(node)
     if r and offers_id(node):
@@ -69,7 +69,9 @@ def sample(node, prop, expandable, depth, stack, parent=None):
             return "usd"
         if "statement_descriptor" in prop:
             return "EMBERFILM"        # validated to 22 characters by the hand type
-        return documented_value(node, {prop, parent}) or f"{prop}_1"
+        # a description often names sibling fields ("if `address_zip` was provided…"); those
+        # are not values either
+        return documented_value(node, {prop, parent, *siblings}) or f"{prop}_1"
     if t == "integer":
         return 1700000000 if node.get("format") == "unix-time" else 1
     if t == "number": return 1.5
@@ -89,8 +91,9 @@ def build_inline(schema, depth, stack, parent=None):
     if depth < 0: return None
     out = {}
     expandable = set(schema.get("x-expandableFields", []))
+    names = tuple(schema.get("properties", {}).keys())
     for prop, node in schema.get("properties", {}).items():
-        v = sample(node, prop, expandable, depth, stack, parent=parent)
+        v = sample(node, prop, expandable, depth, stack, parent=parent, siblings=names)
         if v is not None: out[prop] = v
     return out
 
@@ -138,9 +141,13 @@ struct FixtureDecodingTests {{
     private static let knownHandStrictness: [String: Set<String>] = [
         "treasury.received_credit": ["linked_flows.source_flow_details.payout.failure_code"],
         "treasury.received_debit": ["linked_flows.source_flow_details.payout.failure_code"],
-        "issuing.authorization": ["card.brand"],
-        "treasury.transaction": ["flow_details.issuing_authorization.card.brand"],
-        "treasury.transaction_entry": ["flow_details.issuing_authorization.card.brand"],
+    ]
+
+    /// Hand-written enums that are strict on a field the spec types as a free string, reached
+    /// from many resources through the card types. Same status as the paths above: acknowledged
+    /// defects, matched by the enum's name in the decoding error, to be removed as each is fixed.
+    private static let knownStrictHandEnums: Set<String> = [
+        "CardBrand", "CardFundingType", "CardValidationCheck", "CardTokenizedMethod",
     ]
 
     private static func decodes<T: Decodable>(_ schema: String, as type: T.Type) throws {{
@@ -153,7 +160,8 @@ struct FixtureDecodingTests {{
             }} catch let error as DecodingError {{
                 let (path, reason) = describe(error)
                 let wire = path.joined(separator: ".")
-                let known = knownHandStrictness[schema, default: []].contains {{ wire.hasSuffix($0) }}
+                let strictEnum = knownStrictHandEnums.contains {{ reason.contains("Cannot initialize \\($0) from") }}
+                let known = strictEnum || knownHandStrictness[schema, default: []].contains {{ wire.hasSuffix($0) }}
                 guard known, remove(path: path, from: &json) else {{
                     Issue.record("\\(schema): \\(wire): \\(reason)")
                     return

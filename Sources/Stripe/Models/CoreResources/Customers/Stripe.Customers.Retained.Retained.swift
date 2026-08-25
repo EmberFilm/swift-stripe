@@ -15,37 +15,11 @@ import Foundation
 // The Customer struct is generated (Models/Generated). These are the nested types the request
 // layer still names under `Stripe.Customers.Customer` that the generator spells differently.
 
+// The CustomerCashBalance struct is generated (Models/Generated). These are the nested types the
+// request layer still names under `Stripe.Customers.CustomerCashBalance` that the generator spells differently.
+
 extension Stripe.Customers.Customer {
     public enum Sessions: Sendable {}
-}
-
-extension Stripe.Customers {
-    public struct CustomerCashBalance: Codable, Hashable, Sendable {
-        /// String representing the object’s type. Objects of the same type share the same value.
-        public var object: String
-        /// A hash of all cash balances available to this customer. You cannot delete a customer with any cash balances, even if the balance is 0. Amounts are represented in the smallest currency unit.
-        public var available: [String: Int]?
-        /// The ID of the customer whose cash balance this object represents.
-        public var customer: Stripe.Customers.Customer.ID?
-        /// Has the value true if the object exists in live mode or the value false if the object exists in test mode.
-        public var livemode: Bool
-        /// A hash of settings for this cash balance.
-        public var settings: Stripe.Customers.CustomerCashBalanceSettings?
-
-        public init(
-            object: String,
-            available: [String: Int]? = nil,
-            customer: Stripe.Customers.Customer.ID? = nil,
-            livemode: Bool,
-            settings: Stripe.Customers.CustomerCashBalanceSettings? = nil
-        ) {
-            self.object = object
-            self.available = available
-            self.customer = customer
-            self.livemode = livemode
-            self.settings = settings
-        }
-    }
 }
 
 extension Stripe.Customers {

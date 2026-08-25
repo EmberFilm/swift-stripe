@@ -1,0 +1,23 @@
+{
+ "country": "country_1",
+ "created": 1700000000,
+ "customer": "customer_1",
+ "customer_account": "customer_account_1",
+ "id": "tax_id_1",
+ "livemode": true,
+ "object": "tax_id",
+ "owner": {
+  "account": "account_1",
+  "application": "application_1",
+  "customer": "customer_1",
+  "customer_account": "type",
+  "type": "account"
+ },
+ "type": "ad_nrt",
+ "value": "value_1",
+ "verification": {
+  "status": "pending",
+  "verified_address": "verified_address_1",
+  "verified_name": "verified_name_1"
+ }
+}

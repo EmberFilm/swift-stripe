@@ -153,9 +153,9 @@
      "tiers": [
       {
        "flat_amount": 1,
-       "flat_amount_decimal": "flat_amount",
+       "flat_amount_decimal": "flat_amount_decimal_1",
        "unit_amount": 1,
-       "unit_amount_decimal": "unit_amount",
+       "unit_amount_decimal": "unit_amount_decimal_1",
        "up_to": 1
       }
      ],
@@ -205,9 +205,9 @@
      "tiers": [
       {
        "flat_amount": 1,
-       "flat_amount_decimal": "flat_amount",
+       "flat_amount_decimal": "flat_amount_decimal_1",
        "unit_amount": 1,
-       "unit_amount_decimal": "unit_amount",
+       "unit_amount_decimal": "unit_amount_decimal_1",
        "up_to": 1
       }
      ],
@@ -292,7 +292,7 @@
    },
    "customer_balance": {
     "bank_transfer": {
-     "type": "eu_bank_transfer"
+     "type": "gb_bank_transfer"
     },
     "funding_type": "bank_transfer"
    },
@@ -353,7 +353,7 @@
    "end": 1700000000,
    "id": "id_1",
    "invoice": "invoice_1",
-   "invoice_item": "id",
+   "invoice_item": "invoice_item_1",
    "object": "discount",
    "promotion_code": "promotion_code_1",
    "source": {
@@ -409,9 +409,9 @@
      "tiers": [
       {
        "flat_amount": 1,
-       "flat_amount_decimal": "flat_amount",
+       "flat_amount_decimal": "flat_amount_decimal_1",
        "unit_amount": 1,
-       "unit_amount_decimal": "unit_amount",
+       "unit_amount_decimal": "unit_amount_decimal_1",
        "up_to": 1
       }
      ],
@@ -461,9 +461,9 @@
      "tiers": [
       {
        "flat_amount": 1,
-       "flat_amount_decimal": "flat_amount",
+       "flat_amount_decimal": "flat_amount_decimal_1",
        "unit_amount": 1,
-       "unit_amount_decimal": "unit_amount",
+       "unit_amount_decimal": "unit_amount_decimal_1",
        "up_to": 1
       }
      ],

@@ -1,0 +1,147 @@
+{
+ "amount": 1,
+ "balance_transactions": [
+  {
+   "amount": 1,
+   "available_on": 1700000000,
+   "balance_type": "issuing",
+   "created": 1700000000,
+   "currency": "usd",
+   "description": "description_1",
+   "exchange_rate": 1.5,
+   "fee": 1,
+   "fee_details": [
+    {
+     "amount": 1,
+     "application": "application_1",
+     "currency": "usd",
+     "description": "description_1",
+     "type": "application_fee"
+    }
+   ],
+   "id": "id_1",
+   "net": 1,
+   "object": "balance_transaction",
+   "reporting_category": "reporting_category_1",
+   "source": "balance_transaction_source_1",
+   "status": "available",
+   "type": "adjustment"
+  }
+ ],
+ "charge": "charge_1",
+ "created": 1700000000,
+ "currency": "usd",
+ "enhanced_eligibility_types": [
+  "mastercard_compliance"
+ ],
+ "evidence": {
+  "access_activity_log": "access_activity_log_1",
+  "billing_address": "billing_address_1",
+  "cancellation_policy": "file_1",
+  "cancellation_policy_disclosure": "cancellation_policy_disclosure_1",
+  "cancellation_rebuttal": "cancellation_rebuttal_1",
+  "customer_communication": "file_1",
+  "customer_email_address": "customer_email_address_1",
+  "customer_name": "customer_name_1",
+  "customer_purchase_ip": "customer_purchase_ip_1",
+  "customer_signature": "file_1",
+  "duplicate_charge_documentation": "file_1",
+  "duplicate_charge_explanation": "duplicate_charge_explanation_1",
+  "duplicate_charge_id": "duplicate_charge_id_1",
+  "enhanced_evidence": {
+   "mastercard_compliance": {
+    "fee_acknowledged": true
+   },
+   "visa_compelling_evidence_3": {
+    "disputed_transaction": {
+     "customer_account_id": "customer_account_id_1",
+     "customer_device_fingerprint": "customer_device_fingerprint_1",
+     "customer_device_id": "customer_device_id_1",
+     "customer_email_address": "customer_email_address_1",
+     "customer_purchase_ip": "customer_purchase_ip_1",
+     "merchandise_or_services": "merchandise",
+     "product_description": "product_description_1"
+    },
+    "prior_undisputed_transactions": [
+     {
+      "charge": "charge_1",
+      "customer_account_id": "customer_account_id_1",
+      "customer_device_fingerprint": "customer_device_fingerprint_1",
+      "customer_device_id": "customer_device_id_1",
+      "customer_email_address": "customer_email_address_1",
+      "customer_purchase_ip": "customer_purchase_ip_1",
+      "product_description": "product_description_1"
+     }
+    ]
+   },
+   "visa_compliance": {
+    "fee_acknowledged": true
+   }
+  },
+  "product_description": "product_description_1",
+  "receipt": "file_1",
+  "refund_policy": "file_1",
+  "refund_policy_disclosure": "refund_policy_disclosure_1",
+  "refund_refusal_explanation": "refund_refusal_explanation_1",
+  "service_date": "service_date_1",
+  "service_documentation": "file_1",
+  "shipping_address": "shipping_address_1",
+  "shipping_carrier": "shipping_carrier_1",
+  "shipping_date": "shipping_date_1",
+  "shipping_documentation": "file_1",
+  "shipping_tracking_number": "shipping_tracking_number_1",
+  "uncategorized_file": "file_1",
+  "uncategorized_text": "uncategorized_text_1"
+ },
+ "evidence_details": {
+  "due_by": 1700000000,
+  "enhanced_eligibility": {
+   "mastercard_compliance": {
+    "status": "fee_acknowledged"
+   },
+   "visa_compelling_evidence_3": {
+    "required_actions": [
+     "missing_customer_identifiers"
+    ],
+    "status": "not_qualified"
+   },
+   "visa_compliance": {
+    "status": "fee_acknowledged"
+   }
+  },
+  "has_evidence": true,
+  "past_due": true,
+  "submission_count": 1
+ },
+ "id": "dispute_1",
+ "is_charge_refundable": true,
+ "livemode": true,
+ "metadata": {
+  "key": "metadata_1"
+ },
+ "network_reason_code": "network_reason_code_1",
+ "object": "dispute",
+ "payment_intent": "payment_intent_1",
+ "payment_method_details": {
+  "amazon_pay": {
+   "dispute_type": "chargeback"
+  },
+  "card": {
+   "brand": "amex",
+   "case_type": "block",
+   "network": "amex",
+   "network_reason_code": "network_reason_code_1"
+  },
+  "klarna": {
+   "chargeback_loss_reason_code": "chargeback_loss_reason_code_1",
+   "reason_code": "reason_code_1"
+  },
+  "paypal": {
+   "case_id": "case_id_1",
+   "reason_code": "reason_code_1"
+  },
+  "type": "amazon_pay"
+ },
+ "reason": "bank_cannot_process",
+ "status": "lost"
+}

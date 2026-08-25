@@ -12,6 +12,46 @@ loses only the stale one.
 """
 import pathlib, re, sys
 
+if sys.argv[1] == "--sweep":
+    # Sibling sweep: other hand files that extend the resource, or one of its generated nested
+    # types, with declarations the generated struct now provides. Those blocks are stale.
+    namespace, generated = sys.argv[2:4]
+    gen_names = set(re.findall(r"^        public (?:struct|enum|typealias) `?(\w+)`?", pathlib.Path(generated).read_text(), re.M))
+    swept = []
+    for f in pathlib.Path("Sources/Stripe/Models").rglob("*.swift"):
+        if "Generated" in f.parts: continue
+        s = f.read_text()
+        if f"extension {namespace}" not in s: continue
+        blocks = re.split(r"(?m)^(?=extension |// MARK|// extension|//extension)", s)
+        head, body = blocks[0], blocks[1:]
+        kept = []
+        for b in body:
+            m = re.match(r"^(extension ([\w.]+) \{\n)(.*)(\n\}\n*)$", b, re.S)
+            if not m: kept.append(b); continue
+            header, ext_ns, inner, tail = m.groups()
+            if ext_ns != namespace and ext_ns.startswith(namespace + ".") and ext_ns[len(namespace) + 1:].split(".")[0] in gen_names:
+                swept.append(f"{f.name}: extension {ext_ns}"); continue
+            if ext_ns == namespace:
+                members, buf, depth = [], [], 0
+                for line in inner.split("\n"):
+                    buf.append(line); depth += line.count("{") - line.count("}")
+                    if depth == 0 and re.match(r"^    \}$", line): members.append("\n".join(buf)); buf = []
+                if buf: members.append("\n".join(buf))
+                surv = []
+                for mem in members:
+                    d = re.search(r"^    public (?:struct|enum|typealias) `?(\w+)`?", mem, re.M)
+                    if d and d.group(1) in gen_names: swept.append(f"{f.name}: {ext_ns}.{d.group(1)}")
+                    else: surv.append(mem)
+                if any(re.search(r"^    public ", x, re.M) for x in surv): kept.append(header + "\n".join(surv) + tail)
+                continue
+            kept.append(b)
+        new = head + "".join(kept)
+        if new != s:
+            if not re.search(r"^\s*public ", new, re.M): f.unlink(); swept.append(f"{f.name}: removed (nothing left)")
+            else: f.write_text(new)
+    print(f"sweep {namespace}: {len(swept)} stale declaration(s)" + ("".join("\n   - " + x for x in swept) if swept else ""))
+    sys.exit(0)
+
 hand, struct_name, namespace, generated = sys.argv[1:5]
 hand_p, gen_p = pathlib.Path(hand), pathlib.Path(generated)
 s = hand_p.read_text()
