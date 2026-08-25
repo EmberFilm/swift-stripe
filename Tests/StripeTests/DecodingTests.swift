@@ -122,4 +122,28 @@ struct DecodingTests {
         #expect(decoded.error.param == "payment_method")
         #expect(decoded.error.type == .cardError)
     }
+
+    @Test("fields whose names were misspelled decode again")
+    func correctedFieldNames() throws {
+        // Each of these silently decoded to nil because the property name did not match the wire
+        // name once `.convertFromSnakeCase` had run. Found by diffing the models against live
+        // API responses; the same class of defect as the three in README's corrections table.
+        struct Case {
+            let json: String
+            let check: (Data) throws -> Bool
+        }
+
+        let customer = try StripeAPI.decoder.decode(
+            Stripe.Customers.Customer.self,
+            from: Data(#"{"id":"cus_1","object":"customer","created":1,"preferred_locales":["en"]}"#.utf8)
+        )
+        #expect(customer.preferredLocales == ["en"])
+
+        let invoice = try StripeAPI.decoder.decode(
+            Stripe.Billing.Invoice.self,
+            from: Data(#"{"object":"invoice","created":1,"amount_remaining":250}"#.utf8)
+        )
+        #expect(invoice.amountRemaining == 250)
+    }
+
 }

@@ -76,7 +76,7 @@ extension Stripe.Billing {
         /// The amount, in cents, that was paid.
         public var amountPaid: Int?
         /// The amount remaining, in cents, that is due.
-        public var amountRemanining: Int?
+        public var amountRemaining: Int?
         /// This is the sum of all the shipping amounts.
         public var amountShipping: Int?
         /// ID of the Connect Application that created the invoice.
@@ -209,7 +209,7 @@ extension Stripe.Billing {
             accountTaxIds: [String]? = nil,
             amountDue: Int? = nil,
             amountPaid: Int? = nil,
-            amountRemanining: Int? = nil,
+            amountRemaining: Int? = nil,
             amountShipping: Int? = nil,
             application: String? = nil,
             applicationFeeAmount: Int? = nil,
@@ -288,7 +288,7 @@ extension Stripe.Billing {
             self._accountTaxIds = ExpandableCollection(ids: accountTaxIds)
             self.amountDue = amountDue
             self.amountPaid = amountPaid
-            self.amountRemanining = amountRemanining
+            self.amountRemaining = amountRemaining
             self.amountShipping = amountShipping
             self.application = application
             self.applicationFeeAmount = applicationFeeAmount

@@ -435,6 +435,9 @@ format and are corrected here:
 | `PaymentIntent` | `onBehalfOn` | `onBehalfOf` | `on_behalf_of` |
 | `PaymentLink` … confirmation | `message` | `customMessage` | `custom_message` |
 | `Billing.Invoice` | `subscriptionDetails: Subscription.Details` | `…: Invoice.SubscriptionDetails` | `subscription_details` |
+| `Customers.Customer` | `preferredLocals` | `preferredLocales` | `preferred_locales` |
+| `Checkout.Session` | `shipppingOptions` | `shippingOptions` | `shipping_options` |
+| `Billing.Invoice` | `amountRemanining` | `amountRemaining` | `amount_remaining` |
 
 `Billing.Invoice.subscriptionDetails` was typed as the subscription's
 *cancellation* details, so `subscription` and `metadata` decoded to nothing. It
@@ -466,7 +469,22 @@ regression.
 ## Status
 
 The request engine, form encoding, error handling, retries, idempotency keys,
-and webhook verification are complete and covered by tests. Typed resource clients currently
+and webhook verification are complete and covered by tests.
+
+**The model types are a vendored snapshot, not a tracked mirror of the API.**
+They came from swift-stripe-standard and have not been regenerated since, so on
+a recent pinned version expect fields Stripe has added to be absent and fields
+it has moved to decode as `nil`. Diffing the models against live responses on
+`2026-06-24.dahlia` found, per object, roughly: 15 unmodelled keys on
+Checkout Session, 12 on Invoice, 3 on Subscription and Customer, 0 on Price —
+plus a dozen properties on Invoice that the API no longer returns at all
+(`charge`, `paid`, `payment_intent`, `subscription`, `tax`, `transfer_data`
+and friends, all relocated in `2025-03-31.basil`).
+
+Nothing there breaks decoding — every field is optional — but a missing field is
+silent, so check the object you depend on before trusting it. The quickest check
+is to fetch a live object and compare its keys against the model's properties,
+snake-cased. Typed resource clients currently
 cover Customers, PaymentIntents, Checkout Sessions, Products, Prices,
 Subscriptions, and Billing Portal Sessions; every other endpoint is reachable
 through `stripe.api` with the modelled request and response types.
