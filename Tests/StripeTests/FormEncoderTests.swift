@@ -106,4 +106,19 @@ struct FormEncoderTests {
         let body = try StripeFormEncoder().encode(Request(name: "Ada Lovelace & Co"))
         #expect(body == "name=Ada+Lovelace+%26+Co")
     }
+
+    @Test("non-ASCII text is percent-encoded as UTF-8")
+    func escapingNonASCII() throws {
+        struct Request: Encodable { let name: String }
+        // `CharacterSet.alphanumerics` counted these as allowed and let them through raw.
+        #expect(try StripeFormEncoder().encode(Request(name: "café")) == "name=caf%C3%A9")
+        #expect(try StripeFormEncoder().encode(Request(name: "日本")) == "name=%E6%97%A5%E6%9C%AC")
+    }
+
+    @Test("reserved characters that survive urlQueryAllowed are escaped")
+    func escapingReserved() throws {
+        struct Request: Encodable { let value: String }
+        let body = try StripeFormEncoder().encode(Request(value: "a=b&c+d/e?f#g"))
+        #expect(body == "value=a%3Db%26c%2Bd%2Fe%3Ff%23g")
+    }
 }

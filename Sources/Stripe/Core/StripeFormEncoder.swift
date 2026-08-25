@@ -44,16 +44,39 @@ public struct StripeFormEncoder: Sendable {
             .joined(separator: "&")
     }
 
-    /// Percent-encoding for form bodies: space becomes `+`, and everything
-    /// outside the unreserved set is escaped. `CharacterSet.urlQueryAllowed`
-    /// is too permissive here — it leaves `&`, `=` and `+` intact.
+    /// Percent-encoding for form bodies: space becomes `+`, and every byte outside the unreserved
+    /// set is escaped. `CharacterSet.urlQueryAllowed` is too permissive here — it leaves `&`, `=`
+    /// and `+` intact.
+    ///
+    /// Written over UTF-8 bytes rather than `CharacterSet`, which FoundationEssentials does not
+    /// vend. That also fixes the encoding of non-ASCII text: `CharacterSet.alphanumerics` counts
+    /// letters like `é` as allowed and would have passed them through unescaped.
     static func escape(_ string: String) -> String {
-        var allowed = CharacterSet.alphanumerics
-        allowed.insert(charactersIn: "-._~")
-        return string
-            .addingPercentEncoding(withAllowedCharacters: allowed)?
-            .replacingOccurrences(of: "%20", with: "+")
-            ?? string
+        var out = ""
+        out.reserveCapacity(string.utf8.count)
+        for byte in string.utf8 {
+            switch byte {
+            case UInt8(ascii: "A")...UInt8(ascii: "Z"),
+                 UInt8(ascii: "a")...UInt8(ascii: "z"),
+                 UInt8(ascii: "0")...UInt8(ascii: "9"),
+                 UInt8(ascii: "-"), UInt8(ascii: "."), UInt8(ascii: "_"), UInt8(ascii: "~"):
+                out.append(Character(UnicodeScalar(byte)))
+
+            case UInt8(ascii: " "):
+                out.append("+")
+
+            default:
+                out.append("%")
+                out.append(Self.hexDigit(byte >> 4))
+                out.append(Self.hexDigit(byte & 0x0F))
+            }
+        }
+        return out
+    }
+
+    private static func hexDigit(_ nibble: UInt8) -> Character {
+        Character(UnicodeScalar(nibble < 10 ? nibble + UInt8(ascii: "0")
+                                            : nibble - 10 + UInt8(ascii: "A")))
     }
 }
 

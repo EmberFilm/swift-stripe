@@ -128,6 +128,23 @@ logic, call `StripeAPI.makeRequest` / `StripeAPI.decode` directly.
 Retry tests really sleep through the backoff — keep `maxRetries: 0` in tests
 that aren't about retrying.
 
+## Portability
+
+Every file imports `FoundationEssentials` when it is available and `Foundation`
+otherwise. **FoundationEssentials is a strict subset**, and a consumer
+cross-compiling with the static Linux SDK gets it — so anything Foundation-only
+compiles on macOS and fails there. Already hit once each:
+
+- no `CharacterSet` (percent-encoding and validation are written over UTF-8
+  bytes / `Character` instead);
+- `pow` resolves to the `Decimal` overload, which `Duration.seconds` rejects;
+- `ByteBuffer(data:)` needs `NIOFoundationCompat`; `ByteBuffer(bytes:)` is
+  NIOCore and takes `Data` directly. Prefer it.
+
+The `musl` CI job builds with the static SDK and is the only thing that catches
+this. Run it locally with
+`swift build --swift-sdk aarch64-swift-linux-musl`.
+
 ## Behaviour worth knowing before changing it
 
 - **Retries**: `429` and `5xx` except `501`, exponential backoff (0.5s, 1s, 2s,

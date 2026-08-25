@@ -29,14 +29,14 @@ extension Stripe {
                 throw ValidationError.tooLong
             }
 
-            let invalidCharacters = CharacterSet(charactersIn: "<>\'\"*")
-            guard string.rangeOfCharacter(from: invalidCharacters) == nil else {
+            // Character-wise rather than via `CharacterSet`, which FoundationEssentials
+            // does not vend.
+            let invalidCharacters: Set<Character> = ["<", ">", "'", "\"", "*"]
+            guard !string.contains(where: invalidCharacters.contains) else {
                 throw ValidationError.invalidCharacters
             }
 
-            let numbersOnly = CharacterSet.decimalDigits
-            let stringCharacters = CharacterSet(charactersIn: string)
-            guard !stringCharacters.isSubset(of: numbersOnly) else {
+            guard !string.allSatisfy(\.isNumber) else {
                 throw ValidationError.onlyNumbers
             }
         }

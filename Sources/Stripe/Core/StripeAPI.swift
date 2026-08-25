@@ -135,7 +135,7 @@ public struct StripeAPI: Sendable {
         }
         if let body {
             request.headers.add(name: "Content-Type", value: "application/x-www-form-urlencoded")
-            request.body = .bytes(ByteBuffer(data: body))
+            request.body = .bytes(ByteBuffer(bytes: body))
         }
         return request
     }
@@ -182,8 +182,11 @@ public struct StripeAPI: Sendable {
             } catch let error as StripeClientError where error.isRetryable {
                 lastError = error
                 guard attempt < maxRetries else { break }
-                // Exponential backoff with a conservative ceiling.
-                try await Task.sleep(for: .seconds(min(pow(2.0, Double(attempt)) * 0.5, 8.0)))
+                // Exponential backoff with a conservative ceiling: 0.5s, 1s, 2s, … capped at 8s.
+                // Shifted rather than `pow`ed because FoundationEssentials resolves `pow` to the
+                // `Decimal` overload, which `Duration.seconds` will not take.
+                let backoff = min(0.5 * Double(1 << min(attempt, 8)), 8.0)
+                try await Task.sleep(for: .seconds(backoff))
             }
         }
         throw lastError
