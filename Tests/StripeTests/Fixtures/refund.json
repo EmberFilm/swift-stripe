@@ -1,0 +1,126 @@
+{
+ "amount": 1,
+ "balance_transaction": "balance_transaction_1",
+ "charge": "charge_1",
+ "created": 1700000000,
+ "currency": "usd",
+ "customer": "customer_1",
+ "customer_account": "customer_account_1",
+ "description": "description_1",
+ "destination_details": {
+  "affirm": {},
+  "afterpay_clearpay": {},
+  "alipay": {},
+  "alma": {},
+  "amazon_pay": {},
+  "au_bank_transfer": {},
+  "blik": {
+   "network_decline_code": "network_decline_code_1",
+   "reference": "reference_1",
+   "reference_status": "pending"
+  },
+  "br_bank_transfer": {
+   "reference": "reference_1",
+   "reference_status": "pending"
+  },
+  "card": {
+   "reference": "reference_1",
+   "reference_status": "pending",
+   "reference_type": "reference_type_1",
+   "type": "pending"
+  },
+  "cashapp": {},
+  "crypto": {
+   "reference": "reference_1"
+  },
+  "customer_cash_balance": {},
+  "eps": {},
+  "eu_bank_transfer": {
+   "reference": "reference_1",
+   "reference_status": "pending"
+  },
+  "gb_bank_transfer": {
+   "reference": "reference_1",
+   "reference_status": "pending"
+  },
+  "giropay": {},
+  "grabpay": {},
+  "jp_bank_transfer": {
+   "reference": "reference_1",
+   "reference_status": "pending"
+  },
+  "klarna": {},
+  "mb_way": {
+   "reference": "reference_1",
+   "reference_status": "pending"
+  },
+  "multibanco": {
+   "reference": "reference_1",
+   "reference_status": "pending"
+  },
+  "mx_bank_transfer": {
+   "reference": "reference_1",
+   "reference_status": "pending"
+  },
+  "nz_bank_transfer": {},
+  "p24": {
+   "reference": "reference_1",
+   "reference_status": "pending"
+  },
+  "paynow": {},
+  "paypal": {
+   "network_decline_code": "network_decline_code_1"
+  },
+  "pix": {},
+  "revolut": {},
+  "scalapay": {},
+  "sofort": {},
+  "swish": {
+   "network_decline_code": "network_decline_code_1",
+   "reference": "reference_1",
+   "reference_status": "pending"
+  },
+  "th_bank_transfer": {
+   "reference": "reference_1",
+   "reference_status": "pending"
+  },
+  "twint": {},
+  "type": "type_1",
+  "us_bank_transfer": {
+   "reference": "reference_1",
+   "reference_status": "pending"
+  },
+  "wechat_pay": {},
+  "zip": {}
+ },
+ "failure_balance_transaction": "balance_transaction_1",
+ "failure_reason": "lost_or_stolen_card",
+ "id": "refund_1",
+ "instructions_email": "instructions_email_1",
+ "metadata": {
+  "key": "metadata_1"
+ },
+ "next_action": {
+  "display_details": {
+   "email_sent": {
+    "email_sent_at": 1700000000,
+    "email_sent_to": "email_sent_to_1"
+   },
+   "expires_at": 1700000000
+  },
+  "type": "type_1"
+ },
+ "object": "refund",
+ "payment_intent": "payment_intent_1",
+ "payment_method": "payment_method_1",
+ "pending_reason": "charge_pending",
+ "presentment_details": {
+  "presentment_amount": 1,
+  "presentment_currency": "usd"
+ },
+ "reason": "duplicate",
+ "receipt_number": "receipt_number_1",
+ "source_transfer_reversal": "transfer_reversal_1",
+ "status": "pending",
+ "transfer_reversal": "transfer_reversal_1"
+}

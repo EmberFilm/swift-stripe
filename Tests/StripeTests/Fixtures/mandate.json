@@ -1,0 +1,93 @@
+{
+ "customer_acceptance": {
+  "accepted_at": 1700000000,
+  "offline": {},
+  "online": {
+   "ip_address": "ip_address_1",
+   "user_agent": "user_agent_1"
+  },
+  "type": "offline"
+ },
+ "id": "mandate_1",
+ "livemode": true,
+ "multi_use": {
+  "amount": 1,
+  "currency": "usd"
+ },
+ "object": "mandate",
+ "on_behalf_of": "on_behalf_of_1",
+ "payment_method": "payment_method_1",
+ "payment_method_details": {
+  "acss_debit": {
+   "default_for": [
+    "invoice"
+   ],
+   "interval_description": "interval_description_1",
+   "payment_schedule": "combined",
+   "transaction_type": "business"
+  },
+  "amazon_pay": {},
+  "au_becs_debit": {
+   "url": "url_1"
+  },
+  "bacs_debit": {
+   "display_name": "display_name_1",
+   "network_status": "accepted",
+   "reference": "reference_1",
+   "revocation_reason": "account_closed",
+   "service_user_number": "service_user_number_1",
+   "url": "url_1"
+  },
+  "card": {},
+  "cashapp": {},
+  "kakao_pay": {},
+  "klarna": {},
+  "kr_card": {},
+  "link": {},
+  "naver_pay": {},
+  "nz_bank_account": {},
+  "paypal": {
+   "billing_agreement_id": "billing_agreement_id_1",
+   "payer_id": "payer_id_1"
+  },
+  "payto": {
+   "amount": 1,
+   "amount_type": "fixed",
+   "end_date": "end_date_1",
+   "payment_schedule": "adhoc",
+   "payments_per_period": 1,
+   "purpose": "dependant_support",
+   "start_date": "start_date_1"
+  },
+  "pix": {
+   "amount_includes_iof": "always",
+   "amount_type": "fixed",
+   "end_date": "end_date_1",
+   "payment_schedule": "halfyearly",
+   "reference": "reference_1",
+   "start_date": "start_date_1"
+  },
+  "revolut_pay": {},
+  "sepa_debit": {
+   "reference": "reference_1",
+   "url": "url_1"
+  },
+  "twint": {},
+  "type": "type_1",
+  "upi": {
+   "amount": 1,
+   "amount_type": "fixed",
+   "description": "description_1",
+   "end_date": 1700000000
+  },
+  "us_bank_account": {
+   "collection_method": "paper"
+  }
+ },
+ "single_use": {
+  "amount": 1,
+  "currency": "usd"
+ },
+ "status": "active",
+ "type": "multi_use"
+}

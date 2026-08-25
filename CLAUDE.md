@@ -201,8 +201,10 @@ let the decode path regress to match it.
 
 ## Generated models
 
-Ten resources are generated from Stripe's OpenAPI spec; do not edit the files under
-`Sources/Stripe/Models/Generated/` by hand — regenerate them:
+117 of the spec's 137 root resources are generated from Stripe's OpenAPI spec; do not edit the
+files under `Sources/Stripe/Models/Generated/` by hand — regenerate them. Generated files carry a
+`Generated.` prefix because SwiftPM requires unique basenames per target and a request file
+(`Stripe.ConfirmationToken.swift`) can share a model's name:
 
 ```bash
 curl -sSLO https://raw.githubusercontent.com/stripe/openapi/<pinned commit>/openapi/spec3.sdk.json
@@ -217,8 +219,15 @@ both is the generated one; the retained file must not redeclare it.
 
 To cut a further resource over: add it to `RESOURCES` and `RESOURCE_TYPES`, generate it with
 `--only … --keep`, run `Scripts/cutover.py <hand file> <struct> <namespace> <generated file>`,
-delete any sibling hand file that extends a nested type the generator now declares, and fix
-the request layer's references the compiler reports. The collision set is computed, not listed.
+then `Scripts/cutover.py --sweep <namespace> <generated file>` for sibling files that extend a
+nested type the generator now declares, and fix the request layer's references the compiler
+reports. `Scripts/batch-cutover.py spec --max-refs N` does all of that for every hand resource
+the request layer references at most N times. The collision set is computed, not listed.
+
+Still hand-written: `event` (lenient union decoding the generator does not express),
+`payment_source` (a union), and the request-entangled `account`, `payment_method`, `payment_link`,
+`subscription_schedule`, `coupon`, `plan`, `promotion_code`, `shipping_rate`, `transfer`, `payout`,
+`setup_intent`, `billing.credit_grant`, `billing_portal.configuration`, `forwarding.request`.
 
 Rules the generator enforces, and why:
 

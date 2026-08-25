@@ -1,0 +1,17 @@
+{
+ "account": "account_1",
+ "amount": 1,
+ "currency": "usd",
+ "description": "description_1",
+ "id": "financial_connections.transaction_1",
+ "livemode": true,
+ "object": "financial_connections.transaction",
+ "status": "pending",
+ "status_transitions": {
+  "posted_at": 1700000000,
+  "void_at": 1700000000
+ },
+ "transacted_at": 1700000000,
+ "transaction_refresh": "transaction_refresh_1",
+ "updated": 1700000000
+}

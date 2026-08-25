@@ -1,0 +1,32 @@
+{
+ "created": 1700000000,
+ "expires_at": 1700000000,
+ "filename": "filename_1",
+ "id": "file_1",
+ "links": {
+  "data": [
+   {
+    "created": 1700000000,
+    "expired": true,
+    "expires_at": 1700000000,
+    "file": "file_1",
+    "id": "id_1",
+    "livemode": true,
+    "metadata": {
+     "key": "metadata_1"
+    },
+    "object": "file_link",
+    "url": "url_1"
+   }
+  ],
+  "has_more": true,
+  "object": "list",
+  "url": "url_1"
+ },
+ "object": "file",
+ "purpose": "account_requirement",
+ "size": 1,
+ "title": "title_1",
+ "type": "csv",
+ "url": "url_1"
+}

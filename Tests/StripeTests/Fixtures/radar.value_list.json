@@ -1,0 +1,29 @@
+{
+ "alias": "alias_1",
+ "created": 1700000000,
+ "created_by": "created_by_1",
+ "id": "radar.value_list_1",
+ "item_type": "account",
+ "list_items": {
+  "data": [
+   {
+    "created": 1700000000,
+    "created_by": "created_by_1",
+    "id": "id_1",
+    "livemode": true,
+    "object": "radar.value_list_item",
+    "value": "value_1",
+    "value_list": "value_list_1"
+   }
+  ],
+  "has_more": true,
+  "object": "list",
+  "url": "url_1"
+ },
+ "livemode": true,
+ "metadata": {
+  "key": "metadata_1"
+ },
+ "name": "name_1",
+ "object": "radar.value_list"
+}

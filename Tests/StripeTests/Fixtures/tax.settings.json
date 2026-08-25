@@ -1,0 +1,29 @@
+{
+ "defaults": {
+  "provider": "anrok",
+  "tax_behavior": "exclusive",
+  "tax_code": "tax_code_1"
+ },
+ "head_office": {
+  "address": {
+   "city": "city_1",
+   "country": "country_1",
+   "line1": "line1_1",
+   "line2": "line2_1",
+   "postal_code": "postal_code_1",
+   "state": "state_1"
+  }
+ },
+ "id": "tax.settings_1",
+ "livemode": true,
+ "object": "tax.settings",
+ "status": "active",
+ "status_details": {
+  "active": {},
+  "pending": {
+   "missing_fields": [
+    "missing_fields_1"
+   ]
+  }
+ }
+}

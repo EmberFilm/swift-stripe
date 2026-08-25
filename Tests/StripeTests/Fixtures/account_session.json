@@ -1,0 +1,160 @@
+{
+ "account": "account_1",
+ "client_secret": "client_secret_1",
+ "components": {
+  "account_management": {
+   "enabled": true,
+   "features": {
+    "disable_stripe_user_authentication": true,
+    "external_account_collection": true
+   }
+  },
+  "account_onboarding": {
+   "enabled": true,
+   "features": {
+    "disable_stripe_user_authentication": true,
+    "external_account_collection": true
+   }
+  },
+  "balance_report": {
+   "enabled": true,
+   "features": {}
+  },
+  "balances": {
+   "enabled": true,
+   "features": {
+    "disable_stripe_user_authentication": true,
+    "edit_payout_schedule": true,
+    "external_account_collection": true,
+    "instant_payouts": true,
+    "standard_payouts": true
+   }
+  },
+  "disputes_list": {
+   "enabled": true,
+   "features": {
+    "capture_payments": true,
+    "destination_on_behalf_of_charge_management": true,
+    "dispute_management": true,
+    "refund_management": true,
+    "smart_disputes_management": true
+   }
+  },
+  "documents": {
+   "enabled": true,
+   "features": {}
+  },
+  "financial_account": {
+   "enabled": true,
+   "features": {
+    "disable_stripe_user_authentication": true,
+    "external_account_collection": true,
+    "send_money": true,
+    "transfer_balance": true
+   }
+  },
+  "financial_account_transactions": {
+   "enabled": true,
+   "features": {
+    "card_spend_dispute_management": true
+   }
+  },
+  "instant_payouts_promotion": {
+   "enabled": true,
+   "features": {
+    "disable_stripe_user_authentication": true,
+    "external_account_collection": true,
+    "instant_payouts": true
+   }
+  },
+  "issuing_card": {
+   "enabled": true,
+   "features": {
+    "card_management": true,
+    "card_spend_dispute_management": true,
+    "cardholder_management": true,
+    "spend_control_management": true
+   }
+  },
+  "issuing_cards_list": {
+   "enabled": true,
+   "features": {
+    "card_management": true,
+    "card_spend_dispute_management": true,
+    "cardholder_management": true,
+    "disable_stripe_user_authentication": true,
+    "spend_control_management": true
+   }
+  },
+  "notification_banner": {
+   "enabled": true,
+   "features": {
+    "disable_stripe_user_authentication": true,
+    "external_account_collection": true
+   }
+  },
+  "payment_details": {
+   "enabled": true,
+   "features": {
+    "capture_payments": true,
+    "destination_on_behalf_of_charge_management": true,
+    "dispute_management": true,
+    "refund_management": true,
+    "smart_disputes_management": true
+   }
+  },
+  "payment_disputes": {
+   "enabled": true,
+   "features": {
+    "destination_on_behalf_of_charge_management": true,
+    "dispute_management": true,
+    "refund_management": true,
+    "smart_disputes_management": true
+   }
+  },
+  "payments": {
+   "enabled": true,
+   "features": {
+    "capture_payments": true,
+    "destination_on_behalf_of_charge_management": true,
+    "dispute_management": true,
+    "refund_management": true,
+    "smart_disputes_management": true
+   }
+  },
+  "payout_details": {
+   "enabled": true,
+   "features": {}
+  },
+  "payout_reconciliation_report": {
+   "enabled": true,
+   "features": {}
+  },
+  "payouts": {
+   "enabled": true,
+   "features": {
+    "disable_stripe_user_authentication": true,
+    "edit_payout_schedule": true,
+    "external_account_collection": true,
+    "instant_payouts": true,
+    "standard_payouts": true
+   }
+  },
+  "payouts_list": {
+   "enabled": true,
+   "features": {}
+  },
+  "tax_registrations": {
+   "enabled": true,
+   "features": {}
+  },
+  "tax_settings": {
+   "enabled": true,
+   "features": {}
+  }
+ },
+ "expires_at": 1700000000,
+ "id": "account_session_1",
+ "livemode": true,
+ "object": "account_session"
+}

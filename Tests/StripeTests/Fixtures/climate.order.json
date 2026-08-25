@@ -1,0 +1,58 @@
+{
+ "amount_fees": 1,
+ "amount_subtotal": 1,
+ "amount_total": 1,
+ "beneficiary": {
+  "public_name": "public_name_1"
+ },
+ "canceled_at": 1700000000,
+ "cancellation_reason": "expired",
+ "certificate": "certificate_1",
+ "confirmed_at": 1700000000,
+ "created": 1700000000,
+ "currency": "usd",
+ "delayed_at": 1700000000,
+ "delivered_at": 1700000000,
+ "delivery_details": [
+  {
+   "delivered_at": 1700000000,
+   "location": {
+    "city": "city_1",
+    "country": "country_1",
+    "latitude": 1.5,
+    "longitude": 1.5,
+    "region": "region_1"
+   },
+   "metric_tons": "metric_tons_1",
+   "registry_url": "registry_url_1",
+   "supplier": {
+    "id": "id_1",
+    "info_url": "info_url_1",
+    "livemode": true,
+    "locations": [
+     {
+      "city": "city_1",
+      "country": "country_1",
+      "latitude": 1.5,
+      "longitude": 1.5,
+      "region": "region_1"
+     }
+    ],
+    "name": "name_1",
+    "object": "climate.supplier",
+    "removal_pathway": "biomass_carbon_removal_and_storage"
+   }
+  }
+ ],
+ "expected_delivery_year": 1,
+ "id": "climate.order_1",
+ "livemode": true,
+ "metadata": {
+  "key": "metadata_1"
+ },
+ "metric_tons": "metric_tons_1",
+ "object": "climate.order",
+ "product": "climate.product_1",
+ "product_substituted_at": 1700000000,
+ "status": "awaiting_funds"
+}

@@ -25,6 +25,9 @@ KEEP_BY_HAND = {"event"}   # lenient decoding and the Object union
 # it is used; a wrong entry is reported, not acted on.
 IRREGULAR = {
     "webhook_endpoint": "Webhook",
+    "payment_method_configuration": "Stripe.PaymentMethodConfigurations.Configuration",
+    "confirmation_token": "ConfirmationToken",
+    "login_link": "Stripe.Connect.Account.LoginLink",
     "ephemeral_key": "Stripe.EphemeralKey",
     "file_link": "Stripe.FileLinks.FileLink",
     "account_session": "Stripe.Connect.Account.Session",
@@ -127,5 +130,5 @@ GEN.write_text(head + tmarker + tail)
 subprocess.run([sys.executable, str(GEN), args.spec, "--only", *[n for n, *_ in todo], "--keep"], check=True)
 for n, p, f, struct, full in todo:
     ns = ".".join(full.split(".")[:-1])
-    r = subprocess.run([sys.executable, "Scripts/cutover.py", str(f), struct, full, f"Sources/Stripe/Models/Generated/Stripe.{p.lstrip('/')}.swift"], capture_output=True, text=True)
+    r = subprocess.run([sys.executable, "Scripts/cutover.py", str(f), struct, full, f"Sources/Stripe/Models/Generated/Generated.{p.lstrip('/')}.swift"], capture_output=True, text=True)
     print(("   ok   " if r.returncode == 0 else "   FAIL ") + f"{n:<36} {r.stdout.splitlines()[0] if r.stdout else r.stderr.strip().splitlines()[-1]}")

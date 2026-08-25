@@ -22,7 +22,7 @@ if sys.argv[1] == "--sweep":
         if "Generated" in f.parts: continue
         s = f.read_text()
         if f"extension {namespace}" not in s: continue
-        blocks = re.split(r"(?m)^(?=extension |// MARK|// extension|//extension)", s)
+        blocks = re.split(r"(?m)^(?=(?://[^\n]*\n|\n)*(?:extension |// MARK|// extension|//extension))", s)
         head, body = blocks[0], blocks[1:]
         kept = []
         for b in body:
@@ -77,7 +77,7 @@ def split_members(body: str):
 
 # `// MARK:` lines and commented-out `// extension` blocks sit between blocks; splitting on them
 # too keeps each real block's tail clean. Chunks that are not a live extension pass through.
-blocks = re.split(r"(?m)^(?=extension |// MARK|// extension|//extension)", s)
+blocks = re.split(r"(?m)^(?=(?://[^\n]*\n|\n)*(?:extension |// MARK|// extension|//extension))", s)
 head, body = blocks[0], blocks[1:]
 kept, dropped = [], []
 if top_level:
@@ -96,19 +96,21 @@ if top_level:
 for b in body:
     m = re.match(r"^(extension ([\w.]+) \{\n)(.*)(\n\}\n*)$", b, re.S)
     if not m:
-        if b.startswith("extension "):
+        if b.startswith("extension ") and not re.match(r"^extension [\w.]+ \{[^\n]*\}\n*$", b):
             raise SystemExit(f"could not parse block: {b.splitlines()[0]}")
-        kept.append(b); continue
+        kept.append(b); continue     # a one-line namespace declaration, or prose
     header, ext_ns, inner, tail = m.groups()
     if ext_ns != namespace and not ext_ns.startswith(namespace + "."):
         # e.g. `extension Stripe.Billing { public struct Subscription ... }` — the struct's own home
         if not top_level and re.search(rf"^    public struct {struct_name}\b", inner, re.M) and ext_ns == namespace.rsplit(".", 1)[0]:
+            if kept and re.fullmatch(r"(?://[^\n]*\n|\n)*", kept[-1]): kept.pop()
             dropped.append(f"{ext_ns}: struct {struct_name}"); continue
         kept.append(b); continue
     if ext_ns != namespace:
         # extension of a nested type: drop if that nested type is generated (stale sibling)
         nested = ext_ns[len(namespace) + 1:].split(".")[0]
         if nested in gen_names:
+            if kept and re.fullmatch(r"(?://[^\n]*\n|\n)*", kept[-1]): kept.pop()
             dropped.append(f"{ext_ns}: extension of generated {nested}"); continue
         kept.append(b); continue
     survivors = []

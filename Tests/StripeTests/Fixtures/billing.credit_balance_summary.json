@@ -1,0 +1,25 @@
+{
+ "balances": [
+  {
+   "available_balance": {
+    "monetary": {
+     "currency": "usd",
+     "value": 1
+    },
+    "type": "monetary"
+   },
+   "ledger_balance": {
+    "monetary": {
+     "currency": "usd",
+     "value": 1
+    },
+    "type": "monetary"
+   }
+  }
+ ],
+ "customer": "customer_1",
+ "customer_account": "customer_account_1",
+ "id": "billing.credit_balance_summary_1",
+ "livemode": true,
+ "object": "billing.credit_balance_summary"
+}

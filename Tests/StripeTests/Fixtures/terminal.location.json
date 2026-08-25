@@ -1,0 +1,39 @@
+{
+ "address": {
+  "city": "city_1",
+  "country": "country_1",
+  "line1": "line1_1",
+  "line2": "line2_1",
+  "postal_code": "postal_code_1",
+  "state": "state_1"
+ },
+ "address_kana": {
+  "city": "city_1",
+  "country": "country_1",
+  "line1": "line1_1",
+  "line2": "line2_1",
+  "postal_code": "postal_code_1",
+  "state": "state_1",
+  "town": "town_1"
+ },
+ "address_kanji": {
+  "city": "city_1",
+  "country": "country_1",
+  "line1": "line1_1",
+  "line2": "line2_1",
+  "postal_code": "postal_code_1",
+  "state": "state_1",
+  "town": "town_1"
+ },
+ "configuration_overrides": "configuration_overrides_1",
+ "display_name": "display_name_1",
+ "display_name_kana": "display_name_kana_1",
+ "display_name_kanji": "display_name_kanji_1",
+ "id": "terminal.location_1",
+ "livemode": true,
+ "metadata": {
+  "key": "metadata_1"
+ },
+ "object": "terminal.location",
+ "phone": "phone_1"
+}

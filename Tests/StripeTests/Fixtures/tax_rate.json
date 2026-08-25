@@ -1,0 +1,25 @@
+{
+ "active": true,
+ "country": "country_1",
+ "created": 1700000000,
+ "description": "description_1",
+ "display_name": "display_name_1",
+ "effective_percentage": 1.5,
+ "flat_amount": {
+  "amount": 1,
+  "currency": "usd"
+ },
+ "id": "tax_rate_1",
+ "inclusive": true,
+ "jurisdiction": "jurisdiction_1",
+ "jurisdiction_level": "city",
+ "livemode": true,
+ "metadata": {
+  "key": "metadata_1"
+ },
+ "object": "tax_rate",
+ "percentage": 1.5,
+ "rate_type": "flat_amount",
+ "state": "state_1",
+ "tax_type": "amusement_tax"
+}

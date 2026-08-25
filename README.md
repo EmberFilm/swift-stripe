@@ -471,23 +471,21 @@ regression.
 The request engine, form encoding, error handling, retries, idempotency keys,
 and webhook verification are complete and covered by tests.
 
-**The models EmberFilm depends on are generated from Stripe's OpenAPI spec.** Checkout
-Session, Subscription, Subscription Item, Customer, Invoice, Invoice Payment, Price, Product,
-PaymentIntent and Charge are emitted by `Scripts/generate-models.py` into
-`Sources/Stripe/Models/Generated/` from `spec3.sdk.json`, pinned by commit in CI. Every
-field the spec describes is present, every enum carries the spec's cases, and each struct's
-`CodingKeys` is emitted from the same list as its properties. `Event` stays hand-written:
-it decodes an unknown event type without rejecting the delivery and models `data.object`
-as a discriminated union, neither of which the generator expresses yet.
+**Nearly every model is generated from Stripe's OpenAPI spec.** 117 of the 137 root resources
+are emitted by `Scripts/generate-models.py` into `Sources/Stripe/Models/Generated/` from
+`spec3.sdk.json`, pinned by commit in CI. Every field the spec describes is present, every enum
+carries the spec's cases, and each struct's `CodingKeys` is emitted from the same list as its
+properties. `Event` stays hand-written: it decodes an unknown event type without rejecting the
+delivery and models `data.object` as a discriminated union, neither of which the generator
+expresses yet. A handful of resources the request layer is deeply entangled with (`Account`,
+`PaymentMethod`, `PaymentLink`, `SubscriptionSchedule`, `Coupon`, `Plan`, …) are still hand
+models and are being cut over one at a time.
 
-Every other model is still the vendored snapshot from swift-stripe-standard, and drifts.
-`Scripts/model-drift.py` measures the tracked set; a hand type the generated ones reference
-(a `Tax.Rate`, a `Tax.ID`) can still reject a value Stripe has since added, and
+`Scripts/model-drift.py` measures every generated resource against the spec, and
 `Tests/StripeTests/FixtureDecodingTests.swift` — which decodes a fixture with every spec
-field populated per resource — is what catches that. The few it has caught and not yet fixed
-are listed in that test by path (`IssuingCard.brand` and `Payout.failureCode` are strict enums
-on fields the spec types as free strings); an entry there is an acknowledged defect in a hand
-type, and anything unlisted fails. Typed resource clients currently
+field populated per resource — catches a hand type a generated one references rejecting a
+value Stripe has since added. The few it has caught and not yet fixed are listed in that test
+by path; an entry there is an acknowledged defect in a hand type, and anything unlisted fails. Typed resource clients currently
 cover Customers, PaymentIntents, Checkout Sessions, Products, Prices,
 Subscriptions, and Billing Portal Sessions; every other endpoint is reachable
 through `stripe.api` with the modelled request and response types.

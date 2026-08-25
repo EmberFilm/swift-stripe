@@ -1,0 +1,127 @@
+{
+ "amount_total": 1,
+ "currency": "usd",
+ "customer": "customer_1",
+ "customer_details": {
+  "address": {
+   "city": "city_1",
+   "country": "country_1",
+   "line1": "line1_1",
+   "line2": "line2_1",
+   "postal_code": "postal_code_1",
+   "state": "state_1"
+  },
+  "address_source": "billing",
+  "ip_address": "ip_address_1",
+  "tax_ids": [
+   {
+    "type": "ad_nrt",
+    "value": "value_1"
+   }
+  ],
+  "taxability_override": "customer_exempt"
+ },
+ "expires_at": 1700000000,
+ "id": "tax.calculation_1",
+ "line_items": {
+  "data": [
+   {
+    "amount": 1,
+    "amount_tax": 1,
+    "id": "id_1",
+    "livemode": true,
+    "metadata": {
+     "key": "metadata_1"
+    },
+    "object": "tax.calculation_line_item",
+    "product": "product_1",
+    "quantity": 1,
+    "reference": "reference_1",
+    "tax_behavior": "exclusive",
+    "tax_breakdown": [
+     {
+      "amount": 1,
+      "jurisdiction": {
+       "country": "country_1",
+       "display_name": "display_name_1",
+       "level": "city",
+       "state": "state_1"
+      },
+      "sourcing": "destination",
+      "tax_rate_details": {
+       "display_name": "display_name_1",
+       "percentage_decimal": "percentage_decimal_1",
+       "tax_type": "amusement_tax"
+      },
+      "taxability_reason": "customer_exempt",
+      "taxable_amount": 1
+     }
+    ],
+    "tax_code": "tax_code_1"
+   }
+  ],
+  "has_more": true,
+  "object": "list",
+  "url": "url_1"
+ },
+ "livemode": true,
+ "object": "tax.calculation",
+ "ship_from_details": {
+  "address": {
+   "city": "city_1",
+   "country": "country_1",
+   "line1": "line1_1",
+   "line2": "line2_1",
+   "postal_code": "postal_code_1",
+   "state": "state_1"
+  }
+ },
+ "shipping_cost": {
+  "amount": 1,
+  "amount_tax": 1,
+  "shipping_rate": "shipping_rate_1",
+  "tax_behavior": "exclusive",
+  "tax_breakdown": [
+   {
+    "amount": 1,
+    "jurisdiction": {
+     "country": "country_1",
+     "display_name": "display_name_1",
+     "level": "city",
+     "state": "state_1"
+    },
+    "sourcing": "destination",
+    "tax_rate_details": {
+     "display_name": "display_name_1",
+     "percentage_decimal": "percentage_decimal_1",
+     "tax_type": "amusement_tax"
+    },
+    "taxability_reason": "customer_exempt",
+    "taxable_amount": 1
+   }
+  ],
+  "tax_code": "tax_code_1"
+ },
+ "tax_amount_exclusive": 1,
+ "tax_amount_inclusive": 1,
+ "tax_breakdown": [
+  {
+   "amount": 1,
+   "inclusive": true,
+   "tax_rate_details": {
+    "country": "country_1",
+    "flat_amount": {
+     "amount": 1,
+     "currency": "usd"
+    },
+    "percentage_decimal": "percentage_decimal_1",
+    "rate_type": "flat_amount",
+    "state": "state_1",
+    "tax_type": "amusement_tax"
+   },
+   "taxability_reason": "customer_exempt",
+   "taxable_amount": 1
+  }
+ ],
+ "tax_date": 1700000000
+}

@@ -1,0 +1,14 @@
+{
+ "amount": 1,
+ "balance_transaction": "balance_transaction_1",
+ "created": 1700000000,
+ "currency": "usd",
+ "destination_payment_refund": "refund_1",
+ "id": "transfer_reversal_1",
+ "metadata": {
+  "key": "metadata_1"
+ },
+ "object": "transfer_reversal",
+ "source_refund": "refund_1",
+ "transfer": "transfer_1"
+}

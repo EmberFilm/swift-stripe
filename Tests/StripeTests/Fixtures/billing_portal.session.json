@@ -1,0 +1,53 @@
+{
+ "configuration": "billing_portal.configuration_1",
+ "created": 1700000000,
+ "customer": "customer_1",
+ "customer_account": "customer_account_1",
+ "flow": {
+  "after_completion": {
+   "hosted_confirmation": {
+    "custom_message": "custom_message_1"
+   },
+   "redirect": {
+    "return_url": "return_url_1"
+   },
+   "type": "hosted_confirmation"
+  },
+  "subscription_cancel": {
+   "retention": {
+    "coupon_offer": {
+     "coupon": "coupon_1"
+    },
+    "type": "coupon_offer"
+   },
+   "subscription": "subscription_1"
+  },
+  "subscription_update": {
+   "subscription": "subscription_1"
+  },
+  "subscription_update_confirm": {
+   "discounts": [
+    {
+     "coupon": "coupon_1",
+     "promotion_code": "promotion_code_1"
+    }
+   ],
+   "items": [
+    {
+     "id": "id_1",
+     "price": "price_1",
+     "quantity": 1
+    }
+   ],
+   "subscription": "subscription_1"
+  },
+  "type": "payment_method_update"
+ },
+ "id": "billing_portal.session_1",
+ "livemode": true,
+ "locale": "auto",
+ "object": "billing_portal.session",
+ "on_behalf_of": "on_behalf_of_1",
+ "return_url": "return_url_1",
+ "url": "url_1"
+}

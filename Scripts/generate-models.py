@@ -97,7 +97,33 @@ RESOURCES: dict[str, str] = {
     "terminal.connection_token": "/TerminalConnectionToken",
     "terminal.reader": "Terminal.Readers.Reader",
     "webhook_endpoint": "/Webhook",
+    # stage 4a: cut over from hand models (batch-cutover.py)
+    "account_session": "Connect.Account.Session",
+    "balance": "/Stripe.Balance",
+    "billing.credit_balance_summary": "Billing.Credit.Balance.Summary",
+    "billing_portal.session": "Billing.Customer.Portal.Session",
+    "confirmation_token": "/ConfirmationToken",
+    "credit_note": "Billing.Credit.Note",
+    "file": "Files.File",
+    "line_item": "Billing.Invoice.LineItem",
+    "login_link": "Connect.Account.LoginLink",
+    "mandate": "Mandates.Mandate",
+    "payment_method_configuration": "PaymentMethodConfigurations.Configuration",
+    "quote": "Billing.Quote",
+    "radar.value_list": "Fraud.ValueLists.ValueList",
+    "refund": "Refunds.Refund",
+    "tax.calculation": "Tax.Calculation",
+    "tax_id": "Tax.ID",
+    "tax_rate": "Tax.Rate",
+    "terminal.location": "Terminal.Locations.Location",
+    "transfer_reversal": "Connect.Transfer.Reversal",
     # stage 4a: resources that had no model at all
+    "climate.order": "Climate.Order",
+    "climate.product": "Climate.Product",
+    "tax.settings": "Tax.Settings",
+    "tax.transaction": "Tax.Transaction",
+    "financial_connections.session": "/FinancialConnections.Session",
+    "financial_connections.transaction": "/FinancialConnections.Transaction",
     "entitlements.feature": "Entitlements.Feature",
     "treasury.transaction": "Treasury.Transaction",
     "treasury.credit_reversal": "Treasury.CreditReversal",
@@ -241,12 +267,36 @@ RESOURCE_TYPES: dict[str, str] = {
     "terminal.connection_token": "TerminalConnectionToken",
     "terminal.reader": "Generated.Terminal.Readers.Reader",
     "webhook_endpoint": "Webhook",
+    "climate.order": "Generated.Climate.Order",
+    "climate.product": "Generated.Climate.Product",
+    "tax.settings": "Generated.Tax.Settings",
+    "tax.transaction": "Generated.Tax.Transaction",
+    "financial_connections.session": "FinancialConnections.Session",
+    "financial_connections.transaction": "FinancialConnections.Transaction",
+    "account_session": "Generated.Connect.Account.Session",
+    "balance": "Stripe.Balance",
+    "billing.credit_balance_summary": "Generated.Billing.Credit.Balance.Summary",
+    "billing_portal.session": "Generated.Billing.Customer.Portal.Session",
+    "confirmation_token": "ConfirmationToken",
+    "credit_note": "Generated.Billing.Credit.Note",
+    "file": "Generated.Files.File",
+    "line_item": "Generated.Billing.Invoice.LineItem",
+    "login_link": "Generated.Connect.Account.LoginLink",
+    "mandate": "Generated.Mandates.Mandate",
+    "payment_method_configuration": "Generated.PaymentMethodConfigurations.Configuration",
+    "quote": "Generated.Billing.Quote",
+    "radar.value_list": "Generated.Fraud.ValueLists.ValueList",
+    "refund": "Generated.Refunds.Refund",
+    "tax.calculation": "Generated.Tax.Calculation",
+    "tax_id": "Generated.Tax.ID",
+    "tax_rate": "Generated.Tax.Rate",
+    "terminal.location": "Generated.Terminal.Locations.Location",
+    "transfer_reversal": "Generated.Connect.Transfer.Reversal",
     # everything else is the hand-written Stripe type
+    "billing_portal.configuration": "Stripe.Billing.Customer.Portal.Configuration",
     "tax_id": "Stripe.Tax.ID",
-    "terminal.location": "Stripe.Terminal.Locations.Location",
     "issuing.authorization": "Authorization",
     "payout": "Stripe.Payouts.Payout",
-    "line_item": "Stripe.Billing.Invoice.LineItem",
     "account": "Stripe.Connect.Account",
     "application": "Stripe.Connect.Application",
     # Not the top-level `CashBalance`: inside Customer that name resolves to the empty request
@@ -254,21 +304,15 @@ RESOURCE_TYPES: dict[str, str] = {
     "coupon": "Stripe.Products.Coupon",
     "discount": "Stripe.Products.Discount",
     "deleted_discount": "Stripe.Products.Discount",
-    "file": "Stripe.Files.File",
-    "mandate": "Stripe.Mandates.Mandate",
     "payment_link": "Stripe.PaymentLink",
     "payment_method": "Stripe.PaymentMethods.PaymentMethod",
     "payment_source": "StripePaymentSource",
     "plan": "Stripe.Billing.Plan",
     "promotion_code": "Promotion.Code",
-    "quote": "Stripe.Billing.Quote",
-    "refund": "Stripe.Refunds.Refund",
     "setup_intent": "Stripe.Setup.Intent",
     "shipping_rate": "Stripe.Products.Shipping.Rate",
     "subscription_schedule": "Stripe.Billing.Subscription.Schedule",
-    "tax_rate": "Stripe.Tax.Rate",
     "transfer": "Stripe.Connect.Transfer",
-    "credit_note": "Stripe.Billing.Credit.Note",
     "billing.credit_grant": "Stripe.Billing.Credit.Grant",
 }
 
@@ -567,12 +611,12 @@ class Generator:
             path = swift_path.lstrip("/")
             root = self.build_struct(path.split(".")[-1], self.schemas[name],
                                      path if swift_path.startswith("/") else f"{self.ns}.{path}", root=True)
-            files[f"{self.ns}.{path}.swift"] = self.render_resource(name, swift_path, root)
-        files[f"{self.ns}.Shared.swift"] = self.render_shared()
+            files[f"Generated.{path}.swift"] = self.render_resource(name, swift_path, root)
+        files["Generated.Shared.swift"] = self.render_shared()
         if self.ns != "Stripe":
             files[f"{self.ns}.swift"] = self.render_namespace()
         else:
-            files["Stripe.Namespaces.swift"] = self.render_missing_namespaces()
+            files["Generated.Namespaces.swift"] = self.render_missing_namespaces()
         files = {k: v.replace("Generated.", f"{self.ns}.") for k, v in files.items()}
         if self.ns == "Stripe":
             files = {k: v.replace("#endif\nimport Stripe\n", "#endif\n") for k, v in files.items()}
@@ -769,7 +813,7 @@ def main() -> int:
     out = pathlib.Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
     if not args.keep:
-        for stale in out.glob(f"{args.namespace}.*.swift"):
+        for stale in list(out.glob("Generated.*.swift")) + list(out.glob("Stripe.*.swift")):
             stale.unlink()
     for name, content in files.items():
         (out / name).write_text(content)

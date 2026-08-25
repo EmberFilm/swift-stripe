@@ -1,0 +1,183 @@
+{
+ "amount": 1,
+ "amount_shipping": 1,
+ "created": 1700000000,
+ "currency": "usd",
+ "customer": "customer_1",
+ "customer_account": "customer_account_1",
+ "customer_balance_transaction": "customer_balance_transaction_1",
+ "discount_amount": 1,
+ "discount_amounts": [
+  {
+   "amount": 1,
+   "discount": "discount_1"
+  }
+ ],
+ "effective_at": 1700000000,
+ "id": "credit_note_1",
+ "invoice": "invoice_1",
+ "lines": {
+  "data": [
+   {
+    "amount": 1,
+    "description": "description_1",
+    "discount_amount": 1,
+    "discount_amounts": [
+     {
+      "amount": 1,
+      "discount": "discount_1"
+     }
+    ],
+    "id": "id_1",
+    "invoice_line_item": "invoice_line_item_1",
+    "livemode": true,
+    "metadata": {
+     "key": "metadata_1"
+    },
+    "object": "credit_note_line_item",
+    "pretax_credit_amounts": [
+     {
+      "amount": 1,
+      "credit_balance_transaction": "billing.credit_balance_transaction_1",
+      "discount": "discount_1",
+      "type": "credit_balance_transaction"
+     }
+    ],
+    "quantity": 1,
+    "tax_rates": [
+     {
+      "active": true,
+      "country": "country_1",
+      "created": 1700000000,
+      "description": "description_1",
+      "display_name": "display_name_1",
+      "effective_percentage": 1.5,
+      "flat_amount": {
+       "amount": 1,
+       "currency": "usd"
+      },
+      "id": "id_1",
+      "inclusive": true,
+      "jurisdiction": "jurisdiction_1",
+      "jurisdiction_level": "city",
+      "livemode": true,
+      "metadata": {
+       "key": "metadata_1"
+      },
+      "object": "tax_rate",
+      "percentage": 1.5,
+      "rate_type": "flat_amount",
+      "state": "state_1",
+      "tax_type": "amusement_tax"
+     }
+    ],
+    "taxes": [
+     {
+      "amount": 1,
+      "tax_behavior": "exclusive",
+      "tax_rate_details": {
+       "tax_rate": "tax_rate_1"
+      },
+      "taxability_reason": "customer_exempt",
+      "taxable_amount": 1,
+      "type": "tax_rate_details"
+     }
+    ],
+    "type": "custom_line_item",
+    "unit_amount": 1,
+    "unit_amount_decimal": "unit_amount_decimal_1"
+   }
+  ],
+  "has_more": true,
+  "object": "list",
+  "url": "url_1"
+ },
+ "livemode": true,
+ "memo": "memo_1",
+ "metadata": {
+  "key": "metadata_1"
+ },
+ "number": "number_1",
+ "object": "credit_note",
+ "out_of_band_amount": 1,
+ "pdf": "pdf_1",
+ "post_payment_amount": 1,
+ "pre_payment_amount": 1,
+ "pretax_credit_amounts": [
+  {
+   "amount": 1,
+   "credit_balance_transaction": "billing.credit_balance_transaction_1",
+   "discount": "discount_1",
+   "type": "credit_balance_transaction"
+  }
+ ],
+ "reason": "duplicate",
+ "refunds": [
+  {
+   "amount_refunded": 1,
+   "payment_record_refund": {
+    "payment_record": "payment_record_1",
+    "refund_group": "refund_group_1"
+   },
+   "refund": "refund_1",
+   "type": "payment_record_refund"
+  }
+ ],
+ "shipping_cost": {
+  "amount_subtotal": 1,
+  "amount_tax": 1,
+  "amount_total": 1,
+  "shipping_rate": "shipping_rate_1",
+  "taxes": [
+   {
+    "amount": 1,
+    "rate": {
+     "active": true,
+     "country": "country_1",
+     "created": 1700000000,
+     "description": "description_1",
+     "display_name": "display_name_1",
+     "effective_percentage": 1.5,
+     "flat_amount": {
+      "amount": 1,
+      "currency": "usd"
+     },
+     "id": "id_1",
+     "inclusive": true,
+     "jurisdiction": "jurisdiction_1",
+     "jurisdiction_level": "city",
+     "livemode": true,
+     "metadata": {
+      "key": "metadata_1"
+     },
+     "object": "tax_rate",
+     "percentage": 1.5,
+     "rate_type": "flat_amount",
+     "state": "state_1",
+     "tax_type": "amusement_tax"
+    },
+    "taxability_reason": "customer_exempt",
+    "taxable_amount": 1
+   }
+  ]
+ },
+ "status": "issued",
+ "subtotal": 1,
+ "subtotal_excluding_tax": 1,
+ "total": 1,
+ "total_excluding_tax": 1,
+ "total_taxes": [
+  {
+   "amount": 1,
+   "tax_behavior": "exclusive",
+   "tax_rate_details": {
+    "tax_rate": "tax_rate_1"
+   },
+   "taxability_reason": "customer_exempt",
+   "taxable_amount": 1,
+   "type": "tax_rate_details"
+  }
+ ],
+ "type": "mixed",
+ "voided_at": 1700000000
+}

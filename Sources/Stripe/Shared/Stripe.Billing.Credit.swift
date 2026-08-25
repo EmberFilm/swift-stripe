@@ -155,6 +155,5 @@ extension Stripe.Products {
 extension Stripe.Tax {
     public enum Calculations: Sendable {}
     public enum Registrations: Sendable {}
-    public enum Settings: Sendable {}
     public enum Transactions: Sendable {}
 }

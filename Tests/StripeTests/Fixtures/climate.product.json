@@ -1,0 +1,35 @@
+{
+ "created": 1700000000,
+ "current_prices_per_metric_ton": {
+  "key": {
+   "amount_fees": 1,
+   "amount_subtotal": 1,
+   "amount_total": 1
+  }
+ },
+ "delivery_year": 1,
+ "id": "climate.product_1",
+ "livemode": true,
+ "metric_tons_available": "metric_tons_available_1",
+ "name": "name_1",
+ "object": "climate.product",
+ "suppliers": [
+  {
+   "id": "id_1",
+   "info_url": "info_url_1",
+   "livemode": true,
+   "locations": [
+    {
+     "city": "city_1",
+     "country": "country_1",
+     "latitude": 1.5,
+     "longitude": 1.5,
+     "region": "region_1"
+    }
+   ],
+   "name": "name_1",
+   "object": "climate.supplier",
+   "removal_pathway": "biomass_carbon_removal_and_storage"
+  }
+ ]
+}

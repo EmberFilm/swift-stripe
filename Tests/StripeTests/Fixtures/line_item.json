@@ -1,0 +1,88 @@
+{
+ "amount": 1,
+ "currency": "usd",
+ "description": "description_1",
+ "discount_amounts": [
+  {
+   "amount": 1,
+   "discount": "discount_1"
+  }
+ ],
+ "discountable": true,
+ "discounts": [
+  "discount_1"
+ ],
+ "id": "line_item_1",
+ "invoice": "invoice_1",
+ "livemode": true,
+ "metadata": {
+  "key": "metadata_1"
+ },
+ "object": "line_item",
+ "parent": {
+  "invoice_item_details": {
+   "invoice_item": "invoice_item_1",
+   "proration": true,
+   "proration_details": {
+    "credited_items": {
+     "invoice": "invoice_1",
+     "invoice_line_items": [
+      "invoice_line_items_1"
+     ]
+    }
+   },
+   "subscription": "subscription_1"
+  },
+  "subscription_item_details": {
+   "invoice_item": "invoice_item_1",
+   "proration": true,
+   "proration_details": {
+    "credited_items": {
+     "invoice": "invoice_1",
+     "invoice_line_items": [
+      "invoice_line_items_1"
+     ]
+    }
+   },
+   "subscription": "subscription_1",
+   "subscription_item": "subscription_item_1"
+  },
+  "type": "invoice_item_details"
+ },
+ "period": {
+  "end": 1700000000,
+  "start": 1700000000
+ },
+ "pretax_credit_amounts": [
+  {
+   "amount": 1,
+   "credit_balance_transaction": "billing.credit_balance_transaction_1",
+   "discount": "discount_1",
+   "type": "credit_balance_transaction"
+  }
+ ],
+ "pricing": {
+  "price_details": {
+   "price": "price_1",
+   "product": "product_1"
+  },
+  "type": "price_details",
+  "unit_amount_decimal": "currency"
+ },
+ "quantity": 1,
+ "quantity_decimal": "quantity_decimal_1",
+ "subscription": "subscription_1",
+ "subtotal": 1,
+ "taxes": [
+  {
+   "amount": 1,
+   "tax_behavior": "exclusive",
+   "tax_rate_details": {
+    "tax_rate": "tax_rate_1"
+   },
+   "taxability_reason": "customer_exempt",
+   "taxable_amount": 1,
+   "type": "tax_rate_details"
+  }
+ ]
+}
