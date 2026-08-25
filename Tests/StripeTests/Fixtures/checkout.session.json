@@ -426,8 +426,8 @@
     ]
    },
    "setup_future_usage": "none",
-   "statement_descriptor_suffix_kana": "statement_descriptor_suffix_kana_1",
-   "statement_descriptor_suffix_kanji": "statement_descriptor_suffix_kanji_1"
+   "statement_descriptor_suffix_kana": "EMBERFILM",
+   "statement_descriptor_suffix_kanji": "EMBERFILM"
   },
   "cashapp": {
    "capture_method": "manual",

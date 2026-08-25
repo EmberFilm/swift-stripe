@@ -146,4 +146,27 @@ struct DecodingTests {
         #expect(invoice.amountRemaining == 250)
     }
 
+
+    @Test("percentages are decimals, as the spec declares them")
+    func fractionalPercentages() throws {
+        // These were `Int`, so a 12.5% coupon or an 87.5% transfer split failed to decode at all.
+        let coupon = try StripeAPI.decoder.decode(
+            Stripe.Products.Coupon.self,
+            from: Data(#"{"id":"co_1","object":"coupon","created":1,"percent_off":12.5}"#.utf8)
+        )
+        #expect(coupon.percentOff == 12.5)
+
+        let subscription = try StripeAPI.decoder.decode(
+            Stripe.Billing.Subscription.self,
+            from: Data(#"{"id":"sub_1","object":"subscription","created":1,"transfer_data":{"amount_percent":87.5,"destination":"acct_1"}}"#.utf8)
+        )
+        #expect(subscription.transferData?.amountPercent == 87.5)
+
+        let rate = try StripeAPI.decoder.decode(
+            Stripe.Tax.Rate.self,
+            from: Data(#"{"id":"txr_1","object":"tax_rate","created":1,"percentage":7.25,"effective_percentage":7.25}"#.utf8)
+        )
+        #expect(rate.percentage == 7.25)
+    }
+
 }

@@ -772,8 +772,8 @@
    "request_three_d_secure": "any",
    "require_cvc_recollection": true,
    "setup_future_usage": "none",
-   "statement_descriptor_suffix_kana": "statement_descriptor_suffix_kana_1",
-   "statement_descriptor_suffix_kanji": "statement_descriptor_suffix_kanji_1"
+   "statement_descriptor_suffix_kana": "EMBERFILM",
+   "statement_descriptor_suffix_kanji": "EMBERFILM"
   },
   "card_present": {
    "capture_method": "manual",
@@ -1019,8 +1019,8 @@
   "tracking_number": "tracking_number_1"
  },
  "source": "payment_source_1",
- "statement_descriptor": "statement_descriptor_1",
- "statement_descriptor_suffix": "statement_descriptor_suffix_1",
+ "statement_descriptor": "EMBERFILM",
+ "statement_descriptor_suffix": "EMBERFILM",
  "status": "canceled",
  "transfer_data": {
   "amount": 1,

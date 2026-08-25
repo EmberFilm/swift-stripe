@@ -21,7 +21,7 @@
   "phone": "phone_1",
   "tax_id": "tax_id_1"
  },
- "calculated_statement_descriptor": "calculated_statement_descriptor_1",
+ "calculated_statement_descriptor": "EMBERFILM",
  "captured": true,
  "created": 1700000000,
  "currency": "usd",
@@ -706,8 +706,8 @@
   "tracking_number": "tracking_number_1"
  },
  "source_transfer": "transfer_1",
- "statement_descriptor": "statement_descriptor_suffix",
- "statement_descriptor_suffix": "statement_descriptor_suffix_1",
+ "statement_descriptor": "EMBERFILM",
+ "statement_descriptor_suffix": "EMBERFILM",
  "status": "failed",
  "transfer": "transfer_1",
  "transfer_data": {

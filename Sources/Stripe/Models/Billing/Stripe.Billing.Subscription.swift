@@ -564,7 +564,7 @@ extension Stripe.Billing.Subscription.Trial {
 extension Stripe.Billing.Subscription {
     public struct TransferData: Codable, Hashable, Sendable {
         /// Transfer percentage
-        public var amountPercent: Int?
+        public var amountPercent: Decimal?
         /// Destination account
         @ExpandableOf<Stripe.Connect.Account> public var destination: Stripe.Connect.Account.ID?
 
@@ -574,7 +574,7 @@ extension Stripe.Billing.Subscription {
         }
 
         public init(
-            amountPercent: Int? = nil,
+            amountPercent: Decimal? = nil,
             destination: Stripe.Connect.Account.ID? = nil
         ) {
             self.amountPercent = amountPercent

@@ -72,8 +72,16 @@ struct GeneratedParityTests {
                 return try canonical(type, attempt)
             } catch let error as DecodingError {
                 let (path, reason) = describe(error)
-                guard !path.isEmpty, remove(path: path, from: &json) else { throw error }
+                guard !path.isEmpty else { throw error }
+                guard remove(path: path, from: &json) else {
+                    rejections.append("\(label) type rejects \(path.joined(separator: ".")) and the harness could not strip it: \(reason)")
+                    throw error
+                }
                 rejections.append("\(label) type rejects \(path.joined(separator: ".")): \(reason)")
+            } catch {
+                // A model's own validation (StatementDescriptor.ValidationError) carries no path.
+                rejections.append("\(label) type threw outside DecodingError, so the field cannot be located: \(error)")
+                throw error
             }
         }
         throw NSError(domain: "parity", code: 1, userInfo: [NSLocalizedDescriptionKey: "too many rejections"])
@@ -156,22 +164,24 @@ struct GeneratedParityTests {
     /// drift the cutover exists to fix, and a value the hand type rejects is a hand defect; both
     /// are reported so they can be acted on, but neither is the generated type's fault.
     private static func classify(_ differences: [String]) -> (failing: [String], reported: [String]) {
+        // Rejections spell an index as `.[0]`, the diff as `[0]`; compare on one form.
+        func normalized(_ path: Substring) -> String { path.replacingOccurrences(of: ".[", with: "[") }
         let handRejectedPaths = Set(differences.compactMap { line -> String? in
             guard line.hasPrefix("hand type rejects ") else { return nil }
-            return line.dropFirst("hand type rejects ".count).split(separator: ":").first.map(String.init)
+            return line.dropFirst("hand type rejects ".count).split(separator: ":").first.map(normalized)
         })
         var failing: [String] = [], reported: [String] = []
         for d in differences {
             if d.hasPrefix("only in second") || d.hasPrefix("hand type rejects") {
                 reported.append(d)
             } else if d.hasPrefix("count differs at "),
-                      let path = d.dropFirst("count differs at ".count).split(separator: ":").first,
-                      handRejectedPaths.contains(where: { $0.hasPrefix(String(path)) }) {
+                      let path = d.dropFirst("count differs at ".count).split(separator: ":").first.map(normalized),
+                      handRejectedPaths.contains(where: { $0.hasPrefix(path) }) {
                 // The hand side rejected an element, which the retry removed; an echo, not a gap.
                 reported.append(d + "   (element rejected by the hand type)")
             } else if d.hasPrefix("generated type rejects "),
-                      let path = d.dropFirst("generated type rejects ".count).split(separator: ":").first,
-                      handRejectedPaths.contains { String(path).hasSuffix($0) || $0.hasSuffix(String(path)) || String(path) == $0 } {
+                      let path = d.dropFirst("generated type rejects ".count).split(separator: ":").first.map(normalized),
+                      handRejectedPaths.contains { path.hasSuffix($0) || $0.hasSuffix(path) || path == $0 } {
                 reported.append(d + "   (same shared hand type)")
             } else {
                 failing.append(d)
