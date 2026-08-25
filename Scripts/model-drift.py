@@ -1,0 +1,75 @@
+#!/usr/bin/env python3
+"""Reports how far the vendored models have drifted from Stripe's OpenAPI spec.
+
+The models came from swift-stripe-standard and are not regenerated, so fields Stripe adds are
+absent and fields it moves decode to nil — silently, because every property is optional. This
+turns that into a number.
+
+    curl -sSLO https://raw.githubusercontent.com/stripe/openapi/master/openapi/spec3.sdk.json
+    Scripts/model-drift.py spec3.sdk.json
+
+"missing" = in the spec, not on the Swift type: the value is dropped on decode.
+"stale"   = on the Swift type, not in the spec: the property is always nil.
+"""
+import json, re, pathlib, sys
+
+def snake(name: str) -> str:
+    out = ""
+    for i, c in enumerate(name):
+        out += ("_" if i and c.isupper() else "") + c.lower()
+    return out
+
+def swift_fields(path: pathlib.Path, struct: str) -> set[str]:
+    src = path.read_text()
+    body = src[src.index(f"public struct {struct}"):]
+    cut = body.find("public init(")
+    body = body[:cut] if cut > 0 else body
+    names = set(re.findall(r"public var (\w+)\s*:", body))
+    names |= set(re.findall(r"public var (\w+)\s*$", body, re.M))
+    return {snake(n) for n in names}
+
+M = "Sources/Stripe/Models/"
+# schema name, model file, struct name
+TARGETS = [
+    ("checkout.session", M + "Checkout/Stripe.Checkout.Session.swift", "Session"),
+    ("subscription", M + "Billing/Stripe.Billing.Subscription.swift", "Subscription"),
+    ("subscription_item", M + "Billing/Stripe.Billing.Subscription.Item.swift", "Item"),
+    ("customer", M + "CoreResources/Customers/Stripe.Customers.swift", "Customer"),
+    ("invoice", M + "Billing/Stripe.Billing.Invoice.swift", "Invoice"),
+    ("price", M + "Products/Prices/Stripe.Products.Price.swift", "Price"),
+    ("product", M + "Products/Products/Stripe.Products.Product.swift", "Product"),
+    ("event", M + "CoreResources/Events/Stripe.Events.Event.swift", "Event"),
+    ("payment_intent", M + "CoreResources/PaymentIntents/Stripe.PaymentIntents.PaymentIntent.swift", "PaymentIntent"),
+    ("charge", M + "CoreResources/Charges/Stripe.Charges.Charge.swift", "Charge"),
+]
+
+def main() -> int:
+    if len(sys.argv) < 2:
+        print(__doc__)
+        return 2
+    spec = json.load(open(sys.argv[1]))
+    schemas = spec["components"]["schemas"]
+    print(f"spec version {spec['info']['version']}  ({len(schemas)} schemas)\n")
+    print(f"{'schema':<20}{'spec':>5}{'model':>7}{'missing':>9}{'stale':>7}   detail")
+    print("-" * 100)
+    worst = 0
+    for name, path, struct in TARGETS:
+        schema = schemas.get(name)
+        if schema is None:
+            print(f"{name:<20}    schema not found in spec")
+            continue
+        spec_fields = set(schema.get("properties", {}).keys())
+        try:
+            model = swift_fields(pathlib.Path(path), struct)
+        except (OSError, ValueError):
+            print(f"{name:<20}    could not parse {path}")
+            continue
+        missing = sorted(spec_fields - model)
+        stale = sorted(model - spec_fields)
+        worst = max(worst, len(missing))
+        detail = ", ".join(missing[:4]) + ("…" if len(missing) > 4 else "")
+        print(f"{name:<20}{len(spec_fields):>5}{len(model):>7}{len(missing):>9}{len(stale):>7}   {detail}")
+    return 0
+
+if __name__ == "__main__":
+    sys.exit(main())

@@ -197,6 +197,24 @@ let the decode path regress to match it.
 - **Config keys are read unscoped** (`secretKey`, not `stripe.secretKey`) so the
   caller chooses the namespace. Don't scope inside the library.
 
+## Measuring model drift
+
+The models are a vendored snapshot, not a mirror. `Scripts/model-drift.py` compares them against
+Stripe's OpenAPI spec and prints, per resource, how many fields are missing (dropped on decode)
+and how many are stale (always nil):
+
+```bash
+curl -sSLO https://raw.githubusercontent.com/stripe/openapi/master/openapi/spec3.sdk.json
+Scripts/model-drift.py spec3.sdk.json
+```
+
+Use `spec3.sdk.json`, not `spec3.json`: it carries `x-expandableFields` (which `@ExpandableOf`
+encodes by hand), `x-stripeResource`/`x-stripeOperations`, and expresses union fields such as
+`charge.payment_method_details` as `anyOf`.
+
+Run it before adding a field by hand — the answer is often that several neighbouring fields are
+missing too.
+
 ## Documentation
 
 README.md documents the public API, including the configuration key table and
