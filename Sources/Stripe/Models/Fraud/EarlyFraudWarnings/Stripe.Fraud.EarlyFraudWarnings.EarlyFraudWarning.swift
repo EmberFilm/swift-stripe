@@ -1,0 +1,88 @@
+//
+//  EarlyFraudWarning.swift
+//
+//
+//  Created by Andrew Edwards on 11/29/19.
+//
+
+#if canImport(FoundationEssentials)
+import FoundationEssentials
+#else
+import Foundation
+#endif
+
+// https://docs.stripe.com/api/issuing/early_fraud_warnings/object.md
+
+extension Stripe.Fraud.EarlyFraudWarnings {
+    /// The [Early Fraud Warning Object](https://stripe.com/docs/api/radar/early_fraud_warnings/object)
+    public struct EarlyFraudWarning: Codable, Hashable, Sendable, Identifiable {
+        public typealias ID = String
+
+        /// Unique identifier for the object.
+        public var id: ID
+        /// String representing the object's type. Objects of the same type share the same value.
+        public var object: String
+        /// An EFW is actionable if it has not received a dispute and has not been fully refunded. You may wish to proactively refund a charge that receives an EFW, in order to avoid receiving a dispute later.
+        public var actionable: Bool?
+        /// ID of the charge this early fraud warning is for, optionally expanded.
+        @ExpandableOf<Stripe.Charges.Charge> public var charge
+        /// Time at which the object was created. Measured in seconds since the Unix epoch.
+        public var created: Date
+        /// The type of fraud labelled by the issuer. One of `card_never_received`, `fraudulent_card_application`, `made_with_counterfeit_card`, `made_with_lost_card`, `made_with_stolen_card`, `misc`, `unauthorized_use_of_card`.
+        public var fraudType: FraudType?
+        /// Has the value true if the object exists in live mode or the value false if the object exists in test mode.
+        public var livemode: Bool?
+        /// ID of the Payment Intent this early fraud warning is for, optionally expanded.
+        @ExpandableOf<Stripe.PaymentIntents.PaymentIntent> public var paymentIntent:
+            Stripe.PaymentIntents.PaymentIntent.ID?
+
+        public init(
+            id: ID,
+            object: String,
+            actionable: Bool? = nil,
+            charge: Stripe.Charges.Charge.ID? = nil,
+            created: Date,
+            fraudType: FraudType? = nil,
+            livemode: Bool? = nil,
+            paymentIntent: Stripe.PaymentIntents.PaymentIntent.ID? = nil
+        ) {
+            self.id = id
+            self.object = object
+            self.actionable = actionable
+            self._charge = Expandable(id: charge)
+            self.created = created
+            self.fraudType = fraudType
+            self.livemode = livemode
+            self._paymentIntent = Expandable(id: paymentIntent)
+        }
+    }
+
+    public enum FraudType: String, Codable, Sendable {
+        case cardNeverReceived = "card_never_received"
+        case fraudulentCardApplication = "fraudulent_card_application"
+        case madeWithCounterfeitCard = "made_with_counterfeit_card"
+        case madeWithLostCard = "made_with_lost_card"
+        case madeWithStolenCard = "made_with_stolen_card"
+        case misc
+        case unauthorizedUseOfCard = "unauthorized_use_of_card"
+    }
+
+    public struct List: Codable, Hashable, Sendable {
+        public var object: String
+        public var hasMore: Bool?
+        public var url: String?
+        public var data: [EarlyFraudWarning]?
+
+        public init(
+            object: String,
+            hasMore: Bool? = nil,
+            url: String? = nil,
+            data: [EarlyFraudWarning]? = nil
+        ) {
+            self.object = object
+            self.hasMore = hasMore
+            self.url = url
+            self.data = data
+        }
+    }
+}
