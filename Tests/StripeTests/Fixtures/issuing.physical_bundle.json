@@ -1,0 +1,13 @@
+{
+ "features": {
+  "card_logo": "optional",
+  "carrier_text": "optional",
+  "second_line": "optional"
+ },
+ "id": "issuing.physical_bundle_1",
+ "livemode": true,
+ "name": "name_1",
+ "object": "issuing.physical_bundle",
+ "status": "active",
+ "type": "custom"
+}

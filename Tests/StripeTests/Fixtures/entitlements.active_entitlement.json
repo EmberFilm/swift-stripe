@@ -1,0 +1,7 @@
+{
+ "feature": "entitlements.feature_1",
+ "id": "entitlements.active_entitlement_1",
+ "livemode": true,
+ "lookup_key": "lookup_key_1",
+ "object": "entitlements.active_entitlement"
+}

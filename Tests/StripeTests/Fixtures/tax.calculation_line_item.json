@@ -1,0 +1,34 @@
+{
+ "amount": 1,
+ "amount_tax": 1,
+ "id": "tax.calculation_line_item_1",
+ "livemode": true,
+ "metadata": {
+  "key": "metadata_1"
+ },
+ "object": "tax.calculation_line_item",
+ "product": "product_1",
+ "quantity": 1,
+ "reference": "reference_1",
+ "tax_behavior": "exclusive",
+ "tax_breakdown": [
+  {
+   "amount": 1,
+   "jurisdiction": {
+    "country": "country_1",
+    "display_name": "display_name_1",
+    "level": "city",
+    "state": "state_1"
+   },
+   "sourcing": "destination",
+   "tax_rate_details": {
+    "display_name": "display_name_1",
+    "percentage_decimal": "percentage_decimal_1",
+    "tax_type": "amusement_tax"
+   },
+   "taxability_reason": "customer_exempt",
+   "taxable_amount": 1
+  }
+ ],
+ "tax_code": "tax_code_1"
+}

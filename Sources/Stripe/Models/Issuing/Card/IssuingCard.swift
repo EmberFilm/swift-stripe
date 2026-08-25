@@ -230,14 +230,11 @@ public struct IssuingCardShippingCustom: Codable, Hashable, Sendable {
 }
 
 public enum IssuingCardShippingCarrier: String, Codable, Sendable {
-    /// FedEx
-    case fedex
-    /// USPS
-    case usps
-    /// Royal Mail
-    case royalMail = "royal_mail"
-    /// DHL
+    case correos
     case dhl
+    case fedex
+    case royalMail = "royal_mail"
+    case usps
 }
 
 public enum IssuingCardShippingService: String, Codable, Sendable {

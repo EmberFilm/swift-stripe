@@ -1,0 +1,19 @@
+{
+ "amount": 1,
+ "amount_tax": 1,
+ "id": "tax.transaction_line_item_1",
+ "livemode": true,
+ "metadata": {
+  "key": "metadata_1"
+ },
+ "object": "tax.transaction_line_item",
+ "product": "product_1",
+ "quantity": 1,
+ "reference": "reference_1",
+ "reversal": {
+  "original_line_item": "id"
+ },
+ "tax_behavior": "exclusive",
+ "tax_code": "tax_code_1",
+ "type": "reversal"
+}

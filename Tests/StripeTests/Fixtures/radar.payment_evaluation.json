@@ -1,0 +1,120 @@
+{
+ "client_device_metadata_details": {
+  "radar_session": "radar_session_1"
+ },
+ "created_at": 1700000000,
+ "customer_details": {
+  "customer": "customer_1",
+  "customer_account": "customer_account_1",
+  "email": "email_1",
+  "name": "name_1",
+  "phone": "phone_1"
+ },
+ "events": [
+  {
+   "dispute_opened": {
+    "amount": 1,
+    "currency": "usd",
+    "reason": "account_not_available"
+   },
+   "early_fraud_warning_received": {
+    "fraud_type": "made_with_lost_card"
+   },
+   "occurred_at": 1700000000,
+   "refunded": {
+    "amount": 1,
+    "currency": "usd",
+    "reason": "duplicate"
+   },
+   "type": "dispute_opened",
+   "user_intervention_raised": {
+    "custom": {
+     "type": "type_1"
+    },
+    "key": "key_1",
+    "type": "3ds"
+   },
+   "user_intervention_resolved": {
+    "key": "key_1",
+    "outcome": "abandoned"
+   }
+  }
+ ],
+ "id": "radar.payment_evaluation_1",
+ "livemode": true,
+ "metadata": {
+  "key": "metadata_1"
+ },
+ "object": "radar.payment_evaluation",
+ "outcome": {
+  "merchant_blocked": {
+   "reason": "authentication_required"
+  },
+  "payment_intent_id": "payment_intent_id_1",
+  "rejected": {
+   "card": {
+    "address_line1_check": "fail",
+    "address_postal_code_check": "fail",
+    "cvc_check": "fail",
+    "reason": "authentication_failed"
+   }
+  },
+  "succeeded": {
+   "card": {
+    "address_line1_check": "fail",
+    "address_postal_code_check": "fail",
+    "cvc_check": "fail"
+   }
+  },
+  "type": "failed"
+ },
+ "payment_details": {
+  "amount": 1,
+  "currency": "usd",
+  "description": "description_1",
+  "money_movement_details": {
+   "card": {
+    "customer_presence": "off_session",
+    "payment_type": "one_off"
+   },
+   "money_movement_type": "card"
+  },
+  "payment_method_details": {
+   "billing_details": {
+    "address": {
+     "city": "city_1",
+     "country": "country_1",
+     "line1": "line1_1",
+     "line2": "line2_1",
+     "postal_code": "postal_code_1",
+     "state": "state_1"
+    },
+    "email": "email_1",
+    "name": "name_1",
+    "phone": "phone_1"
+   },
+   "payment_method": "payment_method_1"
+  },
+  "shipping_details": {
+   "address": {
+    "city": "city_1",
+    "country": "country_1",
+    "line1": "line1_1",
+    "line2": "line2_1",
+    "postal_code": "postal_code_1",
+    "state": "state_1"
+   },
+   "name": "name_1",
+   "phone": "phone_1"
+  },
+  "statement_descriptor": "EMBERFILM"
+ },
+ "recommended_action": "block",
+ "signals": {
+  "fraudulent_payment": {
+   "evaluated_at": 1700000000,
+   "risk_level": "elevated",
+   "score": 1.5
+  }
+ }
+}

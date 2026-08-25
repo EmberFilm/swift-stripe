@@ -1,0 +1,75 @@
+{
+ "amount": 1,
+ "cancelable": true,
+ "created": 1700000000,
+ "currency": "usd",
+ "customer": "customer_1",
+ "description": "description_1",
+ "destination_payment_method": "destination_payment_method_data",
+ "destination_payment_method_details": {
+  "billing_details": {
+   "address": {
+    "city": "city_1",
+    "country": "country_1",
+    "line1": "line1_1",
+    "line2": "line2_1",
+    "postal_code": "postal_code_1",
+    "state": "state_1"
+   },
+   "email": "email_1",
+   "name": "name_1"
+  },
+  "financial_account": {
+   "id": "id_1",
+   "network": "stripe"
+  },
+  "type": "financial_account",
+  "us_bank_account": {
+   "account_holder_type": "company",
+   "account_type": "checking",
+   "bank_name": "bank_name_1",
+   "fingerprint": "fingerprint_1",
+   "last4": "last4_1",
+   "mandate": "mandate_1",
+   "network": "ach",
+   "routing_number": "routing_number_1"
+  }
+ },
+ "end_user_details": {
+  "ip_address": "present",
+  "present": true
+ },
+ "expected_arrival_date": 1700000000,
+ "financial_account": "financial_account_1",
+ "hosted_regulatory_receipt_url": "hosted_regulatory_receipt_url_1",
+ "id": "treasury.outbound_payment_1",
+ "livemode": true,
+ "metadata": {
+  "key": "metadata_1"
+ },
+ "object": "treasury.outbound_payment",
+ "returned_details": {
+  "code": "account_closed",
+  "transaction": "treasury.transaction_1"
+ },
+ "statement_descriptor": "EMBERFILM",
+ "status": "canceled",
+ "status_transitions": {
+  "canceled_at": 1700000000,
+  "failed_at": 1700000000,
+  "posted_at": 1700000000,
+  "returned_at": 1700000000
+ },
+ "tracking_details": {
+  "ach": {
+   "trace_id": "trace_id_1"
+  },
+  "type": "ach",
+  "us_domestic_wire": {
+   "chips": "chips_1",
+   "imad": "imad_1",
+   "omad": "omad_1"
+  }
+ },
+ "transaction": "treasury.transaction_1"
+}

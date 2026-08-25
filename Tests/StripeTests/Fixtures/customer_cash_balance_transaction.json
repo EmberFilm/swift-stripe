@@ -1,0 +1,53 @@
+{
+ "adjusted_for_overdraft": {
+  "balance_transaction": "balance_transaction_1",
+  "linked_transaction": "customer_cash_balance_transaction_1"
+ },
+ "applied_to_payment": {
+  "payment_intent": "payment_intent_1"
+ },
+ "created": 1700000000,
+ "currency": "usd",
+ "customer": "customer_1",
+ "customer_account": "customer_account_1",
+ "ending_balance": 1,
+ "funded": {
+  "bank_transfer": {
+   "eu_bank_transfer": {
+    "bic": "bic_1",
+    "iban_last4": "iban_last4_1",
+    "sender_name": "sender_name_1"
+   },
+   "gb_bank_transfer": {
+    "account_number_last4": "account_number_last4_1",
+    "sender_name": "sender_name_1",
+    "sort_code": "sort_code_1"
+   },
+   "jp_bank_transfer": {
+    "sender_bank": "sender_bank_1",
+    "sender_branch": "sender_branch_1",
+    "sender_name": "sender_name_1"
+   },
+   "reference": "reference_1",
+   "type": "eu_bank_transfer",
+   "us_bank_transfer": {
+    "network": "ach",
+    "sender_name": "sender_name_1"
+   }
+  }
+ },
+ "id": "customer_cash_balance_transaction_1",
+ "livemode": true,
+ "net_amount": 1,
+ "object": "customer_cash_balance_transaction",
+ "refunded_from_payment": {
+  "refund": "refund_1"
+ },
+ "transferred_to_balance": {
+  "balance_transaction": "balance_transaction_1"
+ },
+ "type": "adjusted_for_overdraft",
+ "unapplied_from_payment": {
+  "payment_intent": "payment_intent_1"
+ }
+}

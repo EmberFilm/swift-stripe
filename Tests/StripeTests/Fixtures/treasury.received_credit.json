@@ -1,0 +1,186 @@
+{
+ "amount": 1,
+ "created": 1700000000,
+ "currency": "usd",
+ "description": "description_1",
+ "failure_code": "account_closed",
+ "financial_account": "financial_account_1",
+ "hosted_regulatory_receipt_url": "hosted_regulatory_receipt_url_1",
+ "id": "treasury.received_credit_1",
+ "initiating_payment_method_details": {
+  "balance": "payments",
+  "billing_details": {
+   "address": {
+    "city": "city_1",
+    "country": "country_1",
+    "line1": "line1_1",
+    "line2": "line2_1",
+    "postal_code": "postal_code_1",
+    "state": "state_1"
+   },
+   "email": "email_1",
+   "name": "name_1"
+  },
+  "financial_account": {
+   "id": "id_1",
+   "network": "stripe"
+  },
+  "issuing_card": "type",
+  "type": "balance",
+  "us_bank_account": {
+   "bank_name": "bank_name_1",
+   "last4": "last4_1",
+   "routing_number": "routing_number_1"
+  }
+ },
+ "linked_flows": {
+  "credit_reversal": "credit_reversal_1",
+  "issuing_authorization": "issuing_authorization_1",
+  "issuing_transaction": "issuing_transaction_1",
+  "source_flow": "network",
+  "source_flow_details": {
+   "credit_reversal": {
+    "amount": 1,
+    "created": 1700000000,
+    "currency": "usd",
+    "financial_account": "financial_account_1",
+    "hosted_regulatory_receipt_url": "hosted_regulatory_receipt_url_1",
+    "id": "id_1",
+    "livemode": true,
+    "metadata": {
+     "key": "metadata_1"
+    },
+    "network": "ach",
+    "object": "treasury.credit_reversal",
+    "received_credit": "received_credit_1",
+    "status": "canceled",
+    "status_transitions": {
+     "posted_at": 1700000000
+    },
+    "transaction": "treasury.transaction_1"
+   },
+   "outbound_payment": {
+    "amount": 1,
+    "cancelable": true,
+    "created": 1700000000,
+    "currency": "usd",
+    "customer": "customer_1",
+    "description": "description_1",
+    "destination_payment_method": "destination_payment_method_data",
+    "destination_payment_method_details": {
+     "type": "financial_account"
+    },
+    "end_user_details": {
+     "ip_address": "present",
+     "present": true
+    },
+    "expected_arrival_date": 1700000000,
+    "financial_account": "financial_account_1",
+    "hosted_regulatory_receipt_url": "hosted_regulatory_receipt_url_1",
+    "id": "id_1",
+    "livemode": true,
+    "metadata": {
+     "key": "metadata_1"
+    },
+    "object": "treasury.outbound_payment",
+    "returned_details": {
+     "code": "account_closed",
+     "transaction": "treasury.transaction_1"
+    },
+    "statement_descriptor": "EMBERFILM",
+    "status": "canceled",
+    "status_transitions": {
+     "canceled_at": 1700000000,
+     "failed_at": 1700000000,
+     "posted_at": 1700000000,
+     "returned_at": 1700000000
+    },
+    "tracking_details": {
+     "type": "ach"
+    },
+    "transaction": "treasury.transaction_1"
+   },
+   "outbound_transfer": {
+    "amount": 1,
+    "cancelable": true,
+    "created": 1700000000,
+    "currency": "usd",
+    "description": "description_1",
+    "destination_payment_method": "destination_payment_method_1",
+    "destination_payment_method_details": {
+     "type": "financial_account"
+    },
+    "expected_arrival_date": 1700000000,
+    "financial_account": "financial_account_1",
+    "hosted_regulatory_receipt_url": "hosted_regulatory_receipt_url_1",
+    "id": "id_1",
+    "livemode": true,
+    "metadata": {
+     "key": "metadata_1"
+    },
+    "object": "treasury.outbound_transfer",
+    "returned_details": {
+     "code": "account_closed",
+     "transaction": "treasury.transaction_1"
+    },
+    "statement_descriptor": "EMBERFILM",
+    "status": "canceled",
+    "status_transitions": {
+     "canceled_at": 1700000000,
+     "failed_at": 1700000000,
+     "posted_at": 1700000000,
+     "returned_at": 1700000000
+    },
+    "tracking_details": {
+     "type": "ach"
+    },
+    "transaction": "treasury.transaction_1"
+   },
+   "payout": {
+    "amount": 1,
+    "application_fee": "application_fee_1",
+    "application_fee_amount": 1,
+    "arrival_date": 1700000000,
+    "automatic": true,
+    "balance_transaction": "balance_transaction_1",
+    "created": 1700000000,
+    "currency": "usd",
+    "description": "description_1",
+    "destination": "external_account_1",
+    "failure_balance_transaction": "balance_transaction_1",
+    "failure_code": "failure_code_1",
+    "failure_message": "failure_message_1",
+    "id": "id_1",
+    "livemode": true,
+    "metadata": {
+     "key": "metadata_1"
+    },
+    "method": "standard",
+    "object": "payout",
+    "original_payout": "payout_1",
+    "payout_method": "payout_method_1",
+    "reconciliation_status": "completed",
+    "reversed_by": "payout_1",
+    "source_type": "card",
+    "statement_descriptor": "EMBERFILM",
+    "status": "paid",
+    "trace_id": {
+     "status": "pending",
+     "value": "supported"
+    },
+    "type": "bank_account"
+   },
+   "type": "credit_reversal"
+  },
+  "source_flow_type": "outbound_payment"
+ },
+ "livemode": true,
+ "network": "ach",
+ "object": "treasury.received_credit",
+ "reversal_details": {
+  "deadline": 1700000000,
+  "restricted_reason": "already_reversed"
+ },
+ "status": "failed",
+ "transaction": "treasury.transaction_1"
+}

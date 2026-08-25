@@ -1,0 +1,42 @@
+{
+ "ach_credit_transfer": {
+  "customer_data": "customer_data_1",
+  "fingerprint": "fingerprint_1",
+  "last4": "last4_1",
+  "routing_number": "routing_number_1"
+ },
+ "amount": 1,
+ "chf_credit_transfer": {
+  "reference": "reference_1",
+  "sender_address_country": "sender_address_country_1",
+  "sender_address_line1": "sender_address_line1_1",
+  "sender_iban": "sender_iban_1",
+  "sender_name": "sender_name_1"
+ },
+ "created": 1700000000,
+ "currency": "usd",
+ "gbp_credit_transfer": {
+  "fingerprint": "fingerprint_1",
+  "funding_method": "funding_method_1",
+  "last4": "last4_1",
+  "reference": "reference_1",
+  "sender_account_number": "sender_account_number_1",
+  "sender_name": "sender_name_1",
+  "sender_sort_code": "sender_sort_code_1"
+ },
+ "id": "source_transaction_1",
+ "livemode": true,
+ "object": "source_transaction",
+ "paper_check": {
+  "available_at": "available_at_1",
+  "invoices": "invoices_1"
+ },
+ "sepa_credit_transfer": {
+  "reference": "reference_1",
+  "sender_iban": "sender_iban_1",
+  "sender_name": "sender_name_1"
+ },
+ "source": "source_1",
+ "status": "succeeded",
+ "type": "ach_credit_transfer"
+}

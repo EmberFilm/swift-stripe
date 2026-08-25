@@ -14,6 +14,88 @@ extension Stripe {
     public enum Shared {}
 }
 
+// payment_method_details_ach_credit_transfer
+extension Stripe.Shared {
+    public struct AchCreditTransfer: Codable, Hashable, Sendable {
+        /// Account number to transfer funds to.
+        public var accountNumber: String?
+        /// Name of the bank associated with the routing number.
+        public var bankName: String?
+        /// Routing transit number for the bank account to transfer funds to.
+        public var routingNumber: String?
+        /// SWIFT code of the bank associated with the routing number.
+        public var swiftCode: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case accountNumber
+            case bankName
+            case routingNumber
+            case swiftCode
+        }
+
+        public init(
+            accountNumber: String? = nil,
+            bankName: String? = nil,
+            routingNumber: String? = nil,
+            swiftCode: String? = nil
+        ) {
+            self.accountNumber = accountNumber
+            self.bankName = bankName
+            self.routingNumber = routingNumber
+            self.swiftCode = swiftCode
+        }
+    }
+}
+
+// payment_method_details_ach_debit
+extension Stripe.Shared {
+    public struct AchDebit: Codable, Hashable, Sendable {
+        /// Type of entity that holds the account.
+        public var accountHolderType: AccountHolderType?
+        /// Name of the bank associated with the bank account.
+        public var bankName: String?
+        /// Two-letter ISO code representing the country the bank account is located in.
+        public var country: String?
+        /// Uniquely identifies this particular bank account.
+        public var fingerprint: String?
+        /// Last four digits of the bank account number.
+        public var last4: String?
+        /// Routing transit number of the bank account.
+        public var routingNumber: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case accountHolderType
+            case bankName
+            case country
+            case fingerprint
+            case last4
+            case routingNumber
+        }
+
+        public init(
+            accountHolderType: AccountHolderType? = nil,
+            bankName: String? = nil,
+            country: String? = nil,
+            fingerprint: String? = nil,
+            last4: String? = nil,
+            routingNumber: String? = nil
+        ) {
+            self.accountHolderType = accountHolderType
+            self.bankName = bankName
+            self.country = country
+            self.fingerprint = fingerprint
+            self.last4 = last4
+            self.routingNumber = routingNumber
+        }
+
+        /// Type of entity that holds the account.
+        public enum AccountHolderType: String, Codable, Hashable, Sendable {
+            case company
+            case individual
+        }
+    }
+}
+
 // invoice_payment_method_options_acss_debit
 extension Stripe.Shared {
     public struct AcssDebit: Codable, Hashable, Sendable {
@@ -367,6 +449,35 @@ extension Stripe.Shared {
     }
 }
 
+// treasury_transactions_resource_balance_impact
+extension Stripe.Shared {
+    /// Change to a FinancialAccount's balance
+    public struct BalanceImpact: Codable, Hashable, Sendable {
+        /// The change made to funds the user can spend right now.
+        public var cash: Int?
+        /// The change made to funds that are not spendable yet, but will become available at a later time.
+        public var inboundPending: Int?
+        /// The change made to funds in the account, but not spendable because they are being held for pending outbound flows.
+        public var outboundPending: Int?
+
+        private enum CodingKeys: String, CodingKey {
+            case cash
+            case inboundPending
+            case outboundPending
+        }
+
+        public init(
+            cash: Int? = nil,
+            inboundPending: Int? = nil,
+            outboundPending: Int? = nil
+        ) {
+            self.cash = cash
+            self.inboundPending = inboundPending
+            self.outboundPending = outboundPending
+        }
+    }
+}
+
 // invoice_payment_method_options_bancontact
 extension Stripe.Shared {
     public struct Bancontact: Codable, Hashable, Sendable {
@@ -415,6 +526,258 @@ extension Stripe.Shared {
     }
 }
 
+// billing_bill_resource_invoicing_taxes_tax
+extension Stripe.Shared {
+    public struct BillingBillResourceInvoicingTaxesTax: Codable, Hashable, Sendable {
+        /// The amount of the tax, in cents (or local equivalent).
+        public var amount: Int?
+        /// Whether this tax is inclusive or exclusive.
+        public var taxBehavior: TaxBehavior?
+        /// Additional details about the tax rate.
+        public var taxRateDetails: Stripe.Shared.TaxRateDetails?
+        /// The reasoning behind this tax, for example, if the product is tax exempt.
+        public var taxabilityReason: TaxabilityReason?
+        /// The amount on which tax is calculated, in cents (or local equivalent).
+        public var taxableAmount: Int?
+        /// The type of tax information.
+        public var `type`: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case amount
+            case taxBehavior
+            case taxRateDetails
+            case taxabilityReason
+            case taxableAmount
+            case `type`
+        }
+
+        public init(
+            amount: Int? = nil,
+            taxBehavior: TaxBehavior? = nil,
+            taxRateDetails: Stripe.Shared.TaxRateDetails? = nil,
+            taxabilityReason: TaxabilityReason? = nil,
+            taxableAmount: Int? = nil,
+            `type`: String? = nil
+        ) {
+            self.amount = amount
+            self.taxBehavior = taxBehavior
+            self.taxRateDetails = taxRateDetails
+            self.taxabilityReason = taxabilityReason
+            self.taxableAmount = taxableAmount
+            self.`type` = `type`
+        }
+
+        /// Whether this tax is inclusive or exclusive.
+        public enum TaxBehavior: String, Codable, Hashable, Sendable {
+            case exclusive
+            case inclusive
+        }
+
+        /// The reasoning behind this tax, for example, if the product is tax exempt.
+        public enum TaxabilityReason: String, Codable, Hashable, Sendable {
+            case customerExempt = "customer_exempt"
+            case notAvailable = "not_available"
+            case notCollecting = "not_collecting"
+            case notSubjectToTax = "not_subject_to_tax"
+            case notSupported = "not_supported"
+            case portionProductExempt = "portion_product_exempt"
+            case portionReducedRated = "portion_reduced_rated"
+            case portionStandardRated = "portion_standard_rated"
+            case productExempt = "product_exempt"
+            case productExemptHoliday = "product_exempt_holiday"
+            case proportionallyRated = "proportionally_rated"
+            case reducedRated = "reduced_rated"
+            case reverseCharge = "reverse_charge"
+            case standardRated = "standard_rated"
+            case taxableBasisReduced = "taxable_basis_reduced"
+            case zeroRated = "zero_rated"
+        }
+    }
+}
+
+// treasury_shared_resource_billing_details
+extension Stripe.Shared {
+    public struct BillingDetails: Codable, Hashable, Sendable {
+        public var address: Address?
+        /// Email address.
+        public var email: String?
+        /// Full name.
+        public var name: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case address
+            case email
+            case name
+        }
+
+        public init(
+            address: Address? = nil,
+            email: String? = nil,
+            name: String? = nil
+        ) {
+            self.address = address
+            self.email = email
+            self.name = name
+        }
+    }
+}
+
+// payment_method_details_card_present
+extension Stripe.Shared {
+    public struct CardPresent: Codable, Hashable, Sendable {
+        /// The authorized amount
+        public var amountAuthorized: Int?
+        /// Card brand.
+        public var brand: String?
+        /// The product code that identifies the specific program or product associated with a card.
+        public var brandProduct: String?
+        /// When using manual capture, a future timestamp after which the charge will be automatically refunded if uncaptured.
+        public var captureBefore: Date?
+        /// The cardholder name as read from the card, in ISO 7813 format.
+        public var cardholderName: String?
+        /// Two-letter ISO code representing the country of the card.
+        public var country: String?
+        /// A high-level description of the type of cards issued in this range.
+        public var description: String?
+        /// Authorization response cryptogram.
+        public var emvAuthData: String?
+        /// Two-digit number representing the card's expiration month.
+        public var expMonth: Int?
+        /// Four-digit number representing the card's expiration year.
+        public var expYear: Int?
+        /// Uniquely identifies this particular card number.
+        public var fingerprint: String?
+        /// Card funding type.
+        public var funding: String?
+        /// ID of a card PaymentMethod generated from the card_present PaymentMethod that may be attached to a Customer for future…
+        public var generatedCard: String?
+        /// Issuer identification number of the card.
+        public var iin: String?
+        /// Whether this PaymentIntent is eligible for incremental authorizations.
+        public var incrementalAuthorizationSupported: Bool?
+        /// The name of the card's issuing bank.
+        public var issuer: String?
+        /// The last four digits of the card.
+        public var last4: String?
+        /// ID of the location that this transaction's reader is assigned to.
+        public var location: String?
+        /// Identifies which network this charge was processed on.
+        public var network: String?
+        /// This is used by the financial networks to identify a transaction.
+        public var networkTransactionId: String?
+        /// Details about payments collected offline.
+        public var offline: Stripe.Shared.Offline?
+        /// Defines whether the authorized amount can be over-captured or not
+        public var overcaptureSupported: Bool?
+        /// The languages that the issuing bank recommends using for localizing any customer-facing text, as read from the card.
+        public var preferredLocales: [String]?
+        /// How card details were read in this transaction.
+        public var readMethod: ReadMethod?
+        /// ID of the reader this transaction was made on.
+        public var reader: String?
+        /// A collection of fields required to be displayed on receipts.
+        public var receipt: Stripe.Shared.Receipt?
+        public var wallet: Stripe.Shared.Wallet?
+
+        private enum CodingKeys: String, CodingKey {
+            case amountAuthorized
+            case brand
+            case brandProduct
+            case captureBefore
+            case cardholderName
+            case country
+            case description
+            case emvAuthData
+            case expMonth
+            case expYear
+            case fingerprint
+            case funding
+            case generatedCard
+            case iin
+            case incrementalAuthorizationSupported
+            case issuer
+            case last4
+            case location
+            case network
+            case networkTransactionId
+            case offline
+            case overcaptureSupported
+            case preferredLocales
+            case readMethod
+            case reader
+            case receipt
+            case wallet
+        }
+
+        public init(
+            amountAuthorized: Int? = nil,
+            brand: String? = nil,
+            brandProduct: String? = nil,
+            captureBefore: Date? = nil,
+            cardholderName: String? = nil,
+            country: String? = nil,
+            description: String? = nil,
+            emvAuthData: String? = nil,
+            expMonth: Int? = nil,
+            expYear: Int? = nil,
+            fingerprint: String? = nil,
+            funding: String? = nil,
+            generatedCard: String? = nil,
+            iin: String? = nil,
+            incrementalAuthorizationSupported: Bool? = nil,
+            issuer: String? = nil,
+            last4: String? = nil,
+            location: String? = nil,
+            network: String? = nil,
+            networkTransactionId: String? = nil,
+            offline: Stripe.Shared.Offline? = nil,
+            overcaptureSupported: Bool? = nil,
+            preferredLocales: [String]? = nil,
+            readMethod: ReadMethod? = nil,
+            reader: String? = nil,
+            receipt: Stripe.Shared.Receipt? = nil,
+            wallet: Stripe.Shared.Wallet? = nil
+        ) {
+            self.amountAuthorized = amountAuthorized
+            self.brand = brand
+            self.brandProduct = brandProduct
+            self.captureBefore = captureBefore
+            self.cardholderName = cardholderName
+            self.country = country
+            self.description = description
+            self.emvAuthData = emvAuthData
+            self.expMonth = expMonth
+            self.expYear = expYear
+            self.fingerprint = fingerprint
+            self.funding = funding
+            self.generatedCard = generatedCard
+            self.iin = iin
+            self.incrementalAuthorizationSupported = incrementalAuthorizationSupported
+            self.issuer = issuer
+            self.last4 = last4
+            self.location = location
+            self.network = network
+            self.networkTransactionId = networkTransactionId
+            self.offline = offline
+            self.overcaptureSupported = overcaptureSupported
+            self.preferredLocales = preferredLocales
+            self.readMethod = readMethod
+            self.reader = reader
+            self.receipt = receipt
+            self.wallet = wallet
+        }
+
+        /// How card details were read in this transaction.
+        public enum ReadMethod: String, Codable, Hashable, Sendable {
+            case contactEmv = "contact_emv"
+            case contactlessEmv = "contactless_emv"
+            case contactlessMagstripeMode = "contactless_magstripe_mode"
+            case magneticStripeFallback = "magnetic_stripe_fallback"
+            case magneticStripeTrack2 = "magnetic_stripe_track2"
+        }
+    }
+}
+
 // connect_account_reference
 extension Stripe.Shared {
     public struct ConnectAccountReference: Codable, Hashable, Sendable {
@@ -440,6 +803,59 @@ extension Stripe.Shared {
         public enum `Type`: String, Codable, Hashable, Sendable {
             case account
             case `self`
+        }
+    }
+}
+
+// payment_method_details_crypto
+extension Stripe.Shared {
+    public struct Crypto: Codable, Hashable, Sendable {
+        /// The wallet address of the customer.
+        public var buyerAddress: String?
+        /// The blockchain network that the transaction was sent on.
+        public var network: Network?
+        /// The token currency that the transaction was sent with.
+        public var tokenCurrency: TokenCurrency?
+        /// The blockchain transaction hash of the crypto payment.
+        public var transactionHash: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case buyerAddress
+            case network
+            case tokenCurrency
+            case transactionHash
+        }
+
+        public init(
+            buyerAddress: String? = nil,
+            network: Network? = nil,
+            tokenCurrency: TokenCurrency? = nil,
+            transactionHash: String? = nil
+        ) {
+            self.buyerAddress = buyerAddress
+            self.network = network
+            self.tokenCurrency = tokenCurrency
+            self.transactionHash = transactionHash
+        }
+
+        /// The blockchain network that the transaction was sent on.
+        public enum Network: String, Codable, Hashable, Sendable {
+            case base
+            case ethereum
+            case polygon
+            case solana
+            case sui
+            case tempo
+        }
+
+        /// The token currency that the transaction was sent with.
+        public enum TokenCurrency: String, Codable, Hashable, Sendable {
+            case phantomCash = "phantom_cash"
+            case usdc
+            case usdg
+            case usdp
+            case usdsui
+            case usdt
         }
     }
 }
@@ -485,39 +901,6 @@ extension Stripe.Shared {
         ) {
             self.bankTransfer = bankTransfer
             self.fundingType = fundingType
-        }
-    }
-}
-
-// deleted_application
-extension Stripe.Shared {
-    public struct DeletedApplication: Codable, Hashable, Sendable, Identifiable {
-        public typealias ID = String
-        public let id: ID
-        /// Always true for a deleted object
-        public var deleted: Bool?
-        /// The name of the application.
-        public var name: String?
-        /// String representing the object's type.
-        public var object: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case deleted
-            case name
-            case object
-        }
-
-        public init(
-            id: ID,
-            deleted: Bool? = nil,
-            name: String? = nil,
-            object: String? = nil
-        ) {
-            self.id = id
-            self.deleted = deleted
-            self.name = name
-            self.object = object
         }
     }
 }
@@ -600,6 +983,29 @@ extension Stripe.Shared {
     }
 }
 
+// discounts_resource_discount_amount
+extension Stripe.Shared {
+    public struct DiscountsResourceDiscountAmount: Codable, Hashable, Sendable {
+        /// The amount, in cents (or local equivalent), of the discount.
+        public var amount: Int?
+        /// The discount that was applied to get this discount amount.
+        @Expandable<Stripe.Shared.Discount, String> public var discount: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case amount
+            case discount
+        }
+
+        public init(
+            amount: Int? = nil,
+            discount: String? = nil
+        ) {
+            self.amount = amount
+            self._discount = Expandable(id: discount)
+        }
+    }
+}
+
 // payment_method_options_customer_balance_eu_bank_account
 extension Stripe.Shared {
     public struct EuBankTransfer: Codable, Hashable, Sendable {
@@ -651,6 +1057,29 @@ extension Stripe.Shared {
     }
 }
 
+// received_payment_method_details_financial_account
+extension Stripe.Shared {
+    public struct FinancialAccount: Codable, Hashable, Sendable, Identifiable {
+        public typealias ID = String
+        public let id: ID
+        /// The rails the ReceivedCredit was sent over.
+        public var network: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case id
+            case network
+        }
+
+        public init(
+            id: ID,
+            network: String? = nil
+        ) {
+            self.id = id
+            self.network = network
+        }
+    }
+}
+
 // linked_account_options_common
 extension Stripe.Shared {
     public struct FinancialConnections: Codable, Hashable, Sendable {
@@ -692,6 +1121,321 @@ extension Stripe.Shared {
             case balances
             case ownership
             case transactions
+        }
+    }
+}
+
+// treasury_transactions_resource_flow_details
+extension Stripe.Shared {
+    public struct FlowDetails: Codable, Hashable, Sendable {
+        @Boxed public var creditReversal: Stripe.Treasury.CreditReversal?
+        @Boxed public var debitReversal: Stripe.Treasury.DebitReversal?
+        @Boxed public var inboundTransfer: Stripe.Treasury.InboundTransfer?
+        public var issuingAuthorization: Authorization?
+        @Boxed public var outboundPayment: Stripe.Treasury.OutboundPayment?
+        @Boxed public var outboundTransfer: Stripe.Treasury.OutboundTransfer?
+        @Boxed public var receivedCredit: Stripe.Treasury.ReceivedCredit?
+        @Boxed public var receivedDebit: Stripe.Treasury.ReceivedDebit?
+        /// Type of the flow that created the Transaction.
+        public var `type`: Type?
+
+        private enum CodingKeys: String, CodingKey {
+            case creditReversal
+            case debitReversal
+            case inboundTransfer
+            case issuingAuthorization
+            case outboundPayment
+            case outboundTransfer
+            case receivedCredit
+            case receivedDebit
+            case `type`
+        }
+
+        public init(
+            creditReversal: Stripe.Treasury.CreditReversal? = nil,
+            debitReversal: Stripe.Treasury.DebitReversal? = nil,
+            inboundTransfer: Stripe.Treasury.InboundTransfer? = nil,
+            issuingAuthorization: Authorization? = nil,
+            outboundPayment: Stripe.Treasury.OutboundPayment? = nil,
+            outboundTransfer: Stripe.Treasury.OutboundTransfer? = nil,
+            receivedCredit: Stripe.Treasury.ReceivedCredit? = nil,
+            receivedDebit: Stripe.Treasury.ReceivedDebit? = nil,
+            `type`: Type? = nil
+        ) {
+            self._creditReversal = Boxed(wrappedValue: creditReversal)
+            self._debitReversal = Boxed(wrappedValue: debitReversal)
+            self._inboundTransfer = Boxed(wrappedValue: inboundTransfer)
+            self.issuingAuthorization = issuingAuthorization
+            self._outboundPayment = Boxed(wrappedValue: outboundPayment)
+            self._outboundTransfer = Boxed(wrappedValue: outboundTransfer)
+            self._receivedCredit = Boxed(wrappedValue: receivedCredit)
+            self._receivedDebit = Boxed(wrappedValue: receivedDebit)
+            self.`type` = `type`
+        }
+
+        /// Type of the flow that created the Transaction.
+        public enum `Type`: String, Codable, Hashable, Sendable {
+            case creditReversal = "credit_reversal"
+            case debitReversal = "debit_reversal"
+            case inboundTransfer = "inbound_transfer"
+            case issuingAuthorization = "issuing_authorization"
+            case other
+            case outboundPayment = "outbound_payment"
+            case outboundTransfer = "outbound_transfer"
+            case receivedCredit = "received_credit"
+            case receivedDebit = "received_debit"
+        }
+    }
+}
+
+// payment_method_details_fpx
+extension Stripe.Shared {
+    public struct Fpx: Codable, Hashable, Sendable {
+        /// Account holder type, if provided.
+        public var accountHolderType: AccountHolderType?
+        /// The customer's bank.
+        public var bank: Bank?
+        /// Unique transaction id generated by FPX for every request from the merchant
+        public var transactionId: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case accountHolderType
+            case bank
+            case transactionId
+        }
+
+        public init(
+            accountHolderType: AccountHolderType? = nil,
+            bank: Bank? = nil,
+            transactionId: String? = nil
+        ) {
+            self.accountHolderType = accountHolderType
+            self.bank = bank
+            self.transactionId = transactionId
+        }
+
+        /// Account holder type, if provided.
+        public enum AccountHolderType: String, Codable, Hashable, Sendable {
+            case company
+            case individual
+        }
+
+        /// The customer's bank.
+        public enum Bank: String, Codable, Hashable, Sendable {
+            case affinBank = "affin_bank"
+            case agrobank
+            case allianceBank = "alliance_bank"
+            case ambank
+            case bankIslam = "bank_islam"
+            case bankMuamalat = "bank_muamalat"
+            case bankOfChina = "bank_of_china"
+            case bankRakyat = "bank_rakyat"
+            case bnpParibas = "bnp_paribas"
+            case bsn
+            case cimb
+            case citibank
+            case deutscheBank = "deutsche_bank"
+            case hongLeongBank = "hong_leong_bank"
+            case hsbc
+            case kfh
+            case maybank2e
+            case maybank2u
+            case mbsbBank = "mbsb_bank"
+            case ocbc
+            case pbEnterprise = "pb_enterprise"
+            case publicBank = "public_bank"
+            case rhb
+            case standardChartered = "standard_chartered"
+            case uob
+        }
+    }
+}
+
+// payment_method_details_grabpay
+extension Stripe.Shared {
+    public struct Grabpay: Codable, Hashable, Sendable {
+        /// Unique transaction id generated by GrabPay
+        public var transactionId: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case transactionId
+        }
+
+        public init(
+            transactionId: String? = nil
+        ) {
+            self.transactionId = transactionId
+        }
+    }
+}
+
+// treasury_shared_resource_initiating_payment_method_details_initiating_payment_method_details
+extension Stripe.Shared {
+    public struct InitiatingPaymentMethodDetails: Codable, Hashable, Sendable {
+        /// Set when `type` is `balance`.
+        public var balance: String?
+        public var billingDetails: Stripe.Shared.BillingDetails?
+        public var financialAccount: Stripe.Shared.FinancialAccount?
+        /// Set when `type` is `issuing_card`.
+        public var issuingCard: String?
+        /// Polymorphic type matching the originating money movement's source.
+        public var `type`: Type?
+        public var usBankAccount: Stripe.Shared.TreasurySharedResourceInitiatingPaymentMethodDetailsUsBankAccount?
+
+        private enum CodingKeys: String, CodingKey {
+            case balance
+            case billingDetails
+            case financialAccount
+            case issuingCard
+            case `type`
+            case usBankAccount
+        }
+
+        public init(
+            balance: String? = nil,
+            billingDetails: Stripe.Shared.BillingDetails? = nil,
+            financialAccount: Stripe.Shared.FinancialAccount? = nil,
+            issuingCard: String? = nil,
+            `type`: Type? = nil,
+            usBankAccount: Stripe.Shared.TreasurySharedResourceInitiatingPaymentMethodDetailsUsBankAccount? = nil
+        ) {
+            self.balance = balance
+            self.billingDetails = billingDetails
+            self.financialAccount = financialAccount
+            self.issuingCard = issuingCard
+            self.`type` = `type`
+            self.usBankAccount = usBankAccount
+        }
+
+        /// Polymorphic type matching the originating money movement's source.
+        public enum `Type`: String, Codable, Hashable, Sendable {
+            case balance
+            case financialAccount = "financial_account"
+            case issuingCard = "issuing_card"
+            case stripe
+            case usBankAccount = "us_bank_account"
+        }
+    }
+}
+
+// payment_method_details_interac_present
+extension Stripe.Shared {
+    public struct InteracPresent: Codable, Hashable, Sendable {
+        /// Card brand.
+        public var brand: String?
+        /// The cardholder name as read from the card, in ISO 7813 format.
+        public var cardholderName: String?
+        /// Two-letter ISO code representing the country of the card.
+        public var country: String?
+        /// A high-level description of the type of cards issued in this range.
+        public var description: String?
+        /// Authorization response cryptogram.
+        public var emvAuthData: String?
+        /// Two-digit number representing the card's expiration month.
+        public var expMonth: Int?
+        /// Four-digit number representing the card's expiration year.
+        public var expYear: Int?
+        /// Uniquely identifies this particular card number.
+        public var fingerprint: String?
+        /// Card funding type.
+        public var funding: String?
+        /// ID of a card PaymentMethod generated from the card_present PaymentMethod that may be attached to a Customer for future…
+        public var generatedCard: String?
+        /// Issuer identification number of the card.
+        public var iin: String?
+        /// The name of the card's issuing bank.
+        public var issuer: String?
+        /// The last four digits of the card.
+        public var last4: String?
+        /// ID of the location that this transaction's reader is assigned to.
+        public var location: String?
+        /// Identifies which network this charge was processed on.
+        public var network: String?
+        /// This is used by the financial networks to identify a transaction.
+        public var networkTransactionId: String?
+        /// The languages that the issuing bank recommends using for localizing any customer-facing text, as read from the card.
+        public var preferredLocales: [String]?
+        /// How card details were read in this transaction.
+        public var readMethod: ReadMethod?
+        /// ID of the reader this transaction was made on.
+        public var reader: String?
+        /// A collection of fields required to be displayed on receipts.
+        public var receipt: Stripe.Shared.PaymentMethodDetailsInteracPresentReceipt?
+
+        private enum CodingKeys: String, CodingKey {
+            case brand
+            case cardholderName
+            case country
+            case description
+            case emvAuthData
+            case expMonth
+            case expYear
+            case fingerprint
+            case funding
+            case generatedCard
+            case iin
+            case issuer
+            case last4
+            case location
+            case network
+            case networkTransactionId
+            case preferredLocales
+            case readMethod
+            case reader
+            case receipt
+        }
+
+        public init(
+            brand: String? = nil,
+            cardholderName: String? = nil,
+            country: String? = nil,
+            description: String? = nil,
+            emvAuthData: String? = nil,
+            expMonth: Int? = nil,
+            expYear: Int? = nil,
+            fingerprint: String? = nil,
+            funding: String? = nil,
+            generatedCard: String? = nil,
+            iin: String? = nil,
+            issuer: String? = nil,
+            last4: String? = nil,
+            location: String? = nil,
+            network: String? = nil,
+            networkTransactionId: String? = nil,
+            preferredLocales: [String]? = nil,
+            readMethod: ReadMethod? = nil,
+            reader: String? = nil,
+            receipt: Stripe.Shared.PaymentMethodDetailsInteracPresentReceipt? = nil
+        ) {
+            self.brand = brand
+            self.cardholderName = cardholderName
+            self.country = country
+            self.description = description
+            self.emvAuthData = emvAuthData
+            self.expMonth = expMonth
+            self.expYear = expYear
+            self.fingerprint = fingerprint
+            self.funding = funding
+            self.generatedCard = generatedCard
+            self.iin = iin
+            self.issuer = issuer
+            self.last4 = last4
+            self.location = location
+            self.network = network
+            self.networkTransactionId = networkTransactionId
+            self.preferredLocales = preferredLocales
+            self.readMethod = readMethod
+            self.reader = reader
+            self.receipt = receipt
+        }
+
+        /// How card details were read in this transaction.
+        public enum ReadMethod: String, Codable, Hashable, Sendable {
+            case contactEmv = "contact_emv"
+            case contactlessEmv = "contactless_emv"
+            case contactlessMagstripeMode = "contactless_magstripe_mode"
+            case magneticStripeFallback = "magnetic_stripe_fallback"
+            case magneticStripeTrack2 = "magnetic_stripe_track2"
         }
     }
 }
@@ -906,6 +1650,65 @@ extension Stripe.Shared {
     }
 }
 
+// payment_method_details_kr_card
+extension Stripe.Shared {
+    public struct KrCard: Codable, Hashable, Sendable {
+        /// The local credit or debit card brand.
+        public var brand: Brand?
+        /// A unique identifier for the buyer as determined by the local payment processor.
+        public var buyerId: String?
+        /// The last four digits of the card.
+        public var last4: String?
+        /// The Korean Card transaction ID associated with this payment.
+        public var transactionId: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case brand
+            case buyerId
+            case last4
+            case transactionId
+        }
+
+        public init(
+            brand: Brand? = nil,
+            buyerId: String? = nil,
+            last4: String? = nil,
+            transactionId: String? = nil
+        ) {
+            self.brand = brand
+            self.buyerId = buyerId
+            self.last4 = last4
+            self.transactionId = transactionId
+        }
+
+        /// The local credit or debit card brand.
+        public enum Brand: String, Codable, Hashable, Sendable {
+            case bc
+            case citi
+            case hana
+            case hyundai
+            case jeju
+            case jeonbuk
+            case kakaobank
+            case kbank
+            case kdbbank
+            case kookmin
+            case kwangju
+            case lotte
+            case mg
+            case nh
+            case post
+            case samsung
+            case savingsbank
+            case shinhan
+            case shinhyup
+            case suhyup
+            case tossbank
+            case woori
+        }
+    }
+}
+
 // smor_resource_managed_payments
 extension Stripe.Shared {
     public struct ManagedPayments: Codable, Hashable, Sendable {
@@ -998,6 +1801,77 @@ extension Stripe.Shared {
     }
 }
 
+// payment_method_details_nz_bank_account
+extension Stripe.Shared {
+    public struct NzBankAccount: Codable, Hashable, Sendable {
+        /// The name on the bank account.
+        public var accountHolderName: String?
+        /// The numeric code for the bank account's bank.
+        public var bankCode: String?
+        /// The name of the bank.
+        public var bankName: String?
+        /// The numeric code for the bank account's bank branch.
+        public var branchCode: String?
+        /// Estimated date to debit the customer's bank account.
+        public var expectedDebitDate: String?
+        /// Last four digits of the bank account number.
+        public var last4: String?
+        /// The suffix of the bank account number.
+        public var suffix: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case accountHolderName
+            case bankCode
+            case bankName
+            case branchCode
+            case expectedDebitDate
+            case last4
+            case suffix
+        }
+
+        public init(
+            accountHolderName: String? = nil,
+            bankCode: String? = nil,
+            bankName: String? = nil,
+            branchCode: String? = nil,
+            expectedDebitDate: String? = nil,
+            last4: String? = nil,
+            suffix: String? = nil
+        ) {
+            self.accountHolderName = accountHolderName
+            self.bankCode = bankCode
+            self.bankName = bankName
+            self.branchCode = branchCode
+            self.expectedDebitDate = expectedDebitDate
+            self.last4 = last4
+            self.suffix = suffix
+        }
+    }
+}
+
+// payment_method_details_card_present_offline
+extension Stripe.Shared {
+    public struct Offline: Codable, Hashable, Sendable {
+        /// Time at which the payment was collected while offline
+        public var storedAt: Date?
+        /// The method used to process this payment method offline.
+        public var `type`: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case storedAt
+            case `type`
+        }
+
+        public init(
+            storedAt: Date? = nil,
+            `type`: String? = nil
+        ) {
+            self.storedAt = storedAt
+            self.`type` = `type`
+        }
+    }
+}
+
 // payment_method_config_biz_payment_method_configuration_details
 extension Stripe.Shared {
     public struct PaymentMethodConfigurationDetails: Codable, Hashable, Sendable, Identifiable {
@@ -1056,6 +1930,121 @@ extension Stripe.Shared {
     }
 }
 
+// payment_method_details_customer_balance
+extension Stripe.Shared {
+    public struct PaymentMethodDetailsCustomerBalance: Codable, Hashable, Sendable {
+        public init() {}
+    }
+}
+
+// payment_method_details_interac_present_receipt
+extension Stripe.Shared {
+    public struct PaymentMethodDetailsInteracPresentReceipt: Codable, Hashable, Sendable {
+        /// The type of account being debited or credited
+        public var accountType: AccountType?
+        /// The Application Cryptogram, a unique value generated by the card to authenticate the transaction with issuers.
+        public var applicationCryptogram: String?
+        /// The Application Identifier (AID) on the card used to determine which networks are eligible to process the transaction.
+        public var applicationPreferredName: String?
+        /// Identifier for this transaction.
+        public var authorizationCode: String?
+        /// EMV tag 8A.
+        public var authorizationResponseCode: String?
+        /// Describes the method used by the cardholder to verify ownership of the card.
+        public var cardholderVerificationMethod: String?
+        /// Similar to the application_preferred_name, identifying the applications (AIDs) available on the card.
+        public var dedicatedFileName: String?
+        /// A 5-byte string that records the checks and validations that occur between the card and the terminal.
+        public var terminalVerificationResults: String?
+        /// An indication of which steps were completed during the card read process.
+        public var transactionStatusInformation: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case accountType
+            case applicationCryptogram
+            case applicationPreferredName
+            case authorizationCode
+            case authorizationResponseCode
+            case cardholderVerificationMethod
+            case dedicatedFileName
+            case terminalVerificationResults
+            case transactionStatusInformation
+        }
+
+        public init(
+            accountType: AccountType? = nil,
+            applicationCryptogram: String? = nil,
+            applicationPreferredName: String? = nil,
+            authorizationCode: String? = nil,
+            authorizationResponseCode: String? = nil,
+            cardholderVerificationMethod: String? = nil,
+            dedicatedFileName: String? = nil,
+            terminalVerificationResults: String? = nil,
+            transactionStatusInformation: String? = nil
+        ) {
+            self.accountType = accountType
+            self.applicationCryptogram = applicationCryptogram
+            self.applicationPreferredName = applicationPreferredName
+            self.authorizationCode = authorizationCode
+            self.authorizationResponseCode = authorizationResponseCode
+            self.cardholderVerificationMethod = cardholderVerificationMethod
+            self.dedicatedFileName = dedicatedFileName
+            self.terminalVerificationResults = terminalVerificationResults
+            self.transactionStatusInformation = transactionStatusInformation
+        }
+
+        /// The type of account being debited or credited
+        public enum AccountType: String, Codable, Hashable, Sendable {
+            case checking
+            case savings
+            case unknown
+        }
+    }
+}
+
+// payment_method_details_paypal
+extension Stripe.Shared {
+    public struct Paypal: Codable, Hashable, Sendable {
+        /// Two-letter ISO code representing the buyer's country.
+        public var country: String?
+        /// Owner's email.
+        public var payerEmail: String?
+        /// PayPal account PayerID.
+        public var payerId: String?
+        /// Owner's full name.
+        public var payerName: String?
+        /// The level of protection offered as defined by PayPal Seller Protection for Merchants, for this transaction.
+        public var sellerProtection: Stripe.Shared.SellerProtection?
+        /// A unique ID generated by PayPal for this transaction.
+        public var transactionId: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case country
+            case payerEmail
+            case payerId
+            case payerName
+            case sellerProtection
+            case transactionId
+        }
+
+        public init(
+            country: String? = nil,
+            payerEmail: String? = nil,
+            payerId: String? = nil,
+            payerName: String? = nil,
+            sellerProtection: Stripe.Shared.SellerProtection? = nil,
+            transactionId: String? = nil
+        ) {
+            self.country = country
+            self.payerEmail = payerEmail
+            self.payerId = payerId
+            self.payerName = payerName
+            self.sellerProtection = sellerProtection
+            self.transactionId = transactionId
+        }
+    }
+}
+
 // invoice_payment_method_options_payto
 extension Stripe.Shared {
     public struct Payto: Codable, Hashable, Sendable {
@@ -1096,6 +2085,135 @@ extension Stripe.Shared {
     }
 }
 
+// payment_method_details_card_present_receipt
+extension Stripe.Shared {
+    public struct Receipt: Codable, Hashable, Sendable {
+        /// The type of account being debited or credited
+        public var accountType: AccountType?
+        /// The Application Cryptogram, a unique value generated by the card to authenticate the transaction with issuers.
+        public var applicationCryptogram: String?
+        /// The Application Identifier (AID) on the card used to determine which networks are eligible to process the transaction.
+        public var applicationPreferredName: String?
+        /// Identifier for this transaction.
+        public var authorizationCode: String?
+        /// EMV tag 8A.
+        public var authorizationResponseCode: String?
+        /// Describes the method used by the cardholder to verify ownership of the card.
+        public var cardholderVerificationMethod: String?
+        /// Similar to the application_preferred_name, identifying the applications (AIDs) available on the card.
+        public var dedicatedFileName: String?
+        /// A 5-byte string that records the checks and validations that occur between the card and the terminal.
+        public var terminalVerificationResults: String?
+        /// An indication of which steps were completed during the card read process.
+        public var transactionStatusInformation: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case accountType
+            case applicationCryptogram
+            case applicationPreferredName
+            case authorizationCode
+            case authorizationResponseCode
+            case cardholderVerificationMethod
+            case dedicatedFileName
+            case terminalVerificationResults
+            case transactionStatusInformation
+        }
+
+        public init(
+            accountType: AccountType? = nil,
+            applicationCryptogram: String? = nil,
+            applicationPreferredName: String? = nil,
+            authorizationCode: String? = nil,
+            authorizationResponseCode: String? = nil,
+            cardholderVerificationMethod: String? = nil,
+            dedicatedFileName: String? = nil,
+            terminalVerificationResults: String? = nil,
+            transactionStatusInformation: String? = nil
+        ) {
+            self.accountType = accountType
+            self.applicationCryptogram = applicationCryptogram
+            self.applicationPreferredName = applicationPreferredName
+            self.authorizationCode = authorizationCode
+            self.authorizationResponseCode = authorizationResponseCode
+            self.cardholderVerificationMethod = cardholderVerificationMethod
+            self.dedicatedFileName = dedicatedFileName
+            self.terminalVerificationResults = terminalVerificationResults
+            self.transactionStatusInformation = transactionStatusInformation
+        }
+
+        /// The type of account being debited or credited
+        public enum AccountType: String, Codable, Hashable, Sendable {
+            case checking
+            case credit
+            case prepaid
+            case unknown
+        }
+    }
+}
+
+// paypal_seller_protection
+extension Stripe.Shared {
+    public struct SellerProtection: Codable, Hashable, Sendable {
+        /// An array of conditions that are covered for the transaction, if applicable.
+        public var disputeCategories: [DisputeCategories]?
+        /// Indicates whether the transaction is eligible for PayPal's seller protection.
+        public var status: Status?
+
+        private enum CodingKeys: String, CodingKey {
+            case disputeCategories
+            case status
+        }
+
+        public init(
+            disputeCategories: [DisputeCategories]? = nil,
+            status: Status? = nil
+        ) {
+            self.disputeCategories = disputeCategories
+            self.status = status
+        }
+
+        public enum DisputeCategories: String, Codable, Hashable, Sendable {
+            case fraudulent
+            case productNotReceived = "product_not_received"
+        }
+
+        /// Indicates whether the transaction is eligible for PayPal's seller protection.
+        public enum Status: String, Codable, Hashable, Sendable {
+            case eligible
+            case notEligible = "not_eligible"
+            case partiallyEligible = "partially_eligible"
+        }
+    }
+}
+
+// payment_method_details_sepa_credit_transfer
+extension Stripe.Shared {
+    public struct SepaCreditTransfer: Codable, Hashable, Sendable {
+        /// Name of the bank associated with the bank account.
+        public var bankName: String?
+        /// Bank Identifier Code of the bank associated with the bank account.
+        public var bic: String?
+        /// IBAN of the bank account to transfer funds to.
+        public var iban: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case bankName
+            case bic
+            case iban
+        }
+
+        public init(
+            bankName: String? = nil,
+            bic: String? = nil,
+            iban: String? = nil
+        ) {
+            self.bankName = bankName
+            self.bic = bic
+            self.iban = iban
+        }
+    }
+}
+
 // invoice_payment_method_options_sepa_debit
 extension Stripe.Shared {
     public struct SepaDebit: Codable, Hashable, Sendable {
@@ -1122,6 +2240,31 @@ extension Stripe.Shared {
         ) {
             self._coupon = Expandable(id: coupon)
             self.`type` = `type`
+        }
+    }
+}
+
+// payment_method_details_stripe_account
+extension Stripe.Shared {
+    public struct StripeAccount: Codable, Hashable, Sendable {
+        public init() {}
+    }
+}
+
+// billing_bill_resource_invoicing_taxes_tax_rate_details
+extension Stripe.Shared {
+    public struct TaxRateDetails: Codable, Hashable, Sendable {
+        /// ID of the tax rate
+        @Expandable<Stripe.Tax.Rate, String> public var taxRate: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case taxRate
+        }
+
+        public init(
+            taxRate: String? = nil
+        ) {
+            self._taxRate = Expandable(id: taxRate)
         }
     }
 }
@@ -1177,6 +2320,34 @@ extension Stripe.Shared {
     }
 }
 
+// treasury_shared_resource_initiating_payment_method_details_us_bank_account
+extension Stripe.Shared {
+    public struct TreasurySharedResourceInitiatingPaymentMethodDetailsUsBankAccount: Codable, Hashable, Sendable {
+        /// Bank name.
+        public var bankName: String?
+        /// The last four digits of the bank account number.
+        public var last4: String?
+        /// The routing number for the bank account.
+        public var routingNumber: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case bankName
+            case last4
+            case routingNumber
+        }
+
+        public init(
+            bankName: String? = nil,
+            last4: String? = nil,
+            routingNumber: String? = nil
+        ) {
+            self.bankName = bankName
+            self.last4 = last4
+            self.routingNumber = routingNumber
+        }
+    }
+}
+
 // invoice_payment_method_options_upi
 extension Stripe.Shared {
     public struct Upi: Codable, Hashable, Sendable {
@@ -1220,6 +2391,39 @@ extension Stripe.Shared {
             case instant
             case microdeposits
         }
+    }
+}
+
+// payment_flows_private_payment_methods_card_present_common_wallet
+extension Stripe.Shared {
+    public struct Wallet: Codable, Hashable, Sendable {
+        /// The type of mobile wallet, one of `apple_pay`, `google_pay`, `samsung_pay`, or `unknown`.
+        public var `type`: Type?
+
+        private enum CodingKeys: String, CodingKey {
+            case `type`
+        }
+
+        public init(
+            `type`: Type? = nil
+        ) {
+            self.`type` = `type`
+        }
+
+        /// The type of mobile wallet, one of `apple_pay`, `google_pay`, `samsung_pay`, or `unknown`.
+        public enum `Type`: String, Codable, Hashable, Sendable {
+            case applePay = "apple_pay"
+            case googlePay = "google_pay"
+            case samsungPay = "samsung_pay"
+            case unknown
+        }
+    }
+}
+
+// payment_method_details_wechat
+extension Stripe.Shared {
+    public struct Wechat: Codable, Hashable, Sendable {
+        public init() {}
     }
 }
 

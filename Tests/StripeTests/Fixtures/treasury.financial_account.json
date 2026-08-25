@@ -1,0 +1,172 @@
+{
+ "active_features": [
+  "card_issuing"
+ ],
+ "balance": {
+  "cash": {
+   "key": 1
+  },
+  "inbound_pending": {
+   "key": 1
+  },
+  "outbound_pending": {
+   "key": 1
+  }
+ },
+ "country": "country_1",
+ "created": 1700000000,
+ "features": {
+  "card_issuing": {
+   "requested": true,
+   "status": "active",
+   "status_details": [
+    {
+     "code": "activating",
+     "resolution": "contact_stripe",
+     "restriction": "inbound_flows"
+    }
+   ]
+  },
+  "deposit_insurance": {
+   "requested": true,
+   "status": "active",
+   "status_details": [
+    {
+     "code": "activating",
+     "resolution": "contact_stripe",
+     "restriction": "inbound_flows"
+    }
+   ]
+  },
+  "financial_addresses": {
+   "aba": {
+    "requested": true,
+    "status": "active",
+    "status_details": [
+     {
+      "code": "activating",
+      "resolution": "contact_stripe",
+      "restriction": "inbound_flows"
+     }
+    ]
+   }
+  },
+  "inbound_transfers": {
+   "ach": {
+    "requested": true,
+    "status": "active",
+    "status_details": [
+     {
+      "code": "activating",
+      "resolution": "contact_stripe",
+      "restriction": "inbound_flows"
+     }
+    ]
+   }
+  },
+  "intra_stripe_flows": {
+   "requested": true,
+   "status": "active",
+   "status_details": [
+    {
+     "code": "activating",
+     "resolution": "contact_stripe",
+     "restriction": "inbound_flows"
+    }
+   ]
+  },
+  "object": "treasury.financial_account_features",
+  "outbound_payments": {
+   "ach": {
+    "requested": true,
+    "status": "active",
+    "status_details": [
+     {
+      "code": "activating",
+      "resolution": "contact_stripe",
+      "restriction": "inbound_flows"
+     }
+    ]
+   },
+   "us_domestic_wire": {
+    "requested": true,
+    "status": "active",
+    "status_details": [
+     {
+      "code": "activating",
+      "resolution": "contact_stripe",
+      "restriction": "inbound_flows"
+     }
+    ]
+   }
+  },
+  "outbound_transfers": {
+   "ach": {
+    "requested": true,
+    "status": "active",
+    "status_details": [
+     {
+      "code": "activating",
+      "resolution": "contact_stripe",
+      "restriction": "inbound_flows"
+     }
+    ]
+   },
+   "us_domestic_wire": {
+    "requested": true,
+    "status": "active",
+    "status_details": [
+     {
+      "code": "activating",
+      "resolution": "contact_stripe",
+      "restriction": "inbound_flows"
+     }
+    ]
+   }
+  }
+ },
+ "financial_addresses": [
+  {
+   "aba": {
+    "account_holder_name": "account_holder_name_1",
+    "account_number": "account_number_1",
+    "account_number_last4": "account_number_last4_1",
+    "bank_name": "bank_name_1",
+    "routing_number": "routing_number_1"
+   },
+   "supported_networks": [
+    "ach"
+   ],
+   "type": "aba"
+  }
+ ],
+ "id": "treasury.financial_account_1",
+ "is_default": true,
+ "livemode": true,
+ "metadata": {
+  "key": "metadata_1"
+ },
+ "nickname": "nickname_1",
+ "object": "treasury.financial_account",
+ "pending_features": [
+  "card_issuing"
+ ],
+ "platform_restrictions": {
+  "inbound_flows": "restricted",
+  "outbound_flows": "restricted"
+ },
+ "restricted_features": [
+  "card_issuing"
+ ],
+ "status": "closed",
+ "status_details": {
+  "closed": {
+   "reasons": [
+    "account_rejected"
+   ]
+  }
+ },
+ "supported_currencies": [
+  "supported_currencies_1"
+ ]
+}

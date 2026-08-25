@@ -156,13 +156,13 @@ extension Stripe.Billing {
         /// Total after discounts and taxes.
         public var total: Int?
         /// The aggregate amounts calculated per discount across all line items.
-        public var totalDiscountAmounts: [TotalDiscountAmounts]?
+        public var totalDiscountAmounts: [Stripe.Shared.DiscountsResourceDiscountAmount]?
         /// The integer amount in cents (or local equivalent) representing the total amount of the invoice including all discounts…
         public var totalExcludingTax: Int?
         /// Contains pretax credit amounts (ex: discount, credit grants, etc) that apply to this invoice.
         public var totalPretaxCreditAmounts: [TotalPretaxCreditAmounts]?
         /// The aggregate tax information of all line items.
-        public var totalTaxes: [TotalTaxes]?
+        public var totalTaxes: [Stripe.Shared.BillingBillResourceInvoicingTaxesTax]?
         /// Invoices are automatically paid or sent 1 hour after webhooks are delivered, or until all webhook delivery attempts ha…
         public var webhooksDeliveredAt: Date?
 
@@ -323,10 +323,10 @@ extension Stripe.Billing {
             testClock: String? = nil,
             thresholdReason: ThresholdReason? = nil,
             total: Int? = nil,
-            totalDiscountAmounts: [TotalDiscountAmounts]? = nil,
+            totalDiscountAmounts: [Stripe.Shared.DiscountsResourceDiscountAmount]? = nil,
             totalExcludingTax: Int? = nil,
             totalPretaxCreditAmounts: [TotalPretaxCreditAmounts]? = nil,
-            totalTaxes: [TotalTaxes]? = nil,
+            totalTaxes: [Stripe.Shared.BillingBillResourceInvoicingTaxesTax]? = nil,
             webhooksDeliveredAt: Date? = nil
         ) {
             self.id = id
@@ -1168,26 +1168,6 @@ extension Stripe.Billing {
             }
         }
 
-        public struct TotalDiscountAmounts: Codable, Hashable, Sendable {
-            /// The amount, in cents (or local equivalent), of the discount.
-            public var amount: Int?
-            /// The discount that was applied to get this discount amount.
-            @Expandable<Stripe.Shared.Discount, String> public var discount: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case amount
-                case discount
-            }
-
-            public init(
-                amount: Int? = nil,
-                discount: String? = nil
-            ) {
-                self.amount = amount
-                self._discount = Expandable(id: discount)
-            }
-        }
-
         public struct TotalPretaxCreditAmounts: Codable, Hashable, Sendable {
             /// The amount, in cents (or local equivalent), of the pretax credit amount.
             public var amount: Int?
@@ -1221,87 +1201,6 @@ extension Stripe.Billing {
             public enum `Type`: String, Codable, Hashable, Sendable {
                 case creditBalanceTransaction = "credit_balance_transaction"
                 case discount
-            }
-        }
-
-        public struct TotalTaxes: Codable, Hashable, Sendable {
-            /// The amount of the tax, in cents (or local equivalent).
-            public var amount: Int?
-            /// Whether this tax is inclusive or exclusive.
-            public var taxBehavior: TaxBehavior?
-            /// Additional details about the tax rate.
-            public var taxRateDetails: TaxRateDetails?
-            /// The reasoning behind this tax, for example, if the product is tax exempt.
-            public var taxabilityReason: TaxabilityReason?
-            /// The amount on which tax is calculated, in cents (or local equivalent).
-            public var taxableAmount: Int?
-            /// The type of tax information.
-            public var `type`: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case amount
-                case taxBehavior
-                case taxRateDetails
-                case taxabilityReason
-                case taxableAmount
-                case `type`
-            }
-
-            public init(
-                amount: Int? = nil,
-                taxBehavior: TaxBehavior? = nil,
-                taxRateDetails: TaxRateDetails? = nil,
-                taxabilityReason: TaxabilityReason? = nil,
-                taxableAmount: Int? = nil,
-                `type`: String? = nil
-            ) {
-                self.amount = amount
-                self.taxBehavior = taxBehavior
-                self.taxRateDetails = taxRateDetails
-                self.taxabilityReason = taxabilityReason
-                self.taxableAmount = taxableAmount
-                self.`type` = `type`
-            }
-
-            /// Whether this tax is inclusive or exclusive.
-            public enum TaxBehavior: String, Codable, Hashable, Sendable {
-                case exclusive
-                case inclusive
-            }
-
-            /// The reasoning behind this tax, for example, if the product is tax exempt.
-            public enum TaxabilityReason: String, Codable, Hashable, Sendable {
-                case customerExempt = "customer_exempt"
-                case notAvailable = "not_available"
-                case notCollecting = "not_collecting"
-                case notSubjectToTax = "not_subject_to_tax"
-                case notSupported = "not_supported"
-                case portionProductExempt = "portion_product_exempt"
-                case portionReducedRated = "portion_reduced_rated"
-                case portionStandardRated = "portion_standard_rated"
-                case productExempt = "product_exempt"
-                case productExemptHoliday = "product_exempt_holiday"
-                case proportionallyRated = "proportionally_rated"
-                case reducedRated = "reduced_rated"
-                case reverseCharge = "reverse_charge"
-                case standardRated = "standard_rated"
-                case taxableBasisReduced = "taxable_basis_reduced"
-                case zeroRated = "zero_rated"
-            }
-
-            public struct TaxRateDetails: Codable, Hashable, Sendable {
-                /// ID of the tax rate
-                @Expandable<Stripe.Tax.Rate, String> public var taxRate: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case taxRate
-                }
-
-                public init(
-                    taxRate: String? = nil
-                ) {
-                    self._taxRate = Expandable(id: taxRate)
-                }
             }
         }
     }

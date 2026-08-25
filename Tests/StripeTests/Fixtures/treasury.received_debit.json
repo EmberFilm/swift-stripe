@@ -1,0 +1,53 @@
+{
+ "amount": 1,
+ "created": 1700000000,
+ "currency": "usd",
+ "description": "description_1",
+ "failure_code": "account_closed",
+ "financial_account": "financial_account_1",
+ "hosted_regulatory_receipt_url": "hosted_regulatory_receipt_url_1",
+ "id": "treasury.received_debit_1",
+ "initiating_payment_method_details": {
+  "balance": "payments",
+  "billing_details": {
+   "address": {
+    "city": "city_1",
+    "country": "country_1",
+    "line1": "line1_1",
+    "line2": "line2_1",
+    "postal_code": "postal_code_1",
+    "state": "state_1"
+   },
+   "email": "email_1",
+   "name": "name_1"
+  },
+  "financial_account": {
+   "id": "id_1",
+   "network": "stripe"
+  },
+  "issuing_card": "type",
+  "type": "balance",
+  "us_bank_account": {
+   "bank_name": "bank_name_1",
+   "last4": "last4_1",
+   "routing_number": "routing_number_1"
+  }
+ },
+ "linked_flows": {
+  "debit_reversal": "debit_reversal_1",
+  "inbound_transfer": "inbound_transfer_1",
+  "issuing_authorization": "issuing_authorization_1",
+  "issuing_transaction": "issuing_transaction_1",
+  "payout": "payout_1",
+  "topup": "topup_1"
+ },
+ "livemode": true,
+ "network": "ach",
+ "object": "treasury.received_debit",
+ "reversal_details": {
+  "deadline": 1700000000,
+  "restricted_reason": "already_reversed"
+ },
+ "status": "failed",
+ "transaction": "treasury.transaction_1"
+}

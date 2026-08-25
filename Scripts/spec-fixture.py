@@ -11,8 +11,10 @@ import json, pathlib, sys
 
 SPEC = json.load(open(sys.argv[1]))
 S = SPEC["components"]["schemas"]
-RESOURCES = ["checkout.session", "subscription", "subscription_item", "customer", "invoice",
-             "price", "product", "event", "payment_intent", "charge", "invoice_payment"]
+import importlib.util, sys
+_spec = importlib.util.spec_from_file_location("gen", pathlib.Path(__file__).with_name("generate-models.py"))
+_gen = importlib.util.module_from_spec(_spec); _spec.loader.exec_module(_gen)
+RESOURCES = dict(_gen.RESOURCES)          # schema -> Swift path, the generator's own list
 DEPTH = 4
 
 def ref(node):
@@ -101,4 +103,100 @@ for name in RESOURCES:
     obj = build(name, DEPTH, frozenset())
     obj["id"] = f"{name}_1"
     (out_dir / f"{name}.json").write_text(json.dumps(obj, indent=1, sort_keys=True) + "\n")
-    print(f"{name:<20} {len(obj)} top-level keys")
+print(f"{len(RESOURCES)} fixtures written")
+
+# The decode gate, one case per generated resource, kept in step with the generator's list.
+cases = "".join(
+    f'    @Test("{name}") func {"".join(w.title() for w in re.split(r"[._]", name))[0].lower() + "".join(w.title() for w in re.split(r"[._]", name))[1:]}() throws {{ try Self.decodes("{name}", as: {path}.self) }}\n'
+    for name, path in ((n, p.lstrip("/") if p.startswith("/") else f"Stripe.{p}") for n, p in RESOURCES.items()))
+pathlib.Path("Tests/StripeTests/FixtureDecodingTests.swift").write_text(f'''//
+//  FixtureDecodingTests.swift
+//  swift-stripe
+//
+//  Written by Scripts/spec-fixture.py — do not edit. Every generated resource decodes a fixture
+//  in which every spec field is populated, and must accept every value the spec allows. A
+//  rejection here is a model that will throw on a real object one day.
+//
+
+import Foundation
+import Testing
+
+@testable import Stripe
+
+@Suite("Spec fixture decoding")
+struct FixtureDecodingTests {{
+
+    private static func fixture(_ name: String) throws -> Data {{
+        let url = try #require(Bundle.module.url(forResource: name, withExtension: "json", subdirectory: "Fixtures"))
+        return try Data(contentsOf: url)
+    }}
+
+    /// Hand-written types the generated ones reference that reject a value the spec allows —
+    /// a strict enum on a field the spec types as a free string. Each is a defect in that hand
+    /// type, listed here by path so it is acknowledged rather than silently tolerated; remove an
+    /// entry when the hand type is fixed. Anything not listed fails.
+    private static let knownHandStrictness: [String: Set<String>] = [
+        "treasury.received_credit": ["linked_flows.source_flow_details.payout.failure_code"],
+        "treasury.received_debit": ["linked_flows.source_flow_details.payout.failure_code"],
+        "issuing.authorization": ["card.brand"],
+        "treasury.transaction": ["flow_details.issuing_authorization.card.brand"],
+        "treasury.transaction_entry": ["flow_details.issuing_authorization.card.brand"],
+    ]
+
+    private static func decodes<T: Decodable>(_ schema: String, as type: T.Type) throws {{
+        var json = try JSONSerialization.jsonObject(with: fixture(schema)) as! [String: Any]
+        for _ in 0..<20 {{
+            let data = try JSONSerialization.data(withJSONObject: json)
+            do {{
+                _ = try StripeAPI.decoder.decode(type, from: data)
+                return
+            }} catch let error as DecodingError {{
+                let (path, reason) = describe(error)
+                let wire = path.joined(separator: ".")
+                let known = knownHandStrictness[schema, default: []].contains {{ wire.hasSuffix($0) }}
+                guard known, remove(path: path, from: &json) else {{
+                    Issue.record("\\(schema): \\(wire): \\(reason)")
+                    return
+                }}
+                // acknowledged: strip the field and keep checking the rest of the object
+            }}
+        }}
+        Issue.record("\\(schema): too many rejections")
+    }}
+
+    private static func describe(_ error: DecodingError) -> ([String], String) {{
+        let context: DecodingError.Context
+        switch error {{
+        case .typeMismatch(_, let c), .valueNotFound(_, let c), .keyNotFound(_, let c), .dataCorrupted(let c):
+            context = c
+        @unknown default:
+            return ([], "\\(error)")
+        }}
+        let path = context.codingPath.map {{ key -> String in
+            if let i = key.intValue {{ return "[\\(i)]" }}
+            return key.stringValue.replacingOccurrences(of: "([A-Z])", with: "_$1", options: .regularExpression).lowercased()
+        }}
+        return (path, context.debugDescription)
+    }}
+
+    private static func remove(path: [String], from json: inout [String: Any]) -> Bool {{
+        guard let first = path.first else {{ return false }}
+        if path.count == 1 {{ return json.removeValue(forKey: first) != nil }}
+        let rest = Array(path.dropFirst())
+        if var child = json[first] as? [String: Any] {{
+            guard remove(path: rest, from: &child) else {{ return false }}
+            json[first] = child; return true
+        }}
+        if var list = json[first] as? [Any], let idx = rest.first, idx.hasPrefix("["),
+           let i = Int(idx.dropFirst().dropLast()), i < list.count {{
+            if rest.count == 1 {{ list.remove(at: i); json[first] = list; return true }}
+            guard var element = list[i] as? [String: Any],
+                  remove(path: Array(rest.dropFirst()), from: &element) else {{ return false }}
+            list[i] = element; json[first] = list; return true
+        }}
+        return false
+    }}
+
+{cases}}}
+''')
+print("FixtureDecodingTests.swift written")

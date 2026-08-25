@@ -1,0 +1,12 @@
+{
+ "created": 1700000000,
+ "id": "invoice_rendering_template_1",
+ "livemode": true,
+ "metadata": {
+  "key": "metadata_1"
+ },
+ "nickname": "nickname_1",
+ "object": "invoice_rendering_template",
+ "status": "active",
+ "version": 1
+}

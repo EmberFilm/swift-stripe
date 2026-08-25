@@ -1,0 +1,12 @@
+{
+ "created": 1700000000,
+ "event_name": "event_name_1",
+ "id": "billing.meter_event_1",
+ "identifier": "identifier_1",
+ "livemode": true,
+ "object": "billing.meter_event",
+ "payload": {
+  "key": "payload_1"
+ },
+ "timestamp": 1700000000
+}

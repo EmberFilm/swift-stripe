@@ -1,0 +1,56 @@
+{
+ "amount": 1,
+ "cancelable": true,
+ "created": 1700000000,
+ "currency": "usd",
+ "description": "description_1",
+ "failure_details": {
+  "code": "account_closed"
+ },
+ "financial_account": "financial_account_1",
+ "hosted_regulatory_receipt_url": "hosted_regulatory_receipt_url_1",
+ "id": "treasury.inbound_transfer_1",
+ "linked_flows": {
+  "received_debit": "succeeded"
+ },
+ "livemode": true,
+ "metadata": {
+  "key": "metadata_1"
+ },
+ "object": "treasury.inbound_transfer",
+ "origin_payment_method": "origin_payment_method_1",
+ "origin_payment_method_details": {
+  "billing_details": {
+   "address": {
+    "city": "city_1",
+    "country": "country_1",
+    "line1": "line1_1",
+    "line2": "line2_1",
+    "postal_code": "postal_code_1",
+    "state": "state_1"
+   },
+   "email": "email_1",
+   "name": "name_1"
+  },
+  "type": "us_bank_account",
+  "us_bank_account": {
+   "account_holder_type": "company",
+   "account_type": "checking",
+   "bank_name": "bank_name_1",
+   "fingerprint": "fingerprint_1",
+   "last4": "last4_1",
+   "mandate": "mandate_1",
+   "network": "ach",
+   "routing_number": "routing_number_1"
+  }
+ },
+ "returned": true,
+ "statement_descriptor": "EMBERFILM",
+ "status": "canceled",
+ "status_transitions": {
+  "canceled_at": 1700000000,
+  "failed_at": 1700000000,
+  "succeeded_at": 1700000000
+ },
+ "transaction": "treasury.transaction_1"
+}

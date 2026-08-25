@@ -51,6 +51,45 @@ RESOURCES: dict[str, str] = {
     "payment_intent": "PaymentIntents.PaymentIntent",
     "charge": "Charges.Charge",
     "invoice_payment": "Billing.Invoice.Payment",
+    # stage 4a: resources that had no model at all
+    "entitlements.feature": "Entitlements.Feature",
+    "treasury.transaction": "Treasury.Transaction",
+    "treasury.credit_reversal": "Treasury.CreditReversal",
+    "treasury.debit_reversal": "Treasury.DebitReversal",
+    "treasury.financial_account": "Treasury.FinancialAccount",
+    "treasury.financial_account_features": "Treasury.FinancialAccountFeatures",
+    "treasury.inbound_transfer": "Treasury.InboundTransfer",
+    "treasury.outbound_payment": "Treasury.OutboundPayment",
+    "treasury.outbound_transfer": "Treasury.OutboundTransfer",
+    "treasury.received_credit": "Treasury.ReceivedCredit",
+    "treasury.received_debit": "Treasury.ReceivedDebit",
+    "treasury.transaction_entry": "Treasury.TransactionEntry",
+    "billing.alert": "Billing.Alert",
+    "billing.meter": "Billing.Meter",
+    "billing.meter_event": "Billing.MeterEvent",
+    "billing.meter_event_adjustment": "Billing.MeterEventAdjustment",
+    "billing.meter_event_summary": "Billing.MeterEventSummary",
+    "invoice_rendering_template": "Billing.InvoiceRenderingTemplate",
+    "credit_note_line_item": "Billing.CreditNoteLineItem",
+    "tax.association": "Tax.Association",
+    "tax.calculation_line_item": "Tax.CalculationLineItem",
+    "tax.registration": "Tax.Registration",
+    "tax.transaction_line_item": "Tax.TransactionLineItem",
+    "issuing.personalization_design": "Issuing.PersonalizationDesign",
+    "issuing.physical_bundle": "Issuing.PhysicalBundle",
+    "climate.supplier": "Climate.Supplier",
+    "entitlements.active_entitlement": "Entitlements.ActiveEntitlement",
+    "radar.payment_evaluation": "Fraud.PaymentEvaluation",
+    "terminal.onboarding_link": "Terminal.OnboardingLink",
+    "financial_connections.account_owner": "/FinancialConnections.AccountOwner",
+    "account_link": "Connect.AccountLink",
+    "apple_pay_domain": "ApplePayDomain",
+    "balance_settings": "BalanceSettings",
+    "exchange_rate": "ExchangeRate",
+    "payment_attempt_record": "PaymentAttemptRecord",
+    "product_feature": "Products.ProductFeature",
+    "source_transaction": "SourceTransaction",
+    "customer_cash_balance_transaction": "Customers.CashBalanceTransaction",
 }
 
 # Schemas that carry x-resourceId but are sub-objects of one parent, not standalone
@@ -74,7 +113,47 @@ RESOURCE_TYPES: dict[str, str] = {
     "payment_intent": "Generated.PaymentIntents.PaymentIntent",
     "charge": "Generated.Charges.Charge",
     "invoice_payment": "Generated.Billing.Invoice.Payment",
+    "treasury.credit_reversal": "Generated.Treasury.CreditReversal",
+    "treasury.debit_reversal": "Generated.Treasury.DebitReversal",
+    "treasury.financial_account": "Generated.Treasury.FinancialAccount",
+    "treasury.financial_account_features": "Generated.Treasury.FinancialAccountFeatures",
+    "treasury.inbound_transfer": "Generated.Treasury.InboundTransfer",
+    "treasury.outbound_payment": "Generated.Treasury.OutboundPayment",
+    "treasury.outbound_transfer": "Generated.Treasury.OutboundTransfer",
+    "treasury.received_credit": "Generated.Treasury.ReceivedCredit",
+    "treasury.received_debit": "Generated.Treasury.ReceivedDebit",
+    "treasury.transaction_entry": "Generated.Treasury.TransactionEntry",
+    "billing.alert": "Generated.Billing.Alert",
+    "billing.meter": "Generated.Billing.Meter",
+    "billing.meter_event": "Generated.Billing.MeterEvent",
+    "billing.meter_event_adjustment": "Generated.Billing.MeterEventAdjustment",
+    "billing.meter_event_summary": "Generated.Billing.MeterEventSummary",
+    "invoice_rendering_template": "Generated.Billing.InvoiceRenderingTemplate",
+    "credit_note_line_item": "Generated.Billing.CreditNoteLineItem",
+    "tax.association": "Generated.Tax.Association",
+    "tax.calculation_line_item": "Generated.Tax.CalculationLineItem",
+    "tax.registration": "Generated.Tax.Registration",
+    "tax.transaction_line_item": "Generated.Tax.TransactionLineItem",
+    "issuing.personalization_design": "Generated.Issuing.PersonalizationDesign",
+    "issuing.physical_bundle": "Generated.Issuing.PhysicalBundle",
+    "climate.supplier": "Generated.Climate.Supplier",
+    "entitlements.active_entitlement": "Generated.Entitlements.ActiveEntitlement",
+    "radar.payment_evaluation": "Generated.Fraud.PaymentEvaluation",
+    "terminal.onboarding_link": "Generated.Terminal.OnboardingLink",
+    "financial_connections.account_owner": "FinancialConnections.AccountOwner",
+    "account_link": "Generated.Connect.AccountLink",
+    "apple_pay_domain": "Generated.ApplePayDomain",
+    "balance_settings": "Generated.BalanceSettings",
+    "exchange_rate": "Generated.ExchangeRate",
+    "payment_attempt_record": "Generated.PaymentAttemptRecord",
+    "product_feature": "Generated.Products.ProductFeature",
+    "source_transaction": "Generated.SourceTransaction",
+    "customer_cash_balance_transaction": "Generated.Customers.CashBalanceTransaction",
+    "entitlements.feature": "Generated.Entitlements.Feature",
+    "treasury.transaction": "Generated.Treasury.Transaction",
     # everything else is the hand-written Stripe type
+    "issuing.authorization": "Authorization",
+    "payout": "Stripe.Payouts.Payout",
     "item": "Stripe.Checkout.Session.LineItem",
     "line_item": "Stripe.Billing.Invoice.LineItem",
     "tax_code": "Stripe.Tax.Code",
@@ -119,6 +198,7 @@ RESOURCE_TYPES: dict[str, str] = {
 # Resources with no Swift type at all. A reference to one is kept as its id, never expanded.
 ID_ONLY_RESOURCES: set[str] = {
     "payment_record",
+    "external_account",   # bank account | card; a union, kept as the id until unions are modelled
 }
 
 # Non-resource schemas that already have a hand-written shared type worth reusing.
@@ -293,6 +373,10 @@ class Generator:
         ref = self.ref_name(node)
         if ref:
             return self.type_for_ref(ref, prop, owner)
+        if node.get("type") == "array":
+            # reached for map values and nested arrays; a property-level array is handled by
+            # resolve(), which also decides whether it is an expandable collection
+            return f"[{self.element_type(node.get('items', {}), prop, owner)}]"
 
         members = [m for m in node.get("anyOf", []) if "$ref" in m]
         if members:
@@ -394,11 +478,15 @@ class Generator:
         for name, swift_path in RESOURCES.items():
             if self.only and name not in self.only:
                 continue
-            root = self.build_struct(swift_path.split(".")[-1], self.schemas[name], f"{self.ns}.{swift_path}", root=True)
-            files[f"{self.ns}.{swift_path}.swift"] = self.render_resource(name, swift_path, root)
+            path = swift_path.lstrip("/")
+            root = self.build_struct(path.split(".")[-1], self.schemas[name],
+                                     path if swift_path.startswith("/") else f"{self.ns}.{path}", root=True)
+            files[f"{self.ns}.{path}.swift"] = self.render_resource(name, swift_path, root)
         files[f"{self.ns}.Shared.swift"] = self.render_shared()
         if self.ns != "Stripe":
             files[f"{self.ns}.swift"] = self.render_namespace()
+        else:
+            files["Stripe.Namespaces.swift"] = self.render_missing_namespaces()
         files = {k: v.replace("Generated.", f"{self.ns}.") for k, v in files.items()}
         if self.ns == "Stripe":
             files = {k: v.replace("#endif\nimport Stripe\n", "#endif\n") for k, v in files.items()}
@@ -407,8 +495,12 @@ class Generator:
     # ---- rendering ------------------------------------------------------------------------
 
     def render_resource(self, schema_name: str, swift_path: str, root: "Struct") -> str:
-        parts = swift_path.split(".")
-        container = self.ns + ("." + ".".join(parts[:-1]) if len(parts) > 1 else "")
+        # A leading "/" places the resource under a top-level container (`FinancialConnections`
+        # is a module-level enum, not `Stripe.FinancialConnections`).
+        top_level = swift_path.startswith("/")
+        parts = swift_path.lstrip("/").split(".")
+        container = ".".join(parts[:-1]) if top_level else \
+            self.ns + ("." + ".".join(parts[:-1]) if len(parts) > 1 else "")
         body = root.render(indent="    ")
         return HEADER.format(version=self.version, schema=schema_name) + \
             f"extension {container} {{\n{body}}}\n"
@@ -418,6 +510,18 @@ class Generator:
         out += f"extension {self.ns} {{\n    public enum Shared {{}}\n}}\n\n"
         for ref, s in sorted(self.shared_done.items(), key=lambda kv: kv[1].name):
             out += f"// {ref}\nextension {self.ns}.Shared {{\n{s.render(indent='    ')}}}\n\n"
+        return out
+
+    def render_missing_namespaces(self) -> str:
+        """Declares first-level containers (`Stripe.Treasury`) the hand sources do not."""
+        hand = "\n".join(p.read_text() for p in pathlib.Path("Sources/Stripe").rglob("*.swift")
+                         if "Generated" not in p.parts)
+        wanted = sorted({p.split(".")[0] for p in RESOURCES.values() if "." in p and not p.startswith("/")})
+        def exists(e):   # `Stripe.X` in use, or declared directly inside the root enum's extension
+            return re.search(rf"\bStripe\.{e}\b", hand) or re.search(rf"extension Stripe \{{[^}}]*\bpublic enum {e}\b", hand)
+        missing = [e for e in wanted if not exists(e)]
+        out = HEADER.format(version=self.version, schema="(namespaces the hand sources do not declare)")
+        out += "extension Stripe {\n" + "".join(f"    public enum {e} {{}}\n" for e in missing) + "}\n"
         return out
 
     def render_namespace(self) -> str:

@@ -1,0 +1,444 @@
+{
+ "active_from": 1700000000,
+ "country": "country_1",
+ "country_options": {
+  "ae": {
+   "standard": {
+    "place_of_supply_scheme": "inbound_goods"
+   },
+   "type": "standard"
+  },
+  "al": {
+   "type": "standard"
+  },
+  "am": {
+   "type": "simplified"
+  },
+  "ao": {
+   "type": "standard"
+  },
+  "at": {
+   "standard": {
+    "place_of_supply_scheme": "inbound_goods"
+   },
+   "type": "ioss"
+  },
+  "au": {
+   "standard": {
+    "place_of_supply_scheme": "inbound_goods"
+   },
+   "type": "standard"
+  },
+  "aw": {
+   "type": "standard"
+  },
+  "az": {
+   "type": "simplified"
+  },
+  "ba": {
+   "type": "standard"
+  },
+  "bb": {
+   "type": "standard"
+  },
+  "bd": {
+   "type": "standard"
+  },
+  "be": {
+   "standard": {
+    "place_of_supply_scheme": "inbound_goods"
+   },
+   "type": "ioss"
+  },
+  "bf": {
+   "type": "standard"
+  },
+  "bg": {
+   "standard": {
+    "place_of_supply_scheme": "inbound_goods"
+   },
+   "type": "ioss"
+  },
+  "bh": {
+   "type": "standard"
+  },
+  "bj": {
+   "type": "simplified"
+  },
+  "bs": {
+   "type": "standard"
+  },
+  "by": {
+   "type": "simplified"
+  },
+  "ca": {
+   "province_standard": {
+    "province": "province_1"
+   },
+   "type": "province_standard"
+  },
+  "cd": {
+   "type": "standard"
+  },
+  "ch": {
+   "standard": {
+    "place_of_supply_scheme": "inbound_goods"
+   },
+   "type": "standard"
+  },
+  "cl": {
+   "type": "simplified"
+  },
+  "cm": {
+   "type": "simplified"
+  },
+  "co": {
+   "type": "simplified"
+  },
+  "cr": {
+   "type": "simplified"
+  },
+  "cv": {
+   "type": "simplified"
+  },
+  "cy": {
+   "standard": {
+    "place_of_supply_scheme": "inbound_goods"
+   },
+   "type": "ioss"
+  },
+  "cz": {
+   "standard": {
+    "place_of_supply_scheme": "inbound_goods"
+   },
+   "type": "ioss"
+  },
+  "de": {
+   "standard": {
+    "place_of_supply_scheme": "inbound_goods"
+   },
+   "type": "ioss"
+  },
+  "dk": {
+   "standard": {
+    "place_of_supply_scheme": "inbound_goods"
+   },
+   "type": "ioss"
+  },
+  "ec": {
+   "type": "simplified"
+  },
+  "ee": {
+   "standard": {
+    "place_of_supply_scheme": "inbound_goods"
+   },
+   "type": "ioss"
+  },
+  "eg": {
+   "type": "simplified"
+  },
+  "es": {
+   "standard": {
+    "place_of_supply_scheme": "inbound_goods"
+   },
+   "type": "ioss"
+  },
+  "et": {
+   "type": "standard"
+  },
+  "fi": {
+   "standard": {
+    "place_of_supply_scheme": "inbound_goods"
+   },
+   "type": "ioss"
+  },
+  "fr": {
+   "standard": {
+    "place_of_supply_scheme": "inbound_goods"
+   },
+   "type": "ioss"
+  },
+  "gb": {
+   "standard": {
+    "place_of_supply_scheme": "inbound_goods"
+   },
+   "type": "standard"
+  },
+  "ge": {
+   "type": "simplified"
+  },
+  "gn": {
+   "type": "standard"
+  },
+  "gr": {
+   "standard": {
+    "place_of_supply_scheme": "inbound_goods"
+   },
+   "type": "ioss"
+  },
+  "hr": {
+   "standard": {
+    "place_of_supply_scheme": "inbound_goods"
+   },
+   "type": "ioss"
+  },
+  "hu": {
+   "standard": {
+    "place_of_supply_scheme": "inbound_goods"
+   },
+   "type": "ioss"
+  },
+  "id": {
+   "type": "simplified"
+  },
+  "ie": {
+   "standard": {
+    "place_of_supply_scheme": "inbound_goods"
+   },
+   "type": "ioss"
+  },
+  "in": {
+   "type": "simplified"
+  },
+  "is": {
+   "type": "standard"
+  },
+  "it": {
+   "standard": {
+    "place_of_supply_scheme": "inbound_goods"
+   },
+   "type": "ioss"
+  },
+  "jp": {
+   "standard": {
+    "place_of_supply_scheme": "inbound_goods"
+   },
+   "type": "standard"
+  },
+  "ke": {
+   "type": "simplified"
+  },
+  "kg": {
+   "type": "simplified"
+  },
+  "kh": {
+   "type": "simplified"
+  },
+  "kr": {
+   "type": "simplified"
+  },
+  "kz": {
+   "type": "simplified"
+  },
+  "la": {
+   "type": "simplified"
+  },
+  "lk": {
+   "type": "simplified"
+  },
+  "lt": {
+   "standard": {
+    "place_of_supply_scheme": "inbound_goods"
+   },
+   "type": "ioss"
+  },
+  "lu": {
+   "standard": {
+    "place_of_supply_scheme": "inbound_goods"
+   },
+   "type": "ioss"
+  },
+  "lv": {
+   "standard": {
+    "place_of_supply_scheme": "inbound_goods"
+   },
+   "type": "ioss"
+  },
+  "ma": {
+   "type": "simplified"
+  },
+  "md": {
+   "type": "simplified"
+  },
+  "me": {
+   "type": "standard"
+  },
+  "mk": {
+   "type": "standard"
+  },
+  "mr": {
+   "type": "standard"
+  },
+  "mt": {
+   "standard": {
+    "place_of_supply_scheme": "inbound_goods"
+   },
+   "type": "ioss"
+  },
+  "mx": {
+   "type": "simplified"
+  },
+  "my": {
+   "type": "simplified"
+  },
+  "ng": {
+   "type": "simplified"
+  },
+  "nl": {
+   "standard": {
+    "place_of_supply_scheme": "inbound_goods"
+   },
+   "type": "ioss"
+  },
+  "no": {
+   "standard": {
+    "place_of_supply_scheme": "inbound_goods"
+   },
+   "type": "standard"
+  },
+  "np": {
+   "type": "simplified"
+  },
+  "nz": {
+   "standard": {
+    "place_of_supply_scheme": "inbound_goods"
+   },
+   "type": "standard"
+  },
+  "om": {
+   "type": "standard"
+  },
+  "pe": {
+   "type": "simplified"
+  },
+  "ph": {
+   "type": "simplified"
+  },
+  "pl": {
+   "standard": {
+    "place_of_supply_scheme": "inbound_goods"
+   },
+   "type": "ioss"
+  },
+  "pt": {
+   "standard": {
+    "place_of_supply_scheme": "inbound_goods"
+   },
+   "type": "ioss"
+  },
+  "ro": {
+   "standard": {
+    "place_of_supply_scheme": "inbound_goods"
+   },
+   "type": "ioss"
+  },
+  "rs": {
+   "type": "standard"
+  },
+  "ru": {
+   "type": "simplified"
+  },
+  "sa": {
+   "type": "simplified"
+  },
+  "se": {
+   "standard": {
+    "place_of_supply_scheme": "inbound_goods"
+   },
+   "type": "ioss"
+  },
+  "sg": {
+   "standard": {
+    "place_of_supply_scheme": "inbound_goods"
+   },
+   "type": "standard"
+  },
+  "si": {
+   "standard": {
+    "place_of_supply_scheme": "inbound_goods"
+   },
+   "type": "ioss"
+  },
+  "sk": {
+   "standard": {
+    "place_of_supply_scheme": "inbound_goods"
+   },
+   "type": "ioss"
+  },
+  "sn": {
+   "type": "simplified"
+  },
+  "sr": {
+   "type": "standard"
+  },
+  "th": {
+   "type": "simplified"
+  },
+  "tj": {
+   "type": "simplified"
+  },
+  "tr": {
+   "type": "simplified"
+  },
+  "tw": {
+   "type": "simplified"
+  },
+  "tz": {
+   "type": "simplified"
+  },
+  "ua": {
+   "type": "simplified"
+  },
+  "ug": {
+   "type": "simplified"
+  },
+  "us": {
+   "local_amusement_tax": {
+    "jurisdiction": "jurisdiction_1"
+   },
+   "local_lease_tax": {
+    "jurisdiction": "jurisdiction_1"
+   },
+   "mass_transit_parking_tax": {
+    "jurisdiction": "jurisdiction_1"
+   },
+   "parking_tax": {
+    "jurisdiction": "jurisdiction_1"
+   },
+   "state": "state_1",
+   "state_sales_tax": {
+    "elections": [
+     {
+      "jurisdiction": "jurisdiction_1",
+      "type": "local_use_tax"
+     }
+    ]
+   },
+   "type": "local_amusement_tax"
+  },
+  "uy": {
+   "type": "standard"
+  },
+  "uz": {
+   "type": "simplified"
+  },
+  "vn": {
+   "type": "simplified"
+  },
+  "za": {
+   "type": "standard"
+  },
+  "zm": {
+   "type": "simplified"
+  },
+  "zw": {
+   "type": "standard"
+  }
+ },
+ "created": 1700000000,
+ "expires_at": 1700000000,
+ "id": "tax.registration_1",
+ "livemode": true,
+ "object": "tax.registration",
+ "status": "active"
+}

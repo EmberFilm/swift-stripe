@@ -90,7 +90,7 @@ extension Stripe.Billing {
     public enum Meters: Sendable {}
     public enum MeterEvents: Sendable {}
     public enum MeterEventAdjustments: Sendable {}
-    public enum MeterEventSummary: Sendable {}
+    public enum MeterEventSummaries: Sendable {}
     public enum TestClocks: Sendable {}
     public enum Alerts: Sendable {}
     public enum CreditBalanceSummary: Sendable {}

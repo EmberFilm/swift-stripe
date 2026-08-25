@@ -1,0 +1,13 @@
+{
+ "id": "terminal.onboarding_link_1",
+ "link_options": {
+  "apple_terms_and_conditions": {
+   "allow_relinking": true,
+   "merchant_display_name": "merchant_display_name_1"
+  }
+ },
+ "link_type": "apple_terms_and_conditions",
+ "object": "terminal.onboarding_link",
+ "on_behalf_of": "on_behalf_of_1",
+ "redirect_url": "redirect_url_1"
+}

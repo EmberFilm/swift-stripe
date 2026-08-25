@@ -1,0 +1,7 @@
+{
+ "created": 1700000000,
+ "domain_name": "domain_name_1",
+ "id": "apple_pay_domain_1",
+ "livemode": true,
+ "object": "apple_pay_domain"
+}

@@ -1,0 +1,20 @@
+{
+ "amount": 1,
+ "created": 1700000000,
+ "currency": "usd",
+ "financial_account": "financial_account_1",
+ "hosted_regulatory_receipt_url": "hosted_regulatory_receipt_url_1",
+ "id": "treasury.credit_reversal_1",
+ "livemode": true,
+ "metadata": {
+  "key": "metadata_1"
+ },
+ "network": "ach",
+ "object": "treasury.credit_reversal",
+ "received_credit": "received_credit_1",
+ "status": "canceled",
+ "status_transitions": {
+  "posted_at": 1700000000
+ },
+ "transaction": "treasury.transaction_1"
+}

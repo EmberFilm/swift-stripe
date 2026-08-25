@@ -11,7 +11,7 @@ import FoundationEssentials
 import Foundation
 #endif
 
-extension Stripe.Billing.MeterEventSummary {
+extension Stripe.Billing.MeterEventSummaries {
     public struct MeterEventSummary: Codable, Equatable, Sendable, Identifiable {
         public typealias ID = String
         public let id: ID
@@ -52,12 +52,12 @@ extension Stripe.Billing.MeterEventSummary {
     }
 }
 
-extension Stripe.Billing.MeterEventSummary {
+extension Stripe.Billing.MeterEventSummaries {
     // https://docs.stripe.com/api/billing/meter-event-summary/list.md
     public enum List {}
 }
 
-extension Stripe.Billing.MeterEventSummary.List {
+extension Stripe.Billing.MeterEventSummaries.List {
     public struct Request: Codable, Equatable, Sendable {
         /// Customer to fetch event summaries for
         public var customer: Stripe.Customers.Customer.ID
@@ -112,7 +112,7 @@ extension Stripe.Billing.MeterEventSummary.List {
         public let object: String
         public let url: String
         public let hasMore: Bool
-        public let data: [Stripe.Billing.MeterEventSummary.MeterEventSummary]
+        public let data: [Stripe.Billing.MeterEventSummaries.MeterEventSummary]
 
         private enum CodingKeys: String, CodingKey {
             case object

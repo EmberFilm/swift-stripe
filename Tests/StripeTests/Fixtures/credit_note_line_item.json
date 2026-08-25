@@ -1,0 +1,69 @@
+{
+ "amount": 1,
+ "description": "description_1",
+ "discount_amount": 1,
+ "discount_amounts": [
+  {
+   "amount": 1,
+   "discount": "discount_1"
+  }
+ ],
+ "id": "credit_note_line_item_1",
+ "invoice_line_item": "invoice_line_item_1",
+ "livemode": true,
+ "metadata": {
+  "key": "metadata_1"
+ },
+ "object": "credit_note_line_item",
+ "pretax_credit_amounts": [
+  {
+   "amount": 1,
+   "credit_balance_transaction": "billing.credit_balance_transaction_1",
+   "discount": "discount_1",
+   "type": "credit_balance_transaction"
+  }
+ ],
+ "quantity": 1,
+ "tax_rates": [
+  {
+   "active": true,
+   "country": "country_1",
+   "created": 1700000000,
+   "description": "description_1",
+   "display_name": "display_name_1",
+   "effective_percentage": 1.5,
+   "flat_amount": {
+    "amount": 1,
+    "currency": "usd"
+   },
+   "id": "id_1",
+   "inclusive": true,
+   "jurisdiction": "jurisdiction_1",
+   "jurisdiction_level": "city",
+   "livemode": true,
+   "metadata": {
+    "key": "metadata_1"
+   },
+   "object": "tax_rate",
+   "percentage": 1.5,
+   "rate_type": "flat_amount",
+   "state": "state_1",
+   "tax_type": "amusement_tax"
+  }
+ ],
+ "taxes": [
+  {
+   "amount": 1,
+   "tax_behavior": "exclusive",
+   "tax_rate_details": {
+    "tax_rate": "tax_rate_1"
+   },
+   "taxability_reason": "customer_exempt",
+   "taxable_amount": 1,
+   "type": "tax_rate_details"
+  }
+ ],
+ "type": "custom_line_item",
+ "unit_amount": 1,
+ "unit_amount_decimal": "unit_amount"
+}

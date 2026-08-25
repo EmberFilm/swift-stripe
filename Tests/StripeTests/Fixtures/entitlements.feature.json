@@ -1,0 +1,11 @@
+{
+ "active": true,
+ "id": "entitlements.feature_1",
+ "livemode": true,
+ "lookup_key": "lookup_key_1",
+ "metadata": {
+  "key": "metadata_1"
+ },
+ "name": "name_1",
+ "object": "entitlements.feature"
+}

@@ -1,0 +1,10 @@
+{
+ "email": "email_1",
+ "id": "financial_connections.account_owner_1",
+ "name": "name_1",
+ "object": "financial_connections.account_owner",
+ "ownership": "ownership_1",
+ "phone": "phone_1",
+ "raw_address": "raw_address_1",
+ "refreshed_at": 1700000000
+}

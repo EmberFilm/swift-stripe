@@ -1,0 +1,23 @@
+{
+ "amount": 1,
+ "created": 1700000000,
+ "currency": "usd",
+ "financial_account": "financial_account_1",
+ "hosted_regulatory_receipt_url": "hosted_regulatory_receipt_url_1",
+ "id": "treasury.debit_reversal_1",
+ "linked_flows": {
+  "issuing_dispute": "issuing_dispute_1"
+ },
+ "livemode": true,
+ "metadata": {
+  "key": "metadata_1"
+ },
+ "network": "ach",
+ "object": "treasury.debit_reversal",
+ "received_debit": "received_debit_1",
+ "status": "failed",
+ "status_transitions": {
+  "completed_at": 1700000000
+ },
+ "transaction": "treasury.transaction_1"
+}

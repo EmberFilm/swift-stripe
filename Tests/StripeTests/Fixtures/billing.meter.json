@@ -1,0 +1,24 @@
+{
+ "created": 1700000000,
+ "customer_mapping": {
+  "event_payload_key": "event_payload_key_1",
+  "type": "by_id"
+ },
+ "default_aggregation": {
+  "formula": "count"
+ },
+ "display_name": "display_name_1",
+ "event_name": "event_name_1",
+ "event_time_window": "day",
+ "id": "billing.meter_1",
+ "livemode": true,
+ "object": "billing.meter",
+ "status": "active",
+ "status_transitions": {
+  "deactivated_at": 1700000000
+ },
+ "updated": 1700000000,
+ "value_settings": {
+  "event_payload_key": "event_payload_key_1"
+ }
+}

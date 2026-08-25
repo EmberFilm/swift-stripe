@@ -1,0 +1,9 @@
+{
+ "aggregated_value": 1.5,
+ "end_time": 1700000000,
+ "id": "billing.meter_event_summary_1",
+ "livemode": true,
+ "meter": "meter_1",
+ "object": "billing.meter_event_summary",
+ "start_time": 1700000000
+}

@@ -484,7 +484,10 @@ Every other model is still the vendored snapshot from swift-stripe-standard, and
 `Scripts/model-drift.py` measures the tracked set; a hand type the generated ones reference
 (a `Tax.Rate`, a `Tax.ID`) can still reject a value Stripe has since added, and
 `Tests/StripeTests/FixtureDecodingTests.swift` — which decodes a fixture with every spec
-field populated per resource — is what catches that. Typed resource clients currently
+field populated per resource — is what catches that. The few it has caught and not yet fixed
+are listed in that test by path (`IssuingCard.brand` and `Payout.failureCode` are strict enums
+on fields the spec types as free strings); an entry there is an acknowledged defect in a hand
+type, and anything unlisted fails. Typed resource clients currently
 cover Customers, PaymentIntents, Checkout Sessions, Products, Prices,
 Subscriptions, and Billing Portal Sessions; every other endpoint is reachable
 through `stripe.api` with the modelled request and response types.

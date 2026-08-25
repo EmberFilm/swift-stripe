@@ -1,0 +1,7 @@
+{
+ "id": "exchange_rate_1",
+ "object": "exchange_rate",
+ "rates": {
+  "key": 1.5
+ }
+}

@@ -1,0 +1,18 @@
+{
+ "calculation": "calculation_1",
+ "id": "tax.association_1",
+ "object": "tax.association",
+ "payment_intent": "payment_intent_1",
+ "tax_transaction_attempts": [
+  {
+   "committed": {
+    "transaction": "transaction_1"
+   },
+   "errored": {
+    "reason": "another_payment_associated_with_calculation"
+   },
+   "source": "source_1",
+   "status": "errored"
+  }
+ ]
+}

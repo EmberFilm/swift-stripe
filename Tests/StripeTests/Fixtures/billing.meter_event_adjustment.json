@@ -1,0 +1,11 @@
+{
+ "cancel": {
+  "identifier": "identifier_1"
+ },
+ "event_name": "event_name_1",
+ "id": "billing.meter_event_adjustment_1",
+ "livemode": true,
+ "object": "billing.meter_event_adjustment",
+ "status": "complete",
+ "type": "cancel"
+}

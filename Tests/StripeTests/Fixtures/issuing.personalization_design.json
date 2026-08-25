@@ -1,0 +1,32 @@
+{
+ "card_logo": "file_1",
+ "carrier_text": {
+  "footer_body": "footer_body_1",
+  "footer_title": "footer_title_1",
+  "header_body": "header_body_1",
+  "header_title": "header_title_1"
+ },
+ "created": 1700000000,
+ "id": "issuing.personalization_design_1",
+ "livemode": true,
+ "lookup_key": "lookup_key_1",
+ "metadata": {
+  "key": "metadata_1"
+ },
+ "name": "name_1",
+ "object": "issuing.personalization_design",
+ "physical_bundle": "issuing.physical_bundle_1",
+ "preferences": {
+  "is_default": true,
+  "is_platform_default": true
+ },
+ "rejection_reasons": {
+  "card_logo": [
+   "geographic_location"
+  ],
+  "carrier_text": [
+   "geographic_location"
+  ]
+ },
+ "status": "active"
+}

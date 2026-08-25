@@ -1,0 +1,623 @@
+{
+ "balance_impact": {
+  "cash": 1,
+  "inbound_pending": 1,
+  "outbound_pending": 1
+ },
+ "created": 1700000000,
+ "currency": "usd",
+ "effective_at": 1700000000,
+ "financial_account": "financial_account_1",
+ "flow": "flow_1",
+ "flow_details": {
+  "credit_reversal": {
+   "amount": 1,
+   "created": 1700000000,
+   "currency": "usd",
+   "financial_account": "financial_account_1",
+   "hosted_regulatory_receipt_url": "hosted_regulatory_receipt_url_1",
+   "id": "id_1",
+   "livemode": true,
+   "metadata": {
+    "key": "metadata_1"
+   },
+   "network": "ach",
+   "object": "treasury.credit_reversal",
+   "received_credit": "received_credit_1",
+   "status": "canceled",
+   "status_transitions": {
+    "posted_at": 1700000000
+   },
+   "transaction": "treasury.transaction_1"
+  },
+  "debit_reversal": {
+   "amount": 1,
+   "created": 1700000000,
+   "currency": "usd",
+   "financial_account": "financial_account_1",
+   "hosted_regulatory_receipt_url": "hosted_regulatory_receipt_url_1",
+   "id": "id_1",
+   "linked_flows": {
+    "issuing_dispute": "issuing_dispute_1"
+   },
+   "livemode": true,
+   "metadata": {
+    "key": "metadata_1"
+   },
+   "network": "ach",
+   "object": "treasury.debit_reversal",
+   "received_debit": "received_debit_1",
+   "status": "failed",
+   "status_transitions": {
+    "completed_at": 1700000000
+   },
+   "transaction": "treasury.transaction_1"
+  },
+  "inbound_transfer": {
+   "amount": 1,
+   "cancelable": true,
+   "created": 1700000000,
+   "currency": "usd",
+   "description": "description_1",
+   "failure_details": {
+    "code": "account_closed"
+   },
+   "financial_account": "financial_account_1",
+   "hosted_regulatory_receipt_url": "hosted_regulatory_receipt_url_1",
+   "id": "id_1",
+   "linked_flows": {
+    "received_debit": "succeeded"
+   },
+   "livemode": true,
+   "metadata": {
+    "key": "metadata_1"
+   },
+   "object": "treasury.inbound_transfer",
+   "origin_payment_method": "origin_payment_method_1",
+   "origin_payment_method_details": {
+    "billing_details": {
+     "email": "email_1",
+     "name": "name_1"
+    },
+    "type": "us_bank_account",
+    "us_bank_account": {
+     "account_holder_type": "company",
+     "account_type": "checking",
+     "bank_name": "bank_name_1",
+     "fingerprint": "fingerprint_1",
+     "last4": "last4_1",
+     "mandate": "mandate_1",
+     "network": "ach",
+     "routing_number": "routing_number_1"
+    }
+   },
+   "returned": true,
+   "statement_descriptor": "EMBERFILM",
+   "status": "canceled",
+   "status_transitions": {
+    "canceled_at": 1700000000,
+    "failed_at": 1700000000,
+    "succeeded_at": 1700000000
+   },
+   "transaction": "treasury.transaction_1"
+  },
+  "issuing_authorization": {
+   "amount": 1,
+   "amount_details": {
+    "atm_fee": 1,
+    "cashback_amount": 1
+   },
+   "approved": true,
+   "authorization_method": "chip",
+   "balance_transactions": [
+    {
+     "amount": 1,
+     "available_on": 1700000000,
+     "balance_type": "issuing",
+     "created": 1700000000,
+     "currency": "usd",
+     "description": "description_1",
+     "exchange_rate": 1.5,
+     "fee": 1,
+     "fee_details": [
+      {
+       "amount": 1,
+       "application": "application_1",
+       "currency": "usd",
+       "description": "description_1",
+       "type": "application_fee"
+      }
+     ],
+     "id": "id_1",
+     "net": 1,
+     "object": "balance_transaction",
+     "reporting_category": "reporting_category_1",
+     "source": "balance_transaction_source_1",
+     "status": "available",
+     "type": "adjustment"
+    }
+   ],
+   "card": {
+    "brand": "brand_1",
+    "cancellation_reason": "design_rejected",
+    "cardholder": {
+     "created": 1700000000,
+     "email": "email_1",
+     "id": "id_1",
+     "livemode": true,
+     "metadata": {
+      "key": "metadata_1"
+     },
+     "name": "name_1",
+     "object": "issuing.cardholder",
+     "phone_number": "phone_number_1",
+     "preferred_locales": [
+      "de"
+     ],
+     "status": "active",
+     "type": "company"
+    },
+    "created": 1700000000,
+    "currency": "usd",
+    "cvc": "expand",
+    "exp_month": 1,
+    "exp_year": 1,
+    "financial_account": "financial_account_1",
+    "id": "id_1",
+    "last4": "last4_1",
+    "latest_fraud_warning": {
+     "started_at": 1700000000,
+     "type": "card_testing_exposure"
+    },
+    "lifecycle_controls": {},
+    "livemode": true,
+    "metadata": {
+     "key": "metadata_1"
+    },
+    "number": "expand",
+    "object": "issuing.card",
+    "personalization_design": "issuing.personalization_design_1",
+    "replaced_by": "issuing.card_1",
+    "replacement_for": "issuing.card_1",
+    "replacement_reason": "damaged",
+    "second_line": "second_line_1",
+    "shipping": {
+     "business_name": "business_name_1",
+     "carrier": "correos",
+     "eta": 1700000000,
+     "name": "name_1",
+     "phone_number": "phone_number_1",
+     "require_signature": true,
+     "service": "express",
+     "status": "canceled",
+     "tracking_number": "tracking_number_1",
+     "tracking_url": "tracking_url_1",
+     "type": "bulk"
+    },
+    "spending_controls": {
+     "allowed_card_presences": [
+      "not_present"
+     ],
+     "allowed_categories": [
+      "ac_refrigeration_repair"
+     ],
+     "allowed_merchant_countries": [
+      "allowed_merchant_countries_1"
+     ],
+     "blocked_card_presences": [
+      "not_present"
+     ],
+     "blocked_categories": [
+      "ac_refrigeration_repair"
+     ],
+     "blocked_merchant_countries": [
+      "blocked_merchant_countries_1"
+     ],
+     "spending_limits": [],
+     "spending_limits_currency": "usd"
+    },
+    "status": "active",
+    "type": "physical",
+    "wallets": {
+     "primary_account_identifier": "primary_account_identifier_1"
+    }
+   },
+   "card_presence": "not_present",
+   "cardholder": "issuing.cardholder_1",
+   "created": 1700000000,
+   "currency": "usd",
+   "fleet": {
+    "cardholder_prompt_data": {
+     "alphanumeric_id": "alphanumeric_id_1",
+     "driver_id": "driver_id_1",
+     "odometer": 1,
+     "unspecified_id": "unspecified_id_1",
+     "user_id": "user_id_1",
+     "vehicle_number": "vehicle_number_1"
+    },
+    "purchase_type": "fuel_and_non_fuel_purchase",
+    "reported_breakdown": {},
+    "service_type": "full_service"
+   },
+   "fraud_challenges": [
+    {
+     "channel": "sms",
+     "status": "expired",
+     "undeliverable_reason": "no_phone_number"
+    }
+   ],
+   "fuel": {
+    "industry_product_code": "industry_product_code_1",
+    "quantity_decimal": "unit",
+    "type": "diesel",
+    "unit": "charging_minute",
+    "unit_cost_decimal": "unit_cost_decimal_1"
+   },
+   "id": "id_1",
+   "livemode": true,
+   "merchant_amount": 1,
+   "merchant_currency": "usd",
+   "merchant_data": {
+    "category": "category_1",
+    "category_code": "category_code_1",
+    "city": "city_1",
+    "country": "country_1",
+    "name": "name_1",
+    "network_id": "network_id_1",
+    "postal_code": "postal_code_1",
+    "state": "state_1",
+    "tax_id": "tax_id_1",
+    "terminal_id": "terminal_id_1",
+    "url": "url_1"
+   },
+   "metadata": {
+    "key": "metadata_1"
+   },
+   "network_data": {
+    "acquiring_institution_id": "null",
+    "system_trace_audit_number": "system_trace_audit_number_1",
+    "transaction_id": "transaction_id_1"
+   },
+   "object": "issuing.authorization",
+   "pending_request": {
+    "amount": 1,
+    "amount_details": {
+     "atm_fee": 1,
+     "cashback_amount": 1
+    },
+    "currency": "usd",
+    "is_amount_controllable": true,
+    "merchant_amount": 1,
+    "merchant_currency": "usd",
+    "network_risk_score": 1
+   },
+   "request_history": [
+    {
+     "amount": 1,
+     "amount_details": {
+      "atm_fee": 1,
+      "cashback_amount": 1
+     },
+     "approved": true,
+     "authorization_code": "authorization_code_1",
+     "created": 1700000000,
+     "currency": "usd",
+     "merchant_amount": 1,
+     "merchant_currency": "usd",
+     "network_risk_score": 1,
+     "reason": "account_disabled",
+     "reason_message": "webhook_error",
+     "requested_at": 1700000000
+    }
+   ],
+   "status": "closed",
+   "token": "issuing.token_1",
+   "transactions": [
+    {
+     "amount": 1,
+     "amount_details": {
+      "atm_fee": 1,
+      "cashback_amount": 1
+     },
+     "authorization": "issuing.authorization_1",
+     "balance_transaction": "balance_transaction_1",
+     "card": "issuing.card_1",
+     "cardholder": "issuing.cardholder_1",
+     "created": 1700000000,
+     "currency": "usd",
+     "dispute": "issuing.dispute_1",
+     "id": "id_1",
+     "livemode": true,
+     "merchant_amount": 1,
+     "merchant_currency": "usd",
+     "merchant_data": {
+      "category": "category_1",
+      "category_code": "category_code_1",
+      "city": "city_1",
+      "country": "country_1",
+      "name": "name_1",
+      "network_id": "network_id_1",
+      "postal_code": "postal_code_1",
+      "state": "state_1",
+      "tax_id": "tax_id_1",
+      "terminal_id": "terminal_id_1",
+      "url": "url_1"
+     },
+     "metadata": {
+      "key": "metadata_1"
+     },
+     "network_data": {
+      "authorization_code": "authorization_code_1",
+      "processing_date": "processing_date_1",
+      "transaction_id": "transaction_id_1"
+     },
+     "object": "issuing.transaction",
+     "purchase_details": {
+      "receipt": [],
+      "reference": "reference_1"
+     },
+     "token": "issuing.token_1",
+     "treasury": {
+      "received_credit": "received_credit_1",
+      "received_debit": "received_debit_1"
+     },
+     "type": "capture",
+     "wallet": "apple_pay"
+    }
+   ],
+   "treasury": {
+    "received_credits": [
+     "received_credits_1"
+    ],
+    "received_debits": [
+     "received_debits_1"
+    ],
+    "transaction": "transaction_1"
+   },
+   "verification_data": {
+    "address_line1_check": "match",
+    "address_postal_code_check": "match",
+    "authentication_exemption": {
+     "claimed_by": "acquirer",
+     "type": "low_value_transaction"
+    },
+    "cvc_check": "match",
+    "expiry_check": "match",
+    "postal_code": "postal_code_1",
+    "three_d_secure": {
+     "result": "attempt_acknowledged"
+    }
+   },
+   "verified_by_fraud_challenge": true,
+   "wallet": "apple_pay"
+  },
+  "outbound_payment": {
+   "amount": 1,
+   "cancelable": true,
+   "created": 1700000000,
+   "currency": "usd",
+   "customer": "customer_1",
+   "description": "description_1",
+   "destination_payment_method": "destination_payment_method_data",
+   "destination_payment_method_details": {
+    "billing_details": {
+     "email": "email_1",
+     "name": "name_1"
+    },
+    "financial_account": {
+     "id": "id_1",
+     "network": "stripe"
+    },
+    "type": "financial_account",
+    "us_bank_account": {
+     "account_holder_type": "company",
+     "account_type": "checking",
+     "bank_name": "bank_name_1",
+     "fingerprint": "fingerprint_1",
+     "last4": "last4_1",
+     "mandate": "mandate_1",
+     "network": "ach",
+     "routing_number": "routing_number_1"
+    }
+   },
+   "end_user_details": {
+    "ip_address": "present",
+    "present": true
+   },
+   "expected_arrival_date": 1700000000,
+   "financial_account": "financial_account_1",
+   "hosted_regulatory_receipt_url": "hosted_regulatory_receipt_url_1",
+   "id": "id_1",
+   "livemode": true,
+   "metadata": {
+    "key": "metadata_1"
+   },
+   "object": "treasury.outbound_payment",
+   "returned_details": {
+    "code": "account_closed",
+    "transaction": "treasury.transaction_1"
+   },
+   "statement_descriptor": "EMBERFILM",
+   "status": "canceled",
+   "status_transitions": {
+    "canceled_at": 1700000000,
+    "failed_at": 1700000000,
+    "posted_at": 1700000000,
+    "returned_at": 1700000000
+   },
+   "tracking_details": {
+    "ach": {
+     "trace_id": "trace_id_1"
+    },
+    "type": "ach",
+    "us_domestic_wire": {
+     "chips": "chips_1",
+     "imad": "imad_1",
+     "omad": "omad_1"
+    }
+   },
+   "transaction": "treasury.transaction_1"
+  },
+  "outbound_transfer": {
+   "amount": 1,
+   "cancelable": true,
+   "created": 1700000000,
+   "currency": "usd",
+   "description": "description_1",
+   "destination_payment_method": "destination_payment_method_1",
+   "destination_payment_method_details": {
+    "billing_details": {
+     "email": "email_1",
+     "name": "name_1"
+    },
+    "financial_account": {
+     "id": "id_1",
+     "network": "stripe"
+    },
+    "type": "financial_account",
+    "us_bank_account": {
+     "account_holder_type": "company",
+     "account_type": "checking",
+     "bank_name": "bank_name_1",
+     "fingerprint": "fingerprint_1",
+     "last4": "last4_1",
+     "mandate": "mandate_1",
+     "network": "ach",
+     "routing_number": "routing_number_1"
+    }
+   },
+   "expected_arrival_date": 1700000000,
+   "financial_account": "financial_account_1",
+   "hosted_regulatory_receipt_url": "hosted_regulatory_receipt_url_1",
+   "id": "id_1",
+   "livemode": true,
+   "metadata": {
+    "key": "metadata_1"
+   },
+   "object": "treasury.outbound_transfer",
+   "returned_details": {
+    "code": "account_closed",
+    "transaction": "treasury.transaction_1"
+   },
+   "statement_descriptor": "EMBERFILM",
+   "status": "canceled",
+   "status_transitions": {
+    "canceled_at": 1700000000,
+    "failed_at": 1700000000,
+    "posted_at": 1700000000,
+    "returned_at": 1700000000
+   },
+   "tracking_details": {
+    "ach": {
+     "trace_id": "trace_id_1"
+    },
+    "type": "ach",
+    "us_domestic_wire": {
+     "chips": "chips_1",
+     "imad": "imad_1",
+     "omad": "omad_1"
+    }
+   },
+   "transaction": "treasury.transaction_1"
+  },
+  "received_credit": {
+   "amount": 1,
+   "created": 1700000000,
+   "currency": "usd",
+   "description": "description_1",
+   "failure_code": "account_closed",
+   "financial_account": "financial_account_1",
+   "hosted_regulatory_receipt_url": "hosted_regulatory_receipt_url_1",
+   "id": "id_1",
+   "initiating_payment_method_details": {
+    "balance": "payments",
+    "billing_details": {
+     "email": "email_1",
+     "name": "name_1"
+    },
+    "financial_account": {
+     "id": "id_1",
+     "network": "stripe"
+    },
+    "issuing_card": "type",
+    "type": "balance",
+    "us_bank_account": {
+     "bank_name": "bank_name_1",
+     "last4": "last4_1",
+     "routing_number": "routing_number_1"
+    }
+   },
+   "linked_flows": {
+    "credit_reversal": "credit_reversal_1",
+    "issuing_authorization": "issuing_authorization_1",
+    "issuing_transaction": "issuing_transaction_1",
+    "source_flow": "network",
+    "source_flow_details": {
+     "type": "credit_reversal"
+    },
+    "source_flow_type": "outbound_payment"
+   },
+   "livemode": true,
+   "network": "ach",
+   "object": "treasury.received_credit",
+   "reversal_details": {
+    "deadline": 1700000000,
+    "restricted_reason": "already_reversed"
+   },
+   "status": "failed",
+   "transaction": "treasury.transaction_1"
+  },
+  "received_debit": {
+   "amount": 1,
+   "created": 1700000000,
+   "currency": "usd",
+   "description": "description_1",
+   "failure_code": "account_closed",
+   "financial_account": "financial_account_1",
+   "hosted_regulatory_receipt_url": "hosted_regulatory_receipt_url_1",
+   "id": "id_1",
+   "initiating_payment_method_details": {
+    "balance": "payments",
+    "billing_details": {
+     "email": "email_1",
+     "name": "name_1"
+    },
+    "financial_account": {
+     "id": "id_1",
+     "network": "stripe"
+    },
+    "issuing_card": "type",
+    "type": "balance",
+    "us_bank_account": {
+     "bank_name": "bank_name_1",
+     "last4": "last4_1",
+     "routing_number": "routing_number_1"
+    }
+   },
+   "linked_flows": {
+    "debit_reversal": "debit_reversal_1",
+    "inbound_transfer": "inbound_transfer_1",
+    "issuing_authorization": "issuing_authorization_1",
+    "issuing_transaction": "issuing_transaction_1",
+    "payout": "payout_1",
+    "topup": "topup_1"
+   },
+   "livemode": true,
+   "network": "ach",
+   "object": "treasury.received_debit",
+   "reversal_details": {
+    "deadline": 1700000000,
+    "restricted_reason": "already_reversed"
+   },
+   "status": "failed",
+   "transaction": "treasury.transaction_1"
+  },
+  "type": "credit_reversal"
+ },
+ "flow_type": "credit_reversal",
+ "id": "treasury.transaction_entry_1",
+ "livemode": true,
+ "object": "treasury.transaction_entry",
+ "transaction": "treasury.transaction_1",
+ "type": "credit_reversal"
+}

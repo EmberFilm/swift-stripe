@@ -1,0 +1,41 @@
+{
+ "id": "balance_settings_1",
+ "object": "balance_settings",
+ "payments": {
+  "debit_negative_balances": true,
+  "payouts": {
+   "automatic_transfer_rules_by_currency": {
+    "usd": [
+     {
+      "payout_method": "payout_method_1",
+      "transfer_up_to_amount": 1,
+      "type": "transfer_all"
+     }
+    ]
+   },
+   "minimum_balance_by_currency": {
+    "usd": 1
+   },
+   "schedule": {
+    "interval": "daily",
+    "monthly_payout_days": [
+     1
+    ],
+    "weekly_payout_days": [
+     "friday"
+    ]
+   },
+   "statement_descriptor": "EMBERFILM",
+   "status": "disabled"
+  },
+  "settlement_timing": {
+   "delay_days": 1,
+   "delay_days_override": 1,
+   "start_of_day": {
+    "hour": 1,
+    "minutes": 1,
+    "timezone": "timezone_1"
+   }
+  }
+ }
+}

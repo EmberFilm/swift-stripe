@@ -1,0 +1,111 @@
+{
+ "card_issuing": {
+  "requested": true,
+  "status": "active",
+  "status_details": [
+   {
+    "code": "activating",
+    "resolution": "contact_stripe",
+    "restriction": "inbound_flows"
+   }
+  ]
+ },
+ "deposit_insurance": {
+  "requested": true,
+  "status": "active",
+  "status_details": [
+   {
+    "code": "activating",
+    "resolution": "contact_stripe",
+    "restriction": "inbound_flows"
+   }
+  ]
+ },
+ "financial_addresses": {
+  "aba": {
+   "requested": true,
+   "status": "active",
+   "status_details": [
+    {
+     "code": "activating",
+     "resolution": "contact_stripe",
+     "restriction": "inbound_flows"
+    }
+   ]
+  }
+ },
+ "id": "treasury.financial_account_features_1",
+ "inbound_transfers": {
+  "ach": {
+   "requested": true,
+   "status": "active",
+   "status_details": [
+    {
+     "code": "activating",
+     "resolution": "contact_stripe",
+     "restriction": "inbound_flows"
+    }
+   ]
+  }
+ },
+ "intra_stripe_flows": {
+  "requested": true,
+  "status": "active",
+  "status_details": [
+   {
+    "code": "activating",
+    "resolution": "contact_stripe",
+    "restriction": "inbound_flows"
+   }
+  ]
+ },
+ "object": "treasury.financial_account_features",
+ "outbound_payments": {
+  "ach": {
+   "requested": true,
+   "status": "active",
+   "status_details": [
+    {
+     "code": "activating",
+     "resolution": "contact_stripe",
+     "restriction": "inbound_flows"
+    }
+   ]
+  },
+  "us_domestic_wire": {
+   "requested": true,
+   "status": "active",
+   "status_details": [
+    {
+     "code": "activating",
+     "resolution": "contact_stripe",
+     "restriction": "inbound_flows"
+    }
+   ]
+  }
+ },
+ "outbound_transfers": {
+  "ach": {
+   "requested": true,
+   "status": "active",
+   "status_details": [
+    {
+     "code": "activating",
+     "resolution": "contact_stripe",
+     "restriction": "inbound_flows"
+    }
+   ]
+  },
+  "us_domestic_wire": {
+   "requested": true,
+   "status": "active",
+   "status_details": [
+    {
+     "code": "activating",
+     "resolution": "contact_stripe",
+     "restriction": "inbound_flows"
+    }
+   ]
+  }
+ }
+}
