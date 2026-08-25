@@ -57,23 +57,38 @@ struct FormEncoderTests {
         #expect(pairs.contains { $0.key == "metadata[order_id]" && $0.value == "abc" })
     }
 
-    @Test("a camelCase metadata key is snake-cased on the way out, but not on the way back")
-    func metadataKeysAreNotSymmetric() throws {
-        // The encoder cannot tell a dictionary key from a field name, so it snake-cases both.
-        // `JSONDecoder.convertFromSnakeCase` deliberately skips dictionary keys, so the two do
-        // not round-trip. Keep metadata keys lowercase or snake_case and both sides agree.
-        struct Request: Encodable { let metadata: [String: String] }
-        let pairs = try StripeFormEncoder().pairs(of: Request(metadata: ["userId": "u_1"]))
-        #expect(pairs.contains { $0.key == "metadata[user_id]" })
+    @Test("metadata keys round-trip under the name they were written with")
+    func metadataKeysRoundTrip() throws {
+        // Dictionary keys are data, not field names. The encoder leaves them verbatim and
+        // `convertFromSnakeCase` leaves them alone coming back, so one constant addresses the
+        // value in both directions. Snake-casing them on the way out silently broke that.
+        struct Request: Encodable { let metadata: [String: String]; let successUrl: String }
+        let pairs = try StripeFormEncoder().pairs(
+            of: Request(metadata: ["userId": "u_1", "order_id": "o_1"], successUrl: "https://x")
+        )
+        #expect(pairs.contains { $0.key == "metadata[userId]" && $0.value == "u_1" })
+        #expect(pairs.contains { $0.key == "metadata[order_id]" && $0.value == "o_1" })
+        // Field names are still snake-cased.
+        #expect(pairs.contains { $0.key == "success_url" })
 
         struct Response: Decodable { let metadata: [String: String] }
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         let decoded = try decoder.decode(
-            Response.self, from: Data(#"{"metadata":{"user_id":"u_1"}}"#.utf8)
+            Response.self, from: Data(#"{"metadata":{"userId":"u_1"}}"#.utf8)
         )
-        #expect(decoded.metadata["user_id"] == "u_1")
-        #expect(decoded.metadata["userId"] == nil)
+        #expect(decoded.metadata["userId"] == "u_1")
+    }
+
+    @Test("nested metadata keys are verbatim too")
+    func nestedMetadataKeys() throws {
+        struct Inner: Encodable { let metadata: [String: String]; let trialPeriodDays: Int }
+        struct Request: Encodable { let subscriptionData: Inner }
+        let pairs = try StripeFormEncoder().pairs(
+            of: Request(subscriptionData: .init(metadata: ["userId": "u_1"], trialPeriodDays: 7))
+        )
+        #expect(pairs.contains { $0.key == "subscription_data[metadata][userId]" })
+        #expect(pairs.contains { $0.key == "subscription_data[trial_period_days]" })
     }
 
     @Test("booleans render as true/false, not 1/0")

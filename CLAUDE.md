@@ -71,6 +71,12 @@ a custom `init(from:)`.
 The encode side mirrors this: `StripeFormEncoder` snake-cases keys itself, so
 request payloads follow the same rule.
 
+**Dictionary keys are exempt on both sides.** Stripe metadata keys are data, not
+field names, so the encoder emits them verbatim (`VerbatimKey`, detected by the
+container's `Key` being `Swift._DictionaryCodingKey`) and `convertFromSnakeCase`
+already skips them. Transforming them on only one side means a camelCase
+metadata key is written and read under different names — that was a live bug.
+
 If a field decodes to `nil` unexpectedly, check the property spelling against
 Stripe's wire name — three such defects were inherited from the vendored sources
 and corrected (see the Wire format section of README.md).

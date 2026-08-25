@@ -403,16 +403,17 @@ On the way back, responses decode with `.convertFromSnakeCase` and
 `.secondsSince1970`, so models declare plain camelCase properties and carry no
 redundant `CodingKeys` raw values.
 
-### Metadata keys do not round-trip through camelCase
+### Metadata keys are left alone
 
-The encoder cannot tell a dictionary key from a field name, so it snake-cases
-both: `metadata: ["userId": x]` goes out as `metadata[user_id]=x`.
-`JSONDecoder.convertFromSnakeCase` deliberately does *not* touch dictionary
-keys, so it comes back as `"user_id"`, not `"userId"` — writing and reading with
-the same Swift constant silently misses.
+Snake-casing applies to *field names*, not to dictionary keys. Stripe metadata
+keys are data chosen by the caller, so `metadata: ["userId": x]` goes out as
+`metadata[userId]=x` and comes back as `"userId"` — one constant addresses the
+value in both directions.
 
-**Keep metadata keys lowercase or `snake_case`**, matching Stripe's own
-convention. Those pass through both directions unchanged.
+This matches `JSONDecoder.convertFromSnakeCase`, which deliberately skips
+dictionary keys. Transforming them on only one side, as this package did before
+0.4.3, meant a camelCase metadata key was written under one name and read under
+another.
 
 ### Event decoding is deliberately lenient
 

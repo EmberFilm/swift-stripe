@@ -102,12 +102,31 @@ func snakeCased(_ key: String) -> String {
     return out
 }
 
+/// The stdlib type Swift uses for `[String: _]` keys. Matching on it is how a dictionary key is
+/// told apart from a field name, since both arrive as `CodingKey`.
+private let dictionaryCodingKeyType = "Swift._DictionaryCodingKey"
+
+/// A path component that must be emitted exactly as written.
+///
+/// Dictionary keys are *data*, not field names: Stripe metadata keys are chosen by the caller,
+/// and `JSONDecoder.convertFromSnakeCase` deliberately leaves them alone on the way back. Snake-
+/// casing them on the way out made `metadata["userId"]` go out as `metadata[user_id]` and read
+/// back as `"user_id"`, so writing and reading with one constant silently missed.
+private struct VerbatimKey: CodingKey {
+    let stringValue: String
+    var intValue: Int? { nil }
+    init(_ value: String) { self.stringValue = value }
+    init?(stringValue: String) { self.stringValue = stringValue }
+    init?(intValue: Int) { nil }
+}
+
 /// Renders a coding path as Stripe bracket notation: `a`, then `a[b]`, `a[b][0]`.
 private func bracketed(_ path: [any CodingKey]) -> String {
-    guard let first = path.first else { return "" }
-    return path.dropFirst().reduce(snakeCased(first.stringValue)) {
-        $0 + "[\(snakeCased($1.stringValue))]"
+    func component(_ key: any CodingKey) -> String {
+        key is VerbatimKey ? key.stringValue : snakeCased(key.stringValue)
     }
+    guard let first = path.first else { return "" }
+    return path.dropFirst().reduce(component(first)) { $0 + "[\(component($1))]" }
 }
 
 private final class FormStorage {
@@ -170,12 +189,19 @@ private struct KeyedContainer<Key: CodingKey>: KeyedEncodingContainerProtocol {
     let storage: FormStorage
     var codingPath: [any CodingKey]
 
+    /// True when this container holds a dictionary's keys rather than a type's fields.
+    let keysAreVerbatim = String(reflecting: Key.self) == dictionaryCodingKeyType
+
+    private func path(appending key: Key) -> [any CodingKey] {
+        codingPath + [keysAreVerbatim ? VerbatimKey(key.stringValue) : key]
+    }
+
     // Stripe omits absent parameters entirely; it does not accept an empty
     // string as "unset" for most fields.
     mutating func encodeNil(forKey key: Key) throws {}
 
     mutating func encode(_ value: some Encodable, forKey key: Key) throws {
-        let path = codingPath + [key]
+        let path = path(appending: key)
         if let rendered = leaf(value) {
             storage.append(path, rendered)
         } else {
@@ -187,12 +213,12 @@ private struct KeyedContainer<Key: CodingKey>: KeyedEncodingContainerProtocol {
         keyedBy: NestedKey.Type, forKey key: Key
     ) -> KeyedEncodingContainer<NestedKey> {
         KeyedEncodingContainer(
-            KeyedContainer<NestedKey>(storage: storage, codingPath: codingPath + [key])
+            KeyedContainer<NestedKey>(storage: storage, codingPath: path(appending: key))
         )
     }
 
     mutating func nestedUnkeyedContainer(forKey key: Key) -> any UnkeyedEncodingContainer {
-        UnkeyedContainer(storage: storage, codingPath: codingPath + [key])
+        UnkeyedContainer(storage: storage, codingPath: path(appending: key))
     }
 
     mutating func superEncoder() -> any Encoder {
@@ -200,7 +226,7 @@ private struct KeyedContainer<Key: CodingKey>: KeyedEncodingContainerProtocol {
     }
 
     mutating func superEncoder(forKey key: Key) -> any Encoder {
-        FormEncoder(storage: storage, codingPath: codingPath + [key])
+        FormEncoder(storage: storage, codingPath: path(appending: key))
     }
 }
 
