@@ -38,6 +38,8 @@ extension Stripe.Billing.Subscription {
         public var taxRates: [Stripe.Tax.Rate]?
         /// Current period end for this subscription item
         public var currentPeriodEnd: Date?
+        /// The time period the subscription item has been billed for.
+        public var billedUntil: Date?
         /// Current period start for this subscription item
         public var currentPeriodStart: Date?
         /// Legacy plan object (deprecated, use price instead)
@@ -72,6 +74,7 @@ extension Stripe.Billing.Subscription {
             created: Date,
             taxRates: [Stripe.Tax.Rate]? = nil,
             currentPeriodEnd: Date? = nil,
+            billedUntil: Date? = nil,
             currentPeriodStart: Date? = nil,
             plan: Stripe.Billing.Plan? = nil,
             discounts: [Stripe.Products.Discount]? = nil
@@ -86,6 +89,7 @@ extension Stripe.Billing.Subscription {
             self.created = created
             self.taxRates = taxRates
             self.currentPeriodEnd = currentPeriodEnd
+            self.billedUntil = billedUntil
             self.currentPeriodStart = currentPeriodStart
             self.plan = plan
             self.discounts = discounts

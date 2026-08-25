@@ -37,6 +37,8 @@ extension Stripe.Events {
         public var livemode: Bool?
         /// Number of webhooks that have yet to be successfully delivered (i.e., to return a 20x response) to the URLs you've specified.
         public var pendingWebhooks: Int?
+        /// Authentication context needed to fetch the event or related object.
+        public var context: String?
         /// The event type exactly as Stripe sent it, including types this package does not model.
         ///
         /// ``type`` is `nil` for an event Stripe has added since this package was built; this
@@ -54,6 +56,7 @@ extension Stripe.Events {
             created: Date? = nil,
             livemode: Bool? = nil,
             pendingWebhooks: Int? = nil,
+            context: String? = nil,
             rawType: String? = nil
         ) {
             self.id = id
@@ -66,12 +69,13 @@ extension Stripe.Events {
             self.created = created
             self.livemode = livemode
             self.pendingWebhooks = pendingWebhooks
+            self.context = context
             self.rawType = rawType ?? type?.rawValue
         }
 
         private enum CodingKeys: String, CodingKey {
             case id, apiVersion, data, request, type, object, account, created, livemode
-            case pendingWebhooks
+            case pendingWebhooks, context
         }
 
         /// Decodes an event without letting an unrecognised payload reject the delivery.
@@ -93,6 +97,7 @@ extension Stripe.Events {
             self.created = try container.decodeIfPresent(Date.self, forKey: .created)
             self.livemode = try container.decodeIfPresent(Bool.self, forKey: .livemode)
             self.pendingWebhooks = try container.decodeIfPresent(Int.self, forKey: .pendingWebhooks)
+            self.context = try container.decodeIfPresent(String.self, forKey: .context)
             self.rawType = try container.decodeIfPresent(String.self, forKey: .type)
             self.type = try? container.decodeIfPresent(`Type`.self, forKey: .type)
             self.data = try? container.decodeIfPresent(Data.self, forKey: .data)

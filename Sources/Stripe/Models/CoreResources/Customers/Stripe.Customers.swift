@@ -28,6 +28,14 @@ extension Stripe.Customers {
         public var metadata: [String: String]?
         /// The customers full name or business name.
         public var name: String?
+        /// The customer's business name.
+        public var businessName: String?
+        /// The customer's individual name.
+        public var individualName: String?
+        /// ID of the account representing this customer.
+        public var customerAccount: String?
+        /// Tax details and the automatic-tax status for this customer.
+        public var tax: Tax?
         /// The customers phone number.
         public var phone: String?
         /// Mailing and shipping address for the customer. Appears on invoices emailed to this customer.
@@ -81,6 +89,10 @@ extension Stripe.Customers {
             email: String? = nil,
             metadata: [String: String]? = nil,
             name: String? = nil,
+            businessName: String? = nil,
+            individualName: String? = nil,
+            customerAccount: String? = nil,
+            tax: Tax? = nil,
             phone: String? = nil,
             shipping: ShippingLabel? = nil,
             object: String,
@@ -109,6 +121,10 @@ extension Stripe.Customers {
             self.email = email
             self.metadata = metadata
             self.name = name
+            self.businessName = businessName
+            self.individualName = individualName
+            self.customerAccount = customerAccount
+            self.tax = tax
             self.phone = phone
             self.shipping = shipping
             self.object = object
@@ -298,6 +314,49 @@ extension Stripe.Customers {
             self.url = url
             self.nextPage = nextPage
             self.totalCount = totalCount
+        }
+    }
+}
+
+// MARK: - Tax
+extension Stripe.Customers.Customer {
+    /// Tax details and the automatic-tax status for a customer.
+    public struct Tax: Codable, Hashable, Sendable {
+        /// Surfaces whether automatic tax can be computed for this customer.
+        public var automaticTax: AutomaticTax?
+        /// The customer's IP address, used to infer a location.
+        public var ipAddress: String?
+        /// The identified tax provider.
+        public var provider: Provider?
+
+        private enum CodingKeys: String, CodingKey {
+            case automaticTax
+            case ipAddress
+            case provider
+        }
+
+        public init(
+            automaticTax: AutomaticTax? = nil,
+            ipAddress: String? = nil,
+            provider: Provider? = nil
+        ) {
+            self.automaticTax = automaticTax
+            self.ipAddress = ipAddress
+            self.provider = provider
+        }
+
+        public enum AutomaticTax: String, Codable, Sendable {
+            case failed
+            case notCollecting = "not_collecting"
+            case supported
+            case unrecognizedLocation = "unrecognized_location"
+        }
+
+        public enum Provider: String, Codable, Sendable {
+            case anrok
+            case avalara
+            case sphere
+            case stripe
         }
     }
 }

@@ -116,6 +116,12 @@ extension Stripe.Charges {
         @ExpandableOf<Stripe.Connect.Transfer> public var transfer: Stripe.Connect.Transfer.ID?
         /// An optional dictionary including the account to automatically transfer to as part of a destination charge. [See the Connect documentation](https://stripe.com/docs/connect/destination-charges) for details.
         public var transferData: Stripe.Charges.Charge.Transfer.Data?
+        /// Authorization code on the charge.
+        public var authorizationCode: String?
+        /// Level III card data submitted with the charge.
+        public var level3: Level3?
+        /// The amount and currency the charge was presented to the customer in.
+        public var presentmentDetails: PresentmentDetails?
         /// A string that identifies this transaction as part of a group. See the [Connect documentation](https://stripe.com/docs/connect/charges-transfers#grouping-transactions) for details.
         public var transferGroup: String?
 
@@ -165,6 +171,9 @@ extension Stripe.Charges {
             status: Stripe.Charges.Charge.Status? = nil,
             transfer: Stripe.Connect.Transfer.ID? = nil,
             transferData: Stripe.Charges.Charge.Transfer.Data? = nil,
+            authorizationCode: String? = nil,
+            level3: Level3? = nil,
+            presentmentDetails: PresentmentDetails? = nil,
             transferGroup: String? = nil
         ) {
             self.id = id
@@ -212,6 +221,9 @@ extension Stripe.Charges {
             self.status = status
             self._transfer = Expandable(id: transfer)
             self.transferData = transferData
+            self.authorizationCode = authorizationCode
+            self.level3 = level3
+            self.presentmentDetails = presentmentDetails
             self.transferGroup = transferGroup
         }
     }
@@ -616,6 +628,94 @@ extension Stripe.Charges.Charge.Radar {
             session: String? = nil
         ) {
             self.session = session
+        }
+    }
+}
+
+// MARK: - Level III card data
+extension Stripe.Charges.Charge {
+    /// Level III data: the extra line-item detail some card networks price on.
+    public struct Level3: Codable, Hashable, Sendable {
+        public var customerReference: String?
+        public var lineItems: [LineItem]?
+        public var merchantReference: String?
+        public var shippingAddressZip: String?
+        public var shippingAmount: Int?
+        public var shippingFromZip: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case customerReference
+            case lineItems
+            case merchantReference
+            case shippingAddressZip
+            case shippingAmount
+            case shippingFromZip
+        }
+
+        public init(
+            customerReference: String? = nil,
+            lineItems: [LineItem]? = nil,
+            merchantReference: String? = nil,
+            shippingAddressZip: String? = nil,
+            shippingAmount: Int? = nil,
+            shippingFromZip: String? = nil
+        ) {
+            self.customerReference = customerReference
+            self.lineItems = lineItems
+            self.merchantReference = merchantReference
+            self.shippingAddressZip = shippingAddressZip
+            self.shippingAmount = shippingAmount
+            self.shippingFromZip = shippingFromZip
+        }
+
+        public struct LineItem: Codable, Hashable, Sendable {
+            public var discountAmount: Int?
+            public var productCode: String?
+            public var productDescription: String?
+            public var quantity: Int?
+            public var taxAmount: Int?
+            public var unitCost: Int?
+
+            private enum CodingKeys: String, CodingKey {
+                case discountAmount
+                case productCode
+                case productDescription
+                case quantity
+                case taxAmount
+                case unitCost
+            }
+
+            public init(
+                discountAmount: Int? = nil,
+                productCode: String? = nil,
+                productDescription: String? = nil,
+                quantity: Int? = nil,
+                taxAmount: Int? = nil,
+                unitCost: Int? = nil
+            ) {
+                self.discountAmount = discountAmount
+                self.productCode = productCode
+                self.productDescription = productDescription
+                self.quantity = quantity
+                self.taxAmount = taxAmount
+                self.unitCost = unitCost
+            }
+        }
+    }
+
+    /// The amount and currency a charge was presented to the customer in.
+    public struct PresentmentDetails: Codable, Hashable, Sendable {
+        public var presentmentAmount: Int?
+        public var presentmentCurrency: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case presentmentAmount
+            case presentmentCurrency
+        }
+
+        public init(presentmentAmount: Int? = nil, presentmentCurrency: String? = nil) {
+            self.presentmentAmount = presentmentAmount
+            self.presentmentCurrency = presentmentCurrency
         }
     }
 }
