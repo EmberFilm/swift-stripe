@@ -15,6 +15,8 @@ extension Stripe.Treasury {
     public struct Transaction: Codable, Hashable, Sendable, Identifiable {
         public typealias ID = String
         public let id: ID
+        /// String representing the object's type.
+        public let object: String
         /// Amount (in cents) transferred.
         public var amount: Int?
         public var balanceImpact: Stripe.Shared.BalanceImpact?
@@ -36,14 +38,13 @@ extension Stripe.Treasury {
         public var flowType: FlowType?
         /// If the object exists in live mode, the value is `true`.
         public var livemode: Bool?
-        /// String representing the object's type.
-        public var object: String?
         /// Status of the Transaction.
         public var status: Status?
         public var statusTransitions: StatusTransitions?
 
         private enum CodingKeys: String, CodingKey {
             case id
+            case object
             case amount
             case balanceImpact
             case created
@@ -55,13 +56,13 @@ extension Stripe.Treasury {
             case flowDetails
             case flowType
             case livemode
-            case object
             case status
             case statusTransitions
         }
 
         public init(
             id: ID,
+            object: String,
             amount: Int? = nil,
             balanceImpact: Stripe.Shared.BalanceImpact? = nil,
             created: Date? = nil,
@@ -73,11 +74,11 @@ extension Stripe.Treasury {
             flowDetails: Stripe.Shared.FlowDetails? = nil,
             flowType: FlowType? = nil,
             livemode: Bool? = nil,
-            object: String? = nil,
             status: Status? = nil,
             statusTransitions: StatusTransitions? = nil
         ) {
             self.id = id
+            self.object = object
             self.amount = amount
             self.balanceImpact = balanceImpact
             self.created = created
@@ -89,7 +90,6 @@ extension Stripe.Treasury {
             self.flowDetails = flowDetails
             self.flowType = flowType
             self.livemode = livemode
-            self.object = object
             self.status = status
             self.statusTransitions = statusTransitions
         }
@@ -116,31 +116,31 @@ extension Stripe.Treasury {
 
         /// A list of TransactionEntries that are part of this Transaction.
         public struct Entries: Codable, Hashable, Sendable {
+            /// String representing the object's type.
+            public let object: String
             /// Details about each object.
             public var data: [Stripe.Treasury.TransactionEntry]?
             /// True if this list has another page of items after this one that can be fetched.
             public var hasMore: Bool?
-            /// String representing the object's type.
-            public var object: String?
             /// The URL where this list can be accessed.
             public var url: String?
 
             private enum CodingKeys: String, CodingKey {
+                case object
                 case data
                 case hasMore
-                case object
                 case url
             }
 
             public init(
+                object: String,
                 data: [Stripe.Treasury.TransactionEntry]? = nil,
                 hasMore: Bool? = nil,
-                object: String? = nil,
                 url: String? = nil
             ) {
+                self.object = object
                 self.data = data
                 self.hasMore = hasMore
-                self.object = object
                 self.url = url
             }
         }

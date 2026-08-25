@@ -15,6 +15,8 @@ extension Stripe.Treasury {
     public struct ReceivedCredit: Codable, Hashable, Sendable, Identifiable {
         public typealias ID = String
         public let id: ID
+        /// String representing the object's type.
+        public let object: String
         /// Amount (in cents) transferred.
         public var amount: Int?
         /// Time at which the object was created.
@@ -35,8 +37,6 @@ extension Stripe.Treasury {
         public var livemode: Bool?
         /// The rails used to send the funds.
         public var network: Network?
-        /// String representing the object's type.
-        public var object: String?
         /// Details describing when a ReceivedCredit may be reversed.
         public var reversalDetails: ReversalDetails?
         /// Status of the ReceivedCredit.
@@ -46,6 +46,7 @@ extension Stripe.Treasury {
 
         private enum CodingKeys: String, CodingKey {
             case id
+            case object
             case amount
             case created
             case currency
@@ -57,7 +58,6 @@ extension Stripe.Treasury {
             case linkedFlows
             case livemode
             case network
-            case object
             case reversalDetails
             case status
             case transaction
@@ -65,6 +65,7 @@ extension Stripe.Treasury {
 
         public init(
             id: ID,
+            object: String,
             amount: Int? = nil,
             created: Date? = nil,
             currency: Stripe.Currency? = nil,
@@ -76,12 +77,12 @@ extension Stripe.Treasury {
             linkedFlows: LinkedFlows? = nil,
             livemode: Bool? = nil,
             network: Network? = nil,
-            object: String? = nil,
             reversalDetails: ReversalDetails? = nil,
             status: Status? = nil,
             transaction: String? = nil
         ) {
             self.id = id
+            self.object = object
             self.amount = amount
             self.created = created
             self.currency = currency
@@ -93,7 +94,6 @@ extension Stripe.Treasury {
             self.linkedFlows = linkedFlows
             self.livemode = livemode
             self.network = network
-            self.object = object
             self.reversalDetails = reversalDetails
             self.status = status
             self._transaction = Expandable(id: transaction)

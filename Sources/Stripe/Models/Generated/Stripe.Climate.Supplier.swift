@@ -15,6 +15,8 @@ extension Stripe.Climate {
     public struct Supplier: Codable, Hashable, Sendable, Identifiable {
         public typealias ID = String
         public let id: ID
+        /// String representing the object's type.
+        public let object: String
         /// Link to a webpage to learn more about the supplier.
         public var infoUrl: String?
         /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
@@ -23,36 +25,34 @@ extension Stripe.Climate {
         public var locations: [Locations]?
         /// Name of this carbon removal supplier.
         public var name: String?
-        /// String representing the object’s type.
-        public var object: String?
         /// The scientific pathway used for carbon removal.
         public var removalPathway: RemovalPathway?
 
         private enum CodingKeys: String, CodingKey {
             case id
+            case object
             case infoUrl
             case livemode
             case locations
             case name
-            case object
             case removalPathway
         }
 
         public init(
             id: ID,
+            object: String,
             infoUrl: String? = nil,
             livemode: Bool? = nil,
             locations: [Locations]? = nil,
             name: String? = nil,
-            object: String? = nil,
             removalPathway: RemovalPathway? = nil
         ) {
             self.id = id
+            self.object = object
             self.infoUrl = infoUrl
             self.livemode = livemode
             self.locations = locations
             self.name = name
-            self.object = object
             self.removalPathway = removalPathway
         }
 

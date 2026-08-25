@@ -16,7 +16,7 @@ extension Stripe {
         public typealias ID = String
         public let id: ID
         /// String representing the object's type.
-        public var object: String?
+        public let object: String
         /// Hash where the keys are supported currencies and the values are the exchange rate at which the base id currency conver…
         public var rates: [String: Double]?
 
@@ -28,7 +28,7 @@ extension Stripe {
 
         public init(
             id: ID,
-            object: String? = nil,
+            object: String,
             rates: [String: Double]? = nil
         ) {
             self.id = id

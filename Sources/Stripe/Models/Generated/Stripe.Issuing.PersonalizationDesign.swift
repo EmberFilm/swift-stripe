@@ -15,6 +15,8 @@ extension Stripe.Issuing {
     public struct PersonalizationDesign: Codable, Hashable, Sendable, Identifiable {
         public typealias ID = String
         public let id: ID
+        /// String representing the object's type.
+        public let object: String
         /// The file for the card logo to use with physical bundles that support card logos.
         @Expandable<Stripe.Files.File, String> public var cardLogo: String?
         /// Hash containing carrier text, for use with physical bundles that support carrier text.
@@ -29,8 +31,6 @@ extension Stripe.Issuing {
         public var metadata: [String: String]?
         /// Friendly display name.
         public var name: String?
-        /// String representing the object's type.
-        public var object: String?
         /// The physical bundle object belonging to this personalization design.
         @Expandable<Stripe.Issuing.PhysicalBundle, String> public var physicalBundle: String?
         public var preferences: Preferences?
@@ -40,6 +40,7 @@ extension Stripe.Issuing {
 
         private enum CodingKeys: String, CodingKey {
             case id
+            case object
             case cardLogo
             case carrierText
             case created
@@ -47,7 +48,6 @@ extension Stripe.Issuing {
             case lookupKey
             case metadata
             case name
-            case object
             case physicalBundle
             case preferences
             case rejectionReasons
@@ -56,6 +56,7 @@ extension Stripe.Issuing {
 
         public init(
             id: ID,
+            object: String,
             cardLogo: String? = nil,
             carrierText: CarrierText? = nil,
             created: Date? = nil,
@@ -63,13 +64,13 @@ extension Stripe.Issuing {
             lookupKey: String? = nil,
             metadata: [String: String]? = nil,
             name: String? = nil,
-            object: String? = nil,
             physicalBundle: String? = nil,
             preferences: Preferences? = nil,
             rejectionReasons: RejectionReasons? = nil,
             status: Status? = nil
         ) {
             self.id = id
+            self.object = object
             self._cardLogo = Expandable(id: cardLogo)
             self.carrierText = carrierText
             self.created = created
@@ -77,7 +78,6 @@ extension Stripe.Issuing {
             self.lookupKey = lookupKey
             self.metadata = metadata
             self.name = name
-            self.object = object
             self._physicalBundle = Expandable(id: physicalBundle)
             self.preferences = preferences
             self.rejectionReasons = rejectionReasons

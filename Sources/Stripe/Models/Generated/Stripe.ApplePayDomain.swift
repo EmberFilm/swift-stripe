@@ -14,34 +14,34 @@ extension Stripe {
     public struct ApplePayDomain: Codable, Hashable, Sendable, Identifiable {
         public typealias ID = String
         public let id: ID
+        /// String representing the object's type.
+        public let object: String
         /// Time at which the object was created.
         public var created: Date?
         public var domainName: String?
         /// If the object exists in live mode, the value is `true`.
         public var livemode: Bool?
-        /// String representing the object's type.
-        public var object: String?
 
         private enum CodingKeys: String, CodingKey {
             case id
+            case object
             case created
             case domainName
             case livemode
-            case object
         }
 
         public init(
             id: ID,
+            object: String,
             created: Date? = nil,
             domainName: String? = nil,
-            livemode: Bool? = nil,
-            object: String? = nil
+            livemode: Bool? = nil
         ) {
             self.id = id
+            self.object = object
             self.created = created
             self.domainName = domainName
             self.livemode = livemode
-            self.object = object
         }
     }
 }

@@ -15,6 +15,8 @@ extension Stripe.Balance {
     public struct Transaction: Codable, Hashable, Sendable, Identifiable {
         public typealias ID = String
         public let id: ID
+        /// String representing the object's type.
+        public let object: String
         /// Gross amount of this transaction (in cents (or local equivalent)).
         public var amount: Int?
         /// The date that the transaction's net funds become available in the Stripe balance.
@@ -35,8 +37,6 @@ extension Stripe.Balance {
         public var feeDetails: [FeeDetails]?
         /// Net impact to a Stripe balance (in cents (or local equivalent)).
         public var net: Int?
-        /// String representing the object's type.
-        public var object: String?
         /// Learn more about how reporting categories can help you understand balance transactions from an accounting perspective.
         public var reportingCategory: String?
         /// This transaction relates to the Stripe object.
@@ -48,6 +48,7 @@ extension Stripe.Balance {
 
         private enum CodingKeys: String, CodingKey {
             case id
+            case object
             case amount
             case availableOn
             case balanceType
@@ -58,7 +59,6 @@ extension Stripe.Balance {
             case fee
             case feeDetails
             case net
-            case object
             case reportingCategory
             case source
             case status
@@ -67,6 +67,7 @@ extension Stripe.Balance {
 
         public init(
             id: ID,
+            object: String,
             amount: Int? = nil,
             availableOn: Date? = nil,
             balanceType: BalanceType? = nil,
@@ -77,13 +78,13 @@ extension Stripe.Balance {
             fee: Int? = nil,
             feeDetails: [FeeDetails]? = nil,
             net: Int? = nil,
-            object: String? = nil,
             reportingCategory: String? = nil,
             source: String? = nil,
             status: String? = nil,
             `type`: Type? = nil
         ) {
             self.id = id
+            self.object = object
             self.amount = amount
             self.availableOn = availableOn
             self.balanceType = balanceType
@@ -94,7 +95,6 @@ extension Stripe.Balance {
             self.fee = fee
             self.feeDetails = feeDetails
             self.net = net
-            self.object = object
             self.reportingCategory = reportingCategory
             self._source = Expandable(id: source)
             self.status = status

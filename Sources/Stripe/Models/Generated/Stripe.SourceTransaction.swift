@@ -15,6 +15,8 @@ extension Stripe {
     public struct SourceTransaction: Codable, Hashable, Sendable, Identifiable {
         public typealias ID = String
         public let id: ID
+        /// String representing the object's type.
+        public let object: String
         public var achCreditTransfer: AchCreditTransfer?
         /// A positive integer in the smallest currency unit (that is, 100 cents for $1.00, or 1 for ¥1, Japanese Yen being a zero…
         public var amount: Int?
@@ -26,8 +28,6 @@ extension Stripe {
         public var gbpCreditTransfer: GbpCreditTransfer?
         /// If the object exists in live mode, the value is `true`.
         public var livemode: Bool?
-        /// String representing the object's type.
-        public var object: String?
         public var paperCheck: PaperCheck?
         public var sepaCreditTransfer: SepaCreditTransfer?
         /// The ID of the source this transaction is attached to.
@@ -39,6 +39,7 @@ extension Stripe {
 
         private enum CodingKeys: String, CodingKey {
             case id
+            case object
             case achCreditTransfer
             case amount
             case chfCreditTransfer
@@ -46,7 +47,6 @@ extension Stripe {
             case currency
             case gbpCreditTransfer
             case livemode
-            case object
             case paperCheck
             case sepaCreditTransfer
             case source
@@ -56,6 +56,7 @@ extension Stripe {
 
         public init(
             id: ID,
+            object: String,
             achCreditTransfer: AchCreditTransfer? = nil,
             amount: Int? = nil,
             chfCreditTransfer: ChfCreditTransfer? = nil,
@@ -63,7 +64,6 @@ extension Stripe {
             currency: Stripe.Currency? = nil,
             gbpCreditTransfer: GbpCreditTransfer? = nil,
             livemode: Bool? = nil,
-            object: String? = nil,
             paperCheck: PaperCheck? = nil,
             sepaCreditTransfer: SepaCreditTransfer? = nil,
             source: String? = nil,
@@ -71,6 +71,7 @@ extension Stripe {
             `type`: Type? = nil
         ) {
             self.id = id
+            self.object = object
             self.achCreditTransfer = achCreditTransfer
             self.amount = amount
             self.chfCreditTransfer = chfCreditTransfer
@@ -78,7 +79,6 @@ extension Stripe {
             self.currency = currency
             self.gbpCreditTransfer = gbpCreditTransfer
             self.livemode = livemode
-            self.object = object
             self.paperCheck = paperCheck
             self.sepaCreditTransfer = sepaCreditTransfer
             self.source = source

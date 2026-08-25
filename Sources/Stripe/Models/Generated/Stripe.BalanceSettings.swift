@@ -14,7 +14,7 @@ extension Stripe {
     /// Options for customizing account balances and payout settings for a Stripe platform’s connected accounts.
     public struct BalanceSettings: Codable, Hashable, Sendable {
         /// String representing the object's type.
-        public var object: String?
+        public let object: String
         public var payments: Payments?
 
         private enum CodingKeys: String, CodingKey {
@@ -23,7 +23,7 @@ extension Stripe {
         }
 
         public init(
-            object: String? = nil,
+            object: String,
             payments: Payments? = nil
         ) {
             self.object = object

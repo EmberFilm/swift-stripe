@@ -15,6 +15,8 @@ extension Stripe.Checkout.Session {
     public struct LineItem: Codable, Hashable, Sendable, Identifiable {
         public typealias ID = String
         public let id: ID
+        /// String representing the object's type.
+        public let object: String
         public var adjustableQuantity: AdjustableQuantity?
         /// Total discount amount applied.
         public var amountDiscount: Int?
@@ -32,8 +34,6 @@ extension Stripe.Checkout.Session {
         public var discounts: [Stripe.Shared.Discounts]?
         /// Set of key-value pairs that you can attach to an object.
         public var metadata: [String: String]?
-        /// String representing the object's type.
-        public var object: String?
         /// The price used to generate the line item.
         @Boxed public var price: Stripe.Products.Price?
         /// The quantity of products being purchased.
@@ -43,6 +43,7 @@ extension Stripe.Checkout.Session {
 
         private enum CodingKeys: String, CodingKey {
             case id
+            case object
             case adjustableQuantity
             case amountDiscount
             case amountSubtotal
@@ -52,7 +53,6 @@ extension Stripe.Checkout.Session {
             case description
             case discounts
             case metadata
-            case object
             case price
             case quantity
             case taxes
@@ -60,6 +60,7 @@ extension Stripe.Checkout.Session {
 
         public init(
             id: ID,
+            object: String,
             adjustableQuantity: AdjustableQuantity? = nil,
             amountDiscount: Int? = nil,
             amountSubtotal: Int? = nil,
@@ -69,12 +70,12 @@ extension Stripe.Checkout.Session {
             description: String? = nil,
             discounts: [Stripe.Shared.Discounts]? = nil,
             metadata: [String: String]? = nil,
-            object: String? = nil,
             price: Stripe.Products.Price? = nil,
             quantity: Int? = nil,
             taxes: [Stripe.Shared.Taxes]? = nil
         ) {
             self.id = id
+            self.object = object
             self.adjustableQuantity = adjustableQuantity
             self.amountDiscount = amountDiscount
             self.amountSubtotal = amountSubtotal
@@ -84,7 +85,6 @@ extension Stripe.Checkout.Session {
             self.description = description
             self.discounts = discounts
             self.metadata = metadata
-            self.object = object
             self._price = Boxed(wrappedValue: price)
             self.quantity = quantity
             self.taxes = taxes

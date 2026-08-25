@@ -1,0 +1,54 @@
+{
+ "created": 1700000000,
+ "error": "error_1",
+ "id": "reporting.report_run_1",
+ "livemode": true,
+ "object": "reporting.report_run",
+ "parameters": {
+  "columns": [
+   "columns_1"
+  ],
+  "connected_account": "connected_account_1",
+  "currency": "usd",
+  "interval_end": 1700000000,
+  "interval_start": 1700000000,
+  "payout": "payout_1",
+  "reporting_category": "reporting_category_1",
+  "timezone": "timezone_1"
+ },
+ "report_type": "report_type_1",
+ "result": {
+  "created": 1700000000,
+  "expires_at": 1700000000,
+  "filename": "filename_1",
+  "id": "id_1",
+  "links": {
+   "data": [
+    {
+     "created": 1700000000,
+     "expired": true,
+     "expires_at": 1700000000,
+     "file": "file_1",
+     "id": "id_1",
+     "livemode": true,
+     "metadata": {
+      "key": "metadata_1"
+     },
+     "object": "file_link",
+     "url": "url_1"
+    }
+   ],
+   "has_more": true,
+   "object": "list",
+   "url": "url_1"
+  },
+  "object": "file",
+  "purpose": "account_requirement",
+  "size": 1,
+  "title": "title_1",
+  "type": "csv",
+  "url": "url_1"
+ },
+ "status": "pending",
+ "succeeded_at": 1700000000
+}

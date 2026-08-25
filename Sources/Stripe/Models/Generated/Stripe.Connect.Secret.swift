@@ -15,6 +15,8 @@ extension Stripe.Connect {
     public struct Secret: Codable, Hashable, Sendable, Identifiable {
         public typealias ID = String
         public let id: ID
+        /// String representing the object's type.
+        public let object: String
         /// Time at which the object was created.
         public var created: Date?
         /// If true, indicates that this secret has been deleted
@@ -25,42 +27,40 @@ extension Stripe.Connect {
         public var livemode: Bool?
         /// A name for the secret that's unique within the scope.
         public var name: String?
-        /// String representing the object's type.
-        public var object: String?
         /// The plaintext secret value to be stored.
         public var payload: String?
         public var scope: Scope?
 
         private enum CodingKeys: String, CodingKey {
             case id
+            case object
             case created
             case deleted
             case expiresAt
             case livemode
             case name
-            case object
             case payload
             case scope
         }
 
         public init(
             id: ID,
+            object: String,
             created: Date? = nil,
             deleted: Bool? = nil,
             expiresAt: Date? = nil,
             livemode: Bool? = nil,
             name: String? = nil,
-            object: String? = nil,
             payload: String? = nil,
             scope: Scope? = nil
         ) {
             self.id = id
+            self.object = object
             self.created = created
             self.deleted = deleted
             self.expiresAt = expiresAt
             self.livemode = livemode
             self.name = name
-            self.object = object
             self.payload = payload
             self.scope = scope
         }

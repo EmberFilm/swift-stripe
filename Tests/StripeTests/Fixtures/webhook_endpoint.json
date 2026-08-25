@@ -1,0 +1,18 @@
+{
+ "api_version": "api_version_1",
+ "application": "application_1",
+ "created": 1700000000,
+ "description": "description_1",
+ "enabled_events": [
+  "enabled_events_1"
+ ],
+ "id": "webhook_endpoint_1",
+ "livemode": true,
+ "metadata": {
+  "key": "metadata_1"
+ },
+ "object": "webhook_endpoint",
+ "secret": "secret_1",
+ "status": "enabled",
+ "url": "url_1"
+}

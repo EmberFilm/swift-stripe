@@ -15,6 +15,8 @@ extension Stripe.Billing {
     public struct InvoiceRenderingTemplate: Codable, Hashable, Sendable, Identifiable {
         public typealias ID = String
         public let id: ID
+        /// String representing the object's type.
+        public let object: String
         /// Time at which the object was created.
         public var created: Date?
         /// If the object exists in live mode, the value is `true`.
@@ -23,8 +25,6 @@ extension Stripe.Billing {
         public var metadata: [String: String]?
         /// A brief description of the template, hidden from customers
         public var nickname: String?
-        /// String representing the object's type.
-        public var object: String?
         /// The status of the template, one of `active` or `archived`.
         public var status: Status?
         /// Version of this template; version increases by one when an update on the template changes any field that controls invo…
@@ -32,31 +32,31 @@ extension Stripe.Billing {
 
         private enum CodingKeys: String, CodingKey {
             case id
+            case object
             case created
             case livemode
             case metadata
             case nickname
-            case object
             case status
             case version
         }
 
         public init(
             id: ID,
+            object: String,
             created: Date? = nil,
             livemode: Bool? = nil,
             metadata: [String: String]? = nil,
             nickname: String? = nil,
-            object: String? = nil,
             status: Status? = nil,
             version: Int? = nil
         ) {
             self.id = id
+            self.object = object
             self.created = created
             self.livemode = livemode
             self.metadata = metadata
             self.nickname = nickname
-            self.object = object
             self.status = status
             self.version = version
         }

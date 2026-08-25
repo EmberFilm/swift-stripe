@@ -21,9 +21,55 @@ hand_files = {p: p.read_text() for p in pathlib.Path("Sources/Stripe/Models").rg
 requests = "\n".join(p.read_text() for p in list(pathlib.Path("Sources/Stripe/Requests").rglob("*.swift")) + list(pathlib.Path("Sources/Stripe/Clients").rglob("*.swift")))
 KEEP_BY_HAND = {"event"}   # lenient decoding and the Object union
 
+# Hand types whose names do not follow from the schema name. Each is verified to exist before
+# it is used; a wrong entry is reported, not acted on.
+IRREGULAR = {
+    "webhook_endpoint": "Webhook",
+    "ephemeral_key": "Stripe.EphemeralKey",
+    "file_link": "Stripe.FileLinks.FileLink",
+    "account_session": "Stripe.Connect.Account.Session",
+    "capability": "Stripe.Connect.Capability",
+    "country_spec": "Stripe.Connect.CountrySpec",
+    "customer_session": "Stripe.Customers.Customer.Session",
+    "transfer_reversal": "Stripe.Connect.Transfer.Reversal",
+    "setup_attempt": "Stripe.Setup.Attempt",
+    "tax.calculation": "Stripe.Tax.Calculation",
+    "billing_portal.configuration": "Stripe.Billing.Customer.Portal.Configuration",
+    "billing_portal.session": "Stripe.Billing.Customer.Portal.Session",
+    "billing.credit_balance_summary": "Stripe.Billing.Credit.Balance.Summary",
+    "radar.early_fraud_warning": "Stripe.Fraud.EarlyFraudWarnings.EarlyFraudWarning",
+    "radar.value_list": "Stripe.Fraud.ValueLists.ValueList",
+    "radar.value_list_item": "Stripe.Fraud.ValueListItems.ValueListItem",
+    "terminal.location": "Stripe.Terminal.Locations.Location",
+    "terminal.reader": "Stripe.Terminal.Readers.Reader",
+    "terminal.configuration": "TerminalConfiguration",
+    "terminal.connection_token": "TerminalConnectionToken",
+    "forwarding.request": "Stripe.Forwarding.Request",
+    "payment_method_domain": "Stripe.PaymentMethodDomain",
+    "financial_connections.account": "FinancialConnections.Account",
+    "financial_connections.session": "FinancialConnections.Session",
+    "financial_connections.transaction": "FinancialConnections.Transaction",
+    "identity.verification_report": "VerificationReport",
+    "identity.verification_session": "VerificationSession",
+    "issuing.card": "IssuingCard",
+    "issuing.cardholder": "Cardholder",
+    "issuing.dispute": "IssuingDispute",
+    "issuing.transaction": "Transaction",
+    "issuing.authorization": "Authorization",
+    "funding_instructions": "FundingInstructions",
+    "reporting.report_run": "ReportRun",
+    "reporting.report_type": "ReportType",
+    "scheduled_query_run": "ScheduledQueryRun",
+    "bank_account": "BankAccount",
+    "card": "Card",
+    "source": "StripePaymentSource",
+    "tax_id": "Stripe.Tax.ID",
+    "payout": "Stripe.Payouts.Payout",
+}
+
 def locate(name):
     """-> (file, namespace, struct) for the hand type, or None if not uniquely found."""
-    t = gen.RESOURCE_TYPES.get(name)
+    t = IRREGULAR.get(name) or gen.RESOURCE_TYPES.get(name)
     candidates = []
     if t and not t.startswith("Generated."):
         parts = t.split("."); ns, struct = ".".join(parts[:-1]), parts[-1]
@@ -57,8 +103,11 @@ for name, sch in sorted(S.items()):
     full = f"{ns}.{struct}" if ns else struct
     refs = len(re.findall(rf"\b{re.escape(full)}\.[A-Z]\w*", requests))
     if refs > args.max_refs: skipped.append((name, f"{refs} request refs")); continue
-    if not ns.startswith("Stripe."): skipped.append((name, f"top-level type {full}; needs a '/' path")); continue
-    todo.append((name, ns[len("Stripe."):] + "." + struct, f, struct, ns + "." + struct))
+    if ns.startswith("Stripe."):
+        todo.append((name, ns[len("Stripe."):] + "." + struct, f, struct, ns + "." + struct))
+    else:
+        # module-level container or a bare module-level struct: a "/" path
+        todo.append((name, "/" + (ns + "." + struct if ns else struct), f, struct, (ns + "." + struct) if ns else struct))
 
 print(f"cutting over {len(todo)}; skipping {len(skipped)}")
 for n, why in skipped: print(f"   skip {n:<40} {why}")
@@ -69,7 +118,7 @@ s = GEN.read_text()
 marker = "    # stage 4a: resources that had no model at all\n"
 s = s.replace(marker, marker.replace("resources that had no model at all", "cut over from hand models (batch-cutover.py)") + "".join(f'    "{n}": "{p}",\n' for n, p, *_ in todo) + marker, 1)
 tmarker = "    # everything else is the hand-written Stripe type\n"
-s = s.replace(tmarker, "".join(f'    "{n}": "Generated.{p}",\n' for n, p, *_ in todo) + tmarker, 1)
+s = s.replace(tmarker, "".join(f'    "{n}": "{p.lstrip("/") if p.startswith("/") else "Generated." + p}",\n' for n, p, *_ in todo) + tmarker, 1)
 # drop the old hand mapping for these — only in RESOURCE_TYPES, after the hand-type marker
 head, tail = s.split(tmarker, 1)
 for n, *_ in todo:
@@ -78,5 +127,5 @@ GEN.write_text(head + tmarker + tail)
 subprocess.run([sys.executable, str(GEN), args.spec, "--only", *[n for n, *_ in todo], "--keep"], check=True)
 for n, p, f, struct, full in todo:
     ns = ".".join(full.split(".")[:-1])
-    r = subprocess.run([sys.executable, "Scripts/cutover.py", str(f), struct, full, f"Sources/Stripe/Models/Generated/Stripe.{p}.swift"], capture_output=True, text=True)
+    r = subprocess.run([sys.executable, "Scripts/cutover.py", str(f), struct, full, f"Sources/Stripe/Models/Generated/Stripe.{p.lstrip('/')}.swift"], capture_output=True, text=True)
     print(("   ok   " if r.returncode == 0 else "   FAIL ") + f"{n:<36} {r.stdout.splitlines()[0] if r.stdout else r.stderr.strip().splitlines()[-1]}")

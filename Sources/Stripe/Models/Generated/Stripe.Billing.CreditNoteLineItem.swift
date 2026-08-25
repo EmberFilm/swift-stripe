@@ -15,6 +15,8 @@ extension Stripe.Billing {
     public struct CreditNoteLineItem: Codable, Hashable, Sendable, Identifiable {
         public typealias ID = String
         public let id: ID
+        /// String representing the object's type.
+        public let object: String
         /// The integer amount in cents (or local equivalent) representing the gross amount being credited for this line item, exc…
         public var amount: Int?
         /// Description of the item being credited.
@@ -29,8 +31,6 @@ extension Stripe.Billing {
         public var livemode: Bool?
         /// Set of key-value pairs that you can attach to an object.
         public var metadata: [String: String]?
-        /// String representing the object's type.
-        public var object: String?
         /// The pretax credit amounts (ex: discount, credit grants, etc) for this line item.
         public var pretaxCreditAmounts: [PretaxCreditAmounts]?
         /// The number of units of product being credited.
@@ -48,6 +48,7 @@ extension Stripe.Billing {
 
         private enum CodingKeys: String, CodingKey {
             case id
+            case object
             case amount
             case description
             case discountAmount
@@ -55,7 +56,6 @@ extension Stripe.Billing {
             case invoiceLineItem
             case livemode
             case metadata
-            case object
             case pretaxCreditAmounts
             case quantity
             case taxRates
@@ -67,6 +67,7 @@ extension Stripe.Billing {
 
         public init(
             id: ID,
+            object: String,
             amount: Int? = nil,
             description: String? = nil,
             discountAmount: Int? = nil,
@@ -74,7 +75,6 @@ extension Stripe.Billing {
             invoiceLineItem: String? = nil,
             livemode: Bool? = nil,
             metadata: [String: String]? = nil,
-            object: String? = nil,
             pretaxCreditAmounts: [PretaxCreditAmounts]? = nil,
             quantity: Int? = nil,
             taxRates: [Stripe.Tax.Rate]? = nil,
@@ -84,6 +84,7 @@ extension Stripe.Billing {
             unitAmountDecimal: String? = nil
         ) {
             self.id = id
+            self.object = object
             self.amount = amount
             self.description = description
             self.discountAmount = discountAmount
@@ -91,7 +92,6 @@ extension Stripe.Billing {
             self.invoiceLineItem = invoiceLineItem
             self.livemode = livemode
             self.metadata = metadata
-            self.object = object
             self.pretaxCreditAmounts = pretaxCreditAmounts
             self.quantity = quantity
             self.taxRates = taxRates

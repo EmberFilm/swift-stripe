@@ -15,6 +15,8 @@ extension Stripe.Billing.Invoice {
     public struct Payment: Codable, Hashable, Sendable, Identifiable {
         public typealias ID = String
         public let id: ID
+        /// String representing the object's type.
+        public let object: String
         /// Amount that was actually paid for this invoice, in cents (or local equivalent).
         public var amountPaid: Int?
         /// Amount intended to be paid toward this invoice, in cents (or local equivalent)
@@ -29,8 +31,6 @@ extension Stripe.Billing.Invoice {
         public var isDefault: Bool?
         /// If the object exists in live mode, the value is `true`.
         public var livemode: Bool?
-        /// String representing the object's type.
-        public var object: String?
         public var payment: Payment?
         /// The status of the payment, one of `open`, `paid`, or `canceled`.
         public var status: String?
@@ -38,6 +38,7 @@ extension Stripe.Billing.Invoice {
 
         private enum CodingKeys: String, CodingKey {
             case id
+            case object
             case amountPaid
             case amountRequested
             case created
@@ -45,7 +46,6 @@ extension Stripe.Billing.Invoice {
             case invoice
             case isDefault
             case livemode
-            case object
             case payment
             case status
             case statusTransitions
@@ -53,6 +53,7 @@ extension Stripe.Billing.Invoice {
 
         public init(
             id: ID,
+            object: String,
             amountPaid: Int? = nil,
             amountRequested: Int? = nil,
             created: Date? = nil,
@@ -60,12 +61,12 @@ extension Stripe.Billing.Invoice {
             invoice: String? = nil,
             isDefault: Bool? = nil,
             livemode: Bool? = nil,
-            object: String? = nil,
             payment: Payment? = nil,
             status: String? = nil,
             statusTransitions: StatusTransitions? = nil
         ) {
             self.id = id
+            self.object = object
             self.amountPaid = amountPaid
             self.amountRequested = amountRequested
             self.created = created
@@ -73,7 +74,6 @@ extension Stripe.Billing.Invoice {
             self._invoice = Expandable(id: invoice)
             self.isDefault = isDefault
             self.livemode = livemode
-            self.object = object
             self.payment = payment
             self.status = status
             self.statusTransitions = statusTransitions

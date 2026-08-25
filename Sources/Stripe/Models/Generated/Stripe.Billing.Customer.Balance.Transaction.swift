@@ -15,6 +15,8 @@ extension Stripe.Billing.Customer.Balance {
     public struct Transaction: Codable, Hashable, Sendable, Identifiable {
         public typealias ID = String
         public let id: ID
+        /// String representing the object's type.
+        public let object: String
         /// The amount of the transaction.
         public var amount: Int?
         /// The ID of the checkout session (if any) that created the transaction.
@@ -39,13 +41,12 @@ extension Stripe.Billing.Customer.Balance {
         public var livemode: Bool?
         /// Set of key-value pairs that you can attach to an object.
         public var metadata: [String: String]?
-        /// String representing the object's type.
-        public var object: String?
         /// Transaction type: `adjustment`, `applied_to_invoice`, `credit_note`, `initial`, `invoice_overpaid`, `invoice_too_large…
         public var `type`: Type?
 
         private enum CodingKeys: String, CodingKey {
             case id
+            case object
             case amount
             case checkoutSession
             case created
@@ -58,12 +59,12 @@ extension Stripe.Billing.Customer.Balance {
             case invoice
             case livemode
             case metadata
-            case object
             case `type`
         }
 
         public init(
             id: ID,
+            object: String,
             amount: Int? = nil,
             checkoutSession: String? = nil,
             created: Date? = nil,
@@ -76,10 +77,10 @@ extension Stripe.Billing.Customer.Balance {
             invoice: String? = nil,
             livemode: Bool? = nil,
             metadata: [String: String]? = nil,
-            object: String? = nil,
             `type`: Type? = nil
         ) {
             self.id = id
+            self.object = object
             self.amount = amount
             self._checkoutSession = Expandable(id: checkoutSession)
             self.created = created
@@ -92,7 +93,6 @@ extension Stripe.Billing.Customer.Balance {
             self._invoice = Expandable(id: invoice)
             self.livemode = livemode
             self.metadata = metadata
-            self.object = object
             self.`type` = `type`
         }
 

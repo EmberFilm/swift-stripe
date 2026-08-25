@@ -15,6 +15,8 @@ extension Stripe.Billing.Credit.Balance {
     public struct Transaction: Codable, Hashable, Sendable, Identifiable {
         public typealias ID = String
         public let id: ID
+        /// String representing the object's type.
+        public let object: String
         /// Time at which the object was created.
         public var created: Date?
         /// Credit details for this credit balance transaction.
@@ -27,8 +29,6 @@ extension Stripe.Billing.Credit.Balance {
         public var effectiveAt: Date?
         /// If the object exists in live mode, the value is `true`.
         public var livemode: Bool?
-        /// String representing the object's type.
-        public var object: String?
         /// ID of the test clock this credit balance transaction belongs to.
         @Expandable<Stripe.Billing.TestClocks.TestClock, String> public var testClock: String?
         /// The type of credit balance transaction (credit or debit).
@@ -36,37 +36,37 @@ extension Stripe.Billing.Credit.Balance {
 
         private enum CodingKeys: String, CodingKey {
             case id
+            case object
             case created
             case credit
             case creditGrant
             case debit
             case effectiveAt
             case livemode
-            case object
             case testClock
             case `type`
         }
 
         public init(
             id: ID,
+            object: String,
             created: Date? = nil,
             credit: Credit? = nil,
             creditGrant: String? = nil,
             debit: Debit? = nil,
             effectiveAt: Date? = nil,
             livemode: Bool? = nil,
-            object: String? = nil,
             testClock: String? = nil,
             `type`: Type? = nil
         ) {
             self.id = id
+            self.object = object
             self.created = created
             self.credit = credit
             self._creditGrant = Expandable(id: creditGrant)
             self.debit = debit
             self.effectiveAt = effectiveAt
             self.livemode = livemode
-            self.object = object
             self._testClock = Expandable(id: testClock)
             self.`type` = `type`
         }

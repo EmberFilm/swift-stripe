@@ -1,0 +1,108 @@
+{
+ "amount": 1,
+ "amount_details": {
+  "atm_fee": 1,
+  "cashback_amount": 1
+ },
+ "authorization": "issuing.authorization_1",
+ "balance_transaction": "balance_transaction_1",
+ "card": "issuing.card_1",
+ "cardholder": "issuing.cardholder_1",
+ "created": 1700000000,
+ "currency": "usd",
+ "dispute": "issuing.dispute_1",
+ "id": "issuing.transaction_1",
+ "livemode": true,
+ "merchant_amount": 1,
+ "merchant_currency": "usd",
+ "merchant_data": {
+  "category": "category_1",
+  "category_code": "category_code_1",
+  "city": "city_1",
+  "country": "country_1",
+  "name": "name_1",
+  "network_id": "network_id_1",
+  "postal_code": "postal_code_1",
+  "state": "state_1",
+  "tax_id": "tax_id_1",
+  "terminal_id": "terminal_id_1",
+  "url": "url_1"
+ },
+ "metadata": {
+  "key": "metadata_1"
+ },
+ "network_data": {
+  "authorization_code": "authorization_code_1",
+  "processing_date": "processing_date_1",
+  "transaction_id": "transaction_id_1"
+ },
+ "object": "issuing.transaction",
+ "purchase_details": {
+  "fleet": {
+   "cardholder_prompt_data": {
+    "driver_id": "driver_id_1",
+    "odometer": 1,
+    "unspecified_id": "unspecified_id_1",
+    "user_id": "user_id_1",
+    "vehicle_number": "vehicle_number_1"
+   },
+   "purchase_type": "fuel_purchase",
+   "reported_breakdown": {
+    "fuel": {
+     "gross_amount_decimal": "gross_amount_decimal_1"
+    },
+    "non_fuel": {
+     "gross_amount_decimal": "gross_amount_decimal_1"
+    },
+    "tax": {
+     "local_amount_decimal": "local_amount_decimal_1",
+     "national_amount_decimal": "national_amount_decimal_1"
+    }
+   },
+   "service_type": "non_fuel_transaction"
+  },
+  "flight": {
+   "departure_at": 1,
+   "passenger_name": "passenger_name_1",
+   "refundable": true,
+   "segments": [
+    {
+     "arrival_airport_code": "arrival_airport_code_1",
+     "carrier": "carrier_1",
+     "departure_airport_code": "departure_airport_code_1",
+     "flight_number": "flight_number_1",
+     "service_class": "service_class_1",
+     "stopover_allowed": true
+    }
+   ],
+   "travel_agency": "travel_agency_1"
+  },
+  "fuel": {
+   "industry_product_code": "industry_product_code_1",
+   "quantity_decimal": "quantity_decimal_1",
+   "type": "diesel",
+   "unit": "charging_minute",
+   "unit_cost_decimal": "unit_cost_decimal_1"
+  },
+  "lodging": {
+   "check_in_at": 1,
+   "nights": 1
+  },
+  "receipt": [
+   {
+    "description": "description_1",
+    "quantity": 1.5,
+    "total": 1,
+    "unit_cost": 1
+   }
+  ],
+  "reference": "reference_1"
+ },
+ "token": "issuing.token_1",
+ "treasury": {
+  "received_credit": "received_credit_1",
+  "received_debit": "received_debit_1"
+ },
+ "type": "capture",
+ "wallet": "apple_pay"
+}

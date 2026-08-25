@@ -15,6 +15,8 @@ extension Stripe.Treasury {
     public struct InboundTransfer: Codable, Hashable, Sendable, Identifiable {
         public typealias ID = String
         public let id: ID
+        /// String representing the object's type.
+        public let object: String
         /// Amount (in cents) transferred.
         public var amount: Int?
         /// Returns `true` if the InboundTransfer is able to be canceled.
@@ -36,8 +38,6 @@ extension Stripe.Treasury {
         public var livemode: Bool?
         /// Set of key-value pairs that you can attach to an object.
         public var metadata: [String: String]?
-        /// String representing the object's type.
-        public var object: String?
         /// The origin payment method to be debited for an InboundTransfer.
         public var originPaymentMethod: String?
         /// Details about the PaymentMethod for an InboundTransfer.
@@ -54,6 +54,7 @@ extension Stripe.Treasury {
 
         private enum CodingKeys: String, CodingKey {
             case id
+            case object
             case amount
             case cancelable
             case created
@@ -65,7 +66,6 @@ extension Stripe.Treasury {
             case linkedFlows
             case livemode
             case metadata
-            case object
             case originPaymentMethod
             case originPaymentMethodDetails
             case returned
@@ -77,6 +77,7 @@ extension Stripe.Treasury {
 
         public init(
             id: ID,
+            object: String,
             amount: Int? = nil,
             cancelable: Bool? = nil,
             created: Date? = nil,
@@ -88,7 +89,6 @@ extension Stripe.Treasury {
             linkedFlows: LinkedFlows? = nil,
             livemode: Bool? = nil,
             metadata: [String: String]? = nil,
-            object: String? = nil,
             originPaymentMethod: String? = nil,
             originPaymentMethodDetails: OriginPaymentMethodDetails? = nil,
             returned: Bool? = nil,
@@ -98,6 +98,7 @@ extension Stripe.Treasury {
             transaction: String? = nil
         ) {
             self.id = id
+            self.object = object
             self.amount = amount
             self.cancelable = cancelable
             self.created = created
@@ -109,7 +110,6 @@ extension Stripe.Treasury {
             self.linkedFlows = linkedFlows
             self.livemode = livemode
             self.metadata = metadata
-            self.object = object
             self.originPaymentMethod = originPaymentMethod
             self.originPaymentMethodDetails = originPaymentMethodDetails
             self.returned = returned

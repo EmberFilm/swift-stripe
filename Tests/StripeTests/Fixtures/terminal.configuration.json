@@ -1,0 +1,255 @@
+{
+ "bbpos_wisepad3": {
+  "splashscreen": "file_1"
+ },
+ "bbpos_wisepos_e": {
+  "splashscreen": "file_1"
+ },
+ "cellular": {
+  "enabled": true
+ },
+ "id": "terminal.configuration_1",
+ "is_account_default": true,
+ "livemode": true,
+ "name": "name_1",
+ "object": "terminal.configuration",
+ "offline": {
+  "enabled": true
+ },
+ "reboot_window": {
+  "end_hour": 1,
+  "start_hour": 1
+ },
+ "stripe_s700": {
+  "splashscreen": "file_1"
+ },
+ "stripe_s710": {
+  "splashscreen": "file_1"
+ },
+ "tipping": {
+  "aed": {
+   "fixed_amounts": [
+    1
+   ],
+   "percentages": [
+    1
+   ],
+   "smart_tip_threshold": 1
+  },
+  "aud": {
+   "fixed_amounts": [
+    1
+   ],
+   "percentages": [
+    1
+   ],
+   "smart_tip_threshold": 1
+  },
+  "cad": {
+   "fixed_amounts": [
+    1
+   ],
+   "percentages": [
+    1
+   ],
+   "smart_tip_threshold": 1
+  },
+  "chf": {
+   "fixed_amounts": [
+    1
+   ],
+   "percentages": [
+    1
+   ],
+   "smart_tip_threshold": 1
+  },
+  "czk": {
+   "fixed_amounts": [
+    1
+   ],
+   "percentages": [
+    1
+   ],
+   "smart_tip_threshold": 1
+  },
+  "dkk": {
+   "fixed_amounts": [
+    1
+   ],
+   "percentages": [
+    1
+   ],
+   "smart_tip_threshold": 1
+  },
+  "eur": {
+   "fixed_amounts": [
+    1
+   ],
+   "percentages": [
+    1
+   ],
+   "smart_tip_threshold": 1
+  },
+  "gbp": {
+   "fixed_amounts": [
+    1
+   ],
+   "percentages": [
+    1
+   ],
+   "smart_tip_threshold": 1
+  },
+  "gip": {
+   "fixed_amounts": [
+    1
+   ],
+   "percentages": [
+    1
+   ],
+   "smart_tip_threshold": 1
+  },
+  "hkd": {
+   "fixed_amounts": [
+    1
+   ],
+   "percentages": [
+    1
+   ],
+   "smart_tip_threshold": 1
+  },
+  "huf": {
+   "fixed_amounts": [
+    1
+   ],
+   "percentages": [
+    1
+   ],
+   "smart_tip_threshold": 1
+  },
+  "jpy": {
+   "fixed_amounts": [
+    1
+   ],
+   "percentages": [
+    1
+   ],
+   "smart_tip_threshold": 1
+  },
+  "mxn": {
+   "fixed_amounts": [
+    1
+   ],
+   "percentages": [
+    1
+   ],
+   "smart_tip_threshold": 1
+  },
+  "myr": {
+   "fixed_amounts": [
+    1
+   ],
+   "percentages": [
+    1
+   ],
+   "smart_tip_threshold": 1
+  },
+  "nok": {
+   "fixed_amounts": [
+    1
+   ],
+   "percentages": [
+    1
+   ],
+   "smart_tip_threshold": 1
+  },
+  "nzd": {
+   "fixed_amounts": [
+    1
+   ],
+   "percentages": [
+    1
+   ],
+   "smart_tip_threshold": 1
+  },
+  "pln": {
+   "fixed_amounts": [
+    1
+   ],
+   "percentages": [
+    1
+   ],
+   "smart_tip_threshold": 1
+  },
+  "ron": {
+   "fixed_amounts": [
+    1
+   ],
+   "percentages": [
+    1
+   ],
+   "smart_tip_threshold": 1
+  },
+  "sek": {
+   "fixed_amounts": [
+    1
+   ],
+   "percentages": [
+    1
+   ],
+   "smart_tip_threshold": 1
+  },
+  "sgd": {
+   "fixed_amounts": [
+    1
+   ],
+   "percentages": [
+    1
+   ],
+   "smart_tip_threshold": 1
+  },
+  "usd": {
+   "fixed_amounts": [
+    1
+   ],
+   "percentages": [
+    1
+   ],
+   "smart_tip_threshold": 1
+  }
+ },
+ "verifone_m425": {
+  "splashscreen": "file_1"
+ },
+ "verifone_p400": {
+  "splashscreen": "file_1"
+ },
+ "verifone_p630": {
+  "splashscreen": "file_1"
+ },
+ "verifone_ux700": {
+  "splashscreen": "file_1"
+ },
+ "verifone_v660p": {
+  "splashscreen": "file_1"
+ },
+ "wifi": {
+  "enterprise_eap_peap": {
+   "ca_certificate_file": "ca_certificate_file_1",
+   "password": "password_1",
+   "ssid": "ssid_1",
+   "username": "username_1"
+  },
+  "enterprise_eap_tls": {
+   "ca_certificate_file": "ca_certificate_file_1",
+   "client_certificate_file": "client_certificate_file_1",
+   "private_key_file": "private_key_file_1",
+   "private_key_file_password": "private_key_file_password_1",
+   "ssid": "ssid_1"
+  },
+  "personal_psk": {
+   "password": "password_1",
+   "ssid": "ssid_1"
+  },
+  "type": "enterprise_eap_peap"
+ }
+}

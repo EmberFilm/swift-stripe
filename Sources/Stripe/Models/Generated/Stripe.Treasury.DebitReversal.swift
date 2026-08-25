@@ -15,6 +15,8 @@ extension Stripe.Treasury {
     public struct DebitReversal: Codable, Hashable, Sendable, Identifiable {
         public typealias ID = String
         public let id: ID
+        /// String representing the object's type.
+        public let object: String
         /// Amount (in cents) transferred.
         public var amount: Int?
         /// Time at which the object was created.
@@ -33,8 +35,6 @@ extension Stripe.Treasury {
         public var metadata: [String: String]?
         /// The rails used to reverse the funds.
         public var network: Network?
-        /// String representing the object's type.
-        public var object: String?
         /// The ReceivedDebit being reversed.
         public var receivedDebit: String?
         /// Status of the DebitReversal
@@ -45,6 +45,7 @@ extension Stripe.Treasury {
 
         private enum CodingKeys: String, CodingKey {
             case id
+            case object
             case amount
             case created
             case currency
@@ -54,7 +55,6 @@ extension Stripe.Treasury {
             case livemode
             case metadata
             case network
-            case object
             case receivedDebit
             case status
             case statusTransitions
@@ -63,6 +63,7 @@ extension Stripe.Treasury {
 
         public init(
             id: ID,
+            object: String,
             amount: Int? = nil,
             created: Date? = nil,
             currency: Stripe.Currency? = nil,
@@ -72,13 +73,13 @@ extension Stripe.Treasury {
             livemode: Bool? = nil,
             metadata: [String: String]? = nil,
             network: Network? = nil,
-            object: String? = nil,
             receivedDebit: String? = nil,
             status: Status? = nil,
             statusTransitions: StatusTransitions? = nil,
             transaction: String? = nil
         ) {
             self.id = id
+            self.object = object
             self.amount = amount
             self.created = created
             self.currency = currency
@@ -88,7 +89,6 @@ extension Stripe.Treasury {
             self.livemode = livemode
             self.metadata = metadata
             self.network = network
-            self.object = object
             self.receivedDebit = receivedDebit
             self.status = status
             self.statusTransitions = statusTransitions

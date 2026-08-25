@@ -15,10 +15,10 @@ extension Stripe.Tax {
     public struct Association: Codable, Hashable, Sendable, Identifiable {
         public typealias ID = String
         public let id: ID
+        /// String representing the object's type.
+        public let object: String
         /// The Tax Calculation that was included in PaymentIntent.
         public var calculation: String?
-        /// String representing the object's type.
-        public var object: String?
         /// The PaymentIntent that this Tax Association is tracking.
         public var paymentIntent: String?
         /// Information about the tax transactions linked to this payment intent
@@ -26,22 +26,22 @@ extension Stripe.Tax {
 
         private enum CodingKeys: String, CodingKey {
             case id
-            case calculation
             case object
+            case calculation
             case paymentIntent
             case taxTransactionAttempts
         }
 
         public init(
             id: ID,
+            object: String,
             calculation: String? = nil,
-            object: String? = nil,
             paymentIntent: String? = nil,
             taxTransactionAttempts: [TaxTransactionAttempts]? = nil
         ) {
             self.id = id
-            self.calculation = calculation
             self.object = object
+            self.calculation = calculation
             self.paymentIntent = paymentIntent
             self.taxTransactionAttempts = taxTransactionAttempts
         }

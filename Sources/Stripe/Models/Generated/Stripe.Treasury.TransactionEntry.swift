@@ -15,6 +15,8 @@ extension Stripe.Treasury {
     public struct TransactionEntry: Codable, Hashable, Sendable, Identifiable {
         public typealias ID = String
         public let id: ID
+        /// String representing the object's type.
+        public let object: String
         public var balanceImpact: Stripe.Shared.BalanceImpact?
         /// Time at which the object was created.
         public var created: Date?
@@ -32,8 +34,6 @@ extension Stripe.Treasury {
         public var flowType: FlowType?
         /// If the object exists in live mode, the value is `true`.
         public var livemode: Bool?
-        /// String representing the object's type.
-        public var object: String?
         /// The Transaction associated with this object.
         @Expandable<Stripe.Treasury.Transaction, String> public var transaction: String?
         /// The specific money movement that generated the TransactionEntry.
@@ -41,6 +41,7 @@ extension Stripe.Treasury {
 
         private enum CodingKeys: String, CodingKey {
             case id
+            case object
             case balanceImpact
             case created
             case currency
@@ -50,13 +51,13 @@ extension Stripe.Treasury {
             case flowDetails
             case flowType
             case livemode
-            case object
             case transaction
             case `type`
         }
 
         public init(
             id: ID,
+            object: String,
             balanceImpact: Stripe.Shared.BalanceImpact? = nil,
             created: Date? = nil,
             currency: Stripe.Currency? = nil,
@@ -66,11 +67,11 @@ extension Stripe.Treasury {
             flowDetails: Stripe.Shared.FlowDetails? = nil,
             flowType: FlowType? = nil,
             livemode: Bool? = nil,
-            object: String? = nil,
             transaction: String? = nil,
             `type`: Type? = nil
         ) {
             self.id = id
+            self.object = object
             self.balanceImpact = balanceImpact
             self.created = created
             self.currency = currency
@@ -80,7 +81,6 @@ extension Stripe.Treasury {
             self.flowDetails = flowDetails
             self.flowType = flowType
             self.livemode = livemode
-            self.object = object
             self._transaction = Expandable(id: transaction)
             self.`type` = `type`
         }

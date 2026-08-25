@@ -15,6 +15,8 @@ extension Stripe.Charges {
     public struct Charge: Codable, Hashable, Sendable, Identifiable {
         public typealias ID = String
         public let id: ID
+        /// String representing the object's type.
+        public let object: String
         /// Amount intended to be collected by this payment.
         public var amount: Int?
         /// Amount in cents (or local equivalent) captured (can be less than the amount attribute on the charge if a partial captu…
@@ -59,8 +61,6 @@ extension Stripe.Charges {
         public var livemode: Bool?
         /// Set of key-value pairs that you can attach to an object.
         public var metadata: [String: String]?
-        /// String representing the object's type.
-        public var object: String?
         /// The account (if any) the charge was made on behalf of without triggering an automatic transfer.
         @Expandable<Stripe.Connect.Account, String> public var onBehalfOf: String?
         /// Details about whether the payment was accepted, and why.
@@ -108,6 +108,7 @@ extension Stripe.Charges {
 
         private enum CodingKeys: String, CodingKey {
             case id
+            case object
             case amount
             case amountCaptured
             case amountRefunded
@@ -131,7 +132,6 @@ extension Stripe.Charges {
             case level3
             case livemode
             case metadata
-            case object
             case onBehalfOf
             case outcome
             case paid
@@ -159,6 +159,7 @@ extension Stripe.Charges {
 
         public init(
             id: ID,
+            object: String,
             amount: Int? = nil,
             amountCaptured: Int? = nil,
             amountRefunded: Int? = nil,
@@ -182,7 +183,6 @@ extension Stripe.Charges {
             level3: Level3? = nil,
             livemode: Bool? = nil,
             metadata: [String: String]? = nil,
-            object: String? = nil,
             onBehalfOf: String? = nil,
             outcome: Outcome? = nil,
             paid: Bool? = nil,
@@ -208,6 +208,7 @@ extension Stripe.Charges {
             transferGroup: String? = nil
         ) {
             self.id = id
+            self.object = object
             self.amount = amount
             self.amountCaptured = amountCaptured
             self.amountRefunded = amountRefunded
@@ -231,7 +232,6 @@ extension Stripe.Charges {
             self.level3 = level3
             self.livemode = livemode
             self.metadata = metadata
-            self.object = object
             self._onBehalfOf = Expandable(id: onBehalfOf)
             self.outcome = outcome
             self.paid = paid
@@ -1509,11 +1509,11 @@ extension Stripe.Charges {
 
                     /// The Electronic Commerce Indicator (ECI).
                     public enum ElectronicCommerceIndicator: String, Codable, Hashable, Sendable {
-                        case _01 = "01"
-                        case _02 = "02"
-                        case _05 = "05"
-                        case _06 = "06"
-                        case _07 = "07"
+                        case value01 = "01"
+                        case value02 = "02"
+                        case value05 = "05"
+                        case value06 = "06"
+                        case value07 = "07"
                     }
 
                     /// The exemption requested via 3DS and accepted by the issuer at authentication time.
@@ -1546,20 +1546,20 @@ extension Stripe.Charges {
 
                     /// The version of 3D Secure that was used.
                     public enum Version: String, Codable, Hashable, Sendable {
-                        case _102 = "1.0.2"
-                        case _210 = "2.1.0"
-                        case _220 = "2.2.0"
-                        case _230 = "2.3.0"
-                        case _231 = "2.3.1"
+                        case value1_0_2 = "1.0.2"
+                        case value2_1_0 = "2.1.0"
+                        case value2_2_0 = "2.2.0"
+                        case value2_3_0 = "2.3.0"
+                        case value2_3_1 = "2.3.1"
                     }
                 }
 
                 public struct Wallet: Codable, Hashable, Sendable {
                     public var amexExpressCheckout: AmexExpressCheckout?
-                    public var applePay: ApplePay?
+                    public var applePay: Stripe.Shared.ApplePay?
                     /// (For tokenized numbers only.) The last four digits of the device account number.
                     public var dynamicLast4: String?
-                    public var googlePay: GooglePay?
+                    public var googlePay: Stripe.Shared.GooglePay?
                     public var link: Link?
                     public var masterpass: Masterpass?
                     public var samsungPay: SamsungPay?
@@ -1581,9 +1581,9 @@ extension Stripe.Charges {
 
                     public init(
                         amexExpressCheckout: AmexExpressCheckout? = nil,
-                        applePay: ApplePay? = nil,
+                        applePay: Stripe.Shared.ApplePay? = nil,
                         dynamicLast4: String? = nil,
-                        googlePay: GooglePay? = nil,
+                        googlePay: Stripe.Shared.GooglePay? = nil,
                         link: Link? = nil,
                         masterpass: Masterpass? = nil,
                         samsungPay: SamsungPay? = nil,
@@ -1613,14 +1613,6 @@ extension Stripe.Charges {
                     }
 
                     public struct AmexExpressCheckout: Codable, Hashable, Sendable {
-                        public init() {}
-                    }
-
-                    public struct ApplePay: Codable, Hashable, Sendable {
-                        public init() {}
-                    }
-
-                    public struct GooglePay: Codable, Hashable, Sendable {
                         public init() {}
                     }
 
@@ -2745,31 +2737,31 @@ extension Stripe.Charges {
 
         /// A list of refunds that have been applied to the charge.
         public struct Refunds: Codable, Hashable, Sendable {
+            /// String representing the object's type.
+            public let object: String
             /// Details about each object.
             public var data: [Stripe.Refunds.Refund]?
             /// True if this list has another page of items after this one that can be fetched.
             public var hasMore: Bool?
-            /// String representing the object's type.
-            public var object: String?
             /// The URL where this list can be accessed.
             public var url: String?
 
             private enum CodingKeys: String, CodingKey {
+                case object
                 case data
                 case hasMore
-                case object
                 case url
             }
 
             public init(
+                object: String,
                 data: [Stripe.Refunds.Refund]? = nil,
                 hasMore: Bool? = nil,
-                object: String? = nil,
                 url: String? = nil
             ) {
+                self.object = object
                 self.data = data
                 self.hasMore = hasMore
-                self.object = object
                 self.url = url
             }
         }

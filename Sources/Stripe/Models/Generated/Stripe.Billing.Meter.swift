@@ -15,6 +15,8 @@ extension Stripe.Billing {
     public struct Meter: Codable, Hashable, Sendable, Identifiable {
         public typealias ID = String
         public let id: ID
+        /// String representing the object's type.
+        public let object: String
         /// Time at which the object was created.
         public var created: Date?
         public var customerMapping: CustomerMapping?
@@ -27,8 +29,6 @@ extension Stripe.Billing {
         public var eventTimeWindow: EventTimeWindow?
         /// If the object exists in live mode, the value is `true`.
         public var livemode: Bool?
-        /// String representing the object's type.
-        public var object: String?
         /// The meter's status.
         public var status: Status?
         public var statusTransitions: StatusTransitions?
@@ -38,6 +38,7 @@ extension Stripe.Billing {
 
         private enum CodingKeys: String, CodingKey {
             case id
+            case object
             case created
             case customerMapping
             case defaultAggregation
@@ -45,7 +46,6 @@ extension Stripe.Billing {
             case eventName
             case eventTimeWindow
             case livemode
-            case object
             case status
             case statusTransitions
             case updated
@@ -54,6 +54,7 @@ extension Stripe.Billing {
 
         public init(
             id: ID,
+            object: String,
             created: Date? = nil,
             customerMapping: CustomerMapping? = nil,
             defaultAggregation: DefaultAggregation? = nil,
@@ -61,13 +62,13 @@ extension Stripe.Billing {
             eventName: String? = nil,
             eventTimeWindow: EventTimeWindow? = nil,
             livemode: Bool? = nil,
-            object: String? = nil,
             status: Status? = nil,
             statusTransitions: StatusTransitions? = nil,
             updated: Date? = nil,
             valueSettings: ValueSettings? = nil
         ) {
             self.id = id
+            self.object = object
             self.created = created
             self.customerMapping = customerMapping
             self.defaultAggregation = defaultAggregation
@@ -75,7 +76,6 @@ extension Stripe.Billing {
             self.eventName = eventName
             self.eventTimeWindow = eventTimeWindow
             self.livemode = livemode
-            self.object = object
             self.status = status
             self.statusTransitions = statusTransitions
             self.updated = updated

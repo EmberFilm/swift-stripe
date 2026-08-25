@@ -13,40 +13,40 @@ import Foundation
 extension Stripe.Billing {
     /// A billing meter event adjustment is a resource that allows you to cancel a meter event.
     public struct MeterEventAdjustment: Codable, Hashable, Sendable {
+        /// String representing the object's type.
+        public let object: String
         /// Specifies which event to cancel.
         public var cancel: Cancel?
         /// The name of the meter event.
         public var eventName: String?
         /// If the object exists in live mode, the value is `true`.
         public var livemode: Bool?
-        /// String representing the object's type.
-        public var object: String?
         /// The meter event adjustment's status.
         public var status: Status?
         /// Specifies whether to cancel a single event or a range of events for a time period.
         public var `type`: String?
 
         private enum CodingKeys: String, CodingKey {
+            case object
             case cancel
             case eventName
             case livemode
-            case object
             case status
             case `type`
         }
 
         public init(
+            object: String,
             cancel: Cancel? = nil,
             eventName: String? = nil,
             livemode: Bool? = nil,
-            object: String? = nil,
             status: Status? = nil,
             `type`: String? = nil
         ) {
+            self.object = object
             self.cancel = cancel
             self.eventName = eventName
             self.livemode = livemode
-            self.object = object
             self.status = status
             self.`type` = `type`
         }

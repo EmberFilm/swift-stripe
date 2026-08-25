@@ -1,0 +1,450 @@
+{
+ "amount": 1,
+ "amount_details": {
+  "atm_fee": 1,
+  "cashback_amount": 1
+ },
+ "approved": true,
+ "authorization_method": "chip",
+ "balance_transactions": [
+  {
+   "amount": 1,
+   "available_on": 1700000000,
+   "balance_type": "issuing",
+   "created": 1700000000,
+   "currency": "usd",
+   "description": "description_1",
+   "exchange_rate": 1.5,
+   "fee": 1,
+   "fee_details": [
+    {
+     "amount": 1,
+     "application": "application_1",
+     "currency": "usd",
+     "description": "description_1",
+     "type": "application_fee"
+    }
+   ],
+   "id": "id_1",
+   "net": 1,
+   "object": "balance_transaction",
+   "reporting_category": "reporting_category_1",
+   "source": "balance_transaction_source_1",
+   "status": "available",
+   "type": "adjustment"
+  }
+ ],
+ "card": {
+  "brand": "brand_1",
+  "cancellation_reason": "design_rejected",
+  "cardholder": {
+   "billing": {
+    "address": {
+     "city": "city_1",
+     "country": "country_1",
+     "line1": "line1_1",
+     "line2": "line2_1",
+     "postal_code": "postal_code_1",
+     "state": "state_1"
+    }
+   },
+   "company": {
+    "tax_id_provided": true
+   },
+   "created": 1700000000,
+   "email": "email_1",
+   "id": "id_1",
+   "individual": {
+    "card_issuing": {},
+    "dob": {
+     "day": 1,
+     "month": 1,
+     "year": 1
+    },
+    "first_name": "first_name_1",
+    "last_name": "last_name_1",
+    "verification": {}
+   },
+   "livemode": true,
+   "metadata": {
+    "key": "metadata_1"
+   },
+   "name": "name_1",
+   "object": "issuing.cardholder",
+   "phone_number": "phone_number_1",
+   "preferred_locales": [
+    "de"
+   ],
+   "requirements": {
+    "disabled_reason": "listed",
+    "past_due": [
+     "company.tax_id"
+    ]
+   },
+   "spending_controls": {
+    "allowed_card_presences": [
+     "not_present"
+    ],
+    "allowed_categories": [
+     "ac_refrigeration_repair"
+    ],
+    "allowed_merchant_countries": [
+     "allowed_merchant_countries_1"
+    ],
+    "blocked_card_presences": [
+     "not_present"
+    ],
+    "blocked_categories": [
+     "ac_refrigeration_repair"
+    ],
+    "blocked_merchant_countries": [
+     "blocked_merchant_countries_1"
+    ],
+    "spending_limits": [
+     {
+      "amount": 1,
+      "categories": [
+       "ac_refrigeration_repair"
+      ],
+      "interval": "all_time"
+     }
+    ],
+    "spending_limits_currency": "usd"
+   },
+   "status": "active",
+   "type": "company"
+  },
+  "created": 1700000000,
+  "currency": "usd",
+  "cvc": "expand",
+  "exp_month": 1,
+  "exp_year": 1,
+  "financial_account": "financial_account_1",
+  "id": "id_1",
+  "last4": "last4_1",
+  "latest_fraud_warning": {
+   "started_at": 1700000000,
+   "type": "card_testing_exposure"
+  },
+  "lifecycle_controls": {
+   "cancel_after": {
+    "payment_count": 1
+   }
+  },
+  "livemode": true,
+  "metadata": {
+   "key": "metadata_1"
+  },
+  "number": "expand",
+  "object": "issuing.card",
+  "personalization_design": "issuing.personalization_design_1",
+  "replaced_by": "issuing.card_1",
+  "replacement_for": "issuing.card_1",
+  "replacement_reason": "damaged",
+  "second_line": "second_line_1",
+  "shipping": {
+   "address": {
+    "city": "city_1",
+    "country": "country_1",
+    "line1": "line1_1",
+    "line2": "line2_1",
+    "postal_code": "postal_code_1",
+    "state": "state_1"
+   },
+   "address_validation": {
+    "mode": "disabled",
+    "normalized_address": {
+     "city": "city_1",
+     "country": "country_1",
+     "line1": "line1_1",
+     "line2": "line2_1",
+     "postal_code": "postal_code_1",
+     "state": "state_1"
+    },
+    "result": "indeterminate"
+   },
+   "business_name": "business_name_1",
+   "carrier": "correos",
+   "customs": {
+    "eori_number": "eori_number_1"
+   },
+   "eta": 1700000000,
+   "name": "name_1",
+   "phone_number": "phone_number_1",
+   "require_signature": true,
+   "service": "express",
+   "status": "canceled",
+   "tracking_number": "tracking_number_1",
+   "tracking_url": "tracking_url_1",
+   "type": "bulk"
+  },
+  "spending_controls": {
+   "allowed_card_presences": [
+    "not_present"
+   ],
+   "allowed_categories": [
+    "ac_refrigeration_repair"
+   ],
+   "allowed_merchant_countries": [
+    "allowed_merchant_countries_1"
+   ],
+   "blocked_card_presences": [
+    "not_present"
+   ],
+   "blocked_categories": [
+    "ac_refrigeration_repair"
+   ],
+   "blocked_merchant_countries": [
+    "blocked_merchant_countries_1"
+   ],
+   "spending_limits": [
+    {
+     "amount": 1,
+     "categories": [
+      "ac_refrigeration_repair"
+     ],
+     "interval": "all_time"
+    }
+   ],
+   "spending_limits_currency": "usd"
+  },
+  "status": "active",
+  "type": "physical",
+  "wallets": {
+   "apple_pay": {
+    "eligible": true,
+    "ineligible_reason": "missing_agreement"
+   },
+   "google_pay": {
+    "eligible": true,
+    "ineligible_reason": "missing_agreement"
+   },
+   "primary_account_identifier": "primary_account_identifier_1"
+  }
+ },
+ "card_presence": "not_present",
+ "cardholder": "issuing.cardholder_1",
+ "created": 1700000000,
+ "currency": "usd",
+ "fleet": {
+  "cardholder_prompt_data": {
+   "alphanumeric_id": "alphanumeric_id_1",
+   "driver_id": "driver_id_1",
+   "odometer": 1,
+   "unspecified_id": "unspecified_id_1",
+   "user_id": "user_id_1",
+   "vehicle_number": "vehicle_number_1"
+  },
+  "purchase_type": "fuel_and_non_fuel_purchase",
+  "reported_breakdown": {
+   "fuel": {
+    "gross_amount_decimal": "gross_amount_decimal_1"
+   },
+   "non_fuel": {
+    "gross_amount_decimal": "gross_amount_decimal_1"
+   },
+   "tax": {
+    "local_amount_decimal": "null",
+    "national_amount_decimal": "null"
+   }
+  },
+  "service_type": "full_service"
+ },
+ "fraud_challenges": [
+  {
+   "channel": "sms",
+   "status": "expired",
+   "undeliverable_reason": "no_phone_number"
+  }
+ ],
+ "fuel": {
+  "industry_product_code": "industry_product_code_1",
+  "quantity_decimal": "quantity_decimal_1",
+  "type": "diesel",
+  "unit": "charging_minute",
+  "unit_cost_decimal": "unit_cost_decimal_1"
+ },
+ "id": "issuing.authorization_1",
+ "livemode": true,
+ "merchant_amount": 1,
+ "merchant_currency": "usd",
+ "merchant_data": {
+  "category": "category_1",
+  "category_code": "category_code_1",
+  "city": "city_1",
+  "country": "country_1",
+  "name": "name_1",
+  "network_id": "network_id_1",
+  "postal_code": "postal_code_1",
+  "state": "state_1",
+  "tax_id": "tax_id_1",
+  "terminal_id": "terminal_id_1",
+  "url": "url_1"
+ },
+ "metadata": {
+  "key": "metadata_1"
+ },
+ "network_data": {
+  "acquiring_institution_id": "null",
+  "system_trace_audit_number": "system_trace_audit_number_1",
+  "transaction_id": "transaction_id_1"
+ },
+ "object": "issuing.authorization",
+ "pending_request": {
+  "amount": 1,
+  "amount_details": {
+   "atm_fee": 1,
+   "cashback_amount": 1
+  },
+  "currency": "usd",
+  "is_amount_controllable": true,
+  "merchant_amount": 1,
+  "merchant_currency": "usd",
+  "network_risk_score": 1
+ },
+ "request_history": [
+  {
+   "amount": 1,
+   "amount_details": {
+    "atm_fee": 1,
+    "cashback_amount": 1
+   },
+   "approved": true,
+   "authorization_code": "authorization_code_1",
+   "created": 1700000000,
+   "currency": "usd",
+   "merchant_amount": 1,
+   "merchant_currency": "usd",
+   "network_risk_score": 1,
+   "reason": "account_disabled",
+   "reason_message": "webhook_error",
+   "requested_at": 1700000000
+  }
+ ],
+ "status": "closed",
+ "token": "issuing.token_1",
+ "transactions": [
+  {
+   "amount": 1,
+   "amount_details": {
+    "atm_fee": 1,
+    "cashback_amount": 1
+   },
+   "authorization": "issuing.authorization_1",
+   "balance_transaction": "balance_transaction_1",
+   "card": "issuing.card_1",
+   "cardholder": "issuing.cardholder_1",
+   "created": 1700000000,
+   "currency": "usd",
+   "dispute": "issuing.dispute_1",
+   "id": "id_1",
+   "livemode": true,
+   "merchant_amount": 1,
+   "merchant_currency": "usd",
+   "merchant_data": {
+    "category": "category_1",
+    "category_code": "category_code_1",
+    "city": "city_1",
+    "country": "country_1",
+    "name": "name_1",
+    "network_id": "network_id_1",
+    "postal_code": "postal_code_1",
+    "state": "state_1",
+    "tax_id": "tax_id_1",
+    "terminal_id": "terminal_id_1",
+    "url": "url_1"
+   },
+   "metadata": {
+    "key": "metadata_1"
+   },
+   "network_data": {
+    "authorization_code": "authorization_code_1",
+    "processing_date": "processing_date_1",
+    "transaction_id": "transaction_id_1"
+   },
+   "object": "issuing.transaction",
+   "purchase_details": {
+    "fleet": {
+     "cardholder_prompt_data": {
+      "driver_id": "driver_id_1",
+      "odometer": 1,
+      "unspecified_id": "unspecified_id_1",
+      "user_id": "user_id_1",
+      "vehicle_number": "vehicle_number_1"
+     },
+     "purchase_type": "fuel_purchase",
+     "reported_breakdown": {},
+     "service_type": "non_fuel_transaction"
+    },
+    "flight": {
+     "departure_at": 1,
+     "passenger_name": "passenger_name_1",
+     "refundable": true,
+     "segments": [
+      {
+       "arrival_airport_code": "arrival_airport_code_1",
+       "carrier": "carrier_1",
+       "departure_airport_code": "departure_airport_code_1",
+       "flight_number": "flight_number_1",
+       "service_class": "service_class_1",
+       "stopover_allowed": true
+      }
+     ],
+     "travel_agency": "travel_agency_1"
+    },
+    "fuel": {
+     "industry_product_code": "industry_product_code_1",
+     "quantity_decimal": "quantity_decimal_1",
+     "type": "diesel",
+     "unit": "charging_minute",
+     "unit_cost_decimal": "unit_cost_decimal_1"
+    },
+    "lodging": {
+     "check_in_at": 1,
+     "nights": 1
+    },
+    "receipt": [
+     {
+      "description": "description_1",
+      "quantity": 1.5,
+      "total": 1,
+      "unit_cost": 1
+     }
+    ],
+    "reference": "reference_1"
+   },
+   "token": "issuing.token_1",
+   "treasury": {
+    "received_credit": "received_credit_1",
+    "received_debit": "received_debit_1"
+   },
+   "type": "capture",
+   "wallet": "apple_pay"
+  }
+ ],
+ "treasury": {
+  "received_credits": [
+   "received_credits_1"
+  ],
+  "received_debits": [
+   "received_debits_1"
+  ],
+  "transaction": "transaction_1"
+ },
+ "verification_data": {
+  "address_line1_check": "match",
+  "address_postal_code_check": "match",
+  "authentication_exemption": {
+   "claimed_by": "acquirer",
+   "type": "low_value_transaction"
+  },
+  "cvc_check": "match",
+  "expiry_check": "match",
+  "postal_code": "postal_code_1",
+  "three_d_secure": {
+   "result": "attempt_acknowledged"
+  }
+ },
+ "verified_by_fraud_challenge": true,
+ "wallet": "apple_pay"
+}

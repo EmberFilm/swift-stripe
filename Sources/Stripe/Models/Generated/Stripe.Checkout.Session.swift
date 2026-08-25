@@ -15,6 +15,8 @@ extension Stripe.Checkout {
     public struct Session: Codable, Hashable, Sendable, Identifiable {
         public typealias ID = String
         public let id: ID
+        /// String representing the object's type.
+        public let object: String
         /// Settings for price localization with Adaptive Pricing.
         public var adaptivePricing: AdaptivePricing?
         /// When set, provides configuration for actions to take if this Checkout Session expires.
@@ -85,8 +87,6 @@ extension Stripe.Checkout {
         /// The mode of the Checkout Session.
         public var mode: Mode?
         public var nameCollection: NameCollection?
-        /// String representing the object's type.
-        public var object: String?
         /// The optional items presented to the customer at checkout.
         public var optionalItems: [OptionalItems]?
         /// Where the user is coming from.
@@ -145,6 +145,7 @@ extension Stripe.Checkout {
 
         private enum CodingKeys: String, CodingKey {
             case id
+            case object
             case adaptivePricing
             case afterExpiration
             case allowPromotionCodes
@@ -182,7 +183,6 @@ extension Stripe.Checkout {
             case metadata
             case mode
             case nameCollection
-            case object
             case optionalItems
             case originContext
             case paymentIntent
@@ -216,6 +216,7 @@ extension Stripe.Checkout {
 
         public init(
             id: ID,
+            object: String,
             adaptivePricing: AdaptivePricing? = nil,
             afterExpiration: AfterExpiration? = nil,
             allowPromotionCodes: Bool? = nil,
@@ -253,7 +254,6 @@ extension Stripe.Checkout {
             metadata: [String: String]? = nil,
             mode: Mode? = nil,
             nameCollection: NameCollection? = nil,
-            object: String? = nil,
             optionalItems: [OptionalItems]? = nil,
             originContext: OriginContext? = nil,
             paymentIntent: String? = nil,
@@ -285,6 +285,7 @@ extension Stripe.Checkout {
             walletOptions: WalletOptions? = nil
         ) {
             self.id = id
+            self.object = object
             self.adaptivePricing = adaptivePricing
             self.afterExpiration = afterExpiration
             self.allowPromotionCodes = allowPromotionCodes
@@ -322,7 +323,6 @@ extension Stripe.Checkout {
             self.metadata = metadata
             self.mode = mode
             self.nameCollection = nameCollection
-            self.object = object
             self.optionalItems = optionalItems
             self.originContext = originContext
             self._paymentIntent = Expandable(id: paymentIntent)
@@ -1405,31 +1405,31 @@ extension Stripe.Checkout {
 
         /// The line items purchased by the customer.
         public struct LineItems: Codable, Hashable, Sendable {
+            /// String representing the object's type.
+            public let object: String
             /// Details about each object.
             public var data: [Stripe.Checkout.Session.LineItem]?
             /// True if this list has another page of items after this one that can be fetched.
             public var hasMore: Bool?
-            /// String representing the object's type.
-            public var object: String?
             /// The URL where this list can be accessed.
             public var url: String?
 
             private enum CodingKeys: String, CodingKey {
+                case object
                 case data
                 case hasMore
-                case object
                 case url
             }
 
             public init(
+                object: String,
                 data: [Stripe.Checkout.Session.LineItem]? = nil,
                 hasMore: Bool? = nil,
-                object: String? = nil,
                 url: String? = nil
             ) {
+                self.object = object
                 self.data = data
                 self.hasMore = hasMore
-                self.object = object
                 self.url = url
             }
         }
@@ -3585,7 +3585,7 @@ extension Stripe.Checkout {
 
             public struct Breakdown: Codable, Hashable, Sendable {
                 /// The aggregated discounts.
-                public var discounts: [Discounts]?
+                public var discounts: [Stripe.Shared.Discounts]?
                 /// The aggregated tax amounts by rate.
                 public var taxes: [Stripe.Shared.Taxes]?
 
@@ -3595,30 +3595,11 @@ extension Stripe.Checkout {
                 }
 
                 public init(
-                    discounts: [Discounts]? = nil,
+                    discounts: [Stripe.Shared.Discounts]? = nil,
                     taxes: [Stripe.Shared.Taxes]? = nil
                 ) {
                     self.discounts = discounts
                     self.taxes = taxes
-                }
-
-                public struct Discounts: Codable, Hashable, Sendable {
-                    /// The amount discounted.
-                    public var amount: Int?
-                    public var discount: Stripe.Shared.Discount?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case amount
-                        case discount
-                    }
-
-                    public init(
-                        amount: Int? = nil,
-                        discount: Stripe.Shared.Discount? = nil
-                    ) {
-                        self.amount = amount
-                        self.discount = discount
-                    }
                 }
             }
         }

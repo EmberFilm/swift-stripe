@@ -15,6 +15,8 @@ extension Stripe.Treasury {
     public struct OutboundTransfer: Codable, Hashable, Sendable, Identifiable {
         public typealias ID = String
         public let id: ID
+        /// String representing the object's type.
+        public let object: String
         /// Amount (in cents) transferred.
         public var amount: Int?
         /// Returns `true` if the object can be canceled, and `false` otherwise.
@@ -38,8 +40,6 @@ extension Stripe.Treasury {
         public var livemode: Bool?
         /// Set of key-value pairs that you can attach to an object.
         public var metadata: [String: String]?
-        /// String representing the object's type.
-        public var object: String?
         /// Details about a returned OutboundTransfer.
         public var returnedDetails: ReturnedDetails?
         /// Information about the OutboundTransfer to be sent to the recipient account.
@@ -54,6 +54,7 @@ extension Stripe.Treasury {
 
         private enum CodingKeys: String, CodingKey {
             case id
+            case object
             case amount
             case cancelable
             case created
@@ -66,7 +67,6 @@ extension Stripe.Treasury {
             case hostedRegulatoryReceiptUrl
             case livemode
             case metadata
-            case object
             case returnedDetails
             case statementDescriptor
             case status
@@ -77,6 +77,7 @@ extension Stripe.Treasury {
 
         public init(
             id: ID,
+            object: String,
             amount: Int? = nil,
             cancelable: Bool? = nil,
             created: Date? = nil,
@@ -89,7 +90,6 @@ extension Stripe.Treasury {
             hostedRegulatoryReceiptUrl: String? = nil,
             livemode: Bool? = nil,
             metadata: [String: String]? = nil,
-            object: String? = nil,
             returnedDetails: ReturnedDetails? = nil,
             statementDescriptor: String? = nil,
             status: Status? = nil,
@@ -98,6 +98,7 @@ extension Stripe.Treasury {
             transaction: String? = nil
         ) {
             self.id = id
+            self.object = object
             self.amount = amount
             self.cancelable = cancelable
             self.created = created
@@ -110,7 +111,6 @@ extension Stripe.Treasury {
             self.hostedRegulatoryReceiptUrl = hostedRegulatoryReceiptUrl
             self.livemode = livemode
             self.metadata = metadata
-            self.object = object
             self.returnedDetails = returnedDetails
             self.statementDescriptor = statementDescriptor
             self.status = status

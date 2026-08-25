@@ -15,6 +15,8 @@ extension Stripe.PaymentIntents {
     public struct PaymentIntent: Codable, Hashable, Sendable, Identifiable {
         public typealias ID = String
         public let id: ID
+        /// String representing the object's type.
+        public let object: String
         /// The list of payment method types allowed for use with this payment.
         public var allowedPaymentMethodTypes: [AllowedPaymentMethodTypes]?
         /// Amount intended to be collected by this PaymentIntent.
@@ -65,8 +67,6 @@ extension Stripe.PaymentIntents {
         public var metadata: [String: String]?
         /// If present, this property tells you what actions you need to take in order for your customer to fulfill a payment usin…
         public var nextAction: NextAction?
-        /// String representing the object's type.
-        public var object: String?
         /// You can specify the settlement merchant as the connected account using the `on_behalf_of` attribute on the charge.
         @Expandable<Stripe.Connect.Account, String> public var onBehalfOf: String?
         public var paymentDetails: PaymentDetails?
@@ -104,6 +104,7 @@ extension Stripe.PaymentIntents {
 
         private enum CodingKeys: String, CodingKey {
             case id
+            case object
             case allowedPaymentMethodTypes
             case amount
             case amountCapturable
@@ -130,7 +131,6 @@ extension Stripe.PaymentIntents {
             case managedPayments
             case metadata
             case nextAction
-            case object
             case onBehalfOf
             case paymentDetails
             case paymentMethod
@@ -153,6 +153,7 @@ extension Stripe.PaymentIntents {
 
         public init(
             id: ID,
+            object: String,
             allowedPaymentMethodTypes: [AllowedPaymentMethodTypes]? = nil,
             amount: Int? = nil,
             amountCapturable: Int? = nil,
@@ -179,7 +180,6 @@ extension Stripe.PaymentIntents {
             managedPayments: Stripe.Shared.ManagedPayments? = nil,
             metadata: [String: String]? = nil,
             nextAction: NextAction? = nil,
-            object: String? = nil,
             onBehalfOf: String? = nil,
             paymentDetails: PaymentDetails? = nil,
             paymentMethod: String? = nil,
@@ -200,6 +200,7 @@ extension Stripe.PaymentIntents {
             transferGroup: String? = nil
         ) {
             self.id = id
+            self.object = object
             self.allowedPaymentMethodTypes = allowedPaymentMethodTypes
             self.amount = amount
             self.amountCapturable = amountCapturable
@@ -226,7 +227,6 @@ extension Stripe.PaymentIntents {
             self.managedPayments = managedPayments
             self.metadata = metadata
             self.nextAction = nextAction
-            self.object = object
             self._onBehalfOf = Expandable(id: onBehalfOf)
             self.paymentDetails = paymentDetails
             self._paymentMethod = Expandable(id: paymentMethod)
@@ -507,41 +507,41 @@ extension Stripe.PaymentIntents {
 
             /// A list of line items, each containing information about a product in the PaymentIntent.
             public struct LineItems: Codable, Hashable, Sendable {
+                /// String representing the object's type.
+                public let object: String
                 /// Details about each object.
                 public var data: [Data]?
                 /// True if this list has another page of items after this one that can be fetched.
                 public var hasMore: Bool?
-                /// String representing the object's type.
-                public var object: String?
                 /// The URL where this list can be accessed.
                 public var url: String?
 
                 private enum CodingKeys: String, CodingKey {
+                    case object
                     case data
                     case hasMore
-                    case object
                     case url
                 }
 
                 public init(
+                    object: String,
                     data: [Data]? = nil,
                     hasMore: Bool? = nil,
-                    object: String? = nil,
                     url: String? = nil
                 ) {
+                    self.object = object
                     self.data = data
                     self.hasMore = hasMore
-                    self.object = object
                     self.url = url
                 }
 
                 public struct Data: Codable, Hashable, Sendable, Identifiable {
                     public typealias ID = String
                     public let id: ID
+                    /// String representing the object's type.
+                    public let object: String
                     /// The discount applied on this line item represented in the smallest currency unit.
                     public var discountAmount: Int?
-                    /// String representing the object's type.
-                    public var object: String?
                     /// Payment method-specific information for line items.
                     public var paymentMethodOptions: PaymentMethodOptions?
                     /// The product code of the line item, such as an SKU.
@@ -559,8 +559,8 @@ extension Stripe.PaymentIntents {
 
                     private enum CodingKeys: String, CodingKey {
                         case id
-                        case discountAmount
                         case object
+                        case discountAmount
                         case paymentMethodOptions
                         case productCode
                         case productName
@@ -572,8 +572,8 @@ extension Stripe.PaymentIntents {
 
                     public init(
                         id: ID,
+                        object: String,
                         discountAmount: Int? = nil,
-                        object: String? = nil,
                         paymentMethodOptions: PaymentMethodOptions? = nil,
                         productCode: String? = nil,
                         productName: String? = nil,
@@ -583,8 +583,8 @@ extension Stripe.PaymentIntents {
                         unitOfMeasure: String? = nil
                     ) {
                         self.id = id
-                        self.discountAmount = discountAmount
                         self.object = object
+                        self.discountAmount = discountAmount
                         self.paymentMethodOptions = paymentMethodOptions
                         self.productCode = productCode
                         self.productName = productName
@@ -1086,7 +1086,7 @@ extension Stripe.PaymentIntents {
                 /// Three-letter ISO currency code, in lowercase.
                 public var currency: Stripe.Currency?
                 /// A list of financial addresses that can be used to fund the customer balance
-                public var financialAddresses: [FinancialAddresses]?
+                public var financialAddresses: [Stripe.Shared.FinancialAddresses]?
                 /// A link to a hosted page that guides your customer through completing the transfer.
                 public var hostedInstructionsUrl: String?
                 /// A string identifying this payment.
@@ -1106,7 +1106,7 @@ extension Stripe.PaymentIntents {
                 public init(
                     amountRemaining: Int? = nil,
                     currency: Stripe.Currency? = nil,
-                    financialAddresses: [FinancialAddresses]? = nil,
+                    financialAddresses: [Stripe.Shared.FinancialAddresses]? = nil,
                     hostedInstructionsUrl: String? = nil,
                     reference: String? = nil,
                     `type`: Type? = nil
@@ -1126,327 +1126,6 @@ extension Stripe.PaymentIntents {
                     case jpBankTransfer = "jp_bank_transfer"
                     case mxBankTransfer = "mx_bank_transfer"
                     case usBankTransfer = "us_bank_transfer"
-                }
-
-                /// FinancialAddresses contain identifying information that resolves to a FinancialAccount.
-                public struct FinancialAddresses: Codable, Hashable, Sendable {
-                    public var aba: Aba?
-                    public var iban: Iban?
-                    public var sortCode: SortCode?
-                    public var spei: Spei?
-                    /// The payment networks supported by this FinancialAddress
-                    public var supportedNetworks: [SupportedNetworks]?
-                    public var swift: Swift?
-                    /// The type of financial address
-                    public var `type`: Type?
-                    public var zengin: Zengin?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case aba
-                        case iban
-                        case sortCode
-                        case spei
-                        case supportedNetworks
-                        case swift
-                        case `type`
-                        case zengin
-                    }
-
-                    public init(
-                        aba: Aba? = nil,
-                        iban: Iban? = nil,
-                        sortCode: SortCode? = nil,
-                        spei: Spei? = nil,
-                        supportedNetworks: [SupportedNetworks]? = nil,
-                        swift: Swift? = nil,
-                        `type`: Type? = nil,
-                        zengin: Zengin? = nil
-                    ) {
-                        self.aba = aba
-                        self.iban = iban
-                        self.sortCode = sortCode
-                        self.spei = spei
-                        self.supportedNetworks = supportedNetworks
-                        self.swift = swift
-                        self.`type` = `type`
-                        self.zengin = zengin
-                    }
-
-                    public enum SupportedNetworks: String, Codable, Hashable, Sendable {
-                        case ach
-                        case bacs
-                        case chaps
-                        case domesticWireUs = "domestic_wire_us"
-                        case fps
-                        case sepa
-                        case spei
-                        case swift
-                        case zengin
-                    }
-
-                    /// The type of financial address
-                    public enum `Type`: String, Codable, Hashable, Sendable {
-                        case aba
-                        case iban
-                        case sortCode = "sort_code"
-                        case spei
-                        case swift
-                        case zengin
-                    }
-
-                    /// ABA Records contain U.S.
-                    public struct Aba: Codable, Hashable, Sendable {
-                        public var accountHolderAddress: Address?
-                        /// The account holder name
-                        public var accountHolderName: String?
-                        /// The ABA account number
-                        public var accountNumber: String?
-                        /// The account type
-                        public var accountType: String?
-                        public var bankAddress: Address?
-                        /// The bank name
-                        public var bankName: String?
-                        /// The ABA routing number
-                        public var routingNumber: String?
-
-                        private enum CodingKeys: String, CodingKey {
-                            case accountHolderAddress
-                            case accountHolderName
-                            case accountNumber
-                            case accountType
-                            case bankAddress
-                            case bankName
-                            case routingNumber
-                        }
-
-                        public init(
-                            accountHolderAddress: Address? = nil,
-                            accountHolderName: String? = nil,
-                            accountNumber: String? = nil,
-                            accountType: String? = nil,
-                            bankAddress: Address? = nil,
-                            bankName: String? = nil,
-                            routingNumber: String? = nil
-                        ) {
-                            self.accountHolderAddress = accountHolderAddress
-                            self.accountHolderName = accountHolderName
-                            self.accountNumber = accountNumber
-                            self.accountType = accountType
-                            self.bankAddress = bankAddress
-                            self.bankName = bankName
-                            self.routingNumber = routingNumber
-                        }
-                    }
-
-                    /// Iban Records contain E.U.
-                    public struct Iban: Codable, Hashable, Sendable {
-                        public var accountHolderAddress: Address?
-                        /// The name of the person or business that owns the bank account
-                        public var accountHolderName: String?
-                        public var bankAddress: Address?
-                        /// The BIC/SWIFT code of the account.
-                        public var bic: String?
-                        /// Two-letter country code (ISO 3166-1 alpha-2).
-                        public var country: String?
-                        /// The IBAN of the account.
-                        public var iban: String?
-
-                        private enum CodingKeys: String, CodingKey {
-                            case accountHolderAddress
-                            case accountHolderName
-                            case bankAddress
-                            case bic
-                            case country
-                            case iban
-                        }
-
-                        public init(
-                            accountHolderAddress: Address? = nil,
-                            accountHolderName: String? = nil,
-                            bankAddress: Address? = nil,
-                            bic: String? = nil,
-                            country: String? = nil,
-                            iban: String? = nil
-                        ) {
-                            self.accountHolderAddress = accountHolderAddress
-                            self.accountHolderName = accountHolderName
-                            self.bankAddress = bankAddress
-                            self.bic = bic
-                            self.country = country
-                            self.iban = iban
-                        }
-                    }
-
-                    /// Sort Code Records contain U.K.
-                    public struct SortCode: Codable, Hashable, Sendable {
-                        public var accountHolderAddress: Address?
-                        /// The name of the person or business that owns the bank account
-                        public var accountHolderName: String?
-                        /// The account number
-                        public var accountNumber: String?
-                        public var bankAddress: Address?
-                        /// The six-digit sort code
-                        public var sortCode: String?
-
-                        private enum CodingKeys: String, CodingKey {
-                            case accountHolderAddress
-                            case accountHolderName
-                            case accountNumber
-                            case bankAddress
-                            case sortCode
-                        }
-
-                        public init(
-                            accountHolderAddress: Address? = nil,
-                            accountHolderName: String? = nil,
-                            accountNumber: String? = nil,
-                            bankAddress: Address? = nil,
-                            sortCode: String? = nil
-                        ) {
-                            self.accountHolderAddress = accountHolderAddress
-                            self.accountHolderName = accountHolderName
-                            self.accountNumber = accountNumber
-                            self.bankAddress = bankAddress
-                            self.sortCode = sortCode
-                        }
-                    }
-
-                    /// SPEI Records contain Mexico bank account details per the SPEI format.
-                    public struct Spei: Codable, Hashable, Sendable {
-                        public var accountHolderAddress: Address?
-                        /// The account holder name
-                        public var accountHolderName: String?
-                        public var bankAddress: Address?
-                        /// The three-digit bank code
-                        public var bankCode: String?
-                        /// The short banking institution name
-                        public var bankName: String?
-                        /// The CLABE number
-                        public var clabe: String?
-
-                        private enum CodingKeys: String, CodingKey {
-                            case accountHolderAddress
-                            case accountHolderName
-                            case bankAddress
-                            case bankCode
-                            case bankName
-                            case clabe
-                        }
-
-                        public init(
-                            accountHolderAddress: Address? = nil,
-                            accountHolderName: String? = nil,
-                            bankAddress: Address? = nil,
-                            bankCode: String? = nil,
-                            bankName: String? = nil,
-                            clabe: String? = nil
-                        ) {
-                            self.accountHolderAddress = accountHolderAddress
-                            self.accountHolderName = accountHolderName
-                            self.bankAddress = bankAddress
-                            self.bankCode = bankCode
-                            self.bankName = bankName
-                            self.clabe = clabe
-                        }
-                    }
-
-                    /// SWIFT Records contain U.S.
-                    public struct Swift: Codable, Hashable, Sendable {
-                        public var accountHolderAddress: Address?
-                        /// The account holder name
-                        public var accountHolderName: String?
-                        /// The account number
-                        public var accountNumber: String?
-                        /// The account type
-                        public var accountType: String?
-                        public var bankAddress: Address?
-                        /// The bank name
-                        public var bankName: String?
-                        /// The SWIFT code
-                        public var swiftCode: String?
-
-                        private enum CodingKeys: String, CodingKey {
-                            case accountHolderAddress
-                            case accountHolderName
-                            case accountNumber
-                            case accountType
-                            case bankAddress
-                            case bankName
-                            case swiftCode
-                        }
-
-                        public init(
-                            accountHolderAddress: Address? = nil,
-                            accountHolderName: String? = nil,
-                            accountNumber: String? = nil,
-                            accountType: String? = nil,
-                            bankAddress: Address? = nil,
-                            bankName: String? = nil,
-                            swiftCode: String? = nil
-                        ) {
-                            self.accountHolderAddress = accountHolderAddress
-                            self.accountHolderName = accountHolderName
-                            self.accountNumber = accountNumber
-                            self.accountType = accountType
-                            self.bankAddress = bankAddress
-                            self.bankName = bankName
-                            self.swiftCode = swiftCode
-                        }
-                    }
-
-                    /// Zengin Records contain Japan bank account details per the Zengin format.
-                    public struct Zengin: Codable, Hashable, Sendable {
-                        public var accountHolderAddress: Address?
-                        /// The account holder name
-                        public var accountHolderName: String?
-                        /// The account number
-                        public var accountNumber: String?
-                        /// The bank account type.
-                        public var accountType: String?
-                        public var bankAddress: Address?
-                        /// The bank code of the account
-                        public var bankCode: String?
-                        /// The bank name of the account
-                        public var bankName: String?
-                        /// The branch code of the account
-                        public var branchCode: String?
-                        /// The branch name of the account
-                        public var branchName: String?
-
-                        private enum CodingKeys: String, CodingKey {
-                            case accountHolderAddress
-                            case accountHolderName
-                            case accountNumber
-                            case accountType
-                            case bankAddress
-                            case bankCode
-                            case bankName
-                            case branchCode
-                            case branchName
-                        }
-
-                        public init(
-                            accountHolderAddress: Address? = nil,
-                            accountHolderName: String? = nil,
-                            accountNumber: String? = nil,
-                            accountType: String? = nil,
-                            bankAddress: Address? = nil,
-                            bankCode: String? = nil,
-                            bankName: String? = nil,
-                            branchCode: String? = nil,
-                            branchName: String? = nil
-                        ) {
-                            self.accountHolderAddress = accountHolderAddress
-                            self.accountHolderName = accountHolderName
-                            self.accountNumber = accountNumber
-                            self.accountType = accountType
-                            self.bankAddress = bankAddress
-                            self.bankCode = bankCode
-                            self.bankName = bankName
-                            self.branchCode = branchCode
-                            self.branchName = branchName
-                        }
-                    }
                 }
             }
 

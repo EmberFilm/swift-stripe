@@ -1,0 +1,78 @@
+{
+ "account_holder": {
+  "account": "account_1",
+  "customer": "customer_1",
+  "customer_account": "customer_account_1",
+  "type": "account"
+ },
+ "account_numbers": [
+  {
+   "expected_expiry_date": 1700000000,
+   "identifier_type": "account_number",
+   "status": "deactivated",
+   "supported_networks": [
+    "ach"
+   ]
+  }
+ ],
+ "balance": {
+  "as_of": 1700000000,
+  "cash": {
+   "available": {
+    "key": 1
+   }
+  },
+  "credit": {
+   "used": {
+    "key": 1
+   }
+  },
+  "current": {
+   "key": 1
+  },
+  "type": "cash"
+ },
+ "balance_refresh": {
+  "last_attempted_at": 1700000000,
+  "next_refresh_available_at": 1700000000,
+  "status": "failed"
+ },
+ "category": "cash",
+ "created": 1700000000,
+ "display_name": "display_name_1",
+ "id": "financial_connections.account_1",
+ "institution_name": "institution_name_1",
+ "last4": "last4_1",
+ "livemode": true,
+ "object": "financial_connections.account",
+ "ownership": "financial_connections.account_ownership_1",
+ "ownership_refresh": {
+  "last_attempted_at": 1700000000,
+  "next_refresh_available_at": 1700000000,
+  "status": "failed"
+ },
+ "permissions": [
+  "balances"
+ ],
+ "status": "active",
+ "status_details": {
+  "active": {
+   "action": "none",
+   "cause": "access_expired",
+   "expected_deactivation_date": 1700000000
+  }
+ },
+ "subcategory": "checking",
+ "subscriptions": [
+  "transactions"
+ ],
+ "supported_payment_method_types": [
+  "link"
+ ],
+ "transaction_refresh": {
+  "id": "id_1",
+  "last_attempted_at": 1700000000,
+  "next_refresh_available_at": 1700000000,
+  "status": "failed"
+ }
+}

@@ -15,6 +15,8 @@ extension Stripe.Billing.Invoice {
     public struct Item: Codable, Hashable, Sendable, Identifiable {
         public typealias ID = String
         public let id: ID
+        /// String representing the object's type.
+        public let object: String
         /// Amount (in the `currency` specified) of the invoice item.
         public var amount: Int?
         /// Three-letter ISO currency code, in lowercase.
@@ -39,8 +41,6 @@ extension Stripe.Billing.Invoice {
         public var metadata: [String: String]?
         /// The amount after discounts, but before credits and taxes.
         public var netAmount: Int?
-        /// String representing the object's type.
-        public var object: String?
         /// The parent that generated this invoice item.
         public var parent: Parent?
         public var period: Period?
@@ -60,6 +60,7 @@ extension Stripe.Billing.Invoice {
 
         private enum CodingKeys: String, CodingKey {
             case id
+            case object
             case amount
             case currency
             case customer
@@ -72,7 +73,6 @@ extension Stripe.Billing.Invoice {
             case livemode
             case metadata
             case netAmount
-            case object
             case parent
             case period
             case pricing
@@ -86,6 +86,7 @@ extension Stripe.Billing.Invoice {
 
         public init(
             id: ID,
+            object: String,
             amount: Int? = nil,
             currency: Stripe.Currency? = nil,
             customer: String? = nil,
@@ -98,7 +99,6 @@ extension Stripe.Billing.Invoice {
             livemode: Bool? = nil,
             metadata: [String: String]? = nil,
             netAmount: Int? = nil,
-            object: String? = nil,
             parent: Parent? = nil,
             period: Period? = nil,
             pricing: Pricing? = nil,
@@ -110,6 +110,7 @@ extension Stripe.Billing.Invoice {
             testClock: String? = nil
         ) {
             self.id = id
+            self.object = object
             self.amount = amount
             self.currency = currency
             self._customer = Expandable(id: customer)
@@ -122,7 +123,6 @@ extension Stripe.Billing.Invoice {
             self.livemode = livemode
             self.metadata = metadata
             self.netAmount = netAmount
-            self.object = object
             self.parent = parent
             self.period = period
             self.pricing = pricing

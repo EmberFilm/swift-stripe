@@ -15,13 +15,13 @@ extension Stripe.Issuing {
     public struct PhysicalBundle: Codable, Hashable, Sendable, Identifiable {
         public typealias ID = String
         public let id: ID
+        /// String representing the object's type.
+        public let object: String
         public var features: Features?
         /// If the object exists in live mode, the value is `true`.
         public var livemode: Bool?
         /// Friendly display name.
         public var name: String?
-        /// String representing the object's type.
-        public var object: String?
         /// Whether this physical bundle can be used to create cards.
         public var status: Status?
         /// Whether this physical bundle is a standard Stripe offering or custom-made for you.
@@ -29,28 +29,28 @@ extension Stripe.Issuing {
 
         private enum CodingKeys: String, CodingKey {
             case id
+            case object
             case features
             case livemode
             case name
-            case object
             case status
             case `type`
         }
 
         public init(
             id: ID,
+            object: String,
             features: Features? = nil,
             livemode: Bool? = nil,
             name: String? = nil,
-            object: String? = nil,
             status: Status? = nil,
             `type`: Type? = nil
         ) {
             self.id = id
+            self.object = object
             self.features = features
             self.livemode = livemode
             self.name = name
-            self.object = object
             self.status = status
             self.`type` = `type`
         }

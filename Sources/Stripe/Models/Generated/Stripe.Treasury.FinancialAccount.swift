@@ -15,6 +15,8 @@ extension Stripe.Treasury {
     public struct FinancialAccount: Codable, Hashable, Sendable, Identifiable {
         public typealias ID = String
         public let id: ID
+        /// String representing the object's type.
+        public let object: String
         /// The array of paths to active Features in the Features hash.
         public var activeFeatures: [ActiveFeatures]?
         public var balance: Balance?
@@ -32,8 +34,6 @@ extension Stripe.Treasury {
         public var metadata: [String: String]?
         /// The nickname for the FinancialAccount.
         public var nickname: String?
-        /// String representing the object's type.
-        public var object: String?
         /// The array of paths to pending Features in the Features hash.
         public var pendingFeatures: [PendingFeatures]?
         /// The set of functionalities that the platform can restrict on the FinancialAccount.
@@ -48,6 +48,7 @@ extension Stripe.Treasury {
 
         private enum CodingKeys: String, CodingKey {
             case id
+            case object
             case activeFeatures
             case balance
             case country
@@ -58,7 +59,6 @@ extension Stripe.Treasury {
             case livemode
             case metadata
             case nickname
-            case object
             case pendingFeatures
             case platformRestrictions
             case restrictedFeatures
@@ -69,6 +69,7 @@ extension Stripe.Treasury {
 
         public init(
             id: ID,
+            object: String,
             activeFeatures: [ActiveFeatures]? = nil,
             balance: Balance? = nil,
             country: String? = nil,
@@ -79,7 +80,6 @@ extension Stripe.Treasury {
             livemode: Bool? = nil,
             metadata: [String: String]? = nil,
             nickname: String? = nil,
-            object: String? = nil,
             pendingFeatures: [PendingFeatures]? = nil,
             platformRestrictions: PlatformRestrictions? = nil,
             restrictedFeatures: [RestrictedFeatures]? = nil,
@@ -88,6 +88,7 @@ extension Stripe.Treasury {
             supportedCurrencies: [String]? = nil
         ) {
             self.id = id
+            self.object = object
             self.activeFeatures = activeFeatures
             self.balance = balance
             self.country = country
@@ -98,7 +99,6 @@ extension Stripe.Treasury {
             self.livemode = livemode
             self.metadata = metadata
             self.nickname = nickname
-            self.object = object
             self.pendingFeatures = pendingFeatures
             self.platformRestrictions = platformRestrictions
             self.restrictedFeatures = restrictedFeatures

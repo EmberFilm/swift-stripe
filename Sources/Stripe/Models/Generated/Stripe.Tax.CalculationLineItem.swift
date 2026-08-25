@@ -14,6 +14,8 @@ extension Stripe.Tax {
     public struct CalculationLineItem: Codable, Hashable, Sendable, Identifiable {
         public typealias ID = String
         public let id: ID
+        /// String representing the object's type.
+        public let object: String
         /// The line item amount in the smallest currency unit.
         public var amount: Int?
         /// The amount of tax calculated for this line item, in the smallest currency unit.
@@ -22,8 +24,6 @@ extension Stripe.Tax {
         public var livemode: Bool?
         /// Set of key-value pairs that you can attach to an object.
         public var metadata: [String: String]?
-        /// String representing the object's type.
-        public var object: String?
         /// The ID of an existing Product.
         public var product: String?
         /// The number of units of the item being purchased.
@@ -39,11 +39,11 @@ extension Stripe.Tax {
 
         private enum CodingKeys: String, CodingKey {
             case id
+            case object
             case amount
             case amountTax
             case livemode
             case metadata
-            case object
             case product
             case quantity
             case reference
@@ -54,11 +54,11 @@ extension Stripe.Tax {
 
         public init(
             id: ID,
+            object: String,
             amount: Int? = nil,
             amountTax: Int? = nil,
             livemode: Bool? = nil,
             metadata: [String: String]? = nil,
-            object: String? = nil,
             product: String? = nil,
             quantity: Int? = nil,
             reference: String? = nil,
@@ -67,11 +67,11 @@ extension Stripe.Tax {
             taxCode: String? = nil
         ) {
             self.id = id
+            self.object = object
             self.amount = amount
             self.amountTax = amountTax
             self.livemode = livemode
             self.metadata = metadata
-            self.object = object
             self.product = product
             self.quantity = quantity
             self.reference = reference

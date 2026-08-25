@@ -15,6 +15,8 @@ extension Stripe.Products {
     public struct Product: Codable, Hashable, Sendable, Identifiable {
         public typealias ID = String
         public let id: ID
+        /// String representing the object's type.
+        public let object: String
         /// Whether the product is currently available for purchase.
         public var active: Bool?
         /// Time at which the object was created.
@@ -33,8 +35,6 @@ extension Stripe.Products {
         public var metadata: [String: String]?
         /// The product's name, meant to be displayable to the customer.
         public var name: String?
-        /// String representing the object's type.
-        public var object: String?
         /// The dimensions of this product for shipping purposes.
         public var packageDimensions: PackageDimensions?
         /// Whether this product is shipped (i.e., physical goods).
@@ -54,6 +54,7 @@ extension Stripe.Products {
 
         private enum CodingKeys: String, CodingKey {
             case id
+            case object
             case active
             case created
             case defaultPrice
@@ -63,7 +64,6 @@ extension Stripe.Products {
             case marketingFeatures
             case metadata
             case name
-            case object
             case packageDimensions
             case shippable
             case statementDescriptor
@@ -76,6 +76,7 @@ extension Stripe.Products {
 
         public init(
             id: ID,
+            object: String,
             active: Bool? = nil,
             created: Date? = nil,
             defaultPrice: String? = nil,
@@ -85,7 +86,6 @@ extension Stripe.Products {
             marketingFeatures: [MarketingFeatures]? = nil,
             metadata: [String: String]? = nil,
             name: String? = nil,
-            object: String? = nil,
             packageDimensions: PackageDimensions? = nil,
             shippable: Bool? = nil,
             statementDescriptor: String? = nil,
@@ -96,6 +96,7 @@ extension Stripe.Products {
             url: String? = nil
         ) {
             self.id = id
+            self.object = object
             self.active = active
             self.created = created
             self._defaultPrice = Expandable(id: defaultPrice)
@@ -105,7 +106,6 @@ extension Stripe.Products {
             self.marketingFeatures = marketingFeatures
             self.metadata = metadata
             self.name = name
-            self.object = object
             self.packageDimensions = packageDimensions
             self.shippable = shippable
             self.statementDescriptor = statementDescriptor

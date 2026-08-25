@@ -1,0 +1,155 @@
+{
+ "bank_transfer": {
+  "country": "country_1",
+  "financial_addresses": [
+   {
+    "aba": {
+     "account_holder_address": {
+      "city": "city_1",
+      "country": "country_1",
+      "line1": "line1_1",
+      "line2": "line2_1",
+      "postal_code": "postal_code_1",
+      "state": "state_1"
+     },
+     "account_holder_name": "account_holder_name_1",
+     "account_number": "account_number_1",
+     "account_type": "account_type_1",
+     "bank_address": {
+      "city": "city_1",
+      "country": "country_1",
+      "line1": "line1_1",
+      "line2": "line2_1",
+      "postal_code": "postal_code_1",
+      "state": "state_1"
+     },
+     "bank_name": "bank_name_1",
+     "routing_number": "routing_number_1"
+    },
+    "iban": {
+     "account_holder_address": {
+      "city": "city_1",
+      "country": "country_1",
+      "line1": "line1_1",
+      "line2": "line2_1",
+      "postal_code": "postal_code_1",
+      "state": "state_1"
+     },
+     "account_holder_name": "account_holder_name_1",
+     "bank_address": {
+      "city": "city_1",
+      "country": "country_1",
+      "line1": "line1_1",
+      "line2": "line2_1",
+      "postal_code": "postal_code_1",
+      "state": "state_1"
+     },
+     "bic": "bic_1",
+     "country": "country_1",
+     "iban": "iban_1"
+    },
+    "sort_code": {
+     "account_holder_address": {
+      "city": "city_1",
+      "country": "country_1",
+      "line1": "line1_1",
+      "line2": "line2_1",
+      "postal_code": "postal_code_1",
+      "state": "state_1"
+     },
+     "account_holder_name": "account_holder_name_1",
+     "account_number": "account_number_1",
+     "bank_address": {
+      "city": "city_1",
+      "country": "country_1",
+      "line1": "line1_1",
+      "line2": "line2_1",
+      "postal_code": "postal_code_1",
+      "state": "state_1"
+     },
+     "sort_code": "sort_code_1"
+    },
+    "spei": {
+     "account_holder_address": {
+      "city": "city_1",
+      "country": "country_1",
+      "line1": "line1_1",
+      "line2": "line2_1",
+      "postal_code": "postal_code_1",
+      "state": "state_1"
+     },
+     "account_holder_name": "account_holder_name_1",
+     "bank_address": {
+      "city": "city_1",
+      "country": "country_1",
+      "line1": "line1_1",
+      "line2": "line2_1",
+      "postal_code": "postal_code_1",
+      "state": "state_1"
+     },
+     "bank_code": "bank_code_1",
+     "bank_name": "bank_name_1",
+     "clabe": "clabe_1"
+    },
+    "supported_networks": [
+     "ach"
+    ],
+    "swift": {
+     "account_holder_address": {
+      "city": "city_1",
+      "country": "country_1",
+      "line1": "line1_1",
+      "line2": "line2_1",
+      "postal_code": "postal_code_1",
+      "state": "state_1"
+     },
+     "account_holder_name": "account_holder_name_1",
+     "account_number": "account_number_1",
+     "account_type": "account_type_1",
+     "bank_address": {
+      "city": "city_1",
+      "country": "country_1",
+      "line1": "line1_1",
+      "line2": "line2_1",
+      "postal_code": "postal_code_1",
+      "state": "state_1"
+     },
+     "bank_name": "bank_name_1",
+     "swift_code": "swift_code_1"
+    },
+    "type": "aba",
+    "zengin": {
+     "account_holder_address": {
+      "city": "city_1",
+      "country": "country_1",
+      "line1": "line1_1",
+      "line2": "line2_1",
+      "postal_code": "postal_code_1",
+      "state": "state_1"
+     },
+     "account_holder_name": "account_holder_name_1",
+     "account_number": "account_number_1",
+     "account_type": "futsu",
+     "bank_address": {
+      "city": "city_1",
+      "country": "country_1",
+      "line1": "line1_1",
+      "line2": "line2_1",
+      "postal_code": "postal_code_1",
+      "state": "state_1"
+     },
+     "bank_code": "bank_code_1",
+     "bank_name": "bank_name_1",
+     "branch_code": "branch_code_1",
+     "branch_name": "branch_name_1"
+    }
+   }
+  ],
+  "type": "eu_bank_transfer"
+ },
+ "currency": "usd",
+ "funding_type": "bank_transfer",
+ "id": "funding_instructions_1",
+ "livemode": true,
+ "object": "funding_instructions"
+}

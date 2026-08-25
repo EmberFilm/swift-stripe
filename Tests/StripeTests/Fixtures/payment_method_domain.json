@@ -1,0 +1,44 @@
+{
+ "amazon_pay": {
+  "status": "active",
+  "status_details": {
+   "error_message": "error_message_1"
+  }
+ },
+ "apple_pay": {
+  "status": "active",
+  "status_details": {
+   "error_message": "error_message_1"
+  }
+ },
+ "created": 1700000000,
+ "domain_name": "domain_name_1",
+ "enabled": true,
+ "google_pay": {
+  "status": "active",
+  "status_details": {
+   "error_message": "error_message_1"
+  }
+ },
+ "id": "payment_method_domain_1",
+ "klarna": {
+  "status": "active",
+  "status_details": {
+   "error_message": "error_message_1"
+  }
+ },
+ "link": {
+  "status": "active",
+  "status_details": {
+   "error_message": "error_message_1"
+  }
+ },
+ "livemode": true,
+ "object": "payment_method_domain",
+ "paypal": {
+  "status": "active",
+  "status_details": {
+   "error_message": "error_message_1"
+  }
+ }
+}

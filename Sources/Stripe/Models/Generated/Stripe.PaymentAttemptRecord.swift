@@ -15,6 +15,8 @@ extension Stripe {
     public struct PaymentAttemptRecord: Codable, Hashable, Sendable, Identifiable {
         public typealias ID = String
         public let id: ID
+        /// String representing the object's type.
+        public let object: String
         public var amount: Amount?
         public var amountAuthorized: AmountAuthorized?
         public var amountCanceled: AmountCanceled?
@@ -36,8 +38,6 @@ extension Stripe {
         public var livemode: Bool?
         /// Set of key-value pairs that you can attach to an object.
         public var metadata: [String: String]?
-        /// String representing the object's type.
-        public var object: String?
         /// Information about the Payment Method debited for this payment.
         public var paymentMethodDetails: PaymentMethodDetails?
         /// ID of the Payment Record this Payment Attempt Record belongs to.
@@ -50,6 +50,7 @@ extension Stripe {
 
         private enum CodingKeys: String, CodingKey {
             case id
+            case object
             case amount
             case amountAuthorized
             case amountCanceled
@@ -64,7 +65,6 @@ extension Stripe {
             case description
             case livemode
             case metadata
-            case object
             case paymentMethodDetails
             case paymentRecord
             case processorDetails
@@ -74,6 +74,7 @@ extension Stripe {
 
         public init(
             id: ID,
+            object: String,
             amount: Amount? = nil,
             amountAuthorized: AmountAuthorized? = nil,
             amountCanceled: AmountCanceled? = nil,
@@ -88,7 +89,6 @@ extension Stripe {
             description: String? = nil,
             livemode: Bool? = nil,
             metadata: [String: String]? = nil,
-            object: String? = nil,
             paymentMethodDetails: PaymentMethodDetails? = nil,
             paymentRecord: String? = nil,
             processorDetails: ProcessorDetails? = nil,
@@ -96,6 +96,7 @@ extension Stripe {
             shippingDetails: ShippingDetails? = nil
         ) {
             self.id = id
+            self.object = object
             self.amount = amount
             self.amountAuthorized = amountAuthorized
             self.amountCanceled = amountCanceled
@@ -110,7 +111,6 @@ extension Stripe {
             self.description = description
             self.livemode = livemode
             self.metadata = metadata
-            self.object = object
             self.paymentMethodDetails = paymentMethodDetails
             self.paymentRecord = paymentRecord
             self.processorDetails = processorDetails
@@ -1400,13 +1400,13 @@ extension Stripe {
 
                     /// The Electronic Commerce Indicator (ECI).
                     public enum ElectronicCommerceIndicator: String, Codable, Hashable, Sendable {
-                        case _01 = "01"
-                        case _02 = "02"
-                        case _03 = "03"
-                        case _04 = "04"
-                        case _05 = "05"
-                        case _06 = "06"
-                        case _07 = "07"
+                        case value01 = "01"
+                        case value02 = "02"
+                        case value03 = "03"
+                        case value04 = "04"
+                        case value05 = "05"
+                        case value06 = "06"
+                        case value07 = "07"
                     }
 
                     /// The exemption requested via 3DS and accepted by the issuer at authentication time.
@@ -1439,9 +1439,9 @@ extension Stripe {
 
                     /// The version of 3D Secure that was used.
                     public enum Version: String, Codable, Hashable, Sendable {
-                        case _102 = "1.0.2"
-                        case _210 = "2.1.0"
-                        case _220 = "2.2.0"
+                        case value1_0_2 = "1.0.2"
+                        case value2_1_0 = "2.1.0"
+                        case value2_2_0 = "2.2.0"
                     }
                 }
 

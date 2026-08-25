@@ -14,6 +14,8 @@ extension Stripe.Connect.Application {
     public struct Fee: Codable, Hashable, Sendable, Identifiable {
         public typealias ID = String
         public let id: ID
+        /// String representing the object's type.
+        public let object: String
         /// ID of the Stripe account this fee was taken from.
         @Expandable<Stripe.Connect.Account, String> public var account: String?
         /// Amount earned, in cents (or local equivalent).
@@ -34,8 +36,6 @@ extension Stripe.Connect.Application {
         public var feeSource: FeeSource?
         /// If the object exists in live mode, the value is `true`.
         public var livemode: Bool?
-        /// String representing the object's type.
-        public var object: String?
         /// ID of the corresponding charge on the platform account, if this fee was the result of a charge using the `destination`…
         @Expandable<Stripe.Charges.Charge, String> public var originatingTransaction: String?
         /// Whether the fee has been fully refunded.
@@ -45,6 +45,7 @@ extension Stripe.Connect.Application {
 
         private enum CodingKeys: String, CodingKey {
             case id
+            case object
             case account
             case amount
             case amountRefunded
@@ -55,7 +56,6 @@ extension Stripe.Connect.Application {
             case currency
             case feeSource
             case livemode
-            case object
             case originatingTransaction
             case refunded
             case refunds
@@ -63,6 +63,7 @@ extension Stripe.Connect.Application {
 
         public init(
             id: ID,
+            object: String,
             account: String? = nil,
             amount: Int? = nil,
             amountRefunded: Int? = nil,
@@ -73,12 +74,12 @@ extension Stripe.Connect.Application {
             currency: Stripe.Currency? = nil,
             feeSource: FeeSource? = nil,
             livemode: Bool? = nil,
-            object: String? = nil,
             originatingTransaction: String? = nil,
             refunded: Bool? = nil,
             refunds: Refunds? = nil
         ) {
             self.id = id
+            self.object = object
             self._account = Expandable(id: account)
             self.amount = amount
             self.amountRefunded = amountRefunded
@@ -89,7 +90,6 @@ extension Stripe.Connect.Application {
             self.currency = currency
             self.feeSource = feeSource
             self.livemode = livemode
-            self.object = object
             self._originatingTransaction = Expandable(id: originatingTransaction)
             self.refunded = refunded
             self.refunds = refunds
@@ -128,31 +128,31 @@ extension Stripe.Connect.Application {
 
         /// A list of refunds that have been applied to the fee.
         public struct Refunds: Codable, Hashable, Sendable {
+            /// String representing the object's type.
+            public let object: String
             /// Details about each object.
             public var data: [Stripe.Connect.Application.Fee.Refund]?
             /// True if this list has another page of items after this one that can be fetched.
             public var hasMore: Bool?
-            /// String representing the object's type.
-            public var object: String?
             /// The URL where this list can be accessed.
             public var url: String?
 
             private enum CodingKeys: String, CodingKey {
+                case object
                 case data
                 case hasMore
-                case object
                 case url
             }
 
             public init(
+                object: String,
                 data: [Stripe.Connect.Application.Fee.Refund]? = nil,
                 hasMore: Bool? = nil,
-                object: String? = nil,
                 url: String? = nil
             ) {
+                self.object = object
                 self.data = data
                 self.hasMore = hasMore
-                self.object = object
                 self.url = url
             }
         }

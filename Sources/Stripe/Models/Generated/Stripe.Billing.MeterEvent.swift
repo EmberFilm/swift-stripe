@@ -13,6 +13,8 @@ import Foundation
 extension Stripe.Billing {
     /// Meter events represent actions that customers take in your system.
     public struct MeterEvent: Codable, Hashable, Sendable {
+        /// String representing the object's type.
+        public let object: String
         /// Time at which the object was created.
         public var created: Date?
         /// The name of the meter event.
@@ -21,37 +23,35 @@ extension Stripe.Billing {
         public var identifier: String?
         /// If the object exists in live mode, the value is `true`.
         public var livemode: Bool?
-        /// String representing the object's type.
-        public var object: String?
         /// The payload of the event.
         public var payload: [String: String]?
         /// The timestamp passed in when creating the event.
         public var timestamp: Date?
 
         private enum CodingKeys: String, CodingKey {
+            case object
             case created
             case eventName
             case identifier
             case livemode
-            case object
             case payload
             case timestamp
         }
 
         public init(
+            object: String,
             created: Date? = nil,
             eventName: String? = nil,
             identifier: String? = nil,
             livemode: Bool? = nil,
-            object: String? = nil,
             payload: [String: String]? = nil,
             timestamp: Date? = nil
         ) {
+            self.object = object
             self.created = created
             self.eventName = eventName
             self.identifier = identifier
             self.livemode = livemode
-            self.object = object
             self.payload = payload
             self.timestamp = timestamp
         }

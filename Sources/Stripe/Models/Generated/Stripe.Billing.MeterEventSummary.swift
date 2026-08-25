@@ -15,6 +15,8 @@ extension Stripe.Billing {
     public struct MeterEventSummary: Codable, Hashable, Sendable, Identifiable {
         public typealias ID = String
         public let id: ID
+        /// String representing the object's type.
+        public let object: String
         /// Aggregated value of all the events within `start_time` (inclusive) and `end_time` (inclusive).
         public var aggregatedValue: Double?
         /// End timestamp for this event summary (exclusive).
@@ -23,36 +25,34 @@ extension Stripe.Billing {
         public var livemode: Bool?
         /// The meter associated with this event summary.
         public var meter: String?
-        /// String representing the object's type.
-        public var object: String?
         /// Start timestamp for this event summary (inclusive).
         public var startTime: Date?
 
         private enum CodingKeys: String, CodingKey {
             case id
+            case object
             case aggregatedValue
             case endTime
             case livemode
             case meter
-            case object
             case startTime
         }
 
         public init(
             id: ID,
+            object: String,
             aggregatedValue: Double? = nil,
             endTime: Date? = nil,
             livemode: Bool? = nil,
             meter: String? = nil,
-            object: String? = nil,
             startTime: Date? = nil
         ) {
             self.id = id
+            self.object = object
             self.aggregatedValue = aggregatedValue
             self.endTime = endTime
             self.livemode = livemode
             self.meter = meter
-            self.object = object
             self.startTime = startTime
         }
     }

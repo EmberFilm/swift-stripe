@@ -15,6 +15,8 @@ extension Stripe.Products {
     public struct Price: Codable, Hashable, Sendable, Identifiable {
         public typealias ID = String
         public let id: ID
+        /// String representing the object's type.
+        public let object: String
         /// Whether the price can be used for new purchases.
         public var active: Bool?
         /// Describes how to compute the price per period.
@@ -35,8 +37,6 @@ extension Stripe.Products {
         public var metadata: [String: String]?
         /// A brief description of the price, hidden from customers.
         public var nickname: String?
-        /// String representing the object's type.
-        public var object: String?
         /// The ID of the product this price is associated with.
         @Expandable<Stripe.Products.Product, String> public var product: String?
         /// The recurring components of a price such as `interval` and `usage_type`.
@@ -58,6 +58,7 @@ extension Stripe.Products {
 
         private enum CodingKeys: String, CodingKey {
             case id
+            case object
             case active
             case billingScheme
             case created
@@ -68,7 +69,6 @@ extension Stripe.Products {
             case lookupKey
             case metadata
             case nickname
-            case object
             case product
             case recurring
             case taxBehavior
@@ -82,6 +82,7 @@ extension Stripe.Products {
 
         public init(
             id: ID,
+            object: String,
             active: Bool? = nil,
             billingScheme: BillingScheme? = nil,
             created: Date? = nil,
@@ -92,7 +93,6 @@ extension Stripe.Products {
             lookupKey: String? = nil,
             metadata: [String: String]? = nil,
             nickname: String? = nil,
-            object: String? = nil,
             product: String? = nil,
             recurring: Recurring? = nil,
             taxBehavior: TaxBehavior? = nil,
@@ -104,6 +104,7 @@ extension Stripe.Products {
             unitAmountDecimal: String? = nil
         ) {
             self.id = id
+            self.object = object
             self.active = active
             self.billingScheme = billingScheme
             self.created = created
@@ -114,7 +115,6 @@ extension Stripe.Products {
             self.lookupKey = lookupKey
             self.metadata = metadata
             self.nickname = nickname
-            self.object = object
             self._product = Expandable(id: product)
             self.recurring = recurring
             self.taxBehavior = taxBehavior

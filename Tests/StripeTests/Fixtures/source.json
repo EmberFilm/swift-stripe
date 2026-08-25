@@ -1,0 +1,302 @@
+{
+ "ach_credit_transfer": {
+  "account_number": "account_number_1",
+  "bank_name": "bank_name_1",
+  "fingerprint": "fingerprint_1",
+  "refund_account_holder_name": "refund_account_holder_name_1",
+  "refund_account_holder_type": "refund_account_holder_type_1",
+  "refund_routing_number": "refund_routing_number_1",
+  "routing_number": "routing_number_1",
+  "swift_code": "swift_code_1"
+ },
+ "ach_debit": {
+  "bank_name": "bank_name_1",
+  "country": "country_1",
+  "fingerprint": "fingerprint_1",
+  "last4": "last4_1",
+  "routing_number": "routing_number_1",
+  "type": "type_1"
+ },
+ "acss_debit": {
+  "bank_address_city": "bank_address_city_1",
+  "bank_address_line_1": "bank_address_line_1_1",
+  "bank_address_line_2": "bank_address_line_2_1",
+  "bank_address_postal_code": "bank_address_postal_code_1",
+  "bank_name": "bank_name_1",
+  "category": "category_1",
+  "country": "country_1",
+  "fingerprint": "fingerprint_1",
+  "last4": "last4_1",
+  "routing_number": "routing_number_1"
+ },
+ "alipay": {
+  "data_string": "data_string_1",
+  "native_url": "native_url_1",
+  "statement_descriptor": "EMBERFILM"
+ },
+ "allow_redisplay": "always",
+ "amount": 1,
+ "au_becs_debit": {
+  "bsb_number": "bsb_number_1",
+  "fingerprint": "fingerprint_1",
+  "last4": "last4_1"
+ },
+ "bancontact": {
+  "bank_code": "bank_code_1",
+  "bank_name": "bank_name_1",
+  "bic": "bic_1",
+  "iban_last4": "iban_last4_1",
+  "preferred_language": "preferred_language_1",
+  "statement_descriptor": "EMBERFILM"
+ },
+ "card": {
+  "address_line1_check": "address_line1_check_1",
+  "address_zip_check": "address_zip_check_1",
+  "brand": "brand_1",
+  "country": "country_1",
+  "cvc_check": "cvc_check_1",
+  "description": "description_1",
+  "dynamic_last4": "dynamic_last4_1",
+  "exp_month": 1,
+  "exp_year": 1,
+  "fingerprint": "fingerprint_1",
+  "funding": "funding_1",
+  "iin": "iin_1",
+  "issuer": "issuer_1",
+  "last4": "last4_1",
+  "name": "name_1",
+  "three_d_secure": "three_d_secure_1",
+  "tokenization_method": "tokenization_method_1"
+ },
+ "card_present": {
+  "application_cryptogram": "application_cryptogram_1",
+  "application_preferred_name": "application_preferred_name_1",
+  "authorization_code": "authorization_code_1",
+  "authorization_response_code": "authorization_response_code_1",
+  "brand": "brand_1",
+  "country": "country_1",
+  "cvm_type": "cvm_type_1",
+  "data_type": "data_type_1",
+  "dedicated_file_name": "dedicated_file_name_1",
+  "description": "description_1",
+  "emv_auth_data": "emv_auth_data_1",
+  "evidence_customer_signature": "evidence_customer_signature_1",
+  "evidence_transaction_certificate": "evidence_transaction_certificate_1",
+  "exp_month": 1,
+  "exp_year": 1,
+  "fingerprint": "fingerprint_1",
+  "funding": "funding_1",
+  "iin": "iin_1",
+  "issuer": "issuer_1",
+  "last4": "last4_1",
+  "pos_device_id": "pos_device_id_1",
+  "pos_entry_mode": "pos_entry_mode_1",
+  "read_method": "read_method_1",
+  "reader": "reader_1",
+  "terminal_verification_results": "terminal_verification_results_1",
+  "transaction_status_information": "transaction_status_information_1"
+ },
+ "client_secret": "client_secret_1",
+ "code_verification": {
+  "attempts_remaining": 1,
+  "status": "pending"
+ },
+ "created": 1700000000,
+ "currency": "usd",
+ "customer": "customer_1",
+ "eps": {
+  "reference": "reference_1",
+  "statement_descriptor": "EMBERFILM"
+ },
+ "flow": "none",
+ "giropay": {
+  "bank_code": "bank_code_1",
+  "bank_name": "bank_name_1",
+  "bic": "bic_1",
+  "statement_descriptor": "EMBERFILM"
+ },
+ "id": "source_1",
+ "ideal": {
+  "bank": "bank_1",
+  "bic": "bic_1",
+  "iban_last4": "iban_last4_1",
+  "statement_descriptor": "EMBERFILM"
+ },
+ "klarna": {
+  "background_image_url": "background_image_url_1",
+  "client_token": "client_token_1",
+  "first_name": "first_name_1",
+  "last_name": "last_name_1",
+  "locale": "locale_1",
+  "logo_url": "logo_url_1",
+  "page_title": "page_title_1",
+  "pay_later_asset_urls_descriptive": "pay_later_asset_urls_descriptive_1",
+  "pay_later_asset_urls_standard": "pay_later_asset_urls_standard_1",
+  "pay_later_name": "pay_later_name_1",
+  "pay_later_redirect_url": "pay_later_redirect_url_1",
+  "pay_now_asset_urls_descriptive": "pay_now_asset_urls_descriptive_1",
+  "pay_now_asset_urls_standard": "pay_now_asset_urls_standard_1",
+  "pay_now_name": "pay_now_name_1",
+  "pay_now_redirect_url": "pay_now_redirect_url_1",
+  "pay_over_time_asset_urls_descriptive": "pay_over_time_asset_urls_descriptive_1",
+  "pay_over_time_asset_urls_standard": "pay_over_time_asset_urls_standard_1",
+  "pay_over_time_name": "pay_over_time_name_1",
+  "pay_over_time_redirect_url": "pay_over_time_redirect_url_1",
+  "payment_method_categories": "payment_method_categories_1",
+  "purchase_country": "purchase_country_1",
+  "purchase_type": "purchase_type_1",
+  "redirect_url": "redirect_url_1",
+  "shipping_delay": 1,
+  "shipping_first_name": "shipping_first_name_1",
+  "shipping_last_name": "shipping_last_name_1"
+ },
+ "livemode": true,
+ "metadata": {
+  "key": "metadata_1"
+ },
+ "multibanco": {
+  "entity": "entity_1",
+  "reference": "reference_1",
+  "refund_account_holder_address_city": "refund_account_holder_address_city_1",
+  "refund_account_holder_address_country": "refund_account_holder_address_country_1",
+  "refund_account_holder_address_line1": "refund_account_holder_address_line1_1",
+  "refund_account_holder_address_line2": "refund_account_holder_address_line2_1",
+  "refund_account_holder_address_postal_code": "refund_account_holder_address_postal_code_1",
+  "refund_account_holder_address_state": "refund_account_holder_address_state_1",
+  "refund_account_holder_name": "refund_account_holder_name_1",
+  "refund_iban": "refund_iban_1"
+ },
+ "object": "source",
+ "owner": {
+  "address": {
+   "city": "city_1",
+   "country": "country_1",
+   "line1": "line1_1",
+   "line2": "line2_1",
+   "postal_code": "postal_code_1",
+   "state": "state_1"
+  },
+  "email": "email_1",
+  "name": "name_1",
+  "phone": "phone_1",
+  "verified_address": {
+   "city": "city_1",
+   "country": "country_1",
+   "line1": "line1_1",
+   "line2": "line2_1",
+   "postal_code": "postal_code_1",
+   "state": "state_1"
+  },
+  "verified_email": "verified_email_1",
+  "verified_name": "verified_name_1",
+  "verified_phone": "verified_phone_1"
+ },
+ "p24": {
+  "reference": "reference_1"
+ },
+ "receiver": {
+  "address": "address_1",
+  "amount_charged": 1,
+  "amount_received": 1,
+  "amount_returned": 1,
+  "refund_attributes_method": "email",
+  "refund_attributes_status": "missing"
+ },
+ "redirect": {
+  "failure_reason": "user_abort",
+  "return_url": "return_url_1",
+  "status": "pending",
+  "url": "url_1"
+ },
+ "sepa_credit_transfer": {
+  "bank_name": "bank_name_1",
+  "bic": "bic_1",
+  "iban": "iban_1",
+  "refund_account_holder_address_city": "refund_account_holder_address_city_1",
+  "refund_account_holder_address_country": "refund_account_holder_address_country_1",
+  "refund_account_holder_address_line1": "refund_account_holder_address_line1_1",
+  "refund_account_holder_address_line2": "refund_account_holder_address_line2_1",
+  "refund_account_holder_address_postal_code": "refund_account_holder_address_postal_code_1",
+  "refund_account_holder_address_state": "refund_account_holder_address_state_1",
+  "refund_account_holder_name": "refund_account_holder_name_1",
+  "refund_iban": "refund_iban_1"
+ },
+ "sepa_debit": {
+  "bank_code": "bank_code_1",
+  "branch_code": "branch_code_1",
+  "country": "country_1",
+  "fingerprint": "fingerprint_1",
+  "last4": "last4_1",
+  "mandate_reference": "mandate_reference_1",
+  "mandate_url": "mandate_url_1"
+ },
+ "sofort": {
+  "bank_code": "bank_code_1",
+  "bank_name": "bank_name_1",
+  "bic": "bic_1",
+  "country": "country_1",
+  "iban_last4": "iban_last4_1",
+  "preferred_language": "preferred_language_1",
+  "statement_descriptor": "EMBERFILM"
+ },
+ "source_order": {
+  "amount": 1,
+  "currency": "usd",
+  "email": "email_1",
+  "items": [
+   {
+    "amount": 1,
+    "currency": "usd",
+    "description": "description_1",
+    "parent": "parent_1",
+    "quantity": 1,
+    "type": "sku"
+   }
+  ],
+  "shipping": {
+   "address": {
+    "city": "city_1",
+    "country": "country_1",
+    "line1": "line1_1",
+    "line2": "line2_1",
+    "postal_code": "postal_code_1",
+    "state": "state_1"
+   },
+   "carrier": "carrier_1",
+   "name": "name_1",
+   "phone": "phone_1",
+   "tracking_number": "tracking_number_1"
+  }
+ },
+ "statement_descriptor": "EMBERFILM",
+ "status": "canceled",
+ "three_d_secure": {
+  "address_line1_check": "address_line1_check_1",
+  "address_zip_check": "address_zip_check_1",
+  "authenticated": true,
+  "brand": "brand_1",
+  "card": "card_1",
+  "country": "country_1",
+  "customer": "customer_1",
+  "cvc_check": "cvc_check_1",
+  "description": "description_1",
+  "dynamic_last4": "dynamic_last4_1",
+  "exp_month": 1,
+  "exp_year": 1,
+  "fingerprint": "fingerprint_1",
+  "funding": "funding_1",
+  "iin": "iin_1",
+  "issuer": "issuer_1",
+  "last4": "last4_1",
+  "name": "name_1",
+  "three_d_secure": "three_d_secure_1",
+  "tokenization_method": "tokenization_method_1"
+ },
+ "type": "ach_credit_transfer",
+ "usage": "reusable",
+ "wechat": {
+  "prepay_id": "prepay_id_1",
+  "qr_code_url": "qr_code_url_1",
+  "statement_descriptor": "EMBERFILM"
+ }
+}

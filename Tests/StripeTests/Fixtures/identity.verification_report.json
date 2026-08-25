@@ -1,0 +1,103 @@
+{
+ "client_reference_id": "client_reference_id_1",
+ "created": 1700000000,
+ "document": {
+  "address": {
+   "city": "city_1",
+   "country": "country_1",
+   "line1": "line1_1",
+   "line2": "line2_1",
+   "postal_code": "postal_code_1",
+   "state": "state_1"
+  },
+  "dob": {
+   "day": 1,
+   "month": 1,
+   "year": 1
+  },
+  "error": {
+   "code": "document_expired",
+   "reason": "reason_1"
+  },
+  "expiration_date": {
+   "day": 1,
+   "month": 1,
+   "year": 1
+  },
+  "files": [
+   "files_1"
+  ],
+  "first_name": "first_name_1",
+  "issued_date": {
+   "day": 1,
+   "month": 1,
+   "year": 1
+  },
+  "issuing_country": "issuing_country_1",
+  "last_name": "last_name_1",
+  "number": "number_1",
+  "sex": "[redacted]",
+  "status": "unverified",
+  "type": "driving_license",
+  "unparsed_place_of_birth": "unparsed_place_of_birth_1",
+  "unparsed_sex": "unparsed_sex_1"
+ },
+ "email": {
+  "email": "email_1",
+  "error": {
+   "code": "email_unverified_other",
+   "reason": "reason_1"
+  },
+  "status": "unverified"
+ },
+ "id": "identity.verification_report_1",
+ "id_number": {
+  "dob": {
+   "day": 1,
+   "month": 1,
+   "year": 1
+  },
+  "error": {
+   "code": "id_number_insufficient_document_data",
+   "reason": "reason_1"
+  },
+  "first_name": "first_name_1",
+  "id_number": "us_ssn",
+  "id_number_type": "br_cpf",
+  "last_name": "last_name_1",
+  "status": "unverified"
+ },
+ "livemode": true,
+ "object": "identity.verification_report",
+ "options": {
+  "document": {
+   "allowed_types": [
+    "driving_license"
+   ],
+   "require_id_number": true,
+   "require_live_capture": true,
+   "require_matching_selfie": true
+  },
+  "id_number": {}
+ },
+ "phone": {
+  "error": {
+   "code": "phone_unverified_other",
+   "reason": "reason_1"
+  },
+  "phone": "phone_1",
+  "status": "unverified"
+ },
+ "selfie": {
+  "document": "document_1",
+  "error": {
+   "code": "selfie_document_missing_photo",
+   "reason": "reason_1"
+  },
+  "selfie": "selfie_1",
+  "status": "unverified"
+ },
+ "type": "document",
+ "verification_flow": "verification_flow_1",
+ "verification_session": "verification_session_1"
+}

@@ -1,0 +1,13 @@
+{
+ "data_available_end": 1700000000,
+ "data_available_start": 1700000000,
+ "default_columns": [
+  "default_columns_1"
+ ],
+ "id": "reporting.report_type_1",
+ "livemode": true,
+ "name": "name_1",
+ "object": "reporting.report_type",
+ "updated": 1700000000,
+ "version": 1
+}

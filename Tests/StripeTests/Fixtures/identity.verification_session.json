@@ -1,0 +1,78 @@
+{
+ "client_reference_id": "client_reference_id_1",
+ "client_secret": "client_secret_1",
+ "created": 1700000000,
+ "id": "identity.verification_session_1",
+ "last_error": {
+  "code": "abandoned",
+  "reason": "reason_1"
+ },
+ "last_verification_report": "identity.verification_report_1",
+ "livemode": true,
+ "metadata": {
+  "key": "metadata_1"
+ },
+ "object": "identity.verification_session",
+ "options": {
+  "document": {
+   "allowed_types": [
+    "driving_license"
+   ],
+   "require_id_number": true,
+   "require_live_capture": true,
+   "require_matching_selfie": true
+  },
+  "email": {
+   "require_verification": true
+  },
+  "id_number": {},
+  "matching": {
+   "dob": "none",
+   "name": "none"
+  },
+  "phone": {
+   "require_verification": true
+  }
+ },
+ "provided_details": {
+  "email": "email_1",
+  "phone": "phone_1"
+ },
+ "redaction": {
+  "status": "processing"
+ },
+ "related_customer": "related_customer_1",
+ "related_customer_account": "related_customer_account_1",
+ "related_person": {
+  "account": "account_1",
+  "person": "person_1"
+ },
+ "status": "canceled",
+ "type": "document",
+ "url": "url_1",
+ "verification_flow": "verification_flow_1",
+ "verified_outputs": {
+  "address": {
+   "city": "city_1",
+   "country": "country_1",
+   "line1": "line1_1",
+   "line2": "line2_1",
+   "postal_code": "postal_code_1",
+   "state": "state_1"
+  },
+  "dob": {
+   "day": 1,
+   "month": 1,
+   "year": 1
+  },
+  "email": "email_1",
+  "first_name": "first_name_1",
+  "id_number": "id_number_1",
+  "id_number_type": "br_cpf",
+  "last_name": "last_name_1",
+  "phone": "phone_1",
+  "sex": "[redacted]",
+  "unparsed_place_of_birth": "unparsed_place_of_birth_1",
+  "unparsed_sex": "unparsed_sex_1"
+ }
+}

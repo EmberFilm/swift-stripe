@@ -1,0 +1,42 @@
+{
+ "account": "account_1",
+ "address_city": "address_city_1",
+ "address_country": "address_country_1",
+ "address_line1": "address_line1_1",
+ "address_line1_check": "pass",
+ "address_line2": "address_line2_1",
+ "address_state": "address_state_1",
+ "address_zip": "address_zip_1",
+ "address_zip_check": "pass",
+ "allow_redisplay": "always",
+ "available_payout_methods": [
+  "instant"
+ ],
+ "brand": "brand_1",
+ "country": "country_1",
+ "currency": "usd",
+ "customer": "customer_1",
+ "cvc_check": "pass",
+ "default_for_currency": true,
+ "description": "description_1",
+ "dynamic_last4": "dynamic_last4_1",
+ "exp_month": 1,
+ "exp_year": 1,
+ "fingerprint": "fingerprint_1",
+ "funding": "credit",
+ "id": "card_1",
+ "iin": "iin_1",
+ "issuer": "issuer_1",
+ "last4": "last4_1",
+ "metadata": {
+  "key": "metadata_1"
+ },
+ "name": "name_1",
+ "networks": {
+  "preferred": "cartes_bancaires"
+ },
+ "object": "card",
+ "regulated_status": "regulated",
+ "status": "new",
+ "tokenization_method": "android_pay"
+}

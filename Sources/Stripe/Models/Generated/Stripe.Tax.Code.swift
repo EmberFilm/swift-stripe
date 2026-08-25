@@ -15,30 +15,30 @@ extension Stripe.Tax {
     public struct Code: Codable, Hashable, Sendable, Identifiable {
         public typealias ID = String
         public let id: ID
+        /// String representing the object's type.
+        public let object: String
         /// A detailed description of which types of products the tax code represents.
         public var description: String?
         /// A short name for the tax code.
         public var name: String?
-        /// String representing the object's type.
-        public var object: String?
 
         private enum CodingKeys: String, CodingKey {
             case id
+            case object
             case description
             case name
-            case object
         }
 
         public init(
             id: ID,
+            object: String,
             description: String? = nil,
-            name: String? = nil,
-            object: String? = nil
+            name: String? = nil
         ) {
             self.id = id
+            self.object = object
             self.description = description
             self.name = name
-            self.object = object
         }
     }
 }

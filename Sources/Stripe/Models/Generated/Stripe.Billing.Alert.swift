@@ -15,12 +15,12 @@ extension Stripe.Billing {
     public struct Alert: Codable, Hashable, Sendable, Identifiable {
         public typealias ID = String
         public let id: ID
+        /// String representing the object's type.
+        public let object: String
         /// Defines the type of the alert.
         public var alertType: String?
         /// If the object exists in live mode, the value is `true`.
         public var livemode: Bool?
-        /// String representing the object's type.
-        public var object: String?
         /// Status of the alert.
         public var status: Status?
         /// Title of the alert.
@@ -30,9 +30,9 @@ extension Stripe.Billing {
 
         private enum CodingKeys: String, CodingKey {
             case id
+            case object
             case alertType
             case livemode
-            case object
             case status
             case title
             case usageThreshold
@@ -40,17 +40,17 @@ extension Stripe.Billing {
 
         public init(
             id: ID,
+            object: String,
             alertType: String? = nil,
             livemode: Bool? = nil,
-            object: String? = nil,
             status: Status? = nil,
             title: String? = nil,
             usageThreshold: UsageThreshold? = nil
         ) {
             self.id = id
+            self.object = object
             self.alertType = alertType
             self.livemode = livemode
-            self.object = object
             self.status = status
             self.title = title
             self.usageThreshold = usageThreshold

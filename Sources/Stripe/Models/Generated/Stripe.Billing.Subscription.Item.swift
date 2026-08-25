@@ -15,6 +15,8 @@ extension Stripe.Billing.Subscription {
     public struct Item: Codable, Hashable, Sendable, Identifiable {
         public typealias ID = String
         public let id: ID
+        /// String representing the object's type.
+        public let object: String
         /// The time period the subscription item has been billed for.
         public var billedUntil: Date?
         /// Define thresholds at which an invoice will be sent, and the related subscription advanced to a new billing period
@@ -29,8 +31,6 @@ extension Stripe.Billing.Subscription {
         @ExpandableCollection<Stripe.Shared.Discount> public var discounts: [String]?
         /// Set of key-value pairs that you can attach to an object.
         public var metadata: [String: String]?
-        /// String representing the object's type.
-        public var object: String?
         public var plan: Stripe.Billing.Plan?
         @Boxed public var price: Stripe.Products.Price?
         /// The quantity of the plan to which the customer should be subscribed.
@@ -42,6 +42,7 @@ extension Stripe.Billing.Subscription {
 
         private enum CodingKeys: String, CodingKey {
             case id
+            case object
             case billedUntil
             case billingThresholds
             case created
@@ -49,7 +50,6 @@ extension Stripe.Billing.Subscription {
             case currentPeriodStart
             case discounts
             case metadata
-            case object
             case plan
             case price
             case quantity
@@ -59,6 +59,7 @@ extension Stripe.Billing.Subscription {
 
         public init(
             id: ID,
+            object: String,
             billedUntil: Date? = nil,
             billingThresholds: BillingThresholds? = nil,
             created: Int? = nil,
@@ -66,7 +67,6 @@ extension Stripe.Billing.Subscription {
             currentPeriodStart: Date? = nil,
             discounts: [String]? = nil,
             metadata: [String: String]? = nil,
-            object: String? = nil,
             plan: Stripe.Billing.Plan? = nil,
             price: Stripe.Products.Price? = nil,
             quantity: Int? = nil,
@@ -74,6 +74,7 @@ extension Stripe.Billing.Subscription {
             taxRates: [Stripe.Tax.Rate]? = nil
         ) {
             self.id = id
+            self.object = object
             self.billedUntil = billedUntil
             self.billingThresholds = billingThresholds
             self.created = created
@@ -81,7 +82,6 @@ extension Stripe.Billing.Subscription {
             self.currentPeriodStart = currentPeriodStart
             self._discounts = ExpandableCollection(ids: discounts)
             self.metadata = metadata
-            self.object = object
             self.plan = plan
             self._price = Boxed(wrappedValue: price)
             self.quantity = quantity

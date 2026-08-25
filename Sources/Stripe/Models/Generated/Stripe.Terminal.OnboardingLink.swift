@@ -13,33 +13,34 @@ import Foundation
 extension Stripe.Terminal {
     /// Returns redirect links used for onboarding onto Tap to Pay on iPhone.
     public struct OnboardingLink: Codable, Hashable, Sendable {
+        /// String representing the object's type.
+        public let object: String
         public var linkOptions: LinkOptions?
         /// The type of link being generated.
         public var linkType: String?
-        public var object: String?
         /// Stripe account ID to generate the link for.
         public var onBehalfOf: String?
         /// The link passed back to the user for their onboarding.
         public var redirectUrl: String?
 
         private enum CodingKeys: String, CodingKey {
+            case object
             case linkOptions
             case linkType
-            case object
             case onBehalfOf
             case redirectUrl
         }
 
         public init(
+            object: String,
             linkOptions: LinkOptions? = nil,
             linkType: String? = nil,
-            object: String? = nil,
             onBehalfOf: String? = nil,
             redirectUrl: String? = nil
         ) {
+            self.object = object
             self.linkOptions = linkOptions
             self.linkType = linkType
-            self.object = object
             self.onBehalfOf = onBehalfOf
             self.redirectUrl = redirectUrl
         }

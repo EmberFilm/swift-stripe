@@ -15,6 +15,8 @@ extension Stripe.Billing {
     public struct Invoice: Codable, Hashable, Sendable {
         public typealias ID = String
         public var id: ID?
+        /// String representing the object's type.
+        public let object: String
         /// The country of the business associated with this invoice, most often the business creating the invoice.
         public var accountCountry: String?
         /// The public name of the business associated with this invoice, most often the business creating the invoice.
@@ -113,8 +115,6 @@ extension Stripe.Billing {
         public var nextPaymentAttempt: Date?
         /// A unique, identifying string that appears on emails sent to the customer for this invoice.
         public var number: String?
-        /// String representing the object's type.
-        public var object: String?
         /// The account (if any) for which the funds of the invoice payment are intended.
         @Expandable<Stripe.Connect.Account, String> public var onBehalfOf: String?
         /// The parent that generated this invoice
@@ -168,6 +168,7 @@ extension Stripe.Billing {
 
         private enum CodingKeys: String, CodingKey {
             case id
+            case object
             case accountCountry
             case accountName
             case accountTaxIds
@@ -218,7 +219,6 @@ extension Stripe.Billing {
             case metadata
             case nextPaymentAttempt
             case number
-            case object
             case onBehalfOf
             case parent
             case paymentSettings
@@ -250,6 +250,7 @@ extension Stripe.Billing {
 
         public init(
             id: ID? = nil,
+            object: String,
             accountCountry: String? = nil,
             accountName: String? = nil,
             accountTaxIds: [String]? = nil,
@@ -300,7 +301,6 @@ extension Stripe.Billing {
             metadata: [String: String]? = nil,
             nextPaymentAttempt: Date? = nil,
             number: String? = nil,
-            object: String? = nil,
             onBehalfOf: String? = nil,
             parent: Parent? = nil,
             paymentSettings: PaymentSettings? = nil,
@@ -330,6 +330,7 @@ extension Stripe.Billing {
             webhooksDeliveredAt: Date? = nil
         ) {
             self.id = id
+            self.object = object
             self.accountCountry = accountCountry
             self.accountName = accountName
             self._accountTaxIds = ExpandableCollection(ids: accountTaxIds)
@@ -380,7 +381,6 @@ extension Stripe.Billing {
             self.metadata = metadata
             self.nextPaymentAttempt = nextPaymentAttempt
             self.number = number
-            self.object = object
             self._onBehalfOf = Expandable(id: onBehalfOf)
             self.parent = parent
             self.paymentSettings = paymentSettings
@@ -677,31 +677,31 @@ extension Stripe.Billing {
 
         /// The individual line items that make up the invoice.
         public struct Lines: Codable, Hashable, Sendable {
+            /// String representing the object's type.
+            public let object: String
             /// Details about each object.
             public var data: [Stripe.Billing.Invoice.LineItem]?
             /// True if this list has another page of items after this one that can be fetched.
             public var hasMore: Bool?
-            /// String representing the object's type.
-            public var object: String?
             /// The URL where this list can be accessed.
             public var url: String?
 
             private enum CodingKeys: String, CodingKey {
+                case object
                 case data
                 case hasMore
-                case object
                 case url
             }
 
             public init(
+                object: String,
                 data: [Stripe.Billing.Invoice.LineItem]? = nil,
                 hasMore: Bool? = nil,
-                object: String? = nil,
                 url: String? = nil
             ) {
+                self.object = object
                 self.data = data
                 self.hasMore = hasMore
-                self.object = object
                 self.url = url
             }
         }
@@ -982,31 +982,31 @@ extension Stripe.Billing {
 
         /// Payments for this invoice.
         public struct Payments: Codable, Hashable, Sendable {
+            /// String representing the object's type.
+            public let object: String
             /// Details about each object.
             public var data: [Stripe.Billing.Invoice.Payment]?
             /// True if this list has another page of items after this one that can be fetched.
             public var hasMore: Bool?
-            /// String representing the object's type.
-            public var object: String?
             /// The URL where this list can be accessed.
             public var url: String?
 
             private enum CodingKeys: String, CodingKey {
+                case object
                 case data
                 case hasMore
-                case object
                 case url
             }
 
             public init(
+                object: String,
                 data: [Stripe.Billing.Invoice.Payment]? = nil,
                 hasMore: Bool? = nil,
-                object: String? = nil,
                 url: String? = nil
             ) {
+                self.object = object
                 self.data = data
                 self.hasMore = hasMore
-                self.object = object
                 self.url = url
             }
         }

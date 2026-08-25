@@ -15,6 +15,8 @@ extension Stripe.Tax {
     public struct Registration: Codable, Hashable, Sendable, Identifiable {
         public typealias ID = String
         public let id: ID
+        /// String representing the object's type.
+        public let object: String
         /// Time at which the registration becomes active.
         public var activeFrom: Date?
         /// Two-letter country code (ISO 3166-1 alpha-2).
@@ -26,42 +28,40 @@ extension Stripe.Tax {
         public var expiresAt: Date?
         /// If the object exists in live mode, the value is `true`.
         public var livemode: Bool?
-        /// String representing the object's type.
-        public var object: String?
         /// The status of the registration.
         public var status: Status?
 
         private enum CodingKeys: String, CodingKey {
             case id
+            case object
             case activeFrom
             case country
             case countryOptions
             case created
             case expiresAt
             case livemode
-            case object
             case status
         }
 
         public init(
             id: ID,
+            object: String,
             activeFrom: Date? = nil,
             country: String? = nil,
             countryOptions: CountryOptions? = nil,
             created: Date? = nil,
             expiresAt: Date? = nil,
             livemode: Bool? = nil,
-            object: String? = nil,
             status: Status? = nil
         ) {
             self.id = id
+            self.object = object
             self.activeFrom = activeFrom
             self.country = country
             self.countryOptions = countryOptions
             self.created = created
             self.expiresAt = expiresAt
             self.livemode = livemode
-            self.object = object
             self.status = status
         }
 

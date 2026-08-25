@@ -1,0 +1,9 @@
+{
+ "created": 1700000000,
+ "created_by": "created_by_1",
+ "id": "radar.value_list_item_1",
+ "livemode": true,
+ "object": "radar.value_list_item",
+ "value": "value_1",
+ "value_list": "value_list_1"
+}

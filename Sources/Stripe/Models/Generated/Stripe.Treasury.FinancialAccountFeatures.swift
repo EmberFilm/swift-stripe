@@ -13,43 +13,43 @@ import Foundation
 extension Stripe.Treasury {
     /// Encodes whether a FinancialAccount has access to a particular Feature, with a `status` enum and associated `status_det…
     public struct FinancialAccountFeatures: Codable, Hashable, Sendable {
+        /// String representing the object's type.
+        public let object: String
         public var cardIssuing: CardIssuing?
         public var depositInsurance: DepositInsurance?
         public var financialAddresses: FinancialAddresses?
         public var inboundTransfers: InboundTransfers?
         public var intraStripeFlows: IntraStripeFlows?
-        /// String representing the object's type.
-        public var object: String?
         public var outboundPayments: OutboundPayments?
         public var outboundTransfers: OutboundTransfers?
 
         private enum CodingKeys: String, CodingKey {
+            case object
             case cardIssuing
             case depositInsurance
             case financialAddresses
             case inboundTransfers
             case intraStripeFlows
-            case object
             case outboundPayments
             case outboundTransfers
         }
 
         public init(
+            object: String,
             cardIssuing: CardIssuing? = nil,
             depositInsurance: DepositInsurance? = nil,
             financialAddresses: FinancialAddresses? = nil,
             inboundTransfers: InboundTransfers? = nil,
             intraStripeFlows: IntraStripeFlows? = nil,
-            object: String? = nil,
             outboundPayments: OutboundPayments? = nil,
             outboundTransfers: OutboundTransfers? = nil
         ) {
+            self.object = object
             self.cardIssuing = cardIssuing
             self.depositInsurance = depositInsurance
             self.financialAddresses = financialAddresses
             self.inboundTransfers = inboundTransfers
             self.intraStripeFlows = intraStripeFlows
-            self.object = object
             self.outboundPayments = outboundPayments
             self.outboundTransfers = outboundTransfers
         }

@@ -15,6 +15,8 @@ extension Stripe.Connect {
     public struct TopUp: Codable, Hashable, Sendable, Identifiable {
         public typealias ID = String
         public let id: ID
+        /// String representing the object's type.
+        public let object: String
         /// Amount transferred.
         public var amount: Int?
         /// ID of the balance transaction that describes the impact of this top-up on your account balance.
@@ -37,14 +39,12 @@ extension Stripe.Connect {
         public var livemode: Bool?
         /// Set of key-value pairs that you can attach to an object.
         public var metadata: [String: String]?
-        /// String representing the object's type.
-        public var object: String?
         /// The ID of a PaymentMethod representing the payment method used for the top-up.
         @Expandable<Stripe.PaymentMethods.PaymentMethod, String> public var paymentMethod: String?
         /// Payment-method-specific configuration for this top-up.
         public var paymentMethodOptions: PaymentMethodOptions?
         /// The source field is deprecated.
-        public var source: StripePaymentSource?
+        public var source: Source?
         /// Extra information about a top-up.
         public var statementDescriptor: String?
         /// The status of the top-up is either `canceled`, `failed`, `pending`, `reversed`, or `succeeded`.
@@ -54,6 +54,7 @@ extension Stripe.Connect {
 
         private enum CodingKeys: String, CodingKey {
             case id
+            case object
             case amount
             case balanceTransaction
             case created
@@ -65,7 +66,6 @@ extension Stripe.Connect {
             case initiatedBy
             case livemode
             case metadata
-            case object
             case paymentMethod
             case paymentMethodOptions
             case source
@@ -76,6 +76,7 @@ extension Stripe.Connect {
 
         public init(
             id: ID,
+            object: String,
             amount: Int? = nil,
             balanceTransaction: String? = nil,
             created: Date? = nil,
@@ -87,15 +88,15 @@ extension Stripe.Connect {
             initiatedBy: InitiatedBy? = nil,
             livemode: Bool? = nil,
             metadata: [String: String]? = nil,
-            object: String? = nil,
             paymentMethod: String? = nil,
             paymentMethodOptions: PaymentMethodOptions? = nil,
-            source: StripePaymentSource? = nil,
+            source: Source? = nil,
             statementDescriptor: String? = nil,
             status: Status? = nil,
             transferGroup: String? = nil
         ) {
             self.id = id
+            self.object = object
             self.amount = amount
             self._balanceTransaction = Expandable(id: balanceTransaction)
             self.created = created
@@ -107,7 +108,6 @@ extension Stripe.Connect {
             self.initiatedBy = initiatedBy
             self.livemode = livemode
             self.metadata = metadata
-            self.object = object
             self._paymentMethod = Expandable(id: paymentMethod)
             self.paymentMethodOptions = paymentMethodOptions
             self.source = source

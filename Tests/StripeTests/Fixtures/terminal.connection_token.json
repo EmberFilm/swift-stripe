@@ -1,0 +1,6 @@
+{
+ "id": "terminal.connection_token_1",
+ "location": "location_1",
+ "object": "terminal.connection_token",
+ "secret": "secret_1"
+}

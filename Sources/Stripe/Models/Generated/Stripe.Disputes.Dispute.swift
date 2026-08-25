@@ -15,6 +15,8 @@ extension Stripe.Disputes {
     public struct Dispute: Codable, Hashable, Sendable, Identifiable {
         public typealias ID = String
         public let id: ID
+        /// String representing the object's type.
+        public let object: String
         /// Disputed amount.
         public var amount: Int?
         /// List of zero, one, or two balance transactions that show funds withdrawn and reinstated to your Stripe account as a re…
@@ -37,8 +39,6 @@ extension Stripe.Disputes {
         public var metadata: [String: String]?
         /// Network-dependent reason code for the dispute.
         public var networkReasonCode: String?
-        /// String representing the object's type.
-        public var object: String?
         /// ID of the PaymentIntent that's disputed.
         @Expandable<Stripe.PaymentIntents.PaymentIntent, String> public var paymentIntent: String?
         public var paymentMethodDetails: PaymentMethodDetails?
@@ -49,6 +49,7 @@ extension Stripe.Disputes {
 
         private enum CodingKeys: String, CodingKey {
             case id
+            case object
             case amount
             case balanceTransactions
             case charge
@@ -61,7 +62,6 @@ extension Stripe.Disputes {
             case livemode
             case metadata
             case networkReasonCode
-            case object
             case paymentIntent
             case paymentMethodDetails
             case reason
@@ -70,6 +70,7 @@ extension Stripe.Disputes {
 
         public init(
             id: ID,
+            object: String,
             amount: Int? = nil,
             balanceTransactions: [Stripe.Balance.Transaction]? = nil,
             charge: String? = nil,
@@ -82,13 +83,13 @@ extension Stripe.Disputes {
             livemode: Bool? = nil,
             metadata: [String: String]? = nil,
             networkReasonCode: String? = nil,
-            object: String? = nil,
             paymentIntent: String? = nil,
             paymentMethodDetails: PaymentMethodDetails? = nil,
             reason: String? = nil,
             status: Status? = nil
         ) {
             self.id = id
+            self.object = object
             self.amount = amount
             self.balanceTransactions = balanceTransactions
             self._charge = Expandable(id: charge)
@@ -101,7 +102,6 @@ extension Stripe.Disputes {
             self.livemode = livemode
             self.metadata = metadata
             self.networkReasonCode = networkReasonCode
-            self.object = object
             self._paymentIntent = Expandable(id: paymentIntent)
             self.paymentMethodDetails = paymentMethodDetails
             self.reason = reason

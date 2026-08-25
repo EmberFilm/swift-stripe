@@ -1,0 +1,8 @@
+{
+ "created": 1700000000,
+ "expires": 1700000000,
+ "id": "ephemeral_key_1",
+ "livemode": true,
+ "object": "ephemeral_key",
+ "secret": "secret_1"
+}

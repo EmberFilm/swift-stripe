@@ -1,0 +1,74 @@
+{
+ "account": "account_1",
+ "future_requirements": {
+  "alternatives": [
+   {
+    "alternative_fields_due": [
+     "alternative_fields_due_1"
+    ],
+    "original_fields_due": [
+     "original_fields_due_1"
+    ]
+   }
+  ],
+  "current_deadline": 1700000000,
+  "currently_due": [
+   "currently_due_1"
+  ],
+  "disabled_reason": "other",
+  "errors": [
+   {
+    "code": "external_request",
+    "reason": "reason_1",
+    "requirement": "requirement_1"
+   }
+  ],
+  "eventually_due": [
+   "eventually_due_1"
+  ],
+  "past_due": [
+   "past_due_1"
+  ],
+  "pending_verification": [
+   "pending_verification_1"
+  ]
+ },
+ "id": "capability_1",
+ "object": "capability",
+ "requested": true,
+ "requested_at": 1700000000,
+ "requirements": {
+  "alternatives": [
+   {
+    "alternative_fields_due": [
+     "alternative_fields_due_1"
+    ],
+    "original_fields_due": [
+     "original_fields_due_1"
+    ]
+   }
+  ],
+  "current_deadline": 1700000000,
+  "currently_due": [
+   "currently_due_1"
+  ],
+  "disabled_reason": "other",
+  "errors": [
+   {
+    "code": "external_request",
+    "reason": "reason_1",
+    "requirement": "requirement_1"
+   }
+  ],
+  "eventually_due": [
+   "eventually_due_1"
+  ],
+  "past_due": [
+   "past_due_1"
+  ],
+  "pending_verification": [
+   "pending_verification_1"
+  ]
+ },
+ "status": "active"
+}

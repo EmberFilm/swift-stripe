@@ -1,0 +1,12 @@
+{
+ "amount": 1,
+ "balance_transaction": "balance_transaction_1",
+ "created": 1700000000,
+ "currency": "usd",
+ "fee": "application_fee_1",
+ "id": "fee_refund_1",
+ "metadata": {
+  "key": "metadata_1"
+ },
+ "object": "fee_refund"
+}

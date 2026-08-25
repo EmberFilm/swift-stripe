@@ -13,6 +13,8 @@ import Foundation
 extension Stripe.Customers {
     /// A customer's `Cash balance` represents real funds.
     public struct CustomerCashBalance: Codable, Hashable, Sendable {
+        /// String representing the object's type.
+        public let object: String
         /// A hash of all cash balances available to this customer.
         public var available: [String: Int]?
         /// The ID of the customer whose cash balance this object represents.
@@ -21,32 +23,30 @@ extension Stripe.Customers {
         public var customerAccount: String?
         /// If the object exists in live mode, the value is `true`.
         public var livemode: Bool?
-        /// String representing the object's type.
-        public var object: String?
         public var settings: Settings?
 
         private enum CodingKeys: String, CodingKey {
+            case object
             case available
             case customer
             case customerAccount
             case livemode
-            case object
             case settings
         }
 
         public init(
+            object: String,
             available: [String: Int]? = nil,
             customer: String? = nil,
             customerAccount: String? = nil,
             livemode: Bool? = nil,
-            object: String? = nil,
             settings: Settings? = nil
         ) {
+            self.object = object
             self.available = available
             self.customer = customer
             self.customerAccount = customerAccount
             self.livemode = livemode
-            self.object = object
             self.settings = settings
         }
 

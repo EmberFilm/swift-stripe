@@ -1,0 +1,13 @@
+{
+ "created": 1700000000,
+ "expired": true,
+ "expires_at": 1700000000,
+ "file": "file_1",
+ "id": "file_link_1",
+ "livemode": true,
+ "metadata": {
+  "key": "metadata_1"
+ },
+ "object": "file_link",
+ "url": "url_1"
+}

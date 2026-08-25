@@ -15,6 +15,8 @@ extension Stripe.Entitlements {
     public struct Feature: Codable, Hashable, Sendable, Identifiable {
         public typealias ID = String
         public let id: ID
+        /// String representing the object's type.
+        public let object: String
         /// Inactive features cannot be attached to new products and will not be returned from the features list endpoint.
         public var active: Bool?
         /// If the object exists in live mode, the value is `true`.
@@ -25,35 +27,33 @@ extension Stripe.Entitlements {
         public var metadata: [String: String]?
         /// The feature's name, for your own purpose, not meant to be displayable to the customer.
         public var name: String?
-        /// String representing the object's type.
-        public var object: String?
 
         private enum CodingKeys: String, CodingKey {
             case id
+            case object
             case active
             case livemode
             case lookupKey
             case metadata
             case name
-            case object
         }
 
         public init(
             id: ID,
+            object: String,
             active: Bool? = nil,
             livemode: Bool? = nil,
             lookupKey: String? = nil,
             metadata: [String: String]? = nil,
-            name: String? = nil,
-            object: String? = nil
+            name: String? = nil
         ) {
             self.id = id
+            self.object = object
             self.active = active
             self.livemode = livemode
             self.lookupKey = lookupKey
             self.metadata = metadata
             self.name = name
-            self.object = object
         }
     }
 }

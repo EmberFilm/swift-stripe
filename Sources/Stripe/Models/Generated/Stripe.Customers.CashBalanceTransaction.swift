@@ -15,6 +15,8 @@ extension Stripe.Customers {
     public struct CashBalanceTransaction: Codable, Hashable, Sendable, Identifiable {
         public typealias ID = String
         public let id: ID
+        /// String representing the object's type.
+        public let object: String
         public var adjustedForOverdraft: AdjustedForOverdraft?
         public var appliedToPayment: AppliedToPayment?
         /// Time at which the object was created.
@@ -32,8 +34,6 @@ extension Stripe.Customers {
         public var livemode: Bool?
         /// The amount by which the cash balance changed, represented in the smallest currency unit.
         public var netAmount: Int?
-        /// String representing the object's type.
-        public var object: String?
         public var refundedFromPayment: RefundedFromPayment?
         public var transferredToBalance: TransferredToBalance?
         /// The type of the cash balance transaction.
@@ -42,6 +42,7 @@ extension Stripe.Customers {
 
         private enum CodingKeys: String, CodingKey {
             case id
+            case object
             case adjustedForOverdraft
             case appliedToPayment
             case created
@@ -52,7 +53,6 @@ extension Stripe.Customers {
             case funded
             case livemode
             case netAmount
-            case object
             case refundedFromPayment
             case transferredToBalance
             case `type`
@@ -61,6 +61,7 @@ extension Stripe.Customers {
 
         public init(
             id: ID,
+            object: String,
             adjustedForOverdraft: AdjustedForOverdraft? = nil,
             appliedToPayment: AppliedToPayment? = nil,
             created: Date? = nil,
@@ -71,13 +72,13 @@ extension Stripe.Customers {
             funded: Funded? = nil,
             livemode: Bool? = nil,
             netAmount: Int? = nil,
-            object: String? = nil,
             refundedFromPayment: RefundedFromPayment? = nil,
             transferredToBalance: TransferredToBalance? = nil,
             `type`: Type? = nil,
             unappliedFromPayment: UnappliedFromPayment? = nil
         ) {
             self.id = id
+            self.object = object
             self.adjustedForOverdraft = adjustedForOverdraft
             self.appliedToPayment = appliedToPayment
             self.created = created
@@ -88,7 +89,6 @@ extension Stripe.Customers {
             self.funded = funded
             self.livemode = livemode
             self.netAmount = netAmount
-            self.object = object
             self.refundedFromPayment = refundedFromPayment
             self.transferredToBalance = transferredToBalance
             self.`type` = `type`

@@ -15,35 +15,35 @@ extension Stripe.Entitlements {
     public struct ActiveEntitlement: Codable, Hashable, Sendable, Identifiable {
         public typealias ID = String
         public let id: ID
+        /// String representing the object's type.
+        public let object: String
         /// The Feature that the customer is entitled to.
         @Expandable<Stripe.Entitlements.Feature, String> public var feature: String?
         /// If the object exists in live mode, the value is `true`.
         public var livemode: Bool?
         /// A unique key you provide as your own system identifier.
         public var lookupKey: String?
-        /// String representing the object's type.
-        public var object: String?
 
         private enum CodingKeys: String, CodingKey {
             case id
+            case object
             case feature
             case livemode
             case lookupKey
-            case object
         }
 
         public init(
             id: ID,
+            object: String,
             feature: String? = nil,
             livemode: Bool? = nil,
-            lookupKey: String? = nil,
-            object: String? = nil
+            lookupKey: String? = nil
         ) {
             self.id = id
+            self.object = object
             self._feature = Expandable(id: feature)
             self.livemode = livemode
             self.lookupKey = lookupKey
-            self.object = object
         }
     }
 }

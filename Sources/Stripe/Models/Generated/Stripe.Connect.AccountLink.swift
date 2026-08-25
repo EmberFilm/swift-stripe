@@ -13,31 +13,31 @@ import Foundation
 extension Stripe.Connect {
     /// Account Links are the means by which a Connect platform grants a connected account permission to access Stripe-hosted …
     public struct AccountLink: Codable, Hashable, Sendable {
+        /// String representing the object's type.
+        public let object: String
         /// Time at which the object was created.
         public var created: Date?
         /// The timestamp at which this account link will expire.
         public var expiresAt: Date?
-        /// String representing the object's type.
-        public var object: String?
         /// The URL for the account link.
         public var url: String?
 
         private enum CodingKeys: String, CodingKey {
+            case object
             case created
             case expiresAt
-            case object
             case url
         }
 
         public init(
+            object: String,
             created: Date? = nil,
             expiresAt: Date? = nil,
-            object: String? = nil,
             url: String? = nil
         ) {
+            self.object = object
             self.created = created
             self.expiresAt = expiresAt
-            self.object = object
             self.url = url
         }
     }

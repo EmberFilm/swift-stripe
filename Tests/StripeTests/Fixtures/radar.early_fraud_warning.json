@@ -1,0 +1,10 @@
+{
+ "actionable": true,
+ "charge": "charge_1",
+ "created": 1700000000,
+ "fraud_type": "card_never_received",
+ "id": "radar.early_fraud_warning_1",
+ "livemode": true,
+ "object": "radar.early_fraud_warning",
+ "payment_intent": "payment_intent_1"
+}

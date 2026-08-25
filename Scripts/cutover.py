@@ -56,8 +56,12 @@ hand, struct_name, namespace, generated = sys.argv[1:5]
 hand_p, gen_p = pathlib.Path(hand), pathlib.Path(generated)
 s = hand_p.read_text()
 
-# names the generated struct declares directly inside itself (8-space indent)
-gen_names = set(re.findall(r"^        public (?:struct|enum|typealias) `?(\w+)`?", gen_p.read_text(), re.M))
+# names the generated struct declares directly inside itself: 8-space indent under an
+# extension, 4-space for a module-level struct
+gen_src = gen_p.read_text()
+top_level = "." not in namespace
+gen_names = set(re.findall(r"^    public (?:struct|enum|typealias) `?(\w+)`?" if top_level
+                           else r"^        public (?:struct|enum|typealias) `?(\w+)`?", gen_src, re.M))
 
 def split_members(body: str):
     """Top-level members of an extension body, each with leading comments/attributes attached."""
@@ -76,6 +80,19 @@ def split_members(body: str):
 blocks = re.split(r"(?m)^(?=extension |// MARK|// extension|//extension)", s)
 head, body = blocks[0], blocks[1:]
 kept, dropped = [], []
+if top_level:
+    # the struct itself sits at file scope: cut its brace-matched block out of the head
+    m = re.search(rf"^(?:///[^\n]*\n)*public struct {struct_name}\b[^{{]*\{{", head, re.M)
+    assert m, f"top-level struct {struct_name} not found"
+    i, depth = head.index("{", m.start()), 0
+    while True:
+        if head[i] == "{": depth += 1
+        elif head[i] == "}":
+            depth -= 1
+            if depth == 0: break
+        i += 1
+    head = head[:m.start()] + head[i + 1:].lstrip("\n")
+    dropped.append(f"(file scope): struct {struct_name}")
 for b in body:
     m = re.match(r"^(extension ([\w.]+) \{\n)(.*)(\n\}\n*)$", b, re.S)
     if not m:
@@ -85,7 +102,7 @@ for b in body:
     header, ext_ns, inner, tail = m.groups()
     if ext_ns != namespace and not ext_ns.startswith(namespace + "."):
         # e.g. `extension Stripe.Billing { public struct Subscription ... }` — the struct's own home
-        if re.search(rf"^    public struct {struct_name}\b", inner, re.M) and ext_ns == namespace.rsplit(".", 1)[0]:
+        if not top_level and re.search(rf"^    public struct {struct_name}\b", inner, re.M) and ext_ns == namespace.rsplit(".", 1)[0]:
             dropped.append(f"{ext_ns}: struct {struct_name}"); continue
         kept.append(b); continue
     if ext_ns != namespace:
@@ -106,6 +123,8 @@ for b in body:
         kept.append(header + "\n".join(survivors) + tail)
 
 assert any(f"struct {struct_name}" in d for d in dropped), "struct not found"
+if not re.search(r"^\s*(public|extension)\s", head + "".join(kept), re.M):
+    hand_p.unlink(); print(f"{struct_name}: nothing to retain; hand file removed"); sys.exit(0)
 new_p = hand_p.with_name(hand_p.name.replace(".swift", ".Retained.swift"))
 out = head.replace(hand_p.name, new_p.name).rstrip("\n") + \
       f"\n\n// The {struct_name} struct is generated (Models/Generated). These are the nested types the\n" \

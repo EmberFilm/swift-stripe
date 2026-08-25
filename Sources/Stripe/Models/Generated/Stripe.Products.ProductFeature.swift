@@ -15,29 +15,29 @@ extension Stripe.Products {
     public struct ProductFeature: Codable, Hashable, Sendable, Identifiable {
         public typealias ID = String
         public let id: ID
+        /// String representing the object's type.
+        public let object: String
         @Boxed public var entitlementFeature: Stripe.Entitlements.Feature?
         /// If the object exists in live mode, the value is `true`.
         public var livemode: Bool?
-        /// String representing the object's type.
-        public var object: String?
 
         private enum CodingKeys: String, CodingKey {
             case id
+            case object
             case entitlementFeature
             case livemode
-            case object
         }
 
         public init(
             id: ID,
+            object: String,
             entitlementFeature: Stripe.Entitlements.Feature? = nil,
-            livemode: Bool? = nil,
-            object: String? = nil
+            livemode: Bool? = nil
         ) {
             self.id = id
+            self.object = object
             self._entitlementFeature = Boxed(wrappedValue: entitlementFeature)
             self.livemode = livemode
-            self.object = object
         }
     }
 }

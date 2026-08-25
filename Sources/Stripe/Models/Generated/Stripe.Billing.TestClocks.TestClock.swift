@@ -15,6 +15,8 @@ extension Stripe.Billing.TestClocks {
     public struct TestClock: Codable, Hashable, Sendable, Identifiable {
         public typealias ID = String
         public let id: ID
+        /// String representing the object's type.
+        public let object: String
         /// Time at which the object was created.
         public var created: Date?
         /// Time at which this clock is scheduled to auto delete.
@@ -25,42 +27,40 @@ extension Stripe.Billing.TestClocks {
         public var livemode: Bool?
         /// The custom name supplied at creation.
         public var name: String?
-        /// String representing the object's type.
-        public var object: String?
         /// The status of the Test Clock.
         public var status: Status?
         public var statusDetails: StatusDetails?
 
         private enum CodingKeys: String, CodingKey {
             case id
+            case object
             case created
             case deletesAfter
             case frozenTime
             case livemode
             case name
-            case object
             case status
             case statusDetails
         }
 
         public init(
             id: ID,
+            object: String,
             created: Date? = nil,
             deletesAfter: Date? = nil,
             frozenTime: Date? = nil,
             livemode: Bool? = nil,
             name: String? = nil,
-            object: String? = nil,
             status: Status? = nil,
             statusDetails: StatusDetails? = nil
         ) {
             self.id = id
+            self.object = object
             self.created = created
             self.deletesAfter = deletesAfter
             self.frozenTime = frozenTime
             self.livemode = livemode
             self.name = name
-            self.object = object
             self.status = status
             self.statusDetails = statusDetails
         }

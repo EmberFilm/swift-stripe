@@ -14,6 +14,53 @@ extension Stripe {
     public enum Shared {}
 }
 
+// funding_instructions_bank_transfer_aba_record
+extension Stripe.Shared {
+    /// ABA Records contain U.S.
+    public struct Aba: Codable, Hashable, Sendable {
+        public var accountHolderAddress: Address?
+        /// The account holder name
+        public var accountHolderName: String?
+        /// The ABA account number
+        public var accountNumber: String?
+        /// The account type
+        public var accountType: String?
+        public var bankAddress: Address?
+        /// The bank name
+        public var bankName: String?
+        /// The ABA routing number
+        public var routingNumber: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case accountHolderAddress
+            case accountHolderName
+            case accountNumber
+            case accountType
+            case bankAddress
+            case bankName
+            case routingNumber
+        }
+
+        public init(
+            accountHolderAddress: Address? = nil,
+            accountHolderName: String? = nil,
+            accountNumber: String? = nil,
+            accountType: String? = nil,
+            bankAddress: Address? = nil,
+            bankName: String? = nil,
+            routingNumber: String? = nil
+        ) {
+            self.accountHolderAddress = accountHolderAddress
+            self.accountHolderName = accountHolderName
+            self.accountNumber = accountNumber
+            self.accountType = accountType
+            self.bankAddress = bankAddress
+            self.bankName = bankName
+            self.routingNumber = routingNumber
+        }
+    }
+}
+
 // payment_method_details_ach_credit_transfer
 extension Stripe.Shared {
     public struct AchCreditTransfer: Codable, Hashable, Sendable {
@@ -121,6 +168,29 @@ extension Stripe.Shared {
             case automatic
             case instant
             case microdeposits
+        }
+    }
+}
+
+// account_requirements_alternative
+extension Stripe.Shared {
+    public struct Alternatives: Codable, Hashable, Sendable {
+        /// Fields that can be provided to resolve all fields in `original_fields_due`.
+        public var alternativeFieldsDue: [String]?
+        /// Fields that are due and can be resolved by providing all fields in `alternative_fields_due`.
+        public var originalFieldsDue: [String]?
+
+        private enum CodingKeys: String, CodingKey {
+            case alternativeFieldsDue
+            case originalFieldsDue
+        }
+
+        public init(
+            alternativeFieldsDue: [String]? = nil,
+            originalFieldsDue: [String]? = nil
+        ) {
+            self.alternativeFieldsDue = alternativeFieldsDue
+            self.originalFieldsDue = originalFieldsDue
         }
     }
 }
@@ -421,30 +491,37 @@ extension Stripe.Shared {
     }
 }
 
+// payment_method_details_card_wallet_apple_pay
+extension Stripe.Shared {
+    public struct ApplePay: Codable, Hashable, Sendable {
+        public init() {}
+    }
+}
+
 // application
 extension Stripe.Shared {
     public struct Application: Codable, Hashable, Sendable, Identifiable {
         public typealias ID = String
         public let id: ID
+        /// String representing the object's type.
+        public let object: String
         /// The name of the application.
         public var name: String?
-        /// String representing the object's type.
-        public var object: String?
 
         private enum CodingKeys: String, CodingKey {
             case id
-            case name
             case object
+            case name
         }
 
         public init(
             id: ID,
-            name: String? = nil,
-            object: String? = nil
+            object: String,
+            name: String? = nil
         ) {
             self.id = id
-            self.name = name
             self.object = object
+            self.name = name
         }
     }
 }
@@ -905,45 +982,14 @@ extension Stripe.Shared {
     }
 }
 
-// deleted_application
-extension Stripe.Shared {
-    public struct DeletedApplication: Codable, Hashable, Sendable, Identifiable {
-        public typealias ID = String
-        public let id: ID
-        /// Always true for a deleted object
-        public var deleted: Bool?
-        /// The name of the application.
-        public var name: String?
-        /// String representing the object's type.
-        public var object: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case deleted
-            case name
-            case object
-        }
-
-        public init(
-            id: ID,
-            deleted: Bool? = nil,
-            name: String? = nil,
-            object: String? = nil
-        ) {
-            self.id = id
-            self.deleted = deleted
-            self.name = name
-            self.object = object
-        }
-    }
-}
-
 // discount
 extension Stripe.Shared {
     /// A discount represents the actual application of a coupon or promotion code.
     public struct Discount: Codable, Hashable, Sendable, Identifiable {
         public typealias ID = String
         public let id: ID
+        /// String representing the object's type.
+        public let object: String
         /// The Checkout session that this coupon is applied to, if it is applied to a particular session in payment mode.
         public var checkoutSession: String?
         /// The ID of the customer associated with this discount.
@@ -956,8 +1002,6 @@ extension Stripe.Shared {
         public var invoice: String?
         /// The invoice item `id` (or invoice line item `id` for invoice line items of type='subscription') that the discount's co…
         public var invoiceItem: String?
-        /// String representing the object's type.
-        public var object: String?
         /// The promotion code applied to create this discount.
         @Expandable<Promotion.Code, String> public var promotionCode: String?
         public var source: Stripe.Shared.Source?
@@ -970,13 +1014,13 @@ extension Stripe.Shared {
 
         private enum CodingKeys: String, CodingKey {
             case id
+            case object
             case checkoutSession
             case customer
             case customerAccount
             case end
             case invoice
             case invoiceItem
-            case object
             case promotionCode
             case source
             case start
@@ -986,13 +1030,13 @@ extension Stripe.Shared {
 
         public init(
             id: ID,
+            object: String,
             checkoutSession: String? = nil,
             customer: String? = nil,
             customerAccount: String? = nil,
             end: Date? = nil,
             invoice: String? = nil,
             invoiceItem: String? = nil,
-            object: String? = nil,
             promotionCode: String? = nil,
             source: Stripe.Shared.Source? = nil,
             start: Date? = nil,
@@ -1000,13 +1044,13 @@ extension Stripe.Shared {
             subscriptionItem: String? = nil
         ) {
             self.id = id
+            self.object = object
             self.checkoutSession = checkoutSession
             self._customer = Expandable(id: customer)
             self.customerAccount = customerAccount
             self.end = end
             self.invoice = invoice
             self.invoiceItem = invoiceItem
-            self.object = object
             self._promotionCode = Expandable(id: promotionCode)
             self.source = source
             self.start = start
@@ -1057,6 +1101,135 @@ extension Stripe.Shared {
         ) {
             self.amount = amount
             self._discount = Expandable(id: discount)
+        }
+    }
+}
+
+// account_requirements_error
+extension Stripe.Shared {
+    public struct Errors: Codable, Hashable, Sendable {
+        /// The code for the type of error.
+        public var code: Code?
+        /// An informative message that indicates the error type and provides additional details about the error.
+        public var reason: String?
+        /// The specific user onboarding requirement field (in the requirements hash) that needs to be resolved.
+        public var requirement: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case code
+            case reason
+            case requirement
+        }
+
+        public init(
+            code: Code? = nil,
+            reason: String? = nil,
+            requirement: String? = nil
+        ) {
+            self.code = code
+            self.reason = reason
+            self.requirement = requirement
+        }
+
+        /// The code for the type of error.
+        public enum Code: String, Codable, Hashable, Sendable {
+            case externalRequest = "external_request"
+            case informationMissing = "information_missing"
+            case invalidAddressCityStatePostalCode = "invalid_address_city_state_postal_code"
+            case invalidAddressHighwayContractBox = "invalid_address_highway_contract_box"
+            case invalidAddressPrivateMailbox = "invalid_address_private_mailbox"
+            case invalidBusinessProfileName = "invalid_business_profile_name"
+            case invalidBusinessProfileNameDenylisted = "invalid_business_profile_name_denylisted"
+            case invalidCompanyNameDenylisted = "invalid_company_name_denylisted"
+            case invalidDobAgeOverMaximum = "invalid_dob_age_over_maximum"
+            case invalidDobAgeUnder18 = "invalid_dob_age_under_18"
+            case invalidDobAgeUnderMinimum = "invalid_dob_age_under_minimum"
+            case invalidProductDescriptionLength = "invalid_product_description_length"
+            case invalidProductDescriptionUrlMatch = "invalid_product_description_url_match"
+            case invalidRepresentativeCountry = "invalid_representative_country"
+            case invalidSignator = "invalid_signator"
+            case invalidStatementDescriptorBusinessMismatch = "invalid_statement_descriptor_business_mismatch"
+            case invalidStatementDescriptorDenylisted = "invalid_statement_descriptor_denylisted"
+            case invalidStatementDescriptorLength = "invalid_statement_descriptor_length"
+            case invalidStatementDescriptorPrefixDenylisted = "invalid_statement_descriptor_prefix_denylisted"
+            case invalidStatementDescriptorPrefixMismatch = "invalid_statement_descriptor_prefix_mismatch"
+            case invalidStreetAddress = "invalid_street_address"
+            case invalidTaxId = "invalid_tax_id"
+            case invalidTaxIdFormat = "invalid_tax_id_format"
+            case invalidTosAcceptance = "invalid_tos_acceptance"
+            case invalidUrlDenylisted = "invalid_url_denylisted"
+            case invalidUrlFormat = "invalid_url_format"
+            case invalidUrlLength = "invalid_url_length"
+            case invalidUrlWebPresenceDetected = "invalid_url_web_presence_detected"
+            case invalidUrlWebsiteBusinessInformationMismatch = "invalid_url_website_business_information_mismatch"
+            case invalidUrlWebsiteEmpty = "invalid_url_website_empty"
+            case invalidUrlWebsiteInaccessible = "invalid_url_website_inaccessible"
+            case invalidUrlWebsiteInaccessibleGeoblocked = "invalid_url_website_inaccessible_geoblocked"
+            case invalidUrlWebsiteInaccessiblePasswordProtected = "invalid_url_website_inaccessible_password_protected"
+            case invalidUrlWebsiteIncomplete = "invalid_url_website_incomplete"
+            case invalidUrlWebsiteIncompleteCancellationPolicy = "invalid_url_website_incomplete_cancellation_policy"
+            case invalidUrlWebsiteIncompleteCustomerServiceDetails = "invalid_url_website_incomplete_customer_service_details"
+            case invalidUrlWebsiteIncompleteLegalRestrictions = "invalid_url_website_incomplete_legal_restrictions"
+            case invalidUrlWebsiteIncompleteRefundPolicy = "invalid_url_website_incomplete_refund_policy"
+            case invalidUrlWebsiteIncompleteReturnPolicy = "invalid_url_website_incomplete_return_policy"
+            case invalidUrlWebsiteIncompleteTermsAndConditions = "invalid_url_website_incomplete_terms_and_conditions"
+            case invalidUrlWebsiteIncompleteUnderConstruction = "invalid_url_website_incomplete_under_construction"
+            case invalidUrlWebsiteOther = "invalid_url_website_other"
+            case invalidValueOther = "invalid_value_other"
+            case unsupportedBusinessType = "unsupported_business_type"
+            case verificationDirectorsMismatch = "verification_directors_mismatch"
+            case verificationDocumentAddressMismatch = "verification_document_address_mismatch"
+            case verificationDocumentAddressMissing = "verification_document_address_missing"
+            case verificationDocumentCorrupt = "verification_document_corrupt"
+            case verificationDocumentCountryNotSupported = "verification_document_country_not_supported"
+            case verificationDocumentDirectorsMismatch = "verification_document_directors_mismatch"
+            case verificationDocumentDobMismatch = "verification_document_dob_mismatch"
+            case verificationDocumentDuplicateType = "verification_document_duplicate_type"
+            case verificationDocumentExpired = "verification_document_expired"
+            case verificationDocumentFailedCopy = "verification_document_failed_copy"
+            case verificationDocumentFailedGreyscale = "verification_document_failed_greyscale"
+            case verificationDocumentFailedOther = "verification_document_failed_other"
+            case verificationDocumentFailedTestMode = "verification_document_failed_test_mode"
+            case verificationDocumentFraudulent = "verification_document_fraudulent"
+            case verificationDocumentIdNumberMismatch = "verification_document_id_number_mismatch"
+            case verificationDocumentIdNumberMissing = "verification_document_id_number_missing"
+            case verificationDocumentIncomplete = "verification_document_incomplete"
+            case verificationDocumentInvalid = "verification_document_invalid"
+            case verificationDocumentIssueOrExpiryDateMissing = "verification_document_issue_or_expiry_date_missing"
+            case verificationDocumentManipulated = "verification_document_manipulated"
+            case verificationDocumentMissingBack = "verification_document_missing_back"
+            case verificationDocumentMissingFront = "verification_document_missing_front"
+            case verificationDocumentNameMismatch = "verification_document_name_mismatch"
+            case verificationDocumentNameMissing = "verification_document_name_missing"
+            case verificationDocumentNationalityMismatch = "verification_document_nationality_mismatch"
+            case verificationDocumentNotReadable = "verification_document_not_readable"
+            case verificationDocumentNotSigned = "verification_document_not_signed"
+            case verificationDocumentNotUploaded = "verification_document_not_uploaded"
+            case verificationDocumentPhotoMismatch = "verification_document_photo_mismatch"
+            case verificationDocumentTooLarge = "verification_document_too_large"
+            case verificationDocumentTypeNotSupported = "verification_document_type_not_supported"
+            case verificationExtraneousDirectors = "verification_extraneous_directors"
+            case verificationFailedAddressMatch = "verification_failed_address_match"
+            case verificationFailedAuthorizerAuthority = "verification_failed_authorizer_authority"
+            case verificationFailedBusinessIecNumber = "verification_failed_business_iec_number"
+            case verificationFailedDocumentMatch = "verification_failed_document_match"
+            case verificationFailedIdNumberMatch = "verification_failed_id_number_match"
+            case verificationFailedKeyedIdentity = "verification_failed_keyed_identity"
+            case verificationFailedKeyedMatch = "verification_failed_keyed_match"
+            case verificationFailedNameMatch = "verification_failed_name_match"
+            case verificationFailedOther = "verification_failed_other"
+            case verificationFailedRepresentativeAuthority = "verification_failed_representative_authority"
+            case verificationFailedResidentialAddress = "verification_failed_residential_address"
+            case verificationFailedTaxIdMatch = "verification_failed_tax_id_match"
+            case verificationFailedTaxIdNotIssued = "verification_failed_tax_id_not_issued"
+            case verificationLegalEntityStructureMismatch = "verification_legal_entity_structure_mismatch"
+            case verificationMissingDirectors = "verification_missing_directors"
+            case verificationMissingExecutives = "verification_missing_executives"
+            case verificationMissingOwners = "verification_missing_owners"
+            case verificationRejectedOwnershipExemptionReason = "verification_rejected_ownership_exemption_reason"
+            case verificationRequiresAdditionalMemorandumOfAssociations = "verification_requires_additional_memorandum_of_associations"
+            case verificationRequiresAdditionalProofOfRegistration = "verification_requires_additional_proof_of_registration"
+            case verificationSupportability = "verification_supportability"
         }
     }
 }
@@ -1131,6 +1304,76 @@ extension Stripe.Shared {
         ) {
             self.id = id
             self.network = network
+        }
+    }
+}
+
+// funding_instructions_bank_transfer_financial_address
+extension Stripe.Shared {
+    /// FinancialAddresses contain identifying information that resolves to a FinancialAccount.
+    public struct FinancialAddresses: Codable, Hashable, Sendable {
+        public var aba: Stripe.Shared.Aba?
+        public var iban: Stripe.Shared.Iban?
+        public var sortCode: Stripe.Shared.SortCode?
+        public var spei: Stripe.Shared.Spei?
+        /// The payment networks supported by this FinancialAddress
+        public var supportedNetworks: [SupportedNetworks]?
+        public var swift: Stripe.Shared.Swift?
+        /// The type of financial address
+        public var `type`: Type?
+        public var zengin: Stripe.Shared.Zengin?
+
+        private enum CodingKeys: String, CodingKey {
+            case aba
+            case iban
+            case sortCode
+            case spei
+            case supportedNetworks
+            case swift
+            case `type`
+            case zengin
+        }
+
+        public init(
+            aba: Stripe.Shared.Aba? = nil,
+            iban: Stripe.Shared.Iban? = nil,
+            sortCode: Stripe.Shared.SortCode? = nil,
+            spei: Stripe.Shared.Spei? = nil,
+            supportedNetworks: [SupportedNetworks]? = nil,
+            swift: Stripe.Shared.Swift? = nil,
+            `type`: Type? = nil,
+            zengin: Stripe.Shared.Zengin? = nil
+        ) {
+            self.aba = aba
+            self.iban = iban
+            self.sortCode = sortCode
+            self.spei = spei
+            self.supportedNetworks = supportedNetworks
+            self.swift = swift
+            self.`type` = `type`
+            self.zengin = zengin
+        }
+
+        public enum SupportedNetworks: String, Codable, Hashable, Sendable {
+            case ach
+            case bacs
+            case chaps
+            case domesticWireUs = "domestic_wire_us"
+            case fps
+            case sepa
+            case spei
+            case swift
+            case zengin
+        }
+
+        /// The type of financial address
+        public enum `Type`: String, Codable, Hashable, Sendable {
+            case aba
+            case iban
+            case sortCode = "sort_code"
+            case spei
+            case swift
+            case zengin
         }
     }
 }
@@ -1306,6 +1549,13 @@ extension Stripe.Shared {
     }
 }
 
+// payment_method_details_card_wallet_google_pay
+extension Stripe.Shared {
+    public struct GooglePay: Codable, Hashable, Sendable {
+        public init() {}
+    }
+}
+
 // payment_method_details_grabpay
 extension Stripe.Shared {
     public struct Grabpay: Codable, Hashable, Sendable {
@@ -1320,6 +1570,48 @@ extension Stripe.Shared {
             transactionId: String? = nil
         ) {
             self.transactionId = transactionId
+        }
+    }
+}
+
+// funding_instructions_bank_transfer_iban_record
+extension Stripe.Shared {
+    /// Iban Records contain E.U.
+    public struct Iban: Codable, Hashable, Sendable {
+        public var accountHolderAddress: Address?
+        /// The name of the person or business that owns the bank account
+        public var accountHolderName: String?
+        public var bankAddress: Address?
+        /// The BIC/SWIFT code of the account.
+        public var bic: String?
+        /// Two-letter country code (ISO 3166-1 alpha-2).
+        public var country: String?
+        /// The IBAN of the account.
+        public var iban: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case accountHolderAddress
+            case accountHolderName
+            case bankAddress
+            case bic
+            case country
+            case iban
+        }
+
+        public init(
+            accountHolderAddress: Address? = nil,
+            accountHolderName: String? = nil,
+            bankAddress: Address? = nil,
+            bic: String? = nil,
+            country: String? = nil,
+            iban: String? = nil
+        ) {
+            self.accountHolderAddress = accountHolderAddress
+            self.accountHolderName = accountHolderName
+            self.bankAddress = bankAddress
+            self.bic = bic
+            self.country = country
+            self.iban = iban
         }
     }
 }
@@ -1856,6 +2148,74 @@ extension Stripe.Shared {
     }
 }
 
+// issuing_authorization_merchant_data
+extension Stripe.Shared {
+    public struct MerchantData: Codable, Hashable, Sendable {
+        /// A categorization of the seller's type of business.
+        public var category: String?
+        /// The merchant category code for the seller’s business
+        public var categoryCode: String?
+        /// City where the seller is located
+        public var city: String?
+        /// Country where the seller is located
+        public var country: String?
+        /// Name of the seller
+        public var name: String?
+        /// Identifier assigned to the seller by the card network.
+        public var networkId: String?
+        /// Postal code where the seller is located
+        public var postalCode: String?
+        /// State where the seller is located
+        public var state: String?
+        /// The seller's tax identification number.
+        public var taxId: String?
+        /// An ID assigned by the seller to the location of the sale.
+        public var terminalId: String?
+        /// URL provided by the merchant on a 3DS request
+        public var url: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case category
+            case categoryCode
+            case city
+            case country
+            case name
+            case networkId
+            case postalCode
+            case state
+            case taxId
+            case terminalId
+            case url
+        }
+
+        public init(
+            category: String? = nil,
+            categoryCode: String? = nil,
+            city: String? = nil,
+            country: String? = nil,
+            name: String? = nil,
+            networkId: String? = nil,
+            postalCode: String? = nil,
+            state: String? = nil,
+            taxId: String? = nil,
+            terminalId: String? = nil,
+            url: String? = nil
+        ) {
+            self.category = category
+            self.categoryCode = categoryCode
+            self.city = city
+            self.country = country
+            self.name = name
+            self.networkId = networkId
+            self.postalCode = postalCode
+            self.state = state
+            self.taxId = taxId
+            self.terminalId = terminalId
+            self.url = url
+        }
+    }
+}
+
 // payment_method_details_nz_bank_account
 extension Stripe.Shared {
     public struct NzBankAccount: Codable, Hashable, Sendable {
@@ -2276,6 +2636,43 @@ extension Stripe.Shared {
     }
 }
 
+// funding_instructions_bank_transfer_sort_code_record
+extension Stripe.Shared {
+    /// Sort Code Records contain U.K.
+    public struct SortCode: Codable, Hashable, Sendable {
+        public var accountHolderAddress: Address?
+        /// The name of the person or business that owns the bank account
+        public var accountHolderName: String?
+        /// The account number
+        public var accountNumber: String?
+        public var bankAddress: Address?
+        /// The six-digit sort code
+        public var sortCode: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case accountHolderAddress
+            case accountHolderName
+            case accountNumber
+            case bankAddress
+            case sortCode
+        }
+
+        public init(
+            accountHolderAddress: Address? = nil,
+            accountHolderName: String? = nil,
+            accountNumber: String? = nil,
+            bankAddress: Address? = nil,
+            sortCode: String? = nil
+        ) {
+            self.accountHolderAddress = accountHolderAddress
+            self.accountHolderName = accountHolderName
+            self.accountNumber = accountNumber
+            self.bankAddress = bankAddress
+            self.sortCode = sortCode
+        }
+    }
+}
+
 // discount_source
 extension Stripe.Shared {
     public struct Source: Codable, Hashable, Sendable {
@@ -2299,10 +2696,99 @@ extension Stripe.Shared {
     }
 }
 
+// funding_instructions_bank_transfer_spei_record
+extension Stripe.Shared {
+    /// SPEI Records contain Mexico bank account details per the SPEI format.
+    public struct Spei: Codable, Hashable, Sendable {
+        public var accountHolderAddress: Address?
+        /// The account holder name
+        public var accountHolderName: String?
+        public var bankAddress: Address?
+        /// The three-digit bank code
+        public var bankCode: String?
+        /// The short banking institution name
+        public var bankName: String?
+        /// The CLABE number
+        public var clabe: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case accountHolderAddress
+            case accountHolderName
+            case bankAddress
+            case bankCode
+            case bankName
+            case clabe
+        }
+
+        public init(
+            accountHolderAddress: Address? = nil,
+            accountHolderName: String? = nil,
+            bankAddress: Address? = nil,
+            bankCode: String? = nil,
+            bankName: String? = nil,
+            clabe: String? = nil
+        ) {
+            self.accountHolderAddress = accountHolderAddress
+            self.accountHolderName = accountHolderName
+            self.bankAddress = bankAddress
+            self.bankCode = bankCode
+            self.bankName = bankName
+            self.clabe = clabe
+        }
+    }
+}
+
 // payment_method_details_stripe_account
 extension Stripe.Shared {
     public struct StripeAccount: Codable, Hashable, Sendable {
         public init() {}
+    }
+}
+
+// funding_instructions_bank_transfer_swift_record
+extension Stripe.Shared {
+    /// SWIFT Records contain U.S.
+    public struct Swift: Codable, Hashable, Sendable {
+        public var accountHolderAddress: Address?
+        /// The account holder name
+        public var accountHolderName: String?
+        /// The account number
+        public var accountNumber: String?
+        /// The account type
+        public var accountType: String?
+        public var bankAddress: Address?
+        /// The bank name
+        public var bankName: String?
+        /// The SWIFT code
+        public var swiftCode: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case accountHolderAddress
+            case accountHolderName
+            case accountNumber
+            case accountType
+            case bankAddress
+            case bankName
+            case swiftCode
+        }
+
+        public init(
+            accountHolderAddress: Address? = nil,
+            accountHolderName: String? = nil,
+            accountNumber: String? = nil,
+            accountType: String? = nil,
+            bankAddress: Address? = nil,
+            bankName: String? = nil,
+            swiftCode: String? = nil
+        ) {
+            self.accountHolderAddress = accountHolderAddress
+            self.accountHolderName = accountHolderName
+            self.accountNumber = accountNumber
+            self.accountType = accountType
+            self.bankAddress = bankAddress
+            self.bankName = bankName
+            self.swiftCode = swiftCode
+        }
     }
 }
 
@@ -2479,6 +2965,63 @@ extension Stripe.Shared {
 extension Stripe.Shared {
     public struct Wechat: Codable, Hashable, Sendable {
         public init() {}
+    }
+}
+
+// funding_instructions_bank_transfer_zengin_record
+extension Stripe.Shared {
+    /// Zengin Records contain Japan bank account details per the Zengin format.
+    public struct Zengin: Codable, Hashable, Sendable {
+        public var accountHolderAddress: Address?
+        /// The account holder name
+        public var accountHolderName: String?
+        /// The account number
+        public var accountNumber: String?
+        /// The bank account type.
+        public var accountType: String?
+        public var bankAddress: Address?
+        /// The bank code of the account
+        public var bankCode: String?
+        /// The bank name of the account
+        public var bankName: String?
+        /// The branch code of the account
+        public var branchCode: String?
+        /// The branch name of the account
+        public var branchName: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case accountHolderAddress
+            case accountHolderName
+            case accountNumber
+            case accountType
+            case bankAddress
+            case bankCode
+            case bankName
+            case branchCode
+            case branchName
+        }
+
+        public init(
+            accountHolderAddress: Address? = nil,
+            accountHolderName: String? = nil,
+            accountNumber: String? = nil,
+            accountType: String? = nil,
+            bankAddress: Address? = nil,
+            bankCode: String? = nil,
+            bankName: String? = nil,
+            branchCode: String? = nil,
+            branchName: String? = nil
+        ) {
+            self.accountHolderAddress = accountHolderAddress
+            self.accountHolderName = accountHolderName
+            self.accountNumber = accountNumber
+            self.accountType = accountType
+            self.bankAddress = bankAddress
+            self.bankCode = bankCode
+            self.bankName = bankName
+            self.branchCode = branchCode
+            self.branchName = branchName
+        }
     }
 }
 

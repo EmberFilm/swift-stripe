@@ -67,6 +67,36 @@ RESOURCES: dict[str, str] = {
     "test_helpers.test_clock": "Billing.TestClocks.TestClock",
     "token": "Tokens.Token",
     "topup": "Connect.TopUp",
+    # stage 4a: cut over from hand models (batch-cutover.py)
+    "bank_account": "/BankAccount",
+    "capability": "Connect.Capability",
+    "card": "/Card",
+    "country_spec": "Connect.CountrySpec",
+    "customer_session": "Customers.Customer.Session",
+    "ephemeral_key": "/Stripe.EphemeralKey",
+    "fee_refund": "Connect.Application.Fee.Refund",
+    "file_link": "FileLinks.FileLink",
+    "financial_connections.account": "/FinancialConnections.Account",
+    "funding_instructions": "/FundingInstructions",
+    "identity.verification_report": "/VerificationReport",
+    "identity.verification_session": "/VerificationSession",
+    "issuing.authorization": "/Authorization",
+    "issuing.card": "/IssuingCard",
+    "issuing.cardholder": "/Cardholder",
+    "issuing.dispute": "/IssuingDispute",
+    "issuing.transaction": "/Transaction",
+    "payment_method_domain": "/Stripe.PaymentMethodDomain",
+    "radar.early_fraud_warning": "Fraud.EarlyFraudWarnings.EarlyFraudWarning",
+    "radar.value_list_item": "Fraud.ValueListItems.ValueListItem",
+    "reporting.report_run": "/ReportRun",
+    "reporting.report_type": "/ReportType",
+    "scheduled_query_run": "/ScheduledQueryRun",
+    "setup_attempt": "Setup.Attempt",
+    "source": "/Source",
+    "terminal.configuration": "/TerminalConfiguration",
+    "terminal.connection_token": "/TerminalConnectionToken",
+    "terminal.reader": "Terminal.Readers.Reader",
+    "webhook_endpoint": "/Webhook",
     # stage 4a: resources that had no model at all
     "entitlements.feature": "Entitlements.Feature",
     "treasury.transaction": "Treasury.Transaction",
@@ -182,19 +212,43 @@ RESOURCE_TYPES: dict[str, str] = {
     "test_helpers.test_clock": "Generated.Billing.TestClocks.TestClock",
     "token": "Generated.Tokens.Token",
     "topup": "Generated.Connect.TopUp",
-    # everything else is the hand-written Stripe type
+    "bank_account": "BankAccount",
+    "capability": "Generated.Connect.Capability",
+    "card": "Card",
+    "country_spec": "Generated.Connect.CountrySpec",
+    "customer_session": "Generated.Customers.Customer.Session",
+    "ephemeral_key": "Stripe.EphemeralKey",
+    "fee_refund": "Generated.Connect.Application.Fee.Refund",
+    "file_link": "Generated.FileLinks.FileLink",
+    "financial_connections.account": "FinancialConnections.Account",
+    "funding_instructions": "FundingInstructions",
+    "identity.verification_report": "VerificationReport",
+    "identity.verification_session": "VerificationSession",
     "issuing.authorization": "Authorization",
     "issuing.card": "IssuingCard",
+    "issuing.cardholder": "Cardholder",
     "issuing.dispute": "IssuingDispute",
-    "tax_id": "Stripe.Tax.ID",
     "issuing.transaction": "Transaction",
-    "fee_refund": "Stripe.Connect.Application.Fee.Refund",
+    "payment_method_domain": "Stripe.PaymentMethodDomain",
+    "radar.early_fraud_warning": "Generated.Fraud.EarlyFraudWarnings.EarlyFraudWarning",
+    "radar.value_list_item": "Generated.Fraud.ValueListItems.ValueListItem",
+    "reporting.report_run": "ReportRun",
+    "reporting.report_type": "ReportType",
+    "scheduled_query_run": "ScheduledQueryRun",
+    "setup_attempt": "Generated.Setup.Attempt",
+    "source": "Source",
+    "terminal.configuration": "TerminalConfiguration",
+    "terminal.connection_token": "TerminalConnectionToken",
+    "terminal.reader": "Generated.Terminal.Readers.Reader",
+    "webhook_endpoint": "Webhook",
+    # everything else is the hand-written Stripe type
+    "tax_id": "Stripe.Tax.ID",
+    "terminal.location": "Stripe.Terminal.Locations.Location",
+    "issuing.authorization": "Authorization",
     "payout": "Stripe.Payouts.Payout",
     "line_item": "Stripe.Billing.Invoice.LineItem",
     "account": "Stripe.Connect.Account",
     "application": "Stripe.Connect.Application",
-    "bank_account": "BankAccount",
-    "card": "Card",
     # Not the top-level `CashBalance`: inside Customer that name resolves to the empty request
     # namespace `Stripe.Customers.CashBalance`. This is the type the hand Customer used.
     "coupon": "Stripe.Products.Coupon",
@@ -215,7 +269,6 @@ RESOURCE_TYPES: dict[str, str] = {
     "tax_rate": "Stripe.Tax.Rate",
     "transfer": "Stripe.Connect.Transfer",
     "credit_note": "Stripe.Billing.Credit.Note",
-    "source": "StripePaymentSource",
     "billing.credit_grant": "Stripe.Billing.Credit.Grant",
 }
 
@@ -264,8 +317,12 @@ def ident(name: str) -> str:
     return f"`{name}`" if name in SWIFT_KEYWORDS else name
 
 def enum_case(value: str) -> str:
+    """A Swift case name for a spec enum value; the raw value is always emitted alongside."""
     c = camel(value)
-    if not re.match(r"^[A-Za-z_]", c):
+    if not c.strip("_") or not re.match(r"^[A-Za-z]", c.lstrip("_")):
+        # nothing usable survives ("_", "-", a bare digit): name it for its raw text
+        c = "value" + re.sub(r"\W", "_", value) or "empty"
+    elif not re.match(r"^[A-Za-z_]", c):
         c = "_" + c
     return ident(c)
 
@@ -482,6 +539,10 @@ class Generator:
                 s.has_id = True
                 s.id_optional = "id" not in required
                 continue
+            if prop == "object" and "object" in required:
+                # the discriminator Stripe always sends; hand unions switch on it directly
+                s.has_object = True
+                continue
             s.fields.append(self.resolve(node, prop, expandable, s))
         return s
 
@@ -526,6 +587,9 @@ class Generator:
         parts = swift_path.lstrip("/").split(".")
         container = ".".join(parts[:-1]) if top_level else \
             self.ns + ("." + ".".join(parts[:-1]) if len(parts) > 1 else "")
+        if not container:
+            # "/Webhook": a module-level struct, the way the hand sources declared it
+            return HEADER.format(version=self.version, schema=schema_name) + root.render(indent="")
         body = root.render(indent="    ")
         return HEADER.format(version=self.version, schema=schema_name) + \
             f"extension {container} {{\n{body}}}\n"
@@ -611,6 +675,7 @@ class Struct:
         self.nested: list[Struct] = []
         self.has_id = False
         self.id_optional = False
+        self.has_object = False
 
     def render(self, indent: str) -> str:
         i = indent
@@ -622,6 +687,8 @@ class Struct:
         if self.has_id:
             decl = "public var id: ID?" if self.id_optional else "public let id: ID"
             out += f"{i}    public typealias ID = String\n{i}    {decl}\n"
+        if self.has_object:
+            out += f"{i}    /// String representing the object's type.\n{i}    public let object: String\n"
         for f in self.fields:
             if f.description:
                 out += f"{i}    /// {f.description}\n"
@@ -630,22 +697,27 @@ class Struct:
             else:
                 out += f"{i}    public var {ident(f.name)}: {f.swift_type}?\n"
         # A spec object with no properties (`konbini: {}`) is a marker; it has nothing to key.
-        if not self.fields and not self.has_id:
+        if not self.fields and not self.has_id and not self.has_object:
             out += f"{i}    public init() {{}}\n{i}}}\n"
             return out
         # CodingKeys, from the same list as the properties
         out += f"\n{i}    private enum CodingKeys: String, CodingKey {{\n"
         if self.has_id:
             out += f"{i}        case id\n"
+        if self.has_object:
+            out += f"{i}        case object\n"
         for f in self.fields:
             out += f"{i}        case {ident(f.name)}\n"
         out += f"{i}    }}\n\n"
         # init
         params = ([("id: ID? = nil" if self.id_optional else "id: ID")] if self.has_id else []) + \
+                 (["object: String"] if self.has_object else []) + \
                  [f"{ident(f.name)}: {f.swift_type}? = nil" for f in self.fields]
         out += f"{i}    public init(\n" + ",\n".join(f"{i}        {p}" for p in params) + f"\n{i}    ) {{\n"
         if self.has_id:
             out += f"{i}        self.id = id\n"
+        if self.has_object:
+            out += f"{i}        self.object = object\n"
         for f in self.fields:
             n = ident(f.name)
             if f.id_wrapper:

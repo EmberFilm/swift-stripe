@@ -15,6 +15,8 @@ extension Stripe.Connect {
     public struct Person: Codable, Hashable, Sendable, Identifiable {
         public typealias ID = String
         public let id: ID
+        /// String representing the object's type.
+        public let object: String
         /// The account the person is associated with.
         public var account: String?
         public var additionalTosAcceptances: AdditionalTosAcceptances?
@@ -56,8 +58,6 @@ extension Stripe.Connect {
         public var metadata: [String: String]?
         /// The country where the person is a national.
         public var nationality: String?
-        /// String representing the object's type.
-        public var object: String?
         /// The person's phone number.
         public var phone: String?
         /// Indicates if the person or any of their representatives, family members, or other closely related persons, declares th…
@@ -74,6 +74,7 @@ extension Stripe.Connect {
 
         private enum CodingKeys: String, CodingKey {
             case id
+            case object
             case account
             case additionalTosAcceptances
             case address
@@ -96,7 +97,6 @@ extension Stripe.Connect {
             case maidenName
             case metadata
             case nationality
-            case object
             case phone
             case politicalExposure
             case registeredAddress
@@ -109,6 +109,7 @@ extension Stripe.Connect {
 
         public init(
             id: ID,
+            object: String,
             account: String? = nil,
             additionalTosAcceptances: AdditionalTosAcceptances? = nil,
             address: Address? = nil,
@@ -131,7 +132,6 @@ extension Stripe.Connect {
             maidenName: String? = nil,
             metadata: [String: String]? = nil,
             nationality: String? = nil,
-            object: String? = nil,
             phone: String? = nil,
             politicalExposure: PoliticalExposure? = nil,
             registeredAddress: Address? = nil,
@@ -142,6 +142,7 @@ extension Stripe.Connect {
             verification: Verification? = nil
         ) {
             self.id = id
+            self.object = object
             self.account = account
             self.additionalTosAcceptances = additionalTosAcceptances
             self.address = address
@@ -164,7 +165,6 @@ extension Stripe.Connect {
             self.maidenName = maidenName
             self.metadata = metadata
             self.nationality = nationality
-            self.object = object
             self.phone = phone
             self.politicalExposure = politicalExposure
             self.registeredAddress = registeredAddress
@@ -338,11 +338,11 @@ extension Stripe.Connect {
 
         public struct FutureRequirements: Codable, Hashable, Sendable {
             /// Fields that are due and can be resolved by providing the corresponding alternative fields instead.
-            public var alternatives: [Alternatives]?
+            public var alternatives: [Stripe.Shared.Alternatives]?
             /// Fields that need to be resolved to keep the person's account enabled.
             public var currentlyDue: [String]?
             /// Fields that are `currently_due` and need to be collected again because validation or verification failed.
-            public var errors: [Errors]?
+            public var errors: [Stripe.Shared.Errors]?
             /// Fields you must collect when all thresholds are reached.
             public var eventuallyDue: [String]?
             /// Fields that haven't been resolved by the account's `requirements.current_deadline`.
@@ -360,9 +360,9 @@ extension Stripe.Connect {
             }
 
             public init(
-                alternatives: [Alternatives]? = nil,
+                alternatives: [Stripe.Shared.Alternatives]? = nil,
                 currentlyDue: [String]? = nil,
-                errors: [Errors]? = nil,
+                errors: [Stripe.Shared.Errors]? = nil,
                 eventuallyDue: [String]? = nil,
                 pastDue: [String]? = nil,
                 pendingVerification: [String]? = nil
@@ -373,152 +373,6 @@ extension Stripe.Connect {
                 self.eventuallyDue = eventuallyDue
                 self.pastDue = pastDue
                 self.pendingVerification = pendingVerification
-            }
-
-            public struct Alternatives: Codable, Hashable, Sendable {
-                /// Fields that can be provided to resolve all fields in `original_fields_due`.
-                public var alternativeFieldsDue: [String]?
-                /// Fields that are due and can be resolved by providing all fields in `alternative_fields_due`.
-                public var originalFieldsDue: [String]?
-
-                private enum CodingKeys: String, CodingKey {
-                    case alternativeFieldsDue
-                    case originalFieldsDue
-                }
-
-                public init(
-                    alternativeFieldsDue: [String]? = nil,
-                    originalFieldsDue: [String]? = nil
-                ) {
-                    self.alternativeFieldsDue = alternativeFieldsDue
-                    self.originalFieldsDue = originalFieldsDue
-                }
-            }
-
-            public struct Errors: Codable, Hashable, Sendable {
-                /// The code for the type of error.
-                public var code: Code?
-                /// An informative message that indicates the error type and provides additional details about the error.
-                public var reason: String?
-                /// The specific user onboarding requirement field (in the requirements hash) that needs to be resolved.
-                public var requirement: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case code
-                    case reason
-                    case requirement
-                }
-
-                public init(
-                    code: Code? = nil,
-                    reason: String? = nil,
-                    requirement: String? = nil
-                ) {
-                    self.code = code
-                    self.reason = reason
-                    self.requirement = requirement
-                }
-
-                /// The code for the type of error.
-                public enum Code: String, Codable, Hashable, Sendable {
-                    case externalRequest = "external_request"
-                    case informationMissing = "information_missing"
-                    case invalidAddressCityStatePostalCode = "invalid_address_city_state_postal_code"
-                    case invalidAddressHighwayContractBox = "invalid_address_highway_contract_box"
-                    case invalidAddressPrivateMailbox = "invalid_address_private_mailbox"
-                    case invalidBusinessProfileName = "invalid_business_profile_name"
-                    case invalidBusinessProfileNameDenylisted = "invalid_business_profile_name_denylisted"
-                    case invalidCompanyNameDenylisted = "invalid_company_name_denylisted"
-                    case invalidDobAgeOverMaximum = "invalid_dob_age_over_maximum"
-                    case invalidDobAgeUnder18 = "invalid_dob_age_under_18"
-                    case invalidDobAgeUnderMinimum = "invalid_dob_age_under_minimum"
-                    case invalidProductDescriptionLength = "invalid_product_description_length"
-                    case invalidProductDescriptionUrlMatch = "invalid_product_description_url_match"
-                    case invalidRepresentativeCountry = "invalid_representative_country"
-                    case invalidSignator = "invalid_signator"
-                    case invalidStatementDescriptorBusinessMismatch = "invalid_statement_descriptor_business_mismatch"
-                    case invalidStatementDescriptorDenylisted = "invalid_statement_descriptor_denylisted"
-                    case invalidStatementDescriptorLength = "invalid_statement_descriptor_length"
-                    case invalidStatementDescriptorPrefixDenylisted = "invalid_statement_descriptor_prefix_denylisted"
-                    case invalidStatementDescriptorPrefixMismatch = "invalid_statement_descriptor_prefix_mismatch"
-                    case invalidStreetAddress = "invalid_street_address"
-                    case invalidTaxId = "invalid_tax_id"
-                    case invalidTaxIdFormat = "invalid_tax_id_format"
-                    case invalidTosAcceptance = "invalid_tos_acceptance"
-                    case invalidUrlDenylisted = "invalid_url_denylisted"
-                    case invalidUrlFormat = "invalid_url_format"
-                    case invalidUrlLength = "invalid_url_length"
-                    case invalidUrlWebPresenceDetected = "invalid_url_web_presence_detected"
-                    case invalidUrlWebsiteBusinessInformationMismatch = "invalid_url_website_business_information_mismatch"
-                    case invalidUrlWebsiteEmpty = "invalid_url_website_empty"
-                    case invalidUrlWebsiteInaccessible = "invalid_url_website_inaccessible"
-                    case invalidUrlWebsiteInaccessibleGeoblocked = "invalid_url_website_inaccessible_geoblocked"
-                    case invalidUrlWebsiteInaccessiblePasswordProtected = "invalid_url_website_inaccessible_password_protected"
-                    case invalidUrlWebsiteIncomplete = "invalid_url_website_incomplete"
-                    case invalidUrlWebsiteIncompleteCancellationPolicy = "invalid_url_website_incomplete_cancellation_policy"
-                    case invalidUrlWebsiteIncompleteCustomerServiceDetails = "invalid_url_website_incomplete_customer_service_details"
-                    case invalidUrlWebsiteIncompleteLegalRestrictions = "invalid_url_website_incomplete_legal_restrictions"
-                    case invalidUrlWebsiteIncompleteRefundPolicy = "invalid_url_website_incomplete_refund_policy"
-                    case invalidUrlWebsiteIncompleteReturnPolicy = "invalid_url_website_incomplete_return_policy"
-                    case invalidUrlWebsiteIncompleteTermsAndConditions = "invalid_url_website_incomplete_terms_and_conditions"
-                    case invalidUrlWebsiteIncompleteUnderConstruction = "invalid_url_website_incomplete_under_construction"
-                    case invalidUrlWebsiteOther = "invalid_url_website_other"
-                    case invalidValueOther = "invalid_value_other"
-                    case unsupportedBusinessType = "unsupported_business_type"
-                    case verificationDirectorsMismatch = "verification_directors_mismatch"
-                    case verificationDocumentAddressMismatch = "verification_document_address_mismatch"
-                    case verificationDocumentAddressMissing = "verification_document_address_missing"
-                    case verificationDocumentCorrupt = "verification_document_corrupt"
-                    case verificationDocumentCountryNotSupported = "verification_document_country_not_supported"
-                    case verificationDocumentDirectorsMismatch = "verification_document_directors_mismatch"
-                    case verificationDocumentDobMismatch = "verification_document_dob_mismatch"
-                    case verificationDocumentDuplicateType = "verification_document_duplicate_type"
-                    case verificationDocumentExpired = "verification_document_expired"
-                    case verificationDocumentFailedCopy = "verification_document_failed_copy"
-                    case verificationDocumentFailedGreyscale = "verification_document_failed_greyscale"
-                    case verificationDocumentFailedOther = "verification_document_failed_other"
-                    case verificationDocumentFailedTestMode = "verification_document_failed_test_mode"
-                    case verificationDocumentFraudulent = "verification_document_fraudulent"
-                    case verificationDocumentIdNumberMismatch = "verification_document_id_number_mismatch"
-                    case verificationDocumentIdNumberMissing = "verification_document_id_number_missing"
-                    case verificationDocumentIncomplete = "verification_document_incomplete"
-                    case verificationDocumentInvalid = "verification_document_invalid"
-                    case verificationDocumentIssueOrExpiryDateMissing = "verification_document_issue_or_expiry_date_missing"
-                    case verificationDocumentManipulated = "verification_document_manipulated"
-                    case verificationDocumentMissingBack = "verification_document_missing_back"
-                    case verificationDocumentMissingFront = "verification_document_missing_front"
-                    case verificationDocumentNameMismatch = "verification_document_name_mismatch"
-                    case verificationDocumentNameMissing = "verification_document_name_missing"
-                    case verificationDocumentNationalityMismatch = "verification_document_nationality_mismatch"
-                    case verificationDocumentNotReadable = "verification_document_not_readable"
-                    case verificationDocumentNotSigned = "verification_document_not_signed"
-                    case verificationDocumentNotUploaded = "verification_document_not_uploaded"
-                    case verificationDocumentPhotoMismatch = "verification_document_photo_mismatch"
-                    case verificationDocumentTooLarge = "verification_document_too_large"
-                    case verificationDocumentTypeNotSupported = "verification_document_type_not_supported"
-                    case verificationExtraneousDirectors = "verification_extraneous_directors"
-                    case verificationFailedAddressMatch = "verification_failed_address_match"
-                    case verificationFailedAuthorizerAuthority = "verification_failed_authorizer_authority"
-                    case verificationFailedBusinessIecNumber = "verification_failed_business_iec_number"
-                    case verificationFailedDocumentMatch = "verification_failed_document_match"
-                    case verificationFailedIdNumberMatch = "verification_failed_id_number_match"
-                    case verificationFailedKeyedIdentity = "verification_failed_keyed_identity"
-                    case verificationFailedKeyedMatch = "verification_failed_keyed_match"
-                    case verificationFailedNameMatch = "verification_failed_name_match"
-                    case verificationFailedOther = "verification_failed_other"
-                    case verificationFailedRepresentativeAuthority = "verification_failed_representative_authority"
-                    case verificationFailedResidentialAddress = "verification_failed_residential_address"
-                    case verificationFailedTaxIdMatch = "verification_failed_tax_id_match"
-                    case verificationFailedTaxIdNotIssued = "verification_failed_tax_id_not_issued"
-                    case verificationLegalEntityStructureMismatch = "verification_legal_entity_structure_mismatch"
-                    case verificationMissingDirectors = "verification_missing_directors"
-                    case verificationMissingExecutives = "verification_missing_executives"
-                    case verificationMissingOwners = "verification_missing_owners"
-                    case verificationRejectedOwnershipExemptionReason = "verification_rejected_ownership_exemption_reason"
-                    case verificationRequiresAdditionalMemorandumOfAssociations = "verification_requires_additional_memorandum_of_associations"
-                    case verificationRequiresAdditionalProofOfRegistration = "verification_requires_additional_proof_of_registration"
-                    case verificationSupportability = "verification_supportability"
-                }
             }
         }
 
@@ -574,11 +428,11 @@ extension Stripe.Connect {
 
         public struct Requirements: Codable, Hashable, Sendable {
             /// Fields that are due and can be resolved by providing the corresponding alternative fields instead.
-            public var alternatives: [Alternatives]?
+            public var alternatives: [Stripe.Shared.Alternatives]?
             /// Fields that need to be resolved to keep the person's account enabled.
             public var currentlyDue: [String]?
             /// Fields that are `currently_due` and need to be collected again because validation or verification failed.
-            public var errors: [Errors]?
+            public var errors: [Stripe.Shared.Errors]?
             /// Fields you must collect when all thresholds are reached.
             public var eventuallyDue: [String]?
             /// Fields that haven't been resolved by `current_deadline`.
@@ -596,9 +450,9 @@ extension Stripe.Connect {
             }
 
             public init(
-                alternatives: [Alternatives]? = nil,
+                alternatives: [Stripe.Shared.Alternatives]? = nil,
                 currentlyDue: [String]? = nil,
-                errors: [Errors]? = nil,
+                errors: [Stripe.Shared.Errors]? = nil,
                 eventuallyDue: [String]? = nil,
                 pastDue: [String]? = nil,
                 pendingVerification: [String]? = nil
@@ -609,152 +463,6 @@ extension Stripe.Connect {
                 self.eventuallyDue = eventuallyDue
                 self.pastDue = pastDue
                 self.pendingVerification = pendingVerification
-            }
-
-            public struct Alternatives: Codable, Hashable, Sendable {
-                /// Fields that can be provided to resolve all fields in `original_fields_due`.
-                public var alternativeFieldsDue: [String]?
-                /// Fields that are due and can be resolved by providing all fields in `alternative_fields_due`.
-                public var originalFieldsDue: [String]?
-
-                private enum CodingKeys: String, CodingKey {
-                    case alternativeFieldsDue
-                    case originalFieldsDue
-                }
-
-                public init(
-                    alternativeFieldsDue: [String]? = nil,
-                    originalFieldsDue: [String]? = nil
-                ) {
-                    self.alternativeFieldsDue = alternativeFieldsDue
-                    self.originalFieldsDue = originalFieldsDue
-                }
-            }
-
-            public struct Errors: Codable, Hashable, Sendable {
-                /// The code for the type of error.
-                public var code: Code?
-                /// An informative message that indicates the error type and provides additional details about the error.
-                public var reason: String?
-                /// The specific user onboarding requirement field (in the requirements hash) that needs to be resolved.
-                public var requirement: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case code
-                    case reason
-                    case requirement
-                }
-
-                public init(
-                    code: Code? = nil,
-                    reason: String? = nil,
-                    requirement: String? = nil
-                ) {
-                    self.code = code
-                    self.reason = reason
-                    self.requirement = requirement
-                }
-
-                /// The code for the type of error.
-                public enum Code: String, Codable, Hashable, Sendable {
-                    case externalRequest = "external_request"
-                    case informationMissing = "information_missing"
-                    case invalidAddressCityStatePostalCode = "invalid_address_city_state_postal_code"
-                    case invalidAddressHighwayContractBox = "invalid_address_highway_contract_box"
-                    case invalidAddressPrivateMailbox = "invalid_address_private_mailbox"
-                    case invalidBusinessProfileName = "invalid_business_profile_name"
-                    case invalidBusinessProfileNameDenylisted = "invalid_business_profile_name_denylisted"
-                    case invalidCompanyNameDenylisted = "invalid_company_name_denylisted"
-                    case invalidDobAgeOverMaximum = "invalid_dob_age_over_maximum"
-                    case invalidDobAgeUnder18 = "invalid_dob_age_under_18"
-                    case invalidDobAgeUnderMinimum = "invalid_dob_age_under_minimum"
-                    case invalidProductDescriptionLength = "invalid_product_description_length"
-                    case invalidProductDescriptionUrlMatch = "invalid_product_description_url_match"
-                    case invalidRepresentativeCountry = "invalid_representative_country"
-                    case invalidSignator = "invalid_signator"
-                    case invalidStatementDescriptorBusinessMismatch = "invalid_statement_descriptor_business_mismatch"
-                    case invalidStatementDescriptorDenylisted = "invalid_statement_descriptor_denylisted"
-                    case invalidStatementDescriptorLength = "invalid_statement_descriptor_length"
-                    case invalidStatementDescriptorPrefixDenylisted = "invalid_statement_descriptor_prefix_denylisted"
-                    case invalidStatementDescriptorPrefixMismatch = "invalid_statement_descriptor_prefix_mismatch"
-                    case invalidStreetAddress = "invalid_street_address"
-                    case invalidTaxId = "invalid_tax_id"
-                    case invalidTaxIdFormat = "invalid_tax_id_format"
-                    case invalidTosAcceptance = "invalid_tos_acceptance"
-                    case invalidUrlDenylisted = "invalid_url_denylisted"
-                    case invalidUrlFormat = "invalid_url_format"
-                    case invalidUrlLength = "invalid_url_length"
-                    case invalidUrlWebPresenceDetected = "invalid_url_web_presence_detected"
-                    case invalidUrlWebsiteBusinessInformationMismatch = "invalid_url_website_business_information_mismatch"
-                    case invalidUrlWebsiteEmpty = "invalid_url_website_empty"
-                    case invalidUrlWebsiteInaccessible = "invalid_url_website_inaccessible"
-                    case invalidUrlWebsiteInaccessibleGeoblocked = "invalid_url_website_inaccessible_geoblocked"
-                    case invalidUrlWebsiteInaccessiblePasswordProtected = "invalid_url_website_inaccessible_password_protected"
-                    case invalidUrlWebsiteIncomplete = "invalid_url_website_incomplete"
-                    case invalidUrlWebsiteIncompleteCancellationPolicy = "invalid_url_website_incomplete_cancellation_policy"
-                    case invalidUrlWebsiteIncompleteCustomerServiceDetails = "invalid_url_website_incomplete_customer_service_details"
-                    case invalidUrlWebsiteIncompleteLegalRestrictions = "invalid_url_website_incomplete_legal_restrictions"
-                    case invalidUrlWebsiteIncompleteRefundPolicy = "invalid_url_website_incomplete_refund_policy"
-                    case invalidUrlWebsiteIncompleteReturnPolicy = "invalid_url_website_incomplete_return_policy"
-                    case invalidUrlWebsiteIncompleteTermsAndConditions = "invalid_url_website_incomplete_terms_and_conditions"
-                    case invalidUrlWebsiteIncompleteUnderConstruction = "invalid_url_website_incomplete_under_construction"
-                    case invalidUrlWebsiteOther = "invalid_url_website_other"
-                    case invalidValueOther = "invalid_value_other"
-                    case unsupportedBusinessType = "unsupported_business_type"
-                    case verificationDirectorsMismatch = "verification_directors_mismatch"
-                    case verificationDocumentAddressMismatch = "verification_document_address_mismatch"
-                    case verificationDocumentAddressMissing = "verification_document_address_missing"
-                    case verificationDocumentCorrupt = "verification_document_corrupt"
-                    case verificationDocumentCountryNotSupported = "verification_document_country_not_supported"
-                    case verificationDocumentDirectorsMismatch = "verification_document_directors_mismatch"
-                    case verificationDocumentDobMismatch = "verification_document_dob_mismatch"
-                    case verificationDocumentDuplicateType = "verification_document_duplicate_type"
-                    case verificationDocumentExpired = "verification_document_expired"
-                    case verificationDocumentFailedCopy = "verification_document_failed_copy"
-                    case verificationDocumentFailedGreyscale = "verification_document_failed_greyscale"
-                    case verificationDocumentFailedOther = "verification_document_failed_other"
-                    case verificationDocumentFailedTestMode = "verification_document_failed_test_mode"
-                    case verificationDocumentFraudulent = "verification_document_fraudulent"
-                    case verificationDocumentIdNumberMismatch = "verification_document_id_number_mismatch"
-                    case verificationDocumentIdNumberMissing = "verification_document_id_number_missing"
-                    case verificationDocumentIncomplete = "verification_document_incomplete"
-                    case verificationDocumentInvalid = "verification_document_invalid"
-                    case verificationDocumentIssueOrExpiryDateMissing = "verification_document_issue_or_expiry_date_missing"
-                    case verificationDocumentManipulated = "verification_document_manipulated"
-                    case verificationDocumentMissingBack = "verification_document_missing_back"
-                    case verificationDocumentMissingFront = "verification_document_missing_front"
-                    case verificationDocumentNameMismatch = "verification_document_name_mismatch"
-                    case verificationDocumentNameMissing = "verification_document_name_missing"
-                    case verificationDocumentNationalityMismatch = "verification_document_nationality_mismatch"
-                    case verificationDocumentNotReadable = "verification_document_not_readable"
-                    case verificationDocumentNotSigned = "verification_document_not_signed"
-                    case verificationDocumentNotUploaded = "verification_document_not_uploaded"
-                    case verificationDocumentPhotoMismatch = "verification_document_photo_mismatch"
-                    case verificationDocumentTooLarge = "verification_document_too_large"
-                    case verificationDocumentTypeNotSupported = "verification_document_type_not_supported"
-                    case verificationExtraneousDirectors = "verification_extraneous_directors"
-                    case verificationFailedAddressMatch = "verification_failed_address_match"
-                    case verificationFailedAuthorizerAuthority = "verification_failed_authorizer_authority"
-                    case verificationFailedBusinessIecNumber = "verification_failed_business_iec_number"
-                    case verificationFailedDocumentMatch = "verification_failed_document_match"
-                    case verificationFailedIdNumberMatch = "verification_failed_id_number_match"
-                    case verificationFailedKeyedIdentity = "verification_failed_keyed_identity"
-                    case verificationFailedKeyedMatch = "verification_failed_keyed_match"
-                    case verificationFailedNameMatch = "verification_failed_name_match"
-                    case verificationFailedOther = "verification_failed_other"
-                    case verificationFailedRepresentativeAuthority = "verification_failed_representative_authority"
-                    case verificationFailedResidentialAddress = "verification_failed_residential_address"
-                    case verificationFailedTaxIdMatch = "verification_failed_tax_id_match"
-                    case verificationFailedTaxIdNotIssued = "verification_failed_tax_id_not_issued"
-                    case verificationLegalEntityStructureMismatch = "verification_legal_entity_structure_mismatch"
-                    case verificationMissingDirectors = "verification_missing_directors"
-                    case verificationMissingExecutives = "verification_missing_executives"
-                    case verificationMissingOwners = "verification_missing_owners"
-                    case verificationRejectedOwnershipExemptionReason = "verification_rejected_ownership_exemption_reason"
-                    case verificationRequiresAdditionalMemorandumOfAssociations = "verification_requires_additional_memorandum_of_associations"
-                    case verificationRequiresAdditionalProofOfRegistration = "verification_requires_additional_proof_of_registration"
-                    case verificationSupportability = "verification_supportability"
-                }
             }
         }
 

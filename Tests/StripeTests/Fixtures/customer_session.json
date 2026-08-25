@@ -1,0 +1,52 @@
+{
+ "client_secret": "client_secret_1",
+ "components": {
+  "buy_button": {
+   "enabled": true
+  },
+  "customer_sheet": {
+   "enabled": true,
+   "features": {
+    "payment_method_allow_redisplay_filters": [
+     "always"
+    ],
+    "payment_method_remove": "disabled"
+   }
+  },
+  "mobile_payment_element": {
+   "enabled": true,
+   "features": {
+    "payment_method_allow_redisplay_filters": [
+     "always"
+    ],
+    "payment_method_redisplay": "disabled",
+    "payment_method_remove": "disabled",
+    "payment_method_save": "disabled",
+    "payment_method_save_allow_redisplay_override": "always"
+   }
+  },
+  "payment_element": {
+   "enabled": true,
+   "features": {
+    "payment_method_allow_redisplay_filters": [
+     "always"
+    ],
+    "payment_method_redisplay": "disabled",
+    "payment_method_redisplay_limit": 1,
+    "payment_method_remove": "disabled",
+    "payment_method_save": "disabled",
+    "payment_method_save_usage": "off_session"
+   }
+  },
+  "pricing_table": {
+   "enabled": true
+  }
+ },
+ "created": 1700000000,
+ "customer": "customer_1",
+ "customer_account": "customer_account_1",
+ "expires_at": 1700000000,
+ "id": "customer_session_1",
+ "livemode": true,
+ "object": "customer_session"
+}

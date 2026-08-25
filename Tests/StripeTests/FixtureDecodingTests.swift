@@ -116,6 +116,35 @@ struct FixtureDecodingTests {
     @Test("test_helpers.test_clock") func testHelpersTestClock() throws { try Self.decodes("test_helpers.test_clock", as: Stripe.Billing.TestClocks.TestClock.self) }
     @Test("token") func token() throws { try Self.decodes("token", as: Stripe.Tokens.Token.self) }
     @Test("topup") func topup() throws { try Self.decodes("topup", as: Stripe.Connect.TopUp.self) }
+    @Test("bank_account") func bankAccount() throws { try Self.decodes("bank_account", as: BankAccount.self) }
+    @Test("capability") func capability() throws { try Self.decodes("capability", as: Stripe.Connect.Capability.self) }
+    @Test("card") func card() throws { try Self.decodes("card", as: Card.self) }
+    @Test("country_spec") func countrySpec() throws { try Self.decodes("country_spec", as: Stripe.Connect.CountrySpec.self) }
+    @Test("customer_session") func customerSession() throws { try Self.decodes("customer_session", as: Stripe.Customers.Customer.Session.self) }
+    @Test("ephemeral_key") func ephemeralKey() throws { try Self.decodes("ephemeral_key", as: Stripe.EphemeralKey.self) }
+    @Test("fee_refund") func feeRefund() throws { try Self.decodes("fee_refund", as: Stripe.Connect.Application.Fee.Refund.self) }
+    @Test("file_link") func fileLink() throws { try Self.decodes("file_link", as: Stripe.FileLinks.FileLink.self) }
+    @Test("financial_connections.account") func financialConnectionsAccount() throws { try Self.decodes("financial_connections.account", as: FinancialConnections.Account.self) }
+    @Test("funding_instructions") func fundingInstructions() throws { try Self.decodes("funding_instructions", as: FundingInstructions.self) }
+    @Test("identity.verification_report") func identityVerificationReport() throws { try Self.decodes("identity.verification_report", as: VerificationReport.self) }
+    @Test("identity.verification_session") func identityVerificationSession() throws { try Self.decodes("identity.verification_session", as: VerificationSession.self) }
+    @Test("issuing.authorization") func issuingAuthorization() throws { try Self.decodes("issuing.authorization", as: Authorization.self) }
+    @Test("issuing.card") func issuingCard() throws { try Self.decodes("issuing.card", as: IssuingCard.self) }
+    @Test("issuing.cardholder") func issuingCardholder() throws { try Self.decodes("issuing.cardholder", as: Cardholder.self) }
+    @Test("issuing.dispute") func issuingDispute() throws { try Self.decodes("issuing.dispute", as: IssuingDispute.self) }
+    @Test("issuing.transaction") func issuingTransaction() throws { try Self.decodes("issuing.transaction", as: Transaction.self) }
+    @Test("payment_method_domain") func paymentMethodDomain() throws { try Self.decodes("payment_method_domain", as: Stripe.PaymentMethodDomain.self) }
+    @Test("radar.early_fraud_warning") func radarEarlyFraudWarning() throws { try Self.decodes("radar.early_fraud_warning", as: Stripe.Fraud.EarlyFraudWarnings.EarlyFraudWarning.self) }
+    @Test("radar.value_list_item") func radarValueListItem() throws { try Self.decodes("radar.value_list_item", as: Stripe.Fraud.ValueListItems.ValueListItem.self) }
+    @Test("reporting.report_run") func reportingReportRun() throws { try Self.decodes("reporting.report_run", as: ReportRun.self) }
+    @Test("reporting.report_type") func reportingReportType() throws { try Self.decodes("reporting.report_type", as: ReportType.self) }
+    @Test("scheduled_query_run") func scheduledQueryRun() throws { try Self.decodes("scheduled_query_run", as: ScheduledQueryRun.self) }
+    @Test("setup_attempt") func setupAttempt() throws { try Self.decodes("setup_attempt", as: Stripe.Setup.Attempt.self) }
+    @Test("source") func source() throws { try Self.decodes("source", as: Source.self) }
+    @Test("terminal.configuration") func terminalConfiguration() throws { try Self.decodes("terminal.configuration", as: TerminalConfiguration.self) }
+    @Test("terminal.connection_token") func terminalConnectionToken() throws { try Self.decodes("terminal.connection_token", as: TerminalConnectionToken.self) }
+    @Test("terminal.reader") func terminalReader() throws { try Self.decodes("terminal.reader", as: Stripe.Terminal.Readers.Reader.self) }
+    @Test("webhook_endpoint") func webhookEndpoint() throws { try Self.decodes("webhook_endpoint", as: Webhook.self) }
     @Test("entitlements.feature") func entitlementsFeature() throws { try Self.decodes("entitlements.feature", as: Stripe.Entitlements.Feature.self) }
     @Test("treasury.transaction") func treasuryTransaction() throws { try Self.decodes("treasury.transaction", as: Stripe.Treasury.Transaction.self) }
     @Test("treasury.credit_reversal") func treasuryCreditReversal() throws { try Self.decodes("treasury.credit_reversal", as: Stripe.Treasury.CreditReversal.self) }

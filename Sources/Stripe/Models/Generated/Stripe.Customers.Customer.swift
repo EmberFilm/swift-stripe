@@ -15,6 +15,8 @@ extension Stripe.Customers {
     public struct Customer: Codable, Hashable, Sendable, Identifiable {
         public typealias ID = String
         public let id: ID
+        /// String representing the object's type.
+        public let object: String
         /// The customer's address.
         public var address: Address?
         /// The current balance, if any, that's stored on the customer in their default currency.
@@ -22,7 +24,7 @@ extension Stripe.Customers {
         /// The customer's business name.
         public var businessName: String?
         /// The current funds being held by Stripe on behalf of the customer.
-        public var cashBalance: Stripe.Customers.CustomerCashBalance?
+        @Boxed public var cashBalance: Stripe.Customers.CustomerCashBalance?
         /// Time at which the object was created.
         public var created: Date?
         /// Three-letter ISO code for the currency the customer can be charged in for recurring billing purposes.
@@ -54,8 +56,6 @@ extension Stripe.Customers {
         public var name: String?
         /// The suffix of the customer's next invoice number (for example, 0001).
         public var nextInvoiceSequence: Int?
-        /// String representing the object's type.
-        public var object: String?
         /// The customer's phone number.
         public var phone: String?
         /// The customer's preferred locales (languages), ordered by preference.
@@ -76,6 +76,7 @@ extension Stripe.Customers {
 
         private enum CodingKeys: String, CodingKey {
             case id
+            case object
             case address
             case balance
             case businessName
@@ -96,7 +97,6 @@ extension Stripe.Customers {
             case metadata
             case name
             case nextInvoiceSequence
-            case object
             case phone
             case preferredLocales
             case shipping
@@ -110,6 +110,7 @@ extension Stripe.Customers {
 
         public init(
             id: ID,
+            object: String,
             address: Address? = nil,
             balance: Int? = nil,
             businessName: String? = nil,
@@ -130,7 +131,6 @@ extension Stripe.Customers {
             metadata: [String: String]? = nil,
             name: String? = nil,
             nextInvoiceSequence: Int? = nil,
-            object: String? = nil,
             phone: String? = nil,
             preferredLocales: [String]? = nil,
             shipping: ShippingLabel? = nil,
@@ -142,10 +142,11 @@ extension Stripe.Customers {
             testClock: String? = nil
         ) {
             self.id = id
+            self.object = object
             self.address = address
             self.balance = balance
             self.businessName = businessName
-            self.cashBalance = cashBalance
+            self._cashBalance = Boxed(wrappedValue: cashBalance)
             self.created = created
             self.currency = currency
             self.customerAccount = customerAccount
@@ -162,7 +163,6 @@ extension Stripe.Customers {
             self.metadata = metadata
             self.name = name
             self.nextInvoiceSequence = nextInvoiceSequence
-            self.object = object
             self.phone = phone
             self.preferredLocales = preferredLocales
             self.shipping = shipping
@@ -233,62 +233,62 @@ extension Stripe.Customers {
 
         /// The customer's payment sources, if any.
         public struct Sources: Codable, Hashable, Sendable {
+            /// String representing the object's type.
+            public let object: String
             /// Details about each object.
             public var data: [StripePaymentSource]?
             /// True if this list has another page of items after this one that can be fetched.
             public var hasMore: Bool?
-            /// String representing the object's type.
-            public var object: String?
             /// The URL where this list can be accessed.
             public var url: String?
 
             private enum CodingKeys: String, CodingKey {
+                case object
                 case data
                 case hasMore
-                case object
                 case url
             }
 
             public init(
+                object: String,
                 data: [StripePaymentSource]? = nil,
                 hasMore: Bool? = nil,
-                object: String? = nil,
                 url: String? = nil
             ) {
+                self.object = object
                 self.data = data
                 self.hasMore = hasMore
-                self.object = object
                 self.url = url
             }
         }
 
         /// The customer's current subscriptions, if any.
         public struct Subscriptions: Codable, Hashable, Sendable {
+            /// String representing the object's type.
+            public let object: String
             /// Details about each object.
             public var data: [Stripe.Billing.Subscription]?
             /// True if this list has another page of items after this one that can be fetched.
             public var hasMore: Bool?
-            /// String representing the object's type.
-            public var object: String?
             /// The URL where this list can be accessed.
             public var url: String?
 
             private enum CodingKeys: String, CodingKey {
+                case object
                 case data
                 case hasMore
-                case object
                 case url
             }
 
             public init(
+                object: String,
                 data: [Stripe.Billing.Subscription]? = nil,
                 hasMore: Bool? = nil,
-                object: String? = nil,
                 url: String? = nil
             ) {
+                self.object = object
                 self.data = data
                 self.hasMore = hasMore
-                self.object = object
                 self.url = url
             }
         }
@@ -374,31 +374,31 @@ extension Stripe.Customers {
 
         /// The customer's tax IDs.
         public struct TaxIds: Codable, Hashable, Sendable {
+            /// String representing the object's type.
+            public let object: String
             /// Details about each object.
             public var data: [Stripe.Tax.ID]?
             /// True if this list has another page of items after this one that can be fetched.
             public var hasMore: Bool?
-            /// String representing the object's type.
-            public var object: String?
             /// The URL where this list can be accessed.
             public var url: String?
 
             private enum CodingKeys: String, CodingKey {
+                case object
                 case data
                 case hasMore
-                case object
                 case url
             }
 
             public init(
+                object: String,
                 data: [Stripe.Tax.ID]? = nil,
                 hasMore: Bool? = nil,
-                object: String? = nil,
                 url: String? = nil
             ) {
+                self.object = object
                 self.data = data
                 self.hasMore = hasMore
-                self.object = object
                 self.url = url
             }
         }

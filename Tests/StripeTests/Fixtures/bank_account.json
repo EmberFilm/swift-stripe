@@ -1,0 +1,59 @@
+{
+ "account": "account_1",
+ "account_holder_name": "account_holder_name_1",
+ "account_holder_type": "individual",
+ "account_type": "checking",
+ "available_payout_methods": [
+  "instant"
+ ],
+ "bank_name": "bank_name_1",
+ "country": "country_1",
+ "currency": "usd",
+ "customer": "customer_1",
+ "default_for_currency": true,
+ "fingerprint": "fingerprint_1",
+ "future_requirements": {
+  "currently_due": [
+   "currently_due_1"
+  ],
+  "errors": [
+   {
+    "code": "external_request",
+    "reason": "reason_1",
+    "requirement": "requirement_1"
+   }
+  ],
+  "past_due": [
+   "past_due_1"
+  ],
+  "pending_verification": [
+   "pending_verification_1"
+  ]
+ },
+ "id": "bank_account_1",
+ "last4": "last4_1",
+ "metadata": {
+  "key": "metadata_1"
+ },
+ "object": "bank_account",
+ "requirements": {
+  "currently_due": [
+   "currently_due_1"
+  ],
+  "errors": [
+   {
+    "code": "external_request",
+    "reason": "reason_1",
+    "requirement": "requirement_1"
+   }
+  ],
+  "past_due": [
+   "past_due_1"
+  ],
+  "pending_verification": [
+   "pending_verification_1"
+  ]
+ },
+ "routing_number": "routing_number_1",
+ "status": "new"
+}

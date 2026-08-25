@@ -15,6 +15,8 @@ extension Stripe.Billing {
     public struct Subscription: Codable, Hashable, Sendable, Identifiable {
         public typealias ID = String
         public let id: ID
+        /// String representing the object's type.
+        public let object: String
         /// ID of the Connect Application that created the subscription.
         @Expandable<Stripe.Shared.Application, String> public var application: String?
         /// A non-negative decimal between 0 and 100, with at most two decimal places.
@@ -74,8 +76,6 @@ extension Stripe.Billing {
         public var metadata: [String: String]?
         /// Specifies the approximate timestamp on which any pending invoice items will be billed according to the schedule provid…
         public var nextPendingInvoiceItemInvoice: Date?
-        /// String representing the object's type.
-        public var object: String?
         /// The account (if any) the charge was made on behalf of for charges associated with this subscription.
         @Expandable<Stripe.Connect.Account, String> public var onBehalfOf: String?
         /// If specified, payment collection for this subscription will be paused.
@@ -108,6 +108,7 @@ extension Stripe.Billing {
 
         private enum CodingKeys: String, CodingKey {
             case id
+            case object
             case application
             case applicationFeePercent
             case automaticTax
@@ -139,7 +140,6 @@ extension Stripe.Billing {
             case managedPayments
             case metadata
             case nextPendingInvoiceItemInvoice
-            case object
             case onBehalfOf
             case pauseCollection
             case paymentSettings
@@ -159,6 +159,7 @@ extension Stripe.Billing {
 
         public init(
             id: ID,
+            object: String,
             application: String? = nil,
             applicationFeePercent: Double? = nil,
             automaticTax: AutomaticTax? = nil,
@@ -190,7 +191,6 @@ extension Stripe.Billing {
             managedPayments: Stripe.Shared.ManagedPayments? = nil,
             metadata: [String: String]? = nil,
             nextPendingInvoiceItemInvoice: Date? = nil,
-            object: String? = nil,
             onBehalfOf: String? = nil,
             pauseCollection: PauseCollection? = nil,
             paymentSettings: PaymentSettings? = nil,
@@ -208,6 +208,7 @@ extension Stripe.Billing {
             trialStart: Date? = nil
         ) {
             self.id = id
+            self.object = object
             self._application = Expandable(id: application)
             self.applicationFeePercent = applicationFeePercent
             self.automaticTax = automaticTax
@@ -239,7 +240,6 @@ extension Stripe.Billing {
             self.managedPayments = managedPayments
             self.metadata = metadata
             self.nextPendingInvoiceItemInvoice = nextPendingInvoiceItemInvoice
-            self.object = object
             self._onBehalfOf = Expandable(id: onBehalfOf)
             self.pauseCollection = pauseCollection
             self.paymentSettings = paymentSettings
@@ -601,31 +601,31 @@ extension Stripe.Billing {
 
         /// List of subscription items, each with an attached price.
         public struct Items: Codable, Hashable, Sendable {
+            /// String representing the object's type.
+            public let object: String
             /// Details about each object.
             public var data: [Stripe.Billing.Subscription.Item]?
             /// True if this list has another page of items after this one that can be fetched.
             public var hasMore: Bool?
-            /// String representing the object's type.
-            public var object: String?
             /// The URL where this list can be accessed.
             public var url: String?
 
             private enum CodingKeys: String, CodingKey {
+                case object
                 case data
                 case hasMore
-                case object
                 case url
             }
 
             public init(
+                object: String,
                 data: [Stripe.Billing.Subscription.Item]? = nil,
                 hasMore: Bool? = nil,
-                object: String? = nil,
                 url: String? = nil
             ) {
+                self.object = object
                 self.data = data
                 self.hasMore = hasMore
-                self.object = object
                 self.url = url
             }
         }

@@ -1,0 +1,37 @@
+{
+ "default_currency": "usd",
+ "id": "country_spec_1",
+ "object": "country_spec",
+ "supported_bank_account_currencies": {
+  "key": [
+   "usd"
+  ]
+ },
+ "supported_payment_currencies": [
+  "usd"
+ ],
+ "supported_payment_methods": [
+  "supported_payment_methods_1"
+ ],
+ "supported_transfer_countries": [
+  "supported_transfer_countries_1"
+ ],
+ "verification_fields": {
+  "company": {
+   "additional": [
+    "additional_1"
+   ],
+   "minimum": [
+    "minimum_1"
+   ]
+  },
+  "individual": {
+   "additional": [
+    "additional_1"
+   ],
+   "minimum": [
+    "minimum_1"
+   ]
+  }
+ }
+}

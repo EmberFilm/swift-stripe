@@ -15,6 +15,8 @@ extension Stripe.Fraud.Reviews {
     public struct Review: Codable, Hashable, Sendable, Identifiable {
         public typealias ID = String
         public let id: ID
+        /// String representing the object's type.
+        public let object: String
         /// The ZIP or postal code of the card used, if applicable.
         public var billingZip: String?
         /// The charge associated with this review.
@@ -29,8 +31,6 @@ extension Stripe.Fraud.Reviews {
         public var ipAddressLocation: IpAddressLocation?
         /// If the object exists in live mode, the value is `true`.
         public var livemode: Bool?
-        /// String representing the object's type.
-        public var object: String?
         /// If `true`, the review needs action.
         public var open: Bool?
         /// The reason the review was opened.
@@ -44,6 +44,7 @@ extension Stripe.Fraud.Reviews {
 
         private enum CodingKeys: String, CodingKey {
             case id
+            case object
             case billingZip
             case charge
             case closedReason
@@ -51,7 +52,6 @@ extension Stripe.Fraud.Reviews {
             case ipAddress
             case ipAddressLocation
             case livemode
-            case object
             case open
             case openedReason
             case paymentIntent
@@ -61,6 +61,7 @@ extension Stripe.Fraud.Reviews {
 
         public init(
             id: ID,
+            object: String,
             billingZip: String? = nil,
             charge: String? = nil,
             closedReason: ClosedReason? = nil,
@@ -68,7 +69,6 @@ extension Stripe.Fraud.Reviews {
             ipAddress: String? = nil,
             ipAddressLocation: IpAddressLocation? = nil,
             livemode: Bool? = nil,
-            object: String? = nil,
             open: Bool? = nil,
             openedReason: OpenedReason? = nil,
             paymentIntent: String? = nil,
@@ -76,6 +76,7 @@ extension Stripe.Fraud.Reviews {
             session: Session? = nil
         ) {
             self.id = id
+            self.object = object
             self.billingZip = billingZip
             self._charge = Expandable(id: charge)
             self.closedReason = closedReason
@@ -83,7 +84,6 @@ extension Stripe.Fraud.Reviews {
             self.ipAddress = ipAddress
             self.ipAddressLocation = ipAddressLocation
             self.livemode = livemode
-            self.object = object
             self.open = open
             self.openedReason = openedReason
             self._paymentIntent = Expandable(id: paymentIntent)

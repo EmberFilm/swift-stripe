@@ -15,6 +15,8 @@ extension Stripe.Fraud {
     public struct PaymentEvaluation: Codable, Hashable, Sendable, Identifiable {
         public typealias ID = String
         public let id: ID
+        /// String representing the object's type.
+        public let object: String
         public var clientDeviceMetadataDetails: ClientDeviceMetadataDetails?
         /// Time at which the object was created.
         public var createdAt: Date?
@@ -25,8 +27,6 @@ extension Stripe.Fraud {
         public var livemode: Bool?
         /// Set of key-value pairs that you can attach to an object.
         public var metadata: [String: String]?
-        /// String representing the object's type.
-        public var object: String?
         /// Indicates the final outcome for the payment evaluation.
         public var outcome: Outcome?
         public var paymentDetails: PaymentDetails?
@@ -36,13 +36,13 @@ extension Stripe.Fraud {
 
         private enum CodingKeys: String, CodingKey {
             case id
+            case object
             case clientDeviceMetadataDetails
             case createdAt
             case customerDetails
             case events
             case livemode
             case metadata
-            case object
             case outcome
             case paymentDetails
             case recommendedAction
@@ -51,26 +51,26 @@ extension Stripe.Fraud {
 
         public init(
             id: ID,
+            object: String,
             clientDeviceMetadataDetails: ClientDeviceMetadataDetails? = nil,
             createdAt: Date? = nil,
             customerDetails: CustomerDetails? = nil,
             events: [Events]? = nil,
             livemode: Bool? = nil,
             metadata: [String: String]? = nil,
-            object: String? = nil,
             outcome: Outcome? = nil,
             paymentDetails: PaymentDetails? = nil,
             recommendedAction: RecommendedAction? = nil,
             signals: Signals? = nil
         ) {
             self.id = id
+            self.object = object
             self.clientDeviceMetadataDetails = clientDeviceMetadataDetails
             self.createdAt = createdAt
             self.customerDetails = customerDetails
             self.events = events
             self.livemode = livemode
             self.metadata = metadata
-            self.object = object
             self.outcome = outcome
             self.paymentDetails = paymentDetails
             self.recommendedAction = recommendedAction
@@ -309,7 +309,7 @@ extension Stripe.Fraud {
 
                 /// Type of user intervention raised.
                 public enum `Type`: String, Codable, Hashable, Sendable {
-                    case _3ds = "3ds"
+                    case value3ds = "3ds"
                     case captcha
                     case custom
                 }

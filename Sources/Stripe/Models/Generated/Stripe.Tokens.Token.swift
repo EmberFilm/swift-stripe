@@ -15,6 +15,8 @@ extension Stripe.Tokens {
     public struct Token: Codable, Hashable, Sendable, Identifiable {
         public typealias ID = String
         public let id: ID
+        /// String representing the object's type.
+        public let object: String
         public var bankAccount: BankAccount?
         public var card: Card?
         /// IP address of the client that generates the token.
@@ -23,8 +25,6 @@ extension Stripe.Tokens {
         public var created: Date?
         /// If the object exists in live mode, the value is `true`.
         public var livemode: Bool?
-        /// String representing the object's type.
-        public var object: String?
         /// Type of the token: `account`, `bank_account`, `card`, or `pii`.
         public var `type`: String?
         /// Determines if you have already used this token (you can only use tokens once).
@@ -32,34 +32,34 @@ extension Stripe.Tokens {
 
         private enum CodingKeys: String, CodingKey {
             case id
+            case object
             case bankAccount
             case card
             case clientIp
             case created
             case livemode
-            case object
             case `type`
             case used
         }
 
         public init(
             id: ID,
+            object: String,
             bankAccount: BankAccount? = nil,
             card: Card? = nil,
             clientIp: String? = nil,
             created: Date? = nil,
             livemode: Bool? = nil,
-            object: String? = nil,
             `type`: String? = nil,
             used: Bool? = nil
         ) {
             self.id = id
+            self.object = object
             self.bankAccount = bankAccount
             self.card = card
             self.clientIp = clientIp
             self.created = created
             self.livemode = livemode
-            self.object = object
             self.`type` = `type`
             self.used = used
         }

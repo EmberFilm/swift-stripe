@@ -65,7 +65,7 @@ def sample(node, prop, expandable, depth, stack, parent=None, siblings=()):
     if t == "string":
         if "enum" in node and node["enum"]:
             return node["enum"][0]
-        if node.get("format") == "currency" or prop == "currency" or prop.endswith("_currency"):
+        if node.get("format") == "currency" or "currenc" in prop:
             return "usd"
         if "statement_descriptor" in prop:
             return "EMBERFILM"        # validated to 22 characters by the hand type
