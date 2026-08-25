@@ -185,7 +185,7 @@ extension Stripe.Checkout.Sessions.Create {
         public let paymentMethodTypes: [String]?
         public let allowPromotionCodes: Bool?
         public let billingAddressCollection: Stripe.Checkout.Session.Billing.Address.Collection?
-        public let consentCollection: Stripe.Checkout.Session.Consent.Collection?
+        public let consentCollection: Stripe.Checkout.Session.ConsentCollection?
         public let customerCreation: Stripe.Checkout.Session.Customer.Creation?
         public let expiresAt: Date?
         public let locale: Stripe.Checkout.Session.Locale?
@@ -246,7 +246,7 @@ extension Stripe.Checkout.Sessions.Create {
             paymentMethodTypes: [String]? = nil,
             allowPromotionCodes: Bool? = nil,
             billingAddressCollection: Stripe.Checkout.Session.Billing.Address.Collection? = nil,
-            consentCollection: Stripe.Checkout.Session.Consent.Collection? = nil,
+            consentCollection: Stripe.Checkout.Session.ConsentCollection? = nil,
             customerCreation: Stripe.Checkout.Session.Customer.Creation? = nil,
             expiresAt: Date? = nil,
             locale: Stripe.Checkout.Session.Locale? = nil,

@@ -184,7 +184,7 @@ struct AddedFieldDecodingTests {
         #expect(session.presentmentDetails?.presentmentAmount == 999)
         #expect(session.redirectOnCompletion == .ifRequired)
         #expect(session.returnUrl == "https://x/return")
-        #expect(session.savedPaymentMethodOptions?.allowRedisplayFilters == ["always"])
+        #expect(session.savedPaymentMethodOptions?.allowRedisplayFilters == [.always])   // spec enum, so typed
         #expect(session.savedPaymentMethodOptions?.paymentMethodRemove == .enabled)
         #expect(session.savedPaymentMethodOptions?.paymentMethodSave == .disabled)
         #expect(session.uiMode == .embeddedPage)
