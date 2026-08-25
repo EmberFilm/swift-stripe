@@ -37,6 +37,21 @@ jobs:
           STATIC_SDK_CHECKSUM: ${{ vars.STATIC_SDK_CHECKSUM }}
       - run: swift build --swift-sdk aarch64-swift-linux-musl
 
+  model-drift:
+    name: Model drift against the OpenAPI spec
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # Pinned to a commit, not master: a Stripe release adding fields is not a regression in
+      # this package. Bumping the pin is a deliberate change that lands alongside the fields.
+      - name: Fetch the pinned spec
+        run: |
+          curl -sSL -o spec3.sdk.json \
+            "https://raw.githubusercontent.com/stripe/openapi/$STRIPE_OPENAPI_COMMIT/openapi/spec3.sdk.json"
+        env:
+          STRIPE_OPENAPI_COMMIT: a99d7764af677e1ddecf18dccb0cb8f99ceda9a4
+      - run: Scripts/model-drift.py spec3.sdk.json
+
   linux:
     name: Linux / Swift ${{ matrix.swift }}
     runs-on: ubuntu-latest

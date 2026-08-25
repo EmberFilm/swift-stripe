@@ -215,6 +215,12 @@ encodes by hand), `x-stripeResource`/`x-stripeOperations`, and expresses union f
 Run it before adding a field by hand — the answer is often that several neighbouring fields are
 missing too.
 
+CI runs it as a gate against a spec pinned by commit ( in
+). To take a newer spec: bump the pin, run the tool, model or
+acknowledge every gap it reports, and land all of that in one change. Adding a field is not
+done until it is decoded in  — see the
+blind spot noted in the script.
+
 ## Documentation
 
 README.md documents the public API, including the configuration key table and
