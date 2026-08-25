@@ -9,9 +9,8 @@ import FoundationEssentials
 #else
 import Foundation
 #endif
-import Stripe
 
-extension Generated.Billing {
+extension Stripe.Billing {
     /// Invoices are statements of amounts owed by a customer, and are either generated one-off, or generated periodically fro…
     public struct Invoice: Codable, Hashable, Sendable {
         public typealias ID = String
@@ -35,7 +34,7 @@ extension Generated.Billing {
         /// This is the sum of all the shipping amounts.
         public var amountShipping: Int?
         /// ID of the Connect Application that created the invoice.
-        @Expandable<Generated.Shared.Application, String> public var application: String?
+        @Expandable<Stripe.Shared.Application, String> public var application: String?
         /// Number of payment attempts made for this invoice, from the perspective of the payment retry schedule.
         public var attemptCount: Int?
         /// Whether an attempt has been made to pay the invoice.
@@ -56,9 +55,9 @@ extension Generated.Billing {
         /// Three-letter ISO currency code, in lowercase.
         public var currency: Stripe.Currency?
         /// Custom fields displayed on the invoice.
-        public var customFields: [Generated.Shared.CustomFields]?
+        public var customFields: [Stripe.Shared.CustomFields]?
         /// The ID of the customer to bill.
-        @Expandable<Generated.Customers.Customer, String> public var customer: String?
+        @Expandable<Stripe.Customers.Customer, String> public var customer: String?
         /// The ID of the account representing the customer to bill.
         public var customerAccount: String?
         /// The customer's address.
@@ -84,7 +83,7 @@ extension Generated.Billing {
         /// An arbitrary string attached to the object.
         public var description: String?
         /// The discounts applied to the invoice.
-        @ExpandableCollection<Generated.Shared.Discount> public var discounts: [String]?
+        @ExpandableCollection<Stripe.Shared.Discount> public var discounts: [String]?
         /// The date on which payment for this invoice is due.
         public var dueDate: Date?
         /// The date when this invoice is in effect.
@@ -99,11 +98,11 @@ extension Generated.Billing {
         public var hostedInvoiceUrl: String?
         /// The link to download the PDF for the invoice.
         public var invoicePdf: String?
-        public var issuer: Generated.Shared.ConnectAccountReference?
+        public var issuer: Stripe.Shared.ConnectAccountReference?
         /// The error encountered during the previous attempt to finalize the invoice.
-        public var lastFinalizationError: Generated.Shared.ApiErrors?
+        public var lastFinalizationError: Stripe.Shared.ApiErrors?
         /// The ID of the most recent non-draft revision of this invoice
-        @Expandable<Generated.Billing.Invoice, String> public var latestRevision: String?
+        @Expandable<Stripe.Billing.Invoice, String> public var latestRevision: String?
         /// The individual line items that make up the invoice.
         public var lines: Lines?
         /// If the object exists in live mode, the value is `true`.
@@ -146,7 +145,7 @@ extension Generated.Billing {
         /// The status of the invoice, one of `draft`, `open`, `paid`, `uncollectible`, or `void`.
         public var status: Status?
         public var statusTransitions: StatusTransitions?
-        @Expandable<Generated.Billing.Subscription, String> public var subscription: String?
+        @Expandable<Stripe.Billing.Subscription, String> public var subscription: String?
         /// Total of all subscriptions, invoice items, and prorations on the invoice before any invoice level discount or exclusiv…
         public var subtotal: Int?
         /// The integer amount in cents (or local equivalent) representing the subtotal of the invoice before any invoice level di…
@@ -271,7 +270,7 @@ extension Generated.Billing {
             confirmationSecret: ConfirmationSecret? = nil,
             created: Date? = nil,
             currency: Stripe.Currency? = nil,
-            customFields: [Generated.Shared.CustomFields]? = nil,
+            customFields: [Stripe.Shared.CustomFields]? = nil,
             customer: String? = nil,
             customerAccount: String? = nil,
             customerAddress: Address? = nil,
@@ -293,8 +292,8 @@ extension Generated.Billing {
             fromInvoice: FromInvoice? = nil,
             hostedInvoiceUrl: String? = nil,
             invoicePdf: String? = nil,
-            issuer: Generated.Shared.ConnectAccountReference? = nil,
-            lastFinalizationError: Generated.Shared.ApiErrors? = nil,
+            issuer: Stripe.Shared.ConnectAccountReference? = nil,
+            lastFinalizationError: Stripe.Shared.ApiErrors? = nil,
             latestRevision: String? = nil,
             lines: Lines? = nil,
             livemode: Bool? = nil,
@@ -452,7 +451,7 @@ extension Generated.Billing {
             /// Whether Stripe automatically computes tax on this invoice.
             public var enabled: Bool?
             /// The account that's liable for tax.
-            public var liability: Generated.Shared.ConnectAccountReference?
+            public var liability: Stripe.Shared.ConnectAccountReference?
             /// The tax provider powering automatic tax.
             public var provider: String?
             /// The status of the most recent automated tax calculation for this invoice.
@@ -469,7 +468,7 @@ extension Generated.Billing {
             public init(
                 disabledReason: DisabledReason? = nil,
                 enabled: Bool? = nil,
-                liability: Generated.Shared.ConnectAccountReference? = nil,
+                liability: Stripe.Shared.ConnectAccountReference? = nil,
                 provider: String? = nil,
                 status: Status? = nil
             ) {
@@ -660,7 +659,7 @@ extension Generated.Billing {
             /// The relation between this invoice and the cloned invoice
             public var action: String?
             /// The invoice that was cloned.
-            @Expandable<Generated.Billing.Invoice, String> public var invoice: String?
+            @Expandable<Stripe.Billing.Invoice, String> public var invoice: String?
 
             private enum CodingKeys: String, CodingKey {
                 case action
@@ -756,7 +755,7 @@ extension Generated.Billing {
                 /// Set of key-value pairs defined as subscription metadata when an invoice is created.
                 public var metadata: [String: String]?
                 /// The subscription that generated this invoice
-                @Expandable<Generated.Billing.Subscription, String> public var subscription: String?
+                @Expandable<Stripe.Billing.Subscription, String> public var subscription: String?
                 /// Only set for upcoming invoices that preview prorations.
                 public var subscriptionProrationDate: Date?
 
@@ -855,25 +854,25 @@ extension Generated.Billing {
 
             public struct PaymentMethodOptions: Codable, Hashable, Sendable {
                 /// If paying by `acss_debit`, this sub-hash contains details about the Canadian pre-authorized debit payment method optio…
-                public var acssDebit: Generated.Shared.AcssDebit?
+                public var acssDebit: Stripe.Shared.AcssDebit?
                 /// If paying by `bancontact`, this sub-hash contains details about the Bancontact payment method options to pass to the i…
-                public var bancontact: Generated.Shared.Bancontact?
+                public var bancontact: Stripe.Shared.Bancontact?
                 /// If paying by `card`, this sub-hash contains details about the Card payment method options to pass to the invoice’s Pay…
                 public var card: Card?
                 /// If paying by `customer_balance`, this sub-hash contains details about the Bank transfer payment method options to pass…
-                public var customerBalance: Generated.Shared.CustomerBalance?
+                public var customerBalance: Stripe.Shared.CustomerBalance?
                 /// If paying by `konbini`, this sub-hash contains details about the Konbini payment method options to pass to the invoice…
-                public var konbini: Generated.Shared.Konbini?
+                public var konbini: Stripe.Shared.Konbini?
                 /// If paying by `payto`, this sub-hash contains details about the PayTo payment method options to pass to the invoice’s P…
-                public var payto: Generated.Shared.Payto?
+                public var payto: Stripe.Shared.Payto?
                 /// If paying by `pix`, this sub-hash contains details about the Pix payment method options to pass to the invoice’s Payme…
                 public var pix: Pix?
                 /// If paying by `sepa_debit`, this sub-hash contains details about the SEPA Direct Debit payment method options to pass t…
-                public var sepaDebit: Generated.Shared.SepaDebit?
+                public var sepaDebit: Stripe.Shared.SepaDebit?
                 /// If paying by `upi`, this sub-hash contains details about the UPI payment method options to pass to the invoice’s Payme…
-                public var upi: Generated.Shared.Upi?
+                public var upi: Stripe.Shared.Upi?
                 /// If paying by `us_bank_account`, this sub-hash contains details about the ACH direct debit payment method options to pa…
-                public var usBankAccount: Generated.Shared.UsBankAccount?
+                public var usBankAccount: Stripe.Shared.UsBankAccount?
 
                 private enum CodingKeys: String, CodingKey {
                     case acssDebit
@@ -889,16 +888,16 @@ extension Generated.Billing {
                 }
 
                 public init(
-                    acssDebit: Generated.Shared.AcssDebit? = nil,
-                    bancontact: Generated.Shared.Bancontact? = nil,
+                    acssDebit: Stripe.Shared.AcssDebit? = nil,
+                    bancontact: Stripe.Shared.Bancontact? = nil,
                     card: Card? = nil,
-                    customerBalance: Generated.Shared.CustomerBalance? = nil,
-                    konbini: Generated.Shared.Konbini? = nil,
-                    payto: Generated.Shared.Payto? = nil,
+                    customerBalance: Stripe.Shared.CustomerBalance? = nil,
+                    konbini: Stripe.Shared.Konbini? = nil,
+                    payto: Stripe.Shared.Payto? = nil,
                     pix: Pix? = nil,
-                    sepaDebit: Generated.Shared.SepaDebit? = nil,
-                    upi: Generated.Shared.Upi? = nil,
-                    usBankAccount: Generated.Shared.UsBankAccount? = nil
+                    sepaDebit: Stripe.Shared.SepaDebit? = nil,
+                    upi: Stripe.Shared.Upi? = nil,
+                    usBankAccount: Stripe.Shared.UsBankAccount? = nil
                 ) {
                     self.acssDebit = acssDebit
                     self.bancontact = bancontact
@@ -984,7 +983,7 @@ extension Generated.Billing {
         /// Payments for this invoice.
         public struct Payments: Codable, Hashable, Sendable {
             /// Details about each object.
-            public var data: [Generated.Billing.Invoice.Payment]?
+            public var data: [Stripe.Billing.Invoice.Payment]?
             /// True if this list has another page of items after this one that can be fetched.
             public var hasMore: Bool?
             /// String representing the object's type.
@@ -1000,7 +999,7 @@ extension Generated.Billing {
             }
 
             public init(
-                data: [Generated.Billing.Invoice.Payment]? = nil,
+                data: [Stripe.Billing.Invoice.Payment]? = nil,
                 hasMore: Bool? = nil,
                 object: String? = nil,
                 url: String? = nil
@@ -1074,7 +1073,7 @@ extension Generated.Billing {
             /// The ID of the ShippingRate for this invoice.
             @Expandable<Stripe.Products.Shipping.Rate, String> public var shippingRate: String?
             /// The taxes applied to the shipping rate.
-            public var taxes: [Generated.Shared.Taxes]?
+            public var taxes: [Stripe.Shared.Taxes]?
 
             private enum CodingKeys: String, CodingKey {
                 case amountSubtotal
@@ -1089,7 +1088,7 @@ extension Generated.Billing {
                 amountTax: Int? = nil,
                 amountTotal: Int? = nil,
                 shippingRate: String? = nil,
-                taxes: [Generated.Shared.Taxes]? = nil
+                taxes: [Stripe.Shared.Taxes]? = nil
             ) {
                 self.amountSubtotal = amountSubtotal
                 self.amountTax = amountTax
@@ -1173,7 +1172,7 @@ extension Generated.Billing {
             /// The amount, in cents (or local equivalent), of the discount.
             public var amount: Int?
             /// The discount that was applied to get this discount amount.
-            @Expandable<Generated.Shared.Discount, String> public var discount: String?
+            @Expandable<Stripe.Shared.Discount, String> public var discount: String?
 
             private enum CodingKeys: String, CodingKey {
                 case amount
@@ -1195,7 +1194,7 @@ extension Generated.Billing {
             /// The credit balance transaction that was applied to get this pretax credit amount.
             @Expandable<Stripe.Billing.Credit.Balance.Transaction, String> public var creditBalanceTransaction: String?
             /// The discount that was applied to get this pretax credit amount.
-            @Expandable<Generated.Shared.Discount, String> public var discount: String?
+            @Expandable<Stripe.Shared.Discount, String> public var discount: String?
             /// Type of the pretax credit amount referenced.
             public var `type`: Type?
 

@@ -17,7 +17,7 @@ extension Stripe {
 // invoice_payment_method_options_acss_debit
 extension Stripe.Shared {
     public struct AcssDebit: Codable, Hashable, Sendable {
-        public var mandateOptions: Stripe.Shared.MandateOptions?
+        public var mandateOptions: Stripe.Shared.InvoicePaymentMethodOptionsAcssDebitMandateOptions?
         /// Bank account verification method.
         public var verificationMethod: VerificationMethod?
 
@@ -27,7 +27,7 @@ extension Stripe.Shared {
         }
 
         public init(
-            mandateOptions: Stripe.Shared.MandateOptions? = nil,
+            mandateOptions: Stripe.Shared.InvoicePaymentMethodOptionsAcssDebitMandateOptions? = nil,
             verificationMethod: VerificationMethod? = nil
         ) {
             self.mandateOptions = mandateOptions
@@ -39,6 +39,302 @@ extension Stripe.Shared {
             case automatic
             case instant
             case microdeposits
+        }
+    }
+}
+
+// api_errors
+extension Stripe.Shared {
+    public struct ApiErrors: Codable, Hashable, Sendable {
+        /// For card errors resulting from a card issuer decline, a short string indicating how to proceed with an error if they p…
+        public var adviceCode: String?
+        /// For card errors, the ID of the failed charge.
+        public var charge: String?
+        /// For some errors that could be handled programmatically, a short string indicating the error code reported.
+        public var code: Code?
+        /// For card errors resulting from a card issuer decline, a short string indicating the card issuer's reason for the decli…
+        public var declineCode: String?
+        /// A URL to more information about the error code reported.
+        public var docUrl: String?
+        /// A human-readable message providing more details about the error.
+        public var message: String?
+        /// For card errors resulting from a card issuer decline, a 2 digit code which indicates the advice given to merchant by t…
+        public var networkAdviceCode: String?
+        /// For payments declined by the network, an alphanumeric code which indicates the reason the payment failed.
+        public var networkDeclineCode: String?
+        /// If the error is parameter-specific, the parameter related to the error.
+        public var param: String?
+        @Boxed public var paymentIntent: Stripe.PaymentIntents.PaymentIntent?
+        public var paymentMethod: Stripe.PaymentMethods.PaymentMethod?
+        /// If the error is specific to the type of payment method, the payment method type that had a problem.
+        public var paymentMethodType: String?
+        /// A URL to the request log entry in your dashboard.
+        public var requestLogUrl: String?
+        public var setupIntent: Stripe.Setup.Intent?
+        public var source: StripePaymentSource?
+        /// The type of error returned.
+        public var `type`: Type?
+
+        private enum CodingKeys: String, CodingKey {
+            case adviceCode
+            case charge
+            case code
+            case declineCode
+            case docUrl
+            case message
+            case networkAdviceCode
+            case networkDeclineCode
+            case param
+            case paymentIntent
+            case paymentMethod
+            case paymentMethodType
+            case requestLogUrl
+            case setupIntent
+            case source
+            case `type`
+        }
+
+        public init(
+            adviceCode: String? = nil,
+            charge: String? = nil,
+            code: Code? = nil,
+            declineCode: String? = nil,
+            docUrl: String? = nil,
+            message: String? = nil,
+            networkAdviceCode: String? = nil,
+            networkDeclineCode: String? = nil,
+            param: String? = nil,
+            paymentIntent: Stripe.PaymentIntents.PaymentIntent? = nil,
+            paymentMethod: Stripe.PaymentMethods.PaymentMethod? = nil,
+            paymentMethodType: String? = nil,
+            requestLogUrl: String? = nil,
+            setupIntent: Stripe.Setup.Intent? = nil,
+            source: StripePaymentSource? = nil,
+            `type`: Type? = nil
+        ) {
+            self.adviceCode = adviceCode
+            self.charge = charge
+            self.code = code
+            self.declineCode = declineCode
+            self.docUrl = docUrl
+            self.message = message
+            self.networkAdviceCode = networkAdviceCode
+            self.networkDeclineCode = networkDeclineCode
+            self.param = param
+            self._paymentIntent = Boxed(wrappedValue: paymentIntent)
+            self.paymentMethod = paymentMethod
+            self.paymentMethodType = paymentMethodType
+            self.requestLogUrl = requestLogUrl
+            self.setupIntent = setupIntent
+            self.source = source
+            self.`type` = `type`
+        }
+
+        /// For some errors that could be handled programmatically, a short string indicating the error code reported.
+        public enum Code: String, Codable, Hashable, Sendable {
+            case accountClosed = "account_closed"
+            case accountCountryInvalidAddress = "account_country_invalid_address"
+            case accountErrorCountryChangeRequiresAdditionalSteps = "account_error_country_change_requires_additional_steps"
+            case accountInformationMismatch = "account_information_mismatch"
+            case accountInvalid = "account_invalid"
+            case accountNumberInvalid = "account_number_invalid"
+            case accountTokenRequiredForV2Account = "account_token_required_for_v2_account"
+            case acssDebitSessionIncomplete = "acss_debit_session_incomplete"
+            case actionBlocked = "action_blocked"
+            case alipayUpgradeRequired = "alipay_upgrade_required"
+            case amountTooLarge = "amount_too_large"
+            case amountTooSmall = "amount_too_small"
+            case anomalousMoneyMovementRequest = "anomalous_money_movement_request"
+            case apiKeyExpired = "api_key_expired"
+            case applicationFeesNotAllowed = "application_fees_not_allowed"
+            case approvalRequired = "approval_required"
+            case authenticationRequired = "authentication_required"
+            case balanceInsufficient = "balance_insufficient"
+            case balanceInvalidParameter = "balance_invalid_parameter"
+            case bankAccountBadRoutingNumbers = "bank_account_bad_routing_numbers"
+            case bankAccountDeclined = "bank_account_declined"
+            case bankAccountExists = "bank_account_exists"
+            case bankAccountRestricted = "bank_account_restricted"
+            case bankAccountUnusable = "bank_account_unusable"
+            case bankAccountUnverified = "bank_account_unverified"
+            case bankAccountVerificationFailed = "bank_account_verification_failed"
+            case billingInvalidMandate = "billing_invalid_mandate"
+            case bitcoinUpgradeRequired = "bitcoin_upgrade_required"
+            case captureChargeAuthorizationExpired = "capture_charge_authorization_expired"
+            case captureUnauthorizedPayment = "capture_unauthorized_payment"
+            case cardDeclineRateLimitExceeded = "card_decline_rate_limit_exceeded"
+            case cardDeclined = "card_declined"
+            case cardholderPhoneNumberRequired = "cardholder_phone_number_required"
+            case chargeAlreadyCaptured = "charge_already_captured"
+            case chargeAlreadyRefunded = "charge_already_refunded"
+            case chargeDisputed = "charge_disputed"
+            case chargeExceedsSourceLimit = "charge_exceeds_source_limit"
+            case chargeExceedsTransactionLimit = "charge_exceeds_transaction_limit"
+            case chargeExpiredForCapture = "charge_expired_for_capture"
+            case chargeInvalidParameter = "charge_invalid_parameter"
+            case chargeNotRefundable = "charge_not_refundable"
+            case clearingCodeUnsupported = "clearing_code_unsupported"
+            case countryCodeInvalid = "country_code_invalid"
+            case countryUnsupported = "country_unsupported"
+            case couponExpired = "coupon_expired"
+            case customerMaxPaymentMethods = "customer_max_payment_methods"
+            case customerMaxSubscriptions = "customer_max_subscriptions"
+            case customerSessionExpired = "customer_session_expired"
+            case customerTaxLocationInvalid = "customer_tax_location_invalid"
+            case debitNotAuthorized = "debit_not_authorized"
+            case emailInvalid = "email_invalid"
+            case expiredCard = "expired_card"
+            case failedTaxCalculation = "failed_tax_calculation"
+            case financialAccountBalanceDoesNotSupportCurrency = "financial_account_balance_does_not_support_currency"
+            case financialAccountCapabilityNotEnabled = "financial_account_capability_not_enabled"
+            case financialAccountCapabilityRestricted = "financial_account_capability_restricted"
+            case financialConnectionsAccountInactive = "financial_connections_account_inactive"
+            case financialConnectionsAccountPendingAccountNumbers = "financial_connections_account_pending_account_numbers"
+            case financialConnectionsAccountUnavailableAccountNumbers = "financial_connections_account_unavailable_account_numbers"
+            case financialConnectionsNoSuccessfulTransactionRefresh = "financial_connections_no_successful_transaction_refresh"
+            case forwardingApiInactive = "forwarding_api_inactive"
+            case forwardingApiInvalidParameter = "forwarding_api_invalid_parameter"
+            case forwardingApiRetryableUpstreamError = "forwarding_api_retryable_upstream_error"
+            case forwardingApiUpstreamConnectionError = "forwarding_api_upstream_connection_error"
+            case forwardingApiUpstreamConnectionTimeout = "forwarding_api_upstream_connection_timeout"
+            case forwardingApiUpstreamError = "forwarding_api_upstream_error"
+            case idempotencyKeyInUse = "idempotency_key_in_use"
+            case incorrectAddress = "incorrect_address"
+            case incorrectCvc = "incorrect_cvc"
+            case incorrectNumber = "incorrect_number"
+            case incorrectZip = "incorrect_zip"
+            case indiaRecurringPaymentMandateCanceled = "india_recurring_payment_mandate_canceled"
+            case instantPayoutsConfigDisabled = "instant_payouts_config_disabled"
+            case instantPayoutsCurrencyDisabled = "instant_payouts_currency_disabled"
+            case instantPayoutsLimitExceeded = "instant_payouts_limit_exceeded"
+            case instantPayoutsUnsupported = "instant_payouts_unsupported"
+            case insufficientFunds = "insufficient_funds"
+            case intentInvalidState = "intent_invalid_state"
+            case intentVerificationMethodMissing = "intent_verification_method_missing"
+            case invalidCardType = "invalid_card_type"
+            case invalidCharacters = "invalid_characters"
+            case invalidChargeAmount = "invalid_charge_amount"
+            case invalidCvc = "invalid_cvc"
+            case invalidExpiryMonth = "invalid_expiry_month"
+            case invalidExpiryYear = "invalid_expiry_year"
+            case invalidMandateReferencePrefixFormat = "invalid_mandate_reference_prefix_format"
+            case invalidNumber = "invalid_number"
+            case invalidSourceUsage = "invalid_source_usage"
+            case invalidTaxLocation = "invalid_tax_location"
+            case invoiceNoCustomerLineItems = "invoice_no_customer_line_items"
+            case invoiceNoPaymentMethodTypes = "invoice_no_payment_method_types"
+            case invoiceNoSubscriptionLineItems = "invoice_no_subscription_line_items"
+            case invoiceNotEditable = "invoice_not_editable"
+            case invoiceOnBehalfOfNotEditable = "invoice_on_behalf_of_not_editable"
+            case invoicePaymentIntentRequiresAction = "invoice_payment_intent_requires_action"
+            case invoiceUpcomingNone = "invoice_upcoming_none"
+            case livemodeMismatch = "livemode_mismatch"
+            case lockTimeout = "lock_timeout"
+            case missing
+            case noAccount = "no_account"
+            case notAllowedOnStandardAccount = "not_allowed_on_standard_account"
+            case outOfInventory = "out_of_inventory"
+            case ownershipDeclarationNotAllowed = "ownership_declaration_not_allowed"
+            case parameterInvalidEmpty = "parameter_invalid_empty"
+            case parameterInvalidInteger = "parameter_invalid_integer"
+            case parameterInvalidStringBlank = "parameter_invalid_string_blank"
+            case parameterInvalidStringEmpty = "parameter_invalid_string_empty"
+            case parameterMissing = "parameter_missing"
+            case parameterUnknown = "parameter_unknown"
+            case parametersExclusive = "parameters_exclusive"
+            case paymentIntentActionRequired = "payment_intent_action_required"
+            case paymentIntentAuthenticationFailure = "payment_intent_authentication_failure"
+            case paymentIntentIncompatiblePaymentMethod = "payment_intent_incompatible_payment_method"
+            case paymentIntentInvalidParameter = "payment_intent_invalid_parameter"
+            case paymentIntentKonbiniRejectedConfirmationNumber = "payment_intent_konbini_rejected_confirmation_number"
+            case paymentIntentMandateInvalid = "payment_intent_mandate_invalid"
+            case paymentIntentPaymentAttemptExpired = "payment_intent_payment_attempt_expired"
+            case paymentIntentPaymentAttemptFailed = "payment_intent_payment_attempt_failed"
+            case paymentIntentRateLimitExceeded = "payment_intent_rate_limit_exceeded"
+            case paymentIntentUnexpectedState = "payment_intent_unexpected_state"
+            case paymentMethodBankAccountAlreadyVerified = "payment_method_bank_account_already_verified"
+            case paymentMethodBankAccountBlocked = "payment_method_bank_account_blocked"
+            case paymentMethodBillingDetailsAddressMissing = "payment_method_billing_details_address_missing"
+            case paymentMethodConfigurationFailures = "payment_method_configuration_failures"
+            case paymentMethodCurrencyMismatch = "payment_method_currency_mismatch"
+            case paymentMethodCustomerDecline = "payment_method_customer_decline"
+            case paymentMethodInvalidParameter = "payment_method_invalid_parameter"
+            case paymentMethodInvalidParameterTestmode = "payment_method_invalid_parameter_testmode"
+            case paymentMethodMicrodepositFailed = "payment_method_microdeposit_failed"
+            case paymentMethodMicrodepositProcessingError = "payment_method_microdeposit_processing_error"
+            case paymentMethodMicrodepositVerificationAmountsInvalid = "payment_method_microdeposit_verification_amounts_invalid"
+            case paymentMethodMicrodepositVerificationAmountsMismatch = "payment_method_microdeposit_verification_amounts_mismatch"
+            case paymentMethodMicrodepositVerificationAttemptsExceeded = "payment_method_microdeposit_verification_attempts_exceeded"
+            case paymentMethodMicrodepositVerificationDescriptorCodeMismatch = "payment_method_microdeposit_verification_descriptor_code_mismatch"
+            case paymentMethodMicrodepositVerificationTimeout = "payment_method_microdeposit_verification_timeout"
+            case paymentMethodNotAvailable = "payment_method_not_available"
+            case paymentMethodProviderDecline = "payment_method_provider_decline"
+            case paymentMethodProviderTimeout = "payment_method_provider_timeout"
+            case paymentMethodUnactivated = "payment_method_unactivated"
+            case paymentMethodUnexpectedState = "payment_method_unexpected_state"
+            case paymentMethodUnsupportedType = "payment_method_unsupported_type"
+            case payoutReconciliationNotReady = "payout_reconciliation_not_ready"
+            case payoutsLimitExceeded = "payouts_limit_exceeded"
+            case payoutsNotAllowed = "payouts_not_allowed"
+            case platformAccountRequired = "platform_account_required"
+            case platformApiKeyExpired = "platform_api_key_expired"
+            case postalCodeInvalid = "postal_code_invalid"
+            case processingError = "processing_error"
+            case productInactive = "product_inactive"
+            case progressiveOnboardingLimitExceeded = "progressive_onboarding_limit_exceeded"
+            case rateLimit = "rate_limit"
+            case referToCustomer = "refer_to_customer"
+            case refundDisputedPayment = "refund_disputed_payment"
+            case requestBlocked = "request_blocked"
+            case resourceAlreadyExists = "resource_already_exists"
+            case resourceMissing = "resource_missing"
+            case returnIntentAlreadyProcessed = "return_intent_already_processed"
+            case routingNumberInvalid = "routing_number_invalid"
+            case secretKeyRequired = "secret_key_required"
+            case sepaUnsupportedAccount = "sepa_unsupported_account"
+            case servicePeriodCouponWithMeteredTieredItemUnsupported = "service_period_coupon_with_metered_tiered_item_unsupported"
+            case setupAttemptFailed = "setup_attempt_failed"
+            case setupIntentAuthenticationFailure = "setup_intent_authentication_failure"
+            case setupIntentInvalidParameter = "setup_intent_invalid_parameter"
+            case setupIntentMandateInvalid = "setup_intent_mandate_invalid"
+            case setupIntentMobileWalletUnsupported = "setup_intent_mobile_wallet_unsupported"
+            case setupIntentSetupAttemptExpired = "setup_intent_setup_attempt_expired"
+            case setupIntentUnexpectedState = "setup_intent_unexpected_state"
+            case shippingAddressInvalid = "shipping_address_invalid"
+            case shippingCalculationFailed = "shipping_calculation_failed"
+            case siretInvalid = "siret_invalid"
+            case skuInactive = "sku_inactive"
+            case stateUnsupported = "state_unsupported"
+            case statusTransitionInvalid = "status_transition_invalid"
+            case storerCapabilityMissing = "storer_capability_missing"
+            case storerCapabilityNotActive = "storer_capability_not_active"
+            case stripeTaxInactive = "stripe_tax_inactive"
+            case taxIdInvalid = "tax_id_invalid"
+            case taxIdProhibited = "tax_id_prohibited"
+            case taxesCalculationFailed = "taxes_calculation_failed"
+            case terminalLocationCountryUnsupported = "terminal_location_country_unsupported"
+            case terminalReaderBusy = "terminal_reader_busy"
+            case terminalReaderHardwareFault = "terminal_reader_hardware_fault"
+            case terminalReaderInvalidLocationForActivation = "terminal_reader_invalid_location_for_activation"
+            case terminalReaderInvalidLocationForPayment = "terminal_reader_invalid_location_for_payment"
+            case terminalReaderOffline = "terminal_reader_offline"
+            case terminalReaderTimeout = "terminal_reader_timeout"
+            case testmodeChargesOnly = "testmode_charges_only"
+            case tlsVersionUnsupported = "tls_version_unsupported"
+            case tokenAlreadyUsed = "token_already_used"
+            case tokenCardNetworkInvalid = "token_card_network_invalid"
+            case tokenInUse = "token_in_use"
+            case transferSourceBalanceParametersMismatch = "transfer_source_balance_parameters_mismatch"
+            case transfersNotAllowed = "transfers_not_allowed"
+            case urlInvalid = "url_invalid"
+        }
+
+        /// The type of error returned.
+        public enum `Type`: String, Codable, Hashable, Sendable {
+            case apiError = "api_error"
+            case cardError = "card_error"
+            case idempotencyError = "idempotency_error"
+            case invalidRequestError = "invalid_request_error"
         }
     }
 }
@@ -100,7 +396,7 @@ extension Stripe.Shared {
 // invoice_payment_method_options_customer_balance_bank_transfer
 extension Stripe.Shared {
     public struct BankTransfer: Codable, Hashable, Sendable {
-        public var euBankTransfer: Stripe.Shared.EuBankTransfer?
+        public var euBankTransfer: Stripe.Shared.InvoicePaymentMethodOptionsCustomerBalanceBankTransferEuBankTransfer?
         /// The bank transfer type that can be used for funding.
         public var `type`: String?
 
@@ -110,7 +406,7 @@ extension Stripe.Shared {
         }
 
         public init(
-            euBankTransfer: Stripe.Shared.EuBankTransfer? = nil,
+            euBankTransfer: Stripe.Shared.InvoicePaymentMethodOptionsCustomerBalanceBankTransferEuBankTransfer? = nil,
             `type`: String? = nil
         ) {
             self.euBankTransfer = euBankTransfer
@@ -193,6 +489,39 @@ extension Stripe.Shared {
     }
 }
 
+// deleted_application
+extension Stripe.Shared {
+    public struct DeletedApplication: Codable, Hashable, Sendable, Identifiable {
+        public typealias ID = String
+        public let id: ID
+        /// Always true for a deleted object
+        public var deleted: Bool?
+        /// The name of the application.
+        public var name: String?
+        /// String representing the object's type.
+        public var object: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case id
+            case deleted
+            case name
+            case object
+        }
+
+        public init(
+            id: ID,
+            deleted: Bool? = nil,
+            name: String? = nil,
+            object: String? = nil
+        ) {
+            self.id = id
+            self.deleted = deleted
+            self.name = name
+            self.object = object
+        }
+    }
+}
+
 // discount
 extension Stripe.Shared {
     /// A discount represents the actual application of a coupon or promotion code.
@@ -271,7 +600,7 @@ extension Stripe.Shared {
     }
 }
 
-// invoice_payment_method_options_customer_balance_bank_transfer_eu_bank_transfer
+// payment_method_options_customer_balance_eu_bank_account
 extension Stripe.Shared {
     public struct EuBankTransfer: Codable, Hashable, Sendable {
         /// The desired country code of the bank account information.
@@ -299,7 +628,7 @@ extension Stripe.Shared {
     }
 }
 
-// invoice_payment_method_options_us_bank_account_linked_account_options_filters
+// payment_flows_private_payment_methods_financial_connections_common_linked_account_options_filters
 extension Stripe.Shared {
     public struct Filters: Codable, Hashable, Sendable {
         /// The account subcategories to use to filter for possible accounts to link.
@@ -322,7 +651,7 @@ extension Stripe.Shared {
     }
 }
 
-// invoice_payment_method_options_us_bank_account_linked_account_options
+// linked_account_options_common
 extension Stripe.Shared {
     public struct FinancialConnections: Codable, Hashable, Sendable {
         public var filters: Stripe.Shared.Filters?
@@ -330,21 +659,26 @@ extension Stripe.Shared {
         public var permissions: [Permissions]?
         /// Data features requested to be retrieved upon account creation.
         public var prefetch: [Prefetch]?
+        /// For webview integrations only.
+        public var returnUrl: String?
 
         private enum CodingKeys: String, CodingKey {
             case filters
             case permissions
             case prefetch
+            case returnUrl
         }
 
         public init(
             filters: Stripe.Shared.Filters? = nil,
             permissions: [Permissions]? = nil,
-            prefetch: [Prefetch]? = nil
+            prefetch: [Prefetch]? = nil,
+            returnUrl: String? = nil
         ) {
             self.filters = filters
             self.permissions = permissions
             self.prefetch = prefetch
+            self.returnUrl = returnUrl
         }
 
         public enum Permissions: String, Codable, Hashable, Sendable {
@@ -411,6 +745,58 @@ extension Stripe.Shared {
     }
 }
 
+// invoice_payment_method_options_acss_debit_mandate_options
+extension Stripe.Shared {
+    public struct InvoicePaymentMethodOptionsAcssDebitMandateOptions: Codable, Hashable, Sendable {
+        /// Transaction type of the mandate.
+        public var transactionType: TransactionType?
+
+        private enum CodingKeys: String, CodingKey {
+            case transactionType
+        }
+
+        public init(
+            transactionType: TransactionType? = nil
+        ) {
+            self.transactionType = transactionType
+        }
+
+        /// Transaction type of the mandate.
+        public enum TransactionType: String, Codable, Hashable, Sendable {
+            case business
+            case personal
+        }
+    }
+}
+
+// invoice_payment_method_options_customer_balance_bank_transfer_eu_bank_transfer
+extension Stripe.Shared {
+    public struct InvoicePaymentMethodOptionsCustomerBalanceBankTransferEuBankTransfer: Codable, Hashable, Sendable {
+        /// The desired country code of the bank account information.
+        public var country: Country?
+
+        private enum CodingKeys: String, CodingKey {
+            case country
+        }
+
+        public init(
+            country: Country? = nil
+        ) {
+            self.country = country
+        }
+
+        /// The desired country code of the bank account information.
+        public enum Country: String, Codable, Hashable, Sendable {
+            case BE
+            case DE
+            case ES
+            case FR
+            case IE
+            case NL
+        }
+    }
+}
+
 // invoice_payment_method_options_mandate_options_upi
 extension Stripe.Shared {
     public struct InvoicePaymentMethodOptionsMandateOptionsUpi: Codable, Hashable, Sendable {
@@ -450,6 +836,69 @@ extension Stripe.Shared {
     }
 }
 
+// invoice_payment_method_options_us_bank_account_linked_account_options
+extension Stripe.Shared {
+    public struct InvoicePaymentMethodOptionsUsBankAccountLinkedAccountOptions: Codable, Hashable, Sendable {
+        public var filters: Stripe.Shared.InvoicePaymentMethodOptionsUsBankAccountLinkedAccountOptionsFilters?
+        /// The list of permissions to request.
+        public var permissions: [Permissions]?
+        /// Data features requested to be retrieved upon account creation.
+        public var prefetch: [Prefetch]?
+
+        private enum CodingKeys: String, CodingKey {
+            case filters
+            case permissions
+            case prefetch
+        }
+
+        public init(
+            filters: Stripe.Shared.InvoicePaymentMethodOptionsUsBankAccountLinkedAccountOptionsFilters? = nil,
+            permissions: [Permissions]? = nil,
+            prefetch: [Prefetch]? = nil
+        ) {
+            self.filters = filters
+            self.permissions = permissions
+            self.prefetch = prefetch
+        }
+
+        public enum Permissions: String, Codable, Hashable, Sendable {
+            case balances
+            case ownership
+            case paymentMethod = "payment_method"
+            case transactions
+        }
+
+        public enum Prefetch: String, Codable, Hashable, Sendable {
+            case balances
+            case ownership
+            case transactions
+        }
+    }
+}
+
+// invoice_payment_method_options_us_bank_account_linked_account_options_filters
+extension Stripe.Shared {
+    public struct InvoicePaymentMethodOptionsUsBankAccountLinkedAccountOptionsFilters: Codable, Hashable, Sendable {
+        /// The account subcategories to use to filter for possible accounts to link.
+        public var accountSubcategories: [AccountSubcategories]?
+
+        private enum CodingKeys: String, CodingKey {
+            case accountSubcategories
+        }
+
+        public init(
+            accountSubcategories: [AccountSubcategories]? = nil
+        ) {
+            self.accountSubcategories = accountSubcategories
+        }
+
+        public enum AccountSubcategories: String, Codable, Hashable, Sendable {
+            case checking
+            case savings
+        }
+    }
+}
+
 // invoice_payment_method_options_konbini
 extension Stripe.Shared {
     public struct Konbini: Codable, Hashable, Sendable {
@@ -475,26 +924,134 @@ extension Stripe.Shared {
     }
 }
 
-// invoice_payment_method_options_acss_debit_mandate_options
+// payment_method_options_mandate_options_pix
 extension Stripe.Shared {
     public struct MandateOptions: Codable, Hashable, Sendable {
-        /// Transaction type of the mandate.
-        public var transactionType: TransactionType?
+        /// Amount to be charged for future payments.
+        public var amount: Int?
+        /// Determines if the amount includes the IOF tax.
+        public var amountIncludesIof: AmountIncludesIof?
+        /// Type of amount.
+        public var amountType: AmountType?
+        /// Three-letter ISO currency code, in lowercase.
+        public var currency: Stripe.Currency?
+        /// Date when the mandate expires and no further payments will be charged, in `YYYY-MM-DD`.
+        public var endDate: String?
+        /// Schedule at which the future payments will be charged.
+        public var paymentSchedule: PaymentSchedule?
+        /// Subscription name displayed to buyers in their bank app.
+        public var reference: String?
+        /// Start date of the mandate, in `YYYY-MM-DD`.
+        public var startDate: String?
 
         private enum CodingKeys: String, CodingKey {
-            case transactionType
+            case amount
+            case amountIncludesIof
+            case amountType
+            case currency
+            case endDate
+            case paymentSchedule
+            case reference
+            case startDate
         }
 
         public init(
-            transactionType: TransactionType? = nil
+            amount: Int? = nil,
+            amountIncludesIof: AmountIncludesIof? = nil,
+            amountType: AmountType? = nil,
+            currency: Stripe.Currency? = nil,
+            endDate: String? = nil,
+            paymentSchedule: PaymentSchedule? = nil,
+            reference: String? = nil,
+            startDate: String? = nil
         ) {
-            self.transactionType = transactionType
+            self.amount = amount
+            self.amountIncludesIof = amountIncludesIof
+            self.amountType = amountType
+            self.currency = currency
+            self.endDate = endDate
+            self.paymentSchedule = paymentSchedule
+            self.reference = reference
+            self.startDate = startDate
         }
 
-        /// Transaction type of the mandate.
-        public enum TransactionType: String, Codable, Hashable, Sendable {
-            case business
-            case personal
+        /// Determines if the amount includes the IOF tax.
+        public enum AmountIncludesIof: String, Codable, Hashable, Sendable {
+            case always
+            case never
+        }
+
+        /// Type of amount.
+        public enum AmountType: String, Codable, Hashable, Sendable {
+            case fixed
+            case maximum
+        }
+
+        /// Schedule at which the future payments will be charged.
+        public enum PaymentSchedule: String, Codable, Hashable, Sendable {
+            case halfyearly
+            case monthly
+            case quarterly
+            case weekly
+            case yearly
+        }
+    }
+}
+
+// payment_method_config_biz_payment_method_configuration_details
+extension Stripe.Shared {
+    public struct PaymentMethodConfigurationDetails: Codable, Hashable, Sendable, Identifiable {
+        public typealias ID = String
+        public let id: ID
+        /// ID of the parent payment method configuration used.
+        public var parent: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case id
+            case parent
+        }
+
+        public init(
+            id: ID,
+            parent: String? = nil
+        ) {
+            self.id = id
+            self.parent = parent
+        }
+    }
+}
+
+// payment_method_details_card_installments_plan
+extension Stripe.Shared {
+    public struct PaymentMethodDetailsCardInstallmentsPlan: Codable, Hashable, Sendable {
+        /// For `fixed_count` installment plans, this is the number of installment payments your customer will make to their credi…
+        public var count: Int?
+        /// For `fixed_count` installment plans, this is the interval between installment payments your customer will make to thei…
+        public var interval: String?
+        /// Type of installment plan, one of `fixed_count`, `bonus`, or `revolving`.
+        public var `type`: Type?
+
+        private enum CodingKeys: String, CodingKey {
+            case count
+            case interval
+            case `type`
+        }
+
+        public init(
+            count: Int? = nil,
+            interval: String? = nil,
+            `type`: Type? = nil
+        ) {
+            self.count = count
+            self.interval = interval
+            self.`type` = `type`
+        }
+
+        /// Type of installment plan, one of `fixed_count`, `bonus`, or `revolving`.
+        public enum `Type`: String, Codable, Hashable, Sendable {
+            case bonus
+            case fixedCount = "fixed_count"
+            case revolving
         }
     }
 }
@@ -512,6 +1069,29 @@ extension Stripe.Shared {
             mandateOptions: Stripe.Shared.InvoiceMandateOptionsPayto? = nil
         ) {
             self.mandateOptions = mandateOptions
+        }
+    }
+}
+
+// payment_flows_payment_intent_presentment_details
+extension Stripe.Shared {
+    public struct PresentmentDetails: Codable, Hashable, Sendable {
+        /// Amount intended to be collected by this payment, denominated in `presentment_currency`.
+        public var presentmentAmount: Int?
+        /// Currency presented to the customer during payment.
+        public var presentmentCurrency: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case presentmentAmount
+            case presentmentCurrency
+        }
+
+        public init(
+            presentmentAmount: Int? = nil,
+            presentmentCurrency: String? = nil
+        ) {
+            self.presentmentAmount = presentmentAmount
+            self.presentmentCurrency = presentmentCurrency
         }
     }
 }
@@ -546,6 +1126,57 @@ extension Stripe.Shared {
     }
 }
 
+// line_items_tax_amount
+extension Stripe.Shared {
+    public struct Taxes: Codable, Hashable, Sendable {
+        /// Amount of tax applied for this rate.
+        public var amount: Int?
+        public var rate: Stripe.Tax.Rate?
+        /// The reasoning behind this tax, for example, if the product is tax exempt.
+        public var taxabilityReason: TaxabilityReason?
+        /// The amount on which tax is calculated, in cents (or local equivalent).
+        public var taxableAmount: Int?
+
+        private enum CodingKeys: String, CodingKey {
+            case amount
+            case rate
+            case taxabilityReason
+            case taxableAmount
+        }
+
+        public init(
+            amount: Int? = nil,
+            rate: Stripe.Tax.Rate? = nil,
+            taxabilityReason: TaxabilityReason? = nil,
+            taxableAmount: Int? = nil
+        ) {
+            self.amount = amount
+            self.rate = rate
+            self.taxabilityReason = taxabilityReason
+            self.taxableAmount = taxableAmount
+        }
+
+        /// The reasoning behind this tax, for example, if the product is tax exempt.
+        public enum TaxabilityReason: String, Codable, Hashable, Sendable {
+            case customerExempt = "customer_exempt"
+            case notCollecting = "not_collecting"
+            case notSubjectToTax = "not_subject_to_tax"
+            case notSupported = "not_supported"
+            case portionProductExempt = "portion_product_exempt"
+            case portionReducedRated = "portion_reduced_rated"
+            case portionStandardRated = "portion_standard_rated"
+            case productExempt = "product_exempt"
+            case productExemptHoliday = "product_exempt_holiday"
+            case proportionallyRated = "proportionally_rated"
+            case reducedRated = "reduced_rated"
+            case reverseCharge = "reverse_charge"
+            case standardRated = "standard_rated"
+            case taxableBasisReduced = "taxable_basis_reduced"
+            case zeroRated = "zero_rated"
+        }
+    }
+}
+
 // invoice_payment_method_options_upi
 extension Stripe.Shared {
     public struct Upi: Codable, Hashable, Sendable {
@@ -566,7 +1197,7 @@ extension Stripe.Shared {
 // invoice_payment_method_options_us_bank_account
 extension Stripe.Shared {
     public struct UsBankAccount: Codable, Hashable, Sendable {
-        public var financialConnections: Stripe.Shared.FinancialConnections?
+        public var financialConnections: Stripe.Shared.InvoicePaymentMethodOptionsUsBankAccountLinkedAccountOptions?
         /// Bank account verification method.
         public var verificationMethod: VerificationMethod?
 
@@ -576,7 +1207,7 @@ extension Stripe.Shared {
         }
 
         public init(
-            financialConnections: Stripe.Shared.FinancialConnections? = nil,
+            financialConnections: Stripe.Shared.InvoicePaymentMethodOptionsUsBankAccountLinkedAccountOptions? = nil,
             verificationMethod: VerificationMethod? = nil
         ) {
             self.financialConnections = financialConnections

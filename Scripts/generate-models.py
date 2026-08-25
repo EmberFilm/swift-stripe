@@ -366,10 +366,12 @@ class Generator:
         expandable = set(schema.get("x-expandableFields", []))
         required = set(schema.get("required", []))
         for prop, node in schema.get("properties", {}).items():
-            # Every Stripe resource has an id; the spec's `required` list is not the signal
-            # (a draft invoice omits it), and half the package keys on `Resource.ID`.
+            # Half the package keys on `Resource.ID`, so a root resource always gets the alias.
+            # Whether `id` itself is optional follows the spec: an upcoming-invoice preview has
+            # none, which is why `invoice` does not list it as required.
             if prop == "id" and (root or "id" in required):
                 s.has_id = True
+                s.id_optional = "id" not in required
                 continue
             s.fields.append(self.resolve(node, prop, expandable, s))
         return s
@@ -378,8 +380,16 @@ class Generator:
         self.shared_done: dict[str, "Struct | None"] = {}
         self.shared_refs_by_name: dict[str, str] = {}
         self.shared_names_by_ref: dict[str, str] = {}
+        # The survey always covers every resource, whatever --only emits: which schemas count as
+        # shared, and what they are named, must not depend on which subset is being written.
         for name in RESOURCES:
             self.survey(name, name, set())
+        if self.only:
+            # Shared types are built on demand as resources reference them; with a subset emitted,
+            # build every shared type up front so the Shared file is complete and stable.
+            for ref, parents in list(self.ref_parents.items()):
+                if len(parents) > 1:
+                    self.type_for_ref(ref, next(iter(self.ref_prop_names[ref])), Struct("_", "_", None))
         files: dict[str, str] = {}
         for name, swift_path in RESOURCES.items():
             if self.only and name not in self.only:
@@ -471,16 +481,18 @@ class Struct:
         self.enums: list[Enum] = []
         self.nested: list[Struct] = []
         self.has_id = False
+        self.id_optional = False
 
     def render(self, indent: str) -> str:
         i = indent
-        conformances = "Codable, Hashable, Sendable" + (", Identifiable" if self.has_id else "")
+        conformances = "Codable, Hashable, Sendable" + (", Identifiable" if self.has_id and not self.id_optional else "")
         out = ""
         if self.description:
             out += f"{i}/// {self.description}\n"
         out += f"{i}public struct {ident(self.name)}: {conformances} {{\n"
         if self.has_id:
-            out += f"{i}    public typealias ID = String\n{i}    public let id: ID\n"
+            decl = "public var id: ID?" if self.id_optional else "public let id: ID"
+            out += f"{i}    public typealias ID = String\n{i}    {decl}\n"
         for f in self.fields:
             if f.description:
                 out += f"{i}    /// {f.description}\n"
@@ -500,7 +512,7 @@ class Struct:
             out += f"{i}        case {ident(f.name)}\n"
         out += f"{i}    }}\n\n"
         # init
-        params = ([f"id: ID"] if self.has_id else []) + \
+        params = ([("id: ID? = nil" if self.id_optional else "id: ID")] if self.has_id else []) + \
                  [f"{ident(f.name)}: {f.swift_type}? = nil" for f in self.fields]
         out += f"{i}    public init(\n" + ",\n".join(f"{i}        {p}" for p in params) + f"\n{i}    ) {{\n"
         if self.has_id:
