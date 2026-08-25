@@ -215,10 +215,10 @@ encodes by hand), `x-stripeResource`/`x-stripeOperations`, and expresses union f
 Run it before adding a field by hand — the answer is often that several neighbouring fields are
 missing too.
 
-CI runs it as a gate against a spec pinned by commit ( in
-). To take a newer spec: bump the pin, run the tool, model or
+CI runs it as a gate against a spec pinned by commit (`STRIPE_OPENAPI_COMMIT` in
+`.github/workflows/ci.yml`). To take a newer spec: bump the pin, run the tool, model or
 acknowledge every gap it reports, and land all of that in one change. Adding a field is not
-done until it is decoded in  — see the
+done until it is decoded in `Tests/StripeTests/AddedFieldDecodingTests.swift` — see the
 blind spot noted in the script.
 
 ## Documentation
