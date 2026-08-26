@@ -80,45 +80,6 @@ extension Stripe.Billing {
         /// The account (if any) the payments will be attributed to for tax reporting, and where funds from each payment will be t…
         public var transferData: TransferData?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case amountSubtotal
-            case amountTotal
-            case application
-            case applicationFeeAmount
-            case applicationFeePercent
-            case automaticTax
-            case collectionMethod
-            case computed
-            case created
-            case currency
-            case customer
-            case customerAccount
-            case defaultTaxRates
-            case description
-            case discounts
-            case expiresAt
-            case footer
-            case fromQuote
-            case header
-            case invoice
-            case invoiceSettings
-            case lineItems
-            case livemode
-            case metadata
-            case number
-            case onBehalfOf
-            case status
-            case statusTransitions
-            case subscription
-            case subscriptionData
-            case subscriptionSchedule
-            case testClock
-            case totalDetails
-            case transferData
-        }
-
         public init(
             id: ID,
             object: String,
@@ -219,13 +180,6 @@ extension Stripe.Billing {
             /// The status of the most recent automated tax calculation for this quote.
             public var status: Status?
 
-            private enum CodingKeys: String, CodingKey {
-                case enabled
-                case liability
-                case provider
-                case status
-            }
-
             public init(
                 enabled: Bool? = nil,
                 liability: Stripe.Shared.ConnectAccountReference? = nil,
@@ -251,11 +205,6 @@ extension Stripe.Billing {
             public var recurring: Recurring?
             public var upfront: Upfront?
 
-            private enum CodingKeys: String, CodingKey {
-                case recurring
-                case upfront
-            }
-
             public init(
                 recurring: Recurring? = nil,
                 upfront: Upfront? = nil
@@ -274,14 +223,6 @@ extension Stripe.Billing {
                 /// The number of intervals (specified in the `interval` attribute) between subscription billings.
                 public var intervalCount: Int?
                 public var totalDetails: TotalDetails?
-
-                private enum CodingKeys: String, CodingKey {
-                    case amountSubtotal
-                    case amountTotal
-                    case interval
-                    case intervalCount
-                    case totalDetails
-                }
 
                 public init(
                     amountSubtotal: Int? = nil,
@@ -314,13 +255,6 @@ extension Stripe.Billing {
                     public var amountTax: Int?
                     public var breakdown: Breakdown?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case amountDiscount
-                        case amountShipping
-                        case amountTax
-                        case breakdown
-                    }
-
                     public init(
                         amountDiscount: Int? = nil,
                         amountShipping: Int? = nil,
@@ -338,11 +272,6 @@ extension Stripe.Billing {
                         public var discounts: [Stripe.Shared.Discounts]?
                         /// The aggregated tax amounts by rate.
                         public var taxes: [Stripe.Shared.Taxes]?
-
-                        private enum CodingKeys: String, CodingKey {
-                            case discounts
-                            case taxes
-                        }
 
                         public init(
                             discounts: [Stripe.Shared.Discounts]? = nil,
@@ -363,13 +292,6 @@ extension Stripe.Billing {
                 /// The line items that will appear on the next invoice after this quote is accepted.
                 public var lineItems: LineItems?
                 public var totalDetails: TotalDetails?
-
-                private enum CodingKeys: String, CodingKey {
-                    case amountSubtotal
-                    case amountTotal
-                    case lineItems
-                    case totalDetails
-                }
 
                 public init(
                     amountSubtotal: Int? = nil,
@@ -394,13 +316,6 @@ extension Stripe.Billing {
                     /// The URL where this list can be accessed.
                     public var url: String?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case object
-                        case data
-                        case hasMore
-                        case url
-                    }
-
                     public init(
                         object: String,
                         data: [Stripe.Checkout.Session.LineItem]? = nil,
@@ -423,13 +338,6 @@ extension Stripe.Billing {
                     public var amountTax: Int?
                     public var breakdown: Breakdown?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case amountDiscount
-                        case amountShipping
-                        case amountTax
-                        case breakdown
-                    }
-
                     public init(
                         amountDiscount: Int? = nil,
                         amountShipping: Int? = nil,
@@ -448,11 +356,6 @@ extension Stripe.Billing {
                         /// The aggregated tax amounts by rate.
                         public var taxes: [Stripe.Shared.Taxes]?
 
-                        private enum CodingKeys: String, CodingKey {
-                            case discounts
-                            case taxes
-                        }
-
                         public init(
                             discounts: [Stripe.Shared.Discounts]? = nil,
                             taxes: [Stripe.Shared.Taxes]? = nil
@@ -470,11 +373,6 @@ extension Stripe.Billing {
             public var isRevision: Bool?
             /// The quote that was cloned.
             @Expandable<Stripe.Billing.Quote, String> public var quote: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case isRevision
-                case quote
-            }
 
             public init(
                 isRevision: Bool? = nil,
@@ -495,14 +393,6 @@ extension Stripe.Billing {
             /// Footer to be displayed on the invoice.
             public var footer: String?
             public var issuer: Stripe.Shared.ConnectAccountReference?
-
-            private enum CodingKeys: String, CodingKey {
-                case customFields
-                case daysUntilDue
-                case description
-                case footer
-                case issuer
-            }
 
             public init(
                 customFields: [Stripe.Shared.CustomFields]? = nil,
@@ -530,13 +420,6 @@ extension Stripe.Billing {
             /// The URL where this list can be accessed.
             public var url: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case object
-                case data
-                case hasMore
-                case url
-            }
-
             public init(
                 object: String,
                 data: [Stripe.Checkout.Session.LineItem]? = nil,
@@ -557,12 +440,6 @@ extension Stripe.Billing {
             public var canceledAt: Date?
             /// The time that the quote was finalized.
             public var finalizedAt: Date?
-
-            private enum CodingKeys: String, CodingKey {
-                case acceptedAt
-                case canceledAt
-                case finalizedAt
-            }
 
             public init(
                 acceptedAt: Date? = nil,
@@ -586,14 +463,6 @@ extension Stripe.Billing {
             /// Integer representing the number of trial period days before the customer is charged for the first time.
             public var trialPeriodDays: Int?
 
-            private enum CodingKeys: String, CodingKey {
-                case billingMode
-                case description
-                case effectiveDate
-                case metadata
-                case trialPeriodDays
-            }
-
             public init(
                 billingMode: BillingMode? = nil,
                 description: String? = nil,
@@ -613,11 +482,6 @@ extension Stripe.Billing {
                 public var flexible: Stripe.Shared.Flexible?
                 /// Controls how prorations and invoices for subscriptions are calculated and orchestrated.
                 public var `type`: Type?
-
-                private enum CodingKeys: String, CodingKey {
-                    case flexible
-                    case `type`
-                }
 
                 public init(
                     flexible: Stripe.Shared.Flexible? = nil,
@@ -644,13 +508,6 @@ extension Stripe.Billing {
             public var amountTax: Int?
             public var breakdown: Breakdown?
 
-            private enum CodingKeys: String, CodingKey {
-                case amountDiscount
-                case amountShipping
-                case amountTax
-                case breakdown
-            }
-
             public init(
                 amountDiscount: Int? = nil,
                 amountShipping: Int? = nil,
@@ -669,11 +526,6 @@ extension Stripe.Billing {
                 /// The aggregated tax amounts by rate.
                 public var taxes: [Stripe.Shared.Taxes]?
 
-                private enum CodingKeys: String, CodingKey {
-                    case discounts
-                    case taxes
-                }
-
                 public init(
                     discounts: [Stripe.Shared.Discounts]? = nil,
                     taxes: [Stripe.Shared.Taxes]? = nil
@@ -691,12 +543,6 @@ extension Stripe.Billing {
             public var amountPercent: Double?
             /// The account where funds from the payment will be transferred to upon payment success.
             @Expandable<Stripe.Connect.Account, String> public var destination: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case amount
-                case amountPercent
-                case destination
-            }
 
             public init(
                 amount: Int? = nil,

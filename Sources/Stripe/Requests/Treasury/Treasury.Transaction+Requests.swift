@@ -39,18 +39,6 @@ extension Stripe.Treasury.Transaction.List {
         /// A filter for the `status_transitions.posted_at` timestamp.
         public var statusTransitions: StatusTransitions?
 
-        private enum CodingKeys: String, CodingKey {
-            case created
-            case endingBefore
-            case expand
-            case financialAccount
-            case limit
-            case orderBy
-            case startingAfter
-            case status
-            case statusTransitions
-        }
-
         public init(
             created: Stripe.RangeQuery? = nil,
             endingBefore: String? = nil,
@@ -89,10 +77,6 @@ extension Stripe.Treasury.Transaction.List {
             /// Returns Transactions with `posted_at` within the specified range.
             public var postedAt: Stripe.RangeQuery?
 
-            private enum CodingKeys: String, CodingKey {
-                case postedAt
-            }
-
             public init(
                 postedAt: Stripe.RangeQuery? = nil
             ) {
@@ -109,10 +93,6 @@ extension Stripe.Treasury.Transaction.Retrieve {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil

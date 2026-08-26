@@ -28,13 +28,6 @@ extension Stripe.Terminal.OnboardingLink.Create {
         /// Stripe account ID to generate the link for.
         public var onBehalfOf: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case linkOptions
-            case linkType
-            case onBehalfOf
-        }
-
         public init(
             expand: [String]? = nil,
             linkOptions: LinkOptions,
@@ -52,10 +45,6 @@ extension Stripe.Terminal.OnboardingLink.Create {
             /// The options associated with the Apple Terms and Conditions link type.
             public var appleTermsAndConditions: AppleTermsAndConditions?
 
-            private enum CodingKeys: String, CodingKey {
-                case appleTermsAndConditions
-            }
-
             public init(
                 appleTermsAndConditions: AppleTermsAndConditions? = nil
             ) {
@@ -68,11 +57,6 @@ extension Stripe.Terminal.OnboardingLink.Create {
                 public var allowRelinking: Bool?
                 /// The business name of the merchant accepting Apple's Terms and Conditions.
                 public var merchantDisplayName: String
-
-                private enum CodingKeys: String, CodingKey {
-                    case allowRelinking
-                    case merchantDisplayName
-                }
 
                 public init(
                     allowRelinking: Bool? = nil,

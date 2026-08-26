@@ -28,16 +28,6 @@ extension Stripe.Climate {
         /// The scientific pathway used for carbon removal.
         public var removalPathway: RemovalPathway?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case infoUrl
-            case livemode
-            case locations
-            case name
-            case removalPathway
-        }
-
         public init(
             id: ID,
             object: String,

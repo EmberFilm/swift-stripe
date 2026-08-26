@@ -27,11 +27,6 @@ extension Stripe.Products.ProductFeature.Create {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case entitlementFeature
-            case expand
-        }
-
         public init(
             entitlementFeature: String,
             expand: [String]? = nil
@@ -61,13 +56,6 @@ extension Stripe.Products.ProductFeature.List {
         /// A cursor for use in pagination.
         public var startingAfter: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case endingBefore
-            case expand
-            case limit
-            case startingAfter
-        }
-
         public init(
             endingBefore: String? = nil,
             expand: [String]? = nil,
@@ -89,10 +77,6 @@ extension Stripe.Products.ProductFeature.Retrieve {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil

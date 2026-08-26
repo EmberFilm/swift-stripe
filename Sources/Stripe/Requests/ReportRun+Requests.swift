@@ -28,12 +28,6 @@ extension ReportRun.Create {
         /// The ID of the report type to run, such as `"balance.summary.1"`.
         public var reportType: String
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case parameters
-            case reportType
-        }
-
         public init(
             expand: [String]? = nil,
             parameters: Parameters? = nil,
@@ -62,17 +56,6 @@ extension ReportRun.Create {
             public var reportingCategory: ReportingCategory?
             /// Defaults to `Etc/UTC`.
             public var timezone: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case columns
-                case connectedAccount
-                case currency
-                case intervalEnd
-                case intervalStart
-                case payout
-                case reportingCategory
-                case timezone
-            }
 
             public init(
                 columns: [String]? = nil,
@@ -153,14 +136,6 @@ extension ReportRun.List {
         /// A cursor for use in pagination.
         public var startingAfter: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case created
-            case endingBefore
-            case expand
-            case limit
-            case startingAfter
-        }
-
         public init(
             created: Stripe.RangeQuery? = nil,
             endingBefore: String? = nil,
@@ -184,10 +159,6 @@ extension ReportRun.Retrieve {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil

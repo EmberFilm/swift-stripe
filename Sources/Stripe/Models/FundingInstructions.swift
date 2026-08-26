@@ -22,14 +22,6 @@ public struct FundingInstructions: Codable, Hashable, Sendable {
     /// If the object exists in live mode, the value is `true`.
     public var livemode: Bool?
 
-    private enum CodingKeys: String, CodingKey {
-        case object
-        case bankTransfer
-        case currency
-        case fundingType
-        case livemode
-    }
-
     public init(
         object: String,
         bankTransfer: BankTransfer? = nil,
@@ -51,12 +43,6 @@ public struct FundingInstructions: Codable, Hashable, Sendable {
         public var financialAddresses: [Stripe.Shared.FinancialAddresses]?
         /// The bank_transfer type
         public var `type`: Type?
-
-        private enum CodingKeys: String, CodingKey {
-            case country
-            case financialAddresses
-            case `type`
-        }
 
         public init(
             country: String? = nil,

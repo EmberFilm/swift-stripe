@@ -33,15 +33,6 @@ extension Stripe.Issuing.PhysicalBundle.List {
         /// Only return physical bundles with the given type.
         public var `type`: Type?
 
-        private enum CodingKeys: String, CodingKey {
-            case endingBefore
-            case expand
-            case limit
-            case startingAfter
-            case status
-            case `type`
-        }
-
         public init(
             endingBefore: String? = nil,
             expand: [String]? = nil,
@@ -78,10 +69,6 @@ extension Stripe.Issuing.PhysicalBundle.Retrieve {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil

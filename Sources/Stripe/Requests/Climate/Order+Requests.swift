@@ -26,10 +26,6 @@ extension Stripe.Climate.Order.Cancel {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
-
         public init(
             expand: [String]? = nil
         ) {
@@ -58,16 +54,6 @@ extension Stripe.Climate.Order.Create {
         /// Unique identifier of the Climate product.
         public var product: String
 
-        private enum CodingKeys: String, CodingKey {
-            case amount
-            case beneficiary
-            case currency
-            case expand
-            case metadata
-            case metricTons
-            case product
-        }
-
         public init(
             amount: Int? = nil,
             beneficiary: Beneficiary? = nil,
@@ -90,10 +76,6 @@ extension Stripe.Climate.Order.Create {
         public struct Beneficiary: Codable, Hashable, Sendable {
             /// Publicly displayable name for the end beneficiary of carbon removal.
             public var publicName: String
-
-            private enum CodingKeys: String, CodingKey {
-                case publicName
-            }
 
             public init(
                 publicName: String
@@ -118,13 +100,6 @@ extension Stripe.Climate.Order.List {
         /// A cursor for use in pagination.
         public var startingAfter: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case endingBefore
-            case expand
-            case limit
-            case startingAfter
-        }
-
         public init(
             endingBefore: String? = nil,
             expand: [String]? = nil,
@@ -147,10 +122,6 @@ extension Stripe.Climate.Order.Retrieve {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
-
         public init(
             expand: [String]? = nil
         ) {
@@ -171,12 +142,6 @@ extension Stripe.Climate.Order.Update {
         /// Set of key-value pairs that you can attach to an object.
         public var metadata: [String: String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case beneficiary
-            case expand
-            case metadata
-        }
-
         public init(
             beneficiary: Stripe.Clearable<Beneficiary>? = nil,
             expand: [String]? = nil,
@@ -190,10 +155,6 @@ extension Stripe.Climate.Order.Update {
         public struct Beneficiary: Codable, Hashable, Sendable {
             /// Publicly displayable name for the end beneficiary of carbon removal.
             public var publicName: String
-
-            private enum CodingKeys: String, CodingKey {
-                case publicName
-            }
 
             public init(
                 publicName: String

@@ -24,15 +24,6 @@ extension Stripe.Tax {
         public var status: Status?
         public var statusDetails: StatusDetails?
 
-        private enum CodingKeys: String, CodingKey {
-            case object
-            case defaults
-            case headOffice
-            case livemode
-            case status
-            case statusDetails
-        }
-
         public init(
             object: String,
             defaults: Defaults? = nil,
@@ -63,12 +54,6 @@ extension Stripe.Tax {
             /// Default tax code used to classify your products and prices.
             public var taxCode: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case provider
-                case taxBehavior
-                case taxCode
-            }
-
             public init(
                 provider: Provider? = nil,
                 taxBehavior: TaxBehavior? = nil,
@@ -98,10 +83,6 @@ extension Stripe.Tax {
         public struct HeadOffice: Codable, Hashable, Sendable {
             public var address: Address?
 
-            private enum CodingKeys: String, CodingKey {
-                case address
-            }
-
             public init(
                 address: Address? = nil
             ) {
@@ -112,11 +93,6 @@ extension Stripe.Tax {
         public struct StatusDetails: Codable, Hashable, Sendable {
             public var active: Active?
             public var pending: Pending?
-
-            private enum CodingKeys: String, CodingKey {
-                case active
-                case pending
-            }
 
             public init(
                 active: Active? = nil,
@@ -133,10 +109,6 @@ extension Stripe.Tax {
             public struct Pending: Codable, Hashable, Sendable {
                 /// The list of missing fields that are required to perform calculations.
                 public var missingFields: [String]?
-
-                private enum CodingKeys: String, CodingKey {
-                    case missingFields
-                }
 
                 public init(
                     missingFields: [String]? = nil

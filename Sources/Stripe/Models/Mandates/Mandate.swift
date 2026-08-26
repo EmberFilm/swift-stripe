@@ -32,20 +32,6 @@ extension Stripe.Mandates {
         /// The type of the mandate.
         public var `type`: Type?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case customerAcceptance
-            case livemode
-            case multiUse
-            case onBehalfOf
-            case paymentMethod
-            case paymentMethodDetails
-            case singleUse
-            case status
-            case `type`
-        }
-
         public init(
             id: ID,
             object: String,
@@ -93,13 +79,6 @@ extension Stripe.Mandates {
             /// The mandate includes the type of customer acceptance information, such as: `online` or `offline`.
             public var `type`: Type?
 
-            private enum CodingKeys: String, CodingKey {
-                case acceptedAt
-                case offline
-                case online
-                case `type`
-            }
-
             public init(
                 acceptedAt: Date? = nil,
                 offline: Offline? = nil,
@@ -128,11 +107,6 @@ extension Stripe.Mandates {
                 /// The customer accepts the mandate using the user agent of the browser.
                 public var userAgent: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case ipAddress
-                    case userAgent
-                }
-
                 public init(
                     ipAddress: String? = nil,
                     userAgent: String? = nil
@@ -148,11 +122,6 @@ extension Stripe.Mandates {
             public var amount: Int?
             /// The currency of the payment on a multi use mandate.
             public var currency: Stripe.Currency?
-
-            private enum CodingKeys: String, CodingKey {
-                case amount
-                case currency
-            }
 
             public init(
                 amount: Int? = nil,
@@ -223,13 +192,6 @@ extension Stripe.Mandates {
                 /// Transaction type of the mandate.
                 public var transactionType: TransactionType?
 
-                private enum CodingKeys: String, CodingKey {
-                    case defaultFor
-                    case intervalDescription
-                    case paymentSchedule
-                    case transactionType
-                }
-
                 public init(
                     defaultFor: [DefaultFor]? = nil,
                     intervalDescription: String? = nil,
@@ -269,10 +231,6 @@ extension Stripe.Mandates {
                 /// The URL of the mandate.
                 public var url: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case url
-                }
-
                 public init(
                     url: String? = nil
                 ) {
@@ -293,15 +251,6 @@ extension Stripe.Mandates {
                 public var serviceUserNumber: String?
                 /// The URL that will contain the mandate that the customer has signed.
                 public var url: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case displayName
-                    case networkStatus
-                    case reference
-                    case revocationReason
-                    case serviceUserNumber
-                    case url
-                }
 
                 public init(
                     displayName: String? = nil,
@@ -375,11 +324,6 @@ extension Stripe.Mandates {
                 /// PayPal account PayerID.
                 public var payerId: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case billingAgreementId
-                    case payerId
-                }
-
                 public init(
                     billingAgreementId: String? = nil,
                     payerId: String? = nil
@@ -404,16 +348,6 @@ extension Stripe.Mandates {
                 public var purpose: Purpose?
                 /// Date, in YYYY-MM-DD format, from which payments will be collected.
                 public var startDate: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case amount
-                    case amountType
-                    case endDate
-                    case paymentSchedule
-                    case paymentsPerPeriod
-                    case purpose
-                    case startDate
-                }
 
                 public init(
                     amount: Int? = nil,
@@ -481,15 +415,6 @@ extension Stripe.Mandates {
                 /// Start date of the mandate, in `YYYY-MM-DD`.
                 public var startDate: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case amountIncludesIof
-                    case amountType
-                    case endDate
-                    case paymentSchedule
-                    case reference
-                    case startDate
-                }
-
                 public init(
                     amountIncludesIof: AmountIncludesIof? = nil,
                     amountType: AmountType? = nil,
@@ -538,11 +463,6 @@ extension Stripe.Mandates {
                 /// The URL of the mandate.
                 public var url: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case reference
-                    case url
-                }
-
                 public init(
                     reference: String? = nil,
                     url: String? = nil
@@ -566,13 +486,6 @@ extension Stripe.Mandates {
                 /// End date of the mandate or subscription.
                 public var endDate: Date?
 
-                private enum CodingKeys: String, CodingKey {
-                    case amount
-                    case amountType
-                    case description
-                    case endDate
-                }
-
                 public init(
                     amount: Int? = nil,
                     amountType: AmountType? = nil,
@@ -595,10 +508,6 @@ extension Stripe.Mandates {
             public struct UsBankAccount: Codable, Hashable, Sendable {
                 /// Mandate collection method
                 public var collectionMethod: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case collectionMethod
-                }
 
                 public init(
                     collectionMethod: String? = nil
@@ -731,11 +640,6 @@ extension Stripe.Mandates {
             public var amount: Int?
             /// The currency of the payment on a single use mandate.
             public var currency: Stripe.Currency?
-
-            private enum CodingKeys: String, CodingKey {
-                case amount
-                case currency
-            }
 
             public init(
                 amount: Int? = nil,

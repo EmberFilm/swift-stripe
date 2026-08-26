@@ -40,23 +40,6 @@ extension Stripe.Billing.Subscription {
         /// The tax rates which apply to this `subscription_item`.
         public var taxRates: [Stripe.Tax.Rate]?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case billedUntil
-            case billingThresholds
-            case created
-            case currentPeriodEnd
-            case currentPeriodStart
-            case discounts
-            case metadata
-            case plan
-            case price
-            case quantity
-            case subscription
-            case taxRates
-        }
-
         public init(
             id: ID,
             object: String,

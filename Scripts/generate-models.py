@@ -21,7 +21,8 @@ Mapping rules, in the order they apply to a property:
   scalar       string / integer / unix-time / number / boolean     String / Int / Date / Double / Bool
   embedded     a full generated resource inside another             @Boxed, to break reference cycles
 
-Every property is optional except `id`. Every struct gets an explicit CodingKeys listing every
+Every property is optional except `id`. Coding keys are synthesized (the decoder converts
+snake_case, the form encoder produces it); only a union spells its keys out. Formerly: every
 property, emitted from the same list — the omission that silently disables decoding cannot
 happen here.
 """
@@ -982,17 +983,21 @@ class Struct:
             return out
         # CodingKeys, from the same list as the properties
         # a union's `Details` decodes from this container, so the keys are visible to the file
-        out += f"\n{i}    {'fileprivate' if self.union else 'private'} enum CodingKeys: String, CodingKey {{\n"
-        if self.has_id:
-            out += f"{i}        case id\n"
-        if self.has_object:
-            out += f"{i}        case object\n"
-        for f in self.fields:
-            out += f"{i}        case {ident(f.name)}\n"
+        # Keys are synthesized: the decoder converts snake_case and the form encoder produces it.
+        # A union decodes its payloads under keys that are not stored properties, so it spells
+        # its keys out, visible to the file for the `Details` enum.
         if self.union:
+            out += f"\n{i}    fileprivate enum CodingKeys: String, CodingKey {{\n"
+            if self.has_id:
+                out += f"{i}        case id\n"
+            if self.has_object:
+                out += f"{i}        case object\n"
+            for f in self.fields:
+                out += f"{i}        case {ident(f.name)}\n"
             for f in self.union.cases:
                 out += f"{i}        case {ident(f.name)}\n"
-        out += f"{i}    }}\n\n"
+            out += f"{i}    }}\n"
+        out += "\n"
         # init
         params = ([("id: ID? = nil" if self.id_optional else "id: ID")] if self.has_id else []) + \
                  (["object: String"] if self.has_object else [])

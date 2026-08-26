@@ -26,15 +26,6 @@ extension Stripe.Billing {
         /// Specifies whether to cancel a single event or a range of events for a time period.
         public var `type`: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case object
-            case cancel
-            case eventName
-            case livemode
-            case status
-            case `type`
-        }
-
         public init(
             object: String,
             cancel: Cancel? = nil,
@@ -60,10 +51,6 @@ extension Stripe.Billing {
         public struct Cancel: Codable, Hashable, Sendable {
             /// Unique identifier for the event.
             public var identifier: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case identifier
-            }
 
             public init(
                 identifier: String? = nil

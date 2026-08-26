@@ -31,18 +31,6 @@ extension Stripe.Connect {
         public var payload: String?
         public var scope: Scope?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case created
-            case deleted
-            case expiresAt
-            case livemode
-            case name
-            case payload
-            case scope
-        }
-
         public init(
             id: ID,
             object: String,
@@ -70,11 +58,6 @@ extension Stripe.Connect {
             public var `type`: Type?
             /// The user ID, if type is set to "user"
             public var user: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case `type`
-                case user
-            }
 
             public init(
                 `type`: Type? = nil,

@@ -229,17 +229,6 @@ public struct Source: Codable, Hashable, Sendable, Identifiable {
         public var routingNumber: String?
         public var swiftCode: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case accountNumber
-            case bankName
-            case fingerprint
-            case refundAccountHolderName
-            case refundAccountHolderType
-            case refundRoutingNumber
-            case routingNumber
-            case swiftCode
-        }
-
         public init(
             accountNumber: String? = nil,
             bankName: String? = nil,
@@ -269,15 +258,6 @@ public struct Source: Codable, Hashable, Sendable, Identifiable {
         public var routingNumber: String?
         public var `type`: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case bankName
-            case country
-            case fingerprint
-            case last4
-            case routingNumber
-            case `type`
-        }
-
         public init(
             bankName: String? = nil,
             country: String? = nil,
@@ -306,19 +286,6 @@ public struct Source: Codable, Hashable, Sendable, Identifiable {
         public var fingerprint: String?
         public var last4: String?
         public var routingNumber: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case bankAddressCity
-            case bankAddressLine1
-            case bankAddressLine2
-            case bankAddressPostalCode
-            case bankName
-            case category
-            case country
-            case fingerprint
-            case last4
-            case routingNumber
-        }
 
         public init(
             bankAddressCity: String? = nil,
@@ -350,12 +317,6 @@ public struct Source: Codable, Hashable, Sendable, Identifiable {
         public var nativeUrl: String?
         public var statementDescriptor: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case dataString
-            case nativeUrl
-            case statementDescriptor
-        }
-
         public init(
             dataString: String? = nil,
             nativeUrl: String? = nil,
@@ -371,12 +332,6 @@ public struct Source: Codable, Hashable, Sendable, Identifiable {
         public var bsbNumber: String?
         public var fingerprint: String?
         public var last4: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case bsbNumber
-            case fingerprint
-            case last4
-        }
 
         public init(
             bsbNumber: String? = nil,
@@ -396,15 +351,6 @@ public struct Source: Codable, Hashable, Sendable, Identifiable {
         public var ibanLast4: String?
         public var preferredLanguage: String?
         public var statementDescriptor: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case bankCode
-            case bankName
-            case bic
-            case ibanLast4
-            case preferredLanguage
-            case statementDescriptor
-        }
 
         public init(
             bankCode: String? = nil,
@@ -441,26 +387,6 @@ public struct Source: Codable, Hashable, Sendable, Identifiable {
         public var name: String?
         public var threeDSecure: String?
         public var tokenizationMethod: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case addressLine1Check
-            case addressZipCheck
-            case brand
-            case country
-            case cvcCheck
-            case description
-            case dynamicLast4
-            case expMonth
-            case expYear
-            case fingerprint
-            case funding
-            case iin
-            case issuer
-            case last4
-            case name
-            case threeDSecure
-            case tokenizationMethod
-        }
 
         public init(
             addressLine1Check: String? = nil,
@@ -529,35 +455,6 @@ public struct Source: Codable, Hashable, Sendable, Identifiable {
         public var terminalVerificationResults: String?
         public var transactionStatusInformation: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case applicationCryptogram
-            case applicationPreferredName
-            case authorizationCode
-            case authorizationResponseCode
-            case brand
-            case country
-            case cvmType
-            case dataType
-            case dedicatedFileName
-            case description
-            case emvAuthData
-            case evidenceCustomerSignature
-            case evidenceTransactionCertificate
-            case expMonth
-            case expYear
-            case fingerprint
-            case funding
-            case iin
-            case issuer
-            case last4
-            case posDeviceId
-            case posEntryMode
-            case readMethod
-            case reader
-            case terminalVerificationResults
-            case transactionStatusInformation
-        }
-
         public init(
             applicationCryptogram: String? = nil,
             applicationPreferredName: String? = nil,
@@ -621,11 +518,6 @@ public struct Source: Codable, Hashable, Sendable, Identifiable {
         /// The status of the code verification, either `pending` (awaiting verification, `attempts_remaining` should be greater t…
         public var status: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case attemptsRemaining
-            case status
-        }
-
         public init(
             attemptsRemaining: Int? = nil,
             status: String? = nil
@@ -638,11 +530,6 @@ public struct Source: Codable, Hashable, Sendable, Identifiable {
     public struct Eps: Codable, Hashable, Sendable {
         public var reference: String?
         public var statementDescriptor: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case reference
-            case statementDescriptor
-        }
 
         public init(
             reference: String? = nil,
@@ -658,13 +545,6 @@ public struct Source: Codable, Hashable, Sendable, Identifiable {
         public var bankName: String?
         public var bic: String?
         public var statementDescriptor: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case bankCode
-            case bankName
-            case bic
-            case statementDescriptor
-        }
 
         public init(
             bankCode: String? = nil,
@@ -684,13 +564,6 @@ public struct Source: Codable, Hashable, Sendable, Identifiable {
         public var bic: String?
         public var ibanLast4: String?
         public var statementDescriptor: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case bank
-            case bic
-            case ibanLast4
-            case statementDescriptor
-        }
 
         public init(
             bank: String? = nil,
@@ -732,35 +605,6 @@ public struct Source: Codable, Hashable, Sendable, Identifiable {
         public var shippingDelay: Int?
         public var shippingFirstName: String?
         public var shippingLastName: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case backgroundImageUrl
-            case clientToken
-            case firstName
-            case lastName
-            case locale
-            case logoUrl
-            case pageTitle
-            case payLaterAssetUrlsDescriptive
-            case payLaterAssetUrlsStandard
-            case payLaterName
-            case payLaterRedirectUrl
-            case payNowAssetUrlsDescriptive
-            case payNowAssetUrlsStandard
-            case payNowName
-            case payNowRedirectUrl
-            case payOverTimeAssetUrlsDescriptive
-            case payOverTimeAssetUrlsStandard
-            case payOverTimeName
-            case payOverTimeRedirectUrl
-            case paymentMethodCategories
-            case purchaseCountry
-            case purchaseType
-            case redirectUrl
-            case shippingDelay
-            case shippingFirstName
-            case shippingLastName
-        }
 
         public init(
             backgroundImageUrl: String? = nil,
@@ -831,19 +675,6 @@ public struct Source: Codable, Hashable, Sendable, Identifiable {
         public var refundAccountHolderName: String?
         public var refundIban: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case entity
-            case reference
-            case refundAccountHolderAddressCity
-            case refundAccountHolderAddressCountry
-            case refundAccountHolderAddressLine1
-            case refundAccountHolderAddressLine2
-            case refundAccountHolderAddressPostalCode
-            case refundAccountHolderAddressState
-            case refundAccountHolderName
-            case refundIban
-        }
-
         public init(
             entity: String? = nil,
             reference: String? = nil,
@@ -887,17 +718,6 @@ public struct Source: Codable, Hashable, Sendable, Identifiable {
         /// Verified owner's phone number (including extension).
         public var verifiedPhone: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case address
-            case email
-            case name
-            case phone
-            case verifiedAddress
-            case verifiedEmail
-            case verifiedName
-            case verifiedPhone
-        }
-
         public init(
             address: Address? = nil,
             email: String? = nil,
@@ -922,10 +742,6 @@ public struct Source: Codable, Hashable, Sendable, Identifiable {
     public struct P24: Codable, Hashable, Sendable {
         public var reference: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case reference
-        }
-
         public init(
             reference: String? = nil
         ) {
@@ -946,15 +762,6 @@ public struct Source: Codable, Hashable, Sendable, Identifiable {
         public var refundAttributesMethod: String?
         /// Type of refund attribute status, one of `missing`, `requested`, or `available`.
         public var refundAttributesStatus: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case address
-            case amountCharged
-            case amountReceived
-            case amountReturned
-            case refundAttributesMethod
-            case refundAttributesStatus
-        }
 
         public init(
             address: String? = nil,
@@ -983,13 +790,6 @@ public struct Source: Codable, Hashable, Sendable, Identifiable {
         /// The URL provided to you to redirect a customer to as part of a `redirect` authentication flow.
         public var url: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case failureReason
-            case returnUrl
-            case status
-            case url
-        }
-
         public init(
             failureReason: String? = nil,
             returnUrl: String? = nil,
@@ -1015,20 +815,6 @@ public struct Source: Codable, Hashable, Sendable, Identifiable {
         public var refundAccountHolderAddressState: String?
         public var refundAccountHolderName: String?
         public var refundIban: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case bankName
-            case bic
-            case iban
-            case refundAccountHolderAddressCity
-            case refundAccountHolderAddressCountry
-            case refundAccountHolderAddressLine1
-            case refundAccountHolderAddressLine2
-            case refundAccountHolderAddressPostalCode
-            case refundAccountHolderAddressState
-            case refundAccountHolderName
-            case refundIban
-        }
 
         public init(
             bankName: String? = nil,
@@ -1066,16 +852,6 @@ public struct Source: Codable, Hashable, Sendable, Identifiable {
         public var mandateReference: String?
         public var mandateUrl: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case bankCode
-            case branchCode
-            case country
-            case fingerprint
-            case last4
-            case mandateReference
-            case mandateUrl
-        }
-
         public init(
             bankCode: String? = nil,
             branchCode: String? = nil,
@@ -1103,16 +879,6 @@ public struct Source: Codable, Hashable, Sendable, Identifiable {
         public var ibanLast4: String?
         public var preferredLanguage: String?
         public var statementDescriptor: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case bankCode
-            case bankName
-            case bic
-            case country
-            case ibanLast4
-            case preferredLanguage
-            case statementDescriptor
-        }
 
         public init(
             bankCode: String? = nil,
@@ -1144,14 +910,6 @@ public struct Source: Codable, Hashable, Sendable, Identifiable {
         public var items: [Items]?
         public var shipping: ShippingLabel?
 
-        private enum CodingKeys: String, CodingKey {
-            case amount
-            case currency
-            case email
-            case items
-            case shipping
-        }
-
         public init(
             amount: Int? = nil,
             currency: Stripe.Currency? = nil,
@@ -1179,15 +937,6 @@ public struct Source: Codable, Hashable, Sendable, Identifiable {
             public var quantity: Int?
             /// The type of this order item.
             public var `type`: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case amount
-                case currency
-                case description
-                case parent
-                case quantity
-                case `type`
-            }
 
             public init(
                 amount: Int? = nil,
@@ -1228,29 +977,6 @@ public struct Source: Codable, Hashable, Sendable, Identifiable {
         public var name: String?
         public var threeDSecure: String?
         public var tokenizationMethod: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case addressLine1Check
-            case addressZipCheck
-            case authenticated
-            case brand
-            case card
-            case country
-            case customer
-            case cvcCheck
-            case description
-            case dynamicLast4
-            case expMonth
-            case expYear
-            case fingerprint
-            case funding
-            case iin
-            case issuer
-            case last4
-            case name
-            case threeDSecure
-            case tokenizationMethod
-        }
 
         public init(
             addressLine1Check: String? = nil,
@@ -1301,12 +1027,6 @@ public struct Source: Codable, Hashable, Sendable, Identifiable {
         public var prepayId: String?
         public var qrCodeUrl: String?
         public var statementDescriptor: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case prepayId
-            case qrCodeUrl
-            case statementDescriptor
-        }
 
         public init(
             prepayId: String? = nil,

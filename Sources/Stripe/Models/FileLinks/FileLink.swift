@@ -32,18 +32,6 @@ extension Stripe.FileLinks {
         /// The publicly accessible URL to download the file.
         public var url: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case created
-            case expired
-            case expiresAt
-            case file
-            case livemode
-            case metadata
-            case url
-        }
-
         public init(
             id: ID,
             object: String,

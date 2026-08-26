@@ -34,14 +34,6 @@ extension Stripe.Fraud.ValueLists.ValueList.Create {
         /// The human-readable name of the value list.
         public var name: String
 
-        private enum CodingKeys: String, CodingKey {
-            case alias
-            case expand
-            case itemType
-            case metadata
-            case name
-        }
-
         public init(
             alias: String,
             expand: [String]? = nil,
@@ -98,16 +90,6 @@ extension Stripe.Fraud.ValueLists.ValueList.List {
         /// A cursor for use in pagination.
         public var startingAfter: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case alias
-            case contains
-            case created
-            case endingBefore
-            case expand
-            case limit
-            case startingAfter
-        }
-
         public init(
             alias: String? = nil,
             contains: String? = nil,
@@ -136,10 +118,6 @@ extension Stripe.Fraud.ValueLists.ValueList.Retrieve {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
-
         public init(
             expand: [String]? = nil
         ) {
@@ -161,13 +139,6 @@ extension Stripe.Fraud.ValueLists.ValueList.Update {
         public var metadata: [String: String]?
         /// The human-readable name of the value list.
         public var name: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case alias
-            case expand
-            case metadata
-            case name
-        }
 
         public init(
             alias: String? = nil,

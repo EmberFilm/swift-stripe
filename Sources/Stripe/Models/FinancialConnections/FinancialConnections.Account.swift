@@ -55,30 +55,6 @@ extension FinancialConnections {
         /// The state of the most recent attempt to refresh the account transactions.
         public var transactionRefresh: TransactionRefresh?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case accountHolder
-            case accountNumbers
-            case balance
-            case balanceRefresh
-            case category
-            case created
-            case displayName
-            case institutionName
-            case last4
-            case livemode
-            case ownership
-            case ownershipRefresh
-            case permissions
-            case status
-            case statusDetails
-            case subcategory
-            case subscriptions
-            case supportedPaymentMethodTypes
-            case transactionRefresh
-        }
-
         public init(
             id: ID,
             object: String,
@@ -172,13 +148,6 @@ extension FinancialConnections {
             /// The payment networks that the account number can be used for.
             public var supportedNetworks: [String]?
 
-            private enum CodingKeys: String, CodingKey {
-                case expectedExpiryDate
-                case identifierType
-                case status
-                case supportedNetworks
-            }
-
             public init(
                 expectedExpiryDate: Date? = nil,
                 identifierType: IdentifierType? = nil,
@@ -214,14 +183,6 @@ extension FinancialConnections {
             /// The `type` of the balance.
             public var `type`: Type?
 
-            private enum CodingKeys: String, CodingKey {
-                case asOf
-                case cash
-                case credit
-                case current
-                case `type`
-            }
-
             public init(
                 asOf: Date? = nil,
                 cash: Cash? = nil,
@@ -246,10 +207,6 @@ extension FinancialConnections {
                 /// The funds available to the account holder.
                 public var available: [String: Int]?
 
-                private enum CodingKeys: String, CodingKey {
-                    case available
-                }
-
                 public init(
                     available: [String: Int]? = nil
                 ) {
@@ -260,10 +217,6 @@ extension FinancialConnections {
             public struct Credit: Codable, Hashable, Sendable {
                 /// The credit that has been used by the account holder.
                 public var used: [String: Int]?
-
-                private enum CodingKeys: String, CodingKey {
-                    case used
-                }
 
                 public init(
                     used: [String: Int]? = nil
@@ -280,12 +233,6 @@ extension FinancialConnections {
             public var nextRefreshAvailableAt: Date?
             /// The status of the last refresh attempt.
             public var status: Status?
-
-            private enum CodingKeys: String, CodingKey {
-                case lastAttemptedAt
-                case nextRefreshAvailableAt
-                case status
-            }
 
             public init(
                 lastAttemptedAt: Date? = nil,
@@ -316,13 +263,6 @@ extension FinancialConnections {
             /// A paginated list of owners for this account.
             public var owners: Owners?
 
-            private enum CodingKeys: String, CodingKey {
-                case id
-                case object
-                case created
-                case owners
-            }
-
             public init(
                 id: ID,
                 object: String,
@@ -346,13 +286,6 @@ extension FinancialConnections {
                 /// The URL where this list can be accessed.
                 public var url: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case object
-                    case data
-                    case hasMore
-                    case url
-                }
-
                 public init(
                     object: String,
                     data: [FinancialConnections.AccountOwner]? = nil,
@@ -375,12 +308,6 @@ extension FinancialConnections {
             /// The status of the last refresh attempt.
             public var status: Status?
 
-            private enum CodingKeys: String, CodingKey {
-                case lastAttemptedAt
-                case nextRefreshAvailableAt
-                case status
-            }
-
             public init(
                 lastAttemptedAt: Date? = nil,
                 nextRefreshAvailableAt: Date? = nil,
@@ -402,10 +329,6 @@ extension FinancialConnections {
         public struct StatusDetails: Codable, Hashable, Sendable {
             public var active: Active?
 
-            private enum CodingKeys: String, CodingKey {
-                case active
-            }
-
             public init(
                 active: Active? = nil
             ) {
@@ -419,12 +342,6 @@ extension FinancialConnections {
                 public var cause: Cause?
                 /// When the Account is expected to become inactive, if applicable.
                 public var expectedDeactivationDate: Date?
-
-                private enum CodingKeys: String, CodingKey {
-                    case action
-                    case cause
-                    case expectedDeactivationDate
-                }
 
                 public init(
                     action: Action? = nil,
@@ -460,13 +377,6 @@ extension FinancialConnections {
             public var nextRefreshAvailableAt: Date?
             /// The status of the last refresh attempt.
             public var status: Status?
-
-            private enum CodingKeys: String, CodingKey {
-                case id
-                case lastAttemptedAt
-                case nextRefreshAvailableAt
-                case status
-            }
 
             public init(
                 id: ID,

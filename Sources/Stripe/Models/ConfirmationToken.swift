@@ -41,23 +41,6 @@ public struct ConfirmationToken: Codable, Hashable, Sendable, Identifiable {
     /// Indicates whether the Stripe SDK is used to handle confirmation flow.
     public var useStripeSdk: Bool?
 
-    private enum CodingKeys: String, CodingKey {
-        case id
-        case object
-        case created
-        case expiresAt
-        case livemode
-        case mandateData
-        case paymentIntent
-        case paymentMethodOptions
-        case paymentMethodPreview
-        case returnUrl
-        case setupFutureUsage
-        case setupIntent
-        case shipping
-        case useStripeSdk
-    }
-
     public init(
         id: ID,
         object: String,
@@ -100,10 +83,6 @@ public struct ConfirmationToken: Codable, Hashable, Sendable, Identifiable {
     public struct MandateData: Codable, Hashable, Sendable {
         public var customerAcceptance: CustomerAcceptance?
 
-        private enum CodingKeys: String, CodingKey {
-            case customerAcceptance
-        }
-
         public init(
             customerAcceptance: CustomerAcceptance? = nil
         ) {
@@ -116,11 +95,6 @@ public struct ConfirmationToken: Codable, Hashable, Sendable, Identifiable {
             public var online: Online?
             /// The type of customer acceptance information included with the Mandate.
             public var `type`: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case online
-                case `type`
-            }
 
             public init(
                 online: Online? = nil,
@@ -136,11 +110,6 @@ public struct ConfirmationToken: Codable, Hashable, Sendable, Identifiable {
                 public var ipAddress: String?
                 /// The user agent of the browser from which the Mandate was accepted by the customer.
                 public var userAgent: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case ipAddress
-                    case userAgent
-                }
 
                 public init(
                     ipAddress: String? = nil,
@@ -158,10 +127,6 @@ public struct ConfirmationToken: Codable, Hashable, Sendable, Identifiable {
         /// This hash contains the card payment method options.
         @Boxed public var card: Card?
 
-        private enum CodingKeys: String, CodingKey {
-            case card
-        }
-
         public init(
             card: Card? = nil
         ) {
@@ -174,11 +139,6 @@ public struct ConfirmationToken: Codable, Hashable, Sendable, Identifiable {
             public var cvcToken: String?
             public var installments: Installments?
 
-            private enum CodingKeys: String, CodingKey {
-                case cvcToken
-                case installments
-            }
-
             public init(
                 cvcToken: String? = nil,
                 installments: Installments? = nil
@@ -190,10 +150,6 @@ public struct ConfirmationToken: Codable, Hashable, Sendable, Identifiable {
             /// Installment configuration for payments.
             public struct Installments: Codable, Hashable, Sendable {
                 public var plan: Stripe.Shared.PaymentMethodDetailsCardInstallmentsPlan?
-
-                private enum CodingKeys: String, CodingKey {
-                    case plan
-                }
 
                 public init(
                     plan: Stripe.Shared.PaymentMethodDetailsCardInstallmentsPlan? = nil
@@ -692,12 +648,6 @@ public struct ConfirmationToken: Codable, Hashable, Sendable, Identifiable {
         public var name: String?
         /// Recipient phone (including extension).
         public var phone: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case address
-            case name
-            case phone
-        }
 
         public init(
             address: Address? = nil,

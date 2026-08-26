@@ -77,32 +77,6 @@ extension Stripe.Customers.Customer.Create {
         public var testClock: String?
         public var validate: Bool?
 
-        private enum CodingKeys: String, CodingKey {
-            case address
-            case balance
-            case businessName
-            case cashBalance
-            case description
-            case email
-            case expand
-            case individualName
-            case invoicePrefix
-            case invoiceSettings
-            case metadata
-            case name
-            case nextInvoiceSequence
-            case paymentMethod
-            case phone
-            case preferredLocales
-            case shipping
-            case source
-            case tax
-            case taxExempt
-            case taxIdData
-            case testClock
-            case validate
-        }
-
         public init(
             address: Stripe.Clearable<Address>? = nil,
             balance: Int? = nil,
@@ -174,15 +148,6 @@ extension Stripe.Customers.Customer.Create {
             /// State, county, province, or region (ISO 3166-2).
             public var state: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case city
-                case country
-                case line1
-                case line2
-                case postalCode
-                case state
-            }
-
             public init(
                 city: String? = nil,
                 country: String? = nil,
@@ -205,10 +170,6 @@ extension Stripe.Customers.Customer.Create {
             /// Settings controlling the behavior of the customer's cash balance, such as reconciliation of funds received.
             public var settings: Settings?
 
-            private enum CodingKeys: String, CodingKey {
-                case settings
-            }
-
             public init(
                 settings: Settings? = nil
             ) {
@@ -219,10 +180,6 @@ extension Stripe.Customers.Customer.Create {
             public struct Settings: Codable, Hashable, Sendable {
                 /// Controls how funds transferred by the customer are applied to payment intents and invoices.
                 public var reconciliationMode: ReconciliationMode?
-
-                private enum CodingKeys: String, CodingKey {
-                    case reconciliationMode
-                }
 
                 public init(
                     reconciliationMode: ReconciliationMode? = nil
@@ -249,13 +206,6 @@ extension Stripe.Customers.Customer.Create {
             /// Default options for invoice PDF rendering for this customer.
             public var renderingOptions: Stripe.Clearable<RenderingOptions>?
 
-            private enum CodingKeys: String, CodingKey {
-                case customFields
-                case defaultPaymentMethod
-                case footer
-                case renderingOptions
-            }
-
             public init(
                 customFields: Stripe.Clearable<[CustomFields]>? = nil,
                 defaultPaymentMethod: String? = nil,
@@ -274,11 +224,6 @@ extension Stripe.Customers.Customer.Create {
                 /// The value of the custom field.
                 public var value: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case name
-                    case value
-                }
-
                 public init(
                     name: String,
                     value: String
@@ -293,11 +238,6 @@ extension Stripe.Customers.Customer.Create {
                 public var amountTaxDisplay: AmountTaxDisplay?
                 /// ID of the invoice rendering template to use for future invoices.
                 public var template: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case amountTaxDisplay
-                    case template
-                }
 
                 public init(
                     amountTaxDisplay: AmountTaxDisplay? = nil,
@@ -322,12 +262,6 @@ extension Stripe.Customers.Customer.Create {
             public var name: String
             /// Customer phone (including extension).
             public var phone: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case address
-                case name
-                case phone
-            }
 
             public init(
                 address: Address,
@@ -354,15 +288,6 @@ extension Stripe.Customers.Customer.Create {
                 /// State, county, province, or region (ISO 3166-2).
                 public var state: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case city
-                    case country
-                    case line1
-                    case line2
-                    case postalCode
-                    case state
-                }
-
                 public init(
                     city: String? = nil,
                     country: String? = nil,
@@ -388,11 +313,6 @@ extension Stripe.Customers.Customer.Create {
             /// A flag that indicates when Stripe should validate the customer tax location.
             public var validateLocation: ValidateLocation?
 
-            private enum CodingKeys: String, CodingKey {
-                case ipAddress
-                case validateLocation
-            }
-
             public init(
                 ipAddress: String? = nil,
                 validateLocation: ValidateLocation? = nil
@@ -412,11 +332,6 @@ extension Stripe.Customers.Customer.Create {
             public var `type`: Type
             /// Value of the tax ID.
             public var value: String
-
-            private enum CodingKeys: String, CodingKey {
-                case `type`
-                case value
-            }
 
             public init(
                 `type`: Type,
@@ -563,13 +478,6 @@ extension Stripe.Customers.Customer.CreateFundingInstructions {
         /// The `funding_type` to get the instructions for.
         public var fundingType: String
 
-        private enum CodingKeys: String, CodingKey {
-            case bankTransfer
-            case currency
-            case expand
-            case fundingType
-        }
-
         public init(
             bankTransfer: BankTransfer,
             currency: Stripe.Currency,
@@ -590,12 +498,6 @@ extension Stripe.Customers.Customer.CreateFundingInstructions {
             public var requestedAddressTypes: [RequestedAddressTypes]?
             /// The type of the `bank_transfer`
             public var `type`: Type
-
-            private enum CodingKeys: String, CodingKey {
-                case euBankTransfer
-                case requestedAddressTypes
-                case `type`
-            }
 
             public init(
                 euBankTransfer: EuBankTransfer? = nil,
@@ -627,10 +529,6 @@ extension Stripe.Customers.Customer.CreateFundingInstructions {
                 /// The desired country code of the bank account information.
                 public var country: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case country
-                }
-
                 public init(
                     country: String
                 ) {
@@ -652,12 +550,6 @@ extension Stripe.Customers.Customer.CreateTaxId {
         public var `type`: Type
         /// Value of the tax ID.
         public var value: String
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case `type`
-            case value
-        }
 
         public init(
             expand: [String]? = nil,
@@ -820,13 +712,6 @@ extension Stripe.Customers.Customer.FundCashBalance {
         /// A description of the test funding.
         public var reference: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case amount
-            case currency
-            case expand
-            case reference
-        }
-
         public init(
             amount: Int,
             currency: Stripe.Currency,
@@ -860,16 +745,6 @@ extension Stripe.Customers.Customer.List {
         public var startingAfter: String?
         /// Provides a list of customers that are associated with the specified test clock.
         public var testClock: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case created
-            case email
-            case endingBefore
-            case expand
-            case limit
-            case startingAfter
-            case testClock
-        }
 
         public init(
             created: Stripe.RangeQuery? = nil,
@@ -908,15 +783,6 @@ extension Stripe.Customers.Customer.ListPaymentMethods {
         public var startingAfter: String?
         /// An optional filter on the list, based on the object `type` field.
         public var `type`: Type?
-
-        private enum CodingKeys: String, CodingKey {
-            case allowRedisplay
-            case endingBefore
-            case expand
-            case limit
-            case startingAfter
-            case `type`
-        }
 
         public init(
             allowRedisplay: AllowRedisplay? = nil,
@@ -1014,13 +880,6 @@ extension Stripe.Customers.Customer.ListTaxIds {
         /// A cursor for use in pagination.
         public var startingAfter: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case endingBefore
-            case expand
-            case limit
-            case startingAfter
-        }
-
         public init(
             endingBefore: String? = nil,
             expand: [String]? = nil,
@@ -1043,10 +902,6 @@ extension Stripe.Customers.Customer.Retrieve {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
-
         public init(
             expand: [String]? = nil
         ) {
@@ -1063,10 +918,6 @@ extension Stripe.Customers.Customer.RetrievePaymentMethod {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
-
         public init(
             expand: [String]? = nil
         ) {
@@ -1082,10 +933,6 @@ extension Stripe.Customers.Customer.RetrieveTaxId {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil
@@ -1108,13 +955,6 @@ extension Stripe.Customers.Customer.Search {
         public var page: String?
         /// The search query string.
         public var query: String
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case limit
-            case page
-            case query
-        }
 
         public init(
             expand: [String]? = nil,
@@ -1175,30 +1015,6 @@ extension Stripe.Customers.Customer.Update {
         /// The customer's tax exemption.
         public var taxExempt: TaxExempt?
         public var validate: Bool?
-
-        private enum CodingKeys: String, CodingKey {
-            case address
-            case balance
-            case businessName
-            case cashBalance
-            case defaultSource
-            case description
-            case email
-            case expand
-            case individualName
-            case invoicePrefix
-            case invoiceSettings
-            case metadata
-            case name
-            case nextInvoiceSequence
-            case phone
-            case preferredLocales
-            case shipping
-            case source
-            case tax
-            case taxExempt
-            case validate
-        }
 
         public init(
             address: Stripe.Clearable<Address>? = nil,
@@ -1267,15 +1083,6 @@ extension Stripe.Customers.Customer.Update {
             /// State, county, province, or region (ISO 3166-2).
             public var state: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case city
-                case country
-                case line1
-                case line2
-                case postalCode
-                case state
-            }
-
             public init(
                 city: String? = nil,
                 country: String? = nil,
@@ -1298,10 +1105,6 @@ extension Stripe.Customers.Customer.Update {
             /// Settings controlling the behavior of the customer's cash balance, such as reconciliation of funds received.
             public var settings: Settings?
 
-            private enum CodingKeys: String, CodingKey {
-                case settings
-            }
-
             public init(
                 settings: Settings? = nil
             ) {
@@ -1312,10 +1115,6 @@ extension Stripe.Customers.Customer.Update {
             public struct Settings: Codable, Hashable, Sendable {
                 /// Controls how funds transferred by the customer are applied to payment intents and invoices.
                 public var reconciliationMode: ReconciliationMode?
-
-                private enum CodingKeys: String, CodingKey {
-                    case reconciliationMode
-                }
 
                 public init(
                     reconciliationMode: ReconciliationMode? = nil
@@ -1342,13 +1141,6 @@ extension Stripe.Customers.Customer.Update {
             /// Default options for invoice PDF rendering for this customer.
             public var renderingOptions: Stripe.Clearable<RenderingOptions>?
 
-            private enum CodingKeys: String, CodingKey {
-                case customFields
-                case defaultPaymentMethod
-                case footer
-                case renderingOptions
-            }
-
             public init(
                 customFields: Stripe.Clearable<[CustomFields]>? = nil,
                 defaultPaymentMethod: String? = nil,
@@ -1367,11 +1159,6 @@ extension Stripe.Customers.Customer.Update {
                 /// The value of the custom field.
                 public var value: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case name
-                    case value
-                }
-
                 public init(
                     name: String,
                     value: String
@@ -1386,11 +1173,6 @@ extension Stripe.Customers.Customer.Update {
                 public var amountTaxDisplay: AmountTaxDisplay?
                 /// ID of the invoice rendering template to use for future invoices.
                 public var template: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case amountTaxDisplay
-                    case template
-                }
 
                 public init(
                     amountTaxDisplay: AmountTaxDisplay? = nil,
@@ -1415,12 +1197,6 @@ extension Stripe.Customers.Customer.Update {
             public var name: String
             /// Customer phone (including extension).
             public var phone: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case address
-                case name
-                case phone
-            }
 
             public init(
                 address: Address,
@@ -1447,15 +1223,6 @@ extension Stripe.Customers.Customer.Update {
                 /// State, county, province, or region (ISO 3166-2).
                 public var state: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case city
-                    case country
-                    case line1
-                    case line2
-                    case postalCode
-                    case state
-                }
-
                 public init(
                     city: String? = nil,
                     country: String? = nil,
@@ -1480,11 +1247,6 @@ extension Stripe.Customers.Customer.Update {
             public var ipAddress: String?
             /// A flag that indicates when Stripe should validate the customer tax location.
             public var validateLocation: ValidateLocation?
-
-            private enum CodingKeys: String, CodingKey {
-                case ipAddress
-                case validateLocation
-            }
 
             public init(
                 ipAddress: String? = nil,

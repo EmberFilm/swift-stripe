@@ -25,14 +25,6 @@ extension Stripe {
         /// The total number of items available, when the request asked for it.
         public var totalCount: Int?
 
-        private enum CodingKeys: String, CodingKey {
-            case object
-            case data
-            case hasMore
-            case url
-            case totalCount
-        }
-
         public init(object: String = "list", data: [Element], hasMore: Bool, url: String, totalCount: Int? = nil) {
             self.object = object
             self.data = data
@@ -58,15 +50,6 @@ extension Stripe {
         public var nextPage: String?
         /// The total number of objects that match the query, when the request asked for it.
         public var totalCount: Int?
-
-        private enum CodingKeys: String, CodingKey {
-            case object
-            case data
-            case hasMore
-            case url
-            case nextPage
-            case totalCount
-        }
 
         public init(object: String = "search_result", data: [Element], hasMore: Bool, url: String,
                     nextPage: String? = nil, totalCount: Int? = nil) {

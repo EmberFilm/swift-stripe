@@ -24,14 +24,6 @@ extension Stripe.Billing.Credit.Balance {
         /// If the object exists in live mode, the value is `true`.
         public var livemode: Bool?
 
-        private enum CodingKeys: String, CodingKey {
-            case object
-            case balances
-            case customer
-            case customerAccount
-            case livemode
-        }
-
         public init(
             object: String,
             balances: [Balances]? = nil,
@@ -49,11 +41,6 @@ extension Stripe.Billing.Credit.Balance {
         public struct Balances: Codable, Hashable, Sendable {
             public var availableBalance: Stripe.Shared.BillingCreditGrantsResourceAmount?
             public var ledgerBalance: Stripe.Shared.BillingCreditGrantsResourceAmount?
-
-            private enum CodingKeys: String, CodingKey {
-                case availableBalance
-                case ledgerBalance
-            }
 
             public init(
                 availableBalance: Stripe.Shared.BillingCreditGrantsResourceAmount? = nil,

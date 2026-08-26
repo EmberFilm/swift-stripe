@@ -79,43 +79,6 @@ public struct Card: Codable, Hashable, Sendable, Identifiable {
     /// If the card number is tokenized, this is the method that was used.
     public var tokenizationMethod: String?
 
-    private enum CodingKeys: String, CodingKey {
-        case id
-        case object
-        case account
-        case addressCity
-        case addressCountry
-        case addressLine1
-        case addressLine1Check
-        case addressLine2
-        case addressState
-        case addressZip
-        case addressZipCheck
-        case allowRedisplay
-        case availablePayoutMethods
-        case brand
-        case country
-        case currency
-        case customer
-        case cvcCheck
-        case defaultForCurrency
-        case description
-        case dynamicLast4
-        case expMonth
-        case expYear
-        case fingerprint
-        case funding
-        case iin
-        case issuer
-        case last4
-        case metadata
-        case name
-        case networks
-        case regulatedStatus
-        case status
-        case tokenizationMethod
-    }
-
     public init(
         id: ID,
         object: String,
@@ -209,10 +172,6 @@ public struct Card: Codable, Hashable, Sendable, Identifiable {
     public struct Networks: Codable, Hashable, Sendable {
         /// The preferred network for co-branded cards.
         public var preferred: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case preferred
-        }
 
         public init(
             preferred: String? = nil

@@ -25,10 +25,6 @@ extension Stripe.Disputes.Dispute.Close {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
-
         public init(
             expand: [String]? = nil
         ) {
@@ -56,16 +52,6 @@ extension Stripe.Disputes.Dispute.List {
         public var paymentIntent: String?
         /// A cursor for use in pagination.
         public var startingAfter: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case charge
-            case created
-            case endingBefore
-            case expand
-            case limit
-            case paymentIntent
-            case startingAfter
-        }
 
         public init(
             charge: String? = nil,
@@ -95,10 +81,6 @@ extension Stripe.Disputes.Dispute.Retrieve {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
-
         public init(
             expand: [String]? = nil
         ) {
@@ -120,13 +102,6 @@ extension Stripe.Disputes.Dispute.Update {
         public var metadata: Stripe.Clearable<[String: String]>?
         /// Whether to immediately submit evidence to the bank.
         public var submit: Bool?
-
-        private enum CodingKeys: String, CodingKey {
-            case evidence
-            case expand
-            case metadata
-            case submit
-        }
 
         public init(
             evidence: Evidence? = nil,
@@ -199,37 +174,6 @@ extension Stripe.Disputes.Dispute.Update {
             /// Any additional evidence or statements.
             public var uncategorizedText: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case accessActivityLog
-                case billingAddress
-                case cancellationPolicy
-                case cancellationPolicyDisclosure
-                case cancellationRebuttal
-                case customerCommunication
-                case customerEmailAddress
-                case customerName
-                case customerPurchaseIp
-                case customerSignature
-                case duplicateChargeDocumentation
-                case duplicateChargeExplanation
-                case duplicateChargeId
-                case enhancedEvidence
-                case productDescription
-                case receipt
-                case refundPolicy
-                case refundPolicyDisclosure
-                case refundRefusalExplanation
-                case serviceDate
-                case serviceDocumentation
-                case shippingAddress
-                case shippingCarrier
-                case shippingDate
-                case shippingDocumentation
-                case shippingTrackingNumber
-                case uncategorizedFile
-                case uncategorizedText
-            }
-
             public init(
                 accessActivityLog: String? = nil,
                 billingAddress: String? = nil,
@@ -298,12 +242,6 @@ extension Stripe.Disputes.Dispute.Update {
                 /// Evidence provided for Visa compliance evidence submission.
                 public var visaCompliance: VisaCompliance?
 
-                private enum CodingKeys: String, CodingKey {
-                    case mastercardCompliance
-                    case visaCompellingEvidence3
-                    case visaCompliance
-                }
-
                 public init(
                     mastercardCompliance: MastercardCompliance? = nil,
                     visaCompellingEvidence3: VisaCompellingEvidence3? = nil,
@@ -319,10 +257,6 @@ extension Stripe.Disputes.Dispute.Update {
                     /// A field acknowledging the fee incurred when countering a Mastercard compliance dispute.
                     public var feeAcknowledged: Bool?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case feeAcknowledged
-                    }
-
                     public init(
                         feeAcknowledged: Bool? = nil
                     ) {
@@ -336,11 +270,6 @@ extension Stripe.Disputes.Dispute.Update {
                     public var disputedTransaction: DisputedTransaction?
                     /// List of exactly two prior undisputed transaction objects for Visa Compelling Evidence 3.0 evidence submission.
                     public var priorUndisputedTransactions: [PriorUndisputedTransactions]?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case disputedTransaction
-                        case priorUndisputedTransactions
-                    }
 
                     public init(
                         disputedTransaction: DisputedTransaction? = nil,
@@ -368,17 +297,6 @@ extension Stripe.Disputes.Dispute.Update {
                         public var productDescription: String?
                         /// The address to which a physical product was shipped.
                         public var shippingAddress: ShippingAddress?
-
-                        private enum CodingKeys: String, CodingKey {
-                            case customerAccountId
-                            case customerDeviceFingerprint
-                            case customerDeviceId
-                            case customerEmailAddress
-                            case customerPurchaseIp
-                            case merchandiseOrServices
-                            case productDescription
-                            case shippingAddress
-                        }
 
                         public init(
                             customerAccountId: String? = nil,
@@ -420,15 +338,6 @@ extension Stripe.Disputes.Dispute.Update {
                             /// State, county, province, or region (ISO 3166-2).
                             public var state: String?
 
-                            private enum CodingKeys: String, CodingKey {
-                                case city
-                                case country
-                                case line1
-                                case line2
-                                case postalCode
-                                case state
-                            }
-
                             public init(
                                 city: String? = nil,
                                 country: String? = nil,
@@ -465,17 +374,6 @@ extension Stripe.Disputes.Dispute.Update {
                         /// The address to which a physical product was shipped.
                         public var shippingAddress: ShippingAddress?
 
-                        private enum CodingKeys: String, CodingKey {
-                            case charge
-                            case customerAccountId
-                            case customerDeviceFingerprint
-                            case customerDeviceId
-                            case customerEmailAddress
-                            case customerPurchaseIp
-                            case productDescription
-                            case shippingAddress
-                        }
-
                         public init(
                             charge: String,
                             customerAccountId: String? = nil,
@@ -511,15 +409,6 @@ extension Stripe.Disputes.Dispute.Update {
                             /// State, county, province, or region (ISO 3166-2).
                             public var state: String?
 
-                            private enum CodingKeys: String, CodingKey {
-                                case city
-                                case country
-                                case line1
-                                case line2
-                                case postalCode
-                                case state
-                            }
-
                             public init(
                                 city: String? = nil,
                                 country: String? = nil,
@@ -543,10 +432,6 @@ extension Stripe.Disputes.Dispute.Update {
                 public struct VisaCompliance: Codable, Hashable, Sendable {
                     /// A field acknowledging the fee incurred when countering a Visa compliance dispute.
                     public var feeAcknowledged: Bool?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case feeAcknowledged
-                    }
 
                     public init(
                         feeAcknowledged: Bool? = nil

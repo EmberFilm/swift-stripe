@@ -33,14 +33,6 @@ extension Stripe.Billing.Customer.Balance.Transaction.Create {
         /// Set of key-value pairs that you can attach to an object.
         public var metadata: Stripe.Clearable<[String: String]>?
 
-        private enum CodingKeys: String, CodingKey {
-            case amount
-            case currency
-            case description
-            case expand
-            case metadata
-        }
-
         public init(
             amount: Int,
             currency: Stripe.Currency,
@@ -75,15 +67,6 @@ extension Stripe.Billing.Customer.Balance.Transaction.List {
         /// A cursor for use in pagination.
         public var startingAfter: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case created
-            case endingBefore
-            case expand
-            case invoice
-            case limit
-            case startingAfter
-        }
-
         public init(
             created: Stripe.RangeQuery? = nil,
             endingBefore: String? = nil,
@@ -110,10 +93,6 @@ extension Stripe.Billing.Customer.Balance.Transaction.Retrieve {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
-
         public init(
             expand: [String]? = nil
         ) {
@@ -133,12 +112,6 @@ extension Stripe.Billing.Customer.Balance.Transaction.Update {
         public var expand: [String]?
         /// Set of key-value pairs that you can attach to an object.
         public var metadata: Stripe.Clearable<[String: String]>?
-
-        private enum CodingKeys: String, CodingKey {
-            case description
-            case expand
-            case metadata
-        }
 
         public init(
             description: String? = nil,

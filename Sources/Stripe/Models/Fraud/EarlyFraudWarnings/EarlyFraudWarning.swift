@@ -30,17 +30,6 @@ extension Stripe.Fraud.EarlyFraudWarnings {
         /// ID of the Payment Intent this early fraud warning is for, optionally expanded.
         @Expandable<Stripe.PaymentIntents.PaymentIntent, String> public var paymentIntent: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case actionable
-            case charge
-            case created
-            case fraudType
-            case livemode
-            case paymentIntent
-        }
-
         public init(
             id: ID,
             object: String,

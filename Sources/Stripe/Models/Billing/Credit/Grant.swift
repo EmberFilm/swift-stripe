@@ -46,26 +46,6 @@ extension Stripe.Billing.Credit {
         /// The time when this credit grant was voided.
         public var voidedAt: Date?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case amount
-            case applicabilityConfig
-            case category
-            case created
-            case customer
-            case customerAccount
-            case effectiveAt
-            case expiresAt
-            case livemode
-            case metadata
-            case name
-            case priority
-            case testClock
-            case updated
-            case voidedAt
-        }
-
         public init(
             id: ID,
             object: String,
@@ -113,10 +93,6 @@ extension Stripe.Billing.Credit {
         public struct ApplicabilityConfig: Codable, Hashable, Sendable {
             public var scope: Scope?
 
-            private enum CodingKeys: String, CodingKey {
-                case scope
-            }
-
             public init(
                 scope: Scope? = nil
             ) {
@@ -129,11 +105,6 @@ extension Stripe.Billing.Credit {
                 /// The prices that credit grants can apply to.
                 public var prices: [Prices]?
 
-                private enum CodingKeys: String, CodingKey {
-                    case priceType
-                    case prices
-                }
-
                 public init(
                     priceType: String? = nil,
                     prices: [Prices]? = nil
@@ -145,10 +116,6 @@ extension Stripe.Billing.Credit {
                 public struct Prices: Codable, Hashable, Sendable, Identifiable {
                     public typealias ID = String
                     public let id: ID
-
-                    private enum CodingKeys: String, CodingKey {
-                        case id
-                    }
 
                     public init(
                         id: ID

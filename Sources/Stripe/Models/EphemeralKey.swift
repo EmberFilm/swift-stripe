@@ -25,15 +25,6 @@ extension Stripe {
         /// The key's secret.
         public var secret: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case created
-            case expires
-            case livemode
-            case secret
-        }
-
         public init(
             id: ID,
             object: String,

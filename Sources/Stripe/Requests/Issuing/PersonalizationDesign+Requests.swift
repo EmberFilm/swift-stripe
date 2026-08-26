@@ -28,10 +28,6 @@ extension Stripe.Issuing.PersonalizationDesign.Activate {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
-
         public init(
             expand: [String]? = nil
         ) {
@@ -63,18 +59,6 @@ extension Stripe.Issuing.PersonalizationDesign.Create {
         public var preferences: Preferences?
         /// If set to true, will atomically remove the lookup key from the existing personalization design, and assign it to this …
         public var transferLookupKey: Bool?
-
-        private enum CodingKeys: String, CodingKey {
-            case cardLogo
-            case carrierText
-            case expand
-            case lookupKey
-            case metadata
-            case name
-            case physicalBundle
-            case preferences
-            case transferLookupKey
-        }
 
         public init(
             cardLogo: String? = nil,
@@ -109,13 +93,6 @@ extension Stripe.Issuing.PersonalizationDesign.Create {
             /// The header title text of the carrier letter.
             public var headerTitle: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case footerBody
-                case footerTitle
-                case headerBody
-                case headerTitle
-            }
-
             public init(
                 footerBody: String? = nil,
                 footerTitle: String? = nil,
@@ -134,10 +111,6 @@ extension Stripe.Issuing.PersonalizationDesign.Create {
             /// Whether we use this personalization design to create cards when one isn't specified.
             public var isDefault: Bool
 
-            private enum CodingKeys: String, CodingKey {
-                case isDefault
-            }
-
             public init(
                 isDefault: Bool
             ) {
@@ -154,10 +127,6 @@ extension Stripe.Issuing.PersonalizationDesign.Deactivate {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil
@@ -186,16 +155,6 @@ extension Stripe.Issuing.PersonalizationDesign.List {
         public var startingAfter: String?
         /// Only return personalization designs with the given status.
         public var status: Status?
-
-        private enum CodingKeys: String, CodingKey {
-            case endingBefore
-            case expand
-            case limit
-            case lookupKeys
-            case preferences
-            case startingAfter
-            case status
-        }
 
         public init(
             endingBefore: String? = nil,
@@ -229,11 +188,6 @@ extension Stripe.Issuing.PersonalizationDesign.List {
             /// Only return the personalization design that is set as the Connect platform's default.
             public var isPlatformDefault: Bool?
 
-            private enum CodingKeys: String, CodingKey {
-                case isDefault
-                case isPlatformDefault
-            }
-
             public init(
                 isDefault: Bool? = nil,
                 isPlatformDefault: Bool? = nil
@@ -255,11 +209,6 @@ extension Stripe.Issuing.PersonalizationDesign.Reject {
         /// The reason(s) the personalization design was rejected.
         public var rejectionReasons: RejectionReasons
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case rejectionReasons
-        }
-
         public init(
             expand: [String]? = nil,
             rejectionReasons: RejectionReasons
@@ -274,11 +223,6 @@ extension Stripe.Issuing.PersonalizationDesign.Reject {
             public var cardLogo: [CardLogo]?
             /// The reason(s) the carrier text was rejected.
             public var carrierText: [CarrierText]?
-
-            private enum CodingKeys: String, CodingKey {
-                case cardLogo
-                case carrierText
-            }
 
             public init(
                 cardLogo: [CardLogo]? = nil,
@@ -320,10 +264,6 @@ extension Stripe.Issuing.PersonalizationDesign.Retrieve {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
-
         public init(
             expand: [String]? = nil
         ) {
@@ -355,18 +295,6 @@ extension Stripe.Issuing.PersonalizationDesign.Update {
         public var preferences: Preferences?
         /// If set to true, will atomically remove the lookup key from the existing personalization design, and assign it to this …
         public var transferLookupKey: Bool?
-
-        private enum CodingKeys: String, CodingKey {
-            case cardLogo
-            case carrierText
-            case expand
-            case lookupKey
-            case metadata
-            case name
-            case physicalBundle
-            case preferences
-            case transferLookupKey
-        }
 
         public init(
             cardLogo: String? = nil,
@@ -400,13 +328,6 @@ extension Stripe.Issuing.PersonalizationDesign.Update {
             /// The header title text of the carrier letter.
             public var headerTitle: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case footerBody
-                case footerTitle
-                case headerBody
-                case headerTitle
-            }
-
             public init(
                 footerBody: String? = nil,
                 footerTitle: String? = nil,
@@ -424,10 +345,6 @@ extension Stripe.Issuing.PersonalizationDesign.Update {
         public struct Preferences: Codable, Hashable, Sendable {
             /// Whether we use this personalization design to create cards when one isn't specified.
             public var isDefault: Bool
-
-            private enum CodingKeys: String, CodingKey {
-                case isDefault
-            }
 
             public init(
                 isDefault: Bool

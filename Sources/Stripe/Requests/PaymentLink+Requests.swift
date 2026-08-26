@@ -88,41 +88,6 @@ extension Stripe.PaymentLink.Create {
         /// The account (if any) the payments will be attributed to for tax reporting, and where funds from each payment will be t…
         public var transferData: TransferData?
 
-        private enum CodingKeys: String, CodingKey {
-            case afterCompletion
-            case allowPromotionCodes
-            case applicationFeeAmount
-            case applicationFeePercent
-            case automaticTax
-            case billingAddressCollection
-            case consentCollection
-            case currency
-            case customFields
-            case customText
-            case customerCreation
-            case expand
-            case inactiveMessage
-            case invoiceCreation
-            case lineItems
-            case managedPayments
-            case metadata
-            case nameCollection
-            case onBehalfOf
-            case optionalItems
-            case paymentIntentData
-            case paymentMethodCollection
-            case paymentMethodOptions
-            case paymentMethodTypes
-            case phoneNumberCollection
-            case restrictions
-            case shippingAddressCollection
-            case shippingOptions
-            case submitType
-            case subscriptionData
-            case taxIdCollection
-            case transferData
-        }
-
         public init(
             afterCompletion: AfterCompletion? = nil,
             allowPromotionCodes: Bool? = nil,
@@ -268,12 +233,6 @@ extension Stripe.PaymentLink.Create {
             /// The specified behavior after the purchase is complete.
             public var `type`: Type
 
-            private enum CodingKeys: String, CodingKey {
-                case hostedConfirmation
-                case redirect
-                case `type`
-            }
-
             public init(
                 hostedConfirmation: HostedConfirmation? = nil,
                 redirect: Redirect? = nil,
@@ -294,10 +253,6 @@ extension Stripe.PaymentLink.Create {
                 /// A custom message to display to the customer after the purchase is complete.
                 public var customMessage: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case customMessage
-                }
-
                 public init(
                     customMessage: String? = nil
                 ) {
@@ -309,10 +264,6 @@ extension Stripe.PaymentLink.Create {
             public struct Redirect: Codable, Hashable, Sendable {
                 /// The URL the customer will be redirected to after the purchase is complete.
                 public var url: String
-
-                private enum CodingKeys: String, CodingKey {
-                    case url
-                }
 
                 public init(
                     url: String
@@ -329,11 +280,6 @@ extension Stripe.PaymentLink.Create {
             /// The account that's liable for tax.
             public var liability: Liability?
 
-            private enum CodingKeys: String, CodingKey {
-                case enabled
-                case liability
-            }
-
             public init(
                 enabled: Bool,
                 liability: Liability? = nil
@@ -348,11 +294,6 @@ extension Stripe.PaymentLink.Create {
                 public var account: String?
                 /// Type of the account referenced in the request.
                 public var `type`: Type
-
-                private enum CodingKeys: String, CodingKey {
-                    case account
-                    case `type`
-                }
 
                 public init(
                     account: String? = nil,
@@ -378,12 +319,6 @@ extension Stripe.PaymentLink.Create {
             /// If set to `required`, it requires customers to check a terms of service checkbox before being able to pay.
             public var termsOfService: TermsOfService?
 
-            private enum CodingKeys: String, CodingKey {
-                case paymentMethodReuseAgreement
-                case promotions
-                case termsOfService
-            }
-
             public init(
                 paymentMethodReuseAgreement: PaymentMethodReuseAgreement? = nil,
                 promotions: Promotions? = nil,
@@ -408,10 +343,6 @@ extension Stripe.PaymentLink.Create {
             public struct PaymentMethodReuseAgreement: Codable, Hashable, Sendable {
                 /// Determines the position and visibility of the payment method reuse agreement in the UI.
                 public var position: Position
-
-                private enum CodingKeys: String, CodingKey {
-                    case position
-                }
 
                 public init(
                     position: Position
@@ -441,16 +372,6 @@ extension Stripe.PaymentLink.Create {
             public var text: Text?
             /// The type of the field.
             public var `type`: Type
-
-            private enum CodingKeys: String, CodingKey {
-                case dropdown
-                case key
-                case label
-                case numeric
-                case optional
-                case text
-                case `type`
-            }
 
             public init(
                 dropdown: Dropdown? = nil,
@@ -483,11 +404,6 @@ extension Stripe.PaymentLink.Create {
                 /// The options available for the customer to select.
                 public var options: [Options]
 
-                private enum CodingKeys: String, CodingKey {
-                    case defaultValue
-                    case options
-                }
-
                 public init(
                     defaultValue: String? = nil,
                     options: [Options]
@@ -501,11 +417,6 @@ extension Stripe.PaymentLink.Create {
                     public var label: String
                     /// The value for this option, not displayed to the customer, used by your integration to reconcile the option selected by…
                     public var value: String
-
-                    private enum CodingKeys: String, CodingKey {
-                        case label
-                        case value
-                    }
 
                     public init(
                         label: String,
@@ -524,11 +435,6 @@ extension Stripe.PaymentLink.Create {
                 /// The type of the label.
                 public var `type`: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case custom
-                    case `type`
-                }
-
                 public init(
                     custom: String,
                     `type`: String
@@ -546,12 +452,6 @@ extension Stripe.PaymentLink.Create {
                 public var maximumLength: Int?
                 /// The minimum character length requirement for the customer's input.
                 public var minimumLength: Int?
-
-                private enum CodingKeys: String, CodingKey {
-                    case defaultValue
-                    case maximumLength
-                    case minimumLength
-                }
 
                 public init(
                     defaultValue: String? = nil,
@@ -572,12 +472,6 @@ extension Stripe.PaymentLink.Create {
                 public var maximumLength: Int?
                 /// The minimum character length requirement for the customer's input.
                 public var minimumLength: Int?
-
-                private enum CodingKeys: String, CodingKey {
-                    case defaultValue
-                    case maximumLength
-                    case minimumLength
-                }
 
                 public init(
                     defaultValue: String? = nil,
@@ -602,13 +496,6 @@ extension Stripe.PaymentLink.Create {
             /// Custom text that should be displayed in place of the default terms of service agreement text.
             public var termsOfServiceAcceptance: Stripe.Clearable<TermsOfServiceAcceptance>?
 
-            private enum CodingKeys: String, CodingKey {
-                case afterSubmit
-                case shippingAddress
-                case submit
-                case termsOfServiceAcceptance
-            }
-
             public init(
                 afterSubmit: Stripe.Clearable<AfterSubmit>? = nil,
                 shippingAddress: Stripe.Clearable<ShippingAddress>? = nil,
@@ -625,10 +512,6 @@ extension Stripe.PaymentLink.Create {
                 /// Text can be up to 1200 characters in length.
                 public var message: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case message
-                }
-
                 public init(
                     message: String
                 ) {
@@ -639,10 +522,6 @@ extension Stripe.PaymentLink.Create {
             public struct ShippingAddress: Codable, Hashable, Sendable {
                 /// Text can be up to 1200 characters in length.
                 public var message: String
-
-                private enum CodingKeys: String, CodingKey {
-                    case message
-                }
 
                 public init(
                     message: String
@@ -655,10 +534,6 @@ extension Stripe.PaymentLink.Create {
                 /// Text can be up to 1200 characters in length.
                 public var message: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case message
-                }
-
                 public init(
                     message: String
                 ) {
@@ -669,10 +544,6 @@ extension Stripe.PaymentLink.Create {
             public struct TermsOfServiceAcceptance: Codable, Hashable, Sendable {
                 /// Text can be up to 1200 characters in length.
                 public var message: String
-
-                private enum CodingKeys: String, CodingKey {
-                    case message
-                }
 
                 public init(
                     message: String
@@ -688,11 +559,6 @@ extension Stripe.PaymentLink.Create {
             public var enabled: Bool
             /// Invoice PDF configuration.
             public var invoiceData: InvoiceData?
-
-            private enum CodingKeys: String, CodingKey {
-                case enabled
-                case invoiceData
-            }
 
             public init(
                 enabled: Bool,
@@ -719,16 +585,6 @@ extension Stripe.PaymentLink.Create {
                 /// Default options for invoice PDF rendering for this customer.
                 public var renderingOptions: Stripe.Clearable<RenderingOptions>?
 
-                private enum CodingKeys: String, CodingKey {
-                    case accountTaxIds
-                    case customFields
-                    case description
-                    case footer
-                    case issuer
-                    case metadata
-                    case renderingOptions
-                }
-
                 public init(
                     accountTaxIds: Stripe.Clearable<[String]>? = nil,
                     customFields: Stripe.Clearable<[CustomFields]>? = nil,
@@ -753,11 +609,6 @@ extension Stripe.PaymentLink.Create {
                     /// The value of the custom field.
                     public var value: String
 
-                    private enum CodingKeys: String, CodingKey {
-                        case name
-                        case value
-                    }
-
                     public init(
                         name: String,
                         value: String
@@ -773,11 +624,6 @@ extension Stripe.PaymentLink.Create {
                     public var account: String?
                     /// Type of the account referenced in the request.
                     public var `type`: Type
-
-                    private enum CodingKeys: String, CodingKey {
-                        case account
-                        case `type`
-                    }
 
                     public init(
                         account: String? = nil,
@@ -798,11 +644,6 @@ extension Stripe.PaymentLink.Create {
                     public var amountTaxDisplay: AmountTaxDisplay?
                     /// ID of the invoice rendering template to use for this invoice.
                     public var template: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case amountTaxDisplay
-                        case template
-                    }
 
                     public init(
                         amountTaxDisplay: AmountTaxDisplay? = nil,
@@ -831,13 +672,6 @@ extension Stripe.PaymentLink.Create {
             /// The quantity of the line item being purchased.
             public var quantity: Int
 
-            private enum CodingKeys: String, CodingKey {
-                case adjustableQuantity
-                case price
-                case priceData
-                case quantity
-            }
-
             public init(
                 adjustableQuantity: AdjustableQuantity? = nil,
                 price: String? = nil,
@@ -858,12 +692,6 @@ extension Stripe.PaymentLink.Create {
                 public var maximum: Int?
                 /// The minimum quantity the customer can purchase.
                 public var minimum: Int?
-
-                private enum CodingKeys: String, CodingKey {
-                    case enabled
-                    case maximum
-                    case minimum
-                }
 
                 public init(
                     enabled: Bool,
@@ -892,16 +720,6 @@ extension Stripe.PaymentLink.Create {
                 public var unitAmount: Int?
                 /// Same as `unit_amount`, but accepts a decimal value in cents (or local equivalent) with at most 12 decimal places.
                 public var unitAmountDecimal: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case currency
-                    case product
-                    case productData
-                    case recurring
-                    case taxBehavior
-                    case unitAmount
-                    case unitAmountDecimal
-                }
 
                 public init(
                     currency: Stripe.Currency,
@@ -942,15 +760,6 @@ extension Stripe.PaymentLink.Create {
                     /// A label that represents units of this product.
                     public var unitLabel: String?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case description
-                        case images
-                        case metadata
-                        case name
-                        case taxCode
-                        case unitLabel
-                    }
-
                     public init(
                         description: String? = nil,
                         images: [String]? = nil,
@@ -975,11 +784,6 @@ extension Stripe.PaymentLink.Create {
                     /// The number of intervals between subscription billings.
                     public var intervalCount: Int?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case interval
-                        case intervalCount
-                    }
-
                     public init(
                         interval: Interval,
                         intervalCount: Int? = nil
@@ -1003,10 +807,6 @@ extension Stripe.PaymentLink.Create {
             /// Set to `true` to enable Managed Payments, Stripe's merchant of record solution, for this session.
             public var enabled: Bool?
 
-            private enum CodingKeys: String, CodingKey {
-                case enabled
-            }
-
             public init(
                 enabled: Bool? = nil
             ) {
@@ -1020,11 +820,6 @@ extension Stripe.PaymentLink.Create {
             public var business: Business?
             /// Controls settings applied for collecting the customer's individual name.
             public var individual: Individual?
-
-            private enum CodingKeys: String, CodingKey {
-                case business
-                case individual
-            }
 
             public init(
                 business: Business? = nil,
@@ -1041,11 +836,6 @@ extension Stripe.PaymentLink.Create {
                 /// Whether the customer is required to provide their business name before checking out.
                 public var optional: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case enabled
-                    case optional
-                }
-
                 public init(
                     enabled: Bool,
                     optional: Bool? = nil
@@ -1061,11 +851,6 @@ extension Stripe.PaymentLink.Create {
                 public var enabled: Bool
                 /// Whether the customer is required to provide their full name before checking out.
                 public var optional: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case enabled
-                    case optional
-                }
 
                 public init(
                     enabled: Bool,
@@ -1085,12 +870,6 @@ extension Stripe.PaymentLink.Create {
             /// The initial quantity of the line item created when a customer chooses to add this optional item to their order.
             public var quantity: Int
 
-            private enum CodingKeys: String, CodingKey {
-                case adjustableQuantity
-                case price
-                case quantity
-            }
-
             public init(
                 adjustableQuantity: AdjustableQuantity? = nil,
                 price: String,
@@ -1109,12 +888,6 @@ extension Stripe.PaymentLink.Create {
                 public var maximum: Int?
                 /// The minimum quantity of this item the customer must purchase, if they choose to purchase it.
                 public var minimum: Int?
-
-                private enum CodingKeys: String, CodingKey {
-                    case enabled
-                    case maximum
-                    case minimum
-                }
 
                 public init(
                     enabled: Bool,
@@ -1144,16 +917,6 @@ extension Stripe.PaymentLink.Create {
             public var statementDescriptorSuffix: String?
             /// A string that identifies the resulting payment as part of a group.
             public var transferGroup: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case captureMethod
-                case description
-                case metadata
-                case setupFutureUsage
-                case statementDescriptor
-                case statementDescriptorSuffix
-                case transferGroup
-            }
 
             public init(
                 captureMethod: CaptureMethod? = nil,
@@ -1190,10 +953,6 @@ extension Stripe.PaymentLink.Create {
             /// Configuration for `card` payment methods.
             public var card: Card?
 
-            private enum CodingKeys: String, CodingKey {
-                case card
-            }
-
             public init(
                 card: Card? = nil
             ) {
@@ -1205,10 +964,6 @@ extension Stripe.PaymentLink.Create {
                 /// Restrictions to apply to the card payment method.
                 public var restrictions: Restrictions?
 
-                private enum CodingKeys: String, CodingKey {
-                    case restrictions
-                }
-
                 public init(
                     restrictions: Restrictions? = nil
                 ) {
@@ -1219,10 +974,6 @@ extension Stripe.PaymentLink.Create {
                 public struct Restrictions: Codable, Hashable, Sendable {
                     /// The card brands to block.
                     public var brandsBlocked: [BrandsBlocked]?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case brandsBlocked
-                    }
 
                     public init(
                         brandsBlocked: [BrandsBlocked]? = nil
@@ -1245,10 +996,6 @@ extension Stripe.PaymentLink.Create {
             /// Set to `true` to enable phone number collection.
             public var enabled: Bool
 
-            private enum CodingKeys: String, CodingKey {
-                case enabled
-            }
-
             public init(
                 enabled: Bool
             ) {
@@ -1261,10 +1008,6 @@ extension Stripe.PaymentLink.Create {
             /// Configuration for the `completed_sessions` restriction type.
             public var completedSessions: CompletedSessions
 
-            private enum CodingKeys: String, CodingKey {
-                case completedSessions
-            }
-
             public init(
                 completedSessions: CompletedSessions
             ) {
@@ -1275,10 +1018,6 @@ extension Stripe.PaymentLink.Create {
             public struct CompletedSessions: Codable, Hashable, Sendable {
                 /// The maximum number of checkout sessions that can be completed for the `completed_sessions` restriction to be met.
                 public var limit: Int
-
-                private enum CodingKeys: String, CodingKey {
-                    case limit
-                }
 
                 public init(
                     limit: Int
@@ -1292,10 +1031,6 @@ extension Stripe.PaymentLink.Create {
         public struct ShippingAddressCollection: Codable, Hashable, Sendable {
             /// An array of two-letter ISO country codes representing which countries Checkout should provide as options for shipping …
             public var allowedCountries: [AllowedCountries]
-
-            private enum CodingKeys: String, CodingKey {
-                case allowedCountries
-            }
 
             public init(
                 allowedCountries: [AllowedCountries]
@@ -1549,10 +1284,6 @@ extension Stripe.PaymentLink.Create {
             /// The ID of the Shipping Rate to use for this shipping option.
             public var shippingRate: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case shippingRate
-            }
-
             public init(
                 shippingRate: String? = nil
             ) {
@@ -1573,14 +1304,6 @@ extension Stripe.PaymentLink.Create {
             /// Settings related to subscription trials.
             public var trialSettings: TrialSettings?
 
-            private enum CodingKeys: String, CodingKey {
-                case description
-                case invoiceSettings
-                case metadata
-                case trialPeriodDays
-                case trialSettings
-            }
-
             public init(
                 description: String? = nil,
                 invoiceSettings: InvoiceSettings? = nil,
@@ -1600,10 +1323,6 @@ extension Stripe.PaymentLink.Create {
                 /// The connected account that issues the invoice.
                 public var issuer: Issuer?
 
-                private enum CodingKeys: String, CodingKey {
-                    case issuer
-                }
-
                 public init(
                     issuer: Issuer? = nil
                 ) {
@@ -1616,11 +1335,6 @@ extension Stripe.PaymentLink.Create {
                     public var account: String?
                     /// Type of the account referenced in the request.
                     public var `type`: Type
-
-                    private enum CodingKeys: String, CodingKey {
-                        case account
-                        case `type`
-                    }
 
                     public init(
                         account: String? = nil,
@@ -1642,10 +1356,6 @@ extension Stripe.PaymentLink.Create {
                 /// Defines how the subscription should behave when the user's free trial ends.
                 public var endBehavior: EndBehavior
 
-                private enum CodingKeys: String, CodingKey {
-                    case endBehavior
-                }
-
                 public init(
                     endBehavior: EndBehavior
                 ) {
@@ -1656,10 +1366,6 @@ extension Stripe.PaymentLink.Create {
                 public struct EndBehavior: Codable, Hashable, Sendable {
                     /// Indicates how the subscription should change when the trial ends if the user did not provide a payment method.
                     public var missingPaymentMethod: MissingPaymentMethod
-
-                    private enum CodingKeys: String, CodingKey {
-                        case missingPaymentMethod
-                    }
 
                     public init(
                         missingPaymentMethod: MissingPaymentMethod
@@ -1683,11 +1389,6 @@ extension Stripe.PaymentLink.Create {
             /// Describes whether a tax ID is required during checkout.
             public var required: Required?
 
-            private enum CodingKeys: String, CodingKey {
-                case enabled
-                case required
-            }
-
             public init(
                 enabled: Bool,
                 required: Required? = nil
@@ -1708,11 +1409,6 @@ extension Stripe.PaymentLink.Create {
             public var amount: Int?
             /// If specified, successful charges will be attributed to the destination account for tax reporting, and the funds from c…
             public var destination: String
-
-            private enum CodingKeys: String, CodingKey {
-                case amount
-                case destination
-            }
 
             public init(
                 amount: Int? = nil,
@@ -1740,14 +1436,6 @@ extension Stripe.PaymentLink.List {
         public var limit: Int?
         /// A cursor for use in pagination.
         public var startingAfter: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case active
-            case endingBefore
-            case expand
-            case limit
-            case startingAfter
-        }
 
         public init(
             active: Bool? = nil,
@@ -1779,13 +1467,6 @@ extension Stripe.PaymentLink.ListLineItems {
         /// A cursor for use in pagination.
         public var startingAfter: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case endingBefore
-            case expand
-            case limit
-            case startingAfter
-        }
-
         public init(
             endingBefore: String? = nil,
             expand: [String]? = nil,
@@ -1807,10 +1488,6 @@ extension Stripe.PaymentLink.Retrieve {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil
@@ -1879,36 +1556,6 @@ extension Stripe.PaymentLink.Update {
         public var subscriptionData: SubscriptionData?
         /// Controls tax ID collection during checkout.
         public var taxIdCollection: TaxIdCollection?
-
-        private enum CodingKeys: String, CodingKey {
-            case active
-            case afterCompletion
-            case allowPromotionCodes
-            case automaticTax
-            case billingAddressCollection
-            case consentCollection
-            case customFields
-            case customText
-            case customerCreation
-            case expand
-            case inactiveMessage
-            case invoiceCreation
-            case lineItems
-            case metadata
-            case nameCollection
-            case optionalItems
-            case paymentIntentData
-            case paymentMethodCollection
-            case paymentMethodOptions
-            case paymentMethodTypes
-            case phoneNumberCollection
-            case restrictions
-            case shippingAddressCollection
-            case shippingOptions
-            case submitType
-            case subscriptionData
-            case taxIdCollection
-        }
 
         public init(
             active: Bool? = nil,
@@ -2045,12 +1692,6 @@ extension Stripe.PaymentLink.Update {
             /// The specified behavior after the purchase is complete.
             public var `type`: Type
 
-            private enum CodingKeys: String, CodingKey {
-                case hostedConfirmation
-                case redirect
-                case `type`
-            }
-
             public init(
                 hostedConfirmation: HostedConfirmation? = nil,
                 redirect: Redirect? = nil,
@@ -2071,10 +1712,6 @@ extension Stripe.PaymentLink.Update {
                 /// A custom message to display to the customer after the purchase is complete.
                 public var customMessage: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case customMessage
-                }
-
                 public init(
                     customMessage: String? = nil
                 ) {
@@ -2086,10 +1723,6 @@ extension Stripe.PaymentLink.Update {
             public struct Redirect: Codable, Hashable, Sendable {
                 /// The URL the customer will be redirected to after the purchase is complete.
                 public var url: String
-
-                private enum CodingKeys: String, CodingKey {
-                    case url
-                }
 
                 public init(
                     url: String
@@ -2106,11 +1739,6 @@ extension Stripe.PaymentLink.Update {
             /// The account that's liable for tax.
             public var liability: Liability?
 
-            private enum CodingKeys: String, CodingKey {
-                case enabled
-                case liability
-            }
-
             public init(
                 enabled: Bool,
                 liability: Liability? = nil
@@ -2125,11 +1753,6 @@ extension Stripe.PaymentLink.Update {
                 public var account: String?
                 /// Type of the account referenced in the request.
                 public var `type`: Type
-
-                private enum CodingKeys: String, CodingKey {
-                    case account
-                    case `type`
-                }
 
                 public init(
                     account: String? = nil,
@@ -2155,12 +1778,6 @@ extension Stripe.PaymentLink.Update {
             /// If set to `required`, it requires customers to check a terms of service checkbox before being able to pay.
             public var termsOfService: TermsOfService?
 
-            private enum CodingKeys: String, CodingKey {
-                case paymentMethodReuseAgreement
-                case promotions
-                case termsOfService
-            }
-
             public init(
                 paymentMethodReuseAgreement: PaymentMethodReuseAgreement? = nil,
                 promotions: Promotions? = nil,
@@ -2185,10 +1802,6 @@ extension Stripe.PaymentLink.Update {
             public struct PaymentMethodReuseAgreement: Codable, Hashable, Sendable {
                 /// Determines the position and visibility of the payment method reuse agreement in the UI.
                 public var position: Position
-
-                private enum CodingKeys: String, CodingKey {
-                    case position
-                }
 
                 public init(
                     position: Position
@@ -2218,16 +1831,6 @@ extension Stripe.PaymentLink.Update {
             public var text: Text?
             /// The type of the field.
             public var `type`: Type
-
-            private enum CodingKeys: String, CodingKey {
-                case dropdown
-                case key
-                case label
-                case numeric
-                case optional
-                case text
-                case `type`
-            }
 
             public init(
                 dropdown: Dropdown? = nil,
@@ -2260,11 +1863,6 @@ extension Stripe.PaymentLink.Update {
                 /// The options available for the customer to select.
                 public var options: [Options]
 
-                private enum CodingKeys: String, CodingKey {
-                    case defaultValue
-                    case options
-                }
-
                 public init(
                     defaultValue: String? = nil,
                     options: [Options]
@@ -2278,11 +1876,6 @@ extension Stripe.PaymentLink.Update {
                     public var label: String
                     /// The value for this option, not displayed to the customer, used by your integration to reconcile the option selected by…
                     public var value: String
-
-                    private enum CodingKeys: String, CodingKey {
-                        case label
-                        case value
-                    }
 
                     public init(
                         label: String,
@@ -2301,11 +1894,6 @@ extension Stripe.PaymentLink.Update {
                 /// The type of the label.
                 public var `type`: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case custom
-                    case `type`
-                }
-
                 public init(
                     custom: String,
                     `type`: String
@@ -2323,12 +1911,6 @@ extension Stripe.PaymentLink.Update {
                 public var maximumLength: Int?
                 /// The minimum character length requirement for the customer's input.
                 public var minimumLength: Int?
-
-                private enum CodingKeys: String, CodingKey {
-                    case defaultValue
-                    case maximumLength
-                    case minimumLength
-                }
 
                 public init(
                     defaultValue: String? = nil,
@@ -2349,12 +1931,6 @@ extension Stripe.PaymentLink.Update {
                 public var maximumLength: Int?
                 /// The minimum character length requirement for the customer's input.
                 public var minimumLength: Int?
-
-                private enum CodingKeys: String, CodingKey {
-                    case defaultValue
-                    case maximumLength
-                    case minimumLength
-                }
 
                 public init(
                     defaultValue: String? = nil,
@@ -2379,13 +1955,6 @@ extension Stripe.PaymentLink.Update {
             /// Custom text that should be displayed in place of the default terms of service agreement text.
             public var termsOfServiceAcceptance: Stripe.Clearable<TermsOfServiceAcceptance>?
 
-            private enum CodingKeys: String, CodingKey {
-                case afterSubmit
-                case shippingAddress
-                case submit
-                case termsOfServiceAcceptance
-            }
-
             public init(
                 afterSubmit: Stripe.Clearable<AfterSubmit>? = nil,
                 shippingAddress: Stripe.Clearable<ShippingAddress>? = nil,
@@ -2402,10 +1971,6 @@ extension Stripe.PaymentLink.Update {
                 /// Text can be up to 1200 characters in length.
                 public var message: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case message
-                }
-
                 public init(
                     message: String
                 ) {
@@ -2416,10 +1981,6 @@ extension Stripe.PaymentLink.Update {
             public struct ShippingAddress: Codable, Hashable, Sendable {
                 /// Text can be up to 1200 characters in length.
                 public var message: String
-
-                private enum CodingKeys: String, CodingKey {
-                    case message
-                }
 
                 public init(
                     message: String
@@ -2432,10 +1993,6 @@ extension Stripe.PaymentLink.Update {
                 /// Text can be up to 1200 characters in length.
                 public var message: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case message
-                }
-
                 public init(
                     message: String
                 ) {
@@ -2446,10 +2003,6 @@ extension Stripe.PaymentLink.Update {
             public struct TermsOfServiceAcceptance: Codable, Hashable, Sendable {
                 /// Text can be up to 1200 characters in length.
                 public var message: String
-
-                private enum CodingKeys: String, CodingKey {
-                    case message
-                }
 
                 public init(
                     message: String
@@ -2465,11 +2018,6 @@ extension Stripe.PaymentLink.Update {
             public var enabled: Bool
             /// Invoice PDF configuration.
             public var invoiceData: InvoiceData?
-
-            private enum CodingKeys: String, CodingKey {
-                case enabled
-                case invoiceData
-            }
 
             public init(
                 enabled: Bool,
@@ -2496,16 +2044,6 @@ extension Stripe.PaymentLink.Update {
                 /// Default options for invoice PDF rendering for this customer.
                 public var renderingOptions: Stripe.Clearable<RenderingOptions>?
 
-                private enum CodingKeys: String, CodingKey {
-                    case accountTaxIds
-                    case customFields
-                    case description
-                    case footer
-                    case issuer
-                    case metadata
-                    case renderingOptions
-                }
-
                 public init(
                     accountTaxIds: Stripe.Clearable<[String]>? = nil,
                     customFields: Stripe.Clearable<[CustomFields]>? = nil,
@@ -2530,11 +2068,6 @@ extension Stripe.PaymentLink.Update {
                     /// The value of the custom field.
                     public var value: String
 
-                    private enum CodingKeys: String, CodingKey {
-                        case name
-                        case value
-                    }
-
                     public init(
                         name: String,
                         value: String
@@ -2550,11 +2083,6 @@ extension Stripe.PaymentLink.Update {
                     public var account: String?
                     /// Type of the account referenced in the request.
                     public var `type`: Type
-
-                    private enum CodingKeys: String, CodingKey {
-                        case account
-                        case `type`
-                    }
 
                     public init(
                         account: String? = nil,
@@ -2575,11 +2103,6 @@ extension Stripe.PaymentLink.Update {
                     public var amountTaxDisplay: AmountTaxDisplay?
                     /// ID of the invoice rendering template to use for this invoice.
                     public var template: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case amountTaxDisplay
-                        case template
-                    }
 
                     public init(
                         amountTaxDisplay: AmountTaxDisplay? = nil,
@@ -2606,12 +2129,6 @@ extension Stripe.PaymentLink.Update {
             /// The quantity of the line item being purchased.
             public var quantity: Int?
 
-            private enum CodingKeys: String, CodingKey {
-                case adjustableQuantity
-                case id
-                case quantity
-            }
-
             public init(
                 adjustableQuantity: AdjustableQuantity? = nil,
                 id: String,
@@ -2631,12 +2148,6 @@ extension Stripe.PaymentLink.Update {
                 /// The minimum quantity the customer can purchase.
                 public var minimum: Int?
 
-                private enum CodingKeys: String, CodingKey {
-                    case enabled
-                    case maximum
-                    case minimum
-                }
-
                 public init(
                     enabled: Bool,
                     maximum: Int? = nil,
@@ -2655,11 +2166,6 @@ extension Stripe.PaymentLink.Update {
             /// Controls settings applied for collecting the customer's individual name.
             public var individual: Individual?
 
-            private enum CodingKeys: String, CodingKey {
-                case business
-                case individual
-            }
-
             public init(
                 business: Business? = nil,
                 individual: Individual? = nil
@@ -2674,11 +2180,6 @@ extension Stripe.PaymentLink.Update {
                 public var enabled: Bool
                 /// Whether the customer is required to provide their business name before checking out.
                 public var optional: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case enabled
-                    case optional
-                }
 
                 public init(
                     enabled: Bool,
@@ -2695,11 +2196,6 @@ extension Stripe.PaymentLink.Update {
                 public var enabled: Bool
                 /// Whether the customer is required to provide their full name before checking out.
                 public var optional: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case enabled
-                    case optional
-                }
 
                 public init(
                     enabled: Bool,
@@ -2719,12 +2215,6 @@ extension Stripe.PaymentLink.Update {
             /// The initial quantity of the line item created when a customer chooses to add this optional item to their order.
             public var quantity: Int
 
-            private enum CodingKeys: String, CodingKey {
-                case adjustableQuantity
-                case price
-                case quantity
-            }
-
             public init(
                 adjustableQuantity: AdjustableQuantity? = nil,
                 price: String,
@@ -2743,12 +2233,6 @@ extension Stripe.PaymentLink.Update {
                 public var maximum: Int?
                 /// The minimum quantity of this item the customer must purchase, if they choose to purchase it.
                 public var minimum: Int?
-
-                private enum CodingKeys: String, CodingKey {
-                    case enabled
-                    case maximum
-                    case minimum
-                }
 
                 public init(
                     enabled: Bool,
@@ -2777,15 +2261,6 @@ extension Stripe.PaymentLink.Update {
             /// A string that identifies the resulting payment as part of a group.
             public var transferGroup: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case description
-                case metadata
-                case setupFutureUsage
-                case statementDescriptor
-                case statementDescriptorSuffix
-                case transferGroup
-            }
-
             public init(
                 description: String? = nil,
                 metadata: Stripe.Clearable<[String: String]>? = nil,
@@ -2813,10 +2288,6 @@ extension Stripe.PaymentLink.Update {
             /// Configuration for `card` payment methods.
             public var card: Stripe.Clearable<Card>?
 
-            private enum CodingKeys: String, CodingKey {
-                case card
-            }
-
             public init(
                 card: Stripe.Clearable<Card>? = nil
             ) {
@@ -2827,10 +2298,6 @@ extension Stripe.PaymentLink.Update {
                 /// Restrictions to apply to the card payment method.
                 public var restrictions: Stripe.Clearable<Restrictions>?
 
-                private enum CodingKeys: String, CodingKey {
-                    case restrictions
-                }
-
                 public init(
                     restrictions: Stripe.Clearable<Restrictions>? = nil
                 ) {
@@ -2840,10 +2307,6 @@ extension Stripe.PaymentLink.Update {
                 public struct Restrictions: Codable, Hashable, Sendable {
                     /// The card brands to block.
                     public var brandsBlocked: Stripe.Clearable<[BrandsBlocked]>?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case brandsBlocked
-                    }
 
                     public init(
                         brandsBlocked: Stripe.Clearable<[BrandsBlocked]>? = nil
@@ -2866,10 +2329,6 @@ extension Stripe.PaymentLink.Update {
             /// Set to `true` to enable phone number collection.
             public var enabled: Bool
 
-            private enum CodingKeys: String, CodingKey {
-                case enabled
-            }
-
             public init(
                 enabled: Bool
             ) {
@@ -2880,10 +2339,6 @@ extension Stripe.PaymentLink.Update {
         public struct Restrictions: Codable, Hashable, Sendable {
             /// Configuration for the `completed_sessions` restriction type.
             public var completedSessions: CompletedSessions
-
-            private enum CodingKeys: String, CodingKey {
-                case completedSessions
-            }
 
             public init(
                 completedSessions: CompletedSessions
@@ -2896,10 +2351,6 @@ extension Stripe.PaymentLink.Update {
                 /// The maximum number of checkout sessions that can be completed for the `completed_sessions` restriction to be met.
                 public var limit: Int
 
-                private enum CodingKeys: String, CodingKey {
-                    case limit
-                }
-
                 public init(
                     limit: Int
                 ) {
@@ -2911,10 +2362,6 @@ extension Stripe.PaymentLink.Update {
         public struct ShippingAddressCollection: Codable, Hashable, Sendable {
             /// An array of two-letter ISO country codes representing which countries Checkout should provide as options for shipping …
             public var allowedCountries: [AllowedCountries]
-
-            private enum CodingKeys: String, CodingKey {
-                case allowedCountries
-            }
 
             public init(
                 allowedCountries: [AllowedCountries]
@@ -3168,10 +2615,6 @@ extension Stripe.PaymentLink.Update {
             /// The ID of the Shipping Rate to use for this shipping option.
             public var shippingRate: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case shippingRate
-            }
-
             public init(
                 shippingRate: String? = nil
             ) {
@@ -3190,13 +2633,6 @@ extension Stripe.PaymentLink.Update {
             /// Settings related to subscription trials.
             public var trialSettings: Stripe.Clearable<TrialSettings>?
 
-            private enum CodingKeys: String, CodingKey {
-                case invoiceSettings
-                case metadata
-                case trialPeriodDays
-                case trialSettings
-            }
-
             public init(
                 invoiceSettings: InvoiceSettings? = nil,
                 metadata: Stripe.Clearable<[String: String]>? = nil,
@@ -3214,10 +2650,6 @@ extension Stripe.PaymentLink.Update {
                 /// The connected account that issues the invoice.
                 public var issuer: Issuer?
 
-                private enum CodingKeys: String, CodingKey {
-                    case issuer
-                }
-
                 public init(
                     issuer: Issuer? = nil
                 ) {
@@ -3230,11 +2662,6 @@ extension Stripe.PaymentLink.Update {
                     public var account: String?
                     /// Type of the account referenced in the request.
                     public var `type`: Type
-
-                    private enum CodingKeys: String, CodingKey {
-                        case account
-                        case `type`
-                    }
 
                     public init(
                         account: String? = nil,
@@ -3255,10 +2682,6 @@ extension Stripe.PaymentLink.Update {
                 /// Defines how the subscription should behave when the user's free trial ends.
                 public var endBehavior: EndBehavior
 
-                private enum CodingKeys: String, CodingKey {
-                    case endBehavior
-                }
-
                 public init(
                     endBehavior: EndBehavior
                 ) {
@@ -3269,10 +2692,6 @@ extension Stripe.PaymentLink.Update {
                 public struct EndBehavior: Codable, Hashable, Sendable {
                     /// Indicates how the subscription should change when the trial ends if the user did not provide a payment method.
                     public var missingPaymentMethod: MissingPaymentMethod
-
-                    private enum CodingKeys: String, CodingKey {
-                        case missingPaymentMethod
-                    }
 
                     public init(
                         missingPaymentMethod: MissingPaymentMethod
@@ -3295,11 +2714,6 @@ extension Stripe.PaymentLink.Update {
             public var enabled: Bool
             /// Describes whether a tax ID is required during checkout.
             public var required: Required?
-
-            private enum CodingKeys: String, CodingKey {
-                case enabled
-                case required
-            }
 
             public init(
                 enabled: Bool,

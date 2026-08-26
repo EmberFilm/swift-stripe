@@ -46,25 +46,6 @@ extension Stripe.Balance {
         /// Transaction type: `tax_fund`, `adjustment`, `advance`, `advance_funding`, `anticipation_repayment`, `application_fee`,…
         public var `type`: Type?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case amount
-            case availableOn
-            case balanceType
-            case created
-            case currency
-            case description
-            case exchangeRate
-            case fee
-            case feeDetails
-            case net
-            case reportingCategory
-            case source
-            case status
-            case `type`
-        }
-
         public init(
             id: ID,
             object: String,
@@ -174,14 +155,6 @@ extension Stripe.Balance {
             public var description: String?
             /// Type of the fee, one of: `application_fee`, `payment_method_passthrough_fee`, `stripe_fee`, `tax`, or `withheld_tax`.
             public var `type`: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case amount
-                case application
-                case currency
-                case description
-                case `type`
-            }
 
             public init(
                 amount: Int? = nil,

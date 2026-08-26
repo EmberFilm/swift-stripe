@@ -43,24 +43,6 @@ extension Stripe.Treasury {
         /// The Transaction associated with this object.
         @Expandable<Stripe.Treasury.Transaction, String> public var transaction: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case amount
-            case created
-            case currency
-            case financialAccount
-            case hostedRegulatoryReceiptUrl
-            case linkedFlows
-            case livemode
-            case metadata
-            case network
-            case receivedDebit
-            case status
-            case statusTransitions
-            case transaction
-        }
-
         public init(
             id: ID,
             object: String,
@@ -112,10 +94,6 @@ extension Stripe.Treasury {
             /// Set if there is an Issuing dispute associated with the DebitReversal.
             public var issuingDispute: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case issuingDispute
-            }
-
             public init(
                 issuingDispute: String? = nil
             ) {
@@ -126,10 +104,6 @@ extension Stripe.Treasury {
         public struct StatusTransitions: Codable, Hashable, Sendable {
             /// Timestamp describing when the DebitReversal changed status to `completed`.
             public var completedAt: Date?
-
-            private enum CodingKeys: String, CodingKey {
-                case completedAt
-            }
 
             public init(
                 completedAt: Date? = nil

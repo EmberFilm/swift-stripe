@@ -25,15 +25,6 @@ extension Stripe.Connect.Account {
         /// If the object exists in live mode, the value is `true`.
         public var livemode: Bool?
 
-        private enum CodingKeys: String, CodingKey {
-            case object
-            case account
-            case clientSecret
-            case components
-            case expiresAt
-            case livemode
-        }
-
         public init(
             object: String,
             account: String? = nil,
@@ -72,30 +63,6 @@ extension Stripe.Connect.Account {
             public var payoutsList: PayoutsList?
             public var taxRegistrations: TaxRegistrations?
             public var taxSettings: TaxSettings?
-
-            private enum CodingKeys: String, CodingKey {
-                case accountManagement
-                case accountOnboarding
-                case balanceReport
-                case balances
-                case disputesList
-                case documents
-                case financialAccount
-                case financialAccountTransactions
-                case instantPayoutsPromotion
-                case issuingCard
-                case issuingCardsList
-                case notificationBanner
-                case paymentDetails
-                case paymentDisputes
-                case payments
-                case payoutDetails
-                case payoutReconciliationReport
-                case payouts
-                case payoutsList
-                case taxRegistrations
-                case taxSettings
-            }
 
             public init(
                 accountManagement: AccountManagement? = nil,
@@ -148,11 +115,6 @@ extension Stripe.Connect.Account {
                 public var enabled: Bool?
                 public var features: Features?
 
-                private enum CodingKeys: String, CodingKey {
-                    case enabled
-                    case features
-                }
-
                 public init(
                     enabled: Bool? = nil,
                     features: Features? = nil
@@ -166,11 +128,6 @@ extension Stripe.Connect.Account {
                     public var disableStripeUserAuthentication: Bool?
                     /// Whether external account collection is enabled.
                     public var externalAccountCollection: Bool?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case disableStripeUserAuthentication
-                        case externalAccountCollection
-                    }
 
                     public init(
                         disableStripeUserAuthentication: Bool? = nil,
@@ -187,11 +144,6 @@ extension Stripe.Connect.Account {
                 public var enabled: Bool?
                 public var features: Features?
 
-                private enum CodingKeys: String, CodingKey {
-                    case enabled
-                    case features
-                }
-
                 public init(
                     enabled: Bool? = nil,
                     features: Features? = nil
@@ -205,11 +157,6 @@ extension Stripe.Connect.Account {
                     public var disableStripeUserAuthentication: Bool?
                     /// Whether external account collection is enabled.
                     public var externalAccountCollection: Bool?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case disableStripeUserAuthentication
-                        case externalAccountCollection
-                    }
 
                     public init(
                         disableStripeUserAuthentication: Bool? = nil,
@@ -225,11 +172,6 @@ extension Stripe.Connect.Account {
                 /// Whether the embedded component is enabled.
                 public var enabled: Bool?
                 public var features: Features?
-
-                private enum CodingKeys: String, CodingKey {
-                    case enabled
-                    case features
-                }
 
                 public init(
                     enabled: Bool? = nil,
@@ -248,11 +190,6 @@ extension Stripe.Connect.Account {
                 /// Whether the embedded component is enabled.
                 public var enabled: Bool?
                 public var features: Features?
-
-                private enum CodingKeys: String, CodingKey {
-                    case enabled
-                    case features
-                }
 
                 public init(
                     enabled: Bool? = nil,
@@ -273,14 +210,6 @@ extension Stripe.Connect.Account {
                     public var instantPayouts: Bool?
                     /// Whether to allow creation of standard payouts.
                     public var standardPayouts: Bool?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case disableStripeUserAuthentication
-                        case editPayoutSchedule
-                        case externalAccountCollection
-                        case instantPayouts
-                        case standardPayouts
-                    }
 
                     public init(
                         disableStripeUserAuthentication: Bool? = nil,
@@ -303,11 +232,6 @@ extension Stripe.Connect.Account {
                 public var enabled: Bool?
                 public var features: Features?
 
-                private enum CodingKeys: String, CodingKey {
-                    case enabled
-                    case features
-                }
-
                 public init(
                     enabled: Bool? = nil,
                     features: Features? = nil
@@ -327,14 +251,6 @@ extension Stripe.Connect.Account {
                     public var refundManagement: Bool?
                     /// Whether to allow connected accounts to submit disputes using Smart Disputes.
                     public var smartDisputesManagement: Bool?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case capturePayments
-                        case destinationOnBehalfOfChargeManagement
-                        case disputeManagement
-                        case refundManagement
-                        case smartDisputesManagement
-                    }
 
                     public init(
                         capturePayments: Bool? = nil,
@@ -357,11 +273,6 @@ extension Stripe.Connect.Account {
                 public var enabled: Bool?
                 public var features: Features?
 
-                private enum CodingKeys: String, CodingKey {
-                    case enabled
-                    case features
-                }
-
                 public init(
                     enabled: Bool? = nil,
                     features: Features? = nil
@@ -380,11 +291,6 @@ extension Stripe.Connect.Account {
                 public var enabled: Bool?
                 public var features: Features?
 
-                private enum CodingKeys: String, CodingKey {
-                    case enabled
-                    case features
-                }
-
                 public init(
                     enabled: Bool? = nil,
                     features: Features? = nil
@@ -402,13 +308,6 @@ extension Stripe.Connect.Account {
                     public var sendMoney: Bool?
                     /// Whether to allow transferring balance.
                     public var transferBalance: Bool?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case disableStripeUserAuthentication
-                        case externalAccountCollection
-                        case sendMoney
-                        case transferBalance
-                    }
 
                     public init(
                         disableStripeUserAuthentication: Bool? = nil,
@@ -429,11 +328,6 @@ extension Stripe.Connect.Account {
                 public var enabled: Bool?
                 public var features: Features?
 
-                private enum CodingKeys: String, CodingKey {
-                    case enabled
-                    case features
-                }
-
                 public init(
                     enabled: Bool? = nil,
                     features: Features? = nil
@@ -445,10 +339,6 @@ extension Stripe.Connect.Account {
                 public struct Features: Codable, Hashable, Sendable {
                     /// Whether to allow card spend dispute management features.
                     public var cardSpendDisputeManagement: Bool?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case cardSpendDisputeManagement
-                    }
 
                     public init(
                         cardSpendDisputeManagement: Bool? = nil
@@ -462,11 +352,6 @@ extension Stripe.Connect.Account {
                 /// Whether the embedded component is enabled.
                 public var enabled: Bool?
                 public var features: Features?
-
-                private enum CodingKeys: String, CodingKey {
-                    case enabled
-                    case features
-                }
 
                 public init(
                     enabled: Bool? = nil,
@@ -483,12 +368,6 @@ extension Stripe.Connect.Account {
                     public var externalAccountCollection: Bool?
                     /// Whether to allow creation of instant payouts.
                     public var instantPayouts: Bool?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case disableStripeUserAuthentication
-                        case externalAccountCollection
-                        case instantPayouts
-                    }
 
                     public init(
                         disableStripeUserAuthentication: Bool? = nil,
@@ -507,11 +386,6 @@ extension Stripe.Connect.Account {
                 public var enabled: Bool?
                 public var features: Features?
 
-                private enum CodingKeys: String, CodingKey {
-                    case enabled
-                    case features
-                }
-
                 public init(
                     enabled: Bool? = nil,
                     features: Features? = nil
@@ -529,13 +403,6 @@ extension Stripe.Connect.Account {
                     public var cardholderManagement: Bool?
                     /// Whether to allow spend control management features.
                     public var spendControlManagement: Bool?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case cardManagement
-                        case cardSpendDisputeManagement
-                        case cardholderManagement
-                        case spendControlManagement
-                    }
 
                     public init(
                         cardManagement: Bool? = nil,
@@ -556,11 +423,6 @@ extension Stripe.Connect.Account {
                 public var enabled: Bool?
                 public var features: Features?
 
-                private enum CodingKeys: String, CodingKey {
-                    case enabled
-                    case features
-                }
-
                 public init(
                     enabled: Bool? = nil,
                     features: Features? = nil
@@ -580,14 +442,6 @@ extension Stripe.Connect.Account {
                     public var disableStripeUserAuthentication: Bool?
                     /// Whether to allow spend control management features.
                     public var spendControlManagement: Bool?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case cardManagement
-                        case cardSpendDisputeManagement
-                        case cardholderManagement
-                        case disableStripeUserAuthentication
-                        case spendControlManagement
-                    }
 
                     public init(
                         cardManagement: Bool? = nil,
@@ -610,11 +464,6 @@ extension Stripe.Connect.Account {
                 public var enabled: Bool?
                 public var features: Features?
 
-                private enum CodingKeys: String, CodingKey {
-                    case enabled
-                    case features
-                }
-
                 public init(
                     enabled: Bool? = nil,
                     features: Features? = nil
@@ -628,11 +477,6 @@ extension Stripe.Connect.Account {
                     public var disableStripeUserAuthentication: Bool?
                     /// Whether external account collection is enabled.
                     public var externalAccountCollection: Bool?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case disableStripeUserAuthentication
-                        case externalAccountCollection
-                    }
 
                     public init(
                         disableStripeUserAuthentication: Bool? = nil,
@@ -648,11 +492,6 @@ extension Stripe.Connect.Account {
                 /// Whether the embedded component is enabled.
                 public var enabled: Bool?
                 public var features: Features?
-
-                private enum CodingKeys: String, CodingKey {
-                    case enabled
-                    case features
-                }
 
                 public init(
                     enabled: Bool? = nil,
@@ -673,14 +512,6 @@ extension Stripe.Connect.Account {
                     public var refundManagement: Bool?
                     /// Whether to allow connected accounts to submit disputes using Smart Disputes.
                     public var smartDisputesManagement: Bool?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case capturePayments
-                        case destinationOnBehalfOfChargeManagement
-                        case disputeManagement
-                        case refundManagement
-                        case smartDisputesManagement
-                    }
 
                     public init(
                         capturePayments: Bool? = nil,
@@ -703,11 +534,6 @@ extension Stripe.Connect.Account {
                 public var enabled: Bool?
                 public var features: Features?
 
-                private enum CodingKeys: String, CodingKey {
-                    case enabled
-                    case features
-                }
-
                 public init(
                     enabled: Bool? = nil,
                     features: Features? = nil
@@ -725,13 +551,6 @@ extension Stripe.Connect.Account {
                     public var refundManagement: Bool?
                     /// Whether to allow connected accounts to submit disputes using Smart Disputes.
                     public var smartDisputesManagement: Bool?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case destinationOnBehalfOfChargeManagement
-                        case disputeManagement
-                        case refundManagement
-                        case smartDisputesManagement
-                    }
 
                     public init(
                         destinationOnBehalfOfChargeManagement: Bool? = nil,
@@ -752,11 +571,6 @@ extension Stripe.Connect.Account {
                 public var enabled: Bool?
                 public var features: Features?
 
-                private enum CodingKeys: String, CodingKey {
-                    case enabled
-                    case features
-                }
-
                 public init(
                     enabled: Bool? = nil,
                     features: Features? = nil
@@ -776,14 +590,6 @@ extension Stripe.Connect.Account {
                     public var refundManagement: Bool?
                     /// Whether to allow connected accounts to submit disputes using Smart Disputes.
                     public var smartDisputesManagement: Bool?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case capturePayments
-                        case destinationOnBehalfOfChargeManagement
-                        case disputeManagement
-                        case refundManagement
-                        case smartDisputesManagement
-                    }
 
                     public init(
                         capturePayments: Bool? = nil,
@@ -806,11 +612,6 @@ extension Stripe.Connect.Account {
                 public var enabled: Bool?
                 public var features: Features?
 
-                private enum CodingKeys: String, CodingKey {
-                    case enabled
-                    case features
-                }
-
                 public init(
                     enabled: Bool? = nil,
                     features: Features? = nil
@@ -829,11 +630,6 @@ extension Stripe.Connect.Account {
                 public var enabled: Bool?
                 public var features: Features?
 
-                private enum CodingKeys: String, CodingKey {
-                    case enabled
-                    case features
-                }
-
                 public init(
                     enabled: Bool? = nil,
                     features: Features? = nil
@@ -851,11 +647,6 @@ extension Stripe.Connect.Account {
                 /// Whether the embedded component is enabled.
                 public var enabled: Bool?
                 public var features: Features?
-
-                private enum CodingKeys: String, CodingKey {
-                    case enabled
-                    case features
-                }
 
                 public init(
                     enabled: Bool? = nil,
@@ -876,14 +667,6 @@ extension Stripe.Connect.Account {
                     public var instantPayouts: Bool?
                     /// Whether to allow creation of standard payouts.
                     public var standardPayouts: Bool?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case disableStripeUserAuthentication
-                        case editPayoutSchedule
-                        case externalAccountCollection
-                        case instantPayouts
-                        case standardPayouts
-                    }
 
                     public init(
                         disableStripeUserAuthentication: Bool? = nil,
@@ -906,11 +689,6 @@ extension Stripe.Connect.Account {
                 public var enabled: Bool?
                 public var features: Features?
 
-                private enum CodingKeys: String, CodingKey {
-                    case enabled
-                    case features
-                }
-
                 public init(
                     enabled: Bool? = nil,
                     features: Features? = nil
@@ -929,11 +707,6 @@ extension Stripe.Connect.Account {
                 public var enabled: Bool?
                 public var features: Features?
 
-                private enum CodingKeys: String, CodingKey {
-                    case enabled
-                    case features
-                }
-
                 public init(
                     enabled: Bool? = nil,
                     features: Features? = nil
@@ -951,11 +724,6 @@ extension Stripe.Connect.Account {
                 /// Whether the embedded component is enabled.
                 public var enabled: Bool?
                 public var features: Features?
-
-                private enum CodingKeys: String, CodingKey {
-                    case enabled
-                    case features
-                }
 
                 public init(
                     enabled: Bool? = nil,

@@ -474,8 +474,8 @@ and webhook verification are complete and covered by tests.
 **Nearly every model is generated from Stripe's OpenAPI spec.** 131 of the 137 root resources
 are emitted by `Scripts/generate-models.py` into `Sources/Stripe/Models/` from
 `spec3.sdk.json`, pinned by commit in CI. Every field the spec describes is present, every enum
-carries the spec's cases, and each struct's `CodingKeys` is emitted from the same list as its
-properties. `Event` and the unions are typed too:
+carries the spec's cases, and coding keys are synthesized — the decoder converts snake_case and
+the form encoder produces it. `Event` and the unions are typed too:
 `charge.paymentMethodDetails?.details` is an enum with a case per payment method,
 `customer.sources` holds `PaymentSource` values told apart by `object`, and `Event.Object` and
 `Event.Type` are generated from the spec's event catalogue — a type the package does not know

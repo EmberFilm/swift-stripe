@@ -31,18 +31,6 @@ extension Stripe.Billing.TestClocks {
         public var status: Status?
         public var statusDetails: StatusDetails?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case created
-            case deletesAfter
-            case frozenTime
-            case livemode
-            case name
-            case status
-            case statusDetails
-        }
-
         public init(
             id: ID,
             object: String,
@@ -75,10 +63,6 @@ extension Stripe.Billing.TestClocks {
         public struct StatusDetails: Codable, Hashable, Sendable {
             public var advancing: Advancing?
 
-            private enum CodingKeys: String, CodingKey {
-                case advancing
-            }
-
             public init(
                 advancing: Advancing? = nil
             ) {
@@ -88,10 +72,6 @@ extension Stripe.Billing.TestClocks {
             public struct Advancing: Codable, Hashable, Sendable {
                 /// The `frozen_time` that the Test Clock is advancing towards.
                 public var targetFrozenTime: Date?
-
-                private enum CodingKeys: String, CodingKey {
-                    case targetFrozenTime
-                }
 
                 public init(
                     targetFrozenTime: Date? = nil

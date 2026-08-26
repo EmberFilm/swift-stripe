@@ -52,29 +52,6 @@ extension Stripe.Billing.Invoice {
         /// The tax information of the line item.
         public var taxes: [Stripe.Shared.BillingBillResourceInvoicingTaxesTax]?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case amount
-            case currency
-            case description
-            case discountAmounts
-            case discountable
-            case discounts
-            case invoice
-            case livemode
-            case metadata
-            case parent
-            case period
-            case pretaxCreditAmounts
-            case pricing
-            case quantity
-            case quantityDecimal
-            case subscription
-            case subtotal
-            case taxes
-        }
-
         public init(
             id: ID,
             object: String,
@@ -127,12 +104,6 @@ extension Stripe.Billing.Invoice {
             /// The type of parent that generated this line item
             public var `type`: Type?
 
-            private enum CodingKeys: String, CodingKey {
-                case invoiceItemDetails
-                case subscriptionItemDetails
-                case `type`
-            }
-
             public init(
                 invoiceItemDetails: InvoiceItemDetails? = nil,
                 subscriptionItemDetails: SubscriptionItemDetails? = nil,
@@ -159,13 +130,6 @@ extension Stripe.Billing.Invoice {
                 /// The subscription that the invoice item belongs to
                 public var subscription: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case invoiceItem
-                    case proration
-                    case prorationDetails
-                    case subscription
-                }
-
                 public init(
                     invoiceItem: String? = nil,
                     proration: Bool? = nil,
@@ -182,10 +146,6 @@ extension Stripe.Billing.Invoice {
                     /// For a credit proration `line_item`, the original debit line_items to which the credit proration applies.
                     public var creditedItems: CreditedItems?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case creditedItems
-                    }
-
                     public init(
                         creditedItems: CreditedItems? = nil
                     ) {
@@ -197,11 +157,6 @@ extension Stripe.Billing.Invoice {
                         public var invoice: String?
                         /// Credited invoice line items
                         public var invoiceLineItems: [String]?
-
-                        private enum CodingKeys: String, CodingKey {
-                            case invoice
-                            case invoiceLineItems
-                        }
 
                         public init(
                             invoice: String? = nil,
@@ -226,14 +181,6 @@ extension Stripe.Billing.Invoice {
                 /// The subscription item that generated this line item
                 public var subscriptionItem: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case invoiceItem
-                    case proration
-                    case prorationDetails
-                    case subscription
-                    case subscriptionItem
-                }
-
                 public init(
                     invoiceItem: String? = nil,
                     proration: Bool? = nil,
@@ -252,10 +199,6 @@ extension Stripe.Billing.Invoice {
                     /// For a credit proration `line_item`, the original debit line_items to which the credit proration applies.
                     public var creditedItems: CreditedItems?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case creditedItems
-                    }
-
                     public init(
                         creditedItems: CreditedItems? = nil
                     ) {
@@ -267,11 +210,6 @@ extension Stripe.Billing.Invoice {
                         public var invoice: String?
                         /// Credited invoice line items
                         public var invoiceLineItems: [String]?
-
-                        private enum CodingKeys: String, CodingKey {
-                            case invoice
-                            case invoiceLineItems
-                        }
 
                         public init(
                             invoice: String? = nil,

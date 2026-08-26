@@ -37,15 +37,6 @@ extension Transaction.CreateForceCapture {
         /// Additional purchase information that is optionally provided by the merchant.
         public var purchaseDetails: PurchaseDetails?
 
-        private enum CodingKeys: String, CodingKey {
-            case amount
-            case card
-            case currency
-            case expand
-            case merchantData
-            case purchaseDetails
-        }
-
         public init(
             amount: Int,
             card: String,
@@ -82,18 +73,6 @@ extension Transaction.CreateForceCapture {
             public var terminalId: String?
             /// URL provided by the merchant on a 3DS request
             public var url: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case category
-                case city
-                case country
-                case name
-                case networkId
-                case postalCode
-                case state
-                case terminalId
-                case url
-            }
 
             public init(
                 category: Category? = nil,
@@ -430,15 +409,6 @@ extension Transaction.CreateForceCapture {
             /// A merchant-specific order number.
             public var reference: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case fleet
-                case flight
-                case fuel
-                case lodging
-                case receipt
-                case reference
-            }
-
             public init(
                 fleet: Fleet? = nil,
                 flight: Flight? = nil,
@@ -465,13 +435,6 @@ extension Transaction.CreateForceCapture {
                 public var reportedBreakdown: ReportedBreakdown?
                 /// The type of fuel service.
                 public var serviceType: ServiceType?
-
-                private enum CodingKeys: String, CodingKey {
-                    case cardholderPromptData
-                    case purchaseType
-                    case reportedBreakdown
-                    case serviceType
-                }
 
                 public init(
                     cardholderPromptData: CardholderPromptData? = nil,
@@ -510,14 +473,6 @@ extension Transaction.CreateForceCapture {
                     /// Vehicle number.
                     public var vehicleNumber: String?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case driverId
-                        case odometer
-                        case unspecifiedId
-                        case userId
-                        case vehicleNumber
-                    }
-
                     public init(
                         driverId: String? = nil,
                         odometer: Int? = nil,
@@ -542,12 +497,6 @@ extension Transaction.CreateForceCapture {
                     /// Information about tax included in this transaction.
                     public var tax: Tax?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case fuel
-                        case nonFuel
-                        case tax
-                    }
-
                     public init(
                         fuel: Fuel? = nil,
                         nonFuel: NonFuel? = nil,
@@ -563,10 +512,6 @@ extension Transaction.CreateForceCapture {
                         /// Gross fuel amount that should equal Fuel Volume multiplied by Fuel Unit Cost, inclusive of taxes.
                         public var grossAmountDecimal: String?
 
-                        private enum CodingKeys: String, CodingKey {
-                            case grossAmountDecimal
-                        }
-
                         public init(
                             grossAmountDecimal: String? = nil
                         ) {
@@ -578,10 +523,6 @@ extension Transaction.CreateForceCapture {
                     public struct NonFuel: Codable, Hashable, Sendable {
                         /// Gross non-fuel amount that should equal the sum of the line items, inclusive of taxes.
                         public var grossAmountDecimal: String?
-
-                        private enum CodingKeys: String, CodingKey {
-                            case grossAmountDecimal
-                        }
 
                         public init(
                             grossAmountDecimal: String? = nil
@@ -596,11 +537,6 @@ extension Transaction.CreateForceCapture {
                         public var localAmountDecimal: String?
                         /// Amount of national Sales Tax or VAT included in the transaction amount.
                         public var nationalAmountDecimal: String?
-
-                        private enum CodingKeys: String, CodingKey {
-                            case localAmountDecimal
-                            case nationalAmountDecimal
-                        }
 
                         public init(
                             localAmountDecimal: String? = nil,
@@ -625,14 +561,6 @@ extension Transaction.CreateForceCapture {
                 public var segments: [Segments]?
                 /// The travel agency that issued the ticket.
                 public var travelAgency: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case departureAt
-                    case passengerName
-                    case refundable
-                    case segments
-                    case travelAgency
-                }
 
                 public init(
                     departureAt: Date? = nil,
@@ -661,15 +589,6 @@ extension Transaction.CreateForceCapture {
                     public var serviceClass: String?
                     /// Whether a stopover is allowed on this flight.
                     public var stopoverAllowed: Bool?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case arrivalAirportCode
-                        case carrier
-                        case departureAirportCode
-                        case flightNumber
-                        case serviceClass
-                        case stopoverAllowed
-                    }
 
                     public init(
                         arrivalAirportCode: String? = nil,
@@ -701,14 +620,6 @@ extension Transaction.CreateForceCapture {
                 public var unit: Unit?
                 /// The cost in cents per each unit of fuel, represented as a decimal string with at most 12 decimal places.
                 public var unitCostDecimal: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case industryProductCode
-                    case quantityDecimal
-                    case `type`
-                    case unit
-                    case unitCostDecimal
-                }
 
                 public init(
                     industryProductCode: String? = nil,
@@ -751,11 +662,6 @@ extension Transaction.CreateForceCapture {
                 /// The number of nights stayed at the lodging.
                 public var nights: Int?
 
-                private enum CodingKeys: String, CodingKey {
-                    case checkInAt
-                    case nights
-                }
-
                 public init(
                     checkInAt: Date? = nil,
                     nights: Int? = nil
@@ -770,13 +676,6 @@ extension Transaction.CreateForceCapture {
                 public var quantity: String?
                 public var total: Int?
                 public var unitCost: Int?
-
-                private enum CodingKeys: String, CodingKey {
-                    case description
-                    case quantity
-                    case total
-                    case unitCost
-                }
 
                 public init(
                     description: String? = nil,
@@ -812,15 +711,6 @@ extension Transaction.CreateUnlinkedRefund {
         /// Additional purchase information that is optionally provided by the merchant.
         public var purchaseDetails: PurchaseDetails?
 
-        private enum CodingKeys: String, CodingKey {
-            case amount
-            case card
-            case currency
-            case expand
-            case merchantData
-            case purchaseDetails
-        }
-
         public init(
             amount: Int,
             card: String,
@@ -857,18 +747,6 @@ extension Transaction.CreateUnlinkedRefund {
             public var terminalId: String?
             /// URL provided by the merchant on a 3DS request
             public var url: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case category
-                case city
-                case country
-                case name
-                case networkId
-                case postalCode
-                case state
-                case terminalId
-                case url
-            }
 
             public init(
                 category: Category? = nil,
@@ -1205,15 +1083,6 @@ extension Transaction.CreateUnlinkedRefund {
             /// A merchant-specific order number.
             public var reference: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case fleet
-                case flight
-                case fuel
-                case lodging
-                case receipt
-                case reference
-            }
-
             public init(
                 fleet: Fleet? = nil,
                 flight: Flight? = nil,
@@ -1240,13 +1109,6 @@ extension Transaction.CreateUnlinkedRefund {
                 public var reportedBreakdown: ReportedBreakdown?
                 /// The type of fuel service.
                 public var serviceType: ServiceType?
-
-                private enum CodingKeys: String, CodingKey {
-                    case cardholderPromptData
-                    case purchaseType
-                    case reportedBreakdown
-                    case serviceType
-                }
 
                 public init(
                     cardholderPromptData: CardholderPromptData? = nil,
@@ -1285,14 +1147,6 @@ extension Transaction.CreateUnlinkedRefund {
                     /// Vehicle number.
                     public var vehicleNumber: String?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case driverId
-                        case odometer
-                        case unspecifiedId
-                        case userId
-                        case vehicleNumber
-                    }
-
                     public init(
                         driverId: String? = nil,
                         odometer: Int? = nil,
@@ -1317,12 +1171,6 @@ extension Transaction.CreateUnlinkedRefund {
                     /// Information about tax included in this transaction.
                     public var tax: Tax?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case fuel
-                        case nonFuel
-                        case tax
-                    }
-
                     public init(
                         fuel: Fuel? = nil,
                         nonFuel: NonFuel? = nil,
@@ -1338,10 +1186,6 @@ extension Transaction.CreateUnlinkedRefund {
                         /// Gross fuel amount that should equal Fuel Volume multiplied by Fuel Unit Cost, inclusive of taxes.
                         public var grossAmountDecimal: String?
 
-                        private enum CodingKeys: String, CodingKey {
-                            case grossAmountDecimal
-                        }
-
                         public init(
                             grossAmountDecimal: String? = nil
                         ) {
@@ -1353,10 +1197,6 @@ extension Transaction.CreateUnlinkedRefund {
                     public struct NonFuel: Codable, Hashable, Sendable {
                         /// Gross non-fuel amount that should equal the sum of the line items, inclusive of taxes.
                         public var grossAmountDecimal: String?
-
-                        private enum CodingKeys: String, CodingKey {
-                            case grossAmountDecimal
-                        }
 
                         public init(
                             grossAmountDecimal: String? = nil
@@ -1371,11 +1211,6 @@ extension Transaction.CreateUnlinkedRefund {
                         public var localAmountDecimal: String?
                         /// Amount of national Sales Tax or VAT included in the transaction amount.
                         public var nationalAmountDecimal: String?
-
-                        private enum CodingKeys: String, CodingKey {
-                            case localAmountDecimal
-                            case nationalAmountDecimal
-                        }
 
                         public init(
                             localAmountDecimal: String? = nil,
@@ -1400,14 +1235,6 @@ extension Transaction.CreateUnlinkedRefund {
                 public var segments: [Segments]?
                 /// The travel agency that issued the ticket.
                 public var travelAgency: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case departureAt
-                    case passengerName
-                    case refundable
-                    case segments
-                    case travelAgency
-                }
 
                 public init(
                     departureAt: Date? = nil,
@@ -1436,15 +1263,6 @@ extension Transaction.CreateUnlinkedRefund {
                     public var serviceClass: String?
                     /// Whether a stopover is allowed on this flight.
                     public var stopoverAllowed: Bool?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case arrivalAirportCode
-                        case carrier
-                        case departureAirportCode
-                        case flightNumber
-                        case serviceClass
-                        case stopoverAllowed
-                    }
 
                     public init(
                         arrivalAirportCode: String? = nil,
@@ -1476,14 +1294,6 @@ extension Transaction.CreateUnlinkedRefund {
                 public var unit: Unit?
                 /// The cost in cents per each unit of fuel, represented as a decimal string with at most 12 decimal places.
                 public var unitCostDecimal: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case industryProductCode
-                    case quantityDecimal
-                    case `type`
-                    case unit
-                    case unitCostDecimal
-                }
 
                 public init(
                     industryProductCode: String? = nil,
@@ -1526,11 +1336,6 @@ extension Transaction.CreateUnlinkedRefund {
                 /// The number of nights stayed at the lodging.
                 public var nights: Int?
 
-                private enum CodingKeys: String, CodingKey {
-                    case checkInAt
-                    case nights
-                }
-
                 public init(
                     checkInAt: Date? = nil,
                     nights: Int? = nil
@@ -1545,13 +1350,6 @@ extension Transaction.CreateUnlinkedRefund {
                 public var quantity: String?
                 public var total: Int?
                 public var unitCost: Int?
-
-                private enum CodingKeys: String, CodingKey {
-                    case description
-                    case quantity
-                    case total
-                    case unitCost
-                }
 
                 public init(
                     description: String? = nil,
@@ -1591,17 +1389,6 @@ extension Transaction.List {
         /// Only return transactions that have the given type.
         public var `type`: Type?
 
-        private enum CodingKeys: String, CodingKey {
-            case card
-            case cardholder
-            case created
-            case endingBefore
-            case expand
-            case limit
-            case startingAfter
-            case `type`
-        }
-
         public init(
             card: String? = nil,
             cardholder: String? = nil,
@@ -1639,11 +1426,6 @@ extension Transaction.Refund {
         /// The total amount to attempt to refund.
         public var refundAmount: Int?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case refundAmount
-        }
-
         public init(
             expand: [String]? = nil,
             refundAmount: Int? = nil
@@ -1662,10 +1444,6 @@ extension Transaction.Retrieve {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
-
         public init(
             expand: [String]? = nil
         ) {
@@ -1683,11 +1461,6 @@ extension Transaction.Update {
         public var expand: [String]?
         /// Set of key-value pairs that you can attach to an object.
         public var metadata: Stripe.Clearable<[String: String]>?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case metadata
-        }
 
         public init(
             expand: [String]? = nil,

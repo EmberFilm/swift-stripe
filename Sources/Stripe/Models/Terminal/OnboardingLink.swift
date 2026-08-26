@@ -23,14 +23,6 @@ extension Stripe.Terminal {
         /// The link passed back to the user for their onboarding.
         public var redirectUrl: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case object
-            case linkOptions
-            case linkType
-            case onBehalfOf
-            case redirectUrl
-        }
-
         public init(
             object: String,
             linkOptions: LinkOptions? = nil,
@@ -50,10 +42,6 @@ extension Stripe.Terminal {
             /// The options associated with the Apple Terms and Conditions link type.
             public var appleTermsAndConditions: AppleTermsAndConditions?
 
-            private enum CodingKeys: String, CodingKey {
-                case appleTermsAndConditions
-            }
-
             public init(
                 appleTermsAndConditions: AppleTermsAndConditions? = nil
             ) {
@@ -66,11 +54,6 @@ extension Stripe.Terminal {
                 public var allowRelinking: Bool?
                 /// The business name of the merchant accepting Apple's Terms and Conditions.
                 public var merchantDisplayName: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case allowRelinking
-                    case merchantDisplayName
-                }
 
                 public init(
                     allowRelinking: Bool? = nil,

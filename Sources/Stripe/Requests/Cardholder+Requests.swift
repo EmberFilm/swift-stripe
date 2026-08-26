@@ -47,21 +47,6 @@ extension Cardholder.Create {
         /// One of `individual` or `company`.
         public var `type`: Type?
 
-        private enum CodingKeys: String, CodingKey {
-            case billing
-            case company
-            case email
-            case expand
-            case individual
-            case metadata
-            case name
-            case phoneNumber
-            case preferredLocales
-            case spendingControls
-            case status
-            case `type`
-        }
-
         public init(
             billing: Billing,
             company: Company? = nil,
@@ -113,10 +98,6 @@ extension Cardholder.Create {
             /// The cardholder’s billing address.
             public var address: Address
 
-            private enum CodingKeys: String, CodingKey {
-                case address
-            }
-
             public init(
                 address: Address
             ) {
@@ -137,15 +118,6 @@ extension Cardholder.Create {
                 public var postalCode: String
                 /// State, county, province, or region (ISO 3166-2).
                 public var state: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case city
-                    case country
-                    case line1
-                    case line2
-                    case postalCode
-                    case state
-                }
 
                 public init(
                     city: String,
@@ -170,10 +142,6 @@ extension Cardholder.Create {
             /// The entity's business ID number.
             public var taxId: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case taxId
-            }
-
             public init(
                 taxId: String? = nil
             ) {
@@ -194,14 +162,6 @@ extension Cardholder.Create {
             /// Government-issued ID document for this cardholder.
             public var verification: Verification?
 
-            private enum CodingKeys: String, CodingKey {
-                case cardIssuing
-                case dob
-                case firstName
-                case lastName
-                case verification
-            }
-
             public init(
                 cardIssuing: CardIssuing? = nil,
                 dob: Dob? = nil,
@@ -221,10 +181,6 @@ extension Cardholder.Create {
                 /// Information about cardholder acceptance of Celtic Authorized User Terms.
                 public var userTermsAcceptance: UserTermsAcceptance?
 
-                private enum CodingKeys: String, CodingKey {
-                    case userTermsAcceptance
-                }
-
                 public init(
                     userTermsAcceptance: UserTermsAcceptance? = nil
                 ) {
@@ -239,12 +195,6 @@ extension Cardholder.Create {
                     public var ip: String?
                     /// The user agent of the browser from which the cardholder accepted the Authorized User Terms.
                     public var userAgent: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case date
-                        case ip
-                        case userAgent
-                    }
 
                     public init(
                         date: Date? = nil,
@@ -267,12 +217,6 @@ extension Cardholder.Create {
                 /// The four-digit year of birth.
                 public var year: Int
 
-                private enum CodingKeys: String, CodingKey {
-                    case day
-                    case month
-                    case year
-                }
-
                 public init(
                     day: Int,
                     month: Int,
@@ -289,10 +233,6 @@ extension Cardholder.Create {
                 /// An identifying document, either a passport or local ID card.
                 public var document: Document?
 
-                private enum CodingKeys: String, CodingKey {
-                    case document
-                }
-
                 public init(
                     document: Document? = nil
                 ) {
@@ -305,11 +245,6 @@ extension Cardholder.Create {
                     public var back: String?
                     /// The front of an ID returned by a file upload with a `purpose` value of `identity_document`.
                     public var front: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case back
-                        case front
-                    }
 
                     public init(
                         back: String? = nil,
@@ -340,17 +275,6 @@ extension Cardholder.Create {
             public var spendingLimits: [SpendingLimits]?
             /// Currency of amounts within `spending_limits`.
             public var spendingLimitsCurrency: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case allowedCardPresences
-                case allowedCategories
-                case allowedMerchantCountries
-                case blockedCardPresences
-                case blockedCategories
-                case blockedMerchantCountries
-                case spendingLimits
-                case spendingLimitsCurrency
-            }
 
             public init(
                 allowedCardPresences: [AllowedCardPresences]? = nil,
@@ -985,12 +909,6 @@ extension Cardholder.Create {
                 public var categories: [Categories]?
                 /// Interval (or event) to which the amount applies.
                 public var interval: Interval
-
-                private enum CodingKeys: String, CodingKey {
-                    case amount
-                    case categories
-                    case interval
-                }
 
                 public init(
                     amount: Int,
@@ -1337,18 +1255,6 @@ extension Cardholder.List {
         /// Only return cardholders that have the given type.
         public var `type`: Type?
 
-        private enum CodingKeys: String, CodingKey {
-            case created
-            case email
-            case endingBefore
-            case expand
-            case limit
-            case phoneNumber
-            case startingAfter
-            case status
-            case `type`
-        }
-
         public init(
             created: Stripe.RangeQuery? = nil,
             email: String? = nil,
@@ -1392,10 +1298,6 @@ extension Cardholder.Retrieve {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
-
         public init(
             expand: [String]? = nil
         ) {
@@ -1429,19 +1331,6 @@ extension Cardholder.Update {
         public var spendingControls: SpendingControls?
         /// Specifies whether to permit authorizations on this cardholder's cards.
         public var status: Status?
-
-        private enum CodingKeys: String, CodingKey {
-            case billing
-            case company
-            case email
-            case expand
-            case individual
-            case metadata
-            case phoneNumber
-            case preferredLocales
-            case spendingControls
-            case status
-        }
 
         public init(
             billing: Billing? = nil,
@@ -1485,10 +1374,6 @@ extension Cardholder.Update {
             /// The cardholder’s billing address.
             public var address: Address
 
-            private enum CodingKeys: String, CodingKey {
-                case address
-            }
-
             public init(
                 address: Address
             ) {
@@ -1509,15 +1394,6 @@ extension Cardholder.Update {
                 public var postalCode: String
                 /// State, county, province, or region (ISO 3166-2).
                 public var state: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case city
-                    case country
-                    case line1
-                    case line2
-                    case postalCode
-                    case state
-                }
 
                 public init(
                     city: String,
@@ -1542,10 +1418,6 @@ extension Cardholder.Update {
             /// The entity's business ID number.
             public var taxId: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case taxId
-            }
-
             public init(
                 taxId: String? = nil
             ) {
@@ -1566,14 +1438,6 @@ extension Cardholder.Update {
             /// Government-issued ID document for this cardholder.
             public var verification: Verification?
 
-            private enum CodingKeys: String, CodingKey {
-                case cardIssuing
-                case dob
-                case firstName
-                case lastName
-                case verification
-            }
-
             public init(
                 cardIssuing: CardIssuing? = nil,
                 dob: Dob? = nil,
@@ -1593,10 +1457,6 @@ extension Cardholder.Update {
                 /// Information about cardholder acceptance of Celtic Authorized User Terms.
                 public var userTermsAcceptance: UserTermsAcceptance?
 
-                private enum CodingKeys: String, CodingKey {
-                    case userTermsAcceptance
-                }
-
                 public init(
                     userTermsAcceptance: UserTermsAcceptance? = nil
                 ) {
@@ -1611,12 +1471,6 @@ extension Cardholder.Update {
                     public var ip: String?
                     /// The user agent of the browser from which the cardholder accepted the Authorized User Terms.
                     public var userAgent: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case date
-                        case ip
-                        case userAgent
-                    }
 
                     public init(
                         date: Date? = nil,
@@ -1639,12 +1493,6 @@ extension Cardholder.Update {
                 /// The four-digit year of birth.
                 public var year: Int
 
-                private enum CodingKeys: String, CodingKey {
-                    case day
-                    case month
-                    case year
-                }
-
                 public init(
                     day: Int,
                     month: Int,
@@ -1661,10 +1509,6 @@ extension Cardholder.Update {
                 /// An identifying document, either a passport or local ID card.
                 public var document: Document?
 
-                private enum CodingKeys: String, CodingKey {
-                    case document
-                }
-
                 public init(
                     document: Document? = nil
                 ) {
@@ -1677,11 +1521,6 @@ extension Cardholder.Update {
                     public var back: String?
                     /// The front of an ID returned by a file upload with a `purpose` value of `identity_document`.
                     public var front: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case back
-                        case front
-                    }
 
                     public init(
                         back: String? = nil,
@@ -1712,17 +1551,6 @@ extension Cardholder.Update {
             public var spendingLimits: [SpendingLimits]?
             /// Currency of amounts within `spending_limits`.
             public var spendingLimitsCurrency: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case allowedCardPresences
-                case allowedCategories
-                case allowedMerchantCountries
-                case blockedCardPresences
-                case blockedCategories
-                case blockedMerchantCountries
-                case spendingLimits
-                case spendingLimitsCurrency
-            }
 
             public init(
                 allowedCardPresences: [AllowedCardPresences]? = nil,
@@ -2357,12 +2185,6 @@ extension Cardholder.Update {
                 public var categories: [Categories]?
                 /// Interval (or event) to which the amount applies.
                 public var interval: Interval
-
-                private enum CodingKeys: String, CodingKey {
-                    case amount
-                    case categories
-                    case interval
-                }
 
                 public init(
                     amount: Int,

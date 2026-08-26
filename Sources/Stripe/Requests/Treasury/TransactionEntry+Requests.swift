@@ -38,18 +38,6 @@ extension Stripe.Treasury.TransactionEntry.List {
         /// Only return TransactionEntries associated with this Transaction.
         public var transaction: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case created
-            case effectiveAt
-            case endingBefore
-            case expand
-            case financialAccount
-            case limit
-            case orderBy
-            case startingAfter
-            case transaction
-        }
-
         public init(
             created: Stripe.RangeQuery? = nil,
             effectiveAt: Stripe.RangeQuery? = nil,
@@ -86,10 +74,6 @@ extension Stripe.Treasury.TransactionEntry.Retrieve {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil

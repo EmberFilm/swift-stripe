@@ -25,15 +25,6 @@ extension Stripe.Connect {
         /// If the object exists in live mode, the value is `true`.
         public var livemode: Bool?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case amount
-            case currency
-            case destination
-            case livemode
-        }
-
         public init(
             id: ID,
             object: String,

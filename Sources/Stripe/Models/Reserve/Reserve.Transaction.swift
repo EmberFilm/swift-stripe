@@ -22,14 +22,6 @@ extension Stripe.Reserve {
         /// An arbitrary string attached to the object.
         public var description: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case amount
-            case currency
-            case description
-        }
-
         public init(
             id: ID,
             object: String,

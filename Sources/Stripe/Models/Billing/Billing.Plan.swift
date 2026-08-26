@@ -54,29 +54,6 @@ extension Stripe.Billing {
         /// Configures how the quantity per period should be determined.
         public var usageType: UsageType?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case active
-            case amount
-            case amountDecimal
-            case billingScheme
-            case created
-            case currency
-            case interval
-            case intervalCount
-            case livemode
-            case metadata
-            case meter
-            case nickname
-            case product
-            case tiers
-            case tiersMode
-            case transformUsage
-            case trialPeriodDays
-            case usageType
-        }
-
         public init(
             id: ID,
             object: String,
@@ -159,14 +136,6 @@ extension Stripe.Billing {
             /// Up to and including to this quantity will be contained in the tier.
             public var upTo: Int?
 
-            private enum CodingKeys: String, CodingKey {
-                case flatAmount
-                case flatAmountDecimal
-                case unitAmount
-                case unitAmountDecimal
-                case upTo
-            }
-
             public init(
                 flatAmount: Int? = nil,
                 flatAmountDecimal: String? = nil,
@@ -187,11 +156,6 @@ extension Stripe.Billing {
             public var divideBy: Int?
             /// After division, either round the result `up` or `down`.
             public var round: Round?
-
-            private enum CodingKeys: String, CodingKey {
-                case divideBy
-                case round
-            }
 
             public init(
                 divideBy: Int? = nil,

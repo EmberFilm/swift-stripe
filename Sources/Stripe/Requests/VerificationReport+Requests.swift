@@ -37,17 +37,6 @@ extension VerificationReport.List {
         /// Only return VerificationReports created by this VerificationSession ID.
         public var verificationSession: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case clientReferenceId
-            case created
-            case endingBefore
-            case expand
-            case limit
-            case startingAfter
-            case `type`
-            case verificationSession
-        }
-
         public init(
             clientReferenceId: String? = nil,
             created: Stripe.RangeQuery? = nil,
@@ -82,10 +71,6 @@ extension VerificationReport.Retrieve {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil

@@ -56,25 +56,6 @@ extension TerminalConfiguration.Create {
         /// Configurations for connecting to a WiFi network.
         public var wifi: Stripe.Clearable<Wifi>?
 
-        private enum CodingKeys: String, CodingKey {
-            case bbposWisepad3
-            case bbposWiseposE
-            case cellular
-            case expand
-            case name
-            case offline
-            case rebootWindow
-            case stripeS700
-            case stripeS710
-            case tipping
-            case verifoneM425
-            case verifoneP400
-            case verifoneP630
-            case verifoneUx700
-            case verifoneV660p
-            case wifi
-        }
-
         public init(
             bbposWisepad3: BbposWisepad3? = nil,
             bbposWiseposE: BbposWiseposE? = nil,
@@ -116,10 +97,6 @@ extension TerminalConfiguration.Create {
             /// A File ID representing an image you want to display on the reader.
             public var splashscreen: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case splashscreen
-            }
-
             public init(
                 splashscreen: String? = nil
             ) {
@@ -132,10 +109,6 @@ extension TerminalConfiguration.Create {
             /// A File ID representing an image to display on the reader
             public var splashscreen: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case splashscreen
-            }
-
             public init(
                 splashscreen: String? = nil
             ) {
@@ -147,10 +120,6 @@ extension TerminalConfiguration.Create {
             /// Determines whether to allow the reader to connect to a cellular network.
             public var enabled: Bool
 
-            private enum CodingKeys: String, CodingKey {
-                case enabled
-            }
-
             public init(
                 enabled: Bool
             ) {
@@ -161,10 +130,6 @@ extension TerminalConfiguration.Create {
         public struct Offline: Codable, Hashable, Sendable {
             /// Determines whether to allow transactions to be collected while reader is offline.
             public var enabled: Bool
-
-            private enum CodingKeys: String, CodingKey {
-                case enabled
-            }
 
             public init(
                 enabled: Bool
@@ -180,11 +145,6 @@ extension TerminalConfiguration.Create {
             /// Integer between 0 to 23 that represents the start hour of the reboot time window.
             public var startHour: Int
 
-            private enum CodingKeys: String, CodingKey {
-                case endHour
-                case startHour
-            }
-
             public init(
                 endHour: Int,
                 startHour: Int
@@ -199,10 +159,6 @@ extension TerminalConfiguration.Create {
             /// A File ID representing an image you want to display on the reader.
             public var splashscreen: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case splashscreen
-            }
-
             public init(
                 splashscreen: String? = nil
             ) {
@@ -214,10 +170,6 @@ extension TerminalConfiguration.Create {
         public struct StripeS710: Codable, Hashable, Sendable {
             /// A File ID representing an image you want to display on the reader.
             public var splashscreen: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case splashscreen
-            }
 
             public init(
                 splashscreen: String? = nil
@@ -269,30 +221,6 @@ extension TerminalConfiguration.Create {
             public var sgd: Sgd?
             /// Tipping configuration for USD
             public var usd: Usd?
-
-            private enum CodingKeys: String, CodingKey {
-                case aed
-                case aud
-                case cad
-                case chf
-                case czk
-                case dkk
-                case eur
-                case gbp
-                case gip
-                case hkd
-                case huf
-                case jpy
-                case mxn
-                case myr
-                case nok
-                case nzd
-                case pln
-                case ron
-                case sek
-                case sgd
-                case usd
-            }
 
             public init(
                 aed: Aed? = nil,
@@ -349,12 +277,6 @@ extension TerminalConfiguration.Create {
                 /// Below this amount, fixed amounts will be displayed; above it, percentages will be displayed
                 public var smartTipThreshold: Int?
 
-                private enum CodingKeys: String, CodingKey {
-                    case fixedAmounts
-                    case percentages
-                    case smartTipThreshold
-                }
-
                 public init(
                     fixedAmounts: [Int]? = nil,
                     percentages: [Int]? = nil,
@@ -374,12 +296,6 @@ extension TerminalConfiguration.Create {
                 public var percentages: [Int]?
                 /// Below this amount, fixed amounts will be displayed; above it, percentages will be displayed
                 public var smartTipThreshold: Int?
-
-                private enum CodingKeys: String, CodingKey {
-                    case fixedAmounts
-                    case percentages
-                    case smartTipThreshold
-                }
 
                 public init(
                     fixedAmounts: [Int]? = nil,
@@ -401,12 +317,6 @@ extension TerminalConfiguration.Create {
                 /// Below this amount, fixed amounts will be displayed; above it, percentages will be displayed
                 public var smartTipThreshold: Int?
 
-                private enum CodingKeys: String, CodingKey {
-                    case fixedAmounts
-                    case percentages
-                    case smartTipThreshold
-                }
-
                 public init(
                     fixedAmounts: [Int]? = nil,
                     percentages: [Int]? = nil,
@@ -426,12 +336,6 @@ extension TerminalConfiguration.Create {
                 public var percentages: [Int]?
                 /// Below this amount, fixed amounts will be displayed; above it, percentages will be displayed
                 public var smartTipThreshold: Int?
-
-                private enum CodingKeys: String, CodingKey {
-                    case fixedAmounts
-                    case percentages
-                    case smartTipThreshold
-                }
 
                 public init(
                     fixedAmounts: [Int]? = nil,
@@ -453,12 +357,6 @@ extension TerminalConfiguration.Create {
                 /// Below this amount, fixed amounts will be displayed; above it, percentages will be displayed
                 public var smartTipThreshold: Int?
 
-                private enum CodingKeys: String, CodingKey {
-                    case fixedAmounts
-                    case percentages
-                    case smartTipThreshold
-                }
-
                 public init(
                     fixedAmounts: [Int]? = nil,
                     percentages: [Int]? = nil,
@@ -478,12 +376,6 @@ extension TerminalConfiguration.Create {
                 public var percentages: [Int]?
                 /// Below this amount, fixed amounts will be displayed; above it, percentages will be displayed
                 public var smartTipThreshold: Int?
-
-                private enum CodingKeys: String, CodingKey {
-                    case fixedAmounts
-                    case percentages
-                    case smartTipThreshold
-                }
 
                 public init(
                     fixedAmounts: [Int]? = nil,
@@ -505,12 +397,6 @@ extension TerminalConfiguration.Create {
                 /// Below this amount, fixed amounts will be displayed; above it, percentages will be displayed
                 public var smartTipThreshold: Int?
 
-                private enum CodingKeys: String, CodingKey {
-                    case fixedAmounts
-                    case percentages
-                    case smartTipThreshold
-                }
-
                 public init(
                     fixedAmounts: [Int]? = nil,
                     percentages: [Int]? = nil,
@@ -530,12 +416,6 @@ extension TerminalConfiguration.Create {
                 public var percentages: [Int]?
                 /// Below this amount, fixed amounts will be displayed; above it, percentages will be displayed
                 public var smartTipThreshold: Int?
-
-                private enum CodingKeys: String, CodingKey {
-                    case fixedAmounts
-                    case percentages
-                    case smartTipThreshold
-                }
 
                 public init(
                     fixedAmounts: [Int]? = nil,
@@ -557,12 +437,6 @@ extension TerminalConfiguration.Create {
                 /// Below this amount, fixed amounts will be displayed; above it, percentages will be displayed
                 public var smartTipThreshold: Int?
 
-                private enum CodingKeys: String, CodingKey {
-                    case fixedAmounts
-                    case percentages
-                    case smartTipThreshold
-                }
-
                 public init(
                     fixedAmounts: [Int]? = nil,
                     percentages: [Int]? = nil,
@@ -582,12 +456,6 @@ extension TerminalConfiguration.Create {
                 public var percentages: [Int]?
                 /// Below this amount, fixed amounts will be displayed; above it, percentages will be displayed
                 public var smartTipThreshold: Int?
-
-                private enum CodingKeys: String, CodingKey {
-                    case fixedAmounts
-                    case percentages
-                    case smartTipThreshold
-                }
 
                 public init(
                     fixedAmounts: [Int]? = nil,
@@ -609,12 +477,6 @@ extension TerminalConfiguration.Create {
                 /// Below this amount, fixed amounts will be displayed; above it, percentages will be displayed
                 public var smartTipThreshold: Int?
 
-                private enum CodingKeys: String, CodingKey {
-                    case fixedAmounts
-                    case percentages
-                    case smartTipThreshold
-                }
-
                 public init(
                     fixedAmounts: [Int]? = nil,
                     percentages: [Int]? = nil,
@@ -634,12 +496,6 @@ extension TerminalConfiguration.Create {
                 public var percentages: [Int]?
                 /// Below this amount, fixed amounts will be displayed; above it, percentages will be displayed
                 public var smartTipThreshold: Int?
-
-                private enum CodingKeys: String, CodingKey {
-                    case fixedAmounts
-                    case percentages
-                    case smartTipThreshold
-                }
 
                 public init(
                     fixedAmounts: [Int]? = nil,
@@ -661,12 +517,6 @@ extension TerminalConfiguration.Create {
                 /// Below this amount, fixed amounts will be displayed; above it, percentages will be displayed
                 public var smartTipThreshold: Int?
 
-                private enum CodingKeys: String, CodingKey {
-                    case fixedAmounts
-                    case percentages
-                    case smartTipThreshold
-                }
-
                 public init(
                     fixedAmounts: [Int]? = nil,
                     percentages: [Int]? = nil,
@@ -686,12 +536,6 @@ extension TerminalConfiguration.Create {
                 public var percentages: [Int]?
                 /// Below this amount, fixed amounts will be displayed; above it, percentages will be displayed
                 public var smartTipThreshold: Int?
-
-                private enum CodingKeys: String, CodingKey {
-                    case fixedAmounts
-                    case percentages
-                    case smartTipThreshold
-                }
 
                 public init(
                     fixedAmounts: [Int]? = nil,
@@ -713,12 +557,6 @@ extension TerminalConfiguration.Create {
                 /// Below this amount, fixed amounts will be displayed; above it, percentages will be displayed
                 public var smartTipThreshold: Int?
 
-                private enum CodingKeys: String, CodingKey {
-                    case fixedAmounts
-                    case percentages
-                    case smartTipThreshold
-                }
-
                 public init(
                     fixedAmounts: [Int]? = nil,
                     percentages: [Int]? = nil,
@@ -738,12 +576,6 @@ extension TerminalConfiguration.Create {
                 public var percentages: [Int]?
                 /// Below this amount, fixed amounts will be displayed; above it, percentages will be displayed
                 public var smartTipThreshold: Int?
-
-                private enum CodingKeys: String, CodingKey {
-                    case fixedAmounts
-                    case percentages
-                    case smartTipThreshold
-                }
 
                 public init(
                     fixedAmounts: [Int]? = nil,
@@ -765,12 +597,6 @@ extension TerminalConfiguration.Create {
                 /// Below this amount, fixed amounts will be displayed; above it, percentages will be displayed
                 public var smartTipThreshold: Int?
 
-                private enum CodingKeys: String, CodingKey {
-                    case fixedAmounts
-                    case percentages
-                    case smartTipThreshold
-                }
-
                 public init(
                     fixedAmounts: [Int]? = nil,
                     percentages: [Int]? = nil,
@@ -790,12 +616,6 @@ extension TerminalConfiguration.Create {
                 public var percentages: [Int]?
                 /// Below this amount, fixed amounts will be displayed; above it, percentages will be displayed
                 public var smartTipThreshold: Int?
-
-                private enum CodingKeys: String, CodingKey {
-                    case fixedAmounts
-                    case percentages
-                    case smartTipThreshold
-                }
 
                 public init(
                     fixedAmounts: [Int]? = nil,
@@ -817,12 +637,6 @@ extension TerminalConfiguration.Create {
                 /// Below this amount, fixed amounts will be displayed; above it, percentages will be displayed
                 public var smartTipThreshold: Int?
 
-                private enum CodingKeys: String, CodingKey {
-                    case fixedAmounts
-                    case percentages
-                    case smartTipThreshold
-                }
-
                 public init(
                     fixedAmounts: [Int]? = nil,
                     percentages: [Int]? = nil,
@@ -842,12 +656,6 @@ extension TerminalConfiguration.Create {
                 public var percentages: [Int]?
                 /// Below this amount, fixed amounts will be displayed; above it, percentages will be displayed
                 public var smartTipThreshold: Int?
-
-                private enum CodingKeys: String, CodingKey {
-                    case fixedAmounts
-                    case percentages
-                    case smartTipThreshold
-                }
 
                 public init(
                     fixedAmounts: [Int]? = nil,
@@ -869,12 +677,6 @@ extension TerminalConfiguration.Create {
                 /// Below this amount, fixed amounts will be displayed; above it, percentages will be displayed
                 public var smartTipThreshold: Int?
 
-                private enum CodingKeys: String, CodingKey {
-                    case fixedAmounts
-                    case percentages
-                    case smartTipThreshold
-                }
-
                 public init(
                     fixedAmounts: [Int]? = nil,
                     percentages: [Int]? = nil,
@@ -892,10 +694,6 @@ extension TerminalConfiguration.Create {
             /// A File ID representing an image you want to display on the reader.
             public var splashscreen: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case splashscreen
-            }
-
             public init(
                 splashscreen: String? = nil
             ) {
@@ -907,10 +705,6 @@ extension TerminalConfiguration.Create {
         public struct VerifoneP400: Codable, Hashable, Sendable {
             /// A File ID representing an image you want to display on the reader.
             public var splashscreen: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case splashscreen
-            }
 
             public init(
                 splashscreen: String? = nil
@@ -924,10 +718,6 @@ extension TerminalConfiguration.Create {
             /// A File ID representing an image you want to display on the reader.
             public var splashscreen: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case splashscreen
-            }
-
             public init(
                 splashscreen: String? = nil
             ) {
@@ -940,10 +730,6 @@ extension TerminalConfiguration.Create {
             /// A File ID representing an image you want to display on the reader.
             public var splashscreen: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case splashscreen
-            }
-
             public init(
                 splashscreen: String? = nil
             ) {
@@ -955,10 +741,6 @@ extension TerminalConfiguration.Create {
         public struct VerifoneV660p: Codable, Hashable, Sendable {
             /// A File ID representing an image you want to display on the reader.
             public var splashscreen: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case splashscreen
-            }
 
             public init(
                 splashscreen: String? = nil
@@ -976,13 +758,6 @@ extension TerminalConfiguration.Create {
             public var personalPsk: PersonalPsk?
             /// Security type of the WiFi network.
             public var `type`: Type
-
-            private enum CodingKeys: String, CodingKey {
-                case enterpriseEapPeap
-                case enterpriseEapTls
-                case personalPsk
-                case `type`
-            }
 
             public init(
                 enterpriseEapPeap: EnterpriseEapPeap? = nil,
@@ -1013,13 +788,6 @@ extension TerminalConfiguration.Create {
                 /// Username for connecting to the WiFi network
                 public var username: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case caCertificateFile
-                    case password
-                    case ssid
-                    case username
-                }
-
                 public init(
                     caCertificateFile: String? = nil,
                     password: String,
@@ -1046,14 +814,6 @@ extension TerminalConfiguration.Create {
                 /// Name of the WiFi network
                 public var ssid: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case caCertificateFile
-                    case clientCertificateFile
-                    case privateKeyFile
-                    case privateKeyFilePassword
-                    case ssid
-                }
-
                 public init(
                     caCertificateFile: String? = nil,
                     clientCertificateFile: String,
@@ -1075,11 +835,6 @@ extension TerminalConfiguration.Create {
                 public var password: String
                 /// Name of the WiFi network
                 public var ssid: String
-
-                private enum CodingKeys: String, CodingKey {
-                    case password
-                    case ssid
-                }
 
                 public init(
                     password: String,
@@ -1114,14 +869,6 @@ extension TerminalConfiguration.List {
         /// A cursor for use in pagination.
         public var startingAfter: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case endingBefore
-            case expand
-            case isAccountDefault
-            case limit
-            case startingAfter
-        }
-
         public init(
             endingBefore: String? = nil,
             expand: [String]? = nil,
@@ -1145,10 +892,6 @@ extension TerminalConfiguration.Retrieve {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil
@@ -1196,25 +939,6 @@ extension TerminalConfiguration.Update {
         /// Configurations for connecting to a WiFi network.
         public var wifi: Stripe.Clearable<Wifi>?
 
-        private enum CodingKeys: String, CodingKey {
-            case bbposWisepad3
-            case bbposWiseposE
-            case cellular
-            case expand
-            case name
-            case offline
-            case rebootWindow
-            case stripeS700
-            case stripeS710
-            case tipping
-            case verifoneM425
-            case verifoneP400
-            case verifoneP630
-            case verifoneUx700
-            case verifoneV660p
-            case wifi
-        }
-
         public init(
             bbposWisepad3: Stripe.Clearable<BbposWisepad3>? = nil,
             bbposWiseposE: Stripe.Clearable<BbposWiseposE>? = nil,
@@ -1255,10 +979,6 @@ extension TerminalConfiguration.Update {
             /// A File ID representing an image you want to display on the reader.
             public var splashscreen: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case splashscreen
-            }
-
             public init(
                 splashscreen: String? = nil
             ) {
@@ -1269,10 +989,6 @@ extension TerminalConfiguration.Update {
         public struct BbposWiseposE: Codable, Hashable, Sendable {
             /// A File ID representing an image to display on the reader
             public var splashscreen: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case splashscreen
-            }
 
             public init(
                 splashscreen: String? = nil
@@ -1285,10 +1001,6 @@ extension TerminalConfiguration.Update {
             /// Determines whether to allow the reader to connect to a cellular network.
             public var enabled: Bool
 
-            private enum CodingKeys: String, CodingKey {
-                case enabled
-            }
-
             public init(
                 enabled: Bool
             ) {
@@ -1299,10 +1011,6 @@ extension TerminalConfiguration.Update {
         public struct Offline: Codable, Hashable, Sendable {
             /// Determines whether to allow transactions to be collected while reader is offline.
             public var enabled: Bool
-
-            private enum CodingKeys: String, CodingKey {
-                case enabled
-            }
 
             public init(
                 enabled: Bool
@@ -1317,11 +1025,6 @@ extension TerminalConfiguration.Update {
             /// Integer between 0 to 23 that represents the start hour of the reboot time window.
             public var startHour: Int
 
-            private enum CodingKeys: String, CodingKey {
-                case endHour
-                case startHour
-            }
-
             public init(
                 endHour: Int,
                 startHour: Int
@@ -1335,10 +1038,6 @@ extension TerminalConfiguration.Update {
             /// A File ID representing an image you want to display on the reader.
             public var splashscreen: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case splashscreen
-            }
-
             public init(
                 splashscreen: String? = nil
             ) {
@@ -1349,10 +1048,6 @@ extension TerminalConfiguration.Update {
         public struct StripeS710: Codable, Hashable, Sendable {
             /// A File ID representing an image you want to display on the reader.
             public var splashscreen: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case splashscreen
-            }
 
             public init(
                 splashscreen: String? = nil
@@ -1404,30 +1099,6 @@ extension TerminalConfiguration.Update {
             public var sgd: Sgd?
             /// Tipping configuration for USD
             public var usd: Usd?
-
-            private enum CodingKeys: String, CodingKey {
-                case aed
-                case aud
-                case cad
-                case chf
-                case czk
-                case dkk
-                case eur
-                case gbp
-                case gip
-                case hkd
-                case huf
-                case jpy
-                case mxn
-                case myr
-                case nok
-                case nzd
-                case pln
-                case ron
-                case sek
-                case sgd
-                case usd
-            }
 
             public init(
                 aed: Aed? = nil,
@@ -1484,12 +1155,6 @@ extension TerminalConfiguration.Update {
                 /// Below this amount, fixed amounts will be displayed; above it, percentages will be displayed
                 public var smartTipThreshold: Int?
 
-                private enum CodingKeys: String, CodingKey {
-                    case fixedAmounts
-                    case percentages
-                    case smartTipThreshold
-                }
-
                 public init(
                     fixedAmounts: [Int]? = nil,
                     percentages: [Int]? = nil,
@@ -1509,12 +1174,6 @@ extension TerminalConfiguration.Update {
                 public var percentages: [Int]?
                 /// Below this amount, fixed amounts will be displayed; above it, percentages will be displayed
                 public var smartTipThreshold: Int?
-
-                private enum CodingKeys: String, CodingKey {
-                    case fixedAmounts
-                    case percentages
-                    case smartTipThreshold
-                }
 
                 public init(
                     fixedAmounts: [Int]? = nil,
@@ -1536,12 +1195,6 @@ extension TerminalConfiguration.Update {
                 /// Below this amount, fixed amounts will be displayed; above it, percentages will be displayed
                 public var smartTipThreshold: Int?
 
-                private enum CodingKeys: String, CodingKey {
-                    case fixedAmounts
-                    case percentages
-                    case smartTipThreshold
-                }
-
                 public init(
                     fixedAmounts: [Int]? = nil,
                     percentages: [Int]? = nil,
@@ -1561,12 +1214,6 @@ extension TerminalConfiguration.Update {
                 public var percentages: [Int]?
                 /// Below this amount, fixed amounts will be displayed; above it, percentages will be displayed
                 public var smartTipThreshold: Int?
-
-                private enum CodingKeys: String, CodingKey {
-                    case fixedAmounts
-                    case percentages
-                    case smartTipThreshold
-                }
 
                 public init(
                     fixedAmounts: [Int]? = nil,
@@ -1588,12 +1235,6 @@ extension TerminalConfiguration.Update {
                 /// Below this amount, fixed amounts will be displayed; above it, percentages will be displayed
                 public var smartTipThreshold: Int?
 
-                private enum CodingKeys: String, CodingKey {
-                    case fixedAmounts
-                    case percentages
-                    case smartTipThreshold
-                }
-
                 public init(
                     fixedAmounts: [Int]? = nil,
                     percentages: [Int]? = nil,
@@ -1613,12 +1254,6 @@ extension TerminalConfiguration.Update {
                 public var percentages: [Int]?
                 /// Below this amount, fixed amounts will be displayed; above it, percentages will be displayed
                 public var smartTipThreshold: Int?
-
-                private enum CodingKeys: String, CodingKey {
-                    case fixedAmounts
-                    case percentages
-                    case smartTipThreshold
-                }
 
                 public init(
                     fixedAmounts: [Int]? = nil,
@@ -1640,12 +1275,6 @@ extension TerminalConfiguration.Update {
                 /// Below this amount, fixed amounts will be displayed; above it, percentages will be displayed
                 public var smartTipThreshold: Int?
 
-                private enum CodingKeys: String, CodingKey {
-                    case fixedAmounts
-                    case percentages
-                    case smartTipThreshold
-                }
-
                 public init(
                     fixedAmounts: [Int]? = nil,
                     percentages: [Int]? = nil,
@@ -1665,12 +1294,6 @@ extension TerminalConfiguration.Update {
                 public var percentages: [Int]?
                 /// Below this amount, fixed amounts will be displayed; above it, percentages will be displayed
                 public var smartTipThreshold: Int?
-
-                private enum CodingKeys: String, CodingKey {
-                    case fixedAmounts
-                    case percentages
-                    case smartTipThreshold
-                }
 
                 public init(
                     fixedAmounts: [Int]? = nil,
@@ -1692,12 +1315,6 @@ extension TerminalConfiguration.Update {
                 /// Below this amount, fixed amounts will be displayed; above it, percentages will be displayed
                 public var smartTipThreshold: Int?
 
-                private enum CodingKeys: String, CodingKey {
-                    case fixedAmounts
-                    case percentages
-                    case smartTipThreshold
-                }
-
                 public init(
                     fixedAmounts: [Int]? = nil,
                     percentages: [Int]? = nil,
@@ -1717,12 +1334,6 @@ extension TerminalConfiguration.Update {
                 public var percentages: [Int]?
                 /// Below this amount, fixed amounts will be displayed; above it, percentages will be displayed
                 public var smartTipThreshold: Int?
-
-                private enum CodingKeys: String, CodingKey {
-                    case fixedAmounts
-                    case percentages
-                    case smartTipThreshold
-                }
 
                 public init(
                     fixedAmounts: [Int]? = nil,
@@ -1744,12 +1355,6 @@ extension TerminalConfiguration.Update {
                 /// Below this amount, fixed amounts will be displayed; above it, percentages will be displayed
                 public var smartTipThreshold: Int?
 
-                private enum CodingKeys: String, CodingKey {
-                    case fixedAmounts
-                    case percentages
-                    case smartTipThreshold
-                }
-
                 public init(
                     fixedAmounts: [Int]? = nil,
                     percentages: [Int]? = nil,
@@ -1769,12 +1374,6 @@ extension TerminalConfiguration.Update {
                 public var percentages: [Int]?
                 /// Below this amount, fixed amounts will be displayed; above it, percentages will be displayed
                 public var smartTipThreshold: Int?
-
-                private enum CodingKeys: String, CodingKey {
-                    case fixedAmounts
-                    case percentages
-                    case smartTipThreshold
-                }
 
                 public init(
                     fixedAmounts: [Int]? = nil,
@@ -1796,12 +1395,6 @@ extension TerminalConfiguration.Update {
                 /// Below this amount, fixed amounts will be displayed; above it, percentages will be displayed
                 public var smartTipThreshold: Int?
 
-                private enum CodingKeys: String, CodingKey {
-                    case fixedAmounts
-                    case percentages
-                    case smartTipThreshold
-                }
-
                 public init(
                     fixedAmounts: [Int]? = nil,
                     percentages: [Int]? = nil,
@@ -1821,12 +1414,6 @@ extension TerminalConfiguration.Update {
                 public var percentages: [Int]?
                 /// Below this amount, fixed amounts will be displayed; above it, percentages will be displayed
                 public var smartTipThreshold: Int?
-
-                private enum CodingKeys: String, CodingKey {
-                    case fixedAmounts
-                    case percentages
-                    case smartTipThreshold
-                }
 
                 public init(
                     fixedAmounts: [Int]? = nil,
@@ -1848,12 +1435,6 @@ extension TerminalConfiguration.Update {
                 /// Below this amount, fixed amounts will be displayed; above it, percentages will be displayed
                 public var smartTipThreshold: Int?
 
-                private enum CodingKeys: String, CodingKey {
-                    case fixedAmounts
-                    case percentages
-                    case smartTipThreshold
-                }
-
                 public init(
                     fixedAmounts: [Int]? = nil,
                     percentages: [Int]? = nil,
@@ -1873,12 +1454,6 @@ extension TerminalConfiguration.Update {
                 public var percentages: [Int]?
                 /// Below this amount, fixed amounts will be displayed; above it, percentages will be displayed
                 public var smartTipThreshold: Int?
-
-                private enum CodingKeys: String, CodingKey {
-                    case fixedAmounts
-                    case percentages
-                    case smartTipThreshold
-                }
 
                 public init(
                     fixedAmounts: [Int]? = nil,
@@ -1900,12 +1475,6 @@ extension TerminalConfiguration.Update {
                 /// Below this amount, fixed amounts will be displayed; above it, percentages will be displayed
                 public var smartTipThreshold: Int?
 
-                private enum CodingKeys: String, CodingKey {
-                    case fixedAmounts
-                    case percentages
-                    case smartTipThreshold
-                }
-
                 public init(
                     fixedAmounts: [Int]? = nil,
                     percentages: [Int]? = nil,
@@ -1925,12 +1494,6 @@ extension TerminalConfiguration.Update {
                 public var percentages: [Int]?
                 /// Below this amount, fixed amounts will be displayed; above it, percentages will be displayed
                 public var smartTipThreshold: Int?
-
-                private enum CodingKeys: String, CodingKey {
-                    case fixedAmounts
-                    case percentages
-                    case smartTipThreshold
-                }
 
                 public init(
                     fixedAmounts: [Int]? = nil,
@@ -1952,12 +1515,6 @@ extension TerminalConfiguration.Update {
                 /// Below this amount, fixed amounts will be displayed; above it, percentages will be displayed
                 public var smartTipThreshold: Int?
 
-                private enum CodingKeys: String, CodingKey {
-                    case fixedAmounts
-                    case percentages
-                    case smartTipThreshold
-                }
-
                 public init(
                     fixedAmounts: [Int]? = nil,
                     percentages: [Int]? = nil,
@@ -1977,12 +1534,6 @@ extension TerminalConfiguration.Update {
                 public var percentages: [Int]?
                 /// Below this amount, fixed amounts will be displayed; above it, percentages will be displayed
                 public var smartTipThreshold: Int?
-
-                private enum CodingKeys: String, CodingKey {
-                    case fixedAmounts
-                    case percentages
-                    case smartTipThreshold
-                }
 
                 public init(
                     fixedAmounts: [Int]? = nil,
@@ -2004,12 +1555,6 @@ extension TerminalConfiguration.Update {
                 /// Below this amount, fixed amounts will be displayed; above it, percentages will be displayed
                 public var smartTipThreshold: Int?
 
-                private enum CodingKeys: String, CodingKey {
-                    case fixedAmounts
-                    case percentages
-                    case smartTipThreshold
-                }
-
                 public init(
                     fixedAmounts: [Int]? = nil,
                     percentages: [Int]? = nil,
@@ -2026,10 +1571,6 @@ extension TerminalConfiguration.Update {
             /// A File ID representing an image you want to display on the reader.
             public var splashscreen: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case splashscreen
-            }
-
             public init(
                 splashscreen: String? = nil
             ) {
@@ -2040,10 +1581,6 @@ extension TerminalConfiguration.Update {
         public struct VerifoneP400: Codable, Hashable, Sendable {
             /// A File ID representing an image you want to display on the reader.
             public var splashscreen: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case splashscreen
-            }
 
             public init(
                 splashscreen: String? = nil
@@ -2056,10 +1593,6 @@ extension TerminalConfiguration.Update {
             /// A File ID representing an image you want to display on the reader.
             public var splashscreen: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case splashscreen
-            }
-
             public init(
                 splashscreen: String? = nil
             ) {
@@ -2071,10 +1604,6 @@ extension TerminalConfiguration.Update {
             /// A File ID representing an image you want to display on the reader.
             public var splashscreen: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case splashscreen
-            }
-
             public init(
                 splashscreen: String? = nil
             ) {
@@ -2085,10 +1614,6 @@ extension TerminalConfiguration.Update {
         public struct VerifoneV660p: Codable, Hashable, Sendable {
             /// A File ID representing an image you want to display on the reader.
             public var splashscreen: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case splashscreen
-            }
 
             public init(
                 splashscreen: String? = nil
@@ -2106,13 +1631,6 @@ extension TerminalConfiguration.Update {
             public var personalPsk: PersonalPsk?
             /// Security type of the WiFi network.
             public var `type`: Type
-
-            private enum CodingKeys: String, CodingKey {
-                case enterpriseEapPeap
-                case enterpriseEapTls
-                case personalPsk
-                case `type`
-            }
 
             public init(
                 enterpriseEapPeap: EnterpriseEapPeap? = nil,
@@ -2143,13 +1661,6 @@ extension TerminalConfiguration.Update {
                 /// Username for connecting to the WiFi network
                 public var username: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case caCertificateFile
-                    case password
-                    case ssid
-                    case username
-                }
-
                 public init(
                     caCertificateFile: String? = nil,
                     password: String,
@@ -2176,14 +1687,6 @@ extension TerminalConfiguration.Update {
                 /// Name of the WiFi network
                 public var ssid: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case caCertificateFile
-                    case clientCertificateFile
-                    case privateKeyFile
-                    case privateKeyFilePassword
-                    case ssid
-                }
-
                 public init(
                     caCertificateFile: String? = nil,
                     clientCertificateFile: String,
@@ -2205,11 +1708,6 @@ extension TerminalConfiguration.Update {
                 public var password: String
                 /// Name of the WiFi network
                 public var ssid: String
-
-                private enum CodingKeys: String, CodingKey {
-                    case password
-                    case ssid
-                }
 
                 public init(
                     password: String,

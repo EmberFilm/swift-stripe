@@ -45,25 +45,6 @@ extension Stripe.Reserve {
         /// Which source balance type this ReserveHold reserves funds from.
         public var sourceType: SourceType?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case amount
-            case amountReleasable
-            case created
-            case createdBy
-            case currency
-            case isReleasable
-            case livemode
-            case metadata
-            case reason
-            case releaseDetails
-            case releaseSchedule
-            case reservePlan
-            case sourceCharge
-            case sourceType
-        }
-
         public init(
             id: ID,
             object: String,

@@ -41,18 +41,6 @@ extension Stripe.Connect.Transfer.Create {
         /// A string that identifies this transaction as part of a group.
         public var transferGroup: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case amount
-            case currency
-            case description
-            case destination
-            case expand
-            case metadata
-            case sourceTransaction
-            case sourceType
-            case transferGroup
-        }
-
         public init(
             amount: Int? = nil,
             currency: Stripe.Currency,
@@ -103,16 +91,6 @@ extension Stripe.Connect.Transfer.List {
         /// Only return transfers with the specified transfer group.
         public var transferGroup: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case created
-            case destination
-            case endingBefore
-            case expand
-            case limit
-            case startingAfter
-            case transferGroup
-        }
-
         public init(
             created: Stripe.RangeQuery? = nil,
             destination: String? = nil,
@@ -141,10 +119,6 @@ extension Stripe.Connect.Transfer.Retrieve {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
-
         public init(
             expand: [String]? = nil
         ) {
@@ -164,12 +138,6 @@ extension Stripe.Connect.Transfer.Update {
         public var expand: [String]?
         /// Set of key-value pairs that you can attach to an object.
         public var metadata: Stripe.Clearable<[String: String]>?
-
-        private enum CodingKeys: String, CodingKey {
-            case description
-            case expand
-            case metadata
-        }
 
         public init(
             description: String? = nil,

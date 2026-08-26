@@ -54,23 +54,6 @@ extension Stripe.Billing.Credit.Note.Create {
         /// When shipping_cost contains the shipping_rate from the invoice, the shipping_cost is included in the credit note.
         public var shippingCost: ShippingCost?
 
-        private enum CodingKeys: String, CodingKey {
-            case amount
-            case creditAmount
-            case effectiveAt
-            case emailType
-            case expand
-            case invoice
-            case lines
-            case memo
-            case metadata
-            case outOfBandAmount
-            case reason
-            case refundAmount
-            case refunds
-            case shippingCost
-        }
-
         public init(
             amount: Int? = nil,
             creditAmount: Int? = nil,
@@ -137,19 +120,6 @@ extension Stripe.Billing.Credit.Note.Create {
             /// Same as `unit_amount`, but accepts a decimal value in cents (or local equivalent) with at most 12 decimal places.
             public var unitAmountDecimal: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case amount
-                case description
-                case invoiceLineItem
-                case metadata
-                case quantity
-                case taxAmounts
-                case taxRates
-                case `type`
-                case unitAmount
-                case unitAmountDecimal
-            }
-
             public init(
                 amount: Int? = nil,
                 description: String? = nil,
@@ -187,12 +157,6 @@ extension Stripe.Billing.Credit.Note.Create {
                 /// The amount on which tax is calculated, in cents (or local equivalent).
                 public var taxableAmount: Int
 
-                private enum CodingKeys: String, CodingKey {
-                    case amount
-                    case taxRate
-                    case taxableAmount
-                }
-
                 public init(
                     amount: Int,
                     taxRate: String,
@@ -214,13 +178,6 @@ extension Stripe.Billing.Credit.Note.Create {
             public var refund: String?
             /// Type of the refund, one of `refund` or `payment_record_refund`.
             public var `type`: Type?
-
-            private enum CodingKeys: String, CodingKey {
-                case amountRefunded
-                case paymentRecordRefund
-                case refund
-                case `type`
-            }
 
             public init(
                 amountRefunded: Int? = nil,
@@ -246,11 +203,6 @@ extension Stripe.Billing.Credit.Note.Create {
                 /// The PaymentRecord refund group to link to this credit note.
                 public var refundGroup: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case paymentRecord
-                    case refundGroup
-                }
-
                 public init(
                     paymentRecord: String,
                     refundGroup: String
@@ -265,10 +217,6 @@ extension Stripe.Billing.Credit.Note.Create {
         public struct ShippingCost: Codable, Hashable, Sendable {
             /// The ID of the shipping rate to use for this order.
             public var shippingRate: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case shippingRate
-            }
 
             public init(
                 shippingRate: String? = nil
@@ -300,17 +248,6 @@ extension Stripe.Billing.Credit.Note.List {
         public var limit: Int?
         /// A cursor for use in pagination.
         public var startingAfter: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case created
-            case customer
-            case customerAccount
-            case endingBefore
-            case expand
-            case invoice
-            case limit
-            case startingAfter
-        }
 
         public init(
             created: Stripe.RangeQuery? = nil,
@@ -368,23 +305,6 @@ extension Stripe.Billing.Credit.Note.Preview {
         /// When shipping_cost contains the shipping_rate from the invoice, the shipping_cost is included in the credit note.
         public var shippingCost: ShippingCost?
 
-        private enum CodingKeys: String, CodingKey {
-            case amount
-            case creditAmount
-            case effectiveAt
-            case emailType
-            case expand
-            case invoice
-            case lines
-            case memo
-            case metadata
-            case outOfBandAmount
-            case reason
-            case refundAmount
-            case refunds
-            case shippingCost
-        }
-
         public init(
             amount: Int? = nil,
             creditAmount: Int? = nil,
@@ -451,19 +371,6 @@ extension Stripe.Billing.Credit.Note.Preview {
             /// Same as `unit_amount`, but accepts a decimal value in cents (or local equivalent) with at most 12 decimal places.
             public var unitAmountDecimal: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case amount
-                case description
-                case invoiceLineItem
-                case metadata
-                case quantity
-                case taxAmounts
-                case taxRates
-                case `type`
-                case unitAmount
-                case unitAmountDecimal
-            }
-
             public init(
                 amount: Int? = nil,
                 description: String? = nil,
@@ -501,12 +408,6 @@ extension Stripe.Billing.Credit.Note.Preview {
                 /// The amount on which tax is calculated, in cents (or local equivalent).
                 public var taxableAmount: Int
 
-                private enum CodingKeys: String, CodingKey {
-                    case amount
-                    case taxRate
-                    case taxableAmount
-                }
-
                 public init(
                     amount: Int,
                     taxRate: String,
@@ -528,13 +429,6 @@ extension Stripe.Billing.Credit.Note.Preview {
             public var refund: String?
             /// Type of the refund, one of `refund` or `payment_record_refund`.
             public var `type`: Type?
-
-            private enum CodingKeys: String, CodingKey {
-                case amountRefunded
-                case paymentRecordRefund
-                case refund
-                case `type`
-            }
 
             public init(
                 amountRefunded: Int? = nil,
@@ -560,11 +454,6 @@ extension Stripe.Billing.Credit.Note.Preview {
                 /// The PaymentRecord refund group to link to this credit note.
                 public var refundGroup: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case paymentRecord
-                    case refundGroup
-                }
-
                 public init(
                     paymentRecord: String,
                     refundGroup: String
@@ -579,10 +468,6 @@ extension Stripe.Billing.Credit.Note.Preview {
         public struct ShippingCost: Codable, Hashable, Sendable {
             /// The ID of the shipping rate to use for this order.
             public var shippingRate: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case shippingRate
-            }
 
             public init(
                 shippingRate: String? = nil
@@ -632,26 +517,6 @@ extension Stripe.Billing.Credit.Note.PreviewLines {
         public var shippingCost: ShippingCost?
         /// A cursor for use in pagination.
         public var startingAfter: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case amount
-            case creditAmount
-            case effectiveAt
-            case emailType
-            case endingBefore
-            case expand
-            case invoice
-            case limit
-            case lines
-            case memo
-            case metadata
-            case outOfBandAmount
-            case reason
-            case refundAmount
-            case refunds
-            case shippingCost
-            case startingAfter
-        }
 
         public init(
             amount: Int? = nil,
@@ -725,19 +590,6 @@ extension Stripe.Billing.Credit.Note.PreviewLines {
             /// Same as `unit_amount`, but accepts a decimal value in cents (or local equivalent) with at most 12 decimal places.
             public var unitAmountDecimal: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case amount
-                case description
-                case invoiceLineItem
-                case metadata
-                case quantity
-                case taxAmounts
-                case taxRates
-                case `type`
-                case unitAmount
-                case unitAmountDecimal
-            }
-
             public init(
                 amount: Int? = nil,
                 description: String? = nil,
@@ -775,12 +627,6 @@ extension Stripe.Billing.Credit.Note.PreviewLines {
                 /// The amount on which tax is calculated, in cents (or local equivalent).
                 public var taxableAmount: Int
 
-                private enum CodingKeys: String, CodingKey {
-                    case amount
-                    case taxRate
-                    case taxableAmount
-                }
-
                 public init(
                     amount: Int,
                     taxRate: String,
@@ -802,13 +648,6 @@ extension Stripe.Billing.Credit.Note.PreviewLines {
             public var refund: String?
             /// Type of the refund, one of `refund` or `payment_record_refund`.
             public var `type`: Type?
-
-            private enum CodingKeys: String, CodingKey {
-                case amountRefunded
-                case paymentRecordRefund
-                case refund
-                case `type`
-            }
 
             public init(
                 amountRefunded: Int? = nil,
@@ -834,11 +673,6 @@ extension Stripe.Billing.Credit.Note.PreviewLines {
                 /// The PaymentRecord refund group to link to this credit note.
                 public var refundGroup: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case paymentRecord
-                    case refundGroup
-                }
-
                 public init(
                     paymentRecord: String,
                     refundGroup: String
@@ -853,10 +687,6 @@ extension Stripe.Billing.Credit.Note.PreviewLines {
         public struct ShippingCost: Codable, Hashable, Sendable {
             /// The ID of the shipping rate to use for this order.
             public var shippingRate: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case shippingRate
-            }
 
             public init(
                 shippingRate: String? = nil
@@ -874,10 +704,6 @@ extension Stripe.Billing.Credit.Note.Retrieve {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil
@@ -899,12 +725,6 @@ extension Stripe.Billing.Credit.Note.Update {
         /// Set of key-value pairs that you can attach to an object.
         public var metadata: [String: String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case memo
-            case metadata
-        }
-
         public init(
             expand: [String]? = nil,
             memo: String? = nil,
@@ -924,10 +744,6 @@ extension Stripe.Billing.Credit.Note.VoidCreditNote {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil

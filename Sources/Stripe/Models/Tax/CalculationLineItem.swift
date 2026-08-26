@@ -37,21 +37,6 @@ extension Stripe.Tax {
         /// The tax code ID used for this resource.
         public var taxCode: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case amount
-            case amountTax
-            case livemode
-            case metadata
-            case product
-            case quantity
-            case reference
-            case taxBehavior
-            case taxBreakdown
-            case taxCode
-        }
-
         public init(
             id: ID,
             object: String,

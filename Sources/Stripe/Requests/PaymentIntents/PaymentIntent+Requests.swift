@@ -36,12 +36,6 @@ extension Stripe.PaymentIntents.PaymentIntent.ApplyCustomerBalance {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case amount
-            case currency
-            case expand
-        }
-
         public init(
             amount: Int? = nil,
             currency: Stripe.Currency? = nil,
@@ -63,11 +57,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Cancel {
         public var cancellationReason: CancellationReason?
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case cancellationReason
-            case expand
-        }
 
         public init(
             cancellationReason: CancellationReason? = nil,
@@ -114,20 +103,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Capture {
         /// The parameters that you can use to automatically create a transfer after the payment is captured.
         public var transferData: TransferData?
 
-        private enum CodingKeys: String, CodingKey {
-            case amountDetails
-            case amountToCapture
-            case applicationFeeAmount
-            case expand
-            case finalCapture
-            case hooks
-            case metadata
-            case paymentDetails
-            case statementDescriptor
-            case statementDescriptorSuffix
-            case transferData
-        }
-
         public init(
             amountDetails: AmountDetails? = nil,
             amountToCapture: Int? = nil,
@@ -167,14 +142,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Capture {
             /// Contains information about the tax portion of the amount.
             public var tax: Stripe.Clearable<Tax>?
 
-            private enum CodingKeys: String, CodingKey {
-                case discountAmount
-                case enforceArithmeticValidation
-                case lineItems
-                case shipping
-                case tax
-            }
-
             public init(
                 discountAmount: Stripe.Clearable<Int>? = nil,
                 enforceArithmeticValidation: Bool? = nil,
@@ -207,17 +174,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Capture {
                 /// A unit of measure for the line item, such as gallons, feet, meters, etc.
                 public var unitOfMeasure: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case discountAmount
-                    case paymentMethodOptions
-                    case productCode
-                    case productName
-                    case quantity
-                    case tax
-                    case unitCost
-                    case unitOfMeasure
-                }
-
                 public init(
                     discountAmount: Int? = nil,
                     paymentMethodOptions: PaymentMethodOptions? = nil,
@@ -249,13 +205,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Capture {
                     /// This sub-hash contains line item details that are specific to the `paypal` payment method.
                     public var paypal: Paypal?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case card
-                        case cardPresent
-                        case klarna
-                        case paypal
-                    }
-
                     public init(
                         card: Card? = nil,
                         cardPresent: CardPresent? = nil,
@@ -273,10 +222,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Capture {
                         /// Identifier that categorizes the items being purchased using a standardized commodity scheme such as (but not limited t…
                         public var commodityCode: String?
 
-                        private enum CodingKeys: String, CodingKey {
-                            case commodityCode
-                        }
-
                         public init(
                             commodityCode: String? = nil
                         ) {
@@ -288,10 +233,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Capture {
                     public struct CardPresent: Codable, Hashable, Sendable {
                         /// Identifier that categorizes the items being purchased using a standardized commodity scheme such as (but not limited t…
                         public var commodityCode: String?
-
-                        private enum CodingKeys: String, CodingKey {
-                            case commodityCode
-                        }
 
                         public init(
                             commodityCode: String? = nil
@@ -310,13 +251,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Capture {
                         public var reference: String?
                         /// Reference for the subscription this line item is for.
                         public var subscriptionReference: String?
-
-                        private enum CodingKeys: String, CodingKey {
-                            case imageUrl
-                            case productUrl
-                            case reference
-                            case subscriptionReference
-                        }
 
                         public init(
                             imageUrl: String? = nil,
@@ -339,12 +273,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Capture {
                         public var description: String?
                         /// The Stripe account ID of the connected account that sells the item.
                         public var soldBy: String?
-
-                        private enum CodingKeys: String, CodingKey {
-                            case category
-                            case description
-                            case soldBy
-                        }
 
                         public init(
                             category: Category? = nil,
@@ -369,10 +297,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Capture {
                     /// The total amount of tax on a single line item represented in the smallest currency unit.
                     public var totalTaxAmount: Int
 
-                    private enum CodingKeys: String, CodingKey {
-                        case totalTaxAmount
-                    }
-
                     public init(
                         totalTaxAmount: Int
                     ) {
@@ -389,12 +313,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Capture {
                 /// If a physical good is being shipped, the postal code of where it is being shipped to.
                 public var toPostalCode: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case amount
-                    case fromPostalCode
-                    case toPostalCode
-                }
-
                 public init(
                     amount: Stripe.Clearable<Int>? = nil,
                     fromPostalCode: String? = nil,
@@ -410,10 +328,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Capture {
                 /// The total amount of tax on the transaction represented in the smallest currency unit.
                 public var totalTaxAmount: Int
 
-                private enum CodingKeys: String, CodingKey {
-                    case totalTaxAmount
-                }
-
                 public init(
                     totalTaxAmount: Int
                 ) {
@@ -427,10 +341,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Capture {
             /// Arguments passed in automations
             public var inputs: Inputs?
 
-            private enum CodingKeys: String, CodingKey {
-                case inputs
-            }
-
             public init(
                 inputs: Inputs? = nil
             ) {
@@ -442,10 +352,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Capture {
                 /// Tax arguments for automations
                 public var tax: Tax?
 
-                private enum CodingKeys: String, CodingKey {
-                    case tax
-                }
-
                 public init(
                     tax: Tax? = nil
                 ) {
@@ -456,10 +362,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Capture {
                 public struct Tax: Codable, Hashable, Sendable {
                     /// The TaxCalculation id
                     public var calculation: String
-
-                    private enum CodingKeys: String, CodingKey {
-                        case calculation
-                    }
 
                     public init(
                         calculation: String
@@ -476,11 +378,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Capture {
             /// A unique value assigned by the business to identify the transaction.
             public var orderReference: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case customerReference
-                case orderReference
-            }
-
             public init(
                 customerReference: String? = nil,
                 orderReference: String? = nil
@@ -494,10 +391,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Capture {
         public struct TransferData: Codable, Hashable, Sendable {
             /// The amount that will be transferred automatically when a charge succeeds.
             public var amount: Int?
-
-            private enum CodingKeys: String, CodingKey {
-                case amount
-            }
 
             public init(
                 amount: Int? = nil
@@ -558,32 +451,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
         public var shipping: Stripe.Clearable<Shipping>?
         /// Set to `true` when confirming server-side and using Stripe.js, iOS, or Android client-side SDKs to handle the next act…
         public var useStripeSdk: Bool?
-
-        private enum CodingKeys: String, CodingKey {
-            case allowedPaymentMethodTypes
-            case amountDetails
-            case amountToConfirm
-            case captureMethod
-            case confirmationToken
-            case errorOnRequiresAction
-            case excludedPaymentMethodTypes
-            case expand
-            case hooks
-            case mandate
-            case mandateData
-            case offSession
-            case paymentDetails
-            case paymentMethod
-            case paymentMethodData
-            case paymentMethodOptions
-            case paymentMethodTypes
-            case radarOptions
-            case receiptEmail
-            case returnUrl
-            case setupFutureUsage
-            case shipping
-            case useStripeSdk
-        }
 
         public init(
             allowedPaymentMethodTypes: [AllowedPaymentMethodTypes]? = nil,
@@ -814,14 +681,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
             /// Contains information about the tax portion of the amount.
             public var tax: Stripe.Clearable<Tax>?
 
-            private enum CodingKeys: String, CodingKey {
-                case discountAmount
-                case enforceArithmeticValidation
-                case lineItems
-                case shipping
-                case tax
-            }
-
             public init(
                 discountAmount: Stripe.Clearable<Int>? = nil,
                 enforceArithmeticValidation: Bool? = nil,
@@ -854,17 +713,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 /// A unit of measure for the line item, such as gallons, feet, meters, etc.
                 public var unitOfMeasure: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case discountAmount
-                    case paymentMethodOptions
-                    case productCode
-                    case productName
-                    case quantity
-                    case tax
-                    case unitCost
-                    case unitOfMeasure
-                }
-
                 public init(
                     discountAmount: Int? = nil,
                     paymentMethodOptions: PaymentMethodOptions? = nil,
@@ -896,13 +744,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                     /// This sub-hash contains line item details that are specific to the `paypal` payment method.
                     public var paypal: Paypal?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case card
-                        case cardPresent
-                        case klarna
-                        case paypal
-                    }
-
                     public init(
                         card: Card? = nil,
                         cardPresent: CardPresent? = nil,
@@ -920,10 +761,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                         /// Identifier that categorizes the items being purchased using a standardized commodity scheme such as (but not limited t…
                         public var commodityCode: String?
 
-                        private enum CodingKeys: String, CodingKey {
-                            case commodityCode
-                        }
-
                         public init(
                             commodityCode: String? = nil
                         ) {
@@ -935,10 +772,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                     public struct CardPresent: Codable, Hashable, Sendable {
                         /// Identifier that categorizes the items being purchased using a standardized commodity scheme such as (but not limited t…
                         public var commodityCode: String?
-
-                        private enum CodingKeys: String, CodingKey {
-                            case commodityCode
-                        }
 
                         public init(
                             commodityCode: String? = nil
@@ -957,13 +790,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                         public var reference: String?
                         /// Reference for the subscription this line item is for.
                         public var subscriptionReference: String?
-
-                        private enum CodingKeys: String, CodingKey {
-                            case imageUrl
-                            case productUrl
-                            case reference
-                            case subscriptionReference
-                        }
 
                         public init(
                             imageUrl: String? = nil,
@@ -986,12 +812,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                         public var description: String?
                         /// The Stripe account ID of the connected account that sells the item.
                         public var soldBy: String?
-
-                        private enum CodingKeys: String, CodingKey {
-                            case category
-                            case description
-                            case soldBy
-                        }
 
                         public init(
                             category: Category? = nil,
@@ -1016,10 +836,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                     /// The total amount of tax on a single line item represented in the smallest currency unit.
                     public var totalTaxAmount: Int
 
-                    private enum CodingKeys: String, CodingKey {
-                        case totalTaxAmount
-                    }
-
                     public init(
                         totalTaxAmount: Int
                     ) {
@@ -1036,12 +852,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 /// If a physical good is being shipped, the postal code of where it is being shipped to.
                 public var toPostalCode: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case amount
-                    case fromPostalCode
-                    case toPostalCode
-                }
-
                 public init(
                     amount: Stripe.Clearable<Int>? = nil,
                     fromPostalCode: String? = nil,
@@ -1057,10 +867,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 /// The total amount of tax on the transaction represented in the smallest currency unit.
                 public var totalTaxAmount: Int
 
-                private enum CodingKeys: String, CodingKey {
-                    case totalTaxAmount
-                }
-
                 public init(
                     totalTaxAmount: Int
                 ) {
@@ -1074,10 +880,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
             /// Arguments passed in automations
             public var inputs: Inputs?
 
-            private enum CodingKeys: String, CodingKey {
-                case inputs
-            }
-
             public init(
                 inputs: Inputs? = nil
             ) {
@@ -1089,10 +891,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 /// Tax arguments for automations
                 public var tax: Tax?
 
-                private enum CodingKeys: String, CodingKey {
-                    case tax
-                }
-
                 public init(
                     tax: Tax? = nil
                 ) {
@@ -1103,10 +901,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 public struct Tax: Codable, Hashable, Sendable {
                     /// The TaxCalculation id
                     public var calculation: String
-
-                    private enum CodingKeys: String, CodingKey {
-                        case calculation
-                    }
 
                     public init(
                         calculation: String
@@ -1120,10 +914,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
         public struct MandateData: Codable, Hashable, Sendable {
             /// This hash contains details about the customer acceptance of the Mandate.
             public var customerAcceptance: CustomerAcceptance
-
-            private enum CodingKeys: String, CodingKey {
-                case customerAcceptance
-            }
 
             public init(
                 customerAcceptance: CustomerAcceptance
@@ -1141,13 +931,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 public var online: Online?
                 /// The type of customer acceptance information included with the Mandate.
                 public var `type`: Type
-
-                private enum CodingKeys: String, CodingKey {
-                    case acceptedAt
-                    case offline
-                    case online
-                    case `type`
-                }
 
                 public init(
                     acceptedAt: Date? = nil,
@@ -1177,11 +960,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                     public var ipAddress: String
                     /// The user agent of the browser from which the Mandate was accepted by the customer.
                     public var userAgent: String
-
-                    private enum CodingKeys: String, CodingKey {
-                        case ipAddress
-                        case userAgent
-                    }
 
                     public init(
                         ipAddress: String,
@@ -1225,11 +1003,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
             public var customerReference: String?
             /// A unique value assigned by the business to identify the transaction.
             public var orderReference: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case customerReference
-                case orderReference
-            }
 
             public init(
                 customerReference: String? = nil,
@@ -1360,68 +1133,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
             public var wechatPay: WechatPay?
             /// If this is a `zip` PaymentMethod, this hash contains details about the Zip payment method.
             public var zip: Zip?
-
-            private enum CodingKeys: String, CodingKey {
-                case acssDebit
-                case affirm
-                case afterpayClearpay
-                case alipay
-                case allowRedisplay
-                case alma
-                case amazonPay
-                case auBecsDebit
-                case bacsDebit
-                case bancontact
-                case billie
-                case billingDetails
-                case bizum
-                case blik
-                case boleto
-                case cashapp
-                case crypto
-                case customerBalance
-                case eps
-                case fpx
-                case giropay
-                case grabpay
-                case ideal
-                case interacPresent
-                case kakaoPay
-                case klarna
-                case konbini
-                case krCard
-                case link
-                case mbWay
-                case metadata
-                case mobilepay
-                case multibanco
-                case naverPay
-                case nzBankAccount
-                case oxxo
-                case p24
-                case payByBank
-                case payco
-                case paynow
-                case paypal
-                case payto
-                case pix
-                case promptpay
-                case radarOptions
-                case revolutPay
-                case samsungPay
-                case satispay
-                case scalapay
-                case sepaDebit
-                case sofort
-                case sunbit
-                case swish
-                case twint
-                case `type`
-                case upi
-                case usBankAccount
-                case wechatPay
-                case zip
-            }
 
             public init(
                 acssDebit: AcssDebit? = nil,
@@ -1616,12 +1327,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 /// Transit number of the customer's bank.
                 public var transitNumber: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case accountNumber
-                    case institutionNumber
-                    case transitNumber
-                }
-
                 public init(
                     accountNumber: String,
                     institutionNumber: String,
@@ -1665,11 +1370,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 /// Bank-State-Branch number of the bank account.
                 public var bsbNumber: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case accountNumber
-                    case bsbNumber
-                }
-
                 public init(
                     accountNumber: String,
                     bsbNumber: String
@@ -1685,11 +1385,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 public var accountNumber: String?
                 /// Sort code of the bank account.
                 public var sortCode: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case accountNumber
-                    case sortCode
-                }
 
                 public init(
                     accountNumber: String? = nil,
@@ -1723,14 +1418,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 /// Taxpayer identification number.
                 public var taxId: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case address
-                    case email
-                    case name
-                    case phone
-                    case taxId
-                }
-
                 public init(
                     address: Stripe.Clearable<Address>? = nil,
                     email: String? = nil,
@@ -1758,15 +1445,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                     public var postalCode: String?
                     /// State, county, province, or region (ISO 3166-2).
                     public var state: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case city
-                        case country
-                        case line1
-                        case line2
-                        case postalCode
-                        case state
-                    }
 
                     public init(
                         city: String? = nil,
@@ -1801,10 +1479,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 /// The tax ID of the customer (CPF for individual consumers or CNPJ for businesses consumers)
                 public var taxId: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case taxId
-                }
-
                 public init(
                     taxId: String
                 ) {
@@ -1831,10 +1505,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
             public struct Eps: Codable, Hashable, Sendable {
                 /// The customer's bank.
                 public var bank: Bank?
-
-                private enum CodingKeys: String, CodingKey {
-                    case bank
-                }
 
                 public init(
                     bank: Bank? = nil
@@ -1880,11 +1550,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 public var accountHolderType: AccountHolderType?
                 /// The customer's bank.
                 public var bank: Bank
-
-                private enum CodingKeys: String, CodingKey {
-                    case accountHolderType
-                    case bank
-                }
 
                 public init(
                     accountHolderType: AccountHolderType? = nil,
@@ -1943,10 +1608,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 /// The customer's bank.
                 public var bank: Bank?
 
-                private enum CodingKeys: String, CodingKey {
-                    case bank
-                }
-
                 public init(
                     bank: Bank? = nil
                 ) {
@@ -1992,10 +1653,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 /// Customer's date of birth
                 public var dob: Dob?
 
-                private enum CodingKeys: String, CodingKey {
-                    case dob
-                }
-
                 public init(
                     dob: Dob? = nil
                 ) {
@@ -2010,12 +1667,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                     public var month: Int
                     /// The four-digit year of birth.
                     public var year: Int
-
-                    private enum CodingKeys: String, CodingKey {
-                        case day
-                        case month
-                        case year
-                    }
 
                     public init(
                         day: Int,
@@ -2064,10 +1715,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 /// Whether to use Naver Pay points or a card to fund this transaction.
                 public var funding: Funding?
 
-                private enum CodingKeys: String, CodingKey {
-                    case funding
-                }
-
                 public init(
                     funding: Funding? = nil
                 ) {
@@ -2093,15 +1740,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 public var reference: String?
                 /// The suffix of the bank account number.
                 public var suffix: String
-
-                private enum CodingKeys: String, CodingKey {
-                    case accountHolderName
-                    case accountNumber
-                    case bankCode
-                    case branchCode
-                    case reference
-                    case suffix
-                }
 
                 public init(
                     accountHolderName: String? = nil,
@@ -2129,10 +1767,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
             public struct P24: Codable, Hashable, Sendable {
                 /// The customer's bank.
                 public var bank: Bank?
-
-                private enum CodingKeys: String, CodingKey {
-                    case bank
-                }
 
                 public init(
                     bank: Bank? = nil
@@ -2199,12 +1833,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 /// The PayID alias for the bank account.
                 public var payId: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case accountNumber
-                    case bsbNumber
-                    case payId
-                }
-
                 public init(
                     accountNumber: String? = nil,
                     bsbNumber: String? = nil,
@@ -2230,10 +1858,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
             public struct RadarOptions: Codable, Hashable, Sendable {
                 /// A Radar Session is a snapshot of the browser metadata and device details that help Radar make more accurate prediction…
                 public var session: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case session
-                }
 
                 public init(
                     session: String? = nil
@@ -2267,10 +1891,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 /// IBAN of the bank account.
                 public var iban: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case iban
-                }
-
                 public init(
                     iban: String
                 ) {
@@ -2282,10 +1902,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
             public struct Sofort: Codable, Hashable, Sendable {
                 /// Two-letter ISO code representing the country the bank account is located in.
                 public var country: Country
-
-                private enum CodingKeys: String, CodingKey {
-                    case country
-                }
 
                 public init(
                     country: Country
@@ -2323,10 +1939,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 /// Configuration options for setting up an eMandate
                 public var mandateOptions: MandateOptions?
 
-                private enum CodingKeys: String, CodingKey {
-                    case mandateOptions
-                }
-
                 public init(
                     mandateOptions: MandateOptions? = nil
                 ) {
@@ -2343,13 +1955,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                     public var description: String?
                     /// End date of the mandate or subscription.
                     public var endDate: Date?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case amount
-                        case amountType
-                        case description
-                        case endDate
-                    }
 
                     public init(
                         amount: Int? = nil,
@@ -2382,14 +1987,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 public var financialConnectionsAccount: String?
                 /// Routing number of the bank account.
                 public var routingNumber: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case accountHolderType
-                    case accountNumber
-                    case accountType
-                    case financialConnectionsAccount
-                    case routingNumber
-                }
 
                 public init(
                     accountHolderType: AccountHolderType? = nil,
@@ -2542,65 +2139,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
             /// If this is a `zip` PaymentMethod, this sub-hash contains details about the Zip payment method options.
             public var zip: Stripe.Clearable<Zip>?
 
-            private enum CodingKeys: String, CodingKey {
-                case acssDebit
-                case affirm
-                case afterpayClearpay
-                case alipay
-                case alma
-                case amazonPay
-                case auBecsDebit
-                case bacsDebit
-                case bancontact
-                case billie
-                case bizum
-                case blik
-                case boleto
-                case card
-                case cardPresent
-                case cashapp
-                case crypto
-                case customerBalance
-                case eps
-                case fpx
-                case giropay
-                case grabpay
-                case ideal
-                case interacPresent
-                case kakaoPay
-                case klarna
-                case konbini
-                case krCard
-                case link
-                case mbWay
-                case mobilepay
-                case multibanco
-                case naverPay
-                case nzBankAccount
-                case oxxo
-                case p24
-                case payByBank
-                case payco
-                case paynow
-                case paypal
-                case payto
-                case pix
-                case promptpay
-                case revolutPay
-                case samsungPay
-                case satispay
-                case scalapay
-                case sepaDebit
-                case sofort
-                case sunbit
-                case swish
-                case twint
-                case upi
-                case usBankAccount
-                case wechatPay
-                case zip
-            }
-
             public init(
                 acssDebit: Stripe.Clearable<AcssDebit>? = nil,
                 affirm: Stripe.Clearable<Affirm>? = nil,
@@ -2727,13 +2265,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 /// Bank account verification method.
                 public var verificationMethod: VerificationMethod?
 
-                private enum CodingKeys: String, CodingKey {
-                    case mandateOptions
-                    case setupFutureUsage
-                    case targetDate
-                    case verificationMethod
-                }
-
                 public init(
                     mandateOptions: MandateOptions? = nil,
                     setupFutureUsage: SetupFutureUsage? = nil,
@@ -2770,13 +2301,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                     /// Transaction type of the mandate.
                     public var transactionType: TransactionType?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case customMandateUrl
-                        case intervalDescription
-                        case paymentSchedule
-                        case transactionType
-                    }
-
                     public init(
                         customMandateUrl: String? = nil,
                         intervalDescription: String? = nil,
@@ -2810,12 +2334,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case captureMethod
-                    case preferredLocale
-                    case setupFutureUsage
-                }
-
                 public init(
                     captureMethod: CaptureMethod? = nil,
                     preferredLocale: String? = nil,
@@ -2840,12 +2358,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case captureMethod
-                    case reference
-                    case setupFutureUsage
-                }
-
                 public init(
                     captureMethod: CaptureMethod? = nil,
                     reference: String? = nil,
@@ -2866,10 +2378,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: SetupFutureUsage?
 
-                private enum CodingKeys: String, CodingKey {
-                    case setupFutureUsage
-                }
-
                 public init(
                     setupFutureUsage: SetupFutureUsage? = nil
                 ) {
@@ -2886,10 +2394,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
             public struct Alma: Codable, Hashable, Sendable {
                 /// Controls when the funds are captured from the customer's account.
                 public var captureMethod: CaptureMethod?
-
-                private enum CodingKeys: String, CodingKey {
-                    case captureMethod
-                }
 
                 public init(
                     captureMethod: CaptureMethod? = nil
@@ -2908,11 +2412,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 public var captureMethod: CaptureMethod?
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: SetupFutureUsage?
-
-                private enum CodingKeys: String, CodingKey {
-                    case captureMethod
-                    case setupFutureUsage
-                }
 
                 public init(
                     captureMethod: CaptureMethod? = nil,
@@ -2940,11 +2439,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 /// Controls when Stripe will attempt to debit the funds from the customer's account.
                 public var targetDate: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case setupFutureUsage
-                    case targetDate
-                }
-
                 public init(
                     setupFutureUsage: SetupFutureUsage? = nil,
                     targetDate: String? = nil
@@ -2969,12 +2463,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 /// Controls when Stripe will attempt to debit the funds from the customer's account.
                 public var targetDate: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case mandateOptions
-                    case setupFutureUsage
-                    case targetDate
-                }
-
                 public init(
                     mandateOptions: MandateOptions? = nil,
                     setupFutureUsage: SetupFutureUsage? = nil,
@@ -2997,10 +2485,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                     /// Prefix used to generate the Mandate reference.
                     public var referencePrefix: String?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case referencePrefix
-                    }
-
                     public init(
                         referencePrefix: String? = nil
                     ) {
@@ -3014,11 +2498,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 public var preferredLanguage: PreferredLanguage?
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: SetupFutureUsage?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preferredLanguage
-                    case setupFutureUsage
-                }
 
                 public init(
                     preferredLanguage: PreferredLanguage? = nil,
@@ -3046,10 +2525,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 /// Controls when the funds are captured from the customer's account.
                 public var captureMethod: CaptureMethod?
 
-                private enum CodingKeys: String, CodingKey {
-                    case captureMethod
-                }
-
                 public init(
                     captureMethod: CaptureMethod? = nil
                 ) {
@@ -3072,11 +2547,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: SetupFutureUsage?
 
-                private enum CodingKeys: String, CodingKey {
-                    case code
-                    case setupFutureUsage
-                }
-
                 public init(
                     code: String? = nil,
                     setupFutureUsage: SetupFutureUsage? = nil
@@ -3096,11 +2566,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 public var expiresAfterDays: Int?
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: SetupFutureUsage?
-
-                private enum CodingKeys: String, CodingKey {
-                    case expiresAfterDays
-                    case setupFutureUsage
-                }
 
                 public init(
                     expiresAfterDays: Int? = nil,
@@ -3151,25 +2616,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 public var statementDescriptorSuffixKanji: String?
                 /// If 3D Secure authentication was performed with a third-party provider, the authentication details to use for this paym…
                 public var threeDSecure: ThreeDSecure?
-
-                private enum CodingKeys: String, CodingKey {
-                    case captureMethod
-                    case cvcToken
-                    case installments
-                    case mandateOptions
-                    case moto
-                    case network
-                    case requestExtendedAuthorization
-                    case requestIncrementalAuthorization
-                    case requestMulticapture
-                    case requestOvercapture
-                    case requestThreeDSecure
-                    case requireCvcRecollection
-                    case setupFutureUsage
-                    case statementDescriptorSuffixKana
-                    case statementDescriptorSuffixKanji
-                    case threeDSecure
-                }
 
                 public init(
                     captureMethod: CaptureMethod? = nil,
@@ -3268,11 +2714,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                     /// The selected installment plan to use for this payment attempt.
                     public var plan: Stripe.Clearable<Plan>?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case enabled
-                        case plan
-                    }
-
                     public init(
                         enabled: Bool? = nil,
                         plan: Stripe.Clearable<Plan>? = nil
@@ -3288,12 +2729,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                         public var interval: String?
                         /// Type of installment plan, one of `fixed_count`, `bonus`, or `revolving`.
                         public var `type`: Type
-
-                        private enum CodingKeys: String, CodingKey {
-                            case count
-                            case interval
-                            case `type`
-                        }
 
                         public init(
                             count: Int? = nil,
@@ -3333,18 +2768,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                     public var startDate: Date
                     /// Specifies the type of mandates supported.
                     public var supportedTypes: [String]?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case amount
-                        case amountType
-                        case description
-                        case endDate
-                        case interval
-                        case intervalCount
-                        case reference
-                        case startDate
-                        case supportedTypes
-                    }
 
                     public init(
                         amount: Int,
@@ -3400,17 +2823,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                     public var transactionId: String
                     /// The version of 3D Secure that was performed.
                     public var version: Version
-
-                    private enum CodingKeys: String, CodingKey {
-                        case aresTransStatus
-                        case cryptogram
-                        case electronicCommerceIndicator
-                        case exemptionIndicator
-                        case networkOptions
-                        case requestorChallengeIndicator
-                        case transactionId
-                        case version
-                    }
 
                     public init(
                         aresTransStatus: AresTransStatus? = nil,
@@ -3468,10 +2880,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                         /// Cartes Bancaires-specific 3DS fields.
                         public var cartesBancaires: CartesBancaires?
 
-                        private enum CodingKeys: String, CodingKey {
-                            case cartesBancaires
-                        }
-
                         public init(
                             cartesBancaires: CartesBancaires? = nil
                         ) {
@@ -3486,12 +2894,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                             public var cbExemption: String?
                             /// The risk score returned from Cartes Bancaires in the ARes.
                             public var cbScore: Int?
-
-                            private enum CodingKeys: String, CodingKey {
-                                case cbAvalgo
-                                case cbExemption
-                                case cbScore
-                            }
 
                             public init(
                                 cbAvalgo: CbAvalgo,
@@ -3526,13 +2928,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 /// Network routing priority on co-branded EMV cards supporting domestic debit and international card schemes.
                 public var routing: Routing?
 
-                private enum CodingKeys: String, CodingKey {
-                    case captureMethod
-                    case requestExtendedAuthorization
-                    case requestIncrementalAuthorizationSupport
-                    case routing
-                }
-
                 public init(
                     captureMethod: CaptureMethod? = nil,
                     requestExtendedAuthorization: Bool? = nil,
@@ -3555,10 +2950,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                     /// Routing requested priority
                     public var requestedPriority: RequestedPriority?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case requestedPriority
-                    }
-
                     public init(
                         requestedPriority: RequestedPriority? = nil
                     ) {
@@ -3577,11 +2968,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 public var captureMethod: CaptureMethod?
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: SetupFutureUsage?
-
-                private enum CodingKeys: String, CodingKey {
-                    case captureMethod
-                    case setupFutureUsage
-                }
 
                 public init(
                     captureMethod: CaptureMethod? = nil,
@@ -3608,10 +2994,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case setupFutureUsage
-                }
-
                 public init(
                     setupFutureUsage: String? = nil
                 ) {
@@ -3626,12 +3008,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 public var fundingType: String?
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case bankTransfer
-                    case fundingType
-                    case setupFutureUsage
-                }
 
                 public init(
                     bankTransfer: BankTransfer? = nil,
@@ -3651,12 +3027,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                     public var requestedAddressTypes: [RequestedAddressTypes]?
                     /// The list of bank transfer types that this PaymentIntent is allowed to use for funding Permitted values include: `eu_ba…
                     public var `type`: Type
-
-                    private enum CodingKeys: String, CodingKey {
-                        case euBankTransfer
-                        case requestedAddressTypes
-                        case `type`
-                    }
 
                     public init(
                         euBankTransfer: EuBankTransfer? = nil,
@@ -3691,10 +3061,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                         /// The desired country code of the bank account information.
                         public var country: String
 
-                        private enum CodingKeys: String, CodingKey {
-                            case country
-                        }
-
                         public init(
                             country: String
                         ) {
@@ -3708,10 +3074,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case setupFutureUsage
-                }
-
                 public init(
                     setupFutureUsage: String? = nil
                 ) {
@@ -3722,10 +3084,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
             public struct Fpx: Codable, Hashable, Sendable {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case setupFutureUsage
-                }
 
                 public init(
                     setupFutureUsage: String? = nil
@@ -3738,10 +3096,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case setupFutureUsage
-                }
-
                 public init(
                     setupFutureUsage: String? = nil
                 ) {
@@ -3753,10 +3107,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case setupFutureUsage
-                }
-
                 public init(
                     setupFutureUsage: String? = nil
                 ) {
@@ -3767,10 +3117,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
             public struct Ideal: Codable, Hashable, Sendable {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: SetupFutureUsage?
-
-                private enum CodingKeys: String, CodingKey {
-                    case setupFutureUsage
-                }
 
                 public init(
                     setupFutureUsage: SetupFutureUsage? = nil
@@ -3794,11 +3140,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 public var captureMethod: CaptureMethod?
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: SetupFutureUsage?
-
-                private enum CodingKeys: String, CodingKey {
-                    case captureMethod
-                    case setupFutureUsage
-                }
 
                 public init(
                     captureMethod: CaptureMethod? = nil,
@@ -3831,14 +3172,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 public var setupFutureUsage: SetupFutureUsage?
                 /// Subscription details if setting up or charging a subscription.
                 public var subscriptions: Stripe.Clearable<[Subscriptions]>?
-
-                private enum CodingKeys: String, CodingKey {
-                    case captureMethod
-                    case onDemand
-                    case preferredLocale
-                    case setupFutureUsage
-                    case subscriptions
-                }
 
                 public init(
                     captureMethod: CaptureMethod? = nil,
@@ -3927,14 +3260,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                     /// The number of `purchase_interval` between charges
                     public var purchaseIntervalCount: Int?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case averageAmount
-                        case maximumAmount
-                        case minimumAmount
-                        case purchaseInterval
-                        case purchaseIntervalCount
-                    }
-
                     public init(
                         averageAmount: Int? = nil,
                         maximumAmount: Int? = nil,
@@ -3969,14 +3294,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                     /// A non-customer-facing reference to correlate subscription charges in the Klarna app.
                     public var reference: String
 
-                    private enum CodingKeys: String, CodingKey {
-                        case interval
-                        case intervalCount
-                        case name
-                        case nextBilling
-                        case reference
-                    }
-
                     public init(
                         interval: Interval,
                         intervalCount: Int? = nil,
@@ -4005,11 +3322,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                         /// The date of the next charge for the subscription in YYYY-MM-DD format.
                         public var date: String
 
-                        private enum CodingKeys: String, CodingKey {
-                            case amount
-                            case date
-                        }
-
                         public init(
                             amount: Int,
                             date: String
@@ -4033,14 +3345,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case confirmationNumber
-                    case expiresAfterDays
-                    case expiresAt
-                    case productDescription
-                    case setupFutureUsage
-                }
-
                 public init(
                     confirmationNumber: String? = nil,
                     expiresAfterDays: Stripe.Clearable<Int>? = nil,
@@ -4061,11 +3365,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 public var captureMethod: CaptureMethod?
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: SetupFutureUsage?
-
-                private enum CodingKeys: String, CodingKey {
-                    case captureMethod
-                    case setupFutureUsage
-                }
 
                 public init(
                     captureMethod: CaptureMethod? = nil,
@@ -4095,12 +3394,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: SetupFutureUsage?
 
-                private enum CodingKeys: String, CodingKey {
-                    case captureMethod
-                    case persistentToken
-                    case setupFutureUsage
-                }
-
                 public init(
                     captureMethod: CaptureMethod? = nil,
                     persistentToken: String? = nil,
@@ -4127,10 +3420,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case setupFutureUsage
-                }
-
                 public init(
                     setupFutureUsage: String? = nil
                 ) {
@@ -4143,11 +3432,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 public var captureMethod: CaptureMethod?
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case captureMethod
-                    case setupFutureUsage
-                }
 
                 public init(
                     captureMethod: CaptureMethod? = nil,
@@ -4167,10 +3451,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case setupFutureUsage
-                }
-
                 public init(
                     setupFutureUsage: String? = nil
                 ) {
@@ -4183,11 +3463,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 public var captureMethod: CaptureMethod?
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: SetupFutureUsage?
-
-                private enum CodingKeys: String, CodingKey {
-                    case captureMethod
-                    case setupFutureUsage
-                }
 
                 public init(
                     captureMethod: CaptureMethod? = nil,
@@ -4215,11 +3490,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 /// Controls when Stripe will attempt to debit the funds from the customer's account.
                 public var targetDate: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case setupFutureUsage
-                    case targetDate
-                }
-
                 public init(
                     setupFutureUsage: SetupFutureUsage? = nil,
                     targetDate: String? = nil
@@ -4242,11 +3512,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case expiresAfterDays
-                    case setupFutureUsage
-                }
-
                 public init(
                     expiresAfterDays: Int? = nil,
                     setupFutureUsage: String? = nil
@@ -4261,11 +3526,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 public var setupFutureUsage: String?
                 /// Confirm that the payer has accepted the P24 terms and conditions.
                 public var tosShownAndAccepted: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case setupFutureUsage
-                    case tosShownAndAccepted
-                }
 
                 public init(
                     setupFutureUsage: String? = nil,
@@ -4286,11 +3546,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case captureMethod
-                    case setupFutureUsage
-                }
-
                 public init(
                     captureMethod: CaptureMethod? = nil,
                     setupFutureUsage: String? = nil
@@ -4308,10 +3563,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
             public struct Paynow: Codable, Hashable, Sendable {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case setupFutureUsage
-                }
 
                 public init(
                     setupFutureUsage: String? = nil
@@ -4331,14 +3582,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 public var riskCorrelationId: String?
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: SetupFutureUsage?
-
-                private enum CodingKeys: String, CodingKey {
-                    case captureMethod
-                    case preferredLocale
-                    case reference
-                    case riskCorrelationId
-                    case setupFutureUsage
-                }
 
                 public init(
                     captureMethod: CaptureMethod? = nil,
@@ -4396,11 +3639,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: SetupFutureUsage?
 
-                private enum CodingKeys: String, CodingKey {
-                    case mandateOptions
-                    case setupFutureUsage
-                }
-
                 public init(
                     mandateOptions: MandateOptions? = nil,
                     setupFutureUsage: SetupFutureUsage? = nil
@@ -4429,15 +3667,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                     public var paymentsPerPeriod: Stripe.Clearable<Int>?
                     /// The purpose for which payments are made.
                     public var purpose: Purpose?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case amount
-                        case amountType
-                        case endDate
-                        case paymentSchedule
-                        case paymentsPerPeriod
-                        case purpose
-                    }
 
                     public init(
                         amount: Stripe.Clearable<Int>? = nil,
@@ -4502,14 +3731,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: SetupFutureUsage?
 
-                private enum CodingKeys: String, CodingKey {
-                    case amountIncludesIof
-                    case expiresAfterSeconds
-                    case expiresAt
-                    case mandateOptions
-                    case setupFutureUsage
-                }
-
                 public init(
                     amountIncludesIof: AmountIncludesIof? = nil,
                     expiresAfterSeconds: Int? = nil,
@@ -4552,17 +3773,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                     public var reference: String?
                     /// Start date of the mandate, in `YYYY-MM-DD`.
                     public var startDate: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case amount
-                        case amountIncludesIof
-                        case amountType
-                        case currency
-                        case endDate
-                        case paymentSchedule
-                        case reference
-                        case startDate
-                    }
 
                     public init(
                         amount: Int? = nil,
@@ -4608,10 +3818,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case setupFutureUsage
-                }
-
                 public init(
                     setupFutureUsage: String? = nil
                 ) {
@@ -4624,11 +3830,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 public var captureMethod: CaptureMethod?
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: SetupFutureUsage?
-
-                private enum CodingKeys: String, CodingKey {
-                    case captureMethod
-                    case setupFutureUsage
-                }
 
                 public init(
                     captureMethod: CaptureMethod? = nil,
@@ -4656,11 +3857,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case captureMethod
-                    case setupFutureUsage
-                }
-
                 public init(
                     captureMethod: CaptureMethod? = nil,
                     setupFutureUsage: String? = nil
@@ -4680,11 +3876,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 public var captureMethod: CaptureMethod?
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: SetupFutureUsage?
-
-                private enum CodingKeys: String, CodingKey {
-                    case captureMethod
-                    case setupFutureUsage
-                }
 
                 public init(
                     captureMethod: CaptureMethod? = nil,
@@ -4711,10 +3902,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 /// Controls when the funds are captured from the customer's account.
                 public var captureMethod: CaptureMethod?
 
-                private enum CodingKeys: String, CodingKey {
-                    case captureMethod
-                }
-
                 public init(
                     captureMethod: CaptureMethod? = nil
                 ) {
@@ -4734,12 +3921,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 public var setupFutureUsage: SetupFutureUsage?
                 /// Controls when Stripe will attempt to debit the funds from the customer's account.
                 public var targetDate: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case mandateOptions
-                    case setupFutureUsage
-                    case targetDate
-                }
 
                 public init(
                     mandateOptions: MandateOptions? = nil,
@@ -4763,10 +3944,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                     /// Prefix used to generate the Mandate reference.
                     public var referencePrefix: String?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case referencePrefix
-                    }
-
                     public init(
                         referencePrefix: String? = nil
                     ) {
@@ -4780,11 +3957,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 public var preferredLanguage: PreferredLanguage?
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: SetupFutureUsage?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preferredLanguage
-                    case setupFutureUsage
-                }
 
                 public init(
                     preferredLanguage: PreferredLanguage? = nil,
@@ -4818,11 +3990,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case captureMethod
-                    case setupFutureUsage
-                }
-
                 public init(
                     captureMethod: CaptureMethod? = nil,
                     setupFutureUsage: String? = nil
@@ -4843,11 +4010,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case reference
-                    case setupFutureUsage
-                }
-
                 public init(
                     reference: String? = nil,
                     setupFutureUsage: String? = nil
@@ -4860,10 +4022,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
             public struct Twint: Codable, Hashable, Sendable {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: SetupFutureUsage?
-
-                private enum CodingKeys: String, CodingKey {
-                    case setupFutureUsage
-                }
 
                 public init(
                     setupFutureUsage: SetupFutureUsage? = nil
@@ -4881,11 +4039,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 /// Configuration options for setting up an eMandate
                 public var mandateOptions: MandateOptions?
                 public var setupFutureUsage: SetupFutureUsage?
-
-                private enum CodingKeys: String, CodingKey {
-                    case mandateOptions
-                    case setupFutureUsage
-                }
 
                 public init(
                     mandateOptions: MandateOptions? = nil,
@@ -4912,13 +4065,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                     public var description: String?
                     /// End date of the mandate or subscription.
                     public var endDate: Date?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case amount
-                        case amountType
-                        case description
-                        case endDate
-                    }
 
                     public init(
                         amount: Int? = nil,
@@ -4954,16 +4100,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 public var transactionPurpose: TransactionPurpose?
                 /// Bank account verification method.
                 public var verificationMethod: VerificationMethod?
-
-                private enum CodingKeys: String, CodingKey {
-                    case financialConnections
-                    case mandateOptions
-                    case networks
-                    case setupFutureUsage
-                    case targetDate
-                    case transactionPurpose
-                    case verificationMethod
-                }
 
                 public init(
                     financialConnections: FinancialConnections? = nil,
@@ -5015,13 +4151,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                     /// For webview integrations only.
                     public var returnUrl: String?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case filters
-                        case permissions
-                        case prefetch
-                        case returnUrl
-                    }
-
                     public init(
                         filters: Filters? = nil,
                         permissions: [Permissions]? = nil,
@@ -5052,10 +4181,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                         /// The account subcategories to use to filter for selectable accounts.
                         public var accountSubcategories: [AccountSubcategories]?
 
-                        private enum CodingKeys: String, CodingKey {
-                            case accountSubcategories
-                        }
-
                         public init(
                             accountSubcategories: [AccountSubcategories]? = nil
                         ) {
@@ -5074,10 +4199,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                     /// The method used to collect offline mandate customer acceptance.
                     public var collectionMethod: CollectionMethod?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case collectionMethod
-                    }
-
                     public init(
                         collectionMethod: CollectionMethod? = nil
                     ) {
@@ -5094,10 +4215,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 public struct Networks: Codable, Hashable, Sendable {
                     /// Triggers validations to run across the selected networks
                     public var requested: [Requested]?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case requested
-                    }
 
                     public init(
                         requested: [Requested]? = nil
@@ -5120,12 +4237,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case appId
-                    case client
-                    case setupFutureUsage
-                }
-
                 public init(
                     appId: String? = nil,
                     client: Client? = nil,
@@ -5147,10 +4258,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case setupFutureUsage
-                }
-
                 public init(
                     setupFutureUsage: String? = nil
                 ) {
@@ -5165,11 +4272,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
             public var referrer: String?
             /// A Radar Session is a snapshot of the browser metadata and device details that help Radar make more accurate prediction…
             public var session: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case referrer
-                case session
-            }
 
             public init(
                 referrer: String? = nil,
@@ -5191,14 +4293,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
             public var phone: String?
             /// The tracking number for a physical product, obtained from the delivery service.
             public var trackingNumber: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case address
-                case carrier
-                case name
-                case phone
-                case trackingNumber
-            }
 
             public init(
                 address: Address,
@@ -5228,15 +4322,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 public var postalCode: String?
                 /// State, county, province, or region (ISO 3166-2).
                 public var state: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case city
-                    case country
-                    case line1
-                    case line2
-                    case postalCode
-                    case state
-                }
 
                 public init(
                     city: String? = nil,
@@ -5339,47 +4424,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
         public var transferGroup: String?
         /// Set to `true` when confirming server-side and using Stripe.js, iOS, or Android client-side SDKs to handle the next act…
         public var useStripeSdk: Bool?
-
-        private enum CodingKeys: String, CodingKey {
-            case allowedPaymentMethodTypes
-            case amount
-            case amountDetails
-            case applicationFeeAmount
-            case automaticPaymentMethods
-            case captureMethod
-            case confirm
-            case confirmationMethod
-            case confirmationToken
-            case currency
-            case customer
-            case customerAccount
-            case description
-            case errorOnRequiresAction
-            case excludedPaymentMethodTypes
-            case expand
-            case hooks
-            case mandate
-            case mandateData
-            case metadata
-            case offSession
-            case onBehalfOf
-            case paymentDetails
-            case paymentMethod
-            case paymentMethodConfiguration
-            case paymentMethodData
-            case paymentMethodOptions
-            case paymentMethodTypes
-            case radarOptions
-            case receiptEmail
-            case returnUrl
-            case setupFutureUsage
-            case shipping
-            case statementDescriptor
-            case statementDescriptorSuffix
-            case transferData
-            case transferGroup
-            case useStripeSdk
-        }
 
         public init(
             allowedPaymentMethodTypes: [AllowedPaymentMethodTypes]? = nil,
@@ -5645,14 +4689,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
             /// Contains information about the tax portion of the amount.
             public var tax: Stripe.Clearable<Tax>?
 
-            private enum CodingKeys: String, CodingKey {
-                case discountAmount
-                case enforceArithmeticValidation
-                case lineItems
-                case shipping
-                case tax
-            }
-
             public init(
                 discountAmount: Stripe.Clearable<Int>? = nil,
                 enforceArithmeticValidation: Bool? = nil,
@@ -5685,17 +4721,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 /// A unit of measure for the line item, such as gallons, feet, meters, etc.
                 public var unitOfMeasure: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case discountAmount
-                    case paymentMethodOptions
-                    case productCode
-                    case productName
-                    case quantity
-                    case tax
-                    case unitCost
-                    case unitOfMeasure
-                }
-
                 public init(
                     discountAmount: Int? = nil,
                     paymentMethodOptions: PaymentMethodOptions? = nil,
@@ -5727,13 +4752,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                     /// This sub-hash contains line item details that are specific to the `paypal` payment method.
                     public var paypal: Paypal?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case card
-                        case cardPresent
-                        case klarna
-                        case paypal
-                    }
-
                     public init(
                         card: Card? = nil,
                         cardPresent: CardPresent? = nil,
@@ -5751,10 +4769,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                         /// Identifier that categorizes the items being purchased using a standardized commodity scheme such as (but not limited t…
                         public var commodityCode: String?
 
-                        private enum CodingKeys: String, CodingKey {
-                            case commodityCode
-                        }
-
                         public init(
                             commodityCode: String? = nil
                         ) {
@@ -5766,10 +4780,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                     public struct CardPresent: Codable, Hashable, Sendable {
                         /// Identifier that categorizes the items being purchased using a standardized commodity scheme such as (but not limited t…
                         public var commodityCode: String?
-
-                        private enum CodingKeys: String, CodingKey {
-                            case commodityCode
-                        }
 
                         public init(
                             commodityCode: String? = nil
@@ -5788,13 +4798,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                         public var reference: String?
                         /// Reference for the subscription this line item is for.
                         public var subscriptionReference: String?
-
-                        private enum CodingKeys: String, CodingKey {
-                            case imageUrl
-                            case productUrl
-                            case reference
-                            case subscriptionReference
-                        }
 
                         public init(
                             imageUrl: String? = nil,
@@ -5817,12 +4820,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                         public var description: String?
                         /// The Stripe account ID of the connected account that sells the item.
                         public var soldBy: String?
-
-                        private enum CodingKeys: String, CodingKey {
-                            case category
-                            case description
-                            case soldBy
-                        }
 
                         public init(
                             category: Category? = nil,
@@ -5847,10 +4844,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                     /// The total amount of tax on a single line item represented in the smallest currency unit.
                     public var totalTaxAmount: Int
 
-                    private enum CodingKeys: String, CodingKey {
-                        case totalTaxAmount
-                    }
-
                     public init(
                         totalTaxAmount: Int
                     ) {
@@ -5867,12 +4860,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 /// If a physical good is being shipped, the postal code of where it is being shipped to.
                 public var toPostalCode: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case amount
-                    case fromPostalCode
-                    case toPostalCode
-                }
-
                 public init(
                     amount: Stripe.Clearable<Int>? = nil,
                     fromPostalCode: String? = nil,
@@ -5888,10 +4875,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 /// The total amount of tax on the transaction represented in the smallest currency unit.
                 public var totalTaxAmount: Int
 
-                private enum CodingKeys: String, CodingKey {
-                    case totalTaxAmount
-                }
-
                 public init(
                     totalTaxAmount: Int
                 ) {
@@ -5906,11 +4889,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
             public var allowRedirects: AllowRedirects?
             /// Whether this feature is enabled.
             public var enabled: Bool
-
-            private enum CodingKeys: String, CodingKey {
-                case allowRedirects
-                case enabled
-            }
 
             public init(
                 allowRedirects: AllowRedirects? = nil,
@@ -5931,10 +4909,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
             /// Arguments passed in automations
             public var inputs: Inputs?
 
-            private enum CodingKeys: String, CodingKey {
-                case inputs
-            }
-
             public init(
                 inputs: Inputs? = nil
             ) {
@@ -5946,10 +4920,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 /// Tax arguments for automations
                 public var tax: Tax?
 
-                private enum CodingKeys: String, CodingKey {
-                    case tax
-                }
-
                 public init(
                     tax: Tax? = nil
                 ) {
@@ -5960,10 +4930,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 public struct Tax: Codable, Hashable, Sendable {
                     /// The TaxCalculation id
                     public var calculation: String
-
-                    private enum CodingKeys: String, CodingKey {
-                        case calculation
-                    }
 
                     public init(
                         calculation: String
@@ -5977,10 +4943,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
         public struct MandateData: Codable, Hashable, Sendable {
             /// This hash contains details about the customer acceptance of the Mandate.
             public var customerAcceptance: CustomerAcceptance
-
-            private enum CodingKeys: String, CodingKey {
-                case customerAcceptance
-            }
 
             public init(
                 customerAcceptance: CustomerAcceptance
@@ -5998,13 +4960,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 public var online: Online?
                 /// The type of customer acceptance information included with the Mandate.
                 public var `type`: Type
-
-                private enum CodingKeys: String, CodingKey {
-                    case acceptedAt
-                    case offline
-                    case online
-                    case `type`
-                }
 
                 public init(
                     acceptedAt: Date? = nil,
@@ -6034,11 +4989,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                     public var ipAddress: String
                     /// The user agent of the browser from which the Mandate was accepted by the customer.
                     public var userAgent: String
-
-                    private enum CodingKeys: String, CodingKey {
-                        case ipAddress
-                        case userAgent
-                    }
 
                     public init(
                         ipAddress: String,
@@ -6083,11 +5033,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
             public var customerReference: String?
             /// A unique value assigned by the business to identify the transaction.
             public var orderReference: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case customerReference
-                case orderReference
-            }
 
             public init(
                 customerReference: String? = nil,
@@ -6218,68 +5163,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
             public var wechatPay: WechatPay?
             /// If this is a `zip` PaymentMethod, this hash contains details about the Zip payment method.
             public var zip: Zip?
-
-            private enum CodingKeys: String, CodingKey {
-                case acssDebit
-                case affirm
-                case afterpayClearpay
-                case alipay
-                case allowRedisplay
-                case alma
-                case amazonPay
-                case auBecsDebit
-                case bacsDebit
-                case bancontact
-                case billie
-                case billingDetails
-                case bizum
-                case blik
-                case boleto
-                case cashapp
-                case crypto
-                case customerBalance
-                case eps
-                case fpx
-                case giropay
-                case grabpay
-                case ideal
-                case interacPresent
-                case kakaoPay
-                case klarna
-                case konbini
-                case krCard
-                case link
-                case mbWay
-                case metadata
-                case mobilepay
-                case multibanco
-                case naverPay
-                case nzBankAccount
-                case oxxo
-                case p24
-                case payByBank
-                case payco
-                case paynow
-                case paypal
-                case payto
-                case pix
-                case promptpay
-                case radarOptions
-                case revolutPay
-                case samsungPay
-                case satispay
-                case scalapay
-                case sepaDebit
-                case sofort
-                case sunbit
-                case swish
-                case twint
-                case `type`
-                case upi
-                case usBankAccount
-                case wechatPay
-                case zip
-            }
 
             public init(
                 acssDebit: AcssDebit? = nil,
@@ -6474,12 +5357,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 /// Transit number of the customer's bank.
                 public var transitNumber: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case accountNumber
-                    case institutionNumber
-                    case transitNumber
-                }
-
                 public init(
                     accountNumber: String,
                     institutionNumber: String,
@@ -6523,11 +5400,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 /// Bank-State-Branch number of the bank account.
                 public var bsbNumber: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case accountNumber
-                    case bsbNumber
-                }
-
                 public init(
                     accountNumber: String,
                     bsbNumber: String
@@ -6543,11 +5415,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 public var accountNumber: String?
                 /// Sort code of the bank account.
                 public var sortCode: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case accountNumber
-                    case sortCode
-                }
 
                 public init(
                     accountNumber: String? = nil,
@@ -6581,14 +5448,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 /// Taxpayer identification number.
                 public var taxId: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case address
-                    case email
-                    case name
-                    case phone
-                    case taxId
-                }
-
                 public init(
                     address: Stripe.Clearable<Address>? = nil,
                     email: String? = nil,
@@ -6616,15 +5475,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                     public var postalCode: String?
                     /// State, county, province, or region (ISO 3166-2).
                     public var state: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case city
-                        case country
-                        case line1
-                        case line2
-                        case postalCode
-                        case state
-                    }
 
                     public init(
                         city: String? = nil,
@@ -6659,10 +5509,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 /// The tax ID of the customer (CPF for individual consumers or CNPJ for businesses consumers)
                 public var taxId: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case taxId
-                }
-
                 public init(
                     taxId: String
                 ) {
@@ -6689,10 +5535,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
             public struct Eps: Codable, Hashable, Sendable {
                 /// The customer's bank.
                 public var bank: Bank?
-
-                private enum CodingKeys: String, CodingKey {
-                    case bank
-                }
 
                 public init(
                     bank: Bank? = nil
@@ -6738,11 +5580,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 public var accountHolderType: AccountHolderType?
                 /// The customer's bank.
                 public var bank: Bank
-
-                private enum CodingKeys: String, CodingKey {
-                    case accountHolderType
-                    case bank
-                }
 
                 public init(
                     accountHolderType: AccountHolderType? = nil,
@@ -6801,10 +5638,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 /// The customer's bank.
                 public var bank: Bank?
 
-                private enum CodingKeys: String, CodingKey {
-                    case bank
-                }
-
                 public init(
                     bank: Bank? = nil
                 ) {
@@ -6850,10 +5683,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 /// Customer's date of birth
                 public var dob: Dob?
 
-                private enum CodingKeys: String, CodingKey {
-                    case dob
-                }
-
                 public init(
                     dob: Dob? = nil
                 ) {
@@ -6868,12 +5697,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                     public var month: Int
                     /// The four-digit year of birth.
                     public var year: Int
-
-                    private enum CodingKeys: String, CodingKey {
-                        case day
-                        case month
-                        case year
-                    }
 
                     public init(
                         day: Int,
@@ -6922,10 +5745,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 /// Whether to use Naver Pay points or a card to fund this transaction.
                 public var funding: Funding?
 
-                private enum CodingKeys: String, CodingKey {
-                    case funding
-                }
-
                 public init(
                     funding: Funding? = nil
                 ) {
@@ -6951,15 +5770,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 public var reference: String?
                 /// The suffix of the bank account number.
                 public var suffix: String
-
-                private enum CodingKeys: String, CodingKey {
-                    case accountHolderName
-                    case accountNumber
-                    case bankCode
-                    case branchCode
-                    case reference
-                    case suffix
-                }
 
                 public init(
                     accountHolderName: String? = nil,
@@ -6987,10 +5797,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
             public struct P24: Codable, Hashable, Sendable {
                 /// The customer's bank.
                 public var bank: Bank?
-
-                private enum CodingKeys: String, CodingKey {
-                    case bank
-                }
 
                 public init(
                     bank: Bank? = nil
@@ -7057,12 +5863,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 /// The PayID alias for the bank account.
                 public var payId: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case accountNumber
-                    case bsbNumber
-                    case payId
-                }
-
                 public init(
                     accountNumber: String? = nil,
                     bsbNumber: String? = nil,
@@ -7088,10 +5888,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
             public struct RadarOptions: Codable, Hashable, Sendable {
                 /// A Radar Session is a snapshot of the browser metadata and device details that help Radar make more accurate prediction…
                 public var session: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case session
-                }
 
                 public init(
                     session: String? = nil
@@ -7125,10 +5921,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 /// IBAN of the bank account.
                 public var iban: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case iban
-                }
-
                 public init(
                     iban: String
                 ) {
@@ -7140,10 +5932,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
             public struct Sofort: Codable, Hashable, Sendable {
                 /// Two-letter ISO code representing the country the bank account is located in.
                 public var country: Country
-
-                private enum CodingKeys: String, CodingKey {
-                    case country
-                }
 
                 public init(
                     country: Country
@@ -7181,10 +5969,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 /// Configuration options for setting up an eMandate
                 public var mandateOptions: MandateOptions?
 
-                private enum CodingKeys: String, CodingKey {
-                    case mandateOptions
-                }
-
                 public init(
                     mandateOptions: MandateOptions? = nil
                 ) {
@@ -7201,13 +5985,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                     public var description: String?
                     /// End date of the mandate or subscription.
                     public var endDate: Date?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case amount
-                        case amountType
-                        case description
-                        case endDate
-                    }
 
                     public init(
                         amount: Int? = nil,
@@ -7240,14 +6017,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 public var financialConnectionsAccount: String?
                 /// Routing number of the bank account.
                 public var routingNumber: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case accountHolderType
-                    case accountNumber
-                    case accountType
-                    case financialConnectionsAccount
-                    case routingNumber
-                }
 
                 public init(
                     accountHolderType: AccountHolderType? = nil,
@@ -7400,65 +6169,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
             /// If this is a `zip` PaymentMethod, this sub-hash contains details about the Zip payment method options.
             public var zip: Stripe.Clearable<Zip>?
 
-            private enum CodingKeys: String, CodingKey {
-                case acssDebit
-                case affirm
-                case afterpayClearpay
-                case alipay
-                case alma
-                case amazonPay
-                case auBecsDebit
-                case bacsDebit
-                case bancontact
-                case billie
-                case bizum
-                case blik
-                case boleto
-                case card
-                case cardPresent
-                case cashapp
-                case crypto
-                case customerBalance
-                case eps
-                case fpx
-                case giropay
-                case grabpay
-                case ideal
-                case interacPresent
-                case kakaoPay
-                case klarna
-                case konbini
-                case krCard
-                case link
-                case mbWay
-                case mobilepay
-                case multibanco
-                case naverPay
-                case nzBankAccount
-                case oxxo
-                case p24
-                case payByBank
-                case payco
-                case paynow
-                case paypal
-                case payto
-                case pix
-                case promptpay
-                case revolutPay
-                case samsungPay
-                case satispay
-                case scalapay
-                case sepaDebit
-                case sofort
-                case sunbit
-                case swish
-                case twint
-                case upi
-                case usBankAccount
-                case wechatPay
-                case zip
-            }
-
             public init(
                 acssDebit: Stripe.Clearable<AcssDebit>? = nil,
                 affirm: Stripe.Clearable<Affirm>? = nil,
@@ -7585,13 +6295,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 /// Bank account verification method.
                 public var verificationMethod: VerificationMethod?
 
-                private enum CodingKeys: String, CodingKey {
-                    case mandateOptions
-                    case setupFutureUsage
-                    case targetDate
-                    case verificationMethod
-                }
-
                 public init(
                     mandateOptions: MandateOptions? = nil,
                     setupFutureUsage: SetupFutureUsage? = nil,
@@ -7628,13 +6331,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                     /// Transaction type of the mandate.
                     public var transactionType: TransactionType?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case customMandateUrl
-                        case intervalDescription
-                        case paymentSchedule
-                        case transactionType
-                    }
-
                     public init(
                         customMandateUrl: String? = nil,
                         intervalDescription: String? = nil,
@@ -7668,12 +6364,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case captureMethod
-                    case preferredLocale
-                    case setupFutureUsage
-                }
-
                 public init(
                     captureMethod: CaptureMethod? = nil,
                     preferredLocale: String? = nil,
@@ -7698,12 +6388,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case captureMethod
-                    case reference
-                    case setupFutureUsage
-                }
-
                 public init(
                     captureMethod: CaptureMethod? = nil,
                     reference: String? = nil,
@@ -7724,10 +6408,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: SetupFutureUsage?
 
-                private enum CodingKeys: String, CodingKey {
-                    case setupFutureUsage
-                }
-
                 public init(
                     setupFutureUsage: SetupFutureUsage? = nil
                 ) {
@@ -7744,10 +6424,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
             public struct Alma: Codable, Hashable, Sendable {
                 /// Controls when the funds are captured from the customer's account.
                 public var captureMethod: CaptureMethod?
-
-                private enum CodingKeys: String, CodingKey {
-                    case captureMethod
-                }
 
                 public init(
                     captureMethod: CaptureMethod? = nil
@@ -7766,11 +6442,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 public var captureMethod: CaptureMethod?
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: SetupFutureUsage?
-
-                private enum CodingKeys: String, CodingKey {
-                    case captureMethod
-                    case setupFutureUsage
-                }
 
                 public init(
                     captureMethod: CaptureMethod? = nil,
@@ -7798,11 +6469,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 /// Controls when Stripe will attempt to debit the funds from the customer's account.
                 public var targetDate: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case setupFutureUsage
-                    case targetDate
-                }
-
                 public init(
                     setupFutureUsage: SetupFutureUsage? = nil,
                     targetDate: String? = nil
@@ -7827,12 +6493,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 /// Controls when Stripe will attempt to debit the funds from the customer's account.
                 public var targetDate: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case mandateOptions
-                    case setupFutureUsage
-                    case targetDate
-                }
-
                 public init(
                     mandateOptions: MandateOptions? = nil,
                     setupFutureUsage: SetupFutureUsage? = nil,
@@ -7855,10 +6515,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                     /// Prefix used to generate the Mandate reference.
                     public var referencePrefix: String?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case referencePrefix
-                    }
-
                     public init(
                         referencePrefix: String? = nil
                     ) {
@@ -7872,11 +6528,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 public var preferredLanguage: PreferredLanguage?
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: SetupFutureUsage?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preferredLanguage
-                    case setupFutureUsage
-                }
 
                 public init(
                     preferredLanguage: PreferredLanguage? = nil,
@@ -7904,10 +6555,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 /// Controls when the funds are captured from the customer's account.
                 public var captureMethod: CaptureMethod?
 
-                private enum CodingKeys: String, CodingKey {
-                    case captureMethod
-                }
-
                 public init(
                     captureMethod: CaptureMethod? = nil
                 ) {
@@ -7930,11 +6577,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: SetupFutureUsage?
 
-                private enum CodingKeys: String, CodingKey {
-                    case code
-                    case setupFutureUsage
-                }
-
                 public init(
                     code: String? = nil,
                     setupFutureUsage: SetupFutureUsage? = nil
@@ -7954,11 +6596,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 public var expiresAfterDays: Int?
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: SetupFutureUsage?
-
-                private enum CodingKeys: String, CodingKey {
-                    case expiresAfterDays
-                    case setupFutureUsage
-                }
 
                 public init(
                     expiresAfterDays: Int? = nil,
@@ -8009,25 +6646,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 public var statementDescriptorSuffixKanji: String?
                 /// If 3D Secure authentication was performed with a third-party provider, the authentication details to use for this paym…
                 public var threeDSecure: ThreeDSecure?
-
-                private enum CodingKeys: String, CodingKey {
-                    case captureMethod
-                    case cvcToken
-                    case installments
-                    case mandateOptions
-                    case moto
-                    case network
-                    case requestExtendedAuthorization
-                    case requestIncrementalAuthorization
-                    case requestMulticapture
-                    case requestOvercapture
-                    case requestThreeDSecure
-                    case requireCvcRecollection
-                    case setupFutureUsage
-                    case statementDescriptorSuffixKana
-                    case statementDescriptorSuffixKanji
-                    case threeDSecure
-                }
 
                 public init(
                     captureMethod: CaptureMethod? = nil,
@@ -8126,11 +6744,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                     /// The selected installment plan to use for this payment attempt.
                     public var plan: Stripe.Clearable<Plan>?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case enabled
-                        case plan
-                    }
-
                     public init(
                         enabled: Bool? = nil,
                         plan: Stripe.Clearable<Plan>? = nil
@@ -8146,12 +6759,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                         public var interval: String?
                         /// Type of installment plan, one of `fixed_count`, `bonus`, or `revolving`.
                         public var `type`: Type
-
-                        private enum CodingKeys: String, CodingKey {
-                            case count
-                            case interval
-                            case `type`
-                        }
 
                         public init(
                             count: Int? = nil,
@@ -8191,18 +6798,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                     public var startDate: Date
                     /// Specifies the type of mandates supported.
                     public var supportedTypes: [String]?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case amount
-                        case amountType
-                        case description
-                        case endDate
-                        case interval
-                        case intervalCount
-                        case reference
-                        case startDate
-                        case supportedTypes
-                    }
 
                     public init(
                         amount: Int,
@@ -8258,17 +6853,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                     public var transactionId: String
                     /// The version of 3D Secure that was performed.
                     public var version: Version
-
-                    private enum CodingKeys: String, CodingKey {
-                        case aresTransStatus
-                        case cryptogram
-                        case electronicCommerceIndicator
-                        case exemptionIndicator
-                        case networkOptions
-                        case requestorChallengeIndicator
-                        case transactionId
-                        case version
-                    }
 
                     public init(
                         aresTransStatus: AresTransStatus? = nil,
@@ -8326,10 +6910,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                         /// Cartes Bancaires-specific 3DS fields.
                         public var cartesBancaires: CartesBancaires?
 
-                        private enum CodingKeys: String, CodingKey {
-                            case cartesBancaires
-                        }
-
                         public init(
                             cartesBancaires: CartesBancaires? = nil
                         ) {
@@ -8344,12 +6924,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                             public var cbExemption: String?
                             /// The risk score returned from Cartes Bancaires in the ARes.
                             public var cbScore: Int?
-
-                            private enum CodingKeys: String, CodingKey {
-                                case cbAvalgo
-                                case cbExemption
-                                case cbScore
-                            }
 
                             public init(
                                 cbAvalgo: CbAvalgo,
@@ -8384,13 +6958,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 /// Network routing priority on co-branded EMV cards supporting domestic debit and international card schemes.
                 public var routing: Routing?
 
-                private enum CodingKeys: String, CodingKey {
-                    case captureMethod
-                    case requestExtendedAuthorization
-                    case requestIncrementalAuthorizationSupport
-                    case routing
-                }
-
                 public init(
                     captureMethod: CaptureMethod? = nil,
                     requestExtendedAuthorization: Bool? = nil,
@@ -8413,10 +6980,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                     /// Routing requested priority
                     public var requestedPriority: RequestedPriority?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case requestedPriority
-                    }
-
                     public init(
                         requestedPriority: RequestedPriority? = nil
                     ) {
@@ -8435,11 +6998,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 public var captureMethod: CaptureMethod?
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: SetupFutureUsage?
-
-                private enum CodingKeys: String, CodingKey {
-                    case captureMethod
-                    case setupFutureUsage
-                }
 
                 public init(
                     captureMethod: CaptureMethod? = nil,
@@ -8466,10 +7024,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case setupFutureUsage
-                }
-
                 public init(
                     setupFutureUsage: String? = nil
                 ) {
@@ -8484,12 +7038,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 public var fundingType: String?
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case bankTransfer
-                    case fundingType
-                    case setupFutureUsage
-                }
 
                 public init(
                     bankTransfer: BankTransfer? = nil,
@@ -8509,12 +7057,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                     public var requestedAddressTypes: [RequestedAddressTypes]?
                     /// The list of bank transfer types that this PaymentIntent is allowed to use for funding Permitted values include: `eu_ba…
                     public var `type`: Type
-
-                    private enum CodingKeys: String, CodingKey {
-                        case euBankTransfer
-                        case requestedAddressTypes
-                        case `type`
-                    }
 
                     public init(
                         euBankTransfer: EuBankTransfer? = nil,
@@ -8549,10 +7091,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                         /// The desired country code of the bank account information.
                         public var country: String
 
-                        private enum CodingKeys: String, CodingKey {
-                            case country
-                        }
-
                         public init(
                             country: String
                         ) {
@@ -8566,10 +7104,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case setupFutureUsage
-                }
-
                 public init(
                     setupFutureUsage: String? = nil
                 ) {
@@ -8580,10 +7114,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
             public struct Fpx: Codable, Hashable, Sendable {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case setupFutureUsage
-                }
 
                 public init(
                     setupFutureUsage: String? = nil
@@ -8596,10 +7126,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case setupFutureUsage
-                }
-
                 public init(
                     setupFutureUsage: String? = nil
                 ) {
@@ -8611,10 +7137,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case setupFutureUsage
-                }
-
                 public init(
                     setupFutureUsage: String? = nil
                 ) {
@@ -8625,10 +7147,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
             public struct Ideal: Codable, Hashable, Sendable {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: SetupFutureUsage?
-
-                private enum CodingKeys: String, CodingKey {
-                    case setupFutureUsage
-                }
 
                 public init(
                     setupFutureUsage: SetupFutureUsage? = nil
@@ -8652,11 +7170,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 public var captureMethod: CaptureMethod?
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: SetupFutureUsage?
-
-                private enum CodingKeys: String, CodingKey {
-                    case captureMethod
-                    case setupFutureUsage
-                }
 
                 public init(
                     captureMethod: CaptureMethod? = nil,
@@ -8689,14 +7202,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 public var setupFutureUsage: SetupFutureUsage?
                 /// Subscription details if setting up or charging a subscription.
                 public var subscriptions: Stripe.Clearable<[Subscriptions]>?
-
-                private enum CodingKeys: String, CodingKey {
-                    case captureMethod
-                    case onDemand
-                    case preferredLocale
-                    case setupFutureUsage
-                    case subscriptions
-                }
 
                 public init(
                     captureMethod: CaptureMethod? = nil,
@@ -8785,14 +7290,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                     /// The number of `purchase_interval` between charges
                     public var purchaseIntervalCount: Int?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case averageAmount
-                        case maximumAmount
-                        case minimumAmount
-                        case purchaseInterval
-                        case purchaseIntervalCount
-                    }
-
                     public init(
                         averageAmount: Int? = nil,
                         maximumAmount: Int? = nil,
@@ -8827,14 +7324,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                     /// A non-customer-facing reference to correlate subscription charges in the Klarna app.
                     public var reference: String
 
-                    private enum CodingKeys: String, CodingKey {
-                        case interval
-                        case intervalCount
-                        case name
-                        case nextBilling
-                        case reference
-                    }
-
                     public init(
                         interval: Interval,
                         intervalCount: Int? = nil,
@@ -8863,11 +7352,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                         /// The date of the next charge for the subscription in YYYY-MM-DD format.
                         public var date: String
 
-                        private enum CodingKeys: String, CodingKey {
-                            case amount
-                            case date
-                        }
-
                         public init(
                             amount: Int,
                             date: String
@@ -8891,14 +7375,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case confirmationNumber
-                    case expiresAfterDays
-                    case expiresAt
-                    case productDescription
-                    case setupFutureUsage
-                }
-
                 public init(
                     confirmationNumber: String? = nil,
                     expiresAfterDays: Stripe.Clearable<Int>? = nil,
@@ -8919,11 +7395,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 public var captureMethod: CaptureMethod?
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: SetupFutureUsage?
-
-                private enum CodingKeys: String, CodingKey {
-                    case captureMethod
-                    case setupFutureUsage
-                }
 
                 public init(
                     captureMethod: CaptureMethod? = nil,
@@ -8953,12 +7424,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: SetupFutureUsage?
 
-                private enum CodingKeys: String, CodingKey {
-                    case captureMethod
-                    case persistentToken
-                    case setupFutureUsage
-                }
-
                 public init(
                     captureMethod: CaptureMethod? = nil,
                     persistentToken: String? = nil,
@@ -8985,10 +7450,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case setupFutureUsage
-                }
-
                 public init(
                     setupFutureUsage: String? = nil
                 ) {
@@ -9001,11 +7462,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 public var captureMethod: CaptureMethod?
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case captureMethod
-                    case setupFutureUsage
-                }
 
                 public init(
                     captureMethod: CaptureMethod? = nil,
@@ -9025,10 +7481,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case setupFutureUsage
-                }
-
                 public init(
                     setupFutureUsage: String? = nil
                 ) {
@@ -9041,11 +7493,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 public var captureMethod: CaptureMethod?
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: SetupFutureUsage?
-
-                private enum CodingKeys: String, CodingKey {
-                    case captureMethod
-                    case setupFutureUsage
-                }
 
                 public init(
                     captureMethod: CaptureMethod? = nil,
@@ -9073,11 +7520,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 /// Controls when Stripe will attempt to debit the funds from the customer's account.
                 public var targetDate: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case setupFutureUsage
-                    case targetDate
-                }
-
                 public init(
                     setupFutureUsage: SetupFutureUsage? = nil,
                     targetDate: String? = nil
@@ -9100,11 +7542,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case expiresAfterDays
-                    case setupFutureUsage
-                }
-
                 public init(
                     expiresAfterDays: Int? = nil,
                     setupFutureUsage: String? = nil
@@ -9119,11 +7556,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 public var setupFutureUsage: String?
                 /// Confirm that the payer has accepted the P24 terms and conditions.
                 public var tosShownAndAccepted: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case setupFutureUsage
-                    case tosShownAndAccepted
-                }
 
                 public init(
                     setupFutureUsage: String? = nil,
@@ -9144,11 +7576,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case captureMethod
-                    case setupFutureUsage
-                }
-
                 public init(
                     captureMethod: CaptureMethod? = nil,
                     setupFutureUsage: String? = nil
@@ -9166,10 +7593,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
             public struct Paynow: Codable, Hashable, Sendable {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case setupFutureUsage
-                }
 
                 public init(
                     setupFutureUsage: String? = nil
@@ -9189,14 +7612,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 public var riskCorrelationId: String?
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: SetupFutureUsage?
-
-                private enum CodingKeys: String, CodingKey {
-                    case captureMethod
-                    case preferredLocale
-                    case reference
-                    case riskCorrelationId
-                    case setupFutureUsage
-                }
 
                 public init(
                     captureMethod: CaptureMethod? = nil,
@@ -9254,11 +7669,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: SetupFutureUsage?
 
-                private enum CodingKeys: String, CodingKey {
-                    case mandateOptions
-                    case setupFutureUsage
-                }
-
                 public init(
                     mandateOptions: MandateOptions? = nil,
                     setupFutureUsage: SetupFutureUsage? = nil
@@ -9287,15 +7697,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                     public var paymentsPerPeriod: Stripe.Clearable<Int>?
                     /// The purpose for which payments are made.
                     public var purpose: Purpose?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case amount
-                        case amountType
-                        case endDate
-                        case paymentSchedule
-                        case paymentsPerPeriod
-                        case purpose
-                    }
 
                     public init(
                         amount: Stripe.Clearable<Int>? = nil,
@@ -9360,14 +7761,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: SetupFutureUsage?
 
-                private enum CodingKeys: String, CodingKey {
-                    case amountIncludesIof
-                    case expiresAfterSeconds
-                    case expiresAt
-                    case mandateOptions
-                    case setupFutureUsage
-                }
-
                 public init(
                     amountIncludesIof: AmountIncludesIof? = nil,
                     expiresAfterSeconds: Int? = nil,
@@ -9410,17 +7803,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                     public var reference: String?
                     /// Start date of the mandate, in `YYYY-MM-DD`.
                     public var startDate: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case amount
-                        case amountIncludesIof
-                        case amountType
-                        case currency
-                        case endDate
-                        case paymentSchedule
-                        case reference
-                        case startDate
-                    }
 
                     public init(
                         amount: Int? = nil,
@@ -9466,10 +7848,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case setupFutureUsage
-                }
-
                 public init(
                     setupFutureUsage: String? = nil
                 ) {
@@ -9482,11 +7860,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 public var captureMethod: CaptureMethod?
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: SetupFutureUsage?
-
-                private enum CodingKeys: String, CodingKey {
-                    case captureMethod
-                    case setupFutureUsage
-                }
 
                 public init(
                     captureMethod: CaptureMethod? = nil,
@@ -9514,11 +7887,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case captureMethod
-                    case setupFutureUsage
-                }
-
                 public init(
                     captureMethod: CaptureMethod? = nil,
                     setupFutureUsage: String? = nil
@@ -9538,11 +7906,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 public var captureMethod: CaptureMethod?
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: SetupFutureUsage?
-
-                private enum CodingKeys: String, CodingKey {
-                    case captureMethod
-                    case setupFutureUsage
-                }
 
                 public init(
                     captureMethod: CaptureMethod? = nil,
@@ -9569,10 +7932,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 /// Controls when the funds are captured from the customer's account.
                 public var captureMethod: CaptureMethod?
 
-                private enum CodingKeys: String, CodingKey {
-                    case captureMethod
-                }
-
                 public init(
                     captureMethod: CaptureMethod? = nil
                 ) {
@@ -9592,12 +7951,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 public var setupFutureUsage: SetupFutureUsage?
                 /// Controls when Stripe will attempt to debit the funds from the customer's account.
                 public var targetDate: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case mandateOptions
-                    case setupFutureUsage
-                    case targetDate
-                }
 
                 public init(
                     mandateOptions: MandateOptions? = nil,
@@ -9621,10 +7974,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                     /// Prefix used to generate the Mandate reference.
                     public var referencePrefix: String?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case referencePrefix
-                    }
-
                     public init(
                         referencePrefix: String? = nil
                     ) {
@@ -9638,11 +7987,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 public var preferredLanguage: PreferredLanguage?
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: SetupFutureUsage?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preferredLanguage
-                    case setupFutureUsage
-                }
 
                 public init(
                     preferredLanguage: PreferredLanguage? = nil,
@@ -9676,11 +8020,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case captureMethod
-                    case setupFutureUsage
-                }
-
                 public init(
                     captureMethod: CaptureMethod? = nil,
                     setupFutureUsage: String? = nil
@@ -9701,11 +8040,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case reference
-                    case setupFutureUsage
-                }
-
                 public init(
                     reference: String? = nil,
                     setupFutureUsage: String? = nil
@@ -9718,10 +8052,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
             public struct Twint: Codable, Hashable, Sendable {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: SetupFutureUsage?
-
-                private enum CodingKeys: String, CodingKey {
-                    case setupFutureUsage
-                }
 
                 public init(
                     setupFutureUsage: SetupFutureUsage? = nil
@@ -9739,11 +8069,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 /// Configuration options for setting up an eMandate
                 public var mandateOptions: MandateOptions?
                 public var setupFutureUsage: SetupFutureUsage?
-
-                private enum CodingKeys: String, CodingKey {
-                    case mandateOptions
-                    case setupFutureUsage
-                }
 
                 public init(
                     mandateOptions: MandateOptions? = nil,
@@ -9770,13 +8095,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                     public var description: String?
                     /// End date of the mandate or subscription.
                     public var endDate: Date?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case amount
-                        case amountType
-                        case description
-                        case endDate
-                    }
 
                     public init(
                         amount: Int? = nil,
@@ -9812,16 +8130,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 public var transactionPurpose: TransactionPurpose?
                 /// Bank account verification method.
                 public var verificationMethod: VerificationMethod?
-
-                private enum CodingKeys: String, CodingKey {
-                    case financialConnections
-                    case mandateOptions
-                    case networks
-                    case setupFutureUsage
-                    case targetDate
-                    case transactionPurpose
-                    case verificationMethod
-                }
 
                 public init(
                     financialConnections: FinancialConnections? = nil,
@@ -9873,13 +8181,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                     /// For webview integrations only.
                     public var returnUrl: String?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case filters
-                        case permissions
-                        case prefetch
-                        case returnUrl
-                    }
-
                     public init(
                         filters: Filters? = nil,
                         permissions: [Permissions]? = nil,
@@ -9910,10 +8211,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                         /// The account subcategories to use to filter for selectable accounts.
                         public var accountSubcategories: [AccountSubcategories]?
 
-                        private enum CodingKeys: String, CodingKey {
-                            case accountSubcategories
-                        }
-
                         public init(
                             accountSubcategories: [AccountSubcategories]? = nil
                         ) {
@@ -9932,10 +8229,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                     /// The method used to collect offline mandate customer acceptance.
                     public var collectionMethod: CollectionMethod?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case collectionMethod
-                    }
-
                     public init(
                         collectionMethod: CollectionMethod? = nil
                     ) {
@@ -9952,10 +8245,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 public struct Networks: Codable, Hashable, Sendable {
                     /// Triggers validations to run across the selected networks
                     public var requested: [Requested]?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case requested
-                    }
 
                     public init(
                         requested: [Requested]? = nil
@@ -9978,12 +8267,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case appId
-                    case client
-                    case setupFutureUsage
-                }
-
                 public init(
                     appId: String? = nil,
                     client: Client? = nil,
@@ -10005,10 +8288,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case setupFutureUsage
-                }
-
                 public init(
                     setupFutureUsage: String? = nil
                 ) {
@@ -10023,11 +8302,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
             public var referrer: String?
             /// A Radar Session is a snapshot of the browser metadata and device details that help Radar make more accurate prediction…
             public var session: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case referrer
-                case session
-            }
 
             public init(
                 referrer: String? = nil,
@@ -10050,14 +8324,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
             public var phone: String?
             /// The tracking number for a physical product, obtained from the delivery service.
             public var trackingNumber: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case address
-                case carrier
-                case name
-                case phone
-                case trackingNumber
-            }
 
             public init(
                 address: Address,
@@ -10087,15 +8353,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 public var postalCode: String?
                 /// State, county, province, or region (ISO 3166-2).
                 public var state: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case city
-                    case country
-                    case line1
-                    case line2
-                    case postalCode
-                    case state
-                }
 
                 public init(
                     city: String? = nil,
@@ -10128,14 +8385,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
             /// The data with which to populate the destination payment.
             public var paymentData: PaymentData?
 
-            private enum CodingKeys: String, CodingKey {
-                case amount
-                case description
-                case destination
-                case metadata
-                case paymentData
-            }
-
             public init(
                 amount: Int? = nil,
                 description: String? = nil,
@@ -10156,11 +8405,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 public var description: String?
                 /// Set of key-value pairs that you can attach to an object.
                 public var metadata: Stripe.Clearable<[String: String]>?
-
-                private enum CodingKeys: String, CodingKey {
-                    case description
-                    case metadata
-                }
 
                 public init(
                     description: String? = nil,
@@ -10200,19 +8444,6 @@ extension Stripe.PaymentIntents.PaymentIntent.IncrementAuthorization {
         /// The parameters used to automatically create a transfer after the payment is captured.
         public var transferData: TransferData?
 
-        private enum CodingKeys: String, CodingKey {
-            case amount
-            case amountDetails
-            case applicationFeeAmount
-            case description
-            case expand
-            case hooks
-            case metadata
-            case paymentDetails
-            case statementDescriptor
-            case transferData
-        }
-
         public init(
             amount: Int,
             amountDetails: AmountDetails? = nil,
@@ -10250,14 +8481,6 @@ extension Stripe.PaymentIntents.PaymentIntent.IncrementAuthorization {
             /// Contains information about the tax portion of the amount.
             public var tax: Stripe.Clearable<Tax>?
 
-            private enum CodingKeys: String, CodingKey {
-                case discountAmount
-                case enforceArithmeticValidation
-                case lineItems
-                case shipping
-                case tax
-            }
-
             public init(
                 discountAmount: Stripe.Clearable<Int>? = nil,
                 enforceArithmeticValidation: Bool? = nil,
@@ -10290,17 +8513,6 @@ extension Stripe.PaymentIntents.PaymentIntent.IncrementAuthorization {
                 /// A unit of measure for the line item, such as gallons, feet, meters, etc.
                 public var unitOfMeasure: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case discountAmount
-                    case paymentMethodOptions
-                    case productCode
-                    case productName
-                    case quantity
-                    case tax
-                    case unitCost
-                    case unitOfMeasure
-                }
-
                 public init(
                     discountAmount: Int? = nil,
                     paymentMethodOptions: PaymentMethodOptions? = nil,
@@ -10332,13 +8544,6 @@ extension Stripe.PaymentIntents.PaymentIntent.IncrementAuthorization {
                     /// This sub-hash contains line item details that are specific to the `paypal` payment method.
                     public var paypal: Paypal?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case card
-                        case cardPresent
-                        case klarna
-                        case paypal
-                    }
-
                     public init(
                         card: Card? = nil,
                         cardPresent: CardPresent? = nil,
@@ -10356,10 +8561,6 @@ extension Stripe.PaymentIntents.PaymentIntent.IncrementAuthorization {
                         /// Identifier that categorizes the items being purchased using a standardized commodity scheme such as (but not limited t…
                         public var commodityCode: String?
 
-                        private enum CodingKeys: String, CodingKey {
-                            case commodityCode
-                        }
-
                         public init(
                             commodityCode: String? = nil
                         ) {
@@ -10371,10 +8572,6 @@ extension Stripe.PaymentIntents.PaymentIntent.IncrementAuthorization {
                     public struct CardPresent: Codable, Hashable, Sendable {
                         /// Identifier that categorizes the items being purchased using a standardized commodity scheme such as (but not limited t…
                         public var commodityCode: String?
-
-                        private enum CodingKeys: String, CodingKey {
-                            case commodityCode
-                        }
 
                         public init(
                             commodityCode: String? = nil
@@ -10393,13 +8590,6 @@ extension Stripe.PaymentIntents.PaymentIntent.IncrementAuthorization {
                         public var reference: String?
                         /// Reference for the subscription this line item is for.
                         public var subscriptionReference: String?
-
-                        private enum CodingKeys: String, CodingKey {
-                            case imageUrl
-                            case productUrl
-                            case reference
-                            case subscriptionReference
-                        }
 
                         public init(
                             imageUrl: String? = nil,
@@ -10422,12 +8612,6 @@ extension Stripe.PaymentIntents.PaymentIntent.IncrementAuthorization {
                         public var description: String?
                         /// The Stripe account ID of the connected account that sells the item.
                         public var soldBy: String?
-
-                        private enum CodingKeys: String, CodingKey {
-                            case category
-                            case description
-                            case soldBy
-                        }
 
                         public init(
                             category: Category? = nil,
@@ -10452,10 +8636,6 @@ extension Stripe.PaymentIntents.PaymentIntent.IncrementAuthorization {
                     /// The total amount of tax on a single line item represented in the smallest currency unit.
                     public var totalTaxAmount: Int
 
-                    private enum CodingKeys: String, CodingKey {
-                        case totalTaxAmount
-                    }
-
                     public init(
                         totalTaxAmount: Int
                     ) {
@@ -10472,12 +8652,6 @@ extension Stripe.PaymentIntents.PaymentIntent.IncrementAuthorization {
                 /// If a physical good is being shipped, the postal code of where it is being shipped to.
                 public var toPostalCode: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case amount
-                    case fromPostalCode
-                    case toPostalCode
-                }
-
                 public init(
                     amount: Stripe.Clearable<Int>? = nil,
                     fromPostalCode: String? = nil,
@@ -10493,10 +8667,6 @@ extension Stripe.PaymentIntents.PaymentIntent.IncrementAuthorization {
                 /// The total amount of tax on the transaction represented in the smallest currency unit.
                 public var totalTaxAmount: Int
 
-                private enum CodingKeys: String, CodingKey {
-                    case totalTaxAmount
-                }
-
                 public init(
                     totalTaxAmount: Int
                 ) {
@@ -10510,10 +8680,6 @@ extension Stripe.PaymentIntents.PaymentIntent.IncrementAuthorization {
             /// Arguments passed in automations
             public var inputs: Inputs?
 
-            private enum CodingKeys: String, CodingKey {
-                case inputs
-            }
-
             public init(
                 inputs: Inputs? = nil
             ) {
@@ -10525,10 +8691,6 @@ extension Stripe.PaymentIntents.PaymentIntent.IncrementAuthorization {
                 /// Tax arguments for automations
                 public var tax: Tax?
 
-                private enum CodingKeys: String, CodingKey {
-                    case tax
-                }
-
                 public init(
                     tax: Tax? = nil
                 ) {
@@ -10539,10 +8701,6 @@ extension Stripe.PaymentIntents.PaymentIntent.IncrementAuthorization {
                 public struct Tax: Codable, Hashable, Sendable {
                     /// The TaxCalculation id
                     public var calculation: String
-
-                    private enum CodingKeys: String, CodingKey {
-                        case calculation
-                    }
 
                     public init(
                         calculation: String
@@ -10560,11 +8718,6 @@ extension Stripe.PaymentIntents.PaymentIntent.IncrementAuthorization {
             /// A unique value assigned by the business to identify the transaction.
             public var orderReference: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case customerReference
-                case orderReference
-            }
-
             public init(
                 customerReference: String? = nil,
                 orderReference: String? = nil
@@ -10578,10 +8731,6 @@ extension Stripe.PaymentIntents.PaymentIntent.IncrementAuthorization {
         public struct TransferData: Codable, Hashable, Sendable {
             /// The amount that will be transferred automatically when a charge succeeds.
             public var amount: Int?
-
-            private enum CodingKeys: String, CodingKey {
-                case amount
-            }
 
             public init(
                 amount: Int? = nil
@@ -10611,16 +8760,6 @@ extension Stripe.PaymentIntents.PaymentIntent.List {
         public var limit: Int?
         /// A cursor for use in pagination.
         public var startingAfter: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case created
-            case customer
-            case customerAccount
-            case endingBefore
-            case expand
-            case limit
-            case startingAfter
-        }
 
         public init(
             created: Stripe.RangeQuery? = nil,
@@ -10652,11 +8791,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Retrieve {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case clientSecret
-            case expand
-        }
-
         public init(
             clientSecret: String? = nil,
             expand: [String]? = nil
@@ -10680,13 +8814,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Search {
         public var page: String?
         /// The search query string.
         public var query: String
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case limit
-            case page
-            case query
-        }
 
         public init(
             expand: [String]? = nil,
@@ -10759,35 +8886,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
         public var transferData: TransferData?
         /// A string that identifies the resulting payment as part of a group.
         public var transferGroup: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case allowedPaymentMethodTypes
-            case amount
-            case amountDetails
-            case applicationFeeAmount
-            case captureMethod
-            case currency
-            case customer
-            case customerAccount
-            case description
-            case excludedPaymentMethodTypes
-            case expand
-            case hooks
-            case metadata
-            case paymentDetails
-            case paymentMethod
-            case paymentMethodConfiguration
-            case paymentMethodData
-            case paymentMethodOptions
-            case paymentMethodTypes
-            case receiptEmail
-            case setupFutureUsage
-            case shipping
-            case statementDescriptor
-            case statementDescriptorSuffix
-            case transferData
-            case transferGroup
-        }
 
         public init(
             allowedPaymentMethodTypes: [AllowedPaymentMethodTypes]? = nil,
@@ -11024,14 +9122,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
             /// Contains information about the tax portion of the amount.
             public var tax: Stripe.Clearable<Tax>?
 
-            private enum CodingKeys: String, CodingKey {
-                case discountAmount
-                case enforceArithmeticValidation
-                case lineItems
-                case shipping
-                case tax
-            }
-
             public init(
                 discountAmount: Stripe.Clearable<Int>? = nil,
                 enforceArithmeticValidation: Bool? = nil,
@@ -11064,17 +9154,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 /// A unit of measure for the line item, such as gallons, feet, meters, etc.
                 public var unitOfMeasure: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case discountAmount
-                    case paymentMethodOptions
-                    case productCode
-                    case productName
-                    case quantity
-                    case tax
-                    case unitCost
-                    case unitOfMeasure
-                }
-
                 public init(
                     discountAmount: Int? = nil,
                     paymentMethodOptions: PaymentMethodOptions? = nil,
@@ -11106,13 +9185,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                     /// This sub-hash contains line item details that are specific to the `paypal` payment method.
                     public var paypal: Paypal?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case card
-                        case cardPresent
-                        case klarna
-                        case paypal
-                    }
-
                     public init(
                         card: Card? = nil,
                         cardPresent: CardPresent? = nil,
@@ -11130,10 +9202,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                         /// Identifier that categorizes the items being purchased using a standardized commodity scheme such as (but not limited t…
                         public var commodityCode: String?
 
-                        private enum CodingKeys: String, CodingKey {
-                            case commodityCode
-                        }
-
                         public init(
                             commodityCode: String? = nil
                         ) {
@@ -11145,10 +9213,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                     public struct CardPresent: Codable, Hashable, Sendable {
                         /// Identifier that categorizes the items being purchased using a standardized commodity scheme such as (but not limited t…
                         public var commodityCode: String?
-
-                        private enum CodingKeys: String, CodingKey {
-                            case commodityCode
-                        }
 
                         public init(
                             commodityCode: String? = nil
@@ -11167,13 +9231,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                         public var reference: String?
                         /// Reference for the subscription this line item is for.
                         public var subscriptionReference: String?
-
-                        private enum CodingKeys: String, CodingKey {
-                            case imageUrl
-                            case productUrl
-                            case reference
-                            case subscriptionReference
-                        }
 
                         public init(
                             imageUrl: String? = nil,
@@ -11196,12 +9253,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                         public var description: String?
                         /// The Stripe account ID of the connected account that sells the item.
                         public var soldBy: String?
-
-                        private enum CodingKeys: String, CodingKey {
-                            case category
-                            case description
-                            case soldBy
-                        }
 
                         public init(
                             category: Category? = nil,
@@ -11226,10 +9277,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                     /// The total amount of tax on a single line item represented in the smallest currency unit.
                     public var totalTaxAmount: Int
 
-                    private enum CodingKeys: String, CodingKey {
-                        case totalTaxAmount
-                    }
-
                     public init(
                         totalTaxAmount: Int
                     ) {
@@ -11246,12 +9293,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 /// If a physical good is being shipped, the postal code of where it is being shipped to.
                 public var toPostalCode: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case amount
-                    case fromPostalCode
-                    case toPostalCode
-                }
-
                 public init(
                     amount: Stripe.Clearable<Int>? = nil,
                     fromPostalCode: String? = nil,
@@ -11267,10 +9308,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 /// The total amount of tax on the transaction represented in the smallest currency unit.
                 public var totalTaxAmount: Int
 
-                private enum CodingKeys: String, CodingKey {
-                    case totalTaxAmount
-                }
-
                 public init(
                     totalTaxAmount: Int
                 ) {
@@ -11284,10 +9321,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
             /// Arguments passed in automations
             public var inputs: Inputs?
 
-            private enum CodingKeys: String, CodingKey {
-                case inputs
-            }
-
             public init(
                 inputs: Inputs? = nil
             ) {
@@ -11299,10 +9332,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 /// Tax arguments for automations
                 public var tax: Tax?
 
-                private enum CodingKeys: String, CodingKey {
-                    case tax
-                }
-
                 public init(
                     tax: Tax? = nil
                 ) {
@@ -11313,10 +9342,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 public struct Tax: Codable, Hashable, Sendable {
                     /// The TaxCalculation id
                     public var calculation: String
-
-                    private enum CodingKeys: String, CodingKey {
-                        case calculation
-                    }
 
                     public init(
                         calculation: String
@@ -11332,11 +9357,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
             public var customerReference: String?
             /// A unique value assigned by the business to identify the transaction.
             public var orderReference: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case customerReference
-                case orderReference
-            }
 
             public init(
                 customerReference: String? = nil,
@@ -11467,68 +9487,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
             public var wechatPay: WechatPay?
             /// If this is a `zip` PaymentMethod, this hash contains details about the Zip payment method.
             public var zip: Zip?
-
-            private enum CodingKeys: String, CodingKey {
-                case acssDebit
-                case affirm
-                case afterpayClearpay
-                case alipay
-                case allowRedisplay
-                case alma
-                case amazonPay
-                case auBecsDebit
-                case bacsDebit
-                case bancontact
-                case billie
-                case billingDetails
-                case bizum
-                case blik
-                case boleto
-                case cashapp
-                case crypto
-                case customerBalance
-                case eps
-                case fpx
-                case giropay
-                case grabpay
-                case ideal
-                case interacPresent
-                case kakaoPay
-                case klarna
-                case konbini
-                case krCard
-                case link
-                case mbWay
-                case metadata
-                case mobilepay
-                case multibanco
-                case naverPay
-                case nzBankAccount
-                case oxxo
-                case p24
-                case payByBank
-                case payco
-                case paynow
-                case paypal
-                case payto
-                case pix
-                case promptpay
-                case radarOptions
-                case revolutPay
-                case samsungPay
-                case satispay
-                case scalapay
-                case sepaDebit
-                case sofort
-                case sunbit
-                case swish
-                case twint
-                case `type`
-                case upi
-                case usBankAccount
-                case wechatPay
-                case zip
-            }
 
             public init(
                 acssDebit: AcssDebit? = nil,
@@ -11723,12 +9681,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 /// Transit number of the customer's bank.
                 public var transitNumber: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case accountNumber
-                    case institutionNumber
-                    case transitNumber
-                }
-
                 public init(
                     accountNumber: String,
                     institutionNumber: String,
@@ -11772,11 +9724,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 /// Bank-State-Branch number of the bank account.
                 public var bsbNumber: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case accountNumber
-                    case bsbNumber
-                }
-
                 public init(
                     accountNumber: String,
                     bsbNumber: String
@@ -11792,11 +9739,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 public var accountNumber: String?
                 /// Sort code of the bank account.
                 public var sortCode: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case accountNumber
-                    case sortCode
-                }
 
                 public init(
                     accountNumber: String? = nil,
@@ -11830,14 +9772,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 /// Taxpayer identification number.
                 public var taxId: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case address
-                    case email
-                    case name
-                    case phone
-                    case taxId
-                }
-
                 public init(
                     address: Stripe.Clearable<Address>? = nil,
                     email: String? = nil,
@@ -11865,15 +9799,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                     public var postalCode: String?
                     /// State, county, province, or region (ISO 3166-2).
                     public var state: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case city
-                        case country
-                        case line1
-                        case line2
-                        case postalCode
-                        case state
-                    }
 
                     public init(
                         city: String? = nil,
@@ -11908,10 +9833,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 /// The tax ID of the customer (CPF for individual consumers or CNPJ for businesses consumers)
                 public var taxId: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case taxId
-                }
-
                 public init(
                     taxId: String
                 ) {
@@ -11938,10 +9859,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
             public struct Eps: Codable, Hashable, Sendable {
                 /// The customer's bank.
                 public var bank: Bank?
-
-                private enum CodingKeys: String, CodingKey {
-                    case bank
-                }
 
                 public init(
                     bank: Bank? = nil
@@ -11987,11 +9904,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 public var accountHolderType: AccountHolderType?
                 /// The customer's bank.
                 public var bank: Bank
-
-                private enum CodingKeys: String, CodingKey {
-                    case accountHolderType
-                    case bank
-                }
 
                 public init(
                     accountHolderType: AccountHolderType? = nil,
@@ -12050,10 +9962,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 /// The customer's bank.
                 public var bank: Bank?
 
-                private enum CodingKeys: String, CodingKey {
-                    case bank
-                }
-
                 public init(
                     bank: Bank? = nil
                 ) {
@@ -12099,10 +10007,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 /// Customer's date of birth
                 public var dob: Dob?
 
-                private enum CodingKeys: String, CodingKey {
-                    case dob
-                }
-
                 public init(
                     dob: Dob? = nil
                 ) {
@@ -12117,12 +10021,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                     public var month: Int
                     /// The four-digit year of birth.
                     public var year: Int
-
-                    private enum CodingKeys: String, CodingKey {
-                        case day
-                        case month
-                        case year
-                    }
 
                     public init(
                         day: Int,
@@ -12171,10 +10069,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 /// Whether to use Naver Pay points or a card to fund this transaction.
                 public var funding: Funding?
 
-                private enum CodingKeys: String, CodingKey {
-                    case funding
-                }
-
                 public init(
                     funding: Funding? = nil
                 ) {
@@ -12200,15 +10094,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 public var reference: String?
                 /// The suffix of the bank account number.
                 public var suffix: String
-
-                private enum CodingKeys: String, CodingKey {
-                    case accountHolderName
-                    case accountNumber
-                    case bankCode
-                    case branchCode
-                    case reference
-                    case suffix
-                }
 
                 public init(
                     accountHolderName: String? = nil,
@@ -12236,10 +10121,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
             public struct P24: Codable, Hashable, Sendable {
                 /// The customer's bank.
                 public var bank: Bank?
-
-                private enum CodingKeys: String, CodingKey {
-                    case bank
-                }
 
                 public init(
                     bank: Bank? = nil
@@ -12306,12 +10187,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 /// The PayID alias for the bank account.
                 public var payId: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case accountNumber
-                    case bsbNumber
-                    case payId
-                }
-
                 public init(
                     accountNumber: String? = nil,
                     bsbNumber: String? = nil,
@@ -12337,10 +10212,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
             public struct RadarOptions: Codable, Hashable, Sendable {
                 /// A Radar Session is a snapshot of the browser metadata and device details that help Radar make more accurate prediction…
                 public var session: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case session
-                }
 
                 public init(
                     session: String? = nil
@@ -12374,10 +10245,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 /// IBAN of the bank account.
                 public var iban: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case iban
-                }
-
                 public init(
                     iban: String
                 ) {
@@ -12389,10 +10256,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
             public struct Sofort: Codable, Hashable, Sendable {
                 /// Two-letter ISO code representing the country the bank account is located in.
                 public var country: Country
-
-                private enum CodingKeys: String, CodingKey {
-                    case country
-                }
 
                 public init(
                     country: Country
@@ -12430,10 +10293,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 /// Configuration options for setting up an eMandate
                 public var mandateOptions: MandateOptions?
 
-                private enum CodingKeys: String, CodingKey {
-                    case mandateOptions
-                }
-
                 public init(
                     mandateOptions: MandateOptions? = nil
                 ) {
@@ -12450,13 +10309,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                     public var description: String?
                     /// End date of the mandate or subscription.
                     public var endDate: Date?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case amount
-                        case amountType
-                        case description
-                        case endDate
-                    }
 
                     public init(
                         amount: Int? = nil,
@@ -12489,14 +10341,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 public var financialConnectionsAccount: String?
                 /// Routing number of the bank account.
                 public var routingNumber: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case accountHolderType
-                    case accountNumber
-                    case accountType
-                    case financialConnectionsAccount
-                    case routingNumber
-                }
 
                 public init(
                     accountHolderType: AccountHolderType? = nil,
@@ -12649,65 +10493,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
             /// If this is a `zip` PaymentMethod, this sub-hash contains details about the Zip payment method options.
             public var zip: Stripe.Clearable<Zip>?
 
-            private enum CodingKeys: String, CodingKey {
-                case acssDebit
-                case affirm
-                case afterpayClearpay
-                case alipay
-                case alma
-                case amazonPay
-                case auBecsDebit
-                case bacsDebit
-                case bancontact
-                case billie
-                case bizum
-                case blik
-                case boleto
-                case card
-                case cardPresent
-                case cashapp
-                case crypto
-                case customerBalance
-                case eps
-                case fpx
-                case giropay
-                case grabpay
-                case ideal
-                case interacPresent
-                case kakaoPay
-                case klarna
-                case konbini
-                case krCard
-                case link
-                case mbWay
-                case mobilepay
-                case multibanco
-                case naverPay
-                case nzBankAccount
-                case oxxo
-                case p24
-                case payByBank
-                case payco
-                case paynow
-                case paypal
-                case payto
-                case pix
-                case promptpay
-                case revolutPay
-                case samsungPay
-                case satispay
-                case scalapay
-                case sepaDebit
-                case sofort
-                case sunbit
-                case swish
-                case twint
-                case upi
-                case usBankAccount
-                case wechatPay
-                case zip
-            }
-
             public init(
                 acssDebit: Stripe.Clearable<AcssDebit>? = nil,
                 affirm: Stripe.Clearable<Affirm>? = nil,
@@ -12834,13 +10619,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 /// Bank account verification method.
                 public var verificationMethod: VerificationMethod?
 
-                private enum CodingKeys: String, CodingKey {
-                    case mandateOptions
-                    case setupFutureUsage
-                    case targetDate
-                    case verificationMethod
-                }
-
                 public init(
                     mandateOptions: MandateOptions? = nil,
                     setupFutureUsage: SetupFutureUsage? = nil,
@@ -12877,13 +10655,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                     /// Transaction type of the mandate.
                     public var transactionType: TransactionType?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case customMandateUrl
-                        case intervalDescription
-                        case paymentSchedule
-                        case transactionType
-                    }
-
                     public init(
                         customMandateUrl: String? = nil,
                         intervalDescription: String? = nil,
@@ -12917,12 +10688,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case captureMethod
-                    case preferredLocale
-                    case setupFutureUsage
-                }
-
                 public init(
                     captureMethod: CaptureMethod? = nil,
                     preferredLocale: String? = nil,
@@ -12947,12 +10712,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case captureMethod
-                    case reference
-                    case setupFutureUsage
-                }
-
                 public init(
                     captureMethod: CaptureMethod? = nil,
                     reference: String? = nil,
@@ -12973,10 +10732,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: SetupFutureUsage?
 
-                private enum CodingKeys: String, CodingKey {
-                    case setupFutureUsage
-                }
-
                 public init(
                     setupFutureUsage: SetupFutureUsage? = nil
                 ) {
@@ -12993,10 +10748,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
             public struct Alma: Codable, Hashable, Sendable {
                 /// Controls when the funds are captured from the customer's account.
                 public var captureMethod: CaptureMethod?
-
-                private enum CodingKeys: String, CodingKey {
-                    case captureMethod
-                }
 
                 public init(
                     captureMethod: CaptureMethod? = nil
@@ -13015,11 +10766,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 public var captureMethod: CaptureMethod?
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: SetupFutureUsage?
-
-                private enum CodingKeys: String, CodingKey {
-                    case captureMethod
-                    case setupFutureUsage
-                }
 
                 public init(
                     captureMethod: CaptureMethod? = nil,
@@ -13047,11 +10793,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 /// Controls when Stripe will attempt to debit the funds from the customer's account.
                 public var targetDate: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case setupFutureUsage
-                    case targetDate
-                }
-
                 public init(
                     setupFutureUsage: SetupFutureUsage? = nil,
                     targetDate: String? = nil
@@ -13076,12 +10817,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 /// Controls when Stripe will attempt to debit the funds from the customer's account.
                 public var targetDate: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case mandateOptions
-                    case setupFutureUsage
-                    case targetDate
-                }
-
                 public init(
                     mandateOptions: MandateOptions? = nil,
                     setupFutureUsage: SetupFutureUsage? = nil,
@@ -13104,10 +10839,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                     /// Prefix used to generate the Mandate reference.
                     public var referencePrefix: String?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case referencePrefix
-                    }
-
                     public init(
                         referencePrefix: String? = nil
                     ) {
@@ -13121,11 +10852,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 public var preferredLanguage: PreferredLanguage?
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: SetupFutureUsage?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preferredLanguage
-                    case setupFutureUsage
-                }
 
                 public init(
                     preferredLanguage: PreferredLanguage? = nil,
@@ -13153,10 +10879,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 /// Controls when the funds are captured from the customer's account.
                 public var captureMethod: CaptureMethod?
 
-                private enum CodingKeys: String, CodingKey {
-                    case captureMethod
-                }
-
                 public init(
                     captureMethod: CaptureMethod? = nil
                 ) {
@@ -13179,11 +10901,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: SetupFutureUsage?
 
-                private enum CodingKeys: String, CodingKey {
-                    case code
-                    case setupFutureUsage
-                }
-
                 public init(
                     code: String? = nil,
                     setupFutureUsage: SetupFutureUsage? = nil
@@ -13203,11 +10920,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 public var expiresAfterDays: Int?
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: SetupFutureUsage?
-
-                private enum CodingKeys: String, CodingKey {
-                    case expiresAfterDays
-                    case setupFutureUsage
-                }
 
                 public init(
                     expiresAfterDays: Int? = nil,
@@ -13258,25 +10970,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 public var statementDescriptorSuffixKanji: String?
                 /// If 3D Secure authentication was performed with a third-party provider, the authentication details to use for this paym…
                 public var threeDSecure: ThreeDSecure?
-
-                private enum CodingKeys: String, CodingKey {
-                    case captureMethod
-                    case cvcToken
-                    case installments
-                    case mandateOptions
-                    case moto
-                    case network
-                    case requestExtendedAuthorization
-                    case requestIncrementalAuthorization
-                    case requestMulticapture
-                    case requestOvercapture
-                    case requestThreeDSecure
-                    case requireCvcRecollection
-                    case setupFutureUsage
-                    case statementDescriptorSuffixKana
-                    case statementDescriptorSuffixKanji
-                    case threeDSecure
-                }
 
                 public init(
                     captureMethod: CaptureMethod? = nil,
@@ -13375,11 +11068,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                     /// The selected installment plan to use for this payment attempt.
                     public var plan: Stripe.Clearable<Plan>?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case enabled
-                        case plan
-                    }
-
                     public init(
                         enabled: Bool? = nil,
                         plan: Stripe.Clearable<Plan>? = nil
@@ -13395,12 +11083,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                         public var interval: String?
                         /// Type of installment plan, one of `fixed_count`, `bonus`, or `revolving`.
                         public var `type`: Type
-
-                        private enum CodingKeys: String, CodingKey {
-                            case count
-                            case interval
-                            case `type`
-                        }
 
                         public init(
                             count: Int? = nil,
@@ -13440,18 +11122,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                     public var startDate: Date
                     /// Specifies the type of mandates supported.
                     public var supportedTypes: [String]?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case amount
-                        case amountType
-                        case description
-                        case endDate
-                        case interval
-                        case intervalCount
-                        case reference
-                        case startDate
-                        case supportedTypes
-                    }
 
                     public init(
                         amount: Int,
@@ -13507,17 +11177,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                     public var transactionId: String
                     /// The version of 3D Secure that was performed.
                     public var version: Version
-
-                    private enum CodingKeys: String, CodingKey {
-                        case aresTransStatus
-                        case cryptogram
-                        case electronicCommerceIndicator
-                        case exemptionIndicator
-                        case networkOptions
-                        case requestorChallengeIndicator
-                        case transactionId
-                        case version
-                    }
 
                     public init(
                         aresTransStatus: AresTransStatus? = nil,
@@ -13575,10 +11234,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                         /// Cartes Bancaires-specific 3DS fields.
                         public var cartesBancaires: CartesBancaires?
 
-                        private enum CodingKeys: String, CodingKey {
-                            case cartesBancaires
-                        }
-
                         public init(
                             cartesBancaires: CartesBancaires? = nil
                         ) {
@@ -13593,12 +11248,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                             public var cbExemption: String?
                             /// The risk score returned from Cartes Bancaires in the ARes.
                             public var cbScore: Int?
-
-                            private enum CodingKeys: String, CodingKey {
-                                case cbAvalgo
-                                case cbExemption
-                                case cbScore
-                            }
 
                             public init(
                                 cbAvalgo: CbAvalgo,
@@ -13633,13 +11282,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 /// Network routing priority on co-branded EMV cards supporting domestic debit and international card schemes.
                 public var routing: Routing?
 
-                private enum CodingKeys: String, CodingKey {
-                    case captureMethod
-                    case requestExtendedAuthorization
-                    case requestIncrementalAuthorizationSupport
-                    case routing
-                }
-
                 public init(
                     captureMethod: CaptureMethod? = nil,
                     requestExtendedAuthorization: Bool? = nil,
@@ -13662,10 +11304,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                     /// Routing requested priority
                     public var requestedPriority: RequestedPriority?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case requestedPriority
-                    }
-
                     public init(
                         requestedPriority: RequestedPriority? = nil
                     ) {
@@ -13684,11 +11322,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 public var captureMethod: CaptureMethod?
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: SetupFutureUsage?
-
-                private enum CodingKeys: String, CodingKey {
-                    case captureMethod
-                    case setupFutureUsage
-                }
 
                 public init(
                     captureMethod: CaptureMethod? = nil,
@@ -13715,10 +11348,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case setupFutureUsage
-                }
-
                 public init(
                     setupFutureUsage: String? = nil
                 ) {
@@ -13733,12 +11362,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 public var fundingType: String?
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case bankTransfer
-                    case fundingType
-                    case setupFutureUsage
-                }
 
                 public init(
                     bankTransfer: BankTransfer? = nil,
@@ -13758,12 +11381,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                     public var requestedAddressTypes: [RequestedAddressTypes]?
                     /// The list of bank transfer types that this PaymentIntent is allowed to use for funding Permitted values include: `eu_ba…
                     public var `type`: Type
-
-                    private enum CodingKeys: String, CodingKey {
-                        case euBankTransfer
-                        case requestedAddressTypes
-                        case `type`
-                    }
 
                     public init(
                         euBankTransfer: EuBankTransfer? = nil,
@@ -13798,10 +11415,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                         /// The desired country code of the bank account information.
                         public var country: String
 
-                        private enum CodingKeys: String, CodingKey {
-                            case country
-                        }
-
                         public init(
                             country: String
                         ) {
@@ -13815,10 +11428,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case setupFutureUsage
-                }
-
                 public init(
                     setupFutureUsage: String? = nil
                 ) {
@@ -13829,10 +11438,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
             public struct Fpx: Codable, Hashable, Sendable {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case setupFutureUsage
-                }
 
                 public init(
                     setupFutureUsage: String? = nil
@@ -13845,10 +11450,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case setupFutureUsage
-                }
-
                 public init(
                     setupFutureUsage: String? = nil
                 ) {
@@ -13860,10 +11461,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case setupFutureUsage
-                }
-
                 public init(
                     setupFutureUsage: String? = nil
                 ) {
@@ -13874,10 +11471,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
             public struct Ideal: Codable, Hashable, Sendable {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: SetupFutureUsage?
-
-                private enum CodingKeys: String, CodingKey {
-                    case setupFutureUsage
-                }
 
                 public init(
                     setupFutureUsage: SetupFutureUsage? = nil
@@ -13901,11 +11494,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 public var captureMethod: CaptureMethod?
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: SetupFutureUsage?
-
-                private enum CodingKeys: String, CodingKey {
-                    case captureMethod
-                    case setupFutureUsage
-                }
 
                 public init(
                     captureMethod: CaptureMethod? = nil,
@@ -13938,14 +11526,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 public var setupFutureUsage: SetupFutureUsage?
                 /// Subscription details if setting up or charging a subscription.
                 public var subscriptions: Stripe.Clearable<[Subscriptions]>?
-
-                private enum CodingKeys: String, CodingKey {
-                    case captureMethod
-                    case onDemand
-                    case preferredLocale
-                    case setupFutureUsage
-                    case subscriptions
-                }
 
                 public init(
                     captureMethod: CaptureMethod? = nil,
@@ -14034,14 +11614,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                     /// The number of `purchase_interval` between charges
                     public var purchaseIntervalCount: Int?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case averageAmount
-                        case maximumAmount
-                        case minimumAmount
-                        case purchaseInterval
-                        case purchaseIntervalCount
-                    }
-
                     public init(
                         averageAmount: Int? = nil,
                         maximumAmount: Int? = nil,
@@ -14076,14 +11648,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                     /// A non-customer-facing reference to correlate subscription charges in the Klarna app.
                     public var reference: String
 
-                    private enum CodingKeys: String, CodingKey {
-                        case interval
-                        case intervalCount
-                        case name
-                        case nextBilling
-                        case reference
-                    }
-
                     public init(
                         interval: Interval,
                         intervalCount: Int? = nil,
@@ -14112,11 +11676,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                         /// The date of the next charge for the subscription in YYYY-MM-DD format.
                         public var date: String
 
-                        private enum CodingKeys: String, CodingKey {
-                            case amount
-                            case date
-                        }
-
                         public init(
                             amount: Int,
                             date: String
@@ -14140,14 +11699,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case confirmationNumber
-                    case expiresAfterDays
-                    case expiresAt
-                    case productDescription
-                    case setupFutureUsage
-                }
-
                 public init(
                     confirmationNumber: String? = nil,
                     expiresAfterDays: Stripe.Clearable<Int>? = nil,
@@ -14168,11 +11719,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 public var captureMethod: CaptureMethod?
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: SetupFutureUsage?
-
-                private enum CodingKeys: String, CodingKey {
-                    case captureMethod
-                    case setupFutureUsage
-                }
 
                 public init(
                     captureMethod: CaptureMethod? = nil,
@@ -14202,12 +11748,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: SetupFutureUsage?
 
-                private enum CodingKeys: String, CodingKey {
-                    case captureMethod
-                    case persistentToken
-                    case setupFutureUsage
-                }
-
                 public init(
                     captureMethod: CaptureMethod? = nil,
                     persistentToken: String? = nil,
@@ -14234,10 +11774,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case setupFutureUsage
-                }
-
                 public init(
                     setupFutureUsage: String? = nil
                 ) {
@@ -14250,11 +11786,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 public var captureMethod: CaptureMethod?
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case captureMethod
-                    case setupFutureUsage
-                }
 
                 public init(
                     captureMethod: CaptureMethod? = nil,
@@ -14274,10 +11805,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case setupFutureUsage
-                }
-
                 public init(
                     setupFutureUsage: String? = nil
                 ) {
@@ -14290,11 +11817,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 public var captureMethod: CaptureMethod?
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: SetupFutureUsage?
-
-                private enum CodingKeys: String, CodingKey {
-                    case captureMethod
-                    case setupFutureUsage
-                }
 
                 public init(
                     captureMethod: CaptureMethod? = nil,
@@ -14322,11 +11844,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 /// Controls when Stripe will attempt to debit the funds from the customer's account.
                 public var targetDate: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case setupFutureUsage
-                    case targetDate
-                }
-
                 public init(
                     setupFutureUsage: SetupFutureUsage? = nil,
                     targetDate: String? = nil
@@ -14349,11 +11866,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case expiresAfterDays
-                    case setupFutureUsage
-                }
-
                 public init(
                     expiresAfterDays: Int? = nil,
                     setupFutureUsage: String? = nil
@@ -14368,11 +11880,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 public var setupFutureUsage: String?
                 /// Confirm that the payer has accepted the P24 terms and conditions.
                 public var tosShownAndAccepted: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case setupFutureUsage
-                    case tosShownAndAccepted
-                }
 
                 public init(
                     setupFutureUsage: String? = nil,
@@ -14393,11 +11900,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case captureMethod
-                    case setupFutureUsage
-                }
-
                 public init(
                     captureMethod: CaptureMethod? = nil,
                     setupFutureUsage: String? = nil
@@ -14415,10 +11917,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
             public struct Paynow: Codable, Hashable, Sendable {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case setupFutureUsage
-                }
 
                 public init(
                     setupFutureUsage: String? = nil
@@ -14438,14 +11936,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 public var riskCorrelationId: String?
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: SetupFutureUsage?
-
-                private enum CodingKeys: String, CodingKey {
-                    case captureMethod
-                    case preferredLocale
-                    case reference
-                    case riskCorrelationId
-                    case setupFutureUsage
-                }
 
                 public init(
                     captureMethod: CaptureMethod? = nil,
@@ -14503,11 +11993,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: SetupFutureUsage?
 
-                private enum CodingKeys: String, CodingKey {
-                    case mandateOptions
-                    case setupFutureUsage
-                }
-
                 public init(
                     mandateOptions: MandateOptions? = nil,
                     setupFutureUsage: SetupFutureUsage? = nil
@@ -14536,15 +12021,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                     public var paymentsPerPeriod: Stripe.Clearable<Int>?
                     /// The purpose for which payments are made.
                     public var purpose: Purpose?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case amount
-                        case amountType
-                        case endDate
-                        case paymentSchedule
-                        case paymentsPerPeriod
-                        case purpose
-                    }
 
                     public init(
                         amount: Stripe.Clearable<Int>? = nil,
@@ -14609,14 +12085,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: SetupFutureUsage?
 
-                private enum CodingKeys: String, CodingKey {
-                    case amountIncludesIof
-                    case expiresAfterSeconds
-                    case expiresAt
-                    case mandateOptions
-                    case setupFutureUsage
-                }
-
                 public init(
                     amountIncludesIof: AmountIncludesIof? = nil,
                     expiresAfterSeconds: Int? = nil,
@@ -14659,17 +12127,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                     public var reference: String?
                     /// Start date of the mandate, in `YYYY-MM-DD`.
                     public var startDate: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case amount
-                        case amountIncludesIof
-                        case amountType
-                        case currency
-                        case endDate
-                        case paymentSchedule
-                        case reference
-                        case startDate
-                    }
 
                     public init(
                         amount: Int? = nil,
@@ -14715,10 +12172,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case setupFutureUsage
-                }
-
                 public init(
                     setupFutureUsage: String? = nil
                 ) {
@@ -14731,11 +12184,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 public var captureMethod: CaptureMethod?
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: SetupFutureUsage?
-
-                private enum CodingKeys: String, CodingKey {
-                    case captureMethod
-                    case setupFutureUsage
-                }
 
                 public init(
                     captureMethod: CaptureMethod? = nil,
@@ -14763,11 +12211,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case captureMethod
-                    case setupFutureUsage
-                }
-
                 public init(
                     captureMethod: CaptureMethod? = nil,
                     setupFutureUsage: String? = nil
@@ -14787,11 +12230,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 public var captureMethod: CaptureMethod?
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: SetupFutureUsage?
-
-                private enum CodingKeys: String, CodingKey {
-                    case captureMethod
-                    case setupFutureUsage
-                }
 
                 public init(
                     captureMethod: CaptureMethod? = nil,
@@ -14818,10 +12256,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 /// Controls when the funds are captured from the customer's account.
                 public var captureMethod: CaptureMethod?
 
-                private enum CodingKeys: String, CodingKey {
-                    case captureMethod
-                }
-
                 public init(
                     captureMethod: CaptureMethod? = nil
                 ) {
@@ -14841,12 +12275,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 public var setupFutureUsage: SetupFutureUsage?
                 /// Controls when Stripe will attempt to debit the funds from the customer's account.
                 public var targetDate: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case mandateOptions
-                    case setupFutureUsage
-                    case targetDate
-                }
 
                 public init(
                     mandateOptions: MandateOptions? = nil,
@@ -14870,10 +12298,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                     /// Prefix used to generate the Mandate reference.
                     public var referencePrefix: String?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case referencePrefix
-                    }
-
                     public init(
                         referencePrefix: String? = nil
                     ) {
@@ -14887,11 +12311,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 public var preferredLanguage: PreferredLanguage?
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: SetupFutureUsage?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preferredLanguage
-                    case setupFutureUsage
-                }
 
                 public init(
                     preferredLanguage: PreferredLanguage? = nil,
@@ -14925,11 +12344,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case captureMethod
-                    case setupFutureUsage
-                }
-
                 public init(
                     captureMethod: CaptureMethod? = nil,
                     setupFutureUsage: String? = nil
@@ -14950,11 +12364,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case reference
-                    case setupFutureUsage
-                }
-
                 public init(
                     reference: String? = nil,
                     setupFutureUsage: String? = nil
@@ -14967,10 +12376,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
             public struct Twint: Codable, Hashable, Sendable {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: SetupFutureUsage?
-
-                private enum CodingKeys: String, CodingKey {
-                    case setupFutureUsage
-                }
 
                 public init(
                     setupFutureUsage: SetupFutureUsage? = nil
@@ -14988,11 +12393,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 /// Configuration options for setting up an eMandate
                 public var mandateOptions: MandateOptions?
                 public var setupFutureUsage: SetupFutureUsage?
-
-                private enum CodingKeys: String, CodingKey {
-                    case mandateOptions
-                    case setupFutureUsage
-                }
 
                 public init(
                     mandateOptions: MandateOptions? = nil,
@@ -15019,13 +12419,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                     public var description: String?
                     /// End date of the mandate or subscription.
                     public var endDate: Date?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case amount
-                        case amountType
-                        case description
-                        case endDate
-                    }
 
                     public init(
                         amount: Int? = nil,
@@ -15061,16 +12454,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 public var transactionPurpose: TransactionPurpose?
                 /// Bank account verification method.
                 public var verificationMethod: VerificationMethod?
-
-                private enum CodingKeys: String, CodingKey {
-                    case financialConnections
-                    case mandateOptions
-                    case networks
-                    case setupFutureUsage
-                    case targetDate
-                    case transactionPurpose
-                    case verificationMethod
-                }
 
                 public init(
                     financialConnections: FinancialConnections? = nil,
@@ -15122,13 +12505,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                     /// For webview integrations only.
                     public var returnUrl: String?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case filters
-                        case permissions
-                        case prefetch
-                        case returnUrl
-                    }
-
                     public init(
                         filters: Filters? = nil,
                         permissions: [Permissions]? = nil,
@@ -15159,10 +12535,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                         /// The account subcategories to use to filter for selectable accounts.
                         public var accountSubcategories: [AccountSubcategories]?
 
-                        private enum CodingKeys: String, CodingKey {
-                            case accountSubcategories
-                        }
-
                         public init(
                             accountSubcategories: [AccountSubcategories]? = nil
                         ) {
@@ -15181,10 +12553,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                     /// The method used to collect offline mandate customer acceptance.
                     public var collectionMethod: CollectionMethod?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case collectionMethod
-                    }
-
                     public init(
                         collectionMethod: CollectionMethod? = nil
                     ) {
@@ -15201,10 +12569,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 public struct Networks: Codable, Hashable, Sendable {
                     /// Triggers validations to run across the selected networks
                     public var requested: [Requested]?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case requested
-                    }
 
                     public init(
                         requested: [Requested]? = nil
@@ -15227,12 +12591,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case appId
-                    case client
-                    case setupFutureUsage
-                }
-
                 public init(
                     appId: String? = nil,
                     client: Client? = nil,
@@ -15254,10 +12612,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case setupFutureUsage
-                }
-
                 public init(
                     setupFutureUsage: String? = nil
                 ) {
@@ -15277,14 +12631,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
             public var phone: String?
             /// The tracking number for a physical product, obtained from the delivery service.
             public var trackingNumber: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case address
-                case carrier
-                case name
-                case phone
-                case trackingNumber
-            }
 
             public init(
                 address: Address,
@@ -15315,15 +12661,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 /// State, county, province, or region (ISO 3166-2).
                 public var state: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case city
-                    case country
-                    case line1
-                    case line2
-                    case postalCode
-                    case state
-                }
-
                 public init(
                     city: String? = nil,
                     country: String? = nil,
@@ -15353,13 +12690,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
             /// The data with which to populate the destination payment.
             public var paymentData: PaymentData?
 
-            private enum CodingKeys: String, CodingKey {
-                case amount
-                case description
-                case metadata
-                case paymentData
-            }
-
             public init(
                 amount: Int? = nil,
                 description: String? = nil,
@@ -15378,11 +12708,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 public var description: String?
                 /// Set of key-value pairs that you can attach to an object.
                 public var metadata: Stripe.Clearable<[String: String]>?
-
-                private enum CodingKeys: String, CodingKey {
-                    case description
-                    case metadata
-                }
 
                 public init(
                     description: String? = nil,
@@ -15407,12 +12732,6 @@ extension Stripe.PaymentIntents.PaymentIntent.VerifyMicrodeposits {
         public var descriptorCode: String?
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case amounts
-            case descriptorCode
-            case expand
-        }
 
         public init(
             amounts: [Int]? = nil,

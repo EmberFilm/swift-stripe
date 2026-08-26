@@ -28,16 +28,6 @@ extension Stripe.Billing {
         /// Start timestamp for this event summary (inclusive).
         public var startTime: Date?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case aggregatedValue
-            case endTime
-            case livemode
-            case meter
-            case startTime
-        }
-
         public init(
             id: ID,
             object: String,

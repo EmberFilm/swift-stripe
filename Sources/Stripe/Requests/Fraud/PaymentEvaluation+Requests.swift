@@ -30,14 +30,6 @@ extension Stripe.Fraud.PaymentEvaluation.Create {
         /// Details about the payment.
         public var paymentDetails: PaymentDetails
 
-        private enum CodingKeys: String, CodingKey {
-            case clientDeviceMetadataDetails
-            case customerDetails
-            case expand
-            case metadata
-            case paymentDetails
-        }
-
         public init(
             clientDeviceMetadataDetails: ClientDeviceMetadataDetails? = nil,
             customerDetails: CustomerDetails,
@@ -56,10 +48,6 @@ extension Stripe.Fraud.PaymentEvaluation.Create {
         public struct ClientDeviceMetadataDetails: Codable, Hashable, Sendable {
             /// ID for the Radar Session to associate with the payment evaluation.
             public var radarSession: String
-
-            private enum CodingKeys: String, CodingKey {
-                case radarSession
-            }
 
             public init(
                 radarSession: String
@@ -80,14 +68,6 @@ extension Stripe.Fraud.PaymentEvaluation.Create {
             public var name: String?
             /// The customer's phone number.
             public var phone: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case customer
-                case customerAccount
-                case email
-                case name
-                case phone
-            }
 
             public init(
                 customer: String? = nil,
@@ -121,16 +101,6 @@ extension Stripe.Fraud.PaymentEvaluation.Create {
             /// Payment statement descriptor.
             public var statementDescriptor: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case amount
-                case currency
-                case description
-                case moneyMovementDetails
-                case paymentMethodDetails
-                case shippingDetails
-                case statementDescriptor
-            }
-
             public init(
                 amount: Int,
                 currency: Stripe.Currency,
@@ -156,11 +126,6 @@ extension Stripe.Fraud.PaymentEvaluation.Create {
                 /// Describes the type of money movement.
                 public var moneyMovementType: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case card
-                    case moneyMovementType
-                }
-
                 public init(
                     card: Card? = nil,
                     moneyMovementType: String
@@ -175,11 +140,6 @@ extension Stripe.Fraud.PaymentEvaluation.Create {
                     public var customerPresence: CustomerPresence?
                     /// Describes the type of payment.
                     public var paymentType: PaymentType?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case customerPresence
-                        case paymentType
-                    }
 
                     public init(
                         customerPresence: CustomerPresence? = nil,
@@ -210,11 +170,6 @@ extension Stripe.Fraud.PaymentEvaluation.Create {
                 /// ID of the payment method used in this payment evaluation.
                 public var paymentMethod: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case billingDetails
-                    case paymentMethod
-                }
-
                 public init(
                     billingDetails: BillingDetails? = nil,
                     paymentMethod: String
@@ -233,13 +188,6 @@ extension Stripe.Fraud.PaymentEvaluation.Create {
                     public var name: String?
                     /// Billing phone number (including extension).
                     public var phone: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case address
-                        case email
-                        case name
-                        case phone
-                    }
 
                     public init(
                         address: Address? = nil,
@@ -267,15 +215,6 @@ extension Stripe.Fraud.PaymentEvaluation.Create {
                         public var postalCode: String?
                         /// State, county, province, or region (ISO 3166-2).
                         public var state: String?
-
-                        private enum CodingKeys: String, CodingKey {
-                            case city
-                            case country
-                            case line1
-                            case line2
-                            case postalCode
-                            case state
-                        }
 
                         public init(
                             city: String? = nil,
@@ -305,12 +244,6 @@ extension Stripe.Fraud.PaymentEvaluation.Create {
                 /// Shipping phone number.
                 public var phone: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case address
-                    case name
-                    case phone
-                }
-
                 public init(
                     address: Address? = nil,
                     name: String? = nil,
@@ -335,15 +268,6 @@ extension Stripe.Fraud.PaymentEvaluation.Create {
                     public var postalCode: String?
                     /// State, county, province, or region (ISO 3166-2).
                     public var state: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case city
-                        case country
-                        case line1
-                        case line2
-                        case postalCode
-                        case state
-                    }
 
                     public init(
                         city: String? = nil,

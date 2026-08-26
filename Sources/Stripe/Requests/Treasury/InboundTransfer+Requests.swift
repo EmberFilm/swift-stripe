@@ -28,10 +28,6 @@ extension Stripe.Treasury.InboundTransfer.Cancel {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
-
         public init(
             expand: [String]? = nil
         ) {
@@ -61,17 +57,6 @@ extension Stripe.Treasury.InboundTransfer.Create {
         public var originPaymentMethod: String
         /// The complete description that appears on your customers' statements.
         public var statementDescriptor: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case amount
-            case currency
-            case description
-            case expand
-            case financialAccount
-            case metadata
-            case originPaymentMethod
-            case statementDescriptor
-        }
 
         public init(
             amount: Int,
@@ -105,11 +90,6 @@ extension Stripe.Treasury.InboundTransfer.Fail {
         /// Details about a failed InboundTransfer.
         public var failureDetails: FailureDetails?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case failureDetails
-        }
-
         public init(
             expand: [String]? = nil,
             failureDetails: FailureDetails? = nil
@@ -122,10 +102,6 @@ extension Stripe.Treasury.InboundTransfer.Fail {
         public struct FailureDetails: Codable, Hashable, Sendable {
             /// Reason for the failure.
             public var code: Code?
-
-            private enum CodingKeys: String, CodingKey {
-                case code
-            }
 
             public init(
                 code: Code? = nil
@@ -170,15 +146,6 @@ extension Stripe.Treasury.InboundTransfer.List {
         /// Only return InboundTransfers that have the given status: `processing`, `succeeded`, `failed` or `canceled`.
         public var status: Status?
 
-        private enum CodingKeys: String, CodingKey {
-            case endingBefore
-            case expand
-            case financialAccount
-            case limit
-            case startingAfter
-            case status
-        }
-
         public init(
             endingBefore: String? = nil,
             expand: [String]? = nil,
@@ -212,10 +179,6 @@ extension Stripe.Treasury.InboundTransfer.Retrieve {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
-
         public init(
             expand: [String]? = nil
         ) {
@@ -232,10 +195,6 @@ extension Stripe.Treasury.InboundTransfer.ReturnInboundTransfer {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
-
         public init(
             expand: [String]? = nil
         ) {
@@ -251,10 +210,6 @@ extension Stripe.Treasury.InboundTransfer.Succeed {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil

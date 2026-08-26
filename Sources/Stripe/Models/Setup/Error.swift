@@ -47,19 +47,6 @@ extension Setup {
         /// The type of error returned
         public let type: String
 
-        enum CodingKeys: String, CodingKey {
-            case adviceCode
-            case code
-            case declineCode
-            case docUrl
-            case message
-            case networkAdviceCode
-            case networkDeclineCode
-            case param
-            case paymentMethod
-            case paymentMethodType
-            case type
-        }
     }
 }
 

@@ -31,14 +31,6 @@ extension Stripe.EphemeralKey.Create {
         /// The ID of the Identity VerificationSession you'd like to access using the resulting ephemeral key
         public var verificationSession: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case customer
-            case expand
-            case issuingCard
-            case nonce
-            case verificationSession
-        }
-
         public init(
             customer: String? = nil,
             expand: [String]? = nil,
@@ -62,10 +54,6 @@ extension Stripe.EphemeralKey.Delete {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil

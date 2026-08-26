@@ -22,13 +22,6 @@ extension Stripe.Entitlements {
         /// If the object exists in live mode, the value is `true`.
         public var livemode: Bool?
 
-        private enum CodingKeys: String, CodingKey {
-            case object
-            case customer
-            case entitlements
-            case livemode
-        }
-
         public init(
             object: String,
             customer: String? = nil,
@@ -50,13 +43,6 @@ extension Stripe.Entitlements {
             public var hasMore: Bool?
             /// The URL where this list can be accessed.
             public var url: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case object
-                case data
-                case hasMore
-                case url
-            }
 
             public init(
                 object: String,

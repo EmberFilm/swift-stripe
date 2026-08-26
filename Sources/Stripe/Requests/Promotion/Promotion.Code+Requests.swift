@@ -43,19 +43,6 @@ extension Promotion.Code.Create {
         /// Settings that restrict the redemption of the promotion code.
         public var restrictions: Restrictions?
 
-        private enum CodingKeys: String, CodingKey {
-            case active
-            case code
-            case customer
-            case customerAccount
-            case expand
-            case expiresAt
-            case maxRedemptions
-            case metadata
-            case promotion
-            case restrictions
-        }
-
         public init(
             active: Bool? = nil,
             code: String? = nil,
@@ -87,11 +74,6 @@ extension Promotion.Code.Create {
             /// Specifies the type of promotion.
             public var `type`: String
 
-            private enum CodingKeys: String, CodingKey {
-                case coupon
-                case `type`
-            }
-
             public init(
                 coupon: String? = nil,
                 `type`: String
@@ -112,13 +94,6 @@ extension Promotion.Code.Create {
             /// Three-letter ISO code for minimum_amount
             public var minimumAmountCurrency: Stripe.Currency?
 
-            private enum CodingKeys: String, CodingKey {
-                case currencyOptions
-                case firstTimeTransaction
-                case minimumAmount
-                case minimumAmountCurrency
-            }
-
             public init(
                 currencyOptions: [String: CurrencyOptions]? = nil,
                 firstTimeTransaction: Bool? = nil,
@@ -134,10 +109,6 @@ extension Promotion.Code.Create {
             public struct CurrencyOptions: Codable, Hashable, Sendable {
                 /// Minimum amount required to redeem this Promotion Code into a Coupon (e.g., a purchase must be $100 or more to work).
                 public var minimumAmount: Int?
-
-                private enum CodingKeys: String, CodingKey {
-                    case minimumAmount
-                }
 
                 public init(
                     minimumAmount: Int? = nil
@@ -175,19 +146,6 @@ extension Promotion.Code.List {
         /// A cursor for use in pagination.
         public var startingAfter: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case active
-            case code
-            case coupon
-            case created
-            case customer
-            case customerAccount
-            case endingBefore
-            case expand
-            case limit
-            case startingAfter
-        }
-
         public init(
             active: Bool? = nil,
             code: String? = nil,
@@ -222,10 +180,6 @@ extension Promotion.Code.Retrieve {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
-
         public init(
             expand: [String]? = nil
         ) {
@@ -248,13 +202,6 @@ extension Promotion.Code.Update {
         /// Settings that restrict the redemption of the promotion code.
         public var restrictions: Restrictions?
 
-        private enum CodingKeys: String, CodingKey {
-            case active
-            case expand
-            case metadata
-            case restrictions
-        }
-
         public init(
             active: Bool? = nil,
             expand: [String]? = nil,
@@ -272,10 +219,6 @@ extension Promotion.Code.Update {
             /// Promotion codes defined in each available currency option.
             public var currencyOptions: [String: CurrencyOptions]?
 
-            private enum CodingKeys: String, CodingKey {
-                case currencyOptions
-            }
-
             public init(
                 currencyOptions: [String: CurrencyOptions]? = nil
             ) {
@@ -285,10 +228,6 @@ extension Promotion.Code.Update {
             public struct CurrencyOptions: Codable, Hashable, Sendable {
                 /// Minimum amount required to redeem this Promotion Code into a Coupon (e.g., a purchase must be $100 or more to work).
                 public var minimumAmount: Int?
-
-                private enum CodingKeys: String, CodingKey {
-                    case minimumAmount
-                }
 
                 public init(
                     minimumAmount: Int? = nil

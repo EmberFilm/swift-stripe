@@ -36,22 +36,6 @@ extension Stripe.Billing {
         public var updated: Date?
         public var valueSettings: ValueSettings?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case created
-            case customerMapping
-            case defaultAggregation
-            case displayName
-            case eventName
-            case eventTimeWindow
-            case livemode
-            case status
-            case statusTransitions
-            case updated
-            case valueSettings
-        }
-
         public init(
             id: ID,
             object: String,
@@ -100,11 +84,6 @@ extension Stripe.Billing {
             /// The method for mapping a meter event to a customer.
             public var `type`: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case eventPayloadKey
-                case `type`
-            }
-
             public init(
                 eventPayloadKey: String? = nil,
                 `type`: String? = nil
@@ -117,10 +96,6 @@ extension Stripe.Billing {
         public struct DefaultAggregation: Codable, Hashable, Sendable {
             /// Specifies how events are aggregated.
             public var formula: Formula?
-
-            private enum CodingKeys: String, CodingKey {
-                case formula
-            }
 
             public init(
                 formula: Formula? = nil
@@ -140,10 +115,6 @@ extension Stripe.Billing {
             /// The time the meter was deactivated, if any.
             public var deactivatedAt: Date?
 
-            private enum CodingKeys: String, CodingKey {
-                case deactivatedAt
-            }
-
             public init(
                 deactivatedAt: Date? = nil
             ) {
@@ -154,10 +125,6 @@ extension Stripe.Billing {
         public struct ValueSettings: Codable, Hashable, Sendable {
             /// The key in the meter event payload to use as the value for this meter.
             public var eventPayloadKey: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case eventPayloadKey
-            }
 
             public init(
                 eventPayloadKey: String? = nil

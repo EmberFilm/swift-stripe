@@ -46,27 +46,6 @@ extension Stripe.Treasury {
         /// The currencies the FinancialAccount can hold a balance in.
         public var supportedCurrencies: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case activeFeatures
-            case balance
-            case country
-            case created
-            case features
-            case financialAddresses
-            case isDefault
-            case livemode
-            case metadata
-            case nickname
-            case pendingFeatures
-            case platformRestrictions
-            case restrictedFeatures
-            case status
-            case statusDetails
-            case supportedCurrencies
-        }
-
         public init(
             id: ID,
             object: String,
@@ -164,12 +143,6 @@ extension Stripe.Treasury {
             /// Funds in the account, but not spendable because they are being held for pending outbound flows.
             public var outboundPending: [String: Int]?
 
-            private enum CodingKeys: String, CodingKey {
-                case cash
-                case inboundPending
-                case outboundPending
-            }
-
             public init(
                 cash: [String: Int]? = nil,
                 inboundPending: [String: Int]? = nil,
@@ -188,12 +161,6 @@ extension Stripe.Treasury {
             public var supportedNetworks: [SupportedNetworks]?
             /// The type of financial address
             public var `type`: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case aba
-                case supportedNetworks
-                case `type`
-            }
 
             public init(
                 aba: Aba? = nil,
@@ -223,14 +190,6 @@ extension Stripe.Treasury {
                 /// Routing number for the account.
                 public var routingNumber: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case accountHolderName
-                    case accountNumber
-                    case accountNumberLast4
-                    case bankName
-                    case routingNumber
-                }
-
                 public init(
                     accountHolderName: String? = nil,
                     accountNumber: String? = nil,
@@ -253,11 +212,6 @@ extension Stripe.Treasury {
             public var inboundFlows: InboundFlows?
             /// Restricts all outbound money movement.
             public var outboundFlows: OutboundFlows?
-
-            private enum CodingKeys: String, CodingKey {
-                case inboundFlows
-                case outboundFlows
-            }
 
             public init(
                 inboundFlows: InboundFlows? = nil,
@@ -284,10 +238,6 @@ extension Stripe.Treasury {
             /// Details related to the closure of this FinancialAccount
             public var closed: Closed?
 
-            private enum CodingKeys: String, CodingKey {
-                case closed
-            }
-
             public init(
                 closed: Closed? = nil
             ) {
@@ -297,10 +247,6 @@ extension Stripe.Treasury {
             public struct Closed: Codable, Hashable, Sendable {
                 /// The array that contains reasons for a FinancialAccount closure.
                 public var reasons: [Reasons]?
-
-                private enum CodingKeys: String, CodingKey {
-                    case reasons
-                }
 
                 public init(
                     reasons: [Reasons]? = nil

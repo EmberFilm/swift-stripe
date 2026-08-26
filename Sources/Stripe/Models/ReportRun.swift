@@ -32,19 +32,6 @@ public struct ReportRun: Codable, Hashable, Sendable, Identifiable {
     /// Timestamp at which this run successfully finished (populated when `status=succeeded`).
     public var succeededAt: Date?
 
-    private enum CodingKeys: String, CodingKey {
-        case id
-        case object
-        case created
-        case error
-        case livemode
-        case parameters
-        case reportType
-        case result
-        case status
-        case succeededAt
-    }
-
     public init(
         id: ID,
         object: String,
@@ -86,17 +73,6 @@ public struct ReportRun: Codable, Hashable, Sendable, Identifiable {
         public var reportingCategory: String?
         /// Defaults to `Etc/UTC`.
         public var timezone: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case columns
-            case connectedAccount
-            case currency
-            case intervalEnd
-            case intervalStart
-            case payout
-            case reportingCategory
-            case timezone
-        }
 
         public init(
             columns: [String]? = nil,

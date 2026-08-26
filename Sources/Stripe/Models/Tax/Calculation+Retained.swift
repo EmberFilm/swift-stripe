@@ -29,14 +29,6 @@ extension Stripe.Tax.Calculation {
         /// The customer's tax IDs.
         public var taxIds: [TaxID]?
 
-        private enum CodingKeys: String, CodingKey {
-            case address
-            case addressSource
-            case ipAddress
-            case taxability
-            case taxIds
-        }
-
         public init(
             address: Address? = nil,
             addressSource: AddressSource? = nil,
@@ -76,19 +68,6 @@ extension Stripe.Tax.Calculation {
         /// The tax code for the line item.
         public var taxCode: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case amount
-            case amountTax
-            case livemode
-            case product
-            case quantity
-            case reference
-            case taxBehavior
-            case taxCode
-        }
-
         public init(
             id: ID,
             object: String,
@@ -119,11 +98,6 @@ extension Stripe.Tax.Calculation {
         public var percentageDecimal: String
         /// The tax type, such as vat or sales_tax.
         public var taxType: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case percentageDecimal
-            case taxType
-        }
 
         public init(
             percentageDecimal: String,

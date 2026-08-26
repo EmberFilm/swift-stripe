@@ -39,22 +39,6 @@ extension Stripe.Reserve {
         @Expandable<Stripe.Shared.ReservePlan, String> public var reservePlan: String?
         public var sourceTransaction: SourceTransaction?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case amount
-            case created
-            case createdBy
-            case currency
-            case livemode
-            case metadata
-            case reason
-            case releasedAt
-            case reserveHold
-            case reservePlan
-            case sourceTransaction
-        }
-
         public init(
             id: ID,
             object: String,
@@ -133,25 +117,6 @@ extension Stripe.Reserve {
             /// Which source balance type this ReserveHold reserves funds from.
             public var sourceType: SourceType?
 
-            private enum CodingKeys: String, CodingKey {
-                case id
-                case object
-                case amount
-                case amountReleasable
-                case created
-                case createdBy
-                case currency
-                case isReleasable
-                case livemode
-                case metadata
-                case reason
-                case releaseDetails
-                case releaseSchedule
-                case reservePlan
-                case sourceCharge
-                case sourceType
-            }
-
             public init(
                 id: ID,
                 object: String,
@@ -215,12 +180,6 @@ extension Stripe.Reserve {
             @Expandable<Stripe.Refunds.Refund, String> public var refund: String?
             /// The type of source transaction.
             public var `type`: Type?
-
-            private enum CodingKeys: String, CodingKey {
-                case dispute
-                case refund
-                case `type`
-            }
 
             public init(
                 dispute: String? = nil,

@@ -56,30 +56,6 @@ extension Stripe.Products {
         /// The unit amount in cents (or local equivalent) to be charged, represented as a decimal string with at most 12 decimal …
         public var unitAmountDecimal: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case active
-            case billingScheme
-            case created
-            case currency
-            case currencyOptions
-            case customUnitAmount
-            case livemode
-            case lookupKey
-            case metadata
-            case nickname
-            case product
-            case recurring
-            case taxBehavior
-            case tiers
-            case tiersMode
-            case transformQuantity
-            case `type`
-            case unitAmount
-            case unitAmountDecimal
-        }
-
         public init(
             id: ID,
             object: String,
@@ -163,14 +139,6 @@ extension Stripe.Products {
             /// The unit amount in cents (or local equivalent) to be charged, represented as a decimal string with at most 12 decimal …
             public var unitAmountDecimal: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case customUnitAmount
-                case taxBehavior
-                case tiers
-                case unitAmount
-                case unitAmountDecimal
-            }
-
             public init(
                 customUnitAmount: CustomUnitAmount? = nil,
                 taxBehavior: TaxBehavior? = nil,
@@ -200,12 +168,6 @@ extension Stripe.Products {
                 /// The starting unit amount which can be updated by the customer.
                 public var preset: Int?
 
-                private enum CodingKeys: String, CodingKey {
-                    case maximum
-                    case minimum
-                    case preset
-                }
-
                 public init(
                     maximum: Int? = nil,
                     minimum: Int? = nil,
@@ -228,14 +190,6 @@ extension Stripe.Products {
                 public var unitAmountDecimal: String?
                 /// Up to and including to this quantity will be contained in the tier.
                 public var upTo: Int?
-
-                private enum CodingKeys: String, CodingKey {
-                    case flatAmount
-                    case flatAmountDecimal
-                    case unitAmount
-                    case unitAmountDecimal
-                    case upTo
-                }
 
                 public init(
                     flatAmount: Int? = nil,
@@ -261,12 +215,6 @@ extension Stripe.Products {
             /// The starting unit amount which can be updated by the customer.
             public var preset: Int?
 
-            private enum CodingKeys: String, CodingKey {
-                case maximum
-                case minimum
-                case preset
-            }
-
             public init(
                 maximum: Int? = nil,
                 minimum: Int? = nil,
@@ -289,14 +237,6 @@ extension Stripe.Products {
             public var trialPeriodDays: Int?
             /// Configures how the quantity per period should be determined.
             public var usageType: UsageType?
-
-            private enum CodingKeys: String, CodingKey {
-                case interval
-                case intervalCount
-                case meter
-                case trialPeriodDays
-                case usageType
-            }
 
             public init(
                 interval: Interval? = nil,
@@ -339,14 +279,6 @@ extension Stripe.Products {
             /// Up to and including to this quantity will be contained in the tier.
             public var upTo: Int?
 
-            private enum CodingKeys: String, CodingKey {
-                case flatAmount
-                case flatAmountDecimal
-                case unitAmount
-                case unitAmountDecimal
-                case upTo
-            }
-
             public init(
                 flatAmount: Int? = nil,
                 flatAmountDecimal: String? = nil,
@@ -367,11 +299,6 @@ extension Stripe.Products {
             public var divideBy: Int?
             /// After division, either round the result `up` or `down`.
             public var round: Round?
-
-            private enum CodingKeys: String, CodingKey {
-                case divideBy
-                case round
-            }
 
             public init(
                 divideBy: Int? = nil,

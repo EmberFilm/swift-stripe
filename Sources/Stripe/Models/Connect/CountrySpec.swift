@@ -29,17 +29,6 @@ extension Stripe.Connect {
         public var supportedTransferCountries: [String]?
         public var verificationFields: VerificationFields?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case defaultCurrency
-            case supportedBankAccountCurrencies
-            case supportedPaymentCurrencies
-            case supportedPaymentMethods
-            case supportedTransferCountries
-            case verificationFields
-        }
-
         public init(
             id: ID,
             object: String,
@@ -64,11 +53,6 @@ extension Stripe.Connect {
             public var company: Company?
             public var individual: Individual?
 
-            private enum CodingKeys: String, CodingKey {
-                case company
-                case individual
-            }
-
             public init(
                 company: Company? = nil,
                 individual: Individual? = nil
@@ -82,11 +66,6 @@ extension Stripe.Connect {
                 public var additional: [String]?
                 /// Fields which every account must eventually provide.
                 public var minimum: [String]?
-
-                private enum CodingKeys: String, CodingKey {
-                    case additional
-                    case minimum
-                }
 
                 public init(
                     additional: [String]? = nil,
@@ -102,11 +81,6 @@ extension Stripe.Connect {
                 public var additional: [String]?
                 /// Fields which every account must eventually provide.
                 public var minimum: [String]?
-
-                private enum CodingKeys: String, CodingKey {
-                    case additional
-                    case minimum
-                }
 
                 public init(
                     additional: [String]? = nil,

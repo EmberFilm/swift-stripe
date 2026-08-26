@@ -22,13 +22,6 @@ extension Stripe.Connect {
         /// The URL for the account link.
         public var url: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case object
-            case created
-            case expiresAt
-            case url
-        }
-
         public init(
             object: String,
             created: Date? = nil,

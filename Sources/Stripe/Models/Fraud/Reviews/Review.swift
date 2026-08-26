@@ -42,23 +42,6 @@ extension Stripe.Fraud.Reviews {
         /// Information related to the browsing session of the user who initiated the payment.
         public var session: Session?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case billingZip
-            case charge
-            case closedReason
-            case created
-            case ipAddress
-            case ipAddressLocation
-            case livemode
-            case open
-            case openedReason
-            case paymentIntent
-            case reason
-            case session
-        }
-
         public init(
             id: ID,
             object: String,
@@ -121,14 +104,6 @@ extension Stripe.Fraud.Reviews {
             /// The state/county/province/region where the payment originated.
             public var region: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case city
-                case country
-                case latitude
-                case longitude
-                case region
-            }
-
             public init(
                 city: String? = nil,
                 country: String? = nil,
@@ -153,13 +128,6 @@ extension Stripe.Fraud.Reviews {
             public var platform: String?
             /// The version for the browser session (e.g., `61.0.3163.100`).
             public var version: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case browser
-                case device
-                case platform
-                case version
-            }
 
             public init(
                 browser: String? = nil,

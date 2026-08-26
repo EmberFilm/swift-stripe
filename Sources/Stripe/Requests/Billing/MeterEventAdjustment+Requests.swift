@@ -28,13 +28,6 @@ extension Stripe.Billing.MeterEventAdjustment.Create {
         /// Specifies whether to cancel a single event or a range of events for a time period.
         public var `type`: String
 
-        private enum CodingKeys: String, CodingKey {
-            case cancel
-            case eventName
-            case expand
-            case `type`
-        }
-
         public init(
             cancel: Cancel? = nil,
             eventName: String,
@@ -51,10 +44,6 @@ extension Stripe.Billing.MeterEventAdjustment.Create {
         public struct Cancel: Codable, Hashable, Sendable {
             /// Unique identifier for the event.
             public var identifier: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case identifier
-            }
 
             public init(
                 identifier: String? = nil

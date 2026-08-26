@@ -98,10 +98,6 @@ public struct SourceMandateNotification: Codable, Hashable, Sendable, Identifiab
         /// The statement descriptor associate with the debit.
         public var statementDescriptor: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case statementDescriptor
-        }
-
         public init(
             statementDescriptor: String? = nil
         ) {
@@ -112,10 +108,6 @@ public struct SourceMandateNotification: Codable, Hashable, Sendable, Identifiab
     public struct BacsDebit: Codable, Hashable, Sendable {
         /// Last 4 digits of the account number associated with the debit.
         public var last4: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case last4
-        }
 
         public init(
             last4: String? = nil
@@ -131,12 +123,6 @@ public struct SourceMandateNotification: Codable, Hashable, Sendable, Identifiab
         public var last4: String?
         /// Mandate reference associated with the debit.
         public var mandateReference: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case creditorIdentifier
-            case last4
-            case mandateReference
-        }
 
         public init(
             creditorIdentifier: String? = nil,

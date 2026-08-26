@@ -23,10 +23,6 @@ extension Stripe.BalanceSettings.Retrieve {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
-
         public init(
             expand: [String]? = nil
         ) {
@@ -45,11 +41,6 @@ extension Stripe.BalanceSettings.Update {
         /// Settings that apply to the Payments Balance.
         public var payments: Payments?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case payments
-        }
-
         public init(
             expand: [String]? = nil,
             payments: Payments? = nil
@@ -66,12 +57,6 @@ extension Stripe.BalanceSettings.Update {
             public var payouts: Payouts?
             /// Settings related to the account's balance settlement timing.
             public var settlementTiming: SettlementTiming?
-
-            private enum CodingKeys: String, CodingKey {
-                case debitNegativeBalances
-                case payouts
-                case settlementTiming
-            }
 
             public init(
                 debitNegativeBalances: Bool? = nil,
@@ -94,13 +79,6 @@ extension Stripe.BalanceSettings.Update {
                 /// The text that appears on the bank account statement for payouts.
                 public var statementDescriptor: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case automaticTransferRulesByCurrency
-                    case minimumBalanceByCurrency
-                    case schedule
-                    case statementDescriptor
-                }
-
                 public init(
                     automaticTransferRulesByCurrency: Stripe.Clearable<[String: Stripe.Clearable<[AutomaticTransferRulesByCurrency]>]>? = nil,
                     minimumBalanceByCurrency: Stripe.Clearable<[String: Stripe.Clearable<Int>]>? = nil,
@@ -120,12 +98,6 @@ extension Stripe.BalanceSettings.Update {
                     public var transferUpToAmount: Int?
                     /// The type of automatic transfer rule.
                     public var `type`: Type
-
-                    private enum CodingKeys: String, CodingKey {
-                        case payoutMethod
-                        case transferUpToAmount
-                        case `type`
-                    }
 
                     public init(
                         payoutMethod: String,
@@ -151,12 +123,6 @@ extension Stripe.BalanceSettings.Update {
                     public var monthlyPayoutDays: [Int]?
                     /// The days of the week when available funds are paid out, specified as an array, e.g., [`monday`, `tuesday`].
                     public var weeklyPayoutDays: [WeeklyPayoutDays]?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case interval
-                        case monthlyPayoutDays
-                        case weeklyPayoutDays
-                    }
 
                     public init(
                         interval: Interval? = nil,
@@ -192,11 +158,6 @@ extension Stripe.BalanceSettings.Update {
                 /// Customized start of day configuration for automatic payouts to group and send payments in local timezones with a custo…
                 public var startOfDay: Stripe.Clearable<StartOfDay>?
 
-                private enum CodingKeys: String, CodingKey {
-                    case delayDaysOverride
-                    case startOfDay
-                }
-
                 public init(
                     delayDaysOverride: Stripe.Clearable<Int>? = nil,
                     startOfDay: Stripe.Clearable<StartOfDay>? = nil
@@ -212,12 +173,6 @@ extension Stripe.BalanceSettings.Update {
                     public var minutes: Int?
                     /// Timezone for the customized start of day.
                     public var timezone: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case hour
-                        case minutes
-                        case timezone
-                    }
 
                     public init(
                         hour: Int? = nil,

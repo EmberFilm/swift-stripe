@@ -37,16 +37,6 @@ extension Stripe.Billing.Customer.Portal.Configuration.Create {
         /// The name of the configuration.
         public var name: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case businessProfile
-            case defaultReturnUrl
-            case expand
-            case features
-            case loginPage
-            case metadata
-            case name
-        }
-
         public init(
             businessProfile: BusinessProfile? = nil,
             defaultReturnUrl: String? = nil,
@@ -74,12 +64,6 @@ extension Stripe.Billing.Customer.Portal.Configuration.Create {
             /// A link to the business’s publicly available terms of service.
             public var termsOfServiceUrl: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case headline
-                case privacyPolicyUrl
-                case termsOfServiceUrl
-            }
-
             public init(
                 headline: String? = nil,
                 privacyPolicyUrl: String? = nil,
@@ -104,14 +88,6 @@ extension Stripe.Billing.Customer.Portal.Configuration.Create {
             /// Information about updating subscriptions in the portal.
             public var subscriptionUpdate: SubscriptionUpdate?
 
-            private enum CodingKeys: String, CodingKey {
-                case customerUpdate
-                case invoiceHistory
-                case paymentMethodUpdate
-                case subscriptionCancel
-                case subscriptionUpdate
-            }
-
             public init(
                 customerUpdate: CustomerUpdate? = nil,
                 invoiceHistory: InvoiceHistory? = nil,
@@ -132,11 +108,6 @@ extension Stripe.Billing.Customer.Portal.Configuration.Create {
                 public var allowedUpdates: Stripe.Clearable<[AllowedUpdates]>?
                 /// Whether the feature is enabled.
                 public var enabled: Bool
-
-                private enum CodingKeys: String, CodingKey {
-                    case allowedUpdates
-                    case enabled
-                }
 
                 public init(
                     allowedUpdates: Stripe.Clearable<[AllowedUpdates]>? = nil,
@@ -161,10 +132,6 @@ extension Stripe.Billing.Customer.Portal.Configuration.Create {
                 /// Whether the feature is enabled.
                 public var enabled: Bool
 
-                private enum CodingKeys: String, CodingKey {
-                    case enabled
-                }
-
                 public init(
                     enabled: Bool
                 ) {
@@ -178,11 +145,6 @@ extension Stripe.Billing.Customer.Portal.Configuration.Create {
                 public var enabled: Bool
                 /// The Payment Method Configuration to use for this portal session.
                 public var paymentMethodConfiguration: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case enabled
-                    case paymentMethodConfiguration
-                }
 
                 public init(
                     enabled: Bool,
@@ -203,13 +165,6 @@ extension Stripe.Billing.Customer.Portal.Configuration.Create {
                 public var mode: Mode?
                 /// Whether to create prorations when canceling subscriptions.
                 public var prorationBehavior: ProrationBehavior?
-
-                private enum CodingKeys: String, CodingKey {
-                    case cancellationReason
-                    case enabled
-                    case mode
-                    case prorationBehavior
-                }
 
                 public init(
                     cancellationReason: CancellationReason? = nil,
@@ -240,11 +195,6 @@ extension Stripe.Billing.Customer.Portal.Configuration.Create {
                     public var enabled: Bool
                     /// Which cancellation reasons will be given as options to the customer.
                     public var options: Stripe.Clearable<[Options]>
-
-                    private enum CodingKeys: String, CodingKey {
-                        case enabled
-                        case options
-                    }
 
                     public init(
                         enabled: Bool,
@@ -284,16 +234,6 @@ extension Stripe.Billing.Customer.Portal.Configuration.Create {
                 /// The behavior when updating a subscription that is trialing.
                 public var trialUpdateBehavior: TrialUpdateBehavior?
 
-                private enum CodingKeys: String, CodingKey {
-                    case billingCycleAnchor
-                    case defaultAllowedUpdates
-                    case enabled
-                    case products
-                    case prorationBehavior
-                    case scheduleAtPeriodEnd
-                    case trialUpdateBehavior
-                }
-
                 public init(
                     billingCycleAnchor: BillingCycleAnchor? = nil,
                     defaultAllowedUpdates: Stripe.Clearable<[DefaultAllowedUpdates]>? = nil,
@@ -342,12 +282,6 @@ extension Stripe.Billing.Customer.Portal.Configuration.Create {
                     /// The product id.
                     public var product: String
 
-                    private enum CodingKeys: String, CodingKey {
-                        case adjustableQuantity
-                        case prices
-                        case product
-                    }
-
                     public init(
                         adjustableQuantity: AdjustableQuantity? = nil,
                         prices: [String],
@@ -367,12 +301,6 @@ extension Stripe.Billing.Customer.Portal.Configuration.Create {
                         /// The minimum quantity that can be set for the product.
                         public var minimum: Int?
 
-                        private enum CodingKeys: String, CodingKey {
-                            case enabled
-                            case maximum
-                            case minimum
-                        }
-
                         public init(
                             enabled: Bool,
                             maximum: Int? = nil,
@@ -390,10 +318,6 @@ extension Stripe.Billing.Customer.Portal.Configuration.Create {
                     /// List of conditions.
                     public var conditions: [Conditions]?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case conditions
-                    }
-
                     public init(
                         conditions: [Conditions]? = nil
                     ) {
@@ -403,10 +327,6 @@ extension Stripe.Billing.Customer.Portal.Configuration.Create {
                     public struct Conditions: Codable, Hashable, Sendable {
                         /// The type of condition.
                         public var `type`: Type
-
-                        private enum CodingKeys: String, CodingKey {
-                            case `type`
-                        }
 
                         public init(
                             `type`: Type
@@ -427,10 +347,6 @@ extension Stripe.Billing.Customer.Portal.Configuration.Create {
         public struct LoginPage: Codable, Hashable, Sendable {
             /// Set to `true` to generate a shareable URL `login_page.url` that will take your customers to a hosted login page for th…
             public var enabled: Bool
-
-            private enum CodingKeys: String, CodingKey {
-                case enabled
-            }
 
             public init(
                 enabled: Bool
@@ -459,15 +375,6 @@ extension Stripe.Billing.Customer.Portal.Configuration.List {
         /// A cursor for use in pagination.
         public var startingAfter: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case active
-            case endingBefore
-            case expand
-            case isDefault
-            case limit
-            case startingAfter
-        }
-
         public init(
             active: Bool? = nil,
             endingBefore: String? = nil,
@@ -493,10 +400,6 @@ extension Stripe.Billing.Customer.Portal.Configuration.Retrieve {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil
@@ -528,17 +431,6 @@ extension Stripe.Billing.Customer.Portal.Configuration.Update {
         /// The name of the configuration.
         public var name: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case active
-            case businessProfile
-            case defaultReturnUrl
-            case expand
-            case features
-            case loginPage
-            case metadata
-            case name
-        }
-
         public init(
             active: Bool? = nil,
             businessProfile: BusinessProfile? = nil,
@@ -568,12 +460,6 @@ extension Stripe.Billing.Customer.Portal.Configuration.Update {
             /// A link to the business’s publicly available terms of service.
             public var termsOfServiceUrl: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case headline
-                case privacyPolicyUrl
-                case termsOfServiceUrl
-            }
-
             public init(
                 headline: String? = nil,
                 privacyPolicyUrl: String? = nil,
@@ -598,14 +484,6 @@ extension Stripe.Billing.Customer.Portal.Configuration.Update {
             /// Information about updating subscriptions in the portal.
             public var subscriptionUpdate: SubscriptionUpdate?
 
-            private enum CodingKeys: String, CodingKey {
-                case customerUpdate
-                case invoiceHistory
-                case paymentMethodUpdate
-                case subscriptionCancel
-                case subscriptionUpdate
-            }
-
             public init(
                 customerUpdate: CustomerUpdate? = nil,
                 invoiceHistory: InvoiceHistory? = nil,
@@ -626,11 +504,6 @@ extension Stripe.Billing.Customer.Portal.Configuration.Update {
                 public var allowedUpdates: Stripe.Clearable<[AllowedUpdates]>?
                 /// Whether the feature is enabled.
                 public var enabled: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case allowedUpdates
-                    case enabled
-                }
 
                 public init(
                     allowedUpdates: Stripe.Clearable<[AllowedUpdates]>? = nil,
@@ -655,10 +528,6 @@ extension Stripe.Billing.Customer.Portal.Configuration.Update {
                 /// Whether the feature is enabled.
                 public var enabled: Bool
 
-                private enum CodingKeys: String, CodingKey {
-                    case enabled
-                }
-
                 public init(
                     enabled: Bool
                 ) {
@@ -672,11 +541,6 @@ extension Stripe.Billing.Customer.Portal.Configuration.Update {
                 public var enabled: Bool
                 /// The Payment Method Configuration to use for this portal session.
                 public var paymentMethodConfiguration: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case enabled
-                    case paymentMethodConfiguration
-                }
 
                 public init(
                     enabled: Bool,
@@ -697,13 +561,6 @@ extension Stripe.Billing.Customer.Portal.Configuration.Update {
                 public var mode: Mode?
                 /// Whether to create prorations when canceling subscriptions.
                 public var prorationBehavior: ProrationBehavior?
-
-                private enum CodingKeys: String, CodingKey {
-                    case cancellationReason
-                    case enabled
-                    case mode
-                    case prorationBehavior
-                }
 
                 public init(
                     cancellationReason: CancellationReason? = nil,
@@ -734,11 +591,6 @@ extension Stripe.Billing.Customer.Portal.Configuration.Update {
                     public var enabled: Bool
                     /// Which cancellation reasons will be given as options to the customer.
                     public var options: Stripe.Clearable<[Options]>?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case enabled
-                        case options
-                    }
 
                     public init(
                         enabled: Bool,
@@ -778,16 +630,6 @@ extension Stripe.Billing.Customer.Portal.Configuration.Update {
                 /// The behavior when updating a subscription that is trialing.
                 public var trialUpdateBehavior: TrialUpdateBehavior?
 
-                private enum CodingKeys: String, CodingKey {
-                    case billingCycleAnchor
-                    case defaultAllowedUpdates
-                    case enabled
-                    case products
-                    case prorationBehavior
-                    case scheduleAtPeriodEnd
-                    case trialUpdateBehavior
-                }
-
                 public init(
                     billingCycleAnchor: BillingCycleAnchor? = nil,
                     defaultAllowedUpdates: Stripe.Clearable<[DefaultAllowedUpdates]>? = nil,
@@ -836,12 +678,6 @@ extension Stripe.Billing.Customer.Portal.Configuration.Update {
                     /// The product id.
                     public var product: String
 
-                    private enum CodingKeys: String, CodingKey {
-                        case adjustableQuantity
-                        case prices
-                        case product
-                    }
-
                     public init(
                         adjustableQuantity: AdjustableQuantity? = nil,
                         prices: [String],
@@ -861,12 +697,6 @@ extension Stripe.Billing.Customer.Portal.Configuration.Update {
                         /// The minimum quantity that can be set for the product.
                         public var minimum: Int?
 
-                        private enum CodingKeys: String, CodingKey {
-                            case enabled
-                            case maximum
-                            case minimum
-                        }
-
                         public init(
                             enabled: Bool,
                             maximum: Int? = nil,
@@ -884,10 +714,6 @@ extension Stripe.Billing.Customer.Portal.Configuration.Update {
                     /// List of conditions.
                     public var conditions: Stripe.Clearable<[Conditions]>?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case conditions
-                    }
-
                     public init(
                         conditions: Stripe.Clearable<[Conditions]>? = nil
                     ) {
@@ -897,10 +723,6 @@ extension Stripe.Billing.Customer.Portal.Configuration.Update {
                     public struct Conditions: Codable, Hashable, Sendable {
                         /// The type of condition.
                         public var `type`: Type
-
-                        private enum CodingKeys: String, CodingKey {
-                            case `type`
-                        }
 
                         public init(
                             `type`: Type
@@ -921,10 +743,6 @@ extension Stripe.Billing.Customer.Portal.Configuration.Update {
         public struct LoginPage: Codable, Hashable, Sendable {
             /// Set to `true` to generate a shareable URL `login_page.url` that will take your customers to a hosted login page for th…
             public var enabled: Bool
-
-            private enum CodingKeys: String, CodingKey {
-                case enabled
-            }
 
             public init(
                 enabled: Bool

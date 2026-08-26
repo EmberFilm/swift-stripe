@@ -34,20 +34,6 @@ public struct ScheduledQueryRun: Codable, Hashable, Sendable, Identifiable {
     /// Title of the query.
     public var title: String?
 
-    private enum CodingKeys: String, CodingKey {
-        case id
-        case object
-        case created
-        case dataLoadTime
-        case error
-        case file
-        case livemode
-        case resultAvailableUntil
-        case sql
-        case status
-        case title
-    }
-
     public init(
         id: ID,
         object: String,
@@ -77,10 +63,6 @@ public struct ScheduledQueryRun: Codable, Hashable, Sendable, Identifiable {
     public struct Error: Codable, Hashable, Sendable {
         /// Information about the run failure.
         public var message: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case message
-        }
 
         public init(
             message: String? = nil

@@ -62,11 +62,12 @@ Key invariants:
 ### Coding keys and the decoder
 
 Models declare plain camelCase properties and rely on
-`JSONDecoder.KeyDecodingStrategy.convertFromSnakeCase`. **Do not add snake_case
-`CodingKeys` raw values** (`case invoicePrefix = "invoice_prefix"`) — the
-strategy already handles them, and the redundant pairs were deliberately removed.
-`CodingKeys` enums *without* raw values are fine and still exist where a type has
-a custom `init(from:)`.
+`JSONDecoder.KeyDecodingStrategy.convertFromSnakeCase`; the form encoder snake-cases keys on
+the way out. **Do not declare `CodingKeys` that merely restate the property names**, with or
+without snake_case raw values — Swift synthesizes them, and the redundant enums were removed
+throughout. A `CodingKeys` enum belongs only where it does work: a custom `init(from:)` that
+decodes keys which are not stored properties (a union's payloads, `Event.Object`'s `object`),
+or a key whose wire name is not the snake_case of its property.
 
 The encode side mirrors this: `StripeFormEncoder` snake-cases keys itself, so
 request payloads follow the same rule.
@@ -141,9 +142,10 @@ compiles on macOS and fails there. Already hit once each:
 - `ByteBuffer(data:)` needs `NIOFoundationCompat`; `ByteBuffer(bytes:)` is
   NIOCore and takes `Data` directly. Prefer it.
 
-The `musl` CI job builds with the static SDK and is the only thing that catches
-this. Run it locally with
-`swift build --swift-sdk aarch64-swift-linux-musl`.
+CI runs Vapor's `check-foundation-linking` workflow, which builds a Linux executable against
+the library and fails if Foundation, FoundationInternationalization or ICU get linked. The
+static-SDK build itself is not a CI job any more; before a release that touches decoding of
+large types, build locally with `swift build --swift-sdk aarch64-swift-linux-musl`.
 
 ### Stack frames
 

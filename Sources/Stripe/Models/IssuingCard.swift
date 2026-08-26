@@ -65,36 +65,6 @@ public struct IssuingCard: Codable, Hashable, Sendable, Identifiable {
     /// Information relating to digital wallets (like Apple Pay and Google Pay).
     public var wallets: Wallets?
 
-    private enum CodingKeys: String, CodingKey {
-        case id
-        case object
-        case brand
-        case cancellationReason
-        case cardholder
-        case created
-        case currency
-        case cvc
-        case expMonth
-        case expYear
-        case financialAccount
-        case last4
-        case latestFraudWarning
-        case lifecycleControls
-        case livemode
-        case metadata
-        case number
-        case personalizationDesign
-        case replacedBy
-        case replacementFor
-        case replacementReason
-        case secondLine
-        case shipping
-        case spendingControls
-        case status
-        case `type`
-        case wallets
-    }
-
     public init(
         id: ID,
         object: String,
@@ -189,11 +159,6 @@ public struct IssuingCard: Codable, Hashable, Sendable, Identifiable {
         /// The type of fraud warning that most recently took place on this card.
         public var `type`: Type?
 
-        private enum CodingKeys: String, CodingKey {
-            case startedAt
-            case `type`
-        }
-
         public init(
             startedAt: Date? = nil,
             `type`: Type? = nil
@@ -214,10 +179,6 @@ public struct IssuingCard: Codable, Hashable, Sendable, Identifiable {
     public struct LifecycleControls: Codable, Hashable, Sendable {
         public var cancelAfter: CancelAfter?
 
-        private enum CodingKeys: String, CodingKey {
-            case cancelAfter
-        }
-
         public init(
             cancelAfter: CancelAfter? = nil
         ) {
@@ -227,10 +188,6 @@ public struct IssuingCard: Codable, Hashable, Sendable, Identifiable {
         public struct CancelAfter: Codable, Hashable, Sendable {
             /// The card is automatically cancelled when it makes this number of non-zero payment authorizations and transactions.
             public var paymentCount: Int?
-
-            private enum CodingKeys: String, CodingKey {
-                case paymentCount
-            }
 
             public init(
                 paymentCount: Int? = nil
@@ -268,23 +225,6 @@ public struct IssuingCard: Codable, Hashable, Sendable, Identifiable {
         public var trackingUrl: String?
         /// Packaging options.
         public var `type`: Type?
-
-        private enum CodingKeys: String, CodingKey {
-            case address
-            case addressValidation
-            case businessName
-            case carrier
-            case customs
-            case eta
-            case name
-            case phoneNumber
-            case requireSignature
-            case service
-            case status
-            case trackingNumber
-            case trackingUrl
-            case `type`
-        }
 
         public init(
             address: Address? = nil,
@@ -359,12 +299,6 @@ public struct IssuingCard: Codable, Hashable, Sendable, Identifiable {
             /// The validation result for the shipping address.
             public var result: Result?
 
-            private enum CodingKeys: String, CodingKey {
-                case mode
-                case normalizedAddress
-                case result
-            }
-
             public init(
                 mode: Mode? = nil,
                 normalizedAddress: Address? = nil,
@@ -394,10 +328,6 @@ public struct IssuingCard: Codable, Hashable, Sendable, Identifiable {
             /// A registration number used for customs in Europe.
             public var eoriNumber: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case eoriNumber
-            }
-
             public init(
                 eoriNumber: String? = nil
             ) {
@@ -423,17 +353,6 @@ public struct IssuingCard: Codable, Hashable, Sendable, Identifiable {
         public var spendingLimits: [SpendingLimits]?
         /// Currency of the amounts within `spending_limits`.
         public var spendingLimitsCurrency: Stripe.Currency?
-
-        private enum CodingKeys: String, CodingKey {
-            case allowedCardPresences
-            case allowedCategories
-            case allowedMerchantCountries
-            case blockedCardPresences
-            case blockedCategories
-            case blockedMerchantCountries
-            case spendingLimits
-            case spendingLimitsCurrency
-        }
 
         public init(
             allowedCardPresences: [AllowedCardPresences]? = nil,
@@ -1069,12 +988,6 @@ public struct IssuingCard: Codable, Hashable, Sendable, Identifiable {
             /// Interval (or event) to which the amount applies.
             public var interval: Interval?
 
-            private enum CodingKeys: String, CodingKey {
-                case amount
-                case categories
-                case interval
-            }
-
             public init(
                 amount: Int? = nil,
                 categories: [Categories]? = nil,
@@ -1401,12 +1314,6 @@ public struct IssuingCard: Codable, Hashable, Sendable, Identifiable {
         /// Unique identifier for a card used with digital wallets
         public var primaryAccountIdentifier: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case applePay
-            case googlePay
-            case primaryAccountIdentifier
-        }
-
         public init(
             applePay: ApplePay? = nil,
             googlePay: GooglePay? = nil,
@@ -1422,11 +1329,6 @@ public struct IssuingCard: Codable, Hashable, Sendable, Identifiable {
             public var eligible: Bool?
             /// Reason the card is ineligible for Apple Pay
             public var ineligibleReason: IneligibleReason?
-
-            private enum CodingKeys: String, CodingKey {
-                case eligible
-                case ineligibleReason
-            }
 
             public init(
                 eligible: Bool? = nil,
@@ -1449,11 +1351,6 @@ public struct IssuingCard: Codable, Hashable, Sendable, Identifiable {
             public var eligible: Bool?
             /// Reason the card is ineligible for Google Pay
             public var ineligibleReason: IneligibleReason?
-
-            private enum CodingKeys: String, CodingKey {
-                case eligible
-                case ineligibleReason
-            }
 
             public init(
                 eligible: Bool? = nil,

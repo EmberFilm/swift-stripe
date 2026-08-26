@@ -129,12 +129,6 @@ extension Stripe.Checkout.Session.Custom.Field {
         /// The value entered by the customer, containing only digits.
         public var value: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case maximumLength
-            case minimumLength
-            case value
-        }
-
         public init(
             maximumLength: Int? = nil,
             minimumLength: Int? = nil,
@@ -155,12 +149,6 @@ extension Stripe.Checkout.Session.Custom.Field {
         public var minimumLength: Int?
         /// The value entered by the customer.
         public var value: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case maximumLength
-            case minimumLength
-            case value
-        }
 
         public init(
             maximumLength: Int? = nil,
@@ -191,11 +179,6 @@ extension Stripe.Checkout.Session.Custom {
         public var shippingAddress: Stripe.Checkout.Session.Custom.Text.Shipping.Address?
         /// Custom text that should be displayed alongside the payment confirmation button.
         public var submit: Stripe.Checkout.Session.CustomTextSubmit?
-
-        private enum CodingKeys: String, CodingKey {
-            case shippingAddress
-            case submit
-        }
 
         public init(
             shippingAddress: Stripe.Checkout.Session.Custom.Text.Shipping.Address? = nil,
@@ -370,7 +353,6 @@ extension Stripe.Checkout.Session.Billing.Address {
 extension Stripe.Checkout.Session {
     public typealias Currency = Stripe.Currency
 }
-
 
 extension Stripe.Checkout.Session.Customer {
     public struct Details: Codable, Hashable, Sendable {
@@ -688,7 +670,6 @@ extension Stripe.Checkout.Session.TaxId {
     }
 }
 
-
 // MARK: - Fields added through API version 2026-07-29.dahlia
 extension Stripe.Checkout.Session {
 
@@ -696,11 +677,6 @@ extension Stripe.Checkout.Session {
     public struct Discount: Codable, Hashable, Sendable {
         @ExpandableOf<Stripe.Products.Coupon> public var coupon: Stripe.Products.Coupon.ID?
         @ExpandableOf<Promotion.Code> public var promotionCode: Promotion.Code.ID?
-
-        private enum CodingKeys: String, CodingKey {
-            case coupon
-            case promotionCode
-        }
 
         public init(
             coupon: Stripe.Products.Coupon.ID? = nil,

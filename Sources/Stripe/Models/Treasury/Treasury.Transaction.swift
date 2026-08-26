@@ -42,24 +42,6 @@ extension Stripe.Treasury {
         public var status: Status?
         public var statusTransitions: StatusTransitions?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case amount
-            case balanceImpact
-            case created
-            case currency
-            case description
-            case entries
-            case financialAccount
-            case flow
-            case flowDetails
-            case flowType
-            case livemode
-            case status
-            case statusTransitions
-        }
-
         public init(
             id: ID,
             object: String,
@@ -125,13 +107,6 @@ extension Stripe.Treasury {
             /// The URL where this list can be accessed.
             public var url: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case object
-                case data
-                case hasMore
-                case url
-            }
-
             public init(
                 object: String,
                 data: [Stripe.Treasury.TransactionEntry]? = nil,
@@ -150,11 +125,6 @@ extension Stripe.Treasury {
             public var postedAt: Date?
             /// Timestamp describing when the Transaction changed status to `void`.
             public var voidAt: Date?
-
-            private enum CodingKeys: String, CodingKey {
-                case postedAt
-                case voidAt
-            }
 
             public init(
                 postedAt: Date? = nil,

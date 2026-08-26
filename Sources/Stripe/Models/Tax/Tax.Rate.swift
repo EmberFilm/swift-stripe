@@ -50,27 +50,6 @@ extension Stripe.Tax {
         /// The high-level tax type, such as `vat` or `sales_tax`.
         public var taxType: TaxType?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case active
-            case country
-            case created
-            case description
-            case displayName
-            case effectivePercentage
-            case flatAmount
-            case inclusive
-            case jurisdiction
-            case jurisdictionLevel
-            case livemode
-            case metadata
-            case percentage
-            case rateType
-            case state
-            case taxType
-        }
-
         public init(
             id: ID,
             object: String,

@@ -36,17 +36,6 @@ extension Stripe.Billing.MeterEventSummary.List {
         /// Specifies what granularity to use when generating event summaries.
         public var valueGroupingWindow: ValueGroupingWindow?
 
-        private enum CodingKeys: String, CodingKey {
-            case customer
-            case endTime
-            case endingBefore
-            case expand
-            case limit
-            case startTime
-            case startingAfter
-            case valueGroupingWindow
-        }
-
         public init(
             customer: String,
             endTime: Date,

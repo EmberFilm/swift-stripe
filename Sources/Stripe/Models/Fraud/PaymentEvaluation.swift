@@ -34,21 +34,6 @@ extension Stripe.Fraud {
         public var recommendedAction: RecommendedAction?
         public var signals: Signals?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case clientDeviceMetadataDetails
-            case createdAt
-            case customerDetails
-            case events
-            case livemode
-            case metadata
-            case outcome
-            case paymentDetails
-            case recommendedAction
-            case signals
-        }
-
         public init(
             id: ID,
             object: String,
@@ -88,10 +73,6 @@ extension Stripe.Fraud {
             /// ID for the Radar Session associated with the payment evaluation.
             public var radarSession: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case radarSession
-            }
-
             public init(
                 radarSession: String? = nil
             ) {
@@ -111,14 +92,6 @@ extension Stripe.Fraud {
             public var name: String?
             /// The customer's phone number.
             public var phone: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case customer
-                case customerAccount
-                case email
-                case name
-                case phone
-            }
 
             public init(
                 customer: String? = nil,
@@ -196,12 +169,6 @@ extension Stripe.Fraud {
                 /// Reason given by cardholder for dispute.
                 public var reason: Reason?
 
-                private enum CodingKeys: String, CodingKey {
-                    case amount
-                    case currency
-                    case reason
-                }
-
                 public init(
                     amount: Int? = nil,
                     currency: Stripe.Currency? = nil,
@@ -233,10 +200,6 @@ extension Stripe.Fraud {
                 /// The type of fraud labeled by the issuer.
                 public var fraudType: FraudType?
 
-                private enum CodingKeys: String, CodingKey {
-                    case fraudType
-                }
-
                 public init(
                     fraudType: FraudType? = nil
                 ) {
@@ -260,12 +223,6 @@ extension Stripe.Fraud {
                 public var currency: Stripe.Currency?
                 /// Indicates the reason for the refund.
                 public var reason: Reason?
-
-                private enum CodingKeys: String, CodingKey {
-                    case amount
-                    case currency
-                    case reason
-                }
 
                 public init(
                     amount: Int? = nil,
@@ -294,12 +251,6 @@ extension Stripe.Fraud {
                 /// Type of user intervention raised.
                 public var `type`: Type?
 
-                private enum CodingKeys: String, CodingKey {
-                    case custom
-                    case key
-                    case `type`
-                }
-
                 public init(
                     custom: Custom? = nil,
                     key: String? = nil,
@@ -322,10 +273,6 @@ extension Stripe.Fraud {
                     /// Custom type of user intervention raised.
                     public var `type`: String?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case `type`
-                    }
-
                     public init(
                         `type`: String? = nil
                     ) {
@@ -340,11 +287,6 @@ extension Stripe.Fraud {
                 public var key: String?
                 /// Result of the intervention if it has been completed.
                 public var outcome: Outcome?
-
-                private enum CodingKeys: String, CodingKey {
-                    case key
-                    case outcome
-                }
 
                 public init(
                     key: String? = nil,
@@ -460,10 +402,6 @@ extension Stripe.Fraud {
                 /// The reason the payment was blocked by the merchant.
                 public var reason: Reason?
 
-                private enum CodingKeys: String, CodingKey {
-                    case reason
-                }
-
                 public init(
                     reason: Reason? = nil
                 ) {
@@ -483,10 +421,6 @@ extension Stripe.Fraud {
             public struct Rejected: Codable, Hashable, Sendable {
                 @Boxed public var card: Card?
 
-                private enum CodingKeys: String, CodingKey {
-                    case card
-                }
-
                 public init(
                     card: Card? = nil
                 ) {
@@ -503,13 +437,6 @@ extension Stripe.Fraud {
                     public var cvcCheck: CvcCheck?
                     /// Card issuer's reason for the network decline.
                     public var reason: Reason?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case addressLine1Check
-                        case addressPostalCodeCheck
-                        case cvcCheck
-                        case reason
-                    }
 
                     public init(
                         addressLine1Check: AddressLine1Check? = nil,
@@ -570,10 +497,6 @@ extension Stripe.Fraud {
             public struct Succeeded: Codable, Hashable, Sendable {
                 @Boxed public var card: Card?
 
-                private enum CodingKeys: String, CodingKey {
-                    case card
-                }
-
                 public init(
                     card: Card? = nil
                 ) {
@@ -588,12 +511,6 @@ extension Stripe.Fraud {
                     public var addressPostalCodeCheck: AddressPostalCodeCheck?
                     /// Result of the CVC check.
                     public var cvcCheck: CvcCheck?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case addressLine1Check
-                        case addressPostalCodeCheck
-                        case cvcCheck
-                    }
 
                     public init(
                         addressLine1Check: AddressLine1Check? = nil,
@@ -684,16 +601,6 @@ extension Stripe.Fraud {
             /// Payment statement descriptor.
             public var statementDescriptor: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case amount
-                case currency
-                case description
-                case moneyMovementDetails
-                case paymentMethodDetails
-                case shippingDetails
-                case statementDescriptor
-            }
-
             public init(
                 amount: Int? = nil,
                 currency: Stripe.Currency? = nil,
@@ -719,11 +626,6 @@ extension Stripe.Fraud {
                 /// Describes the type of money movement.
                 public var moneyMovementType: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case card
-                    case moneyMovementType
-                }
-
                 public init(
                     card: Card? = nil,
                     moneyMovementType: String? = nil
@@ -738,11 +640,6 @@ extension Stripe.Fraud {
                     public var customerPresence: CustomerPresence?
                     /// Describes the type of payment.
                     public var paymentType: PaymentType?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case customerPresence
-                        case paymentType
-                    }
 
                     public init(
                         customerPresence: CustomerPresence? = nil,
@@ -775,11 +672,6 @@ extension Stripe.Fraud {
                 /// The payment method used in this payment evaluation.
                 @Expandable<Stripe.PaymentMethods.PaymentMethod, String> public var paymentMethod: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case billingDetails
-                    case paymentMethod
-                }
-
                 public init(
                     billingDetails: BillingDetails? = nil,
                     paymentMethod: String? = nil
@@ -797,13 +689,6 @@ extension Stripe.Fraud {
                     public var name: String?
                     /// Billing phone number (including extension).
                     public var phone: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case address
-                        case email
-                        case name
-                        case phone
-                    }
 
                     public init(
                         address: Address? = nil,
@@ -832,15 +717,6 @@ extension Stripe.Fraud {
                         /// State, county, province, or region (ISO 3166-2).
                         public var state: String?
 
-                        private enum CodingKeys: String, CodingKey {
-                            case city
-                            case country
-                            case line1
-                            case line2
-                            case postalCode
-                            case state
-                        }
-
                         public init(
                             city: String? = nil,
                             country: String? = nil,
@@ -868,12 +744,6 @@ extension Stripe.Fraud {
                 /// Shipping phone number.
                 public var phone: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case address
-                    case name
-                    case phone
-                }
-
                 public init(
                     address: Address? = nil,
                     name: String? = nil,
@@ -899,15 +769,6 @@ extension Stripe.Fraud {
                     /// State, county, province, or region (ISO 3166-2).
                     public var state: String?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case city
-                        case country
-                        case line1
-                        case line2
-                        case postalCode
-                        case state
-                    }
-
                     public init(
                         city: String? = nil,
                         country: String? = nil,
@@ -931,10 +792,6 @@ extension Stripe.Fraud {
         public struct Signals: Codable, Hashable, Sendable {
             public var fraudulentPayment: FraudulentPayment?
 
-            private enum CodingKeys: String, CodingKey {
-                case fraudulentPayment
-            }
-
             public init(
                 fraudulentPayment: FraudulentPayment? = nil
             ) {
@@ -949,12 +806,6 @@ extension Stripe.Fraud {
                 public var riskLevel: RiskLevel?
                 /// Score for this signal.
                 public var score: Double?
-
-                private enum CodingKeys: String, CodingKey {
-                    case evaluatedAt
-                    case riskLevel
-                    case score
-                }
 
                 public init(
                     evaluatedAt: Date? = nil,

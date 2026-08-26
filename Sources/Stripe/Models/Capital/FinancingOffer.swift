@@ -27,14 +27,6 @@ extension Stripe.Capital {
             public let previousFinancingFeeDiscountRate: Double?
             public let withholdRate: Double
 
-            private enum CodingKeys: String, CodingKey {
-                case advanceAmount
-                case campaignType
-                case currency
-                case feeAmount
-                case previousFinancingFeeDiscountRate
-                case withholdRate
-            }
         }
 
         public enum Status: String, Codable, Equatable, Sendable {

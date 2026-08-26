@@ -70,39 +70,6 @@ public struct Authorization: Codable, Hashable, Sendable, Identifiable {
     /// The digital wallet used for this transaction.
     public var wallet: String?
 
-    private enum CodingKeys: String, CodingKey {
-        case id
-        case object
-        case amount
-        case amountDetails
-        case approved
-        case authorizationMethod
-        case balanceTransactions
-        case card
-        case cardPresence
-        case cardholder
-        case created
-        case currency
-        case fleet
-        case fraudChallenges
-        case fuel
-        case livemode
-        case merchantAmount
-        case merchantCurrency
-        case merchantData
-        case metadata
-        case networkData
-        case pendingRequest
-        case requestHistory
-        case status
-        case token
-        case transactions
-        case treasury
-        case verificationData
-        case verifiedByFraudChallenge
-        case wallet
-    }
-
     public init(
         id: ID,
         object: String,
@@ -196,11 +163,6 @@ public struct Authorization: Codable, Hashable, Sendable, Identifiable {
         /// The amount of cash requested by the cardholder.
         public var cashbackAmount: Int?
 
-        private enum CodingKeys: String, CodingKey {
-            case atmFee
-            case cashbackAmount
-        }
-
         public init(
             atmFee: Int? = nil,
             cashbackAmount: Int? = nil
@@ -219,13 +181,6 @@ public struct Authorization: Codable, Hashable, Sendable, Identifiable {
         public var reportedBreakdown: ReportedBreakdown?
         /// The type of fuel service.
         public var serviceType: ServiceType?
-
-        private enum CodingKeys: String, CodingKey {
-            case cardholderPromptData
-            case purchaseType
-            case reportedBreakdown
-            case serviceType
-        }
 
         public init(
             cardholderPromptData: CardholderPromptData? = nil,
@@ -267,15 +222,6 @@ public struct Authorization: Codable, Hashable, Sendable, Identifiable {
             /// Vehicle number.
             public var vehicleNumber: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case alphanumericId
-                case driverId
-                case odometer
-                case unspecifiedId
-                case userId
-                case vehicleNumber
-            }
-
             public init(
                 alphanumericId: String? = nil,
                 driverId: String? = nil,
@@ -301,12 +247,6 @@ public struct Authorization: Codable, Hashable, Sendable, Identifiable {
             /// Information about tax included in this transaction.
             public var tax: Tax?
 
-            private enum CodingKeys: String, CodingKey {
-                case fuel
-                case nonFuel
-                case tax
-            }
-
             public init(
                 fuel: Fuel? = nil,
                 nonFuel: NonFuel? = nil,
@@ -321,10 +261,6 @@ public struct Authorization: Codable, Hashable, Sendable, Identifiable {
                 /// Gross fuel amount that should equal Fuel Quantity multiplied by Fuel Unit Cost, inclusive of taxes.
                 public var grossAmountDecimal: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case grossAmountDecimal
-                }
-
                 public init(
                     grossAmountDecimal: String? = nil
                 ) {
@@ -335,10 +271,6 @@ public struct Authorization: Codable, Hashable, Sendable, Identifiable {
             public struct NonFuel: Codable, Hashable, Sendable {
                 /// Gross non-fuel amount that should equal the sum of the line items, inclusive of taxes.
                 public var grossAmountDecimal: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case grossAmountDecimal
-                }
 
                 public init(
                     grossAmountDecimal: String? = nil
@@ -352,11 +284,6 @@ public struct Authorization: Codable, Hashable, Sendable, Identifiable {
                 public var localAmountDecimal: String?
                 /// Amount of national Sales Tax or VAT included in the transaction amount.
                 public var nationalAmountDecimal: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case localAmountDecimal
-                    case nationalAmountDecimal
-                }
 
                 public init(
                     localAmountDecimal: String? = nil,
@@ -376,12 +303,6 @@ public struct Authorization: Codable, Hashable, Sendable, Identifiable {
         public var status: Status?
         /// If the challenge is not deliverable, the reason why.
         public var undeliverableReason: UndeliverableReason?
-
-        private enum CodingKeys: String, CodingKey {
-            case channel
-            case status
-            case undeliverableReason
-        }
 
         public init(
             channel: String? = nil,
@@ -420,14 +341,6 @@ public struct Authorization: Codable, Hashable, Sendable, Identifiable {
         public var unit: Unit?
         /// The cost in cents per each unit of fuel, represented as a decimal string with at most 12 decimal places.
         public var unitCostDecimal: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case industryProductCode
-            case quantityDecimal
-            case `type`
-            case unit
-            case unitCostDecimal
-        }
 
         public init(
             industryProductCode: String? = nil,
@@ -473,12 +386,6 @@ public struct Authorization: Codable, Hashable, Sendable, Identifiable {
         /// Unique identifier for the authorization assigned by the card network used to match subsequent messages, disputes, and …
         public var transactionId: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case acquiringInstitutionId
-            case systemTraceAuditNumber
-            case transactionId
-        }
-
         public init(
             acquiringInstitutionId: String? = nil,
             systemTraceAuditNumber: String? = nil,
@@ -506,16 +413,6 @@ public struct Authorization: Codable, Hashable, Sendable, Identifiable {
         /// The card network's estimate of the likelihood that an authorization is fraudulent.
         public var networkRiskScore: Int?
 
-        private enum CodingKeys: String, CodingKey {
-            case amount
-            case amountDetails
-            case currency
-            case isAmountControllable
-            case merchantAmount
-            case merchantCurrency
-            case networkRiskScore
-        }
-
         public init(
             amount: Int? = nil,
             amountDetails: AmountDetails? = nil,
@@ -539,11 +436,6 @@ public struct Authorization: Codable, Hashable, Sendable, Identifiable {
             public var atmFee: Int?
             /// The amount of cash requested by the cardholder.
             public var cashbackAmount: Int?
-
-            private enum CodingKeys: String, CodingKey {
-                case atmFee
-                case cashbackAmount
-            }
 
             public init(
                 atmFee: Int? = nil,
@@ -580,21 +472,6 @@ public struct Authorization: Codable, Hashable, Sendable, Identifiable {
         public var reasonMessage: String?
         /// Time when the card network received an authorization request from the acquirer in UTC.
         public var requestedAt: Date?
-
-        private enum CodingKeys: String, CodingKey {
-            case amount
-            case amountDetails
-            case approved
-            case authorizationCode
-            case created
-            case currency
-            case merchantAmount
-            case merchantCurrency
-            case networkRiskScore
-            case reason
-            case reasonMessage
-            case requestedAt
-        }
 
         public init(
             amount: Int? = nil,
@@ -655,11 +532,6 @@ public struct Authorization: Codable, Hashable, Sendable, Identifiable {
             /// The amount of cash requested by the cardholder.
             public var cashbackAmount: Int?
 
-            private enum CodingKeys: String, CodingKey {
-                case atmFee
-                case cashbackAmount
-            }
-
             public init(
                 atmFee: Int? = nil,
                 cashbackAmount: Int? = nil
@@ -677,12 +549,6 @@ public struct Authorization: Codable, Hashable, Sendable, Identifiable {
         public var receivedDebits: [String]?
         /// The Treasury Transaction associated with this authorization
         public var transaction: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case receivedCredits
-            case receivedDebits
-            case transaction
-        }
 
         public init(
             receivedCredits: [String]? = nil,
@@ -710,16 +576,6 @@ public struct Authorization: Codable, Hashable, Sendable, Identifiable {
         public var postalCode: String?
         /// 3D Secure details.
         public var threeDSecure: ThreeDSecure?
-
-        private enum CodingKeys: String, CodingKey {
-            case addressLine1Check
-            case addressPostalCodeCheck
-            case authenticationExemption
-            case cvcCheck
-            case expiryCheck
-            case postalCode
-            case threeDSecure
-        }
 
         public init(
             addressLine1Check: AddressLine1Check? = nil,
@@ -773,11 +629,6 @@ public struct Authorization: Codable, Hashable, Sendable, Identifiable {
             /// The specific exemption claimed for this authorization.
             public var `type`: Type?
 
-            private enum CodingKeys: String, CodingKey {
-                case claimedBy
-                case `type`
-            }
-
             public init(
                 claimedBy: ClaimedBy? = nil,
                 `type`: Type? = nil
@@ -803,10 +654,6 @@ public struct Authorization: Codable, Hashable, Sendable, Identifiable {
         public struct ThreeDSecure: Codable, Hashable, Sendable {
             /// The outcome of the 3D Secure authentication request.
             public var result: Result?
-
-            private enum CodingKeys: String, CodingKey {
-                case result
-            }
 
             public init(
                 result: Result? = nil

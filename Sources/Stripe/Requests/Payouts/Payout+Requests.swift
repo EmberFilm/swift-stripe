@@ -27,10 +27,6 @@ extension Stripe.Payouts.Payout.Cancel {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
-
         public init(
             expand: [String]? = nil
         ) {
@@ -64,19 +60,6 @@ extension Stripe.Payouts.Payout.Create {
         public var sourceType: SourceType?
         /// A string that displays on the recipient's bank or card statement (up to 22 characters).
         public var statementDescriptor: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case amount
-            case currency
-            case description
-            case destination
-            case expand
-            case metadata
-            case method
-            case payoutMethod
-            case sourceType
-            case statementDescriptor
-        }
 
         public init(
             amount: Int,
@@ -137,17 +120,6 @@ extension Stripe.Payouts.Payout.List {
         /// Only return payouts that have the given status: `pending`, `paid`, `failed`, or `canceled`.
         public var status: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case arrivalDate
-            case created
-            case destination
-            case endingBefore
-            case expand
-            case limit
-            case startingAfter
-            case status
-        }
-
         public init(
             arrivalDate: Stripe.RangeQuery? = nil,
             created: Stripe.RangeQuery? = nil,
@@ -178,10 +150,6 @@ extension Stripe.Payouts.Payout.Retrieve {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
-
         public init(
             expand: [String]? = nil
         ) {
@@ -199,11 +167,6 @@ extension Stripe.Payouts.Payout.Reverse {
         public var expand: [String]?
         /// Set of key-value pairs that you can attach to an object.
         public var metadata: [String: String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case metadata
-        }
 
         public init(
             expand: [String]? = nil,
@@ -224,11 +187,6 @@ extension Stripe.Payouts.Payout.Update {
         public var expand: [String]?
         /// Set of key-value pairs that you can attach to an object.
         public var metadata: Stripe.Clearable<[String: String]>?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case metadata
-        }
 
         public init(
             expand: [String]? = nil,

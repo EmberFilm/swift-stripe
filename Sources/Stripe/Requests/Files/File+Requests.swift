@@ -28,12 +28,6 @@ extension Stripe.Files.File.Create {
         /// The purpose of the uploaded file.
         public var purpose: Purpose
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case fileLinkData
-            case purpose
-        }
-
         public init(
             expand: [String]? = nil,
             fileLinkData: FileLinkData? = nil,
@@ -71,12 +65,6 @@ extension Stripe.Files.File.Create {
             /// Set of key-value pairs that you can attach to an object.
             public var metadata: Stripe.Clearable<[String: String]>?
 
-            private enum CodingKeys: String, CodingKey {
-                case create
-                case expiresAt
-                case metadata
-            }
-
             public init(
                 create: Bool,
                 expiresAt: Date? = nil,
@@ -107,15 +95,6 @@ extension Stripe.Files.File.List {
         public var purpose: Purpose?
         /// A cursor for use in pagination.
         public var startingAfter: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case created
-            case endingBefore
-            case expand
-            case limit
-            case purpose
-            case startingAfter
-        }
 
         public init(
             created: Stripe.RangeQuery? = nil,
@@ -166,10 +145,6 @@ extension Stripe.Files.File.Retrieve {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil

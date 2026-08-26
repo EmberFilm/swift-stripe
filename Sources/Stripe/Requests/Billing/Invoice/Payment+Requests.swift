@@ -37,17 +37,6 @@ extension Stripe.Billing.Invoice.Payment.List {
         /// The status of the invoice payments to return.
         public var status: Status?
 
-        private enum CodingKeys: String, CodingKey {
-            case created
-            case endingBefore
-            case expand
-            case invoice
-            case limit
-            case payment
-            case startingAfter
-            case status
-        }
-
         public init(
             created: Stripe.RangeQuery? = nil,
             endingBefore: String? = nil,
@@ -83,12 +72,6 @@ extension Stripe.Billing.Invoice.Payment.List {
             /// Only return invoice payments associated by this payment type.
             public var `type`: Type
 
-            private enum CodingKeys: String, CodingKey {
-                case paymentIntent
-                case paymentRecord
-                case `type`
-            }
-
             public init(
                 paymentIntent: String? = nil,
                 paymentRecord: String? = nil,
@@ -114,10 +97,6 @@ extension Stripe.Billing.Invoice.Payment.Retrieve {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil

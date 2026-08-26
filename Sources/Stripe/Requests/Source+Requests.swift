@@ -55,25 +55,6 @@ extension Source.Create {
         public var `type`: String?
         public var usage: Usage?
 
-        private enum CodingKeys: String, CodingKey {
-            case amount
-            case currency
-            case customer
-            case expand
-            case flow
-            case mandate
-            case metadata
-            case originalSource
-            case owner
-            case receiver
-            case redirect
-            case sourceOrder
-            case statementDescriptor
-            case token
-            case `type`
-            case usage
-        }
-
         public init(
             amount: Int? = nil,
             currency: Stripe.Currency? = nil,
@@ -135,14 +116,6 @@ extension Source.Create {
             /// The method Stripe should use to notify the customer of upcoming debit instructions and/or mandate confirmation as requ…
             public var notificationMethod: NotificationMethod?
 
-            private enum CodingKeys: String, CodingKey {
-                case acceptance
-                case amount
-                case currency
-                case interval
-                case notificationMethod
-            }
-
             public init(
                 acceptance: Acceptance? = nil,
                 amount: Stripe.Clearable<Int>? = nil,
@@ -188,16 +161,6 @@ extension Source.Create {
                 /// The user agent of the browser from which the mandate was accepted or refused by the customer.
                 public var userAgent: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case date
-                    case ip
-                    case offline
-                    case online
-                    case status
-                    case `type`
-                    case userAgent
-                }
-
                 public init(
                     date: Date? = nil,
                     ip: String? = nil,
@@ -233,10 +196,6 @@ extension Source.Create {
                     /// An email to contact you with if a copy of the mandate is requested, required if `type` is `offline`.
                     public var contactEmail: String
 
-                    private enum CodingKeys: String, CodingKey {
-                        case contactEmail
-                    }
-
                     public init(
                         contactEmail: String
                     ) {
@@ -252,12 +211,6 @@ extension Source.Create {
                     public var ip: String?
                     /// The user agent of the browser from which the mandate was accepted or refused by the customer.
                     public var userAgent: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case date
-                        case ip
-                        case userAgent
-                    }
 
                     public init(
                         date: Date? = nil,
@@ -282,13 +235,6 @@ extension Source.Create {
             public var name: String?
             /// Owner's phone number.
             public var phone: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case address
-                case email
-                case name
-                case phone
-            }
 
             public init(
                 address: Address? = nil,
@@ -317,15 +263,6 @@ extension Source.Create {
                 /// State, county, province, or region (ISO 3166-2).
                 public var state: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case city
-                    case country
-                    case line1
-                    case line2
-                    case postalCode
-                    case state
-                }
-
                 public init(
                     city: String? = nil,
                     country: String? = nil,
@@ -349,10 +286,6 @@ extension Source.Create {
             /// The method Stripe should use to request information needed to process a refund or mispayment.
             public var refundAttributesMethod: RefundAttributesMethod?
 
-            private enum CodingKeys: String, CodingKey {
-                case refundAttributesMethod
-            }
-
             public init(
                 refundAttributesMethod: RefundAttributesMethod? = nil
             ) {
@@ -371,10 +304,6 @@ extension Source.Create {
             /// The URL you provide to redirect the customer back to you after they authenticated their payment.
             public var returnUrl: String
 
-            private enum CodingKeys: String, CodingKey {
-                case returnUrl
-            }
-
             public init(
                 returnUrl: String
             ) {
@@ -388,11 +317,6 @@ extension Source.Create {
             public var items: [Items]?
             /// Shipping address for the order.
             public var shipping: Shipping?
-
-            private enum CodingKeys: String, CodingKey {
-                case items
-                case shipping
-            }
 
             public init(
                 items: [Items]? = nil,
@@ -411,15 +335,6 @@ extension Source.Create {
                 /// The quantity of this order item.
                 public var quantity: Int?
                 public var `type`: Type?
-
-                private enum CodingKeys: String, CodingKey {
-                    case amount
-                    case currency
-                    case description
-                    case parent
-                    case quantity
-                    case `type`
-                }
 
                 public init(
                     amount: Int? = nil,
@@ -458,14 +373,6 @@ extension Source.Create {
                 /// The tracking number for a physical product, obtained from the delivery service.
                 public var trackingNumber: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case address
-                    case carrier
-                    case name
-                    case phone
-                    case trackingNumber
-                }
-
                 public init(
                     address: Address,
                     carrier: String? = nil,
@@ -494,15 +401,6 @@ extension Source.Create {
                     public var postalCode: String?
                     /// State, county, province, or region (ISO 3166-2).
                     public var state: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case city
-                        case country
-                        case line1
-                        case line2
-                        case postalCode
-                        case state
-                    }
 
                     public init(
                         city: String? = nil,
@@ -533,10 +431,6 @@ extension Source.Detach {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
-
         public init(
             expand: [String]? = nil
         ) {
@@ -554,11 +448,6 @@ extension Source.Retrieve {
         public var clientSecret: String?
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case clientSecret
-            case expand
-        }
 
         public init(
             clientSecret: String? = nil,
@@ -583,13 +472,6 @@ extension Source.SourceTransactions {
         public var limit: Int?
         /// A cursor for use in pagination.
         public var startingAfter: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case endingBefore
-            case expand
-            case limit
-            case startingAfter
-        }
 
         public init(
             endingBefore: String? = nil,
@@ -623,15 +505,6 @@ extension Source.Update {
         /// Information about the items and shipping associated with the source.
         public var sourceOrder: SourceOrder?
 
-        private enum CodingKeys: String, CodingKey {
-            case amount
-            case expand
-            case mandate
-            case metadata
-            case owner
-            case sourceOrder
-        }
-
         public init(
             amount: Int? = nil,
             expand: [String]? = nil,
@@ -660,14 +533,6 @@ extension Source.Update {
             public var interval: Interval?
             /// The method Stripe should use to notify the customer of upcoming debit instructions and/or mandate confirmation as requ…
             public var notificationMethod: NotificationMethod?
-
-            private enum CodingKeys: String, CodingKey {
-                case acceptance
-                case amount
-                case currency
-                case interval
-                case notificationMethod
-            }
 
             public init(
                 acceptance: Acceptance? = nil,
@@ -714,16 +579,6 @@ extension Source.Update {
                 /// The user agent of the browser from which the mandate was accepted or refused by the customer.
                 public var userAgent: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case date
-                    case ip
-                    case offline
-                    case online
-                    case status
-                    case `type`
-                    case userAgent
-                }
-
                 public init(
                     date: Date? = nil,
                     ip: String? = nil,
@@ -759,10 +614,6 @@ extension Source.Update {
                     /// An email to contact you with if a copy of the mandate is requested, required if `type` is `offline`.
                     public var contactEmail: String
 
-                    private enum CodingKeys: String, CodingKey {
-                        case contactEmail
-                    }
-
                     public init(
                         contactEmail: String
                     ) {
@@ -778,12 +629,6 @@ extension Source.Update {
                     public var ip: String?
                     /// The user agent of the browser from which the mandate was accepted or refused by the customer.
                     public var userAgent: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case date
-                        case ip
-                        case userAgent
-                    }
 
                     public init(
                         date: Date? = nil,
@@ -808,13 +653,6 @@ extension Source.Update {
             public var name: String?
             /// Owner's phone number.
             public var phone: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case address
-                case email
-                case name
-                case phone
-            }
 
             public init(
                 address: Address? = nil,
@@ -843,15 +681,6 @@ extension Source.Update {
                 /// State, county, province, or region (ISO 3166-2).
                 public var state: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case city
-                    case country
-                    case line1
-                    case line2
-                    case postalCode
-                    case state
-                }
-
                 public init(
                     city: String? = nil,
                     country: String? = nil,
@@ -877,11 +706,6 @@ extension Source.Update {
             /// Shipping address for the order.
             public var shipping: Shipping?
 
-            private enum CodingKeys: String, CodingKey {
-                case items
-                case shipping
-            }
-
             public init(
                 items: [Items]? = nil,
                 shipping: Shipping? = nil
@@ -899,15 +723,6 @@ extension Source.Update {
                 /// The quantity of this order item.
                 public var quantity: Int?
                 public var `type`: Type?
-
-                private enum CodingKeys: String, CodingKey {
-                    case amount
-                    case currency
-                    case description
-                    case parent
-                    case quantity
-                    case `type`
-                }
 
                 public init(
                     amount: Int? = nil,
@@ -946,14 +761,6 @@ extension Source.Update {
                 /// The tracking number for a physical product, obtained from the delivery service.
                 public var trackingNumber: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case address
-                    case carrier
-                    case name
-                    case phone
-                    case trackingNumber
-                }
-
                 public init(
                     address: Address,
                     carrier: String? = nil,
@@ -982,15 +789,6 @@ extension Source.Update {
                     public var postalCode: String?
                     /// State, county, province, or region (ISO 3166-2).
                     public var state: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case city
-                        case country
-                        case line1
-                        case line2
-                        case postalCode
-                        case state
-                    }
 
                     public init(
                         city: String? = nil,
@@ -1022,11 +820,6 @@ extension Source.Verify {
         public var expand: [String]?
         /// The values needed to verify the source.
         public var values: [String]
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case values
-        }
 
         public init(
             expand: [String]? = nil,

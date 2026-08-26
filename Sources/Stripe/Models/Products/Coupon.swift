@@ -47,26 +47,6 @@ extension Stripe.Products {
         /// Taking account of the above properties, whether this coupon can still be applied to a customer.
         public var valid: Bool?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case amountOff
-            case appliesTo
-            case created
-            case currency
-            case currencyOptions
-            case duration
-            case durationInMonths
-            case livemode
-            case maxRedemptions
-            case metadata
-            case name
-            case percentOff
-            case redeemBy
-            case timesRedeemed
-            case valid
-        }
-
         public init(
             id: ID,
             object: String,
@@ -116,10 +96,6 @@ extension Stripe.Products {
             /// A list of product IDs this coupon applies to
             public var products: [String]?
 
-            private enum CodingKeys: String, CodingKey {
-                case products
-            }
-
             public init(
                 products: [String]? = nil
             ) {
@@ -130,10 +106,6 @@ extension Stripe.Products {
         public struct CurrencyOptions: Codable, Hashable, Sendable {
             /// Amount (in the `currency` specified) that will be taken off the subtotal of any invoices for this customer.
             public var amountOff: Int?
-
-            private enum CodingKeys: String, CodingKey {
-                case amountOff
-            }
 
             public init(
                 amountOff: Int? = nil

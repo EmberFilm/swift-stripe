@@ -50,22 +50,6 @@ extension Stripe.Billing.Subscription.Item.Create {
         /// A list of Tax Rate ids.
         public var taxRates: Stripe.Clearable<[String]>?
 
-        private enum CodingKeys: String, CodingKey {
-            case billingThresholds
-            case discounts
-            case expand
-            case metadata
-            case paymentBehavior
-            case plan
-            case price
-            case priceData
-            case prorationBehavior
-            case prorationDate
-            case quantity
-            case subscription
-            case taxRates
-        }
-
         public init(
             billingThresholds: Stripe.Clearable<BillingThresholds>? = nil,
             discounts: Stripe.Clearable<[Discounts]>? = nil,
@@ -113,10 +97,6 @@ extension Stripe.Billing.Subscription.Item.Create {
             /// Number of units that meets the billing threshold to advance the subscription to a new billing period (e.g., it takes 1…
             public var usageGte: Int
 
-            private enum CodingKeys: String, CodingKey {
-                case usageGte
-            }
-
             public init(
                 usageGte: Int
             ) {
@@ -131,12 +111,6 @@ extension Stripe.Billing.Subscription.Item.Create {
             public var discount: String?
             /// ID of the promotion code to create a new discount for.
             public var promotionCode: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case coupon
-                case discount
-                case promotionCode
-            }
 
             public init(
                 coupon: String? = nil,
@@ -163,15 +137,6 @@ extension Stripe.Billing.Subscription.Item.Create {
             public var unitAmount: Int?
             /// Same as `unit_amount`, but accepts a decimal value in cents (or local equivalent) with at most 12 decimal places.
             public var unitAmountDecimal: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case currency
-                case product
-                case recurring
-                case taxBehavior
-                case unitAmount
-                case unitAmountDecimal
-            }
 
             public init(
                 currency: Stripe.Currency,
@@ -201,11 +166,6 @@ extension Stripe.Billing.Subscription.Item.Create {
                 public var interval: Interval
                 /// The number of intervals between subscription billings.
                 public var intervalCount: Int?
-
-                private enum CodingKeys: String, CodingKey {
-                    case interval
-                    case intervalCount
-                }
 
                 public init(
                     interval: Interval,
@@ -239,13 +199,6 @@ extension Stripe.Billing.Subscription.Item.Delete {
         public var prorationBehavior: ProrationBehavior?
         /// If set, the proration will be calculated as though the subscription was updated at the given time.
         public var prorationDate: Date?
-
-        private enum CodingKeys: String, CodingKey {
-            case clearUsage
-            case paymentBehavior
-            case prorationBehavior
-            case prorationDate
-        }
 
         public init(
             clearUsage: Bool? = nil,
@@ -290,14 +243,6 @@ extension Stripe.Billing.Subscription.Item.List {
         /// The ID of the subscription whose items will be retrieved.
         public var subscription: String
 
-        private enum CodingKeys: String, CodingKey {
-            case endingBefore
-            case expand
-            case limit
-            case startingAfter
-            case subscription
-        }
-
         public init(
             endingBefore: String? = nil,
             expand: [String]? = nil,
@@ -321,10 +266,6 @@ extension Stripe.Billing.Subscription.Item.Retrieve {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil
@@ -365,22 +306,6 @@ extension Stripe.Billing.Subscription.Item.Update {
         public var quantity: Int?
         /// A list of Tax Rate ids.
         public var taxRates: Stripe.Clearable<[String]>?
-
-        private enum CodingKeys: String, CodingKey {
-            case billingThresholds
-            case discounts
-            case expand
-            case metadata
-            case offSession
-            case paymentBehavior
-            case plan
-            case price
-            case priceData
-            case prorationBehavior
-            case prorationDate
-            case quantity
-            case taxRates
-        }
 
         public init(
             billingThresholds: Stripe.Clearable<BillingThresholds>? = nil,
@@ -429,10 +354,6 @@ extension Stripe.Billing.Subscription.Item.Update {
             /// Number of units that meets the billing threshold to advance the subscription to a new billing period (e.g., it takes 1…
             public var usageGte: Int
 
-            private enum CodingKeys: String, CodingKey {
-                case usageGte
-            }
-
             public init(
                 usageGte: Int
             ) {
@@ -447,12 +368,6 @@ extension Stripe.Billing.Subscription.Item.Update {
             public var discount: String?
             /// ID of the promotion code to create a new discount for.
             public var promotionCode: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case coupon
-                case discount
-                case promotionCode
-            }
 
             public init(
                 coupon: String? = nil,
@@ -479,15 +394,6 @@ extension Stripe.Billing.Subscription.Item.Update {
             public var unitAmount: Int?
             /// Same as `unit_amount`, but accepts a decimal value in cents (or local equivalent) with at most 12 decimal places.
             public var unitAmountDecimal: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case currency
-                case product
-                case recurring
-                case taxBehavior
-                case unitAmount
-                case unitAmountDecimal
-            }
 
             public init(
                 currency: Stripe.Currency,
@@ -517,11 +423,6 @@ extension Stripe.Billing.Subscription.Item.Update {
                 public var interval: Interval
                 /// The number of intervals between subscription billings.
                 public var intervalCount: Int?
-
-                private enum CodingKeys: String, CodingKey {
-                    case interval
-                    case intervalCount
-                }
 
                 public init(
                     interval: Interval,

@@ -64,29 +64,6 @@ extension Stripe.Billing.Invoice.Item.Create {
         /// The decimal unit amount in cents (or local equivalent) of the charge to be applied to the upcoming invoice.
         public var unitAmountDecimal: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case amount
-            case currency
-            case customer
-            case customerAccount
-            case description
-            case discountable
-            case discounts
-            case expand
-            case invoice
-            case metadata
-            case period
-            case priceData
-            case pricing
-            case quantity
-            case quantityDecimal
-            case subscription
-            case taxBehavior
-            case taxCode
-            case taxRates
-            case unitAmountDecimal
-        }
-
         public init(
             amount: Int? = nil,
             currency: Stripe.Currency? = nil,
@@ -145,12 +122,6 @@ extension Stripe.Billing.Invoice.Item.Create {
             /// ID of the promotion code to create a new discount for.
             public var promotionCode: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case coupon
-                case discount
-                case promotionCode
-            }
-
             public init(
                 coupon: String? = nil,
                 discount: String? = nil,
@@ -168,11 +139,6 @@ extension Stripe.Billing.Invoice.Item.Create {
             public var end: Date
             /// The start of the period.
             public var start: Date
-
-            private enum CodingKeys: String, CodingKey {
-                case end
-                case start
-            }
 
             public init(
                 end: Date,
@@ -195,14 +161,6 @@ extension Stripe.Billing.Invoice.Item.Create {
             public var unitAmount: Int?
             /// Same as `unit_amount`, but accepts a decimal value in cents (or local equivalent) with at most 12 decimal places.
             public var unitAmountDecimal: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case currency
-                case product
-                case taxBehavior
-                case unitAmount
-                case unitAmountDecimal
-            }
 
             public init(
                 currency: Stripe.Currency,
@@ -229,10 +187,6 @@ extension Stripe.Billing.Invoice.Item.Create {
         public struct Pricing: Codable, Hashable, Sendable {
             /// The ID of the price object.
             public var price: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case price
-            }
 
             public init(
                 price: String? = nil
@@ -272,18 +226,6 @@ extension Stripe.Billing.Invoice.Item.List {
         /// A cursor for use in pagination.
         public var startingAfter: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case created
-            case customer
-            case customerAccount
-            case endingBefore
-            case expand
-            case invoice
-            case limit
-            case pending
-            case startingAfter
-        }
-
         public init(
             created: Stripe.RangeQuery? = nil,
             customer: String? = nil,
@@ -315,10 +257,6 @@ extension Stripe.Billing.Invoice.Item.Retrieve {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil
@@ -363,24 +301,6 @@ extension Stripe.Billing.Invoice.Item.Update {
         public var taxRates: Stripe.Clearable<[String]>?
         /// The decimal unit amount in cents (or local equivalent) of the charge to be applied to the upcoming invoice.
         public var unitAmountDecimal: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case amount
-            case description
-            case discountable
-            case discounts
-            case expand
-            case metadata
-            case period
-            case priceData
-            case pricing
-            case quantity
-            case quantityDecimal
-            case taxBehavior
-            case taxCode
-            case taxRates
-            case unitAmountDecimal
-        }
 
         public init(
             amount: Int? = nil,
@@ -430,12 +350,6 @@ extension Stripe.Billing.Invoice.Item.Update {
             /// ID of the promotion code to create a new discount for.
             public var promotionCode: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case coupon
-                case discount
-                case promotionCode
-            }
-
             public init(
                 coupon: String? = nil,
                 discount: String? = nil,
@@ -453,11 +367,6 @@ extension Stripe.Billing.Invoice.Item.Update {
             public var end: Date
             /// The start of the period.
             public var start: Date
-
-            private enum CodingKeys: String, CodingKey {
-                case end
-                case start
-            }
 
             public init(
                 end: Date,
@@ -480,14 +389,6 @@ extension Stripe.Billing.Invoice.Item.Update {
             public var unitAmount: Int?
             /// Same as `unit_amount`, but accepts a decimal value in cents (or local equivalent) with at most 12 decimal places.
             public var unitAmountDecimal: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case currency
-                case product
-                case taxBehavior
-                case unitAmount
-                case unitAmountDecimal
-            }
 
             public init(
                 currency: Stripe.Currency,
@@ -514,10 +415,6 @@ extension Stripe.Billing.Invoice.Item.Update {
         public struct Pricing: Codable, Hashable, Sendable {
             /// The ID of the price object.
             public var price: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case price
-            }
 
             public init(
                 price: String? = nil

@@ -36,22 +36,6 @@ extension FinancialConnections {
         /// For webview integrations only.
         public var returnUrl: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case accountHolder
-            case accounts
-            case bankAccountToken
-            case clientSecret
-            case filters
-            case limits
-            case livemode
-            case manualEntry
-            case permissions
-            case prefetch
-            case returnUrl
-        }
-
         public init(
             id: ID,
             object: String,
@@ -106,13 +90,6 @@ extension FinancialConnections {
             /// The URL where this list can be accessed.
             public var url: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case object
-                case data
-                case hasMore
-                case url
-            }
-
             public init(
                 object: String,
                 data: [FinancialConnections.Account]? = nil,
@@ -133,12 +110,6 @@ extension FinancialConnections {
             public var countries: [String]?
             /// Whether the Session should require that linked accounts support payments and retrieve account numbers before completio…
             public var requirePaymentMethodSupport: RequirePaymentMethodSupport?
-
-            private enum CodingKeys: String, CodingKey {
-                case accountSubcategories
-                case countries
-                case requirePaymentMethodSupport
-            }
 
             public init(
                 accountSubcategories: [AccountSubcategories]? = nil,
@@ -170,10 +141,6 @@ extension FinancialConnections {
             /// The number of accounts that can be linked in this Session.
             public var accounts: Int?
 
-            private enum CodingKeys: String, CodingKey {
-                case accounts
-            }
-
             public init(
                 accounts: Int? = nil
             ) {
@@ -184,10 +151,6 @@ extension FinancialConnections {
         public struct ManualEntry: Codable, Hashable, Sendable {
             /// Controls how manual entry of bank account details is presented to the user.
             public var mode: Mode?
-
-            private enum CodingKeys: String, CodingKey {
-                case mode
-            }
 
             public init(
                 mode: Mode? = nil

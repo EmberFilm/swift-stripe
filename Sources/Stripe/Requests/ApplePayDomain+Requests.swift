@@ -26,11 +26,6 @@ extension Stripe.ApplePayDomain.Create {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case domainName
-            case expand
-        }
-
         public init(
             domainName: String,
             expand: [String]? = nil
@@ -61,14 +56,6 @@ extension Stripe.ApplePayDomain.List {
         /// A cursor for use in pagination.
         public var startingAfter: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case domainName
-            case endingBefore
-            case expand
-            case limit
-            case startingAfter
-        }
-
         public init(
             domainName: String? = nil,
             endingBefore: String? = nil,
@@ -92,10 +79,6 @@ extension Stripe.ApplePayDomain.Retrieve {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil

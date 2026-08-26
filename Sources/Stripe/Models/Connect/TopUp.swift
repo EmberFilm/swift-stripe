@@ -52,28 +52,6 @@ extension Stripe.Connect {
         /// A string that identifies this top-up as part of a group.
         public var transferGroup: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case amount
-            case balanceTransaction
-            case created
-            case currency
-            case description
-            case expectedAvailabilityDate
-            case failureCode
-            case failureMessage
-            case initiatedBy
-            case livemode
-            case metadata
-            case paymentMethod
-            case paymentMethodOptions
-            case source
-            case statementDescriptor
-            case status
-            case transferGroup
-        }
-
         public init(
             id: ID,
             object: String,
@@ -135,10 +113,6 @@ extension Stripe.Connect {
             /// If this top-up is to be used with a `us_bank_account` payment method, this sub-hash contains configuration for it.
             public var usBankAccount: UsBankAccount?
 
-            private enum CodingKeys: String, CodingKey {
-                case usBankAccount
-            }
-
             public init(
                 usBankAccount: UsBankAccount? = nil
             ) {
@@ -148,10 +122,6 @@ extension Stripe.Connect {
             public struct UsBankAccount: Codable, Hashable, Sendable {
                 /// The US bank transfer network used for this top-up.
                 public var network: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case network
-                }
 
                 public init(
                     network: String? = nil

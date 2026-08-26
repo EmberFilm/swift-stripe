@@ -44,19 +44,6 @@ extension Stripe.Terminal.Locations.Location.Create {
         /// The phone number for the location.
         public var phone: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case address
-            case addressKana
-            case addressKanji
-            case configurationOverrides
-            case displayName
-            case displayNameKana
-            case displayNameKanji
-            case expand
-            case metadata
-            case phone
-        }
-
         public init(
             address: Address? = nil,
             addressKana: AddressKana? = nil,
@@ -96,15 +83,6 @@ extension Stripe.Terminal.Locations.Location.Create {
             /// State, county, province, or region (ISO 3166-2).
             public var state: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case city
-                case country
-                case line1
-                case line2
-                case postalCode
-                case state
-            }
-
             public init(
                 city: String? = nil,
                 country: String,
@@ -138,16 +116,6 @@ extension Stripe.Terminal.Locations.Location.Create {
             public var state: String?
             /// Town or cho-me.
             public var town: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case city
-                case country
-                case line1
-                case line2
-                case postalCode
-                case state
-                case town
-            }
 
             public init(
                 city: String? = nil,
@@ -184,16 +152,6 @@ extension Stripe.Terminal.Locations.Location.Create {
             public var state: String?
             /// Town or cho-me.
             public var town: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case city
-                case country
-                case line1
-                case line2
-                case postalCode
-                case state
-                case town
-            }
 
             public init(
                 city: String? = nil,
@@ -235,13 +193,6 @@ extension Stripe.Terminal.Locations.Location.List {
         /// A cursor for use in pagination.
         public var startingAfter: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case endingBefore
-            case expand
-            case limit
-            case startingAfter
-        }
-
         public init(
             endingBefore: String? = nil,
             expand: [String]? = nil,
@@ -263,10 +214,6 @@ extension Stripe.Terminal.Locations.Location.Retrieve {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil
@@ -301,19 +248,6 @@ extension Stripe.Terminal.Locations.Location.Update {
         public var metadata: Stripe.Clearable<[String: String]>?
         /// The phone number for the location.
         public var phone: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case address
-            case addressKana
-            case addressKanji
-            case configurationOverrides
-            case displayName
-            case displayNameKana
-            case displayNameKanji
-            case expand
-            case metadata
-            case phone
-        }
 
         public init(
             address: Address? = nil,
@@ -354,15 +288,6 @@ extension Stripe.Terminal.Locations.Location.Update {
             /// State, county, province, or region (ISO 3166-2).
             public var state: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case city
-                case country
-                case line1
-                case line2
-                case postalCode
-                case state
-            }
-
             public init(
                 city: String? = nil,
                 country: String? = nil,
@@ -396,16 +321,6 @@ extension Stripe.Terminal.Locations.Location.Update {
             public var state: String?
             /// Town or cho-me.
             public var town: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case city
-                case country
-                case line1
-                case line2
-                case postalCode
-                case state
-                case town
-            }
 
             public init(
                 city: String? = nil,
@@ -442,16 +357,6 @@ extension Stripe.Terminal.Locations.Location.Update {
             public var state: String?
             /// Town or cho-me.
             public var town: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case city
-                case country
-                case line1
-                case line2
-                case postalCode
-                case state
-                case town
-            }
 
             public init(
                 city: String? = nil,

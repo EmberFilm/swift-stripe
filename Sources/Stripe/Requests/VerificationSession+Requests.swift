@@ -27,10 +27,6 @@ extension VerificationSession.Cancel {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
-
         public init(
             expand: [String]? = nil
         ) {
@@ -66,20 +62,6 @@ extension VerificationSession.Create {
         public var `type`: Type?
         /// The ID of a verification flow from the Dashboard.
         public var verificationFlow: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case clientReferenceId
-            case expand
-            case metadata
-            case options
-            case providedDetails
-            case relatedCustomer
-            case relatedCustomerAccount
-            case relatedPerson
-            case returnUrl
-            case `type`
-            case verificationFlow
-        }
 
         public init(
             clientReferenceId: String? = nil,
@@ -117,10 +99,6 @@ extension VerificationSession.Create {
             /// Options that apply to the document check.
             public var document: Stripe.Clearable<Document>?
 
-            private enum CodingKeys: String, CodingKey {
-                case document
-            }
-
             public init(
                 document: Stripe.Clearable<Document>? = nil
             ) {
@@ -136,13 +114,6 @@ extension VerificationSession.Create {
                 public var requireLiveCapture: Bool?
                 /// Capture a face image and perform a selfie check comparing a photo ID and a picture of your user’s face.
                 public var requireMatchingSelfie: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case allowedTypes
-                    case requireIdNumber
-                    case requireLiveCapture
-                    case requireMatchingSelfie
-                }
 
                 public init(
                     allowedTypes: [AllowedTypes]? = nil,
@@ -171,11 +142,6 @@ extension VerificationSession.Create {
             /// Phone number of user being verified
             public var phone: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case email
-                case phone
-            }
-
             public init(
                 email: String? = nil,
                 phone: String? = nil
@@ -191,11 +157,6 @@ extension VerificationSession.Create {
             public var account: String
             /// A token referencing a Person resource that this verification is being used to verify.
             public var person: String
-
-            private enum CodingKeys: String, CodingKey {
-                case account
-                case person
-            }
 
             public init(
                 account: String,
@@ -231,18 +192,6 @@ extension VerificationSession.List {
         public var startingAfter: String?
         /// Only return VerificationSessions with this status.
         public var status: Status?
-
-        private enum CodingKeys: String, CodingKey {
-            case clientReferenceId
-            case created
-            case endingBefore
-            case expand
-            case limit
-            case relatedCustomer
-            case relatedCustomerAccount
-            case startingAfter
-            case status
-        }
 
         public init(
             clientReferenceId: String? = nil,
@@ -283,10 +232,6 @@ extension VerificationSession.Redact {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
-
         public init(
             expand: [String]? = nil
         ) {
@@ -302,10 +247,6 @@ extension VerificationSession.Retrieve {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil
@@ -331,14 +272,6 @@ extension VerificationSession.Update {
         /// The type of verification check to be performed.
         public var `type`: Type?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case metadata
-            case options
-            case providedDetails
-            case `type`
-        }
-
         public init(
             expand: [String]? = nil,
             metadata: [String: String]? = nil,
@@ -363,10 +296,6 @@ extension VerificationSession.Update {
             /// Options that apply to the document check.
             public var document: Stripe.Clearable<Document>?
 
-            private enum CodingKeys: String, CodingKey {
-                case document
-            }
-
             public init(
                 document: Stripe.Clearable<Document>? = nil
             ) {
@@ -382,13 +311,6 @@ extension VerificationSession.Update {
                 public var requireLiveCapture: Bool?
                 /// Capture a face image and perform a selfie check comparing a photo ID and a picture of your user’s face.
                 public var requireMatchingSelfie: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case allowedTypes
-                    case requireIdNumber
-                    case requireLiveCapture
-                    case requireMatchingSelfie
-                }
 
                 public init(
                     allowedTypes: [AllowedTypes]? = nil,
@@ -416,11 +338,6 @@ extension VerificationSession.Update {
             public var email: String?
             /// Phone number of user being verified
             public var phone: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case email
-                case phone
-            }
 
             public init(
                 email: String? = nil,

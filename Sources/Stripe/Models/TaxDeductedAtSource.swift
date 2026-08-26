@@ -22,14 +22,6 @@ public struct TaxDeductedAtSource: Codable, Hashable, Sendable, Identifiable {
     /// The TAN that was supplied to Stripe when TDS was assessed
     public var taxDeductionAccountNumber: String?
 
-    private enum CodingKeys: String, CodingKey {
-        case id
-        case object
-        case periodEnd
-        case periodStart
-        case taxDeductionAccountNumber
-    }
-
     public init(
         id: ID,
         object: String,

@@ -24,11 +24,6 @@ extension Stripe.Tax.Association.Find {
         /// Valid PaymentIntent id
         public var paymentIntent: String
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case paymentIntent
-        }
-
         public init(
             expand: [String]? = nil,
             paymentIntent: String

@@ -100,10 +100,7 @@ class Struct:
                 out += f"{i}    /// {f.description}\n"
             opt = "" if f.required else "?"
             out += f"{i}    public var {ident(f.name)}: {f.swift_type}{opt}\n"
-        out += f"\n{i}    private enum CodingKeys: String, CodingKey {{\n"
-        for f in self.fields:
-            out += f"{i}        case {ident(f.name)}\n"
-        out += f"{i}    }}\n\n"
+        out += "\n"
         params = [f"{ident(f.name)}: {f.swift_type}" + ("" if f.required else "? = nil") for f in self.fields]
         out += f"{i}    public init(\n" + ",\n".join(f"{i}        {p}" for p in params) + f"\n{i}    ) {{\n"
         for f in self.fields:

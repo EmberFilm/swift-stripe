@@ -28,12 +28,6 @@ extension Stripe.Treasury.DebitReversal.Create {
         /// The ReceivedDebit to reverse.
         public var receivedDebit: String
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case metadata
-            case receivedDebit
-        }
-
         public init(
             expand: [String]? = nil,
             metadata: [String: String]? = nil,
@@ -67,17 +61,6 @@ extension Stripe.Treasury.DebitReversal.List {
         public var startingAfter: String?
         /// Only return DebitReversals for a given status.
         public var status: Status?
-
-        private enum CodingKeys: String, CodingKey {
-            case endingBefore
-            case expand
-            case financialAccount
-            case limit
-            case receivedDebit
-            case resolution
-            case startingAfter
-            case status
-        }
 
         public init(
             endingBefore: String? = nil,
@@ -119,10 +102,6 @@ extension Stripe.Treasury.DebitReversal.Retrieve {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil

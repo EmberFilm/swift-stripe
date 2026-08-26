@@ -74,40 +74,6 @@ extension Stripe.Customers {
         /// ID of the test clock that this customer belongs to.
         @Expandable<Stripe.Billing.TestClocks.TestClock, String> public var testClock: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case address
-            case balance
-            case businessName
-            case cashBalance
-            case created
-            case currency
-            case customerAccount
-            case defaultSource
-            case delinquent
-            case description
-            case discount
-            case email
-            case individualName
-            case invoiceCreditBalance
-            case invoicePrefix
-            case invoiceSettings
-            case livemode
-            case metadata
-            case name
-            case nextInvoiceSequence
-            case phone
-            case preferredLocales
-            case shipping
-            case sources
-            case subscriptions
-            case tax
-            case taxExempt
-            case taxIds
-            case testClock
-        }
-
         public init(
             id: ID,
             object: String,
@@ -191,13 +157,6 @@ extension Stripe.Customers {
             /// Default options for invoice PDF rendering for this customer.
             public var renderingOptions: RenderingOptions?
 
-            private enum CodingKeys: String, CodingKey {
-                case customFields
-                case defaultPaymentMethod
-                case footer
-                case renderingOptions
-            }
-
             public init(
                 customFields: [Stripe.Shared.CustomFields]? = nil,
                 defaultPaymentMethod: String? = nil,
@@ -215,11 +174,6 @@ extension Stripe.Customers {
                 public var amountTaxDisplay: String?
                 /// ID of the invoice rendering template to be used for this customer's invoices.
                 public var template: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case amountTaxDisplay
-                    case template
-                }
 
                 public init(
                     amountTaxDisplay: String? = nil,
@@ -241,13 +195,6 @@ extension Stripe.Customers {
             public var hasMore: Bool?
             /// The URL where this list can be accessed.
             public var url: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case object
-                case data
-                case hasMore
-                case url
-            }
 
             public init(
                 object: String,
@@ -273,13 +220,6 @@ extension Stripe.Customers {
             /// The URL where this list can be accessed.
             public var url: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case object
-                case data
-                case hasMore
-                case url
-            }
-
             public init(
                 object: String,
                 data: [Stripe.Billing.Subscription]? = nil,
@@ -302,13 +242,6 @@ extension Stripe.Customers {
             public var location: Location?
             /// The tax calculation provider used for location resolution.
             public var provider: Provider?
-
-            private enum CodingKeys: String, CodingKey {
-                case automaticTax
-                case ipAddress
-                case location
-                case provider
-            }
 
             public init(
                 automaticTax: AutomaticTax? = nil,
@@ -346,12 +279,6 @@ extension Stripe.Customers {
                 /// The identified tax state, county, province, or region of the customer.
                 public var state: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case country
-                    case source
-                    case state
-                }
-
                 public init(
                     country: String? = nil,
                     source: Source? = nil,
@@ -382,13 +309,6 @@ extension Stripe.Customers {
             public var hasMore: Bool?
             /// The URL where this list can be accessed.
             public var url: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case object
-                case data
-                case hasMore
-                case url
-            }
 
             public init(
                 object: String,

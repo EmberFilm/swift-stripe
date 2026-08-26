@@ -23,10 +23,6 @@ extension Stripe.Tax.Settings.Retrieve {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
-
         public init(
             expand: [String]? = nil
         ) {
@@ -47,12 +43,6 @@ extension Stripe.Tax.Settings.Update {
         /// The place where your business is located.
         public var headOffice: HeadOffice?
 
-        private enum CodingKeys: String, CodingKey {
-            case defaults
-            case expand
-            case headOffice
-        }
-
         public init(
             defaults: Defaults? = nil,
             expand: [String]? = nil,
@@ -69,11 +59,6 @@ extension Stripe.Tax.Settings.Update {
             public var taxBehavior: TaxBehavior?
             /// A tax code ID.
             public var taxCode: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case taxBehavior
-                case taxCode
-            }
 
             public init(
                 taxBehavior: TaxBehavior? = nil,
@@ -95,10 +80,6 @@ extension Stripe.Tax.Settings.Update {
             /// The location of the business for tax purposes.
             public var address: Address
 
-            private enum CodingKeys: String, CodingKey {
-                case address
-            }
-
             public init(
                 address: Address
             ) {
@@ -119,15 +100,6 @@ extension Stripe.Tax.Settings.Update {
                 public var postalCode: String?
                 /// State/province as an ISO 3166-2 subdivision code, without country prefix, such as "NY" or "TX".
                 public var state: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case city
-                    case country
-                    case line1
-                    case line2
-                    case postalCode
-                    case state
-                }
 
                 public init(
                     city: String? = nil,

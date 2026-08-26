@@ -52,29 +52,6 @@ extension Stripe.Treasury {
         /// The Transaction associated with this object.
         @Expandable<Stripe.Treasury.Transaction, String> public var transaction: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case amount
-            case cancelable
-            case created
-            case currency
-            case description
-            case failureDetails
-            case financialAccount
-            case hostedRegulatoryReceiptUrl
-            case linkedFlows
-            case livemode
-            case metadata
-            case originPaymentMethod
-            case originPaymentMethodDetails
-            case returned
-            case statementDescriptor
-            case status
-            case statusTransitions
-            case transaction
-        }
-
         public init(
             id: ID,
             object: String,
@@ -131,10 +108,6 @@ extension Stripe.Treasury {
             /// Reason for the failure.
             public var code: Code?
 
-            private enum CodingKeys: String, CodingKey {
-                case code
-            }
-
             public init(
                 code: Code? = nil
             ) {
@@ -163,10 +136,6 @@ extension Stripe.Treasury {
             /// If funds for this flow were returned after the flow went to the `succeeded` state, this field contains a reference to …
             public var receivedDebit: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case receivedDebit
-            }
-
             public init(
                 receivedDebit: String? = nil
             ) {
@@ -179,12 +148,6 @@ extension Stripe.Treasury {
             /// The type of the payment method used in the InboundTransfer.
             public var `type`: String?
             public var usBankAccount: UsBankAccount?
-
-            private enum CodingKeys: String, CodingKey {
-                case billingDetails
-                case `type`
-                case usBankAccount
-            }
 
             public init(
                 billingDetails: Stripe.Shared.TreasurySharedResourceBillingDetails? = nil,
@@ -213,17 +176,6 @@ extension Stripe.Treasury {
                 public var network: String?
                 /// Routing number of the bank account.
                 public var routingNumber: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case accountHolderType
-                    case accountType
-                    case bankName
-                    case fingerprint
-                    case last4
-                    case mandate
-                    case network
-                    case routingNumber
-                }
 
                 public init(
                     accountHolderType: AccountHolderType? = nil,
@@ -266,12 +218,6 @@ extension Stripe.Treasury {
             public var failedAt: Date?
             /// Timestamp describing when an InboundTransfer changed status to `succeeded`.
             public var succeededAt: Date?
-
-            private enum CodingKeys: String, CodingKey {
-                case canceledAt
-                case failedAt
-                case succeededAt
-            }
 
             public init(
                 canceledAt: Date? = nil,

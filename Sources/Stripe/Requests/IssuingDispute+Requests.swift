@@ -36,15 +36,6 @@ extension IssuingDispute.Create {
         /// Params for disputes related to Treasury FinancialAccounts
         public var treasury: Treasury?
 
-        private enum CodingKeys: String, CodingKey {
-            case amount
-            case evidence
-            case expand
-            case metadata
-            case transaction
-            case treasury
-        }
-
         public init(
             amount: Int? = nil,
             evidence: Evidence? = nil,
@@ -82,18 +73,6 @@ extension IssuingDispute.Create {
             /// Evidence provided when `reason` is 'service_not_as_described'.
             public var serviceNotAsDescribed: Stripe.Clearable<ServiceNotAsDescribed>?
 
-            private enum CodingKeys: String, CodingKey {
-                case canceled
-                case duplicate
-                case fraudulent
-                case merchandiseNotAsDescribed
-                case noValidAuthorization
-                case notReceived
-                case other
-                case reason
-                case serviceNotAsDescribed
-            }
-
             public init(
                 canceled: Stripe.Clearable<Canceled>? = nil,
                 duplicate: Stripe.Clearable<Duplicate>? = nil,
@@ -149,19 +128,6 @@ extension IssuingDispute.Create {
                 /// Date when the product was returned or attempted to be returned.
                 public var returnedAt: Stripe.Clearable<Date>?
 
-                private enum CodingKeys: String, CodingKey {
-                    case additionalDocumentation
-                    case canceledAt
-                    case cancellationPolicyProvided
-                    case cancellationReason
-                    case expectedAt
-                    case explanation
-                    case productDescription
-                    case productType
-                    case returnStatus
-                    case returnedAt
-                }
-
                 public init(
                     additionalDocumentation: String? = nil,
                     canceledAt: Stripe.Clearable<Date>? = nil,
@@ -213,15 +179,6 @@ extension IssuingDispute.Create {
                 /// Transaction (e.g., ipi_...) that the disputed transaction is a duplicate of.
                 public var originalTransaction: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case additionalDocumentation
-                    case cardStatement
-                    case cashReceipt
-                    case checkImage
-                    case explanation
-                    case originalTransaction
-                }
-
                 public init(
                     additionalDocumentation: String? = nil,
                     cardStatement: String? = nil,
@@ -245,11 +202,6 @@ extension IssuingDispute.Create {
                 /// Explanation of why the cardholder is disputing this transaction.
                 public var explanation: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case additionalDocumentation
-                    case explanation
-                }
-
                 public init(
                     additionalDocumentation: String? = nil,
                     explanation: String? = nil
@@ -272,15 +224,6 @@ extension IssuingDispute.Create {
                 public var returnStatus: ReturnStatus?
                 /// Date when the product was returned or attempted to be returned.
                 public var returnedAt: Stripe.Clearable<Date>?
-
-                private enum CodingKeys: String, CodingKey {
-                    case additionalDocumentation
-                    case explanation
-                    case receivedAt
-                    case returnDescription
-                    case returnStatus
-                    case returnedAt
-                }
 
                 public init(
                     additionalDocumentation: String? = nil,
@@ -311,11 +254,6 @@ extension IssuingDispute.Create {
                 /// Explanation of why the cardholder is disputing this transaction.
                 public var explanation: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case additionalDocumentation
-                    case explanation
-                }
-
                 public init(
                     additionalDocumentation: String? = nil,
                     explanation: String? = nil
@@ -336,14 +274,6 @@ extension IssuingDispute.Create {
                 public var productDescription: String?
                 /// Whether the product was a merchandise or service.
                 public var productType: ProductType?
-
-                private enum CodingKeys: String, CodingKey {
-                    case additionalDocumentation
-                    case expectedAt
-                    case explanation
-                    case productDescription
-                    case productType
-                }
 
                 public init(
                     additionalDocumentation: String? = nil,
@@ -376,13 +306,6 @@ extension IssuingDispute.Create {
                 /// Whether the product was a merchandise or service.
                 public var productType: ProductType?
 
-                private enum CodingKeys: String, CodingKey {
-                    case additionalDocumentation
-                    case explanation
-                    case productDescription
-                    case productType
-                }
-
                 public init(
                     additionalDocumentation: String? = nil,
                     explanation: String? = nil,
@@ -414,14 +337,6 @@ extension IssuingDispute.Create {
                 /// Date when the product was received.
                 public var receivedAt: Stripe.Clearable<Date>?
 
-                private enum CodingKeys: String, CodingKey {
-                    case additionalDocumentation
-                    case canceledAt
-                    case cancellationReason
-                    case explanation
-                    case receivedAt
-                }
-
                 public init(
                     additionalDocumentation: String? = nil,
                     canceledAt: Stripe.Clearable<Date>? = nil,
@@ -442,10 +357,6 @@ extension IssuingDispute.Create {
         public struct Treasury: Codable, Hashable, Sendable {
             /// The ID of the ReceivedDebit to initiate an Issuings dispute for.
             public var receivedDebit: String
-
-            private enum CodingKeys: String, CodingKey {
-                case receivedDebit
-            }
 
             public init(
                 receivedDebit: String
@@ -475,16 +386,6 @@ extension IssuingDispute.List {
         public var status: Status?
         /// Select the Issuing dispute for the given transaction.
         public var transaction: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case created
-            case endingBefore
-            case expand
-            case limit
-            case startingAfter
-            case status
-            case transaction
-        }
 
         public init(
             created: Stripe.RangeQuery? = nil,
@@ -522,10 +423,6 @@ extension IssuingDispute.Retrieve {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
-
         public init(
             expand: [String]? = nil
         ) {
@@ -543,11 +440,6 @@ extension IssuingDispute.Submit {
         public var expand: [String]?
         /// Set of key-value pairs that you can attach to an object.
         public var metadata: Stripe.Clearable<[String: String]>?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case metadata
-        }
 
         public init(
             expand: [String]? = nil,
@@ -572,13 +464,6 @@ extension IssuingDispute.Update {
         public var expand: [String]?
         /// Set of key-value pairs that you can attach to an object.
         public var metadata: Stripe.Clearable<[String: String]>?
-
-        private enum CodingKeys: String, CodingKey {
-            case amount
-            case evidence
-            case expand
-            case metadata
-        }
 
         public init(
             amount: Int? = nil,
@@ -612,18 +497,6 @@ extension IssuingDispute.Update {
             public var reason: Reason?
             /// Evidence provided when `reason` is 'service_not_as_described'.
             public var serviceNotAsDescribed: Stripe.Clearable<ServiceNotAsDescribed>?
-
-            private enum CodingKeys: String, CodingKey {
-                case canceled
-                case duplicate
-                case fraudulent
-                case merchandiseNotAsDescribed
-                case noValidAuthorization
-                case notReceived
-                case other
-                case reason
-                case serviceNotAsDescribed
-            }
 
             public init(
                 canceled: Stripe.Clearable<Canceled>? = nil,
@@ -680,19 +553,6 @@ extension IssuingDispute.Update {
                 /// Date when the product was returned or attempted to be returned.
                 public var returnedAt: Stripe.Clearable<Date>?
 
-                private enum CodingKeys: String, CodingKey {
-                    case additionalDocumentation
-                    case canceledAt
-                    case cancellationPolicyProvided
-                    case cancellationReason
-                    case expectedAt
-                    case explanation
-                    case productDescription
-                    case productType
-                    case returnStatus
-                    case returnedAt
-                }
-
                 public init(
                     additionalDocumentation: String? = nil,
                     canceledAt: Stripe.Clearable<Date>? = nil,
@@ -744,15 +604,6 @@ extension IssuingDispute.Update {
                 /// Transaction (e.g., ipi_...) that the disputed transaction is a duplicate of.
                 public var originalTransaction: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case additionalDocumentation
-                    case cardStatement
-                    case cashReceipt
-                    case checkImage
-                    case explanation
-                    case originalTransaction
-                }
-
                 public init(
                     additionalDocumentation: String? = nil,
                     cardStatement: String? = nil,
@@ -776,11 +627,6 @@ extension IssuingDispute.Update {
                 /// Explanation of why the cardholder is disputing this transaction.
                 public var explanation: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case additionalDocumentation
-                    case explanation
-                }
-
                 public init(
                     additionalDocumentation: String? = nil,
                     explanation: String? = nil
@@ -803,15 +649,6 @@ extension IssuingDispute.Update {
                 public var returnStatus: ReturnStatus?
                 /// Date when the product was returned or attempted to be returned.
                 public var returnedAt: Stripe.Clearable<Date>?
-
-                private enum CodingKeys: String, CodingKey {
-                    case additionalDocumentation
-                    case explanation
-                    case receivedAt
-                    case returnDescription
-                    case returnStatus
-                    case returnedAt
-                }
 
                 public init(
                     additionalDocumentation: String? = nil,
@@ -842,11 +679,6 @@ extension IssuingDispute.Update {
                 /// Explanation of why the cardholder is disputing this transaction.
                 public var explanation: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case additionalDocumentation
-                    case explanation
-                }
-
                 public init(
                     additionalDocumentation: String? = nil,
                     explanation: String? = nil
@@ -867,14 +699,6 @@ extension IssuingDispute.Update {
                 public var productDescription: String?
                 /// Whether the product was a merchandise or service.
                 public var productType: ProductType?
-
-                private enum CodingKeys: String, CodingKey {
-                    case additionalDocumentation
-                    case expectedAt
-                    case explanation
-                    case productDescription
-                    case productType
-                }
 
                 public init(
                     additionalDocumentation: String? = nil,
@@ -907,13 +731,6 @@ extension IssuingDispute.Update {
                 /// Whether the product was a merchandise or service.
                 public var productType: ProductType?
 
-                private enum CodingKeys: String, CodingKey {
-                    case additionalDocumentation
-                    case explanation
-                    case productDescription
-                    case productType
-                }
-
                 public init(
                     additionalDocumentation: String? = nil,
                     explanation: String? = nil,
@@ -944,14 +761,6 @@ extension IssuingDispute.Update {
                 public var explanation: String?
                 /// Date when the product was received.
                 public var receivedAt: Stripe.Clearable<Date>?
-
-                private enum CodingKeys: String, CodingKey {
-                    case additionalDocumentation
-                    case canceledAt
-                    case cancellationReason
-                    case explanation
-                    case receivedAt
-                }
 
                 public init(
                     additionalDocumentation: String? = nil,

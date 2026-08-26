@@ -24,11 +24,6 @@ extension BankAccount.Verify {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case amounts
-            case expand
-        }
-
         public init(
             amounts: [Int]? = nil,
             expand: [String]? = nil

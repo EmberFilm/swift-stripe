@@ -34,16 +34,6 @@ extension Stripe.Connect.AccountLink.Create {
         /// The type of account link the user is requesting.
         public var `type`: Type
 
-        private enum CodingKeys: String, CodingKey {
-            case account
-            case collect
-            case collectionOptions
-            case expand
-            case refreshUrl
-            case returnUrl
-            case `type`
-        }
-
         public init(
             account: String,
             collect: Collect? = nil,
@@ -78,11 +68,6 @@ extension Stripe.Connect.AccountLink.Create {
             public var fields: Fields?
             /// Specifies whether the platform collects future_requirements in addition to requirements in Connect Onboarding.
             public var futureRequirements: FutureRequirements?
-
-            private enum CodingKeys: String, CodingKey {
-                case fields
-                case futureRequirements
-            }
 
             public init(
                 fields: Fields? = nil,

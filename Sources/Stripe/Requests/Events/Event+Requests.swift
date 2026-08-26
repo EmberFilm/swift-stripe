@@ -37,17 +37,6 @@ extension Stripe.Events.Event.List {
         /// An array of up to 20 strings containing specific event names.
         public var types: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case created
-            case deliverySuccess
-            case endingBefore
-            case expand
-            case limit
-            case startingAfter
-            case `type`
-            case types
-        }
-
         public init(
             created: Stripe.RangeQuery? = nil,
             deliverySuccess: Bool? = nil,
@@ -77,10 +66,6 @@ extension Stripe.Events.Event.Retrieve {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil

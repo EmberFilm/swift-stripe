@@ -52,29 +52,6 @@ public struct VerificationSession: Codable, Hashable, Sendable, Identifiable {
     /// The user’s verified data.
     public var verifiedOutputs: VerifiedOutputs?
 
-    private enum CodingKeys: String, CodingKey {
-        case id
-        case object
-        case clientReferenceId
-        case clientSecret
-        case created
-        case lastError
-        case lastVerificationReport
-        case livemode
-        case metadata
-        case options
-        case providedDetails
-        case redaction
-        case relatedCustomer
-        case relatedCustomerAccount
-        case relatedPerson
-        case status
-        case `type`
-        case url
-        case verificationFlow
-        case verifiedOutputs
-    }
-
     public init(
         id: ID,
         object: String,
@@ -141,11 +118,6 @@ public struct VerificationSession: Codable, Hashable, Sendable, Identifiable {
         /// A message that explains the reason for verification or user-session failure.
         public var reason: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case code
-            case reason
-        }
-
         public init(
             code: Code? = nil,
             reason: String? = nil
@@ -185,14 +157,6 @@ public struct VerificationSession: Codable, Hashable, Sendable, Identifiable {
         public var matching: Matching?
         public var phone: Phone?
 
-        private enum CodingKeys: String, CodingKey {
-            case document
-            case email
-            case idNumber
-            case matching
-            case phone
-        }
-
         public init(
             document: Document? = nil,
             email: Email? = nil,
@@ -217,13 +181,6 @@ public struct VerificationSession: Codable, Hashable, Sendable, Identifiable {
             /// Capture a face image and perform a selfie check comparing a photo ID and a picture of your user’s face.
             public var requireMatchingSelfie: Bool?
 
-            private enum CodingKeys: String, CodingKey {
-                case allowedTypes
-                case requireIdNumber
-                case requireLiveCapture
-                case requireMatchingSelfie
-            }
-
             public init(
                 allowedTypes: [AllowedTypes]? = nil,
                 requireIdNumber: Bool? = nil,
@@ -247,10 +204,6 @@ public struct VerificationSession: Codable, Hashable, Sendable, Identifiable {
             /// Request one time password verification of `provided_details.email`.
             public var requireVerification: Bool?
 
-            private enum CodingKeys: String, CodingKey {
-                case requireVerification
-            }
-
             public init(
                 requireVerification: Bool? = nil
             ) {
@@ -267,11 +220,6 @@ public struct VerificationSession: Codable, Hashable, Sendable, Identifiable {
             public var dob: Dob?
             /// Strictness of the name matching policy to apply.
             public var name: Name?
-
-            private enum CodingKeys: String, CodingKey {
-                case dob
-                case name
-            }
 
             public init(
                 dob: Dob? = nil,
@@ -298,10 +246,6 @@ public struct VerificationSession: Codable, Hashable, Sendable, Identifiable {
             /// Request one time password verification of `provided_details.phone`.
             public var requireVerification: Bool?
 
-            private enum CodingKeys: String, CodingKey {
-                case requireVerification
-            }
-
             public init(
                 requireVerification: Bool? = nil
             ) {
@@ -316,11 +260,6 @@ public struct VerificationSession: Codable, Hashable, Sendable, Identifiable {
         /// Phone number of user being verified
         public var phone: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case email
-            case phone
-        }
-
         public init(
             email: String? = nil,
             phone: String? = nil
@@ -333,10 +272,6 @@ public struct VerificationSession: Codable, Hashable, Sendable, Identifiable {
     public struct Redaction: Codable, Hashable, Sendable {
         /// Indicates whether this object and its related objects have been redacted or not.
         public var status: Status?
-
-        private enum CodingKeys: String, CodingKey {
-            case status
-        }
 
         public init(
             status: Status? = nil
@@ -357,11 +292,6 @@ public struct VerificationSession: Codable, Hashable, Sendable, Identifiable {
         public var account: String?
         /// Token referencing the related Person resource.
         public var person: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case account
-            case person
-        }
 
         public init(
             account: String? = nil,
@@ -395,20 +325,6 @@ public struct VerificationSession: Codable, Hashable, Sendable, Identifiable {
         public var unparsedPlaceOfBirth: String?
         /// The user's verified sex as it appears in the document.
         public var unparsedSex: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case address
-            case dob
-            case email
-            case firstName
-            case idNumber
-            case idNumberType
-            case lastName
-            case phone
-            case sex
-            case unparsedPlaceOfBirth
-            case unparsedSex
-        }
 
         public init(
             address: Address? = nil,
@@ -459,12 +375,6 @@ public struct VerificationSession: Codable, Hashable, Sendable, Identifiable {
             public var month: Int?
             /// The four-digit year.
             public var year: Int?
-
-            private enum CodingKeys: String, CodingKey {
-                case day
-                case month
-                case year
-            }
 
             public init(
                 day: Int? = nil,

@@ -39,18 +39,6 @@ extension Stripe.Balance.Transaction.List {
         /// Only returns transactions of the given type.
         public var `type`: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case created
-            case currency
-            case endingBefore
-            case expand
-            case limit
-            case payout
-            case source
-            case startingAfter
-            case `type`
-        }
-
         public init(
             created: Stripe.RangeQuery? = nil,
             currency: Stripe.Currency? = nil,
@@ -82,10 +70,6 @@ extension Stripe.Balance.Transaction.Retrieve {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil

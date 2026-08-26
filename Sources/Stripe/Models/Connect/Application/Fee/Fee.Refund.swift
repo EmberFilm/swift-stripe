@@ -30,17 +30,6 @@ extension Stripe.Connect.Application.Fee {
         /// Set of key-value pairs that you can attach to an object.
         public var metadata: [String: String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case amount
-            case balanceTransaction
-            case created
-            case currency
-            case fee
-            case metadata
-        }
-
         public init(
             id: ID,
             object: String,

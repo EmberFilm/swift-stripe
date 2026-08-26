@@ -63,27 +63,6 @@ extension Stripe.Connect.Account.Create {
         /// The `type` parameter is deprecated.
         public var `type`: Type?
 
-        private enum CodingKeys: String, CodingKey {
-            case accountToken
-            case businessProfile
-            case businessType
-            case capabilities
-            case company
-            case controller
-            case country
-            case defaultCurrency
-            case documents
-            case email
-            case expand
-            case externalAccount
-            case groups
-            case individual
-            case metadata
-            case settings
-            case tosAcceptance
-            case `type`
-        }
-
         public init(
             accountToken: String? = nil,
             businessProfile: BusinessProfile? = nil,
@@ -164,21 +143,6 @@ extension Stripe.Connect.Account.Create {
             /// The business's publicly available website.
             public var url: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case annualRevenue
-                case estimatedWorkerCount
-                case mcc
-                case minorityOwnedBusinessDesignation
-                case monthlyEstimatedRevenue
-                case name
-                case productDescription
-                case supportAddress
-                case supportEmail
-                case supportPhone
-                case supportUrl
-                case url
-            }
-
             public init(
                 annualRevenue: AnnualRevenue? = nil,
                 estimatedWorkerCount: Int? = nil,
@@ -224,12 +188,6 @@ extension Stripe.Connect.Account.Create {
                 /// The close-out date of the preceding fiscal year in ISO 8601 format.
                 public var fiscalYearEnd: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case amount
-                    case currency
-                    case fiscalYearEnd
-                }
-
                 public init(
                     amount: Int,
                     currency: Stripe.Currency,
@@ -247,11 +205,6 @@ extension Stripe.Connect.Account.Create {
                 public var amount: Int
                 /// Three-letter ISO currency code, in lowercase.
                 public var currency: Stripe.Currency
-
-                private enum CodingKeys: String, CodingKey {
-                    case amount
-                    case currency
-                }
 
                 public init(
                     amount: Int,
@@ -276,15 +229,6 @@ extension Stripe.Connect.Account.Create {
                 public var postalCode: String?
                 /// State, county, province, or region (ISO 3166-2).
                 public var state: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case city
-                    case country
-                    case line1
-                    case line2
-                    case postalCode
-                    case state
-                }
 
                 public init(
                     city: String? = nil,
@@ -439,75 +383,6 @@ extension Stripe.Connect.Account.Create {
             /// The zip_payments capability.
             public var zipPayments: ZipPayments?
 
-            private enum CodingKeys: String, CodingKey {
-                case acssDebitPayments
-                case affirmPayments
-                case afterpayClearpayPayments
-                case almaPayments
-                case amazonPayPayments
-                case appDistribution
-                case auBecsDebitPayments
-                case bacsDebitPayments
-                case bancontactPayments
-                case bankTransferPayments
-                case billiePayments
-                case bizumPayments
-                case blikPayments
-                case boletoPayments
-                case cardIssuing
-                case cardPayments
-                case cartesBancairesPayments
-                case cashappPayments
-                case cryptoPayments
-                case epsPayments
-                case fpxPayments
-                case gbBankTransferPayments
-                case giropayPayments
-                case grabpayPayments
-                case idealPayments
-                case indiaInternationalPayments
-                case jcbPayments
-                case jpBankTransferPayments
-                case kakaoPayPayments
-                case klarnaPayments
-                case konbiniPayments
-                case krCardPayments
-                case legacyPayments
-                case linkPayments
-                case mbWayPayments
-                case mobilepayPayments
-                case multibancoPayments
-                case mxBankTransferPayments
-                case naverPayPayments
-                case nzBankAccountBecsDebitPayments
-                case oxxoPayments
-                case p24Payments
-                case payByBankPayments
-                case paycoPayments
-                case paynowPayments
-                case paytoPayments
-                case pixPayments
-                case promptpayPayments
-                case revolutPayPayments
-                case samsungPayPayments
-                case satispayPayments
-                case scalapayPayments
-                case sepaBankTransferPayments
-                case sepaDebitPayments
-                case sofortPayments
-                case sunbitPayments
-                case swishPayments
-                case taxReportingUs1099K
-                case taxReportingUs1099Misc
-                case transfers
-                case treasury
-                case twintPayments
-                case upiPayments
-                case usBankAccountAchPayments
-                case usBankTransferPayments
-                case zipPayments
-            }
-
             public init(
                 acssDebitPayments: AcssDebitPayments? = nil,
                 affirmPayments: AffirmPayments? = nil,
@@ -649,10 +524,6 @@ extension Stripe.Connect.Account.Create {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -664,10 +535,6 @@ extension Stripe.Connect.Account.Create {
             public struct AffirmPayments: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -681,10 +548,6 @@ extension Stripe.Connect.Account.Create {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -696,10 +559,6 @@ extension Stripe.Connect.Account.Create {
             public struct AlmaPayments: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -713,10 +572,6 @@ extension Stripe.Connect.Account.Create {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -728,10 +583,6 @@ extension Stripe.Connect.Account.Create {
             public struct AppDistribution: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -745,10 +596,6 @@ extension Stripe.Connect.Account.Create {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -760,10 +607,6 @@ extension Stripe.Connect.Account.Create {
             public struct BacsDebitPayments: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -777,10 +620,6 @@ extension Stripe.Connect.Account.Create {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -792,10 +631,6 @@ extension Stripe.Connect.Account.Create {
             public struct BankTransferPayments: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -809,10 +644,6 @@ extension Stripe.Connect.Account.Create {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -824,10 +655,6 @@ extension Stripe.Connect.Account.Create {
             public struct BizumPayments: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -841,10 +668,6 @@ extension Stripe.Connect.Account.Create {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -856,10 +679,6 @@ extension Stripe.Connect.Account.Create {
             public struct BoletoPayments: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -873,10 +692,6 @@ extension Stripe.Connect.Account.Create {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -888,10 +703,6 @@ extension Stripe.Connect.Account.Create {
             public struct CardPayments: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -905,10 +716,6 @@ extension Stripe.Connect.Account.Create {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -920,10 +727,6 @@ extension Stripe.Connect.Account.Create {
             public struct CashappPayments: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -937,10 +740,6 @@ extension Stripe.Connect.Account.Create {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -952,10 +751,6 @@ extension Stripe.Connect.Account.Create {
             public struct EpsPayments: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -969,10 +764,6 @@ extension Stripe.Connect.Account.Create {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -984,10 +775,6 @@ extension Stripe.Connect.Account.Create {
             public struct GbBankTransferPayments: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -1001,10 +788,6 @@ extension Stripe.Connect.Account.Create {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -1016,10 +799,6 @@ extension Stripe.Connect.Account.Create {
             public struct GrabpayPayments: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -1033,10 +812,6 @@ extension Stripe.Connect.Account.Create {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -1048,10 +823,6 @@ extension Stripe.Connect.Account.Create {
             public struct IndiaInternationalPayments: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -1065,10 +836,6 @@ extension Stripe.Connect.Account.Create {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -1080,10 +847,6 @@ extension Stripe.Connect.Account.Create {
             public struct JpBankTransferPayments: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -1097,10 +860,6 @@ extension Stripe.Connect.Account.Create {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -1112,10 +871,6 @@ extension Stripe.Connect.Account.Create {
             public struct KlarnaPayments: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -1129,10 +884,6 @@ extension Stripe.Connect.Account.Create {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -1144,10 +895,6 @@ extension Stripe.Connect.Account.Create {
             public struct KrCardPayments: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -1161,10 +908,6 @@ extension Stripe.Connect.Account.Create {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -1176,10 +919,6 @@ extension Stripe.Connect.Account.Create {
             public struct LinkPayments: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -1193,10 +932,6 @@ extension Stripe.Connect.Account.Create {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -1208,10 +943,6 @@ extension Stripe.Connect.Account.Create {
             public struct MobilepayPayments: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -1225,10 +956,6 @@ extension Stripe.Connect.Account.Create {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -1240,10 +967,6 @@ extension Stripe.Connect.Account.Create {
             public struct MxBankTransferPayments: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -1257,10 +980,6 @@ extension Stripe.Connect.Account.Create {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -1272,10 +991,6 @@ extension Stripe.Connect.Account.Create {
             public struct NzBankAccountBecsDebitPayments: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -1289,10 +1004,6 @@ extension Stripe.Connect.Account.Create {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -1304,10 +1015,6 @@ extension Stripe.Connect.Account.Create {
             public struct P24Payments: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -1321,10 +1028,6 @@ extension Stripe.Connect.Account.Create {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -1336,10 +1039,6 @@ extension Stripe.Connect.Account.Create {
             public struct PaycoPayments: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -1353,10 +1052,6 @@ extension Stripe.Connect.Account.Create {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -1368,10 +1063,6 @@ extension Stripe.Connect.Account.Create {
             public struct PaytoPayments: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -1385,10 +1076,6 @@ extension Stripe.Connect.Account.Create {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -1400,10 +1087,6 @@ extension Stripe.Connect.Account.Create {
             public struct PromptpayPayments: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -1417,10 +1100,6 @@ extension Stripe.Connect.Account.Create {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -1432,10 +1111,6 @@ extension Stripe.Connect.Account.Create {
             public struct SamsungPayPayments: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -1449,10 +1124,6 @@ extension Stripe.Connect.Account.Create {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -1464,10 +1135,6 @@ extension Stripe.Connect.Account.Create {
             public struct ScalapayPayments: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -1481,10 +1148,6 @@ extension Stripe.Connect.Account.Create {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -1496,10 +1159,6 @@ extension Stripe.Connect.Account.Create {
             public struct SepaDebitPayments: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -1513,10 +1172,6 @@ extension Stripe.Connect.Account.Create {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -1528,10 +1183,6 @@ extension Stripe.Connect.Account.Create {
             public struct SunbitPayments: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -1545,10 +1196,6 @@ extension Stripe.Connect.Account.Create {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -1560,10 +1207,6 @@ extension Stripe.Connect.Account.Create {
             public struct TaxReportingUs1099K: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -1577,10 +1220,6 @@ extension Stripe.Connect.Account.Create {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -1592,10 +1231,6 @@ extension Stripe.Connect.Account.Create {
             public struct Transfers: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -1609,10 +1244,6 @@ extension Stripe.Connect.Account.Create {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -1624,10 +1255,6 @@ extension Stripe.Connect.Account.Create {
             public struct TwintPayments: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -1641,10 +1268,6 @@ extension Stripe.Connect.Account.Create {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -1656,10 +1279,6 @@ extension Stripe.Connect.Account.Create {
             public struct UsBankAccountAchPayments: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -1673,10 +1292,6 @@ extension Stripe.Connect.Account.Create {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -1688,10 +1303,6 @@ extension Stripe.Connect.Account.Create {
             public struct ZipPayments: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -1751,34 +1362,6 @@ extension Stripe.Connect.Account.Create {
             public var vatId: String?
             /// Information on the verification state of the company.
             public var verification: Verification?
-
-            private enum CodingKeys: String, CodingKey {
-                case address
-                case addressKana
-                case addressKanji
-                case administrativeAddress
-                case directorsProvided
-                case directorshipDeclaration
-                case executivesProvided
-                case exportLicenseId
-                case exportPurposeCode
-                case name
-                case nameKana
-                case nameKanji
-                case ownersProvided
-                case ownershipDeclaration
-                case ownershipExemptionReason
-                case phone
-                case principalPlaceOfBusiness
-                case registrationDate
-                case registrationNumber
-                case representativeDeclaration
-                case structure
-                case taxId
-                case taxIdRegistrar
-                case vatId
-                case verification
-            }
 
             public init(
                 address: Address? = nil,
@@ -1882,15 +1465,6 @@ extension Stripe.Connect.Account.Create {
                 /// State, county, province, or region (ISO 3166-2).
                 public var state: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case city
-                    case country
-                    case line1
-                    case line2
-                    case postalCode
-                    case state
-                }
-
                 public init(
                     city: String? = nil,
                     country: String? = nil,
@@ -1924,16 +1498,6 @@ extension Stripe.Connect.Account.Create {
                 public var state: String?
                 /// Town or cho-me.
                 public var town: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case city
-                    case country
-                    case line1
-                    case line2
-                    case postalCode
-                    case state
-                    case town
-                }
 
                 public init(
                     city: String? = nil,
@@ -1971,16 +1535,6 @@ extension Stripe.Connect.Account.Create {
                 /// Town or cho-me.
                 public var town: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case city
-                    case country
-                    case line1
-                    case line2
-                    case postalCode
-                    case state
-                    case town
-                }
-
                 public init(
                     city: String? = nil,
                     country: String? = nil,
@@ -2014,15 +1568,6 @@ extension Stripe.Connect.Account.Create {
                 /// State, county, province, or region (ISO 3166-2).
                 public var state: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case city
-                    case country
-                    case line1
-                    case line2
-                    case postalCode
-                    case state
-                }
-
                 public init(
                     city: String? = nil,
                     country: String? = nil,
@@ -2049,12 +1594,6 @@ extension Stripe.Connect.Account.Create {
                 /// The user agent of the browser from which the directorship declaration attestation was made.
                 public var userAgent: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case date
-                    case ip
-                    case userAgent
-                }
-
                 public init(
                     date: Date? = nil,
                     ip: String? = nil,
@@ -2074,12 +1613,6 @@ extension Stripe.Connect.Account.Create {
                 public var ip: String?
                 /// The user agent of the browser from which the beneficial owner attestation was made.
                 public var userAgent: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case date
-                    case ip
-                    case userAgent
-                }
 
                 public init(
                     date: Date? = nil,
@@ -2106,15 +1639,6 @@ extension Stripe.Connect.Account.Create {
                 /// State, county, province, or region (ISO 3166-2).
                 public var state: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case city
-                    case country
-                    case line1
-                    case line2
-                    case postalCode
-                    case state
-                }
-
                 public init(
                     city: String? = nil,
                     country: String? = nil,
@@ -2140,12 +1664,6 @@ extension Stripe.Connect.Account.Create {
                 /// The four-digit year of registration.
                 public var year: Int
 
-                private enum CodingKeys: String, CodingKey {
-                    case day
-                    case month
-                    case year
-                }
-
                 public init(
                     day: Int,
                     month: Int,
@@ -2166,12 +1684,6 @@ extension Stripe.Connect.Account.Create {
                 /// The user agent of the browser from which the representative declaration attestation was made.
                 public var userAgent: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case date
-                    case ip
-                    case userAgent
-                }
-
                 public init(
                     date: Date? = nil,
                     ip: String? = nil,
@@ -2188,10 +1700,6 @@ extension Stripe.Connect.Account.Create {
                 /// A document verifying the business.
                 public var document: Document?
 
-                private enum CodingKeys: String, CodingKey {
-                    case document
-                }
-
                 public init(
                     document: Document? = nil
                 ) {
@@ -2204,11 +1712,6 @@ extension Stripe.Connect.Account.Create {
                     public var back: String?
                     /// The front of a document returned by a file upload with a `purpose` value of `additional_verification`.
                     public var front: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case back
-                        case front
-                    }
 
                     public init(
                         back: String? = nil,
@@ -2232,13 +1735,6 @@ extension Stripe.Connect.Account.Create {
             /// A hash of configuration for Stripe-hosted dashboards.
             public var stripeDashboard: StripeDashboard?
 
-            private enum CodingKeys: String, CodingKey {
-                case fees
-                case losses
-                case requirementCollection
-                case stripeDashboard
-            }
-
             public init(
                 fees: Fees? = nil,
                 losses: Losses? = nil,
@@ -2261,10 +1757,6 @@ extension Stripe.Connect.Account.Create {
                 /// A value indicating the responsible payer of Stripe fees on this account.
                 public var payer: Payer?
 
-                private enum CodingKeys: String, CodingKey {
-                    case payer
-                }
-
                 public init(
                     payer: Payer? = nil
                 ) {
@@ -2282,10 +1774,6 @@ extension Stripe.Connect.Account.Create {
                 /// A value indicating who is liable when this account can't pay back negative balances resulting from payments.
                 public var payments: Payments?
 
-                private enum CodingKeys: String, CodingKey {
-                    case payments
-                }
-
                 public init(
                     payments: Payments? = nil
                 ) {
@@ -2302,10 +1790,6 @@ extension Stripe.Connect.Account.Create {
             public struct StripeDashboard: Codable, Hashable, Sendable {
                 /// Whether this account should have access to the full Stripe Dashboard (`full`), to the Express Dashboard (`express`), o…
                 public var `type`: Type?
-
-                private enum CodingKeys: String, CodingKey {
-                    case `type`
-                }
 
                 public init(
                     `type`: Type? = nil
@@ -2340,17 +1824,6 @@ extension Stripe.Connect.Account.Create {
             /// One or more documents that demonstrate proof of ultimate beneficial ownership.
             public var proofOfUltimateBeneficialOwnership: ProofOfUltimateBeneficialOwnership?
 
-            private enum CodingKeys: String, CodingKey {
-                case bankAccountOwnershipVerification
-                case companyLicense
-                case companyMemorandumOfAssociation
-                case companyMinisterialDecree
-                case companyRegistrationVerification
-                case companyTaxIdVerification
-                case proofOfAddress
-                case proofOfUltimateBeneficialOwnership
-            }
-
             public init(
                 bankAccountOwnershipVerification: BankAccountOwnershipVerification? = nil,
                 companyLicense: CompanyLicense? = nil,
@@ -2376,10 +1849,6 @@ extension Stripe.Connect.Account.Create {
                 /// One or more document ids returned by a file upload with a `purpose` value of `account_requirement`.
                 public var files: [String]?
 
-                private enum CodingKeys: String, CodingKey {
-                    case files
-                }
-
                 public init(
                     files: [String]? = nil
                 ) {
@@ -2391,10 +1860,6 @@ extension Stripe.Connect.Account.Create {
             public struct CompanyLicense: Codable, Hashable, Sendable {
                 /// One or more document ids returned by a file upload with a `purpose` value of `account_requirement`.
                 public var files: [String]?
-
-                private enum CodingKeys: String, CodingKey {
-                    case files
-                }
 
                 public init(
                     files: [String]? = nil
@@ -2408,10 +1873,6 @@ extension Stripe.Connect.Account.Create {
                 /// One or more document ids returned by a file upload with a `purpose` value of `account_requirement`.
                 public var files: [String]?
 
-                private enum CodingKeys: String, CodingKey {
-                    case files
-                }
-
                 public init(
                     files: [String]? = nil
                 ) {
@@ -2423,10 +1884,6 @@ extension Stripe.Connect.Account.Create {
             public struct CompanyMinisterialDecree: Codable, Hashable, Sendable {
                 /// One or more document ids returned by a file upload with a `purpose` value of `account_requirement`.
                 public var files: [String]?
-
-                private enum CodingKeys: String, CodingKey {
-                    case files
-                }
 
                 public init(
                     files: [String]? = nil
@@ -2440,10 +1897,6 @@ extension Stripe.Connect.Account.Create {
                 /// One or more document ids returned by a file upload with a `purpose` value of `account_requirement`.
                 public var files: [String]?
 
-                private enum CodingKeys: String, CodingKey {
-                    case files
-                }
-
                 public init(
                     files: [String]? = nil
                 ) {
@@ -2456,10 +1909,6 @@ extension Stripe.Connect.Account.Create {
                 /// One or more document ids returned by a file upload with a `purpose` value of `account_requirement`.
                 public var files: [String]?
 
-                private enum CodingKeys: String, CodingKey {
-                    case files
-                }
-
                 public init(
                     files: [String]? = nil
                 ) {
@@ -2471,10 +1920,6 @@ extension Stripe.Connect.Account.Create {
             public struct ProofOfAddress: Codable, Hashable, Sendable {
                 /// One or more document ids returned by a file upload with a `purpose` value of `account_requirement`.
                 public var files: [String]?
-
-                private enum CodingKeys: String, CodingKey {
-                    case files
-                }
 
                 public init(
                     files: [String]? = nil
@@ -2490,11 +1935,6 @@ extension Stripe.Connect.Account.Create {
                 /// Information regarding the person signing the document if applicable.
                 public var signer: Signer?
 
-                private enum CodingKeys: String, CodingKey {
-                    case files
-                    case signer
-                }
-
                 public init(
                     files: [String]? = nil,
                     signer: Signer? = nil
@@ -2507,10 +1947,6 @@ extension Stripe.Connect.Account.Create {
                 public struct Signer: Codable, Hashable, Sendable {
                     /// The token of the person signing the document, if applicable.
                     public var person: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case person
-                    }
 
                     public init(
                         person: String? = nil
@@ -2525,10 +1961,6 @@ extension Stripe.Connect.Account.Create {
         public struct Groups: Codable, Hashable, Sendable {
             /// The group the account is in to determine their payments pricing, and null if the account is on customized pricing.
             public var paymentsPricing: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case paymentsPricing
-            }
 
             public init(
                 paymentsPricing: String? = nil
@@ -2585,32 +2017,6 @@ extension Stripe.Connect.Account.Create {
             public var ssnLast4: String?
             /// The individual's verification document information.
             public var verification: Verification?
-
-            private enum CodingKeys: String, CodingKey {
-                case address
-                case addressKana
-                case addressKanji
-                case dob
-                case email
-                case firstName
-                case firstNameKana
-                case firstNameKanji
-                case fullNameAliases
-                case gender
-                case idNumber
-                case idNumberSecondary
-                case lastName
-                case lastNameKana
-                case lastNameKanji
-                case maidenName
-                case metadata
-                case phone
-                case politicalExposure
-                case registeredAddress
-                case relationship
-                case ssnLast4
-                case verification
-            }
 
             public init(
                 address: Address? = nil,
@@ -2682,15 +2088,6 @@ extension Stripe.Connect.Account.Create {
                 /// State, county, province, or region (ISO 3166-2).
                 public var state: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case city
-                    case country
-                    case line1
-                    case line2
-                    case postalCode
-                    case state
-                }
-
                 public init(
                     city: String? = nil,
                     country: String? = nil,
@@ -2724,16 +2121,6 @@ extension Stripe.Connect.Account.Create {
                 public var state: String?
                 /// Town or cho-me.
                 public var town: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case city
-                    case country
-                    case line1
-                    case line2
-                    case postalCode
-                    case state
-                    case town
-                }
 
                 public init(
                     city: String? = nil,
@@ -2771,16 +2158,6 @@ extension Stripe.Connect.Account.Create {
                 /// Town or cho-me.
                 public var town: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case city
-                    case country
-                    case line1
-                    case line2
-                    case postalCode
-                    case state
-                    case town
-                }
-
                 public init(
                     city: String? = nil,
                     country: String? = nil,
@@ -2808,12 +2185,6 @@ extension Stripe.Connect.Account.Create {
                 /// The four-digit year of birth.
                 public var year: Int
 
-                private enum CodingKeys: String, CodingKey {
-                    case day
-                    case month
-                    case year
-                }
-
                 public init(
                     day: Int,
                     month: Int,
@@ -2839,15 +2210,6 @@ extension Stripe.Connect.Account.Create {
                 public var postalCode: String?
                 /// State, county, province, or region (ISO 3166-2).
                 public var state: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case city
-                    case country
-                    case line1
-                    case line2
-                    case postalCode
-                    case state
-                }
 
                 public init(
                     city: String? = nil,
@@ -2879,14 +2241,6 @@ extension Stripe.Connect.Account.Create {
                 /// The person's title (e.g., CEO, Support Engineer).
                 public var title: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case director
-                    case executive
-                    case owner
-                    case percentOwnership
-                    case title
-                }
-
                 public init(
                     director: Bool? = nil,
                     executive: Bool? = nil,
@@ -2909,11 +2263,6 @@ extension Stripe.Connect.Account.Create {
                 /// An identifying document, either a passport or local ID card.
                 public var document: Document?
 
-                private enum CodingKeys: String, CodingKey {
-                    case additionalDocument
-                    case document
-                }
-
                 public init(
                     additionalDocument: AdditionalDocument? = nil,
                     document: Document? = nil
@@ -2928,11 +2277,6 @@ extension Stripe.Connect.Account.Create {
                     public var back: String?
                     /// The front of an ID returned by a file upload with a `purpose` value of `identity_document`.
                     public var front: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case back
-                        case front
-                    }
 
                     public init(
                         back: String? = nil,
@@ -2949,11 +2293,6 @@ extension Stripe.Connect.Account.Create {
                     public var back: String?
                     /// The front of an ID returned by a file upload with a `purpose` value of `identity_document`.
                     public var front: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case back
-                        case front
-                    }
 
                     public init(
                         back: String? = nil,
@@ -2985,17 +2324,6 @@ extension Stripe.Connect.Account.Create {
             /// Settings specific to the account's Treasury FinancialAccounts.
             public var treasury: Treasury?
 
-            private enum CodingKeys: String, CodingKey {
-                case bacsDebitPayments
-                case branding
-                case cardIssuing
-                case cardPayments
-                case invoices
-                case payments
-                case payouts
-                case treasury
-            }
-
             public init(
                 bacsDebitPayments: BacsDebitPayments? = nil,
                 branding: Branding? = nil,
@@ -3021,10 +2349,6 @@ extension Stripe.Connect.Account.Create {
                 /// The Bacs Direct Debit Display Name for this account.
                 public var displayName: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case displayName
-                }
-
                 public init(
                     displayName: String? = nil
                 ) {
@@ -3042,13 +2366,6 @@ extension Stripe.Connect.Account.Create {
                 public var primaryColor: String?
                 /// A CSS hex color value representing the secondary branding color for this account.
                 public var secondaryColor: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case icon
-                    case logo
-                    case primaryColor
-                    case secondaryColor
-                }
 
                 public init(
                     icon: String? = nil,
@@ -3068,10 +2385,6 @@ extension Stripe.Connect.Account.Create {
                 /// Details on the account's acceptance of the Stripe Issuing Terms and Disclosures.
                 public var tosAcceptance: TosAcceptance?
 
-                private enum CodingKeys: String, CodingKey {
-                    case tosAcceptance
-                }
-
                 public init(
                     tosAcceptance: TosAcceptance? = nil
                 ) {
@@ -3086,12 +2399,6 @@ extension Stripe.Connect.Account.Create {
                     public var ip: String?
                     /// The user agent of the browser from which the account representative accepted the service agreement.
                     public var userAgent: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case date
-                        case ip
-                        case userAgent
-                    }
 
                     public init(
                         date: Date? = nil,
@@ -3116,13 +2423,6 @@ extension Stripe.Connect.Account.Create {
                 /// The Kanji variation of the default text that appears on credit card statements when a charge is made (Japan only).
                 public var statementDescriptorPrefixKanji: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case declineOn
-                    case statementDescriptorPrefix
-                    case statementDescriptorPrefixKana
-                    case statementDescriptorPrefixKanji
-                }
-
                 public init(
                     declineOn: DeclineOn? = nil,
                     statementDescriptorPrefix: String? = nil,
@@ -3142,11 +2442,6 @@ extension Stripe.Connect.Account.Create {
                     /// Whether Stripe automatically declines charges with an incorrect CVC.
                     public var cvcFailure: Bool?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case avsFailure
-                        case cvcFailure
-                    }
-
                     public init(
                         avsFailure: Bool? = nil,
                         cvcFailure: Bool? = nil
@@ -3161,10 +2456,6 @@ extension Stripe.Connect.Account.Create {
             public struct Invoices: Codable, Hashable, Sendable {
                 /// Whether to save the payment method after a payment is completed for a one-time invoice or a subscription invoice when …
                 public var hostedPaymentMethodSave: HostedPaymentMethodSave?
-
-                private enum CodingKeys: String, CodingKey {
-                    case hostedPaymentMethodSave
-                }
 
                 public init(
                     hostedPaymentMethodSave: HostedPaymentMethodSave? = nil
@@ -3188,12 +2479,6 @@ extension Stripe.Connect.Account.Create {
                 /// The Kanji variation of `statement_descriptor` used for charges in Japan.
                 public var statementDescriptorKanji: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case statementDescriptor
-                    case statementDescriptorKana
-                    case statementDescriptorKanji
-                }
-
                 public init(
                     statementDescriptor: String? = nil,
                     statementDescriptorKana: String? = nil,
@@ -3213,12 +2498,6 @@ extension Stripe.Connect.Account.Create {
                 public var schedule: Schedule?
                 /// The text that appears on the bank account statement for payouts.
                 public var statementDescriptor: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case debitNegativeBalances
-                    case schedule
-                    case statementDescriptor
-                }
 
                 public init(
                     debitNegativeBalances: Bool? = nil,
@@ -3244,15 +2523,6 @@ extension Stripe.Connect.Account.Create {
                     public var weeklyAnchor: WeeklyAnchor?
                     /// The days of the week when available funds are paid out, specified as an array, e.g., [`monday`, `tuesday`].
                     public var weeklyPayoutDays: [WeeklyPayoutDays]?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case delayDays
-                        case interval
-                        case monthlyAnchor
-                        case monthlyPayoutDays
-                        case weeklyAnchor
-                        case weeklyPayoutDays
-                    }
 
                     public init(
                         delayDays: DelayDays? = nil,
@@ -3325,10 +2595,6 @@ extension Stripe.Connect.Account.Create {
                 /// Details on the account's acceptance of the Stripe Treasury Services Agreement.
                 public var tosAcceptance: TosAcceptance?
 
-                private enum CodingKeys: String, CodingKey {
-                    case tosAcceptance
-                }
-
                 public init(
                     tosAcceptance: TosAcceptance? = nil
                 ) {
@@ -3343,12 +2609,6 @@ extension Stripe.Connect.Account.Create {
                     public var ip: String?
                     /// The user agent of the browser from which the account representative accepted the service agreement.
                     public var userAgent: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case date
-                        case ip
-                        case userAgent
-                    }
 
                     public init(
                         date: Date? = nil,
@@ -3373,13 +2633,6 @@ extension Stripe.Connect.Account.Create {
             public var serviceAgreement: String?
             /// The user agent of the browser from which the account representative accepted their service agreement.
             public var userAgent: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case date
-                case ip
-                case serviceAgreement
-                case userAgent
-            }
 
             public init(
                 date: Date? = nil,
@@ -3417,14 +2670,6 @@ extension Stripe.Connect.Account.List {
         /// A cursor for use in pagination.
         public var startingAfter: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case created
-            case endingBefore
-            case expand
-            case limit
-            case startingAfter
-        }
-
         public init(
             created: Stripe.RangeQuery? = nil,
             endingBefore: String? = nil,
@@ -3453,12 +2698,6 @@ extension Stripe.Connect.Account.Reject {
         /// The reason for rejecting the account.
         public var reason: String
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case payoutsAction
-            case reason
-        }
-
         public init(
             expand: [String]? = nil,
             payoutsAction: PayoutsAction? = nil,
@@ -3484,10 +2723,6 @@ extension Stripe.Connect.Account.Retrieve {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
-
         public init(
             expand: [String]? = nil
         ) {
@@ -3504,10 +2739,6 @@ extension Stripe.Connect.Account.RetrieveCurrent {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
-
         public init(
             expand: [String]? = nil
         ) {
@@ -3523,10 +2754,6 @@ extension Stripe.Connect.Account.Unreject {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil
@@ -3571,24 +2798,6 @@ extension Stripe.Connect.Account.Update {
         public var settings: Settings?
         /// Details on the account's acceptance of the Stripe Services Agreement.
         public var tosAcceptance: TosAcceptance?
-
-        private enum CodingKeys: String, CodingKey {
-            case accountToken
-            case businessProfile
-            case businessType
-            case capabilities
-            case company
-            case defaultCurrency
-            case documents
-            case email
-            case expand
-            case externalAccount
-            case groups
-            case individual
-            case metadata
-            case settings
-            case tosAcceptance
-        }
 
         public init(
             accountToken: String? = nil,
@@ -3658,21 +2867,6 @@ extension Stripe.Connect.Account.Update {
             /// The business's publicly available website.
             public var url: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case annualRevenue
-                case estimatedWorkerCount
-                case mcc
-                case minorityOwnedBusinessDesignation
-                case monthlyEstimatedRevenue
-                case name
-                case productDescription
-                case supportAddress
-                case supportEmail
-                case supportPhone
-                case supportUrl
-                case url
-            }
-
             public init(
                 annualRevenue: AnnualRevenue? = nil,
                 estimatedWorkerCount: Int? = nil,
@@ -3718,12 +2912,6 @@ extension Stripe.Connect.Account.Update {
                 /// The close-out date of the preceding fiscal year in ISO 8601 format.
                 public var fiscalYearEnd: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case amount
-                    case currency
-                    case fiscalYearEnd
-                }
-
                 public init(
                     amount: Int,
                     currency: Stripe.Currency,
@@ -3741,11 +2929,6 @@ extension Stripe.Connect.Account.Update {
                 public var amount: Int
                 /// Three-letter ISO currency code, in lowercase.
                 public var currency: Stripe.Currency
-
-                private enum CodingKeys: String, CodingKey {
-                    case amount
-                    case currency
-                }
 
                 public init(
                     amount: Int,
@@ -3770,15 +2953,6 @@ extension Stripe.Connect.Account.Update {
                 public var postalCode: String?
                 /// State, county, province, or region (ISO 3166-2).
                 public var state: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case city
-                    case country
-                    case line1
-                    case line2
-                    case postalCode
-                    case state
-                }
 
                 public init(
                     city: String? = nil,
@@ -3933,75 +3107,6 @@ extension Stripe.Connect.Account.Update {
             /// The zip_payments capability.
             public var zipPayments: ZipPayments?
 
-            private enum CodingKeys: String, CodingKey {
-                case acssDebitPayments
-                case affirmPayments
-                case afterpayClearpayPayments
-                case almaPayments
-                case amazonPayPayments
-                case appDistribution
-                case auBecsDebitPayments
-                case bacsDebitPayments
-                case bancontactPayments
-                case bankTransferPayments
-                case billiePayments
-                case bizumPayments
-                case blikPayments
-                case boletoPayments
-                case cardIssuing
-                case cardPayments
-                case cartesBancairesPayments
-                case cashappPayments
-                case cryptoPayments
-                case epsPayments
-                case fpxPayments
-                case gbBankTransferPayments
-                case giropayPayments
-                case grabpayPayments
-                case idealPayments
-                case indiaInternationalPayments
-                case jcbPayments
-                case jpBankTransferPayments
-                case kakaoPayPayments
-                case klarnaPayments
-                case konbiniPayments
-                case krCardPayments
-                case legacyPayments
-                case linkPayments
-                case mbWayPayments
-                case mobilepayPayments
-                case multibancoPayments
-                case mxBankTransferPayments
-                case naverPayPayments
-                case nzBankAccountBecsDebitPayments
-                case oxxoPayments
-                case p24Payments
-                case payByBankPayments
-                case paycoPayments
-                case paynowPayments
-                case paytoPayments
-                case pixPayments
-                case promptpayPayments
-                case revolutPayPayments
-                case samsungPayPayments
-                case satispayPayments
-                case scalapayPayments
-                case sepaBankTransferPayments
-                case sepaDebitPayments
-                case sofortPayments
-                case sunbitPayments
-                case swishPayments
-                case taxReportingUs1099K
-                case taxReportingUs1099Misc
-                case transfers
-                case treasury
-                case twintPayments
-                case upiPayments
-                case usBankAccountAchPayments
-                case usBankTransferPayments
-                case zipPayments
-            }
-
             public init(
                 acssDebitPayments: AcssDebitPayments? = nil,
                 affirmPayments: AffirmPayments? = nil,
@@ -4143,10 +3248,6 @@ extension Stripe.Connect.Account.Update {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -4158,10 +3259,6 @@ extension Stripe.Connect.Account.Update {
             public struct AffirmPayments: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -4175,10 +3272,6 @@ extension Stripe.Connect.Account.Update {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -4190,10 +3283,6 @@ extension Stripe.Connect.Account.Update {
             public struct AlmaPayments: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -4207,10 +3296,6 @@ extension Stripe.Connect.Account.Update {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -4222,10 +3307,6 @@ extension Stripe.Connect.Account.Update {
             public struct AppDistribution: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -4239,10 +3320,6 @@ extension Stripe.Connect.Account.Update {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -4254,10 +3331,6 @@ extension Stripe.Connect.Account.Update {
             public struct BacsDebitPayments: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -4271,10 +3344,6 @@ extension Stripe.Connect.Account.Update {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -4286,10 +3355,6 @@ extension Stripe.Connect.Account.Update {
             public struct BankTransferPayments: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -4303,10 +3368,6 @@ extension Stripe.Connect.Account.Update {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -4318,10 +3379,6 @@ extension Stripe.Connect.Account.Update {
             public struct BizumPayments: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -4335,10 +3392,6 @@ extension Stripe.Connect.Account.Update {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -4350,10 +3403,6 @@ extension Stripe.Connect.Account.Update {
             public struct BoletoPayments: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -4367,10 +3416,6 @@ extension Stripe.Connect.Account.Update {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -4382,10 +3427,6 @@ extension Stripe.Connect.Account.Update {
             public struct CardPayments: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -4399,10 +3440,6 @@ extension Stripe.Connect.Account.Update {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -4414,10 +3451,6 @@ extension Stripe.Connect.Account.Update {
             public struct CashappPayments: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -4431,10 +3464,6 @@ extension Stripe.Connect.Account.Update {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -4446,10 +3475,6 @@ extension Stripe.Connect.Account.Update {
             public struct EpsPayments: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -4463,10 +3488,6 @@ extension Stripe.Connect.Account.Update {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -4478,10 +3499,6 @@ extension Stripe.Connect.Account.Update {
             public struct GbBankTransferPayments: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -4495,10 +3512,6 @@ extension Stripe.Connect.Account.Update {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -4510,10 +3523,6 @@ extension Stripe.Connect.Account.Update {
             public struct GrabpayPayments: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -4527,10 +3536,6 @@ extension Stripe.Connect.Account.Update {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -4542,10 +3547,6 @@ extension Stripe.Connect.Account.Update {
             public struct IndiaInternationalPayments: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -4559,10 +3560,6 @@ extension Stripe.Connect.Account.Update {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -4574,10 +3571,6 @@ extension Stripe.Connect.Account.Update {
             public struct JpBankTransferPayments: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -4591,10 +3584,6 @@ extension Stripe.Connect.Account.Update {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -4606,10 +3595,6 @@ extension Stripe.Connect.Account.Update {
             public struct KlarnaPayments: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -4623,10 +3608,6 @@ extension Stripe.Connect.Account.Update {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -4638,10 +3619,6 @@ extension Stripe.Connect.Account.Update {
             public struct KrCardPayments: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -4655,10 +3632,6 @@ extension Stripe.Connect.Account.Update {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -4670,10 +3643,6 @@ extension Stripe.Connect.Account.Update {
             public struct LinkPayments: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -4687,10 +3656,6 @@ extension Stripe.Connect.Account.Update {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -4702,10 +3667,6 @@ extension Stripe.Connect.Account.Update {
             public struct MobilepayPayments: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -4719,10 +3680,6 @@ extension Stripe.Connect.Account.Update {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -4734,10 +3691,6 @@ extension Stripe.Connect.Account.Update {
             public struct MxBankTransferPayments: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -4751,10 +3704,6 @@ extension Stripe.Connect.Account.Update {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -4766,10 +3715,6 @@ extension Stripe.Connect.Account.Update {
             public struct NzBankAccountBecsDebitPayments: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -4783,10 +3728,6 @@ extension Stripe.Connect.Account.Update {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -4798,10 +3739,6 @@ extension Stripe.Connect.Account.Update {
             public struct P24Payments: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -4815,10 +3752,6 @@ extension Stripe.Connect.Account.Update {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -4830,10 +3763,6 @@ extension Stripe.Connect.Account.Update {
             public struct PaycoPayments: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -4847,10 +3776,6 @@ extension Stripe.Connect.Account.Update {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -4862,10 +3787,6 @@ extension Stripe.Connect.Account.Update {
             public struct PaytoPayments: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -4879,10 +3800,6 @@ extension Stripe.Connect.Account.Update {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -4894,10 +3811,6 @@ extension Stripe.Connect.Account.Update {
             public struct PromptpayPayments: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -4911,10 +3824,6 @@ extension Stripe.Connect.Account.Update {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -4926,10 +3835,6 @@ extension Stripe.Connect.Account.Update {
             public struct SamsungPayPayments: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -4943,10 +3848,6 @@ extension Stripe.Connect.Account.Update {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -4958,10 +3859,6 @@ extension Stripe.Connect.Account.Update {
             public struct ScalapayPayments: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -4975,10 +3872,6 @@ extension Stripe.Connect.Account.Update {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -4990,10 +3883,6 @@ extension Stripe.Connect.Account.Update {
             public struct SepaDebitPayments: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -5007,10 +3896,6 @@ extension Stripe.Connect.Account.Update {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -5022,10 +3907,6 @@ extension Stripe.Connect.Account.Update {
             public struct SunbitPayments: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -5039,10 +3920,6 @@ extension Stripe.Connect.Account.Update {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -5054,10 +3931,6 @@ extension Stripe.Connect.Account.Update {
             public struct TaxReportingUs1099K: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -5071,10 +3944,6 @@ extension Stripe.Connect.Account.Update {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -5086,10 +3955,6 @@ extension Stripe.Connect.Account.Update {
             public struct Transfers: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -5103,10 +3968,6 @@ extension Stripe.Connect.Account.Update {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -5118,10 +3979,6 @@ extension Stripe.Connect.Account.Update {
             public struct TwintPayments: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -5135,10 +3992,6 @@ extension Stripe.Connect.Account.Update {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -5150,10 +4003,6 @@ extension Stripe.Connect.Account.Update {
             public struct UsBankAccountAchPayments: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -5167,10 +4016,6 @@ extension Stripe.Connect.Account.Update {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool? = nil
                 ) {
@@ -5182,10 +4027,6 @@ extension Stripe.Connect.Account.Update {
             public struct ZipPayments: Codable, Hashable, Sendable {
                 /// Passing true requests the capability for the account, if it is not already requested.
                 public var requested: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool? = nil
@@ -5244,34 +4085,6 @@ extension Stripe.Connect.Account.Update {
             public var vatId: String?
             /// Information on the verification state of the company.
             public var verification: Verification?
-
-            private enum CodingKeys: String, CodingKey {
-                case address
-                case addressKana
-                case addressKanji
-                case administrativeAddress
-                case directorsProvided
-                case directorshipDeclaration
-                case executivesProvided
-                case exportLicenseId
-                case exportPurposeCode
-                case name
-                case nameKana
-                case nameKanji
-                case ownersProvided
-                case ownershipDeclaration
-                case ownershipExemptionReason
-                case phone
-                case principalPlaceOfBusiness
-                case registrationDate
-                case registrationNumber
-                case representativeDeclaration
-                case structure
-                case taxId
-                case taxIdRegistrar
-                case vatId
-                case verification
-            }
 
             public init(
                 address: Address? = nil,
@@ -5375,15 +4188,6 @@ extension Stripe.Connect.Account.Update {
                 /// State, county, province, or region (ISO 3166-2).
                 public var state: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case city
-                    case country
-                    case line1
-                    case line2
-                    case postalCode
-                    case state
-                }
-
                 public init(
                     city: String? = nil,
                     country: String? = nil,
@@ -5417,16 +4221,6 @@ extension Stripe.Connect.Account.Update {
                 public var state: String?
                 /// Town or cho-me.
                 public var town: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case city
-                    case country
-                    case line1
-                    case line2
-                    case postalCode
-                    case state
-                    case town
-                }
 
                 public init(
                     city: String? = nil,
@@ -5464,16 +4258,6 @@ extension Stripe.Connect.Account.Update {
                 /// Town or cho-me.
                 public var town: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case city
-                    case country
-                    case line1
-                    case line2
-                    case postalCode
-                    case state
-                    case town
-                }
-
                 public init(
                     city: String? = nil,
                     country: String? = nil,
@@ -5507,15 +4291,6 @@ extension Stripe.Connect.Account.Update {
                 /// State, county, province, or region (ISO 3166-2).
                 public var state: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case city
-                    case country
-                    case line1
-                    case line2
-                    case postalCode
-                    case state
-                }
-
                 public init(
                     city: String? = nil,
                     country: String? = nil,
@@ -5542,12 +4317,6 @@ extension Stripe.Connect.Account.Update {
                 /// The user agent of the browser from which the directorship declaration attestation was made.
                 public var userAgent: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case date
-                    case ip
-                    case userAgent
-                }
-
                 public init(
                     date: Date? = nil,
                     ip: String? = nil,
@@ -5567,12 +4336,6 @@ extension Stripe.Connect.Account.Update {
                 public var ip: String?
                 /// The user agent of the browser from which the beneficial owner attestation was made.
                 public var userAgent: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case date
-                    case ip
-                    case userAgent
-                }
 
                 public init(
                     date: Date? = nil,
@@ -5599,15 +4362,6 @@ extension Stripe.Connect.Account.Update {
                 /// State, county, province, or region (ISO 3166-2).
                 public var state: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case city
-                    case country
-                    case line1
-                    case line2
-                    case postalCode
-                    case state
-                }
-
                 public init(
                     city: String? = nil,
                     country: String? = nil,
@@ -5633,12 +4387,6 @@ extension Stripe.Connect.Account.Update {
                 /// The four-digit year of registration.
                 public var year: Int
 
-                private enum CodingKeys: String, CodingKey {
-                    case day
-                    case month
-                    case year
-                }
-
                 public init(
                     day: Int,
                     month: Int,
@@ -5659,12 +4407,6 @@ extension Stripe.Connect.Account.Update {
                 /// The user agent of the browser from which the representative declaration attestation was made.
                 public var userAgent: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case date
-                    case ip
-                    case userAgent
-                }
-
                 public init(
                     date: Date? = nil,
                     ip: String? = nil,
@@ -5681,10 +4423,6 @@ extension Stripe.Connect.Account.Update {
                 /// A document verifying the business.
                 public var document: Document?
 
-                private enum CodingKeys: String, CodingKey {
-                    case document
-                }
-
                 public init(
                     document: Document? = nil
                 ) {
@@ -5697,11 +4435,6 @@ extension Stripe.Connect.Account.Update {
                     public var back: String?
                     /// The front of a document returned by a file upload with a `purpose` value of `additional_verification`.
                     public var front: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case back
-                        case front
-                    }
 
                     public init(
                         back: String? = nil,
@@ -5735,18 +4468,6 @@ extension Stripe.Connect.Account.Update {
             /// One or more documents that demonstrate proof of ultimate beneficial ownership.
             public var proofOfUltimateBeneficialOwnership: ProofOfUltimateBeneficialOwnership?
 
-            private enum CodingKeys: String, CodingKey {
-                case bankAccountOwnershipVerification
-                case companyLicense
-                case companyMemorandumOfAssociation
-                case companyMinisterialDecree
-                case companyRegistrationVerification
-                case companyTaxIdVerification
-                case proofOfAddress
-                case proofOfRegistration
-                case proofOfUltimateBeneficialOwnership
-            }
-
             public init(
                 bankAccountOwnershipVerification: BankAccountOwnershipVerification? = nil,
                 companyLicense: CompanyLicense? = nil,
@@ -5774,10 +4495,6 @@ extension Stripe.Connect.Account.Update {
                 /// One or more document ids returned by a file upload with a `purpose` value of `account_requirement`.
                 public var files: [String]?
 
-                private enum CodingKeys: String, CodingKey {
-                    case files
-                }
-
                 public init(
                     files: [String]? = nil
                 ) {
@@ -5789,10 +4506,6 @@ extension Stripe.Connect.Account.Update {
             public struct CompanyLicense: Codable, Hashable, Sendable {
                 /// One or more document ids returned by a file upload with a `purpose` value of `account_requirement`.
                 public var files: [String]?
-
-                private enum CodingKeys: String, CodingKey {
-                    case files
-                }
 
                 public init(
                     files: [String]? = nil
@@ -5806,10 +4519,6 @@ extension Stripe.Connect.Account.Update {
                 /// One or more document ids returned by a file upload with a `purpose` value of `account_requirement`.
                 public var files: [String]?
 
-                private enum CodingKeys: String, CodingKey {
-                    case files
-                }
-
                 public init(
                     files: [String]? = nil
                 ) {
@@ -5821,10 +4530,6 @@ extension Stripe.Connect.Account.Update {
             public struct CompanyMinisterialDecree: Codable, Hashable, Sendable {
                 /// One or more document ids returned by a file upload with a `purpose` value of `account_requirement`.
                 public var files: [String]?
-
-                private enum CodingKeys: String, CodingKey {
-                    case files
-                }
 
                 public init(
                     files: [String]? = nil
@@ -5838,10 +4543,6 @@ extension Stripe.Connect.Account.Update {
                 /// One or more document ids returned by a file upload with a `purpose` value of `account_requirement`.
                 public var files: [String]?
 
-                private enum CodingKeys: String, CodingKey {
-                    case files
-                }
-
                 public init(
                     files: [String]? = nil
                 ) {
@@ -5854,10 +4555,6 @@ extension Stripe.Connect.Account.Update {
                 /// One or more document ids returned by a file upload with a `purpose` value of `account_requirement`.
                 public var files: [String]?
 
-                private enum CodingKeys: String, CodingKey {
-                    case files
-                }
-
                 public init(
                     files: [String]? = nil
                 ) {
@@ -5869,10 +4566,6 @@ extension Stripe.Connect.Account.Update {
             public struct ProofOfAddress: Codable, Hashable, Sendable {
                 /// One or more document ids returned by a file upload with a `purpose` value of `account_requirement`.
                 public var files: [String]?
-
-                private enum CodingKeys: String, CodingKey {
-                    case files
-                }
 
                 public init(
                     files: [String]? = nil
@@ -5888,11 +4581,6 @@ extension Stripe.Connect.Account.Update {
                 /// Information regarding the person signing the document if applicable.
                 public var signer: Signer?
 
-                private enum CodingKeys: String, CodingKey {
-                    case files
-                    case signer
-                }
-
                 public init(
                     files: [String]? = nil,
                     signer: Signer? = nil
@@ -5905,10 +4593,6 @@ extension Stripe.Connect.Account.Update {
                 public struct Signer: Codable, Hashable, Sendable {
                     /// The token of the person signing the document, if applicable.
                     public var person: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case person
-                    }
 
                     public init(
                         person: String? = nil
@@ -5925,11 +4609,6 @@ extension Stripe.Connect.Account.Update {
                 /// Information regarding the person signing the document if applicable.
                 public var signer: Signer?
 
-                private enum CodingKeys: String, CodingKey {
-                    case files
-                    case signer
-                }
-
                 public init(
                     files: [String]? = nil,
                     signer: Signer? = nil
@@ -5942,10 +4621,6 @@ extension Stripe.Connect.Account.Update {
                 public struct Signer: Codable, Hashable, Sendable {
                     /// The token of the person signing the document, if applicable.
                     public var person: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case person
-                    }
 
                     public init(
                         person: String? = nil
@@ -5960,10 +4635,6 @@ extension Stripe.Connect.Account.Update {
         public struct Groups: Codable, Hashable, Sendable {
             /// The group the account is in to determine their payments pricing, and null if the account is on customized pricing.
             public var paymentsPricing: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case paymentsPricing
-            }
 
             public init(
                 paymentsPricing: String? = nil
@@ -6020,32 +4691,6 @@ extension Stripe.Connect.Account.Update {
             public var ssnLast4: String?
             /// The individual's verification document information.
             public var verification: Verification?
-
-            private enum CodingKeys: String, CodingKey {
-                case address
-                case addressKana
-                case addressKanji
-                case dob
-                case email
-                case firstName
-                case firstNameKana
-                case firstNameKanji
-                case fullNameAliases
-                case gender
-                case idNumber
-                case idNumberSecondary
-                case lastName
-                case lastNameKana
-                case lastNameKanji
-                case maidenName
-                case metadata
-                case phone
-                case politicalExposure
-                case registeredAddress
-                case relationship
-                case ssnLast4
-                case verification
-            }
 
             public init(
                 address: Address? = nil,
@@ -6117,15 +4762,6 @@ extension Stripe.Connect.Account.Update {
                 /// State, county, province, or region (ISO 3166-2).
                 public var state: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case city
-                    case country
-                    case line1
-                    case line2
-                    case postalCode
-                    case state
-                }
-
                 public init(
                     city: String? = nil,
                     country: String? = nil,
@@ -6159,16 +4795,6 @@ extension Stripe.Connect.Account.Update {
                 public var state: String?
                 /// Town or cho-me.
                 public var town: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case city
-                    case country
-                    case line1
-                    case line2
-                    case postalCode
-                    case state
-                    case town
-                }
 
                 public init(
                     city: String? = nil,
@@ -6206,16 +4832,6 @@ extension Stripe.Connect.Account.Update {
                 /// Town or cho-me.
                 public var town: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case city
-                    case country
-                    case line1
-                    case line2
-                    case postalCode
-                    case state
-                    case town
-                }
-
                 public init(
                     city: String? = nil,
                     country: String? = nil,
@@ -6243,12 +4859,6 @@ extension Stripe.Connect.Account.Update {
                 /// The four-digit year of birth.
                 public var year: Int
 
-                private enum CodingKeys: String, CodingKey {
-                    case day
-                    case month
-                    case year
-                }
-
                 public init(
                     day: Int,
                     month: Int,
@@ -6274,15 +4884,6 @@ extension Stripe.Connect.Account.Update {
                 public var postalCode: String?
                 /// State, county, province, or region (ISO 3166-2).
                 public var state: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case city
-                    case country
-                    case line1
-                    case line2
-                    case postalCode
-                    case state
-                }
 
                 public init(
                     city: String? = nil,
@@ -6314,14 +4915,6 @@ extension Stripe.Connect.Account.Update {
                 /// The person's title (e.g., CEO, Support Engineer).
                 public var title: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case director
-                    case executive
-                    case owner
-                    case percentOwnership
-                    case title
-                }
-
                 public init(
                     director: Bool? = nil,
                     executive: Bool? = nil,
@@ -6344,11 +4937,6 @@ extension Stripe.Connect.Account.Update {
                 /// An identifying document, either a passport or local ID card.
                 public var document: Document?
 
-                private enum CodingKeys: String, CodingKey {
-                    case additionalDocument
-                    case document
-                }
-
                 public init(
                     additionalDocument: AdditionalDocument? = nil,
                     document: Document? = nil
@@ -6363,11 +4951,6 @@ extension Stripe.Connect.Account.Update {
                     public var back: String?
                     /// The front of an ID returned by a file upload with a `purpose` value of `identity_document`.
                     public var front: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case back
-                        case front
-                    }
 
                     public init(
                         back: String? = nil,
@@ -6384,11 +4967,6 @@ extension Stripe.Connect.Account.Update {
                     public var back: String?
                     /// The front of an ID returned by a file upload with a `purpose` value of `identity_document`.
                     public var front: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case back
-                        case front
-                    }
 
                     public init(
                         back: String? = nil,
@@ -6422,18 +5000,6 @@ extension Stripe.Connect.Account.Update {
             /// Settings specific to the account's Treasury FinancialAccounts.
             public var treasury: Treasury?
 
-            private enum CodingKeys: String, CodingKey {
-                case bacsDebitPayments
-                case branding
-                case cardIssuing
-                case cardPayments
-                case invoices
-                case payments
-                case payouts
-                case sepaDebitPayments
-                case treasury
-            }
-
             public init(
                 bacsDebitPayments: BacsDebitPayments? = nil,
                 branding: Branding? = nil,
@@ -6461,10 +5027,6 @@ extension Stripe.Connect.Account.Update {
                 /// The Bacs Direct Debit Display Name for this account.
                 public var displayName: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case displayName
-                }
-
                 public init(
                     displayName: String? = nil
                 ) {
@@ -6482,13 +5044,6 @@ extension Stripe.Connect.Account.Update {
                 public var primaryColor: String?
                 /// A CSS hex color value representing the secondary branding color for this account.
                 public var secondaryColor: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case icon
-                    case logo
-                    case primaryColor
-                    case secondaryColor
-                }
 
                 public init(
                     icon: String? = nil,
@@ -6508,10 +5063,6 @@ extension Stripe.Connect.Account.Update {
                 /// Details on the account's acceptance of the Stripe Issuing Terms and Disclosures.
                 public var tosAcceptance: TosAcceptance?
 
-                private enum CodingKeys: String, CodingKey {
-                    case tosAcceptance
-                }
-
                 public init(
                     tosAcceptance: TosAcceptance? = nil
                 ) {
@@ -6526,12 +5077,6 @@ extension Stripe.Connect.Account.Update {
                     public var ip: String?
                     /// The user agent of the browser from which the account representative accepted the service agreement.
                     public var userAgent: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case date
-                        case ip
-                        case userAgent
-                    }
 
                     public init(
                         date: Date? = nil,
@@ -6556,13 +5101,6 @@ extension Stripe.Connect.Account.Update {
                 /// The Kanji variation of the default text that appears on credit card statements when a charge is made (Japan only).
                 public var statementDescriptorPrefixKanji: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case declineOn
-                    case statementDescriptorPrefix
-                    case statementDescriptorPrefixKana
-                    case statementDescriptorPrefixKanji
-                }
-
                 public init(
                     declineOn: DeclineOn? = nil,
                     statementDescriptorPrefix: String? = nil,
@@ -6582,11 +5120,6 @@ extension Stripe.Connect.Account.Update {
                     /// Whether Stripe automatically declines charges with an incorrect CVC.
                     public var cvcFailure: Bool?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case avsFailure
-                        case cvcFailure
-                    }
-
                     public init(
                         avsFailure: Bool? = nil,
                         cvcFailure: Bool? = nil
@@ -6603,11 +5136,6 @@ extension Stripe.Connect.Account.Update {
                 public var defaultAccountTaxIds: Stripe.Clearable<[String]>?
                 /// Whether to save the payment method after a payment is completed for a one-time invoice or a subscription invoice when …
                 public var hostedPaymentMethodSave: HostedPaymentMethodSave?
-
-                private enum CodingKeys: String, CodingKey {
-                    case defaultAccountTaxIds
-                    case hostedPaymentMethodSave
-                }
 
                 public init(
                     defaultAccountTaxIds: Stripe.Clearable<[String]>? = nil,
@@ -6633,12 +5161,6 @@ extension Stripe.Connect.Account.Update {
                 /// The Kanji variation of `statement_descriptor` used for charges in Japan.
                 public var statementDescriptorKanji: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case statementDescriptor
-                    case statementDescriptorKana
-                    case statementDescriptorKanji
-                }
-
                 public init(
                     statementDescriptor: String? = nil,
                     statementDescriptorKana: String? = nil,
@@ -6658,12 +5180,6 @@ extension Stripe.Connect.Account.Update {
                 public var schedule: Schedule?
                 /// The text that appears on the bank account statement for payouts.
                 public var statementDescriptor: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case debitNegativeBalances
-                    case schedule
-                    case statementDescriptor
-                }
 
                 public init(
                     debitNegativeBalances: Bool? = nil,
@@ -6689,15 +5205,6 @@ extension Stripe.Connect.Account.Update {
                     public var weeklyAnchor: WeeklyAnchor?
                     /// The days of the week when available funds are paid out, specified as an array, e.g., [`monday`, `tuesday`].
                     public var weeklyPayoutDays: [WeeklyPayoutDays]?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case delayDays
-                        case interval
-                        case monthlyAnchor
-                        case monthlyPayoutDays
-                        case weeklyAnchor
-                        case weeklyPayoutDays
-                    }
 
                     public init(
                         delayDays: DelayDays? = nil,
@@ -6770,10 +5277,6 @@ extension Stripe.Connect.Account.Update {
                 /// The business creditor id for european payments.
                 public var creditorId: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case creditorId
-                }
-
                 public init(
                     creditorId: String? = nil
                 ) {
@@ -6785,10 +5288,6 @@ extension Stripe.Connect.Account.Update {
             public struct Treasury: Codable, Hashable, Sendable {
                 /// Details on the account's acceptance of the Stripe Treasury Services Agreement.
                 public var tosAcceptance: TosAcceptance?
-
-                private enum CodingKeys: String, CodingKey {
-                    case tosAcceptance
-                }
 
                 public init(
                     tosAcceptance: TosAcceptance? = nil
@@ -6804,12 +5303,6 @@ extension Stripe.Connect.Account.Update {
                     public var ip: String?
                     /// The user agent of the browser from which the account representative accepted the service agreement.
                     public var userAgent: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case date
-                        case ip
-                        case userAgent
-                    }
 
                     public init(
                         date: Date? = nil,
@@ -6834,13 +5327,6 @@ extension Stripe.Connect.Account.Update {
             public var serviceAgreement: String?
             /// The user agent of the browser from which the account representative accepted their service agreement.
             public var userAgent: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case date
-                case ip
-                case serviceAgreement
-                case userAgent
-            }
 
             public init(
                 date: Date? = nil,

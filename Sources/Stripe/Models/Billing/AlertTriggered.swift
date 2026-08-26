@@ -24,15 +24,6 @@ extension Stripe.Billing {
         /// The value triggering the alert
         public var value: Int?
 
-        private enum CodingKeys: String, CodingKey {
-            case object
-            case alert
-            case created
-            case customer
-            case livemode
-            case value
-        }
-
         public init(
             object: String,
             alert: Stripe.Billing.Alert? = nil,

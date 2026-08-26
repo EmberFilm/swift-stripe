@@ -37,21 +37,6 @@ public struct Webhook: Codable, Hashable, Sendable, Identifiable {
     /// The URL of the webhook endpoint.
     public var url: String?
 
-    private enum CodingKeys: String, CodingKey {
-        case id
-        case object
-        case apiVersion
-        case application
-        case created
-        case description
-        case enabledEvents
-        case livemode
-        case metadata
-        case secret
-        case status
-        case url
-    }
-
     public init(
         id: ID,
         object: String,

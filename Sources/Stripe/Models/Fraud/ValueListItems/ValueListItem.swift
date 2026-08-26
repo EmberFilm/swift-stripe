@@ -28,16 +28,6 @@ extension Stripe.Fraud.ValueListItems {
         /// The identifier of the value list this item belongs to.
         public var valueList: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case created
-            case createdBy
-            case livemode
-            case value
-            case valueList
-        }
-
         public init(
             id: ID,
             object: String,

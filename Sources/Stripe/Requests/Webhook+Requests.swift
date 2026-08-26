@@ -38,16 +38,6 @@ extension Webhook.Create {
         /// The URL of the webhook endpoint.
         public var url: String
 
-        private enum CodingKeys: String, CodingKey {
-            case apiVersion
-            case connect
-            case description
-            case enabledEvents
-            case expand
-            case metadata
-            case url
-        }
-
         public init(
             apiVersion: ApiVersion? = nil,
             connect: Bool? = nil,
@@ -485,13 +475,6 @@ extension Webhook.List {
         /// A cursor for use in pagination.
         public var startingAfter: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case endingBefore
-            case expand
-            case limit
-            case startingAfter
-        }
-
         public init(
             endingBefore: String? = nil,
             expand: [String]? = nil,
@@ -513,10 +496,6 @@ extension Webhook.Retrieve {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil
@@ -543,15 +522,6 @@ extension Webhook.Update {
         public var metadata: Stripe.Clearable<[String: String]>?
         /// The URL of the webhook endpoint.
         public var url: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case description
-            case disabled
-            case enabledEvents
-            case expand
-            case metadata
-            case url
-        }
 
         public init(
             description: String? = nil,

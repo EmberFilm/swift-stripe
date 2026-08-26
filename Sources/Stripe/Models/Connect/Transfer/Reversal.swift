@@ -34,19 +34,6 @@ extension Stripe.Connect.Transfer {
         /// ID of the transfer that was reversed.
         @Expandable<Stripe.Connect.Transfer, String> public var transfer: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case amount
-            case balanceTransaction
-            case created
-            case currency
-            case destinationPaymentRefund
-            case metadata
-            case sourceRefund
-            case transfer
-        }
-
         public init(
             id: ID,
             object: String,

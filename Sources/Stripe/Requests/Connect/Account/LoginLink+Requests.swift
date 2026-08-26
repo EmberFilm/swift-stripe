@@ -22,10 +22,6 @@ extension Stripe.Connect.Account.LoginLink.Create {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
-
         public init(
             expand: [String]? = nil
         ) {

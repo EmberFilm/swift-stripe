@@ -36,20 +36,6 @@ extension Stripe.Forwarding {
         /// The destination URL for the forwarded request.
         public var url: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case created
-            case livemode
-            case metadata
-            case paymentMethod
-            case replacements
-            case requestContext
-            case requestDetails
-            case responseDetails
-            case url
-        }
-
         public init(
             id: ID,
             object: String,
@@ -91,11 +77,6 @@ extension Stripe.Forwarding {
             /// The IP address of the destination.
             public var destinationIpAddress: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case destinationDuration
-                case destinationIpAddress
-            }
-
             public init(
                 destinationDuration: Int? = nil,
                 destinationIpAddress: String? = nil
@@ -114,12 +95,6 @@ extension Stripe.Forwarding {
             /// The HTTP method used to call the destination endpoint.
             public var httpMethod: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case body
-                case headers
-                case httpMethod
-            }
-
             public init(
                 body: String? = nil,
                 headers: [Headers]? = nil,
@@ -136,11 +111,6 @@ extension Stripe.Forwarding {
                 public var name: String?
                 /// The header value.
                 public var value: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case name
-                    case value
-                }
 
                 public init(
                     name: String? = nil,
@@ -161,12 +131,6 @@ extension Stripe.Forwarding {
             /// The HTTP status code that the destination endpoint returned.
             public var status: Int?
 
-            private enum CodingKeys: String, CodingKey {
-                case body
-                case headers
-                case status
-            }
-
             public init(
                 body: String? = nil,
                 headers: [Headers]? = nil,
@@ -183,11 +147,6 @@ extension Stripe.Forwarding {
                 public var name: String?
                 /// The header value.
                 public var value: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case name
-                    case value
-                }
 
                 public init(
                     name: String? = nil,

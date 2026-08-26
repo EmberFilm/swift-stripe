@@ -40,15 +40,6 @@ extension Stripe.PaymentRecord.List {
         /// A cursor for use in pagination.
         public var startingAfter: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case createdAfter
-            case createdBefore
-            case endingBefore
-            case expand
-            case limit
-            case startingAfter
-        }
-
         public init(
             createdAfter: Date? = nil,
             createdBefore: Date? = nil,
@@ -99,22 +90,6 @@ extension Stripe.PaymentRecord.ReportPayment {
         /// Shipping information for this payment.
         public var shippingDetails: ShippingDetails?
 
-        private enum CodingKeys: String, CodingKey {
-            case amountRequested
-            case customerDetails
-            case customerPresence
-            case description
-            case expand
-            case failed
-            case guaranteed
-            case initiatedAt
-            case metadata
-            case outcome
-            case paymentMethodDetails
-            case processorDetails
-            case shippingDetails
-        }
-
         public init(
             amountRequested: AmountRequested,
             customerDetails: CustomerDetails? = nil,
@@ -162,11 +137,6 @@ extension Stripe.PaymentRecord.ReportPayment {
             /// A positive integer representing the amount in the currency's minor unit.
             public var value: Int
 
-            private enum CodingKeys: String, CodingKey {
-                case currency
-                case value
-            }
-
             public init(
                 currency: Stripe.Currency,
                 value: Int
@@ -187,13 +157,6 @@ extension Stripe.PaymentRecord.ReportPayment {
             /// The customer's phone number.
             public var phone: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case customer
-                case email
-                case name
-                case phone
-            }
-
             public init(
                 customer: String? = nil,
                 email: String? = nil,
@@ -212,10 +175,6 @@ extension Stripe.PaymentRecord.ReportPayment {
             /// When the reported payment failed.
             public var failedAt: Date
 
-            private enum CodingKeys: String, CodingKey {
-                case failedAt
-            }
-
             public init(
                 failedAt: Date
             ) {
@@ -227,10 +186,6 @@ extension Stripe.PaymentRecord.ReportPayment {
         public struct Guaranteed: Codable, Hashable, Sendable {
             /// When the reported payment was guaranteed.
             public var guaranteedAt: Date
-
-            private enum CodingKeys: String, CodingKey {
-                case guaranteedAt
-            }
 
             public init(
                 guaranteedAt: Date
@@ -249,13 +204,6 @@ extension Stripe.PaymentRecord.ReportPayment {
             public var paymentMethod: String?
             /// The type of the payment method details.
             public var `type`: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case billingDetails
-                case custom
-                case paymentMethod
-                case `type`
-            }
 
             public init(
                 billingDetails: BillingDetails? = nil,
@@ -279,13 +227,6 @@ extension Stripe.PaymentRecord.ReportPayment {
                 public var name: String?
                 /// The billing phone number associated with the method of payment.
                 public var phone: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case address
-                    case email
-                    case name
-                    case phone
-                }
 
                 public init(
                     address: Address? = nil,
@@ -314,15 +255,6 @@ extension Stripe.PaymentRecord.ReportPayment {
                     /// State, county, province, or region (ISO 3166-2).
                     public var state: String?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case city
-                        case country
-                        case line1
-                        case line2
-                        case postalCode
-                        case state
-                    }
-
                     public init(
                         city: String? = nil,
                         country: String? = nil,
@@ -348,11 +280,6 @@ extension Stripe.PaymentRecord.ReportPayment {
                 /// The custom payment method type associated with this payment.
                 public var `type`: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case displayName
-                    case `type`
-                }
-
                 public init(
                     displayName: String? = nil,
                     `type`: String? = nil
@@ -370,11 +297,6 @@ extension Stripe.PaymentRecord.ReportPayment {
             /// The type of the processor details.
             public var `type`: String
 
-            private enum CodingKeys: String, CodingKey {
-                case custom
-                case `type`
-            }
-
             public init(
                 custom: Custom? = nil,
                 `type`: String
@@ -387,10 +309,6 @@ extension Stripe.PaymentRecord.ReportPayment {
             public struct Custom: Codable, Hashable, Sendable {
                 /// An opaque string for manual reconciliation of this payment, for example a check number or a payment processor ID.
                 public var paymentReference: String
-
-                private enum CodingKeys: String, CodingKey {
-                    case paymentReference
-                }
 
                 public init(
                     paymentReference: String
@@ -408,12 +326,6 @@ extension Stripe.PaymentRecord.ReportPayment {
             public var name: String?
             /// The shipping recipient's phone number.
             public var phone: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case address
-                case name
-                case phone
-            }
 
             public init(
                 address: Address? = nil,
@@ -439,15 +351,6 @@ extension Stripe.PaymentRecord.ReportPayment {
                 public var postalCode: String?
                 /// State, county, province, or region (ISO 3166-2).
                 public var state: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case city
-                    case country
-                    case line1
-                    case line2
-                    case postalCode
-                    case state
-                }
 
                 public init(
                     city: String? = nil,
@@ -493,18 +396,6 @@ extension Stripe.PaymentRecord.ReportPaymentAttempt {
         /// Shipping information for this payment.
         public var shippingDetails: ShippingDetails?
 
-        private enum CodingKeys: String, CodingKey {
-            case description
-            case expand
-            case failed
-            case guaranteed
-            case initiatedAt
-            case metadata
-            case outcome
-            case paymentMethodDetails
-            case shippingDetails
-        }
-
         public init(
             description: String? = nil,
             expand: [String]? = nil,
@@ -537,10 +428,6 @@ extension Stripe.PaymentRecord.ReportPaymentAttempt {
             /// When the reported payment failed.
             public var failedAt: Date
 
-            private enum CodingKeys: String, CodingKey {
-                case failedAt
-            }
-
             public init(
                 failedAt: Date
             ) {
@@ -552,10 +439,6 @@ extension Stripe.PaymentRecord.ReportPaymentAttempt {
         public struct Guaranteed: Codable, Hashable, Sendable {
             /// When the reported payment was guaranteed.
             public var guaranteedAt: Date
-
-            private enum CodingKeys: String, CodingKey {
-                case guaranteedAt
-            }
 
             public init(
                 guaranteedAt: Date
@@ -574,13 +457,6 @@ extension Stripe.PaymentRecord.ReportPaymentAttempt {
             public var paymentMethod: String?
             /// The type of the payment method details.
             public var `type`: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case billingDetails
-                case custom
-                case paymentMethod
-                case `type`
-            }
 
             public init(
                 billingDetails: BillingDetails? = nil,
@@ -604,13 +480,6 @@ extension Stripe.PaymentRecord.ReportPaymentAttempt {
                 public var name: String?
                 /// The billing phone number associated with the method of payment.
                 public var phone: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case address
-                    case email
-                    case name
-                    case phone
-                }
 
                 public init(
                     address: Address? = nil,
@@ -639,15 +508,6 @@ extension Stripe.PaymentRecord.ReportPaymentAttempt {
                     /// State, county, province, or region (ISO 3166-2).
                     public var state: String?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case city
-                        case country
-                        case line1
-                        case line2
-                        case postalCode
-                        case state
-                    }
-
                     public init(
                         city: String? = nil,
                         country: String? = nil,
@@ -673,11 +533,6 @@ extension Stripe.PaymentRecord.ReportPaymentAttempt {
                 /// The custom payment method type associated with this payment.
                 public var `type`: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case displayName
-                    case `type`
-                }
-
                 public init(
                     displayName: String? = nil,
                     `type`: String? = nil
@@ -696,12 +551,6 @@ extension Stripe.PaymentRecord.ReportPaymentAttempt {
             public var name: String?
             /// The shipping recipient's phone number.
             public var phone: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case address
-                case name
-                case phone
-            }
 
             public init(
                 address: Address? = nil,
@@ -727,15 +576,6 @@ extension Stripe.PaymentRecord.ReportPaymentAttempt {
                 public var postalCode: String?
                 /// State, county, province, or region (ISO 3166-2).
                 public var state: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case city
-                    case country
-                    case line1
-                    case line2
-                    case postalCode
-                    case state
-                }
 
                 public init(
                     city: String? = nil,
@@ -769,12 +609,6 @@ extension Stripe.PaymentRecord.ReportPaymentAttemptCanceled {
         /// Set of key-value pairs that you can attach to an object.
         public var metadata: Stripe.Clearable<[String: String]>?
 
-        private enum CodingKeys: String, CodingKey {
-            case canceledAt
-            case expand
-            case metadata
-        }
-
         public init(
             canceledAt: Date,
             expand: [String]? = nil,
@@ -799,12 +633,6 @@ extension Stripe.PaymentRecord.ReportPaymentAttemptFailed {
         /// Set of key-value pairs that you can attach to an object.
         public var metadata: Stripe.Clearable<[String: String]>?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case failedAt
-            case metadata
-        }
-
         public init(
             expand: [String]? = nil,
             failedAt: Date,
@@ -828,12 +656,6 @@ extension Stripe.PaymentRecord.ReportPaymentAttemptGuaranteed {
         public var guaranteedAt: Date
         /// Set of key-value pairs that you can attach to an object.
         public var metadata: Stripe.Clearable<[String: String]>?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case guaranteedAt
-            case metadata
-        }
 
         public init(
             expand: [String]? = nil,
@@ -863,14 +685,6 @@ extension Stripe.PaymentRecord.ReportPaymentAttemptInformational {
         /// Shipping information for this payment.
         public var shippingDetails: Stripe.Clearable<ShippingDetails>?
 
-        private enum CodingKeys: String, CodingKey {
-            case customerDetails
-            case description
-            case expand
-            case metadata
-            case shippingDetails
-        }
-
         public init(
             customerDetails: CustomerDetails? = nil,
             description: String? = nil,
@@ -896,13 +710,6 @@ extension Stripe.PaymentRecord.ReportPaymentAttemptInformational {
             /// The customer's phone number.
             public var phone: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case customer
-                case email
-                case name
-                case phone
-            }
-
             public init(
                 customer: String? = nil,
                 email: String? = nil,
@@ -923,12 +730,6 @@ extension Stripe.PaymentRecord.ReportPaymentAttemptInformational {
             public var name: String?
             /// The shipping recipient's phone number.
             public var phone: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case address
-                case name
-                case phone
-            }
 
             public init(
                 address: Address? = nil,
@@ -954,15 +755,6 @@ extension Stripe.PaymentRecord.ReportPaymentAttemptInformational {
                 public var postalCode: String?
                 /// State, county, province, or region (ISO 3166-2).
                 public var state: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case city
-                    case country
-                    case line1
-                    case line2
-                    case postalCode
-                    case state
-                }
 
                 public init(
                     city: String? = nil,
@@ -1004,16 +796,6 @@ extension Stripe.PaymentRecord.ReportRefund {
         /// Information about the payment attempt refund.
         public var refunded: Refunded?
 
-        private enum CodingKeys: String, CodingKey {
-            case amount
-            case expand
-            case initiatedAt
-            case metadata
-            case outcome
-            case processorDetails
-            case refunded
-        }
-
         public init(
             amount: Amount? = nil,
             expand: [String]? = nil,
@@ -1039,11 +821,6 @@ extension Stripe.PaymentRecord.ReportRefund {
             /// A positive integer representing the amount in the currency's minor unit.
             public var value: Int
 
-            private enum CodingKeys: String, CodingKey {
-                case currency
-                case value
-            }
-
             public init(
                 currency: Stripe.Currency,
                 value: Int
@@ -1060,11 +837,6 @@ extension Stripe.PaymentRecord.ReportRefund {
             /// The type of the processor details.
             public var `type`: String
 
-            private enum CodingKeys: String, CodingKey {
-                case custom
-                case `type`
-            }
-
             public init(
                 custom: Custom? = nil,
                 `type`: String
@@ -1078,10 +850,6 @@ extension Stripe.PaymentRecord.ReportRefund {
                 /// A reference to the external refund.
                 public var refundReference: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case refundReference
-                }
-
                 public init(
                     refundReference: String
                 ) {
@@ -1094,10 +862,6 @@ extension Stripe.PaymentRecord.ReportRefund {
         public struct Refunded: Codable, Hashable, Sendable {
             /// When the reported refund completed.
             public var refundedAt: Date
-
-            private enum CodingKeys: String, CodingKey {
-                case refundedAt
-            }
 
             public init(
                 refundedAt: Date
@@ -1115,10 +879,6 @@ extension Stripe.PaymentRecord.Retrieve {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil

@@ -28,11 +28,6 @@ extension Stripe.Billing.TestClocks.TestClock.Advance {
         /// The time to advance the test clock.
         public var frozenTime: Date
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case frozenTime
-        }
-
         public init(
             expand: [String]? = nil,
             frozenTime: Date
@@ -56,13 +51,6 @@ extension Stripe.Billing.TestClocks.TestClock.Create {
         public var frozenTime: Date
         /// The name for this test clock.
         public var name: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case customer
-            case expand
-            case frozenTime
-            case name
-        }
 
         public init(
             customer: String? = nil,
@@ -97,13 +85,6 @@ extension Stripe.Billing.TestClocks.TestClock.List {
         /// A cursor for use in pagination.
         public var startingAfter: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case endingBefore
-            case expand
-            case limit
-            case startingAfter
-        }
-
         public init(
             endingBefore: String? = nil,
             expand: [String]? = nil,
@@ -125,10 +106,6 @@ extension Stripe.Billing.TestClocks.TestClock.Retrieve {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil

@@ -27,10 +27,6 @@ extension Stripe.Billing.Alert.Activate {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
-
         public init(
             expand: [String]? = nil
         ) {
@@ -46,10 +42,6 @@ extension Stripe.Billing.Alert.Archive {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil
@@ -72,13 +64,6 @@ extension Stripe.Billing.Alert.Create {
         public var title: String
         /// The configuration of the usage threshold.
         public var usageThreshold: UsageThreshold?
-
-        private enum CodingKeys: String, CodingKey {
-            case alertType
-            case expand
-            case title
-            case usageThreshold
-        }
 
         public init(
             alertType: String,
@@ -103,13 +88,6 @@ extension Stripe.Billing.Alert.Create {
             /// Defines how the alert will behave.
             public var recurrence: String
 
-            private enum CodingKeys: String, CodingKey {
-                case filters
-                case gte
-                case meter
-                case recurrence
-            }
-
             public init(
                 filters: [Filters]? = nil,
                 gte: Int,
@@ -127,11 +105,6 @@ extension Stripe.Billing.Alert.Create {
                 public var customer: String?
                 /// What type of filter is being applied to this usage alert.
                 public var `type`: String
-
-                private enum CodingKeys: String, CodingKey {
-                    case customer
-                    case `type`
-                }
 
                 public init(
                     customer: String? = nil,
@@ -152,10 +125,6 @@ extension Stripe.Billing.Alert.Deactivate {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil
@@ -183,15 +152,6 @@ extension Stripe.Billing.Alert.List {
         /// A cursor for use in pagination.
         public var startingAfter: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case alertType
-            case endingBefore
-            case expand
-            case limit
-            case meter
-            case startingAfter
-        }
-
         public init(
             alertType: String? = nil,
             endingBefore: String? = nil,
@@ -217,10 +177,6 @@ extension Stripe.Billing.Alert.Retrieve {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil

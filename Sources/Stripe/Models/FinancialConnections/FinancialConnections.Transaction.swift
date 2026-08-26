@@ -37,21 +37,6 @@ extension FinancialConnections {
         /// Time at which the object was last updated.
         public var updated: Date?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case account
-            case amount
-            case currency
-            case description
-            case livemode
-            case status
-            case statusTransitions
-            case transactedAt
-            case transactionRefresh
-            case updated
-        }
-
         public init(
             id: ID,
             object: String,
@@ -92,11 +77,6 @@ extension FinancialConnections {
             public var postedAt: Date?
             /// Time at which this transaction was voided.
             public var voidAt: Date?
-
-            private enum CodingKeys: String, CodingKey {
-                case postedAt
-                case voidAt
-            }
 
             public init(
                 postedAt: Date? = nil,

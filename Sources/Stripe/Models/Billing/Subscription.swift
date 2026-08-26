@@ -106,57 +106,6 @@ extension Stripe.Billing {
         /// If the subscription has a trial, the beginning of that trial.
         public var trialStart: Date?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case application
-            case applicationFeePercent
-            case automaticTax
-            case billingCycleAnchor
-            case billingCycleAnchorConfig
-            case billingMode
-            case billingSchedules
-            case billingThresholds
-            case cancelAt
-            case cancelAtPeriodEnd
-            case canceledAt
-            case cancellationDetails
-            case collectionMethod
-            case created
-            case currency
-            case customer
-            case customerAccount
-            case daysUntilDue
-            case defaultPaymentMethod
-            case defaultSource
-            case defaultTaxRates
-            case description
-            case discounts
-            case endedAt
-            case invoiceSettings
-            case items
-            case latestInvoice
-            case livemode
-            case managedPayments
-            case metadata
-            case nextPendingInvoiceItemInvoice
-            case onBehalfOf
-            case pauseCollection
-            case paymentSettings
-            case pendingInvoiceItemInterval
-            case pendingSetupIntent
-            case pendingUpdate
-            case presentmentDetails
-            case schedule
-            case startDate
-            case status
-            case testClock
-            case transferData
-            case trialEnd
-            case trialSettings
-            case trialStart
-        }
-
         public init(
             id: ID,
             object: String,
@@ -283,12 +232,6 @@ extension Stripe.Billing {
             /// The account that's liable for tax.
             public var liability: Stripe.Shared.ConnectAccountReference?
 
-            private enum CodingKeys: String, CodingKey {
-                case disabledReason
-                case enabled
-                case liability
-            }
-
             public init(
                 disabledReason: String? = nil,
                 enabled: Bool? = nil,
@@ -311,14 +254,6 @@ extension Stripe.Billing {
             public var month: Int?
             /// The second of the minute of the billing_cycle_anchor.
             public var second: Int?
-
-            private enum CodingKeys: String, CodingKey {
-                case dayOfMonth
-                case hour
-                case minute
-                case month
-                case second
-            }
 
             public init(
                 dayOfMonth: Int? = nil,
@@ -343,12 +278,6 @@ extension Stripe.Billing {
             /// Unique identifier for the billing schedule.
             public var key: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case appliesTo
-                case billUntil
-                case key
-            }
-
             public init(
                 appliesTo: [AppliesTo]? = nil,
                 billUntil: BillUntil? = nil,
@@ -365,11 +294,6 @@ extension Stripe.Billing {
                 @Expandable<Stripe.Products.Price, String> public var price: String?
                 /// Controls which subscription items the billing schedule applies to.
                 public var `type`: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case price
-                    case `type`
-                }
 
                 public init(
                     price: String? = nil,
@@ -390,13 +314,6 @@ extension Stripe.Billing {
                 public var timestamp: Date?
                 /// Describes how the billing schedule will determine the end date.
                 public var `type`: Type?
-
-                private enum CodingKeys: String, CodingKey {
-                    case computedTimestamp
-                    case duration
-                    case timestamp
-                    case `type`
-                }
 
                 public init(
                     computedTimestamp: Date? = nil,
@@ -422,11 +339,6 @@ extension Stripe.Billing {
                     public var interval: Interval?
                     /// The multiplier applied to the interval.
                     public var intervalCount: Int?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case interval
-                        case intervalCount
-                    }
 
                     public init(
                         interval: Interval? = nil,
@@ -454,12 +366,6 @@ extension Stripe.Billing {
             public var feedback: Feedback?
             /// Why this subscription was canceled.
             public var reason: Reason?
-
-            private enum CodingKeys: String, CodingKey {
-                case comment
-                case feedback
-                case reason
-            }
 
             public init(
                 comment: String? = nil,
@@ -503,14 +409,6 @@ extension Stripe.Billing {
             public var footer: String?
             public var issuer: Stripe.Shared.ConnectAccountReference?
 
-            private enum CodingKeys: String, CodingKey {
-                case accountTaxIds
-                case customFields
-                case description
-                case footer
-                case issuer
-            }
-
             public init(
                 accountTaxIds: [String]? = nil,
                 customFields: [Stripe.Shared.CustomFields]? = nil,
@@ -537,13 +435,6 @@ extension Stripe.Billing {
             /// The URL where this list can be accessed.
             public var url: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case object
-                case data
-                case hasMore
-                case url
-            }
-
             public init(
                 object: String,
                 data: [Stripe.Billing.Subscription.Item]? = nil,
@@ -563,11 +454,6 @@ extension Stripe.Billing {
             public var behavior: Behavior?
             /// The time after which the subscription will resume collecting payments.
             public var resumesAt: Date?
-
-            private enum CodingKeys: String, CodingKey {
-                case behavior
-                case resumesAt
-            }
 
             public init(
                 behavior: Behavior? = nil,
@@ -592,12 +478,6 @@ extension Stripe.Billing {
             public var paymentMethodTypes: [PaymentMethodTypes]?
             /// Configure whether Stripe updates `subscription.default_payment_method` when payment succeeds.
             public var saveDefaultPaymentMethod: SaveDefaultPaymentMethod?
-
-            private enum CodingKeys: String, CodingKey {
-                case paymentMethodOptions
-                case paymentMethodTypes
-                case saveDefaultPaymentMethod
-            }
 
             public init(
                 paymentMethodOptions: PaymentMethodOptions? = nil,
@@ -688,19 +568,6 @@ extension Stripe.Billing {
                 /// This sub-hash contains details about the ACH direct debit payment method options to pass to invoices created by the su…
                 public var usBankAccount: Stripe.Shared.UsBankAccount?
 
-                private enum CodingKeys: String, CodingKey {
-                    case acssDebit
-                    case bancontact
-                    case card
-                    case customerBalance
-                    case konbini
-                    case payto
-                    case pix
-                    case sepaDebit
-                    case upi
-                    case usBankAccount
-                }
-
                 public init(
                     acssDebit: Stripe.Shared.AcssDebit? = nil,
                     bancontact: Stripe.Shared.Bancontact? = nil,
@@ -731,12 +598,6 @@ extension Stripe.Billing {
                     public var network: Network?
                     /// We strongly recommend that you rely on our SCA Engine to automatically prompt your customers for authentication based …
                     public var requestThreeDSecure: RequestThreeDSecure?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case mandateOptions
-                        case network
-                        case requestThreeDSecure
-                    }
 
                     public init(
                         mandateOptions: MandateOptions? = nil,
@@ -780,12 +641,6 @@ extension Stripe.Billing {
                         /// A description of the mandate or subscription that is meant to be displayed to the customer.
                         public var description: String?
 
-                        private enum CodingKeys: String, CodingKey {
-                            case amount
-                            case amountType
-                            case description
-                        }
-
                         public init(
                             amount: Int? = nil,
                             amountType: AmountType? = nil,
@@ -809,11 +664,6 @@ extension Stripe.Billing {
                     public var expiresAfterSeconds: Int?
                     public var mandateOptions: MandateOptions?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case expiresAfterSeconds
-                        case mandateOptions
-                    }
-
                     public init(
                         expiresAfterSeconds: Int? = nil,
                         mandateOptions: MandateOptions? = nil
@@ -831,13 +681,6 @@ extension Stripe.Billing {
                         public var endDate: String?
                         /// Schedule at which the future payments will be charged.
                         public var paymentSchedule: PaymentSchedule?
-
-                        private enum CodingKeys: String, CodingKey {
-                            case amount
-                            case amountIncludesIof
-                            case endDate
-                            case paymentSchedule
-                        }
 
                         public init(
                             amount: Int? = nil,
@@ -876,11 +719,6 @@ extension Stripe.Billing {
             /// The number of intervals between invoices.
             public var intervalCount: Int?
 
-            private enum CodingKeys: String, CodingKey {
-                case interval
-                case intervalCount
-            }
-
             public init(
                 interval: Interval? = nil,
                 intervalCount: Int? = nil
@@ -917,17 +755,6 @@ extension Stripe.Billing {
             /// Indicates if a plan's `trial_period_days` should be applied to the subscription.
             public var trialFromPlan: Bool?
 
-            private enum CodingKeys: String, CodingKey {
-                case billingCycleAnchor
-                case discount
-                case discounts
-                case expiresAt
-                case metadata
-                case subscriptionItems
-                case trialEnd
-                case trialFromPlan
-            }
-
             public init(
                 billingCycleAnchor: Date? = nil,
                 discount: Stripe.Shared.Discount? = nil,
@@ -953,10 +780,6 @@ extension Stripe.Billing {
             /// Currency used for customer payments.
             public var presentmentCurrency: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case presentmentCurrency
-            }
-
             public init(
                 presentmentCurrency: String? = nil
             ) {
@@ -968,10 +791,6 @@ extension Stripe.Billing {
         public struct TrialSettings: Codable, Hashable, Sendable {
             public var endBehavior: EndBehavior?
 
-            private enum CodingKeys: String, CodingKey {
-                case endBehavior
-            }
-
             public init(
                 endBehavior: EndBehavior? = nil
             ) {
@@ -982,10 +801,6 @@ extension Stripe.Billing {
             public struct EndBehavior: Codable, Hashable, Sendable {
                 /// Indicates how the subscription should change when the trial ends if the user did not provide a payment method.
                 public var missingPaymentMethod: MissingPaymentMethod?
-
-                private enum CodingKeys: String, CodingKey {
-                    case missingPaymentMethod
-                }
 
                 public init(
                     missingPaymentMethod: MissingPaymentMethod? = nil

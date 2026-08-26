@@ -19,15 +19,6 @@ extension Stripe.Billing.Subscription.Payment.Settings {
         /// US Bank Account payment method options
         public var usBankAccount: USBankAccount.Configuration?
 
-        private enum CodingKeys: String, CodingKey {
-            case acssDebit
-            case bancontact
-            case card
-            case customerBalance
-            case konbini
-            case usBankAccount
-        }
-
         public init(
             acssDebit: ACSSDebit.Configuration? = nil,
             bancontact: Bancontact.Configuration? = nil,

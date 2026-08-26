@@ -31,13 +31,6 @@ extension Stripe.Entitlements.Feature.Create {
         /// The feature's name, for your own purpose, not meant to be displayable to the customer.
         public var name: String
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case lookupKey
-            case metadata
-            case name
-        }
-
         public init(
             expand: [String]? = nil,
             lookupKey: String,
@@ -70,15 +63,6 @@ extension Stripe.Entitlements.Feature.List {
         /// A cursor for use in pagination.
         public var startingAfter: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case archived
-            case endingBefore
-            case expand
-            case limit
-            case lookupKey
-            case startingAfter
-        }
-
         public init(
             archived: Bool? = nil,
             endingBefore: String? = nil,
@@ -105,10 +89,6 @@ extension Stripe.Entitlements.Feature.Retrieve {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
-
         public init(
             expand: [String]? = nil
         ) {
@@ -130,13 +110,6 @@ extension Stripe.Entitlements.Feature.Update {
         public var metadata: Stripe.Clearable<[String: String]>?
         /// The feature's name, for your own purpose, not meant to be displayable to the customer.
         public var name: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case active
-            case expand
-            case metadata
-            case name
-        }
 
         public init(
             active: Bool? = nil,

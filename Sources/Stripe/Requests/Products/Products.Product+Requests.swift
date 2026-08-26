@@ -57,25 +57,6 @@ extension Stripe.Products.Product.Create {
         /// A URL of a publicly-accessible webpage for this product.
         public var url: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case active
-            case defaultPriceData
-            case description
-            case expand
-            case id
-            case images
-            case marketingFeatures
-            case metadata
-            case name
-            case packageDimensions
-            case shippable
-            case statementDescriptor
-            case taxCode
-            case `type`
-            case unitLabel
-            case url
-        }
-
         public init(
             active: Bool? = nil,
             defaultPriceData: DefaultPriceData? = nil,
@@ -136,17 +117,6 @@ extension Stripe.Products.Product.Create {
             /// Same as `unit_amount`, but accepts a decimal value in cents (or local equivalent) with at most 12 decimal places.
             public var unitAmountDecimal: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case currency
-                case currencyOptions
-                case customUnitAmount
-                case metadata
-                case recurring
-                case taxBehavior
-                case unitAmount
-                case unitAmountDecimal
-            }
-
             public init(
                 currency: Stripe.Currency,
                 currencyOptions: [String: CurrencyOptions]? = nil,
@@ -185,14 +155,6 @@ extension Stripe.Products.Product.Create {
                 /// Same as `unit_amount`, but accepts a decimal value in cents (or local equivalent) with at most 12 decimal places.
                 public var unitAmountDecimal: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case customUnitAmount
-                    case taxBehavior
-                    case tiers
-                    case unitAmount
-                    case unitAmountDecimal
-                }
-
                 public init(
                     customUnitAmount: CustomUnitAmount? = nil,
                     taxBehavior: TaxBehavior? = nil,
@@ -224,13 +186,6 @@ extension Stripe.Products.Product.Create {
                     /// The starting unit amount which can be updated by the customer.
                     public var preset: Int?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case enabled
-                        case maximum
-                        case minimum
-                        case preset
-                    }
-
                     public init(
                         enabled: Bool,
                         maximum: Int? = nil,
@@ -255,14 +210,6 @@ extension Stripe.Products.Product.Create {
                     public var unitAmountDecimal: String?
                     /// Specifies the upper bound of this tier.
                     public var upTo: UpTo
-
-                    private enum CodingKeys: String, CodingKey {
-                        case flatAmount
-                        case flatAmountDecimal
-                        case unitAmount
-                        case unitAmountDecimal
-                        case upTo
-                    }
 
                     public init(
                         flatAmount: Int? = nil,
@@ -314,13 +261,6 @@ extension Stripe.Products.Product.Create {
                 /// The starting unit amount which can be updated by the customer.
                 public var preset: Int?
 
-                private enum CodingKeys: String, CodingKey {
-                    case enabled
-                    case maximum
-                    case minimum
-                    case preset
-                }
-
                 public init(
                     enabled: Bool,
                     maximum: Int? = nil,
@@ -340,11 +280,6 @@ extension Stripe.Products.Product.Create {
                 public var interval: Interval
                 /// The number of intervals between subscription billings.
                 public var intervalCount: Int?
-
-                private enum CodingKeys: String, CodingKey {
-                    case interval
-                    case intervalCount
-                }
 
                 public init(
                     interval: Interval,
@@ -367,10 +302,6 @@ extension Stripe.Products.Product.Create {
             /// The marketing feature name.
             public var name: String
 
-            private enum CodingKeys: String, CodingKey {
-                case name
-            }
-
             public init(
                 name: String
             ) {
@@ -388,13 +319,6 @@ extension Stripe.Products.Product.Create {
             public var weight: Decimal
             /// Width, in inches.
             public var width: Decimal
-
-            private enum CodingKeys: String, CodingKey {
-                case height
-                case length
-                case weight
-                case width
-            }
 
             public init(
                 height: Decimal,
@@ -442,19 +366,6 @@ extension Stripe.Products.Product.List {
         /// Only return products with the given url.
         public var url: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case active
-            case created
-            case endingBefore
-            case expand
-            case ids
-            case limit
-            case shippable
-            case startingAfter
-            case `type`
-            case url
-        }
-
         public init(
             active: Bool? = nil,
             created: Stripe.RangeQuery? = nil,
@@ -494,10 +405,6 @@ extension Stripe.Products.Product.Retrieve {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
-
         public init(
             expand: [String]? = nil
         ) {
@@ -519,13 +426,6 @@ extension Stripe.Products.Product.Search {
         public var page: String?
         /// The search query string.
         public var query: String
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case limit
-            case page
-            case query
-        }
 
         public init(
             expand: [String]? = nil,
@@ -575,23 +475,6 @@ extension Stripe.Products.Product.Update {
         /// A URL of a publicly-accessible webpage for this product.
         public var url: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case active
-            case defaultPrice
-            case description
-            case expand
-            case images
-            case marketingFeatures
-            case metadata
-            case name
-            case packageDimensions
-            case shippable
-            case statementDescriptor
-            case taxCode
-            case unitLabel
-            case url
-        }
-
         public init(
             active: Bool? = nil,
             defaultPrice: String? = nil,
@@ -628,10 +511,6 @@ extension Stripe.Products.Product.Update {
             /// The marketing feature name.
             public var name: String
 
-            private enum CodingKeys: String, CodingKey {
-                case name
-            }
-
             public init(
                 name: String
             ) {
@@ -648,13 +527,6 @@ extension Stripe.Products.Product.Update {
             public var weight: Decimal
             /// Width, in inches.
             public var width: Decimal
-
-            private enum CodingKeys: String, CodingKey {
-                case height
-                case length
-                case weight
-                case width
-            }
 
             public init(
                 height: Decimal,

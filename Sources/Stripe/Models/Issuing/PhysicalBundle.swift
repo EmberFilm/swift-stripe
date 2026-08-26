@@ -27,16 +27,6 @@ extension Stripe.Issuing {
         /// Whether this physical bundle is a standard Stripe offering or custom-made for you.
         public var `type`: Type?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case features
-            case livemode
-            case name
-            case status
-            case `type`
-        }
-
         public init(
             id: ID,
             object: String,
@@ -75,12 +65,6 @@ extension Stripe.Issuing {
             public var carrierText: CarrierText?
             /// The policy for how to use a second line on a card with this physical bundle.
             public var secondLine: SecondLine?
-
-            private enum CodingKeys: String, CodingKey {
-                case cardLogo
-                case carrierText
-                case secondLine
-            }
 
             public init(
                 cardLogo: CardLogo? = nil,

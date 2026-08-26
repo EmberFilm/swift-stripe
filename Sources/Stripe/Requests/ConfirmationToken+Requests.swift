@@ -35,16 +35,6 @@ extension ConfirmationToken.Create {
         /// Shipping information for this ConfirmationToken.
         public var shipping: Shipping?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case paymentMethod
-            case paymentMethodData
-            case paymentMethodOptions
-            case returnUrl
-            case setupFutureUsage
-            case shipping
-        }
-
         public init(
             expand: [String]? = nil,
             paymentMethod: String? = nil,
@@ -188,68 +178,6 @@ extension ConfirmationToken.Create {
             public var wechatPay: WechatPay?
             /// If this is a `zip` PaymentMethod, this hash contains details about the Zip payment method.
             public var zip: Zip?
-
-            private enum CodingKeys: String, CodingKey {
-                case acssDebit
-                case affirm
-                case afterpayClearpay
-                case alipay
-                case allowRedisplay
-                case alma
-                case amazonPay
-                case auBecsDebit
-                case bacsDebit
-                case bancontact
-                case billie
-                case billingDetails
-                case bizum
-                case blik
-                case boleto
-                case cashapp
-                case crypto
-                case customerBalance
-                case eps
-                case fpx
-                case giropay
-                case grabpay
-                case ideal
-                case interacPresent
-                case kakaoPay
-                case klarna
-                case konbini
-                case krCard
-                case link
-                case mbWay
-                case metadata
-                case mobilepay
-                case multibanco
-                case naverPay
-                case nzBankAccount
-                case oxxo
-                case p24
-                case payByBank
-                case payco
-                case paynow
-                case paypal
-                case payto
-                case pix
-                case promptpay
-                case radarOptions
-                case revolutPay
-                case samsungPay
-                case satispay
-                case scalapay
-                case sepaDebit
-                case sofort
-                case sunbit
-                case swish
-                case twint
-                case `type`
-                case upi
-                case usBankAccount
-                case wechatPay
-                case zip
-            }
 
             public init(
                 acssDebit: AcssDebit? = nil,
@@ -444,12 +372,6 @@ extension ConfirmationToken.Create {
                 /// Transit number of the customer's bank.
                 public var transitNumber: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case accountNumber
-                    case institutionNumber
-                    case transitNumber
-                }
-
                 public init(
                     accountNumber: String,
                     institutionNumber: String,
@@ -493,11 +415,6 @@ extension ConfirmationToken.Create {
                 /// Bank-State-Branch number of the bank account.
                 public var bsbNumber: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case accountNumber
-                    case bsbNumber
-                }
-
                 public init(
                     accountNumber: String,
                     bsbNumber: String
@@ -513,11 +430,6 @@ extension ConfirmationToken.Create {
                 public var accountNumber: String?
                 /// Sort code of the bank account.
                 public var sortCode: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case accountNumber
-                    case sortCode
-                }
 
                 public init(
                     accountNumber: String? = nil,
@@ -551,14 +463,6 @@ extension ConfirmationToken.Create {
                 /// Taxpayer identification number.
                 public var taxId: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case address
-                    case email
-                    case name
-                    case phone
-                    case taxId
-                }
-
                 public init(
                     address: Stripe.Clearable<Address>? = nil,
                     email: String? = nil,
@@ -586,15 +490,6 @@ extension ConfirmationToken.Create {
                     public var postalCode: String?
                     /// State, county, province, or region (ISO 3166-2).
                     public var state: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case city
-                        case country
-                        case line1
-                        case line2
-                        case postalCode
-                        case state
-                    }
 
                     public init(
                         city: String? = nil,
@@ -629,10 +524,6 @@ extension ConfirmationToken.Create {
                 /// The tax ID of the customer (CPF for individual consumers or CNPJ for businesses consumers)
                 public var taxId: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case taxId
-                }
-
                 public init(
                     taxId: String
                 ) {
@@ -659,10 +550,6 @@ extension ConfirmationToken.Create {
             public struct Eps: Codable, Hashable, Sendable {
                 /// The customer's bank.
                 public var bank: Bank?
-
-                private enum CodingKeys: String, CodingKey {
-                    case bank
-                }
 
                 public init(
                     bank: Bank? = nil
@@ -708,11 +595,6 @@ extension ConfirmationToken.Create {
                 public var accountHolderType: AccountHolderType?
                 /// The customer's bank.
                 public var bank: Bank
-
-                private enum CodingKeys: String, CodingKey {
-                    case accountHolderType
-                    case bank
-                }
 
                 public init(
                     accountHolderType: AccountHolderType? = nil,
@@ -771,10 +653,6 @@ extension ConfirmationToken.Create {
                 /// The customer's bank.
                 public var bank: Bank?
 
-                private enum CodingKeys: String, CodingKey {
-                    case bank
-                }
-
                 public init(
                     bank: Bank? = nil
                 ) {
@@ -820,10 +698,6 @@ extension ConfirmationToken.Create {
                 /// Customer's date of birth
                 public var dob: Dob?
 
-                private enum CodingKeys: String, CodingKey {
-                    case dob
-                }
-
                 public init(
                     dob: Dob? = nil
                 ) {
@@ -838,12 +712,6 @@ extension ConfirmationToken.Create {
                     public var month: Int
                     /// The four-digit year of birth.
                     public var year: Int
-
-                    private enum CodingKeys: String, CodingKey {
-                        case day
-                        case month
-                        case year
-                    }
 
                     public init(
                         day: Int,
@@ -892,10 +760,6 @@ extension ConfirmationToken.Create {
                 /// Whether to use Naver Pay points or a card to fund this transaction.
                 public var funding: Funding?
 
-                private enum CodingKeys: String, CodingKey {
-                    case funding
-                }
-
                 public init(
                     funding: Funding? = nil
                 ) {
@@ -921,15 +785,6 @@ extension ConfirmationToken.Create {
                 public var reference: String?
                 /// The suffix of the bank account number.
                 public var suffix: String
-
-                private enum CodingKeys: String, CodingKey {
-                    case accountHolderName
-                    case accountNumber
-                    case bankCode
-                    case branchCode
-                    case reference
-                    case suffix
-                }
 
                 public init(
                     accountHolderName: String? = nil,
@@ -957,10 +812,6 @@ extension ConfirmationToken.Create {
             public struct P24: Codable, Hashable, Sendable {
                 /// The customer's bank.
                 public var bank: Bank?
-
-                private enum CodingKeys: String, CodingKey {
-                    case bank
-                }
 
                 public init(
                     bank: Bank? = nil
@@ -1027,12 +878,6 @@ extension ConfirmationToken.Create {
                 /// The PayID alias for the bank account.
                 public var payId: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case accountNumber
-                    case bsbNumber
-                    case payId
-                }
-
                 public init(
                     accountNumber: String? = nil,
                     bsbNumber: String? = nil,
@@ -1058,10 +903,6 @@ extension ConfirmationToken.Create {
             public struct RadarOptions: Codable, Hashable, Sendable {
                 /// A Radar Session is a snapshot of the browser metadata and device details that help Radar make more accurate prediction…
                 public var session: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case session
-                }
 
                 public init(
                     session: String? = nil
@@ -1095,10 +936,6 @@ extension ConfirmationToken.Create {
                 /// IBAN of the bank account.
                 public var iban: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case iban
-                }
-
                 public init(
                     iban: String
                 ) {
@@ -1110,10 +947,6 @@ extension ConfirmationToken.Create {
             public struct Sofort: Codable, Hashable, Sendable {
                 /// Two-letter ISO code representing the country the bank account is located in.
                 public var country: Country
-
-                private enum CodingKeys: String, CodingKey {
-                    case country
-                }
 
                 public init(
                     country: Country
@@ -1151,10 +984,6 @@ extension ConfirmationToken.Create {
                 /// Configuration options for setting up an eMandate
                 public var mandateOptions: MandateOptions?
 
-                private enum CodingKeys: String, CodingKey {
-                    case mandateOptions
-                }
-
                 public init(
                     mandateOptions: MandateOptions? = nil
                 ) {
@@ -1171,13 +1000,6 @@ extension ConfirmationToken.Create {
                     public var description: String?
                     /// End date of the mandate or subscription.
                     public var endDate: Date?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case amount
-                        case amountType
-                        case description
-                        case endDate
-                    }
 
                     public init(
                         amount: Int? = nil,
@@ -1210,14 +1032,6 @@ extension ConfirmationToken.Create {
                 public var financialConnectionsAccount: String?
                 /// Routing number of the bank account.
                 public var routingNumber: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case accountHolderType
-                    case accountNumber
-                    case accountType
-                    case financialConnectionsAccount
-                    case routingNumber
-                }
 
                 public init(
                     accountHolderType: AccountHolderType? = nil,
@@ -1260,10 +1074,6 @@ extension ConfirmationToken.Create {
             /// Configuration for any card payments confirmed using this ConfirmationToken.
             public var card: Card?
 
-            private enum CodingKeys: String, CodingKey {
-                case card
-            }
-
             public init(
                 card: Card? = nil
             ) {
@@ -1275,10 +1085,6 @@ extension ConfirmationToken.Create {
                 /// Installment configuration for payments confirmed using this ConfirmationToken.
                 public var installments: Installments?
 
-                private enum CodingKeys: String, CodingKey {
-                    case installments
-                }
-
                 public init(
                     installments: Installments? = nil
                 ) {
@@ -1289,10 +1095,6 @@ extension ConfirmationToken.Create {
                 public struct Installments: Codable, Hashable, Sendable {
                     /// The selected installment plan to use for this payment attempt.
                     public var plan: Plan
-
-                    private enum CodingKeys: String, CodingKey {
-                        case plan
-                    }
 
                     public init(
                         plan: Plan
@@ -1308,12 +1110,6 @@ extension ConfirmationToken.Create {
                         public var interval: String?
                         /// Type of installment plan, one of `fixed_count`, `bonus`, or `revolving`.
                         public var `type`: Type
-
-                        private enum CodingKeys: String, CodingKey {
-                            case count
-                            case interval
-                            case `type`
-                        }
 
                         public init(
                             count: Int? = nil,
@@ -1344,12 +1140,6 @@ extension ConfirmationToken.Create {
             /// Recipient phone (including extension)
             public var phone: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case address
-                case name
-                case phone
-            }
-
             public init(
                 address: Address,
                 name: String,
@@ -1374,15 +1164,6 @@ extension ConfirmationToken.Create {
                 public var postalCode: String?
                 /// State, county, province, or region (ISO 3166-2).
                 public var state: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case city
-                    case country
-                    case line1
-                    case line2
-                    case postalCode
-                    case state
-                }
 
                 public init(
                     city: String? = nil,
@@ -1411,10 +1192,6 @@ extension ConfirmationToken.Retrieve {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil

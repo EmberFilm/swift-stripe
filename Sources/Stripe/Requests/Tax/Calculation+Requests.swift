@@ -38,17 +38,6 @@ extension Stripe.Tax.Calculation.Create {
         /// The calculation uses the tax rules and rates that are in effect at this timestamp.
         public var taxDate: Int?
 
-        private enum CodingKeys: String, CodingKey {
-            case currency
-            case customer
-            case customerDetails
-            case expand
-            case lineItems
-            case shipFromDetails
-            case shippingCost
-            case taxDate
-        }
-
         public init(
             currency: Stripe.Currency,
             customer: String? = nil,
@@ -81,14 +70,6 @@ extension Stripe.Tax.Calculation.Create {
             public var taxIds: [TaxIds]?
             /// Overrides the tax calculation result to allow you to not collect tax from your customer.
             public var taxabilityOverride: TaxabilityOverride?
-
-            private enum CodingKeys: String, CodingKey {
-                case address
-                case addressSource
-                case ipAddress
-                case taxIds
-                case taxabilityOverride
-            }
 
             public init(
                 address: Address? = nil,
@@ -130,15 +111,6 @@ extension Stripe.Tax.Calculation.Create {
                 /// State, county, province, or region.
                 public var state: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case city
-                    case country
-                    case line1
-                    case line2
-                    case postalCode
-                    case state
-                }
-
                 public init(
                     city: String? = nil,
                     country: String,
@@ -161,11 +133,6 @@ extension Stripe.Tax.Calculation.Create {
                 public var `type`: Type
                 /// Value of the tax ID.
                 public var value: String
-
-                private enum CodingKeys: String, CodingKey {
-                    case `type`
-                    case value
-                }
 
                 public init(
                     `type`: Type,
@@ -313,16 +280,6 @@ extension Stripe.Tax.Calculation.Create {
             /// A tax code ID to use for this line item.
             public var taxCode: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case amount
-                case metadata
-                case product
-                case quantity
-                case reference
-                case taxBehavior
-                case taxCode
-            }
-
             public init(
                 amount: Int,
                 metadata: [String: String]? = nil,
@@ -352,10 +309,6 @@ extension Stripe.Tax.Calculation.Create {
             /// The address from which the goods are being shipped from.
             public var address: Address
 
-            private enum CodingKeys: String, CodingKey {
-                case address
-            }
-
             public init(
                 address: Address
             ) {
@@ -376,15 +329,6 @@ extension Stripe.Tax.Calculation.Create {
                 public var postalCode: String?
                 /// State/province as an ISO 3166-2 subdivision code, without country prefix, such as "NY" or "TX".
                 public var state: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case city
-                    case country
-                    case line1
-                    case line2
-                    case postalCode
-                    case state
-                }
 
                 public init(
                     city: String? = nil,
@@ -414,13 +358,6 @@ extension Stripe.Tax.Calculation.Create {
             public var taxBehavior: TaxBehavior?
             /// The tax code used to calculate tax on shipping.
             public var taxCode: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case amount
-                case shippingRate
-                case taxBehavior
-                case taxCode
-            }
 
             public init(
                 amount: Int? = nil,
@@ -456,13 +393,6 @@ extension Stripe.Tax.Calculation.ListLineItems {
         /// A cursor for use in pagination.
         public var startingAfter: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case endingBefore
-            case expand
-            case limit
-            case startingAfter
-        }
-
         public init(
             endingBefore: String? = nil,
             expand: [String]? = nil,
@@ -484,10 +414,6 @@ extension Stripe.Tax.Calculation.Retrieve {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil

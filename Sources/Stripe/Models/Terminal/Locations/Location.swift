@@ -35,21 +35,6 @@ extension Stripe.Terminal.Locations {
         /// The phone number of the location.
         public var phone: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case address
-            case addressKana
-            case addressKanji
-            case configurationOverrides
-            case displayName
-            case displayNameKana
-            case displayNameKanji
-            case livemode
-            case metadata
-            case phone
-        }
-
         public init(
             id: ID,
             object: String,

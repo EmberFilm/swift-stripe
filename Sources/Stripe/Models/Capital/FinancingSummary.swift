@@ -22,17 +22,6 @@ extension Stripe.Capital {
             public let repaymentsBeginAt: Date?
             public let withholdRate: Double
 
-            private enum CodingKeys: String, CodingKey {
-                case advanceAmount
-                case advancePaidOutAt
-                case currency
-                case currentRepaymentInterval
-                case feeAmount
-                case paidAmount
-                case remainingAmount
-                case repaymentsBeginAt
-                case withholdRate
-            }
         }
 
         private enum CodingKeys: String, CodingKey {

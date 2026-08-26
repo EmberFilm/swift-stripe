@@ -31,18 +31,6 @@ public struct ReportType: Codable, Hashable, Sendable, Identifiable {
     /// Version of the Report Type.
     public var version: Int?
 
-    private enum CodingKeys: String, CodingKey {
-        case id
-        case object
-        case dataAvailableEnd
-        case dataAvailableStart
-        case defaultColumns
-        case livemode
-        case name
-        case updated
-        case version
-    }
-
     public init(
         id: ID,
         object: String,

@@ -31,14 +31,6 @@ extension Stripe.Entitlements.ActiveEntitlement.List {
         /// A cursor for use in pagination.
         public var startingAfter: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case customer
-            case endingBefore
-            case expand
-            case limit
-            case startingAfter
-        }
-
         public init(
             customer: String,
             endingBefore: String? = nil,
@@ -62,10 +54,6 @@ extension Stripe.Entitlements.ActiveEntitlement.Retrieve {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil

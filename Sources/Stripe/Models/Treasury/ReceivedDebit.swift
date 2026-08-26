@@ -44,25 +44,6 @@ extension Stripe.Treasury {
         /// The Transaction associated with this object.
         @Expandable<Stripe.Treasury.Transaction, String> public var transaction: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case amount
-            case created
-            case currency
-            case description
-            case failureCode
-            case financialAccount
-            case hostedRegulatoryReceiptUrl
-            case initiatingPaymentMethodDetails
-            case linkedFlows
-            case livemode
-            case network
-            case reversalDetails
-            case status
-            case transaction
-        }
-
         public init(
             id: ID,
             object: String,
@@ -135,15 +116,6 @@ extension Stripe.Treasury {
             /// Set if the ReceivedDebit was created due to a Topup object.
             public var topup: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case debitReversal
-                case inboundTransfer
-                case issuingAuthorization
-                case issuingTransaction
-                case payout
-                case topup
-            }
-
             public init(
                 debitReversal: String? = nil,
                 inboundTransfer: String? = nil,
@@ -166,11 +138,6 @@ extension Stripe.Treasury {
             public var deadline: Date?
             /// Set if a ReceivedDebit can't be reversed.
             public var restrictedReason: RestrictedReason?
-
-            private enum CodingKeys: String, CodingKey {
-                case deadline
-                case restrictedReason
-            }
 
             public init(
                 deadline: Date? = nil,

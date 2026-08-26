@@ -28,17 +28,6 @@ extension Stripe {
         public var pending: [Pending]?
         public var refundAndDisputePrefunding: RefundAndDisputePrefunding?
 
-        private enum CodingKeys: String, CodingKey {
-            case object
-            case available
-            case connectReserved
-            case instantAvailable
-            case issuing
-            case livemode
-            case pending
-            case refundAndDisputePrefunding
-        }
-
         public init(
             object: String,
             available: [Available]? = nil,
@@ -66,12 +55,6 @@ extension Stripe {
             public var currency: Stripe.Currency?
             public var sourceTypes: SourceTypes?
 
-            private enum CodingKeys: String, CodingKey {
-                case amount
-                case currency
-                case sourceTypes
-            }
-
             public init(
                 amount: Int? = nil,
                 currency: Stripe.Currency? = nil,
@@ -89,12 +72,6 @@ extension Stripe {
                 public var card: Int?
                 /// Amount coming from FPX, a Malaysian payment method.
                 public var fpx: Int?
-
-                private enum CodingKeys: String, CodingKey {
-                    case bankAccount
-                    case card
-                    case fpx
-                }
 
                 public init(
                     bankAccount: Int? = nil,
@@ -115,12 +92,6 @@ extension Stripe {
             public var currency: Stripe.Currency?
             public var sourceTypes: SourceTypes?
 
-            private enum CodingKeys: String, CodingKey {
-                case amount
-                case currency
-                case sourceTypes
-            }
-
             public init(
                 amount: Int? = nil,
                 currency: Stripe.Currency? = nil,
@@ -138,12 +109,6 @@ extension Stripe {
                 public var card: Int?
                 /// Amount coming from FPX, a Malaysian payment method.
                 public var fpx: Int?
-
-                private enum CodingKeys: String, CodingKey {
-                    case bankAccount
-                    case card
-                    case fpx
-                }
 
                 public init(
                     bankAccount: Int? = nil,
@@ -166,13 +131,6 @@ extension Stripe {
             public var netAvailable: [NetAvailable]?
             public var sourceTypes: SourceTypes?
 
-            private enum CodingKeys: String, CodingKey {
-                case amount
-                case currency
-                case netAvailable
-                case sourceTypes
-            }
-
             public init(
                 amount: Int? = nil,
                 currency: Stripe.Currency? = nil,
@@ -192,12 +150,6 @@ extension Stripe {
                 public var destination: String?
                 public var sourceTypes: SourceTypes?
 
-                private enum CodingKeys: String, CodingKey {
-                    case amount
-                    case destination
-                    case sourceTypes
-                }
-
                 public init(
                     amount: Int? = nil,
                     destination: String? = nil,
@@ -215,12 +167,6 @@ extension Stripe {
                     public var card: Int?
                     /// Amount coming from FPX, a Malaysian payment method.
                     public var fpx: Int?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case bankAccount
-                        case card
-                        case fpx
-                    }
 
                     public init(
                         bankAccount: Int? = nil,
@@ -242,12 +188,6 @@ extension Stripe {
                 /// Amount coming from FPX, a Malaysian payment method.
                 public var fpx: Int?
 
-                private enum CodingKeys: String, CodingKey {
-                    case bankAccount
-                    case card
-                    case fpx
-                }
-
                 public init(
                     bankAccount: Int? = nil,
                     card: Int? = nil,
@@ -264,10 +204,6 @@ extension Stripe {
             /// Funds that are available for use.
             public var available: [Available]?
 
-            private enum CodingKeys: String, CodingKey {
-                case available
-            }
-
             public init(
                 available: [Available]? = nil
             ) {
@@ -280,12 +216,6 @@ extension Stripe {
                 /// Three-letter ISO currency code, in lowercase.
                 public var currency: Stripe.Currency?
                 public var sourceTypes: SourceTypes?
-
-                private enum CodingKeys: String, CodingKey {
-                    case amount
-                    case currency
-                    case sourceTypes
-                }
 
                 public init(
                     amount: Int? = nil,
@@ -304,12 +234,6 @@ extension Stripe {
                     public var card: Int?
                     /// Amount coming from FPX, a Malaysian payment method.
                     public var fpx: Int?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case bankAccount
-                        case card
-                        case fpx
-                    }
 
                     public init(
                         bankAccount: Int? = nil,
@@ -331,12 +255,6 @@ extension Stripe {
             public var currency: Stripe.Currency?
             public var sourceTypes: SourceTypes?
 
-            private enum CodingKeys: String, CodingKey {
-                case amount
-                case currency
-                case sourceTypes
-            }
-
             public init(
                 amount: Int? = nil,
                 currency: Stripe.Currency? = nil,
@@ -354,12 +272,6 @@ extension Stripe {
                 public var card: Int?
                 /// Amount coming from FPX, a Malaysian payment method.
                 public var fpx: Int?
-
-                private enum CodingKeys: String, CodingKey {
-                    case bankAccount
-                    case card
-                    case fpx
-                }
 
                 public init(
                     bankAccount: Int? = nil,
@@ -379,11 +291,6 @@ extension Stripe {
             /// Funds that are pending
             public var pending: [Pending]?
 
-            private enum CodingKeys: String, CodingKey {
-                case available
-                case pending
-            }
-
             public init(
                 available: [Available]? = nil,
                 pending: [Pending]? = nil
@@ -398,12 +305,6 @@ extension Stripe {
                 /// Three-letter ISO currency code, in lowercase.
                 public var currency: Stripe.Currency?
                 public var sourceTypes: SourceTypes?
-
-                private enum CodingKeys: String, CodingKey {
-                    case amount
-                    case currency
-                    case sourceTypes
-                }
 
                 public init(
                     amount: Int? = nil,
@@ -422,12 +323,6 @@ extension Stripe {
                     public var card: Int?
                     /// Amount coming from FPX, a Malaysian payment method.
                     public var fpx: Int?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case bankAccount
-                        case card
-                        case fpx
-                    }
 
                     public init(
                         bankAccount: Int? = nil,
@@ -448,12 +343,6 @@ extension Stripe {
                 public var currency: Stripe.Currency?
                 public var sourceTypes: SourceTypes?
 
-                private enum CodingKeys: String, CodingKey {
-                    case amount
-                    case currency
-                    case sourceTypes
-                }
-
                 public init(
                     amount: Int? = nil,
                     currency: Stripe.Currency? = nil,
@@ -471,12 +360,6 @@ extension Stripe {
                     public var card: Int?
                     /// Amount coming from FPX, a Malaysian payment method.
                     public var fpx: Int?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case bankAccount
-                        case card
-                        case fpx
-                    }
 
                     public init(
                         bankAccount: Int? = nil,

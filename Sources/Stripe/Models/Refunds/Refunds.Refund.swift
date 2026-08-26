@@ -61,34 +61,6 @@ extension Stripe.Refunds {
         /// This refers to the transfer reversal object if the accompanying transfer reverses.
         @Expandable<Stripe.Connect.Transfer.Reversal, String> public var transferReversal: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case amount
-            case balanceTransaction
-            case charge
-            case created
-            case currency
-            case customer
-            case customerAccount
-            case description
-            case destinationDetails
-            case failureBalanceTransaction
-            case failureReason
-            case instructionsEmail
-            case metadata
-            case nextAction
-            case paymentIntent
-            case paymentMethod
-            case pendingReason
-            case presentmentDetails
-            case reason
-            case receiptNumber
-            case sourceTransferReversal
-            case status
-            case transferReversal
-        }
-
         public init(
             id: ID,
             object: String,
@@ -256,12 +228,6 @@ extension Stripe.Refunds {
                 /// Status of the reference on the refund.
                 public var referenceStatus: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case networkDeclineCode
-                    case reference
-                    case referenceStatus
-                }
-
                 public init(
                     networkDeclineCode: String? = nil,
                     reference: String? = nil,
@@ -278,11 +244,6 @@ extension Stripe.Refunds {
                 public var reference: String?
                 /// Status of the reference on the refund.
                 public var referenceStatus: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case reference
-                    case referenceStatus
-                }
 
                 public init(
                     reference: String? = nil,
@@ -302,13 +263,6 @@ extension Stripe.Refunds {
                 public var referenceType: String?
                 /// The type of refund.
                 public var `type`: Type?
-
-                private enum CodingKeys: String, CodingKey {
-                    case reference
-                    case referenceStatus
-                    case referenceType
-                    case `type`
-                }
 
                 public init(
                     reference: String? = nil,
@@ -338,10 +292,6 @@ extension Stripe.Refunds {
                 /// The transaction hash of the refund.
                 public var reference: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case reference
-                }
-
                 public init(
                     reference: String? = nil
                 ) {
@@ -363,11 +313,6 @@ extension Stripe.Refunds {
                 /// Status of the reference on the refund.
                 public var referenceStatus: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case reference
-                    case referenceStatus
-                }
-
                 public init(
                     reference: String? = nil,
                     referenceStatus: String? = nil
@@ -382,11 +327,6 @@ extension Stripe.Refunds {
                 public var reference: String?
                 /// Status of the reference on the refund.
                 public var referenceStatus: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case reference
-                    case referenceStatus
-                }
 
                 public init(
                     reference: String? = nil,
@@ -411,11 +351,6 @@ extension Stripe.Refunds {
                 /// Status of the reference on the refund.
                 public var referenceStatus: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case reference
-                    case referenceStatus
-                }
-
                 public init(
                     reference: String? = nil,
                     referenceStatus: String? = nil
@@ -435,11 +370,6 @@ extension Stripe.Refunds {
                 /// Status of the reference on the refund.
                 public var referenceStatus: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case reference
-                    case referenceStatus
-                }
-
                 public init(
                     reference: String? = nil,
                     referenceStatus: String? = nil
@@ -455,11 +385,6 @@ extension Stripe.Refunds {
                 /// Status of the reference on the refund.
                 public var referenceStatus: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case reference
-                    case referenceStatus
-                }
-
                 public init(
                     reference: String? = nil,
                     referenceStatus: String? = nil
@@ -474,11 +399,6 @@ extension Stripe.Refunds {
                 public var reference: String?
                 /// Status of the reference on the refund.
                 public var referenceStatus: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case reference
-                    case referenceStatus
-                }
 
                 public init(
                     reference: String? = nil,
@@ -499,11 +419,6 @@ extension Stripe.Refunds {
                 /// Status of the reference on the refund.
                 public var referenceStatus: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case reference
-                    case referenceStatus
-                }
-
                 public init(
                     reference: String? = nil,
                     referenceStatus: String? = nil
@@ -520,10 +435,6 @@ extension Stripe.Refunds {
             public struct Paypal: Codable, Hashable, Sendable {
                 /// For refunds declined by the network, a decline code provided by the network which indicates the reason the refund fail…
                 public var networkDeclineCode: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case networkDeclineCode
-                }
 
                 public init(
                     networkDeclineCode: String? = nil
@@ -556,12 +467,6 @@ extension Stripe.Refunds {
                 /// Status of the reference on the refund.
                 public var referenceStatus: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case networkDeclineCode
-                    case reference
-                    case referenceStatus
-                }
-
                 public init(
                     networkDeclineCode: String? = nil,
                     reference: String? = nil,
@@ -578,11 +483,6 @@ extension Stripe.Refunds {
                 public var reference: String?
                 /// Status of the reference on the refund.
                 public var referenceStatus: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case reference
-                    case referenceStatus
-                }
 
                 public init(
                     reference: String? = nil,
@@ -602,11 +502,6 @@ extension Stripe.Refunds {
                 public var reference: String?
                 /// Status of the reference on the refund.
                 public var referenceStatus: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case reference
-                    case referenceStatus
-                }
 
                 public init(
                     reference: String? = nil,
@@ -829,11 +724,6 @@ extension Stripe.Refunds {
             /// Type of the next action to perform.
             public var `type`: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayDetails
-                case `type`
-            }
-
             public init(
                 displayDetails: DisplayDetails? = nil,
                 `type`: String? = nil
@@ -846,11 +736,6 @@ extension Stripe.Refunds {
                 public var emailSent: EmailSent?
                 /// The expiry timestamp.
                 public var expiresAt: Date?
-
-                private enum CodingKeys: String, CodingKey {
-                    case emailSent
-                    case expiresAt
-                }
 
                 public init(
                     emailSent: EmailSent? = nil,
@@ -865,11 +750,6 @@ extension Stripe.Refunds {
                     public var emailSentAt: Date?
                     /// The recipient's email address.
                     public var emailSentTo: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case emailSentAt
-                        case emailSentTo
-                    }
 
                     public init(
                         emailSentAt: Date? = nil,

@@ -37,12 +37,6 @@ extension Authorization.Approve {
         /// Set of key-value pairs that you can attach to an object.
         public var metadata: Stripe.Clearable<[String: String]>?
 
-        private enum CodingKeys: String, CodingKey {
-            case amount
-            case expand
-            case metadata
-        }
-
         public init(
             amount: Int? = nil,
             expand: [String]? = nil,
@@ -68,13 +62,6 @@ extension Authorization.Capture {
         public var expand: [String]?
         /// Additional purchase information that is optionally provided by the merchant.
         public var purchaseDetails: PurchaseDetails?
-
-        private enum CodingKeys: String, CodingKey {
-            case captureAmount
-            case closeAuthorization
-            case expand
-            case purchaseDetails
-        }
 
         public init(
             captureAmount: Int? = nil,
@@ -103,15 +90,6 @@ extension Authorization.Capture {
             /// A merchant-specific order number.
             public var reference: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case fleet
-                case flight
-                case fuel
-                case lodging
-                case receipt
-                case reference
-            }
-
             public init(
                 fleet: Fleet? = nil,
                 flight: Flight? = nil,
@@ -138,13 +116,6 @@ extension Authorization.Capture {
                 public var reportedBreakdown: ReportedBreakdown?
                 /// The type of fuel service.
                 public var serviceType: ServiceType?
-
-                private enum CodingKeys: String, CodingKey {
-                    case cardholderPromptData
-                    case purchaseType
-                    case reportedBreakdown
-                    case serviceType
-                }
 
                 public init(
                     cardholderPromptData: CardholderPromptData? = nil,
@@ -183,14 +154,6 @@ extension Authorization.Capture {
                     /// Vehicle number.
                     public var vehicleNumber: String?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case driverId
-                        case odometer
-                        case unspecifiedId
-                        case userId
-                        case vehicleNumber
-                    }
-
                     public init(
                         driverId: String? = nil,
                         odometer: Int? = nil,
@@ -215,12 +178,6 @@ extension Authorization.Capture {
                     /// Information about tax included in this transaction.
                     public var tax: Tax?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case fuel
-                        case nonFuel
-                        case tax
-                    }
-
                     public init(
                         fuel: Fuel? = nil,
                         nonFuel: NonFuel? = nil,
@@ -236,10 +193,6 @@ extension Authorization.Capture {
                         /// Gross fuel amount that should equal Fuel Volume multiplied by Fuel Unit Cost, inclusive of taxes.
                         public var grossAmountDecimal: String?
 
-                        private enum CodingKeys: String, CodingKey {
-                            case grossAmountDecimal
-                        }
-
                         public init(
                             grossAmountDecimal: String? = nil
                         ) {
@@ -251,10 +204,6 @@ extension Authorization.Capture {
                     public struct NonFuel: Codable, Hashable, Sendable {
                         /// Gross non-fuel amount that should equal the sum of the line items, inclusive of taxes.
                         public var grossAmountDecimal: String?
-
-                        private enum CodingKeys: String, CodingKey {
-                            case grossAmountDecimal
-                        }
 
                         public init(
                             grossAmountDecimal: String? = nil
@@ -269,11 +218,6 @@ extension Authorization.Capture {
                         public var localAmountDecimal: String?
                         /// Amount of national Sales Tax or VAT included in the transaction amount.
                         public var nationalAmountDecimal: String?
-
-                        private enum CodingKeys: String, CodingKey {
-                            case localAmountDecimal
-                            case nationalAmountDecimal
-                        }
 
                         public init(
                             localAmountDecimal: String? = nil,
@@ -298,14 +242,6 @@ extension Authorization.Capture {
                 public var segments: [Segments]?
                 /// The travel agency that issued the ticket.
                 public var travelAgency: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case departureAt
-                    case passengerName
-                    case refundable
-                    case segments
-                    case travelAgency
-                }
 
                 public init(
                     departureAt: Date? = nil,
@@ -334,15 +270,6 @@ extension Authorization.Capture {
                     public var serviceClass: String?
                     /// Whether a stopover is allowed on this flight.
                     public var stopoverAllowed: Bool?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case arrivalAirportCode
-                        case carrier
-                        case departureAirportCode
-                        case flightNumber
-                        case serviceClass
-                        case stopoverAllowed
-                    }
 
                     public init(
                         arrivalAirportCode: String? = nil,
@@ -374,14 +301,6 @@ extension Authorization.Capture {
                 public var unit: Unit?
                 /// The cost in cents per each unit of fuel, represented as a decimal string with at most 12 decimal places.
                 public var unitCostDecimal: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case industryProductCode
-                    case quantityDecimal
-                    case `type`
-                    case unit
-                    case unitCostDecimal
-                }
 
                 public init(
                     industryProductCode: String? = nil,
@@ -424,11 +343,6 @@ extension Authorization.Capture {
                 /// The number of nights stayed at the lodging.
                 public var nights: Int?
 
-                private enum CodingKeys: String, CodingKey {
-                    case checkInAt
-                    case nights
-                }
-
                 public init(
                     checkInAt: Date? = nil,
                     nights: Int? = nil
@@ -443,13 +357,6 @@ extension Authorization.Capture {
                 public var quantity: String?
                 public var total: Int?
                 public var unitCost: Int?
-
-                private enum CodingKeys: String, CodingKey {
-                    case description
-                    case quantity
-                    case total
-                    case unitCost
-                }
 
                 public init(
                     description: String? = nil,
@@ -506,26 +413,6 @@ extension Authorization.Create {
         public var verificationData: VerificationData?
         /// The digital wallet used for this transaction.
         public var wallet: Wallet?
-
-        private enum CodingKeys: String, CodingKey {
-            case amount
-            case amountDetails
-            case authorizationMethod
-            case card
-            case currency
-            case expand
-            case fleet
-            case fraudDisputabilityLikelihood
-            case fuel
-            case isAmountControllable
-            case merchantAmount
-            case merchantCurrency
-            case merchantData
-            case networkData
-            case riskAssessment
-            case verificationData
-            case wallet
-        }
 
         public init(
             amount: Int? = nil,
@@ -593,11 +480,6 @@ extension Authorization.Create {
             /// The amount of cash requested by the cardholder.
             public var cashbackAmount: Int?
 
-            private enum CodingKeys: String, CodingKey {
-                case atmFee
-                case cashbackAmount
-            }
-
             public init(
                 atmFee: Int? = nil,
                 cashbackAmount: Int? = nil
@@ -617,13 +499,6 @@ extension Authorization.Create {
             public var reportedBreakdown: ReportedBreakdown?
             /// The type of fuel service.
             public var serviceType: ServiceType?
-
-            private enum CodingKeys: String, CodingKey {
-                case cardholderPromptData
-                case purchaseType
-                case reportedBreakdown
-                case serviceType
-            }
 
             public init(
                 cardholderPromptData: CardholderPromptData? = nil,
@@ -662,14 +537,6 @@ extension Authorization.Create {
                 /// Vehicle number.
                 public var vehicleNumber: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case driverId
-                    case odometer
-                    case unspecifiedId
-                    case userId
-                    case vehicleNumber
-                }
-
                 public init(
                     driverId: String? = nil,
                     odometer: Int? = nil,
@@ -694,12 +561,6 @@ extension Authorization.Create {
                 /// Information about tax included in this transaction.
                 public var tax: Tax?
 
-                private enum CodingKeys: String, CodingKey {
-                    case fuel
-                    case nonFuel
-                    case tax
-                }
-
                 public init(
                     fuel: Fuel? = nil,
                     nonFuel: NonFuel? = nil,
@@ -715,10 +576,6 @@ extension Authorization.Create {
                     /// Gross fuel amount that should equal Fuel Volume multiplied by Fuel Unit Cost, inclusive of taxes.
                     public var grossAmountDecimal: String?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case grossAmountDecimal
-                    }
-
                     public init(
                         grossAmountDecimal: String? = nil
                     ) {
@@ -730,10 +587,6 @@ extension Authorization.Create {
                 public struct NonFuel: Codable, Hashable, Sendable {
                     /// Gross non-fuel amount that should equal the sum of the line items, inclusive of taxes.
                     public var grossAmountDecimal: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case grossAmountDecimal
-                    }
 
                     public init(
                         grossAmountDecimal: String? = nil
@@ -748,11 +601,6 @@ extension Authorization.Create {
                     public var localAmountDecimal: String?
                     /// Amount of national Sales Tax or VAT included in the transaction amount.
                     public var nationalAmountDecimal: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case localAmountDecimal
-                        case nationalAmountDecimal
-                    }
 
                     public init(
                         localAmountDecimal: String? = nil,
@@ -777,14 +625,6 @@ extension Authorization.Create {
             public var unit: Unit?
             /// The cost in cents per each unit of fuel, represented as a decimal string with at most 12 decimal places.
             public var unitCostDecimal: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case industryProductCode
-                case quantityDecimal
-                case `type`
-                case unit
-                case unitCostDecimal
-            }
 
             public init(
                 industryProductCode: String? = nil,
@@ -840,18 +680,6 @@ extension Authorization.Create {
             public var terminalId: String?
             /// URL provided by the merchant on a 3DS request
             public var url: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case category
-                case city
-                case country
-                case name
-                case networkId
-                case postalCode
-                case state
-                case terminalId
-                case url
-            }
 
             public init(
                 category: Category? = nil,
@@ -1178,10 +1006,6 @@ extension Authorization.Create {
             /// Identifier assigned to the acquirer by the card network.
             public var acquiringInstitutionId: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case acquiringInstitutionId
-            }
-
             public init(
                 acquiringInstitutionId: String? = nil
             ) {
@@ -1197,12 +1021,6 @@ extension Authorization.Create {
             public var fraudRisk: FraudRisk?
             /// The dispute risk of the merchant (the seller on a purchase) on an authorization based on all Stripe Issuing activity.
             public var merchantDisputeRisk: MerchantDisputeRisk?
-
-            private enum CodingKeys: String, CodingKey {
-                case cardTestingRisk
-                case fraudRisk
-                case merchantDisputeRisk
-            }
 
             public init(
                 cardTestingRisk: CardTestingRisk? = nil,
@@ -1222,12 +1040,6 @@ extension Authorization.Create {
                 public var invalidCredentialsDeclineRatePastHour: Int?
                 /// The likelihood that this authorization is associated with card testing activity.
                 public var level: Level
-
-                private enum CodingKeys: String, CodingKey {
-                    case invalidAccountNumberDeclineRatePastHour
-                    case invalidCredentialsDeclineRatePastHour
-                    case level
-                }
 
                 public init(
                     invalidAccountNumberDeclineRatePastHour: Int? = nil,
@@ -1256,11 +1068,6 @@ extension Authorization.Create {
                 /// Stripe’s numerical model score assessing the likelihood of fraudulent activity.
                 public var score: Decimal?
 
-                private enum CodingKeys: String, CodingKey {
-                    case level
-                    case score
-                }
-
                 public init(
                     level: Level,
                     score: Decimal? = nil
@@ -1285,11 +1092,6 @@ extension Authorization.Create {
                 public var disputeRate: Int?
                 /// The likelihood that authorizations from this merchant will result in a dispute based on their history on Stripe Issuin…
                 public var level: Level
-
-                private enum CodingKeys: String, CodingKey {
-                    case disputeRate
-                    case level
-                }
 
                 public init(
                     disputeRate: Int? = nil,
@@ -1324,15 +1126,6 @@ extension Authorization.Create {
             public var expiryCheck: ExpiryCheck?
             /// 3D Secure details.
             public var threeDSecure: ThreeDSecure?
-
-            private enum CodingKeys: String, CodingKey {
-                case addressLine1Check
-                case addressPostalCodeCheck
-                case authenticationExemption
-                case cvcCheck
-                case expiryCheck
-                case threeDSecure
-            }
 
             public init(
                 addressLine1Check: AddressLine1Check? = nil,
@@ -1381,11 +1174,6 @@ extension Authorization.Create {
                 /// The specific exemption claimed for this authorization.
                 public var `type`: Type
 
-                private enum CodingKeys: String, CodingKey {
-                    case claimedBy
-                    case `type`
-                }
-
                 public init(
                     claimedBy: ClaimedBy,
                     `type`: Type
@@ -1410,10 +1198,6 @@ extension Authorization.Create {
             public struct ThreeDSecure: Codable, Hashable, Sendable {
                 /// The outcome of the 3D Secure authentication request.
                 public var result: Result
-
-                private enum CodingKeys: String, CodingKey {
-                    case result
-                }
 
                 public init(
                     result: Result
@@ -1442,11 +1226,6 @@ extension Authorization.Decline {
         /// Set of key-value pairs that you can attach to an object.
         public var metadata: Stripe.Clearable<[String: String]>?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case metadata
-        }
-
         public init(
             expand: [String]? = nil,
             metadata: Stripe.Clearable<[String: String]>? = nil
@@ -1464,10 +1243,6 @@ extension Authorization.Expire {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil
@@ -1491,13 +1266,6 @@ extension Authorization.FinalizeAmount {
         /// Information about fuel that was purchased with this transaction.
         public var fuel: Fuel?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case finalAmount
-            case fleet
-            case fuel
-        }
-
         public init(
             expand: [String]? = nil,
             finalAmount: Int,
@@ -1520,13 +1288,6 @@ extension Authorization.FinalizeAmount {
             public var reportedBreakdown: ReportedBreakdown?
             /// The type of fuel service.
             public var serviceType: ServiceType?
-
-            private enum CodingKeys: String, CodingKey {
-                case cardholderPromptData
-                case purchaseType
-                case reportedBreakdown
-                case serviceType
-            }
 
             public init(
                 cardholderPromptData: CardholderPromptData? = nil,
@@ -1565,14 +1326,6 @@ extension Authorization.FinalizeAmount {
                 /// Vehicle number.
                 public var vehicleNumber: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case driverId
-                    case odometer
-                    case unspecifiedId
-                    case userId
-                    case vehicleNumber
-                }
-
                 public init(
                     driverId: String? = nil,
                     odometer: Int? = nil,
@@ -1597,12 +1350,6 @@ extension Authorization.FinalizeAmount {
                 /// Information about tax included in this transaction.
                 public var tax: Tax?
 
-                private enum CodingKeys: String, CodingKey {
-                    case fuel
-                    case nonFuel
-                    case tax
-                }
-
                 public init(
                     fuel: Fuel? = nil,
                     nonFuel: NonFuel? = nil,
@@ -1618,10 +1365,6 @@ extension Authorization.FinalizeAmount {
                     /// Gross fuel amount that should equal Fuel Volume multiplied by Fuel Unit Cost, inclusive of taxes.
                     public var grossAmountDecimal: String?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case grossAmountDecimal
-                    }
-
                     public init(
                         grossAmountDecimal: String? = nil
                     ) {
@@ -1633,10 +1376,6 @@ extension Authorization.FinalizeAmount {
                 public struct NonFuel: Codable, Hashable, Sendable {
                     /// Gross non-fuel amount that should equal the sum of the line items, inclusive of taxes.
                     public var grossAmountDecimal: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case grossAmountDecimal
-                    }
 
                     public init(
                         grossAmountDecimal: String? = nil
@@ -1651,11 +1390,6 @@ extension Authorization.FinalizeAmount {
                     public var localAmountDecimal: String?
                     /// Amount of national Sales Tax or VAT included in the transaction amount.
                     public var nationalAmountDecimal: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case localAmountDecimal
-                        case nationalAmountDecimal
-                    }
 
                     public init(
                         localAmountDecimal: String? = nil,
@@ -1680,14 +1414,6 @@ extension Authorization.FinalizeAmount {
             public var unit: Unit?
             /// The cost in cents per each unit of fuel, represented as a decimal string with at most 12 decimal places.
             public var unitCostDecimal: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case industryProductCode
-                case quantityDecimal
-                case `type`
-                case unit
-                case unitCostDecimal
-            }
 
             public init(
                 industryProductCode: String? = nil,
@@ -1737,12 +1463,6 @@ extension Authorization.Increment {
         /// If set `true`, you may provide amount to control how much to hold for the authorization.
         public var isAmountControllable: Bool?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case incrementAmount
-            case isAmountControllable
-        }
-
         public init(
             expand: [String]? = nil,
             incrementAmount: Int,
@@ -1776,17 +1496,6 @@ extension Authorization.List {
         public var startingAfter: String?
         /// Only return authorizations with the given status.
         public var status: Status?
-
-        private enum CodingKeys: String, CodingKey {
-            case card
-            case cardholder
-            case created
-            case endingBefore
-            case expand
-            case limit
-            case startingAfter
-            case status
-        }
 
         public init(
             card: String? = nil,
@@ -1827,11 +1536,6 @@ extension Authorization.Respond {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case confirmed
-            case expand
-        }
-
         public init(
             confirmed: Bool,
             expand: [String]? = nil
@@ -1850,10 +1554,6 @@ extension Authorization.Retrieve {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
-
         public init(
             expand: [String]? = nil
         ) {
@@ -1871,11 +1571,6 @@ extension Authorization.Reverse {
         public var expand: [String]?
         /// The amount to reverse from the authorization.
         public var reverseAmount: Int?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case reverseAmount
-        }
 
         public init(
             expand: [String]? = nil,
@@ -1896,11 +1591,6 @@ extension Authorization.Update {
         public var expand: [String]?
         /// Set of key-value pairs that you can attach to an object.
         public var metadata: Stripe.Clearable<[String: String]>?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case metadata
-        }
 
         public init(
             expand: [String]? = nil,

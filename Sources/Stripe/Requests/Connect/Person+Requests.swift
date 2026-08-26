@@ -82,38 +82,6 @@ extension Stripe.Connect.Person.Create {
         /// The person's verification status.
         public var verification: Verification?
 
-        private enum CodingKeys: String, CodingKey {
-            case additionalTosAcceptances
-            case address
-            case addressKana
-            case addressKanji
-            case dob
-            case documents
-            case email
-            case expand
-            case firstName
-            case firstNameKana
-            case firstNameKanji
-            case fullNameAliases
-            case gender
-            case idNumber
-            case idNumberSecondary
-            case lastName
-            case lastNameKana
-            case lastNameKanji
-            case maidenName
-            case metadata
-            case nationality
-            case personToken
-            case phone
-            case politicalExposure
-            case registeredAddress
-            case relationship
-            case ssnLast4
-            case usCfpbData
-            case verification
-        }
-
         public init(
             additionalTosAcceptances: AdditionalTosAcceptances? = nil,
             address: Address? = nil,
@@ -186,10 +154,6 @@ extension Stripe.Connect.Person.Create {
             /// Details on the legal guardian's acceptance of the main Stripe service agreement.
             public var account: Account?
 
-            private enum CodingKeys: String, CodingKey {
-                case account
-            }
-
             public init(
                 account: Account? = nil
             ) {
@@ -204,12 +168,6 @@ extension Stripe.Connect.Person.Create {
                 public var ip: String?
                 /// The user agent of the browser from which the account representative accepted the service agreement.
                 public var userAgent: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case date
-                    case ip
-                    case userAgent
-                }
 
                 public init(
                     date: Date? = nil,
@@ -237,15 +195,6 @@ extension Stripe.Connect.Person.Create {
             public var postalCode: String?
             /// State, county, province, or region (ISO 3166-2).
             public var state: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case city
-                case country
-                case line1
-                case line2
-                case postalCode
-                case state
-            }
 
             public init(
                 city: String? = nil,
@@ -280,16 +229,6 @@ extension Stripe.Connect.Person.Create {
             public var state: String?
             /// Town or cho-me.
             public var town: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case city
-                case country
-                case line1
-                case line2
-                case postalCode
-                case state
-                case town
-            }
 
             public init(
                 city: String? = nil,
@@ -327,16 +266,6 @@ extension Stripe.Connect.Person.Create {
             /// Town or cho-me.
             public var town: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case city
-                case country
-                case line1
-                case line2
-                case postalCode
-                case state
-                case town
-            }
-
             public init(
                 city: String? = nil,
                 country: String? = nil,
@@ -364,12 +293,6 @@ extension Stripe.Connect.Person.Create {
             /// The four-digit year of birth.
             public var year: Int
 
-            private enum CodingKeys: String, CodingKey {
-                case day
-                case month
-                case year
-            }
-
             public init(
                 day: Int,
                 month: Int,
@@ -390,12 +313,6 @@ extension Stripe.Connect.Person.Create {
             /// One or more documents showing the person's visa required for living in the country where they are residing.
             public var visa: Visa?
 
-            private enum CodingKeys: String, CodingKey {
-                case companyAuthorization
-                case passport
-                case visa
-            }
-
             public init(
                 companyAuthorization: CompanyAuthorization? = nil,
                 passport: Passport? = nil,
@@ -411,10 +328,6 @@ extension Stripe.Connect.Person.Create {
                 /// One or more document ids returned by a file upload with a `purpose` value of `account_requirement`.
                 public var files: [String]?
 
-                private enum CodingKeys: String, CodingKey {
-                    case files
-                }
-
                 public init(
                     files: [String]? = nil
                 ) {
@@ -427,10 +340,6 @@ extension Stripe.Connect.Person.Create {
                 /// One or more document ids returned by a file upload with a `purpose` value of `account_requirement`.
                 public var files: [String]?
 
-                private enum CodingKeys: String, CodingKey {
-                    case files
-                }
-
                 public init(
                     files: [String]? = nil
                 ) {
@@ -442,10 +351,6 @@ extension Stripe.Connect.Person.Create {
             public struct Visa: Codable, Hashable, Sendable {
                 /// One or more document ids returned by a file upload with a `purpose` value of `account_requirement`.
                 public var files: [String]?
-
-                private enum CodingKeys: String, CodingKey {
-                    case files
-                }
 
                 public init(
                     files: [String]? = nil
@@ -469,15 +374,6 @@ extension Stripe.Connect.Person.Create {
             public var postalCode: String?
             /// State, county, province, or region (ISO 3166-2).
             public var state: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case city
-                case country
-                case line1
-                case line2
-                case postalCode
-                case state
-            }
 
             public init(
                 city: String? = nil,
@@ -515,17 +411,6 @@ extension Stripe.Connect.Person.Create {
             /// The person's title (e.g., CEO, Support Engineer).
             public var title: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case authorizer
-                case director
-                case executive
-                case legalGuardian
-                case owner
-                case percentOwnership
-                case representative
-                case title
-            }
-
             public init(
                 authorizer: Bool? = nil,
                 director: Bool? = nil,
@@ -556,12 +441,6 @@ extension Stripe.Connect.Person.Create {
             /// The persons self-identified gender
             public var selfIdentifiedGender: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case ethnicityDetails
-                case raceDetails
-                case selfIdentifiedGender
-            }
-
             public init(
                 ethnicityDetails: EthnicityDetails? = nil,
                 raceDetails: RaceDetails? = nil,
@@ -578,11 +457,6 @@ extension Stripe.Connect.Person.Create {
                 public var ethnicity: [Ethnicity]?
                 /// Please specify your origin, when other is selected.
                 public var ethnicityOther: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case ethnicity
-                    case ethnicityOther
-                }
 
                 public init(
                     ethnicity: [Ethnicity]? = nil,
@@ -609,11 +483,6 @@ extension Stripe.Connect.Person.Create {
                 public var race: [Race]?
                 /// Please specify your race, when other is selected.
                 public var raceOther: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case race
-                    case raceOther
-                }
 
                 public init(
                     race: [Race]? = nil,
@@ -659,11 +528,6 @@ extension Stripe.Connect.Person.Create {
             /// An identifying document, either a passport or local ID card.
             public var document: Document?
 
-            private enum CodingKeys: String, CodingKey {
-                case additionalDocument
-                case document
-            }
-
             public init(
                 additionalDocument: AdditionalDocument? = nil,
                 document: Document? = nil
@@ -678,11 +542,6 @@ extension Stripe.Connect.Person.Create {
                 public var back: String?
                 /// The front of an ID returned by a file upload with a `purpose` value of `identity_document`.
                 public var front: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case back
-                    case front
-                }
 
                 public init(
                     back: String? = nil,
@@ -699,11 +558,6 @@ extension Stripe.Connect.Person.Create {
                 public var back: String?
                 /// The front of an ID returned by a file upload with a `purpose` value of `identity_document`.
                 public var front: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case back
-                    case front
-                }
 
                 public init(
                     back: String? = nil,
@@ -738,14 +592,6 @@ extension Stripe.Connect.Person.List {
         /// A cursor for use in pagination.
         public var startingAfter: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case endingBefore
-            case expand
-            case limit
-            case relationship
-            case startingAfter
-        }
-
         public init(
             endingBefore: String? = nil,
             expand: [String]? = nil,
@@ -775,15 +621,6 @@ extension Stripe.Connect.Person.List {
             /// A filter on the list of people returned based on whether these people are the representative of the account's company.
             public var representative: Bool?
 
-            private enum CodingKeys: String, CodingKey {
-                case authorizer
-                case director
-                case executive
-                case legalGuardian
-                case owner
-                case representative
-            }
-
             public init(
                 authorizer: Bool? = nil,
                 director: Bool? = nil,
@@ -810,10 +647,6 @@ extension Stripe.Connect.Person.Retrieve {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil
@@ -887,38 +720,6 @@ extension Stripe.Connect.Person.Update {
         /// The person's verification status.
         public var verification: Verification?
 
-        private enum CodingKeys: String, CodingKey {
-            case additionalTosAcceptances
-            case address
-            case addressKana
-            case addressKanji
-            case dob
-            case documents
-            case email
-            case expand
-            case firstName
-            case firstNameKana
-            case firstNameKanji
-            case fullNameAliases
-            case gender
-            case idNumber
-            case idNumberSecondary
-            case lastName
-            case lastNameKana
-            case lastNameKanji
-            case maidenName
-            case metadata
-            case nationality
-            case personToken
-            case phone
-            case politicalExposure
-            case registeredAddress
-            case relationship
-            case ssnLast4
-            case usCfpbData
-            case verification
-        }
-
         public init(
             additionalTosAcceptances: AdditionalTosAcceptances? = nil,
             address: Address? = nil,
@@ -991,10 +792,6 @@ extension Stripe.Connect.Person.Update {
             /// Details on the legal guardian's acceptance of the main Stripe service agreement.
             public var account: Account?
 
-            private enum CodingKeys: String, CodingKey {
-                case account
-            }
-
             public init(
                 account: Account? = nil
             ) {
@@ -1009,12 +806,6 @@ extension Stripe.Connect.Person.Update {
                 public var ip: String?
                 /// The user agent of the browser from which the account representative accepted the service agreement.
                 public var userAgent: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case date
-                    case ip
-                    case userAgent
-                }
 
                 public init(
                     date: Date? = nil,
@@ -1042,15 +833,6 @@ extension Stripe.Connect.Person.Update {
             public var postalCode: String?
             /// State, county, province, or region (ISO 3166-2).
             public var state: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case city
-                case country
-                case line1
-                case line2
-                case postalCode
-                case state
-            }
 
             public init(
                 city: String? = nil,
@@ -1085,16 +867,6 @@ extension Stripe.Connect.Person.Update {
             public var state: String?
             /// Town or cho-me.
             public var town: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case city
-                case country
-                case line1
-                case line2
-                case postalCode
-                case state
-                case town
-            }
 
             public init(
                 city: String? = nil,
@@ -1132,16 +904,6 @@ extension Stripe.Connect.Person.Update {
             /// Town or cho-me.
             public var town: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case city
-                case country
-                case line1
-                case line2
-                case postalCode
-                case state
-                case town
-            }
-
             public init(
                 city: String? = nil,
                 country: String? = nil,
@@ -1169,12 +931,6 @@ extension Stripe.Connect.Person.Update {
             /// The four-digit year of birth.
             public var year: Int
 
-            private enum CodingKeys: String, CodingKey {
-                case day
-                case month
-                case year
-            }
-
             public init(
                 day: Int,
                 month: Int,
@@ -1195,12 +951,6 @@ extension Stripe.Connect.Person.Update {
             /// One or more documents showing the person's visa required for living in the country where they are residing.
             public var visa: Visa?
 
-            private enum CodingKeys: String, CodingKey {
-                case companyAuthorization
-                case passport
-                case visa
-            }
-
             public init(
                 companyAuthorization: CompanyAuthorization? = nil,
                 passport: Passport? = nil,
@@ -1216,10 +966,6 @@ extension Stripe.Connect.Person.Update {
                 /// One or more document ids returned by a file upload with a `purpose` value of `account_requirement`.
                 public var files: [String]?
 
-                private enum CodingKeys: String, CodingKey {
-                    case files
-                }
-
                 public init(
                     files: [String]? = nil
                 ) {
@@ -1232,10 +978,6 @@ extension Stripe.Connect.Person.Update {
                 /// One or more document ids returned by a file upload with a `purpose` value of `account_requirement`.
                 public var files: [String]?
 
-                private enum CodingKeys: String, CodingKey {
-                    case files
-                }
-
                 public init(
                     files: [String]? = nil
                 ) {
@@ -1247,10 +989,6 @@ extension Stripe.Connect.Person.Update {
             public struct Visa: Codable, Hashable, Sendable {
                 /// One or more document ids returned by a file upload with a `purpose` value of `account_requirement`.
                 public var files: [String]?
-
-                private enum CodingKeys: String, CodingKey {
-                    case files
-                }
 
                 public init(
                     files: [String]? = nil
@@ -1274,15 +1012,6 @@ extension Stripe.Connect.Person.Update {
             public var postalCode: String?
             /// State, county, province, or region (ISO 3166-2).
             public var state: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case city
-                case country
-                case line1
-                case line2
-                case postalCode
-                case state
-            }
 
             public init(
                 city: String? = nil,
@@ -1320,17 +1049,6 @@ extension Stripe.Connect.Person.Update {
             /// The person's title (e.g., CEO, Support Engineer).
             public var title: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case authorizer
-                case director
-                case executive
-                case legalGuardian
-                case owner
-                case percentOwnership
-                case representative
-                case title
-            }
-
             public init(
                 authorizer: Bool? = nil,
                 director: Bool? = nil,
@@ -1361,12 +1079,6 @@ extension Stripe.Connect.Person.Update {
             /// The persons self-identified gender
             public var selfIdentifiedGender: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case ethnicityDetails
-                case raceDetails
-                case selfIdentifiedGender
-            }
-
             public init(
                 ethnicityDetails: EthnicityDetails? = nil,
                 raceDetails: RaceDetails? = nil,
@@ -1383,11 +1095,6 @@ extension Stripe.Connect.Person.Update {
                 public var ethnicity: [Ethnicity]?
                 /// Please specify your origin, when other is selected.
                 public var ethnicityOther: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case ethnicity
-                    case ethnicityOther
-                }
 
                 public init(
                     ethnicity: [Ethnicity]? = nil,
@@ -1414,11 +1121,6 @@ extension Stripe.Connect.Person.Update {
                 public var race: [Race]?
                 /// Please specify your race, when other is selected.
                 public var raceOther: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case race
-                    case raceOther
-                }
 
                 public init(
                     race: [Race]? = nil,
@@ -1464,11 +1166,6 @@ extension Stripe.Connect.Person.Update {
             /// An identifying document, either a passport or local ID card.
             public var document: Document?
 
-            private enum CodingKeys: String, CodingKey {
-                case additionalDocument
-                case document
-            }
-
             public init(
                 additionalDocument: AdditionalDocument? = nil,
                 document: Document? = nil
@@ -1483,11 +1180,6 @@ extension Stripe.Connect.Person.Update {
                 public var back: String?
                 /// The front of an ID returned by a file upload with a `purpose` value of `identity_document`.
                 public var front: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case back
-                    case front
-                }
 
                 public init(
                     back: String? = nil,
@@ -1504,11 +1196,6 @@ extension Stripe.Connect.Person.Update {
                 public var back: String?
                 /// The front of an ID returned by a file upload with a `purpose` value of `identity_document`.
                 public var front: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case back
-                    case front
-                }
 
                 public init(
                     back: String? = nil,

@@ -30,17 +30,6 @@ extension FinancialConnections {
         /// The timestamp of the refresh that updated this owner.
         public var refreshedAt: Date?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case email
-            case name
-            case ownership
-            case phone
-            case rawAddress
-            case refreshedAt
-        }
-
         public init(
             id: ID,
             object: String,

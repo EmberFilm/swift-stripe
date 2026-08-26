@@ -88,75 +88,6 @@ extension Stripe.PaymentMethodConfigurations {
         public var wechatPay: WechatPay?
         public var zip: Zip?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case acssDebit
-            case active
-            case affirm
-            case afterpayClearpay
-            case alipay
-            case alma
-            case amazonPay
-            case applePay
-            case application
-            case auBecsDebit
-            case bacsDebit
-            case bancontact
-            case billie
-            case bizum
-            case blik
-            case boleto
-            case card
-            case cartesBancaires
-            case cashapp
-            case crypto
-            case customerBalance
-            case eps
-            case fpx
-            case giropay
-            case googlePay
-            case grabpay
-            case ideal
-            case isDefault
-            case jcb
-            case kakaoPay
-            case klarna
-            case konbini
-            case krCard
-            case link
-            case livemode
-            case mbWay
-            case mobilepay
-            case multibanco
-            case name
-            case naverPay
-            case nzBankAccount
-            case oxxo
-            case p24
-            case parent
-            case payByBank
-            case payco
-            case paynow
-            case paypal
-            case payto
-            case pix
-            case promptpay
-            case revolutPay
-            case samsungPay
-            case satispay
-            case scalapay
-            case sepaDebit
-            case sofort
-            case sunbit
-            case swish
-            case twint
-            case upi
-            case usBankAccount
-            case wechatPay
-            case zip
-        }
-
         public init(
             id: ID,
             object: String,
@@ -298,11 +229,6 @@ extension Stripe.PaymentMethodConfigurations {
             public var available: Bool?
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case available
-                case displayPreference
-            }
-
             public init(
                 available: Bool? = nil,
                 displayPreference: DisplayPreference? = nil
@@ -318,12 +244,6 @@ extension Stripe.PaymentMethodConfigurations {
                 public var preference: Preference?
                 /// The effective display preference value.
                 public var value: Value?
-
-                private enum CodingKeys: String, CodingKey {
-                    case overridable
-                    case preference
-                    case value
-                }
 
                 public init(
                     overridable: Bool? = nil,
@@ -355,11 +275,6 @@ extension Stripe.PaymentMethodConfigurations {
             public var available: Bool?
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case available
-                case displayPreference
-            }
-
             public init(
                 available: Bool? = nil,
                 displayPreference: DisplayPreference? = nil
@@ -375,12 +290,6 @@ extension Stripe.PaymentMethodConfigurations {
                 public var preference: Preference?
                 /// The effective display preference value.
                 public var value: Value?
-
-                private enum CodingKeys: String, CodingKey {
-                    case overridable
-                    case preference
-                    case value
-                }
 
                 public init(
                     overridable: Bool? = nil,
@@ -412,11 +321,6 @@ extension Stripe.PaymentMethodConfigurations {
             public var available: Bool?
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case available
-                case displayPreference
-            }
-
             public init(
                 available: Bool? = nil,
                 displayPreference: DisplayPreference? = nil
@@ -432,12 +336,6 @@ extension Stripe.PaymentMethodConfigurations {
                 public var preference: Preference?
                 /// The effective display preference value.
                 public var value: Value?
-
-                private enum CodingKeys: String, CodingKey {
-                    case overridable
-                    case preference
-                    case value
-                }
 
                 public init(
                     overridable: Bool? = nil,
@@ -469,11 +367,6 @@ extension Stripe.PaymentMethodConfigurations {
             public var available: Bool?
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case available
-                case displayPreference
-            }
-
             public init(
                 available: Bool? = nil,
                 displayPreference: DisplayPreference? = nil
@@ -489,12 +382,6 @@ extension Stripe.PaymentMethodConfigurations {
                 public var preference: Preference?
                 /// The effective display preference value.
                 public var value: Value?
-
-                private enum CodingKeys: String, CodingKey {
-                    case overridable
-                    case preference
-                    case value
-                }
 
                 public init(
                     overridable: Bool? = nil,
@@ -526,11 +413,6 @@ extension Stripe.PaymentMethodConfigurations {
             public var available: Bool?
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case available
-                case displayPreference
-            }
-
             public init(
                 available: Bool? = nil,
                 displayPreference: DisplayPreference? = nil
@@ -546,12 +428,6 @@ extension Stripe.PaymentMethodConfigurations {
                 public var preference: Preference?
                 /// The effective display preference value.
                 public var value: Value?
-
-                private enum CodingKeys: String, CodingKey {
-                    case overridable
-                    case preference
-                    case value
-                }
 
                 public init(
                     overridable: Bool? = nil,
@@ -583,11 +459,6 @@ extension Stripe.PaymentMethodConfigurations {
             public var available: Bool?
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case available
-                case displayPreference
-            }
-
             public init(
                 available: Bool? = nil,
                 displayPreference: DisplayPreference? = nil
@@ -603,12 +474,6 @@ extension Stripe.PaymentMethodConfigurations {
                 public var preference: Preference?
                 /// The effective display preference value.
                 public var value: Value?
-
-                private enum CodingKeys: String, CodingKey {
-                    case overridable
-                    case preference
-                    case value
-                }
 
                 public init(
                     overridable: Bool? = nil,
@@ -640,11 +505,6 @@ extension Stripe.PaymentMethodConfigurations {
             public var available: Bool?
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case available
-                case displayPreference
-            }
-
             public init(
                 available: Bool? = nil,
                 displayPreference: DisplayPreference? = nil
@@ -660,12 +520,6 @@ extension Stripe.PaymentMethodConfigurations {
                 public var preference: Preference?
                 /// The effective display preference value.
                 public var value: Value?
-
-                private enum CodingKeys: String, CodingKey {
-                    case overridable
-                    case preference
-                    case value
-                }
 
                 public init(
                     overridable: Bool? = nil,
@@ -697,11 +551,6 @@ extension Stripe.PaymentMethodConfigurations {
             public var available: Bool?
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case available
-                case displayPreference
-            }
-
             public init(
                 available: Bool? = nil,
                 displayPreference: DisplayPreference? = nil
@@ -717,12 +566,6 @@ extension Stripe.PaymentMethodConfigurations {
                 public var preference: Preference?
                 /// The effective display preference value.
                 public var value: Value?
-
-                private enum CodingKeys: String, CodingKey {
-                    case overridable
-                    case preference
-                    case value
-                }
 
                 public init(
                     overridable: Bool? = nil,
@@ -754,11 +597,6 @@ extension Stripe.PaymentMethodConfigurations {
             public var available: Bool?
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case available
-                case displayPreference
-            }
-
             public init(
                 available: Bool? = nil,
                 displayPreference: DisplayPreference? = nil
@@ -774,12 +612,6 @@ extension Stripe.PaymentMethodConfigurations {
                 public var preference: Preference?
                 /// The effective display preference value.
                 public var value: Value?
-
-                private enum CodingKeys: String, CodingKey {
-                    case overridable
-                    case preference
-                    case value
-                }
 
                 public init(
                     overridable: Bool? = nil,
@@ -811,11 +643,6 @@ extension Stripe.PaymentMethodConfigurations {
             public var available: Bool?
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case available
-                case displayPreference
-            }
-
             public init(
                 available: Bool? = nil,
                 displayPreference: DisplayPreference? = nil
@@ -831,12 +658,6 @@ extension Stripe.PaymentMethodConfigurations {
                 public var preference: Preference?
                 /// The effective display preference value.
                 public var value: Value?
-
-                private enum CodingKeys: String, CodingKey {
-                    case overridable
-                    case preference
-                    case value
-                }
 
                 public init(
                     overridable: Bool? = nil,
@@ -868,11 +689,6 @@ extension Stripe.PaymentMethodConfigurations {
             public var available: Bool?
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case available
-                case displayPreference
-            }
-
             public init(
                 available: Bool? = nil,
                 displayPreference: DisplayPreference? = nil
@@ -888,12 +704,6 @@ extension Stripe.PaymentMethodConfigurations {
                 public var preference: Preference?
                 /// The effective display preference value.
                 public var value: Value?
-
-                private enum CodingKeys: String, CodingKey {
-                    case overridable
-                    case preference
-                    case value
-                }
 
                 public init(
                     overridable: Bool? = nil,
@@ -925,11 +735,6 @@ extension Stripe.PaymentMethodConfigurations {
             public var available: Bool?
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case available
-                case displayPreference
-            }
-
             public init(
                 available: Bool? = nil,
                 displayPreference: DisplayPreference? = nil
@@ -945,12 +750,6 @@ extension Stripe.PaymentMethodConfigurations {
                 public var preference: Preference?
                 /// The effective display preference value.
                 public var value: Value?
-
-                private enum CodingKeys: String, CodingKey {
-                    case overridable
-                    case preference
-                    case value
-                }
 
                 public init(
                     overridable: Bool? = nil,
@@ -982,11 +781,6 @@ extension Stripe.PaymentMethodConfigurations {
             public var available: Bool?
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case available
-                case displayPreference
-            }
-
             public init(
                 available: Bool? = nil,
                 displayPreference: DisplayPreference? = nil
@@ -1002,12 +796,6 @@ extension Stripe.PaymentMethodConfigurations {
                 public var preference: Preference?
                 /// The effective display preference value.
                 public var value: Value?
-
-                private enum CodingKeys: String, CodingKey {
-                    case overridable
-                    case preference
-                    case value
-                }
 
                 public init(
                     overridable: Bool? = nil,
@@ -1039,11 +827,6 @@ extension Stripe.PaymentMethodConfigurations {
             public var available: Bool?
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case available
-                case displayPreference
-            }
-
             public init(
                 available: Bool? = nil,
                 displayPreference: DisplayPreference? = nil
@@ -1059,12 +842,6 @@ extension Stripe.PaymentMethodConfigurations {
                 public var preference: Preference?
                 /// The effective display preference value.
                 public var value: Value?
-
-                private enum CodingKeys: String, CodingKey {
-                    case overridable
-                    case preference
-                    case value
-                }
 
                 public init(
                     overridable: Bool? = nil,
@@ -1096,11 +873,6 @@ extension Stripe.PaymentMethodConfigurations {
             public var available: Bool?
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case available
-                case displayPreference
-            }
-
             public init(
                 available: Bool? = nil,
                 displayPreference: DisplayPreference? = nil
@@ -1116,12 +888,6 @@ extension Stripe.PaymentMethodConfigurations {
                 public var preference: Preference?
                 /// The effective display preference value.
                 public var value: Value?
-
-                private enum CodingKeys: String, CodingKey {
-                    case overridable
-                    case preference
-                    case value
-                }
 
                 public init(
                     overridable: Bool? = nil,
@@ -1153,11 +919,6 @@ extension Stripe.PaymentMethodConfigurations {
             public var available: Bool?
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case available
-                case displayPreference
-            }
-
             public init(
                 available: Bool? = nil,
                 displayPreference: DisplayPreference? = nil
@@ -1173,12 +934,6 @@ extension Stripe.PaymentMethodConfigurations {
                 public var preference: Preference?
                 /// The effective display preference value.
                 public var value: Value?
-
-                private enum CodingKeys: String, CodingKey {
-                    case overridable
-                    case preference
-                    case value
-                }
 
                 public init(
                     overridable: Bool? = nil,
@@ -1210,11 +965,6 @@ extension Stripe.PaymentMethodConfigurations {
             public var available: Bool?
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case available
-                case displayPreference
-            }
-
             public init(
                 available: Bool? = nil,
                 displayPreference: DisplayPreference? = nil
@@ -1230,12 +980,6 @@ extension Stripe.PaymentMethodConfigurations {
                 public var preference: Preference?
                 /// The effective display preference value.
                 public var value: Value?
-
-                private enum CodingKeys: String, CodingKey {
-                    case overridable
-                    case preference
-                    case value
-                }
 
                 public init(
                     overridable: Bool? = nil,
@@ -1267,11 +1011,6 @@ extension Stripe.PaymentMethodConfigurations {
             public var available: Bool?
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case available
-                case displayPreference
-            }
-
             public init(
                 available: Bool? = nil,
                 displayPreference: DisplayPreference? = nil
@@ -1287,12 +1026,6 @@ extension Stripe.PaymentMethodConfigurations {
                 public var preference: Preference?
                 /// The effective display preference value.
                 public var value: Value?
-
-                private enum CodingKeys: String, CodingKey {
-                    case overridable
-                    case preference
-                    case value
-                }
 
                 public init(
                     overridable: Bool? = nil,
@@ -1324,11 +1057,6 @@ extension Stripe.PaymentMethodConfigurations {
             public var available: Bool?
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case available
-                case displayPreference
-            }
-
             public init(
                 available: Bool? = nil,
                 displayPreference: DisplayPreference? = nil
@@ -1344,12 +1072,6 @@ extension Stripe.PaymentMethodConfigurations {
                 public var preference: Preference?
                 /// The effective display preference value.
                 public var value: Value?
-
-                private enum CodingKeys: String, CodingKey {
-                    case overridable
-                    case preference
-                    case value
-                }
 
                 public init(
                     overridable: Bool? = nil,
@@ -1381,11 +1103,6 @@ extension Stripe.PaymentMethodConfigurations {
             public var available: Bool?
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case available
-                case displayPreference
-            }
-
             public init(
                 available: Bool? = nil,
                 displayPreference: DisplayPreference? = nil
@@ -1401,12 +1118,6 @@ extension Stripe.PaymentMethodConfigurations {
                 public var preference: Preference?
                 /// The effective display preference value.
                 public var value: Value?
-
-                private enum CodingKeys: String, CodingKey {
-                    case overridable
-                    case preference
-                    case value
-                }
 
                 public init(
                     overridable: Bool? = nil,
@@ -1438,11 +1149,6 @@ extension Stripe.PaymentMethodConfigurations {
             public var available: Bool?
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case available
-                case displayPreference
-            }
-
             public init(
                 available: Bool? = nil,
                 displayPreference: DisplayPreference? = nil
@@ -1458,12 +1164,6 @@ extension Stripe.PaymentMethodConfigurations {
                 public var preference: Preference?
                 /// The effective display preference value.
                 public var value: Value?
-
-                private enum CodingKeys: String, CodingKey {
-                    case overridable
-                    case preference
-                    case value
-                }
 
                 public init(
                     overridable: Bool? = nil,
@@ -1495,11 +1195,6 @@ extension Stripe.PaymentMethodConfigurations {
             public var available: Bool?
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case available
-                case displayPreference
-            }
-
             public init(
                 available: Bool? = nil,
                 displayPreference: DisplayPreference? = nil
@@ -1515,12 +1210,6 @@ extension Stripe.PaymentMethodConfigurations {
                 public var preference: Preference?
                 /// The effective display preference value.
                 public var value: Value?
-
-                private enum CodingKeys: String, CodingKey {
-                    case overridable
-                    case preference
-                    case value
-                }
 
                 public init(
                     overridable: Bool? = nil,
@@ -1552,11 +1241,6 @@ extension Stripe.PaymentMethodConfigurations {
             public var available: Bool?
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case available
-                case displayPreference
-            }
-
             public init(
                 available: Bool? = nil,
                 displayPreference: DisplayPreference? = nil
@@ -1572,12 +1256,6 @@ extension Stripe.PaymentMethodConfigurations {
                 public var preference: Preference?
                 /// The effective display preference value.
                 public var value: Value?
-
-                private enum CodingKeys: String, CodingKey {
-                    case overridable
-                    case preference
-                    case value
-                }
 
                 public init(
                     overridable: Bool? = nil,
@@ -1609,11 +1287,6 @@ extension Stripe.PaymentMethodConfigurations {
             public var available: Bool?
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case available
-                case displayPreference
-            }
-
             public init(
                 available: Bool? = nil,
                 displayPreference: DisplayPreference? = nil
@@ -1629,12 +1302,6 @@ extension Stripe.PaymentMethodConfigurations {
                 public var preference: Preference?
                 /// The effective display preference value.
                 public var value: Value?
-
-                private enum CodingKeys: String, CodingKey {
-                    case overridable
-                    case preference
-                    case value
-                }
 
                 public init(
                     overridable: Bool? = nil,
@@ -1666,11 +1333,6 @@ extension Stripe.PaymentMethodConfigurations {
             public var available: Bool?
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case available
-                case displayPreference
-            }
-
             public init(
                 available: Bool? = nil,
                 displayPreference: DisplayPreference? = nil
@@ -1686,12 +1348,6 @@ extension Stripe.PaymentMethodConfigurations {
                 public var preference: Preference?
                 /// The effective display preference value.
                 public var value: Value?
-
-                private enum CodingKeys: String, CodingKey {
-                    case overridable
-                    case preference
-                    case value
-                }
 
                 public init(
                     overridable: Bool? = nil,
@@ -1723,11 +1379,6 @@ extension Stripe.PaymentMethodConfigurations {
             public var available: Bool?
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case available
-                case displayPreference
-            }
-
             public init(
                 available: Bool? = nil,
                 displayPreference: DisplayPreference? = nil
@@ -1743,12 +1394,6 @@ extension Stripe.PaymentMethodConfigurations {
                 public var preference: Preference?
                 /// The effective display preference value.
                 public var value: Value?
-
-                private enum CodingKeys: String, CodingKey {
-                    case overridable
-                    case preference
-                    case value
-                }
 
                 public init(
                     overridable: Bool? = nil,
@@ -1780,11 +1425,6 @@ extension Stripe.PaymentMethodConfigurations {
             public var available: Bool?
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case available
-                case displayPreference
-            }
-
             public init(
                 available: Bool? = nil,
                 displayPreference: DisplayPreference? = nil
@@ -1800,12 +1440,6 @@ extension Stripe.PaymentMethodConfigurations {
                 public var preference: Preference?
                 /// The effective display preference value.
                 public var value: Value?
-
-                private enum CodingKeys: String, CodingKey {
-                    case overridable
-                    case preference
-                    case value
-                }
 
                 public init(
                     overridable: Bool? = nil,
@@ -1837,11 +1471,6 @@ extension Stripe.PaymentMethodConfigurations {
             public var available: Bool?
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case available
-                case displayPreference
-            }
-
             public init(
                 available: Bool? = nil,
                 displayPreference: DisplayPreference? = nil
@@ -1857,12 +1486,6 @@ extension Stripe.PaymentMethodConfigurations {
                 public var preference: Preference?
                 /// The effective display preference value.
                 public var value: Value?
-
-                private enum CodingKeys: String, CodingKey {
-                    case overridable
-                    case preference
-                    case value
-                }
 
                 public init(
                     overridable: Bool? = nil,
@@ -1894,11 +1517,6 @@ extension Stripe.PaymentMethodConfigurations {
             public var available: Bool?
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case available
-                case displayPreference
-            }
-
             public init(
                 available: Bool? = nil,
                 displayPreference: DisplayPreference? = nil
@@ -1914,12 +1532,6 @@ extension Stripe.PaymentMethodConfigurations {
                 public var preference: Preference?
                 /// The effective display preference value.
                 public var value: Value?
-
-                private enum CodingKeys: String, CodingKey {
-                    case overridable
-                    case preference
-                    case value
-                }
 
                 public init(
                     overridable: Bool? = nil,
@@ -1951,11 +1563,6 @@ extension Stripe.PaymentMethodConfigurations {
             public var available: Bool?
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case available
-                case displayPreference
-            }
-
             public init(
                 available: Bool? = nil,
                 displayPreference: DisplayPreference? = nil
@@ -1971,12 +1578,6 @@ extension Stripe.PaymentMethodConfigurations {
                 public var preference: Preference?
                 /// The effective display preference value.
                 public var value: Value?
-
-                private enum CodingKeys: String, CodingKey {
-                    case overridable
-                    case preference
-                    case value
-                }
 
                 public init(
                     overridable: Bool? = nil,
@@ -2008,11 +1609,6 @@ extension Stripe.PaymentMethodConfigurations {
             public var available: Bool?
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case available
-                case displayPreference
-            }
-
             public init(
                 available: Bool? = nil,
                 displayPreference: DisplayPreference? = nil
@@ -2028,12 +1624,6 @@ extension Stripe.PaymentMethodConfigurations {
                 public var preference: Preference?
                 /// The effective display preference value.
                 public var value: Value?
-
-                private enum CodingKeys: String, CodingKey {
-                    case overridable
-                    case preference
-                    case value
-                }
 
                 public init(
                     overridable: Bool? = nil,
@@ -2065,11 +1655,6 @@ extension Stripe.PaymentMethodConfigurations {
             public var available: Bool?
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case available
-                case displayPreference
-            }
-
             public init(
                 available: Bool? = nil,
                 displayPreference: DisplayPreference? = nil
@@ -2085,12 +1670,6 @@ extension Stripe.PaymentMethodConfigurations {
                 public var preference: Preference?
                 /// The effective display preference value.
                 public var value: Value?
-
-                private enum CodingKeys: String, CodingKey {
-                    case overridable
-                    case preference
-                    case value
-                }
 
                 public init(
                     overridable: Bool? = nil,
@@ -2122,11 +1701,6 @@ extension Stripe.PaymentMethodConfigurations {
             public var available: Bool?
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case available
-                case displayPreference
-            }
-
             public init(
                 available: Bool? = nil,
                 displayPreference: DisplayPreference? = nil
@@ -2142,12 +1716,6 @@ extension Stripe.PaymentMethodConfigurations {
                 public var preference: Preference?
                 /// The effective display preference value.
                 public var value: Value?
-
-                private enum CodingKeys: String, CodingKey {
-                    case overridable
-                    case preference
-                    case value
-                }
 
                 public init(
                     overridable: Bool? = nil,
@@ -2179,11 +1747,6 @@ extension Stripe.PaymentMethodConfigurations {
             public var available: Bool?
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case available
-                case displayPreference
-            }
-
             public init(
                 available: Bool? = nil,
                 displayPreference: DisplayPreference? = nil
@@ -2199,12 +1762,6 @@ extension Stripe.PaymentMethodConfigurations {
                 public var preference: Preference?
                 /// The effective display preference value.
                 public var value: Value?
-
-                private enum CodingKeys: String, CodingKey {
-                    case overridable
-                    case preference
-                    case value
-                }
 
                 public init(
                     overridable: Bool? = nil,
@@ -2236,11 +1793,6 @@ extension Stripe.PaymentMethodConfigurations {
             public var available: Bool?
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case available
-                case displayPreference
-            }
-
             public init(
                 available: Bool? = nil,
                 displayPreference: DisplayPreference? = nil
@@ -2256,12 +1808,6 @@ extension Stripe.PaymentMethodConfigurations {
                 public var preference: Preference?
                 /// The effective display preference value.
                 public var value: Value?
-
-                private enum CodingKeys: String, CodingKey {
-                    case overridable
-                    case preference
-                    case value
-                }
 
                 public init(
                     overridable: Bool? = nil,
@@ -2293,11 +1839,6 @@ extension Stripe.PaymentMethodConfigurations {
             public var available: Bool?
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case available
-                case displayPreference
-            }
-
             public init(
                 available: Bool? = nil,
                 displayPreference: DisplayPreference? = nil
@@ -2313,12 +1854,6 @@ extension Stripe.PaymentMethodConfigurations {
                 public var preference: Preference?
                 /// The effective display preference value.
                 public var value: Value?
-
-                private enum CodingKeys: String, CodingKey {
-                    case overridable
-                    case preference
-                    case value
-                }
 
                 public init(
                     overridable: Bool? = nil,
@@ -2350,11 +1885,6 @@ extension Stripe.PaymentMethodConfigurations {
             public var available: Bool?
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case available
-                case displayPreference
-            }
-
             public init(
                 available: Bool? = nil,
                 displayPreference: DisplayPreference? = nil
@@ -2370,12 +1900,6 @@ extension Stripe.PaymentMethodConfigurations {
                 public var preference: Preference?
                 /// The effective display preference value.
                 public var value: Value?
-
-                private enum CodingKeys: String, CodingKey {
-                    case overridable
-                    case preference
-                    case value
-                }
 
                 public init(
                     overridable: Bool? = nil,
@@ -2407,11 +1931,6 @@ extension Stripe.PaymentMethodConfigurations {
             public var available: Bool?
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case available
-                case displayPreference
-            }
-
             public init(
                 available: Bool? = nil,
                 displayPreference: DisplayPreference? = nil
@@ -2427,12 +1946,6 @@ extension Stripe.PaymentMethodConfigurations {
                 public var preference: Preference?
                 /// The effective display preference value.
                 public var value: Value?
-
-                private enum CodingKeys: String, CodingKey {
-                    case overridable
-                    case preference
-                    case value
-                }
 
                 public init(
                     overridable: Bool? = nil,
@@ -2464,11 +1977,6 @@ extension Stripe.PaymentMethodConfigurations {
             public var available: Bool?
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case available
-                case displayPreference
-            }
-
             public init(
                 available: Bool? = nil,
                 displayPreference: DisplayPreference? = nil
@@ -2484,12 +1992,6 @@ extension Stripe.PaymentMethodConfigurations {
                 public var preference: Preference?
                 /// The effective display preference value.
                 public var value: Value?
-
-                private enum CodingKeys: String, CodingKey {
-                    case overridable
-                    case preference
-                    case value
-                }
 
                 public init(
                     overridable: Bool? = nil,
@@ -2521,11 +2023,6 @@ extension Stripe.PaymentMethodConfigurations {
             public var available: Bool?
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case available
-                case displayPreference
-            }
-
             public init(
                 available: Bool? = nil,
                 displayPreference: DisplayPreference? = nil
@@ -2541,12 +2038,6 @@ extension Stripe.PaymentMethodConfigurations {
                 public var preference: Preference?
                 /// The effective display preference value.
                 public var value: Value?
-
-                private enum CodingKeys: String, CodingKey {
-                    case overridable
-                    case preference
-                    case value
-                }
 
                 public init(
                     overridable: Bool? = nil,
@@ -2578,11 +2069,6 @@ extension Stripe.PaymentMethodConfigurations {
             public var available: Bool?
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case available
-                case displayPreference
-            }
-
             public init(
                 available: Bool? = nil,
                 displayPreference: DisplayPreference? = nil
@@ -2598,12 +2084,6 @@ extension Stripe.PaymentMethodConfigurations {
                 public var preference: Preference?
                 /// The effective display preference value.
                 public var value: Value?
-
-                private enum CodingKeys: String, CodingKey {
-                    case overridable
-                    case preference
-                    case value
-                }
 
                 public init(
                     overridable: Bool? = nil,
@@ -2635,11 +2115,6 @@ extension Stripe.PaymentMethodConfigurations {
             public var available: Bool?
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case available
-                case displayPreference
-            }
-
             public init(
                 available: Bool? = nil,
                 displayPreference: DisplayPreference? = nil
@@ -2655,12 +2130,6 @@ extension Stripe.PaymentMethodConfigurations {
                 public var preference: Preference?
                 /// The effective display preference value.
                 public var value: Value?
-
-                private enum CodingKeys: String, CodingKey {
-                    case overridable
-                    case preference
-                    case value
-                }
 
                 public init(
                     overridable: Bool? = nil,
@@ -2692,11 +2161,6 @@ extension Stripe.PaymentMethodConfigurations {
             public var available: Bool?
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case available
-                case displayPreference
-            }
-
             public init(
                 available: Bool? = nil,
                 displayPreference: DisplayPreference? = nil
@@ -2712,12 +2176,6 @@ extension Stripe.PaymentMethodConfigurations {
                 public var preference: Preference?
                 /// The effective display preference value.
                 public var value: Value?
-
-                private enum CodingKeys: String, CodingKey {
-                    case overridable
-                    case preference
-                    case value
-                }
 
                 public init(
                     overridable: Bool? = nil,
@@ -2749,11 +2207,6 @@ extension Stripe.PaymentMethodConfigurations {
             public var available: Bool?
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case available
-                case displayPreference
-            }
-
             public init(
                 available: Bool? = nil,
                 displayPreference: DisplayPreference? = nil
@@ -2769,12 +2222,6 @@ extension Stripe.PaymentMethodConfigurations {
                 public var preference: Preference?
                 /// The effective display preference value.
                 public var value: Value?
-
-                private enum CodingKeys: String, CodingKey {
-                    case overridable
-                    case preference
-                    case value
-                }
 
                 public init(
                     overridable: Bool? = nil,
@@ -2806,11 +2253,6 @@ extension Stripe.PaymentMethodConfigurations {
             public var available: Bool?
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case available
-                case displayPreference
-            }
-
             public init(
                 available: Bool? = nil,
                 displayPreference: DisplayPreference? = nil
@@ -2826,12 +2268,6 @@ extension Stripe.PaymentMethodConfigurations {
                 public var preference: Preference?
                 /// The effective display preference value.
                 public var value: Value?
-
-                private enum CodingKeys: String, CodingKey {
-                    case overridable
-                    case preference
-                    case value
-                }
 
                 public init(
                     overridable: Bool? = nil,
@@ -2863,11 +2299,6 @@ extension Stripe.PaymentMethodConfigurations {
             public var available: Bool?
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case available
-                case displayPreference
-            }
-
             public init(
                 available: Bool? = nil,
                 displayPreference: DisplayPreference? = nil
@@ -2883,12 +2314,6 @@ extension Stripe.PaymentMethodConfigurations {
                 public var preference: Preference?
                 /// The effective display preference value.
                 public var value: Value?
-
-                private enum CodingKeys: String, CodingKey {
-                    case overridable
-                    case preference
-                    case value
-                }
 
                 public init(
                     overridable: Bool? = nil,
@@ -2920,11 +2345,6 @@ extension Stripe.PaymentMethodConfigurations {
             public var available: Bool?
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case available
-                case displayPreference
-            }
-
             public init(
                 available: Bool? = nil,
                 displayPreference: DisplayPreference? = nil
@@ -2940,12 +2360,6 @@ extension Stripe.PaymentMethodConfigurations {
                 public var preference: Preference?
                 /// The effective display preference value.
                 public var value: Value?
-
-                private enum CodingKeys: String, CodingKey {
-                    case overridable
-                    case preference
-                    case value
-                }
 
                 public init(
                     overridable: Bool? = nil,
@@ -2977,11 +2391,6 @@ extension Stripe.PaymentMethodConfigurations {
             public var available: Bool?
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case available
-                case displayPreference
-            }
-
             public init(
                 available: Bool? = nil,
                 displayPreference: DisplayPreference? = nil
@@ -2997,12 +2406,6 @@ extension Stripe.PaymentMethodConfigurations {
                 public var preference: Preference?
                 /// The effective display preference value.
                 public var value: Value?
-
-                private enum CodingKeys: String, CodingKey {
-                    case overridable
-                    case preference
-                    case value
-                }
 
                 public init(
                     overridable: Bool? = nil,
@@ -3034,11 +2437,6 @@ extension Stripe.PaymentMethodConfigurations {
             public var available: Bool?
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case available
-                case displayPreference
-            }
-
             public init(
                 available: Bool? = nil,
                 displayPreference: DisplayPreference? = nil
@@ -3054,12 +2452,6 @@ extension Stripe.PaymentMethodConfigurations {
                 public var preference: Preference?
                 /// The effective display preference value.
                 public var value: Value?
-
-                private enum CodingKeys: String, CodingKey {
-                    case overridable
-                    case preference
-                    case value
-                }
 
                 public init(
                     overridable: Bool? = nil,
@@ -3091,11 +2483,6 @@ extension Stripe.PaymentMethodConfigurations {
             public var available: Bool?
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case available
-                case displayPreference
-            }
-
             public init(
                 available: Bool? = nil,
                 displayPreference: DisplayPreference? = nil
@@ -3111,12 +2498,6 @@ extension Stripe.PaymentMethodConfigurations {
                 public var preference: Preference?
                 /// The effective display preference value.
                 public var value: Value?
-
-                private enum CodingKeys: String, CodingKey {
-                    case overridable
-                    case preference
-                    case value
-                }
 
                 public init(
                     overridable: Bool? = nil,
@@ -3148,11 +2529,6 @@ extension Stripe.PaymentMethodConfigurations {
             public var available: Bool?
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case available
-                case displayPreference
-            }
-
             public init(
                 available: Bool? = nil,
                 displayPreference: DisplayPreference? = nil
@@ -3168,12 +2544,6 @@ extension Stripe.PaymentMethodConfigurations {
                 public var preference: Preference?
                 /// The effective display preference value.
                 public var value: Value?
-
-                private enum CodingKeys: String, CodingKey {
-                    case overridable
-                    case preference
-                    case value
-                }
 
                 public init(
                     overridable: Bool? = nil,
@@ -3205,11 +2575,6 @@ extension Stripe.PaymentMethodConfigurations {
             public var available: Bool?
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case available
-                case displayPreference
-            }
-
             public init(
                 available: Bool? = nil,
                 displayPreference: DisplayPreference? = nil
@@ -3225,12 +2590,6 @@ extension Stripe.PaymentMethodConfigurations {
                 public var preference: Preference?
                 /// The effective display preference value.
                 public var value: Value?
-
-                private enum CodingKeys: String, CodingKey {
-                    case overridable
-                    case preference
-                    case value
-                }
 
                 public init(
                     overridable: Bool? = nil,
@@ -3262,11 +2621,6 @@ extension Stripe.PaymentMethodConfigurations {
             public var available: Bool?
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case available
-                case displayPreference
-            }
-
             public init(
                 available: Bool? = nil,
                 displayPreference: DisplayPreference? = nil
@@ -3282,12 +2636,6 @@ extension Stripe.PaymentMethodConfigurations {
                 public var preference: Preference?
                 /// The effective display preference value.
                 public var value: Value?
-
-                private enum CodingKeys: String, CodingKey {
-                    case overridable
-                    case preference
-                    case value
-                }
 
                 public init(
                     overridable: Bool? = nil,
@@ -3319,11 +2667,6 @@ extension Stripe.PaymentMethodConfigurations {
             public var available: Bool?
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case available
-                case displayPreference
-            }
-
             public init(
                 available: Bool? = nil,
                 displayPreference: DisplayPreference? = nil
@@ -3339,12 +2682,6 @@ extension Stripe.PaymentMethodConfigurations {
                 public var preference: Preference?
                 /// The effective display preference value.
                 public var value: Value?
-
-                private enum CodingKeys: String, CodingKey {
-                    case overridable
-                    case preference
-                    case value
-                }
 
                 public init(
                     overridable: Bool? = nil,
@@ -3376,11 +2713,6 @@ extension Stripe.PaymentMethodConfigurations {
             public var available: Bool?
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case available
-                case displayPreference
-            }
-
             public init(
                 available: Bool? = nil,
                 displayPreference: DisplayPreference? = nil
@@ -3396,12 +2728,6 @@ extension Stripe.PaymentMethodConfigurations {
                 public var preference: Preference?
                 /// The effective display preference value.
                 public var value: Value?
-
-                private enum CodingKeys: String, CodingKey {
-                    case overridable
-                    case preference
-                    case value
-                }
 
                 public init(
                     overridable: Bool? = nil,
@@ -3433,11 +2759,6 @@ extension Stripe.PaymentMethodConfigurations {
             public var available: Bool?
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case available
-                case displayPreference
-            }
-
             public init(
                 available: Bool? = nil,
                 displayPreference: DisplayPreference? = nil
@@ -3453,12 +2774,6 @@ extension Stripe.PaymentMethodConfigurations {
                 public var preference: Preference?
                 /// The effective display preference value.
                 public var value: Value?
-
-                private enum CodingKeys: String, CodingKey {
-                    case overridable
-                    case preference
-                    case value
-                }
 
                 public init(
                     overridable: Bool? = nil,
@@ -3490,11 +2805,6 @@ extension Stripe.PaymentMethodConfigurations {
             public var available: Bool?
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case available
-                case displayPreference
-            }
-
             public init(
                 available: Bool? = nil,
                 displayPreference: DisplayPreference? = nil
@@ -3510,12 +2820,6 @@ extension Stripe.PaymentMethodConfigurations {
                 public var preference: Preference?
                 /// The effective display preference value.
                 public var value: Value?
-
-                private enum CodingKeys: String, CodingKey {
-                    case overridable
-                    case preference
-                    case value
-                }
 
                 public init(
                     overridable: Bool? = nil,
@@ -3547,11 +2851,6 @@ extension Stripe.PaymentMethodConfigurations {
             public var available: Bool?
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case available
-                case displayPreference
-            }
-
             public init(
                 available: Bool? = nil,
                 displayPreference: DisplayPreference? = nil
@@ -3567,12 +2866,6 @@ extension Stripe.PaymentMethodConfigurations {
                 public var preference: Preference?
                 /// The effective display preference value.
                 public var value: Value?
-
-                private enum CodingKeys: String, CodingKey {
-                    case overridable
-                    case preference
-                    case value
-                }
 
                 public init(
                     overridable: Bool? = nil,

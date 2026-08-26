@@ -57,31 +57,6 @@ extension Stripe.Climate {
         /// The current status of this order.
         public var status: Status?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case amountFees
-            case amountSubtotal
-            case amountTotal
-            case beneficiary
-            case canceledAt
-            case cancellationReason
-            case certificate
-            case confirmedAt
-            case created
-            case currency
-            case delayedAt
-            case deliveredAt
-            case deliveryDetails
-            case expectedDeliveryYear
-            case livemode
-            case metadata
-            case metricTons
-            case product
-            case productSubstitutedAt
-            case status
-        }
-
         public init(
             id: ID,
             object: String,
@@ -150,10 +125,6 @@ extension Stripe.Climate {
             /// Publicly displayable name for the end beneficiary of carbon removal.
             public var publicName: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case publicName
-            }
-
             public init(
                 publicName: String? = nil
             ) {
@@ -172,14 +143,6 @@ extension Stripe.Climate {
             /// Once retired, a URL to the registry entry for the tons from this delivery.
             public var registryUrl: String?
             @Boxed public var supplier: Stripe.Climate.Supplier?
-
-            private enum CodingKeys: String, CodingKey {
-                case deliveredAt
-                case location
-                case metricTons
-                case registryUrl
-                case supplier
-            }
 
             public init(
                 deliveredAt: Date? = nil,

@@ -51,28 +51,6 @@ public struct BankAccount: Codable, Hashable, Sendable, Identifiable {
     /// For bank accounts, possible values are `new`, `validated`, `verified`, `verification_failed`, `tokenized_account_numbe…
     public var status: String?
 
-    private enum CodingKeys: String, CodingKey {
-        case id
-        case object
-        case account
-        case accountHolderName
-        case accountHolderType
-        case accountType
-        case availablePayoutMethods
-        case bankName
-        case country
-        case currency
-        case customer
-        case defaultForCurrency
-        case fingerprint
-        case futureRequirements
-        case last4
-        case metadata
-        case requirements
-        case routingNumber
-        case status
-    }
-
     public init(
         id: ID,
         object: String,
@@ -130,13 +108,6 @@ public struct BankAccount: Codable, Hashable, Sendable, Identifiable {
         /// Fields that are being reviewed, or might become required depending on the results of a review.
         public var pendingVerification: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case currentlyDue
-            case errors
-            case pastDue
-            case pendingVerification
-        }
-
         public init(
             currentlyDue: [String]? = nil,
             errors: [Stripe.Shared.Errors]? = nil,
@@ -159,13 +130,6 @@ public struct BankAccount: Codable, Hashable, Sendable, Identifiable {
         public var pastDue: [String]?
         /// Fields that are being reviewed, or might become required depending on the results of a review.
         public var pendingVerification: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case currentlyDue
-            case errors
-            case pastDue
-            case pendingVerification
-        }
 
         public init(
             currentlyDue: [String]? = nil,

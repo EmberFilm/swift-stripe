@@ -31,16 +31,6 @@ extension Stripe.Shared {
         /// The ABA routing number
         public var routingNumber: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case accountHolderAddress
-            case accountHolderName
-            case accountNumber
-            case accountType
-            case bankAddress
-            case bankName
-            case routingNumber
-        }
-
         public init(
             accountHolderAddress: Address? = nil,
             accountHolderName: String? = nil,
@@ -71,13 +61,6 @@ extension Stripe.Shared {
         public var customerAccount: String?
         /// Type of account holder that this account belongs to.
         public var `type`: Type?
-
-        private enum CodingKeys: String, CodingKey {
-            case account
-            case customer
-            case customerAccount
-            case `type`
-        }
 
         public init(
             account: String? = nil,
@@ -111,13 +94,6 @@ extension Stripe.Shared {
         /// SWIFT code of the bank associated with the routing number.
         public var swiftCode: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case accountNumber
-            case bankName
-            case routingNumber
-            case swiftCode
-        }
-
         public init(
             accountNumber: String? = nil,
             bankName: String? = nil,
@@ -147,15 +123,6 @@ extension Stripe.Shared {
         public var last4: String?
         /// Routing transit number of the bank account.
         public var routingNumber: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case accountHolderType
-            case bankName
-            case country
-            case fingerprint
-            case last4
-            case routingNumber
-        }
 
         public init(
             accountHolderType: AccountHolderType? = nil,
@@ -187,11 +154,6 @@ extension Stripe.Shared {
         public var mandateOptions: Stripe.Shared.InvoicePaymentMethodOptionsAcssDebitMandateOptions?
         /// Bank account verification method.
         public var verificationMethod: VerificationMethod?
-
-        private enum CodingKeys: String, CodingKey {
-            case mandateOptions
-            case verificationMethod
-        }
 
         public init(
             mandateOptions: Stripe.Shared.InvoicePaymentMethodOptionsAcssDebitMandateOptions? = nil,
@@ -225,15 +187,6 @@ extension Stripe.Shared {
         public var postalCode: String?
         /// State/province as an ISO 3166-2 subdivision code, without country prefix, such as "NY" or "TX".
         public var state: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case city
-            case country
-            case line1
-            case line2
-            case postalCode
-            case state
-        }
 
         public init(
             city: String? = nil,
@@ -288,11 +241,6 @@ extension Stripe.Shared {
         public var alternativeFieldsDue: [String]?
         /// Fields that are due and can be resolved by providing all fields in `alternative_fields_due`.
         public var originalFieldsDue: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case alternativeFieldsDue
-            case originalFieldsDue
-        }
 
         public init(
             alternativeFieldsDue: [String]? = nil,
@@ -349,25 +297,6 @@ extension Stripe.Shared {
         @Boxed public var source: Stripe.PaymentSource?
         /// The type of error returned.
         public var `type`: Type?
-
-        private enum CodingKeys: String, CodingKey {
-            case adviceCode
-            case charge
-            case code
-            case declineCode
-            case docUrl
-            case message
-            case networkAdviceCode
-            case networkDeclineCode
-            case param
-            case paymentIntent
-            case paymentMethod
-            case paymentMethodType
-            case requestLogUrl
-            case setupIntent
-            case source
-            case `type`
-        }
 
         public init(
             adviceCode: String? = nil,
@@ -631,12 +560,6 @@ extension Stripe.Shared {
         /// The name of the application.
         public var name: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case name
-        }
-
         public init(
             id: ID,
             object: String,
@@ -659,12 +582,6 @@ extension Stripe.Shared {
         /// Last four digits of the bank account number.
         public var last4: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case bsbNumber
-            case fingerprint
-            case last4
-        }
-
         public init(
             bsbNumber: String? = nil,
             fingerprint: String? = nil,
@@ -686,12 +603,6 @@ extension Stripe.Shared {
         public var last4: String?
         /// Sort code of the bank account.
         public var sortCode: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case fingerprint
-            case last4
-            case sortCode
-        }
 
         public init(
             fingerprint: String? = nil,
@@ -716,12 +627,6 @@ extension Stripe.Shared {
         /// The change made to funds in the account, but not spendable because they are being held for pending outbound flows.
         public var outboundPending: Int?
 
-        private enum CodingKeys: String, CodingKey {
-            case cash
-            case inboundPending
-            case outboundPending
-        }
-
         public init(
             cash: Int? = nil,
             inboundPending: Int? = nil,
@@ -739,10 +644,6 @@ extension Stripe.Shared {
     public struct Bancontact: Codable, Hashable, Sendable {
         /// Preferred language of the Bancontact authorization page that the customer is redirected to.
         public var preferredLanguage: PreferredLanguage?
-
-        private enum CodingKeys: String, CodingKey {
-            case preferredLanguage
-        }
 
         public init(
             preferredLanguage: PreferredLanguage? = nil
@@ -766,11 +667,6 @@ extension Stripe.Shared {
         public var euBankTransfer: Stripe.Shared.InvoicePaymentMethodOptionsCustomerBalanceBankTransferEuBankTransfer?
         /// The bank transfer type that can be used for funding.
         public var `type`: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case euBankTransfer
-            case `type`
-        }
 
         public init(
             euBankTransfer: Stripe.Shared.InvoicePaymentMethodOptionsCustomerBalanceBankTransferEuBankTransfer? = nil,
@@ -804,15 +700,6 @@ extension Stripe.Shared {
         public var taxableAmount: Int?
         /// The type of tax information.
         public var `type`: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case amount
-            case taxBehavior
-            case taxRateDetails
-            case taxabilityReason
-            case taxableAmount
-            case `type`
-        }
 
         public init(
             amount: Int? = nil,
@@ -866,11 +753,6 @@ extension Stripe.Shared {
         /// The type of this amount.
         public var `type`: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case monetary
-            case `type`
-        }
-
         public init(
             monetary: Stripe.Shared.Monetary? = nil,
             `type`: String? = nil
@@ -894,14 +776,6 @@ extension Stripe.Shared {
         public var phone: String?
         /// Taxpayer identification number.
         public var taxId: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case address
-            case email
-            case name
-            case phone
-            case taxId
-        }
 
         public init(
             address: Address? = nil,
@@ -930,12 +804,6 @@ extension Stripe.Shared {
         /// Details on when the current billing_mode was adopted.
         public var updatedAt: Date?
 
-        private enum CodingKeys: String, CodingKey {
-            case flexible
-            case `type`
-            case updatedAt
-        }
-
         public init(
             flexible: Stripe.Shared.Flexible? = nil,
             `type`: Type? = nil,
@@ -962,11 +830,6 @@ extension Stripe.Shared {
         /// Indicates if the `billing_cycle_anchor` should be reset when a threshold is reached.
         public var resetBillingCycleAnchor: Bool?
 
-        private enum CodingKeys: String, CodingKey {
-            case amountGte
-            case resetBillingCycleAnchor
-        }
-
         public init(
             amountGte: Int? = nil,
             resetBillingCycleAnchor: Bool? = nil
@@ -983,10 +846,6 @@ extension Stripe.Shared {
         /// A unique identifier for the buyer as determined by the local payment processor.
         public var buyerId: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case buyerId
-        }
-
         public init(
             buyerId: String? = nil
         ) {
@@ -1000,10 +859,6 @@ extension Stripe.Shared {
     public struct Blik: Codable, Hashable, Sendable {
         /// A unique and immutable identifier assigned by BLIK to every buyer.
         public var buyerId: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case buyerId
-        }
 
         public init(
             buyerId: String? = nil
@@ -1027,11 +882,6 @@ extension Stripe.Shared {
         public var networkCode: NetworkCode?
         /// The reason why this PaymentMethod's fingerprint has been blocked
         public var reason: Reason?
-
-        private enum CodingKeys: String, CodingKey {
-            case networkCode
-            case reason
-        }
 
         public init(
             networkCode: NetworkCode? = nil,
@@ -1075,10 +925,6 @@ extension Stripe.Shared {
     public struct Boleto: Codable, Hashable, Sendable {
         /// Uniquely identifies the customer tax id (CNPJ or CPF)
         public var taxId: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case taxId
-        }
 
         public init(
             taxId: String? = nil
@@ -1125,26 +971,6 @@ extension Stripe.Shared {
         public var threeDSecureUsage: Stripe.Shared.ThreeDSecureUsage?
         /// If this Card is part of a card wallet, this contains the details of the card wallet.
         public var wallet: Stripe.Shared.PaymentMethodCardWallet?
-
-        private enum CodingKeys: String, CodingKey {
-            case brand
-            case checks
-            case country
-            case description
-            case displayBrand
-            case expMonth
-            case expYear
-            case fingerprint
-            case funding
-            case generatedFrom
-            case iin
-            case issuer
-            case last4
-            case networks
-            case regulatedStatus
-            case threeDSecureUsage
-            case wallet
-        }
 
         public init(
             brand: String? = nil,
@@ -1249,36 +1075,6 @@ extension Stripe.Shared {
         public var receipt: Stripe.Shared.Receipt?
         public var wallet: Stripe.Shared.Wallet?
 
-        private enum CodingKeys: String, CodingKey {
-            case amountAuthorized
-            case brand
-            case brandProduct
-            case captureBefore
-            case cardholderName
-            case country
-            case description
-            case emvAuthData
-            case expMonth
-            case expYear
-            case fingerprint
-            case funding
-            case generatedCard
-            case iin
-            case incrementalAuthorizationSupported
-            case issuer
-            case last4
-            case location
-            case network
-            case networkTransactionId
-            case offline
-            case overcaptureSupported
-            case preferredLocales
-            case readMethod
-            case reader
-            case receipt
-            case wallet
-        }
-
         public init(
             amountAuthorized: Int? = nil,
             brand: String? = nil,
@@ -1356,11 +1152,6 @@ extension Stripe.Shared {
         /// A public identifier for buyers using Cash App.
         public var cashtag: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case buyerId
-            case cashtag
-        }
-
         public init(
             buyerId: String? = nil,
             cashtag: String? = nil
@@ -1379,12 +1170,6 @@ extension Stripe.Shared {
         /// The url for mobile redirect based auth
         public var mobileAuthUrl: String?
         public var qrCode: Stripe.Shared.QrCode?
-
-        private enum CodingKeys: String, CodingKey {
-            case hostedInstructionsUrl
-            case mobileAuthUrl
-            case qrCode
-        }
 
         public init(
             hostedInstructionsUrl: String? = nil,
@@ -1407,12 +1192,6 @@ extension Stripe.Shared {
         public var addressPostalCodeCheck: String?
         /// If a CVC was provided, results of the check, one of `pass`, `fail`, `unavailable`, or `unchecked`.
         public var cvcCheck: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case addressLine1Check
-            case addressPostalCodeCheck
-            case cvcCheck
-        }
 
         public init(
             addressLine1Check: String? = nil,
@@ -1440,14 +1219,6 @@ extension Stripe.Shared {
         /// The state/county/province/region where the supplier is located.
         public var region: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case city
-            case country
-            case latitude
-            case longitude
-            case region
-        }
-
         public init(
             city: String? = nil,
             country: String? = nil,
@@ -1471,11 +1242,6 @@ extension Stripe.Shared {
         @Expandable<Stripe.Connect.Account, String> public var account: String?
         /// Type of the account referenced.
         public var `type`: Type?
-
-        private enum CodingKeys: String, CodingKey {
-            case account
-            case `type`
-        }
 
         public init(
             account: String? = nil,
@@ -1504,13 +1270,6 @@ extension Stripe.Shared {
         public var tokenCurrency: TokenCurrency?
         /// The blockchain transaction hash of the crypto payment.
         public var transactionHash: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case buyerAddress
-            case network
-            case tokenCurrency
-            case transactionHash
-        }
 
         public init(
             buyerAddress: String? = nil,
@@ -1555,11 +1314,6 @@ extension Stripe.Shared {
         /// The custom payment method type associated with this payment.
         public var `type`: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case displayName
-            case `type`
-        }
-
         public init(
             displayName: String? = nil,
             `type`: String? = nil
@@ -1578,11 +1332,6 @@ extension Stripe.Shared {
         /// The value of the custom field.
         public var value: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case name
-            case value
-        }
-
         public init(
             name: String? = nil,
             value: String? = nil
@@ -1599,11 +1348,6 @@ extension Stripe.Shared {
         public var bankTransfer: Stripe.Shared.BankTransfer?
         /// The funding method type to be used when there are not enough funds in the customer balance.
         public var fundingType: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case bankTransfer
-            case fundingType
-        }
 
         public init(
             bankTransfer: Stripe.Shared.BankTransfer? = nil,
@@ -1628,14 +1372,6 @@ extension Stripe.Shared {
         public var taxIds: [Stripe.Shared.TaxIds]?
         /// The taxability override used for taxation.
         public var taxabilityOverride: TaxabilityOverride?
-
-        private enum CodingKeys: String, CodingKey {
-            case address
-            case addressSource
-            case ipAddress
-            case taxIds
-            case taxabilityOverride
-        }
 
         public init(
             address: Stripe.Shared.Address? = nil,
@@ -1696,22 +1432,6 @@ extension Stripe.Shared {
         /// The subscription item that this coupon is applied to, if it is applied to a particular subscription item.
         public var subscriptionItem: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case checkoutSession
-            case customer
-            case customerAccount
-            case end
-            case invoice
-            case invoiceItem
-            case promotionCode
-            case source
-            case start
-            case subscription
-            case subscriptionItem
-        }
-
         public init(
             id: ID,
             object: String,
@@ -1751,11 +1471,6 @@ extension Stripe.Shared {
         public var amount: Int?
         public var discount: Stripe.Shared.Discount?
 
-        private enum CodingKeys: String, CodingKey {
-            case amount
-            case discount
-        }
-
         public init(
             amount: Int? = nil,
             discount: Stripe.Shared.Discount? = nil
@@ -1773,11 +1488,6 @@ extension Stripe.Shared {
         public var amount: Int?
         /// The discount that was applied to get this discount amount.
         @Expandable<Stripe.Shared.Discount, String> public var discount: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case amount
-            case discount
-        }
 
         public init(
             amount: Int? = nil,
@@ -1799,12 +1509,6 @@ extension Stripe.Shared {
         /// The four-digit year of birth.
         public var year: Int?
 
-        private enum CodingKeys: String, CodingKey {
-            case day
-            case month
-            case year
-        }
-
         public init(
             day: Int? = nil,
             month: Int? = nil,
@@ -1822,10 +1526,6 @@ extension Stripe.Shared {
     public struct Eps: Codable, Hashable, Sendable {
         /// The customer's bank.
         public var bank: Bank?
-
-        private enum CodingKeys: String, CodingKey {
-            case bank
-        }
 
         public init(
             bank: Bank? = nil
@@ -1876,12 +1576,6 @@ extension Stripe.Shared {
         public var reason: String?
         /// The specific user onboarding requirement field (in the requirements hash) that needs to be resolved.
         public var requirement: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case code
-            case reason
-            case requirement
-        }
 
         public init(
             code: Code? = nil,
@@ -2002,10 +1696,6 @@ extension Stripe.Shared {
         /// The desired country code of the bank account information.
         public var country: Country?
 
-        private enum CodingKeys: String, CodingKey {
-            case country
-        }
-
         public init(
             country: Country? = nil
         ) {
@@ -2030,10 +1720,6 @@ extension Stripe.Shared {
         /// The account subcategories to use to filter for possible accounts to link.
         public var accountSubcategories: [AccountSubcategories]?
 
-        private enum CodingKeys: String, CodingKey {
-            case accountSubcategories
-        }
-
         public init(
             accountSubcategories: [AccountSubcategories]? = nil
         ) {
@@ -2054,11 +1740,6 @@ extension Stripe.Shared {
         public let id: ID
         /// The rails the ReceivedCredit was sent over.
         public var network: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case network
-        }
 
         public init(
             id: ID,
@@ -2199,13 +1880,6 @@ extension Stripe.Shared {
         /// For webview integrations only.
         public var returnUrl: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case filters
-            case permissions
-            case prefetch
-            case returnUrl
-        }
-
         public init(
             filters: Stripe.Shared.Filters? = nil,
             permissions: [Permissions]? = nil,
@@ -2241,11 +1915,6 @@ extension Stripe.Shared {
         /// The time at which reserved funds are scheduled for release, automatically set to midnight UTC of the day after `releas…
         public var scheduledRelease: Date?
 
-        private enum CodingKeys: String, CodingKey {
-            case releaseAfter
-            case scheduledRelease
-        }
-
         public init(
             releaseAfter: Int? = nil,
             scheduledRelease: Date? = nil
@@ -2265,11 +1934,6 @@ extension Stripe.Shared {
         /// Three-letter ISO currency code, in lowercase.
         public var currency: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case amount
-            case currency
-        }
-
         public init(
             amount: Int? = nil,
             currency: String? = nil
@@ -2285,10 +1949,6 @@ extension Stripe.Shared {
     public struct Flexible: Codable, Hashable, Sendable {
         /// Controls how invoices and invoice items display proration amounts and discount amounts.
         public var prorationDiscounts: ProrationDiscounts?
-
-        private enum CodingKeys: String, CodingKey {
-            case prorationDiscounts
-        }
 
         public init(
             prorationDiscounts: ProrationDiscounts? = nil
@@ -2429,12 +2089,6 @@ extension Stripe.Shared {
         /// Unique transaction id generated by FPX for every request from the merchant
         public var transactionId: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case accountHolderType
-            case bank
-            case transactionId
-        }
-
         public init(
             accountHolderType: AccountHolderType? = nil,
             bank: Bank? = nil,
@@ -2489,11 +2143,6 @@ extension Stripe.Shared {
         /// funding type of the underlying payment method.
         public var `type`: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case card
-            case `type`
-        }
-
         public init(
             card: Stripe.Shared.PaymentsPrimitivesPaymentRecordsResourcePaymentMethodAmazonPayDetailsResourceFundingResourceFundingCard? = nil,
             `type`: String? = nil
@@ -2513,12 +2162,6 @@ extension Stripe.Shared {
         public var paymentMethodDetails: Stripe.Shared.PaymentMethodDetails?
         /// The ID of the SetupAttempt that generated this PaymentMethod, if any.
         @Expandable<Stripe.Setup.Attempt, String> public var setupAttempt: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case charge
-            case paymentMethodDetails
-            case setupAttempt
-        }
 
         public init(
             charge: String? = nil,
@@ -2552,10 +2195,6 @@ extension Stripe.Shared {
         /// Unique transaction id generated by GrabPay
         public var transactionId: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case transactionId
-        }
-
         public init(
             transactionId: String? = nil
         ) {
@@ -2578,15 +2217,6 @@ extension Stripe.Shared {
         public var country: String?
         /// The IBAN of the account.
         public var iban: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case accountHolderAddress
-            case accountHolderName
-            case bankAddress
-            case bic
-            case country
-            case iban
-        }
 
         public init(
             accountHolderAddress: Address? = nil,
@@ -2613,11 +2243,6 @@ extension Stripe.Shared {
         public var bank: Bank?
         /// The Bank Identifier Code of the customer's bank, if the bank was provided.
         public var bic: Bic?
-
-        private enum CodingKeys: String, CodingKey {
-            case bank
-            case bic
-        }
 
         public init(
             bank: Bank? = nil,
@@ -2691,15 +2316,6 @@ extension Stripe.Shared {
         public var `type`: Type?
         public var usBankAccount: Stripe.Shared.TreasurySharedResourceInitiatingPaymentMethodDetailsUsBankAccount?
 
-        private enum CodingKeys: String, CodingKey {
-            case balance
-            case billingDetails
-            case financialAccount
-            case issuingCard
-            case `type`
-            case usBankAccount
-        }
-
         public init(
             balance: String? = nil,
             billingDetails: Stripe.Shared.TreasurySharedResourceBillingDetails? = nil,
@@ -2732,10 +2348,6 @@ extension Stripe.Shared {
     public struct Installments: Codable, Hashable, Sendable {
         /// The number of installments.
         public var count: Int?
-
-        private enum CodingKeys: String, CodingKey {
-            case count
-        }
 
         public init(
             count: Int? = nil
@@ -2788,29 +2400,6 @@ extension Stripe.Shared {
         public var reader: String?
         /// A collection of fields required to be displayed on receipts.
         public var receipt: Stripe.Shared.PaymentMethodDetailsInteracPresentReceipt?
-
-        private enum CodingKeys: String, CodingKey {
-            case brand
-            case cardholderName
-            case country
-            case description
-            case emvAuthData
-            case expMonth
-            case expYear
-            case fingerprint
-            case funding
-            case generatedCard
-            case iin
-            case issuer
-            case last4
-            case location
-            case network
-            case networkTransactionId
-            case preferredLocales
-            case readMethod
-            case reader
-            case receipt
-        }
 
         public init(
             brand: String? = nil,
@@ -2877,12 +2466,6 @@ extension Stripe.Shared {
         /// The purpose for which payments are made.
         public var purpose: Purpose?
 
-        private enum CodingKeys: String, CodingKey {
-            case amount
-            case amountType
-            case purpose
-        }
-
         public init(
             amount: Int? = nil,
             amountType: AmountType? = nil,
@@ -2922,10 +2505,6 @@ extension Stripe.Shared {
         /// Transaction type of the mandate.
         public var transactionType: TransactionType?
 
-        private enum CodingKeys: String, CodingKey {
-            case transactionType
-        }
-
         public init(
             transactionType: TransactionType? = nil
         ) {
@@ -2945,10 +2524,6 @@ extension Stripe.Shared {
     public struct InvoicePaymentMethodOptionsCustomerBalanceBankTransferEuBankTransfer: Codable, Hashable, Sendable {
         /// The desired country code of the bank account information.
         public var country: Country?
-
-        private enum CodingKeys: String, CodingKey {
-            case country
-        }
 
         public init(
             country: Country? = nil
@@ -2980,13 +2555,6 @@ extension Stripe.Shared {
         /// End date of the mandate or subscription.
         public var endDate: Date?
 
-        private enum CodingKeys: String, CodingKey {
-            case amount
-            case amountType
-            case description
-            case endDate
-        }
-
         public init(
             amount: Int? = nil,
             amountType: AmountType? = nil,
@@ -3015,12 +2583,6 @@ extension Stripe.Shared {
         public var permissions: [Permissions]?
         /// Data features requested to be retrieved upon account creation.
         public var prefetch: [Prefetch]?
-
-        private enum CodingKeys: String, CodingKey {
-            case filters
-            case permissions
-            case prefetch
-        }
 
         public init(
             filters: Stripe.Shared.InvoicePaymentMethodOptionsUsBankAccountLinkedAccountOptionsFilters? = nil,
@@ -3053,10 +2615,6 @@ extension Stripe.Shared {
         /// The account subcategories to use to filter for possible accounts to link.
         public var accountSubcategories: [AccountSubcategories]?
 
-        private enum CodingKeys: String, CodingKey {
-            case accountSubcategories
-        }
-
         public init(
             accountSubcategories: [AccountSubcategories]? = nil
         ) {
@@ -3081,13 +2639,6 @@ extension Stripe.Shared {
         @Expandable<Stripe.Shared.Discount, String> public var discount: String?
         /// Type of the pretax credit amount referenced.
         public var `type`: Type?
-
-        private enum CodingKeys: String, CodingKey {
-            case amount
-            case creditBalanceTransaction
-            case discount
-            case `type`
-        }
 
         public init(
             amount: Int? = nil,
@@ -3120,13 +2671,6 @@ extension Stripe.Shared {
         public var level: Level?
         /// ISO 3166-2 subdivision code, without country prefix.
         public var state: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case country
-            case displayName
-            case level
-            case state
-        }
 
         public init(
             country: String? = nil,
@@ -3164,10 +2708,6 @@ extension Stripe.Shared {
         /// The customer's date of birth, if provided.
         public var dob: Stripe.Shared.Dob?
 
-        private enum CodingKeys: String, CodingKey {
-            case dob
-        }
-
         public init(
             dob: Stripe.Shared.Dob? = nil
         ) {
@@ -3194,13 +2734,6 @@ extension Stripe.Shared {
         public var last4: String?
         /// The Korean Card transaction ID associated with this payment.
         public var transactionId: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case brand
-            case buyerId
-            case last4
-            case transactionId
-        }
 
         public init(
             brand: Brand? = nil,
@@ -3260,16 +2793,6 @@ extension Stripe.Shared {
         /// Town/cho-me.
         public var town: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case city
-            case country
-            case line1
-            case line2
-            case postalCode
-            case state
-            case town
-        }
-
         public init(
             city: String? = nil,
             country: String? = nil,
@@ -3303,10 +2826,6 @@ extension Stripe.Shared {
         /// Set to `true` to enable Managed Payments, Stripe's merchant of record solution, for this session.
         public var enabled: Bool?
 
-        private enum CodingKeys: String, CodingKey {
-            case enabled
-        }
-
         public init(
             enabled: Bool? = nil
         ) {
@@ -3334,17 +2853,6 @@ extension Stripe.Shared {
         public var reference: String?
         /// Start date of the mandate, in `YYYY-MM-DD`.
         public var startDate: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case amount
-            case amountIncludesIof
-            case amountType
-            case currency
-            case endDate
-            case paymentSchedule
-            case reference
-            case startDate
-        }
 
         public init(
             amount: Int? = nil,
@@ -3401,13 +2909,6 @@ extension Stripe.Shared {
         /// Owner's verified shipping address.
         public var shippingAddress: Address?
 
-        private enum CodingKeys: String, CodingKey {
-            case billingAddress
-            case email
-            case name
-            case shippingAddress
-        }
-
         public init(
             billingAddress: Address? = nil,
             email: String? = nil,
@@ -3455,20 +2956,6 @@ extension Stripe.Shared {
         /// URL provided by the merchant on a 3DS request
         public var url: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case category
-            case categoryCode
-            case city
-            case country
-            case name
-            case networkId
-            case postalCode
-            case state
-            case taxId
-            case terminalId
-            case url
-        }
-
         public init(
             category: String? = nil,
             categoryCode: String? = nil,
@@ -3512,11 +2999,6 @@ extension Stripe.Shared {
         /// A positive integer representing the amount.
         public var value: Int?
 
-        private enum CodingKeys: String, CodingKey {
-            case currency
-            case value
-        }
-
         public init(
             currency: String? = nil,
             value: Int? = nil
@@ -3542,11 +3024,6 @@ extension Stripe.Shared {
         /// Whether to fund this transaction with Naver Pay points or a card.
         public var funding: Funding?
 
-        private enum CodingKeys: String, CodingKey {
-            case buyerId
-            case funding
-        }
-
         public init(
             buyerId: String? = nil,
             funding: Funding? = nil
@@ -3569,10 +3046,6 @@ extension Stripe.Shared {
         /// Indicates if Stripe used a network token, either user provided or Stripe managed when processing the transaction.
         public var used: Bool?
 
-        private enum CodingKeys: String, CodingKey {
-            case used
-        }
-
         public init(
             used: Bool? = nil
         ) {
@@ -3588,11 +3061,6 @@ extension Stripe.Shared {
         public var available: [String]?
         /// The preferred network for co-branded cards.
         public var preferred: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case available
-            case preferred
-        }
 
         public init(
             available: [String]? = nil,
@@ -3622,16 +3090,6 @@ extension Stripe.Shared {
         /// The suffix of the bank account number.
         public var suffix: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case accountHolderName
-            case bankCode
-            case bankName
-            case branchCode
-            case expectedDebitDate
-            case last4
-            case suffix
-        }
-
         public init(
             accountHolderName: String? = nil,
             bankCode: String? = nil,
@@ -3660,11 +3118,6 @@ extension Stripe.Shared {
         /// The method used to process this payment method offline.
         public var `type`: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case storedAt
-            case `type`
-        }
-
         public init(
             storedAt: Date? = nil,
             `type`: String? = nil
@@ -3687,10 +3140,6 @@ extension Stripe.Shared {
     public struct P24: Codable, Hashable, Sendable {
         /// The customer's bank, if provided.
         public var bank: Bank?
-
-        private enum CodingKeys: String, CodingKey {
-            case bank
-        }
 
         public init(
             bank: Bank? = nil
@@ -3750,10 +3199,6 @@ extension Stripe.Shared {
         /// The payer's address
         public var address: Stripe.Shared.PaymentsPrimitivesPaymentRecordsResourcePaymentMethodKlarnaDetailsResourcePayerDetailsResourcePayerDetailsAddress?
 
-        private enum CodingKeys: String, CodingKey {
-            case address
-        }
-
         public init(
             address: Stripe.Shared.PaymentsPrimitivesPaymentRecordsResourcePaymentMethodKlarnaDetailsResourcePayerDetailsResourcePayerDetailsAddress? = nil
         ) {
@@ -3771,12 +3216,6 @@ extension Stripe.Shared {
         public var imageUrlPng: String?
         /// The image_url_svg string used to render QR code
         public var imageUrlSvg: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case expiresAt
-            case imageUrlPng
-            case imageUrlSvg
-        }
 
         public init(
             expiresAt: Date? = nil,
@@ -3803,14 +3242,6 @@ extension Stripe.Shared {
         public var last4: String?
         /// Transit number of the bank account.
         public var transitNumber: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case bankName
-            case fingerprint
-            case institutionNumber
-            case last4
-            case transitNumber
-        }
 
         public init(
             bankName: String? = nil,
@@ -3872,26 +3303,6 @@ extension Stripe.Shared {
         public var readMethod: ReadMethod?
         public var wallet: Stripe.Shared.Wallet?
 
-        private enum CodingKeys: String, CodingKey {
-            case brand
-            case brandProduct
-            case cardholderName
-            case country
-            case description
-            case expMonth
-            case expYear
-            case fingerprint
-            case funding
-            case iin
-            case issuer
-            case last4
-            case networks
-            case offline
-            case preferredLocales
-            case readMethod
-            case wallet
-        }
-
         public init(
             brand: String? = nil,
             brandProduct: String? = nil,
@@ -3948,11 +3359,6 @@ extension Stripe.Shared {
         public var available: [String]?
         /// The preferred network for the card.
         public var preferred: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case available
-            case preferred
-        }
 
         public init(
             available: [String]? = nil,
@@ -4098,11 +3504,6 @@ extension Stripe.Shared {
         /// ID of the parent payment method configuration used.
         public var parent: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case parent
-        }
-
         public init(
             id: ID,
             parent: String? = nil
@@ -4134,11 +3535,6 @@ extension Stripe.Shared {
         /// The type of payment method transaction-specific details from the transaction that generated this `card` payment method…
         public var `type`: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case cardPresent
-            case `type`
-        }
-
         public init(
             cardPresent: Stripe.Shared.CardPresent? = nil,
             `type`: String? = nil
@@ -4158,12 +3554,6 @@ extension Stripe.Shared {
         public var interval: String?
         /// Type of installment plan, one of `fixed_count`, `bonus`, or `revolving`.
         public var `type`: Type?
-
-        private enum CodingKeys: String, CodingKey {
-            case count
-            case interval
-            case `type`
-        }
 
         public init(
             count: Int? = nil,
@@ -4212,18 +3602,6 @@ extension Stripe.Shared {
         public var terminalVerificationResults: String?
         /// An indication of which steps were completed during the card read process.
         public var transactionStatusInformation: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case accountType
-            case applicationCryptogram
-            case applicationPreferredName
-            case authorizationCode
-            case authorizationResponseCode
-            case cardholderVerificationMethod
-            case dedicatedFileName
-            case terminalVerificationResults
-            case transactionStatusInformation
-        }
 
         public init(
             accountType: AccountType? = nil,
@@ -4274,16 +3652,6 @@ extension Stripe.Shared {
         /// Transit number of the bank account.
         public var transitNumber: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case bankName
-            case expectedDebitDate
-            case fingerprint
-            case institutionNumber
-            case last4
-            case mandate
-            case transitNumber
-        }
-
         public init(
             bankName: String? = nil,
             expectedDebitDate: String? = nil,
@@ -4314,12 +3682,6 @@ extension Stripe.Shared {
         /// The Affirm transaction ID associated with this payment.
         public var transactionId: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case location
-            case reader
-            case transactionId
-        }
-
         public init(
             location: String? = nil,
             reader: String? = nil,
@@ -4339,11 +3701,6 @@ extension Stripe.Shared {
         public var orderId: String?
         /// Order identifier shown to the merchant in Afterpay's online portal.
         public var reference: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case orderId
-            case reference
-        }
 
         public init(
             orderId: String? = nil,
@@ -4365,12 +3722,6 @@ extension Stripe.Shared {
         /// Transaction ID of this particular Alipay transaction.
         public var transactionId: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case buyerId
-            case fingerprint
-            case transactionId
-        }
-
         public init(
             buyerId: String? = nil,
             fingerprint: String? = nil,
@@ -4390,11 +3741,6 @@ extension Stripe.Shared {
         /// The Alma transaction ID associated with this payment.
         public var transactionId: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case installments
-            case transactionId
-        }
-
         public init(
             installments: Stripe.Shared.Installments? = nil,
             transactionId: String? = nil
@@ -4411,11 +3757,6 @@ extension Stripe.Shared {
         public var funding: Stripe.Shared.Funding?
         /// The Amazon Pay transaction ID associated with this payment.
         public var transactionId: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case funding
-            case transactionId
-        }
 
         public init(
             funding: Stripe.Shared.Funding? = nil,
@@ -4440,14 +3781,6 @@ extension Stripe.Shared {
         public var last4: String?
         /// ID of the mandate used to make this payment.
         public var mandate: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case bsbNumber
-            case expectedDebitDate
-            case fingerprint
-            case last4
-            case mandate
-        }
 
         public init(
             bsbNumber: String? = nil,
@@ -4478,14 +3811,6 @@ extension Stripe.Shared {
         public var mandate: String?
         /// Sort code of the bank account.
         public var sortCode: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case expectedDebitDate
-            case fingerprint
-            case last4
-            case mandate
-            case sortCode
-        }
 
         public init(
             expectedDebitDate: String? = nil,
@@ -4523,17 +3848,6 @@ extension Stripe.Shared {
         /// Owner's verified full name.
         public var verifiedName: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case bankCode
-            case bankName
-            case bic
-            case generatedSepaDebit
-            case generatedSepaDebitMandate
-            case ibanLast4
-            case preferredLanguage
-            case verifiedName
-        }
-
         public init(
             bankCode: String? = nil,
             bankName: String? = nil,
@@ -4570,10 +3884,6 @@ extension Stripe.Shared {
         /// The Billie transaction ID associated with this payment.
         public var transactionId: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case transactionId
-        }
-
         public init(
             transactionId: String? = nil
         ) {
@@ -4589,11 +3899,6 @@ extension Stripe.Shared {
         public var buyerId: String?
         /// The Bizum transaction ID associated with this payment.
         public var transactionId: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case buyerId
-            case transactionId
-        }
 
         public init(
             buyerId: String? = nil,
@@ -4611,10 +3916,6 @@ extension Stripe.Shared {
         /// A unique and immutable identifier assigned by BLIK to every buyer.
         public var buyerId: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case buyerId
-        }
-
         public init(
             buyerId: String? = nil
         ) {
@@ -4628,10 +3929,6 @@ extension Stripe.Shared {
     public struct PaymentMethodDetailsPaymentRecordBoleto: Codable, Hashable, Sendable {
         /// The tax ID of the customer (CPF for individuals consumers or CNPJ for businesses consumers)
         public var taxId: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case taxId
-        }
 
         public init(
             taxId: String? = nil
@@ -4650,12 +3947,6 @@ extension Stripe.Shared {
         public var cashtag: String?
         /// A unique and immutable identifier of payments assigned by Cash App.
         public var transactionId: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case buyerId
-            case cashtag
-            case transactionId
-        }
 
         public init(
             buyerId: String? = nil,
@@ -4676,11 +3967,6 @@ extension Stripe.Shared {
         public var bank: Bank?
         /// Owner's verified full name.
         public var verifiedName: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case bank
-            case verifiedName
-        }
 
         public init(
             bank: Bank? = nil,
@@ -4736,13 +4022,6 @@ extension Stripe.Shared {
         /// Owner's verified full name.
         public var verifiedName: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case bankCode
-            case bankName
-            case bic
-            case verifiedName
-        }
-
         public init(
             bankCode: String? = nil,
             bankName: String? = nil,
@@ -4774,16 +4053,6 @@ extension Stripe.Shared {
         public var transactionId: String?
         /// Owner's verified full name.
         public var verifiedName: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case bank
-            case bic
-            case generatedSepaDebit
-            case generatedSepaDebitMandate
-            case ibanLast4
-            case transactionId
-            case verifiedName
-        }
 
         public init(
             bank: Bank? = nil,
@@ -4862,11 +4131,6 @@ extension Stripe.Shared {
         /// The Kakao Pay transaction ID associated with this payment.
         public var transactionId: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case buyerId
-            case transactionId
-        }
-
         public init(
             buyerId: String? = nil,
             transactionId: String? = nil
@@ -4891,14 +4155,6 @@ extension Stripe.Shared {
         /// ID of the reader this transaction was made on.
         public var reader: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case location
-            case payerDetails
-            case paymentMethodCategory
-            case preferredLocale
-            case reader
-        }
-
         public init(
             location: String? = nil,
             payerDetails: Stripe.Shared.PayerDetails? = nil,
@@ -4921,10 +4177,6 @@ extension Stripe.Shared {
         /// If the payment succeeded, this contains the details of the convenience store where the payment was completed.
         public var store: Stripe.Shared.Store?
 
-        private enum CodingKeys: String, CodingKey {
-            case store
-        }
-
         public init(
             store: Stripe.Shared.Store? = nil
         ) {
@@ -4938,10 +4190,6 @@ extension Stripe.Shared {
     public struct PaymentMethodDetailsPaymentRecordLink: Codable, Hashable, Sendable {
         /// Two-letter ISO code representing the funding source country beneath the Link payment.
         public var country: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case country
-        }
 
         public init(
             country: String? = nil
@@ -4964,10 +4212,6 @@ extension Stripe.Shared {
         /// Internal card details
         public var card: Stripe.Shared.PaymentsPrimitivesPaymentRecordsResourcePaymentMethodMobilepayDetailsResourceCard?
 
-        private enum CodingKeys: String, CodingKey {
-            case card
-        }
-
         public init(
             card: Stripe.Shared.PaymentsPrimitivesPaymentRecordsResourcePaymentMethodMobilepayDetailsResourceCard? = nil
         ) {
@@ -4983,11 +4227,6 @@ extension Stripe.Shared {
         public var entity: String?
         /// Reference number associated with this Multibanco payment.
         public var reference: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case entity
-            case reference
-        }
 
         public init(
             entity: String? = nil,
@@ -5007,11 +4246,6 @@ extension Stripe.Shared {
         /// The Naver Pay transaction ID associated with this payment.
         public var transactionId: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case buyerId
-            case transactionId
-        }
-
         public init(
             buyerId: String? = nil,
             transactionId: String? = nil
@@ -5027,10 +4261,6 @@ extension Stripe.Shared {
     public struct PaymentMethodDetailsPaymentRecordOxxo: Codable, Hashable, Sendable {
         /// OXXO reference number
         public var number: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case number
-        }
 
         public init(
             number: String? = nil
@@ -5049,12 +4279,6 @@ extension Stripe.Shared {
         public var reference: String?
         /// Owner's verified full name.
         public var verifiedName: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case bank
-            case reference
-            case verifiedName
-        }
 
         public init(
             bank: Bank? = nil,
@@ -5113,11 +4337,6 @@ extension Stripe.Shared {
         /// The Payco transaction ID associated with this payment.
         public var transactionId: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case buyerId
-            case transactionId
-        }
-
         public init(
             buyerId: String? = nil,
             transactionId: String? = nil
@@ -5137,12 +4356,6 @@ extension Stripe.Shared {
         public var reader: String?
         /// Reference number associated with this PayNow payment
         public var reference: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case location
-            case reader
-            case reference
-        }
 
         public init(
             location: String? = nil,
@@ -5168,13 +4381,6 @@ extension Stripe.Shared {
         /// The PayID alias for the bank account.
         public var payId: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case bsbNumber
-            case last4
-            case mandate
-            case payId
-        }
-
         public init(
             bsbNumber: String? = nil,
             last4: String? = nil,
@@ -5197,11 +4403,6 @@ extension Stripe.Shared {
         /// ID of the multi use Mandate generated by the PaymentIntent
         public var mandate: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case bankTransactionId
-            case mandate
-        }
-
         public init(
             bankTransactionId: String? = nil,
             mandate: String? = nil
@@ -5218,10 +4419,6 @@ extension Stripe.Shared {
         /// Bill reference generated by PromptPay
         public var reference: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case reference
-        }
-
         public init(
             reference: String? = nil
         ) {
@@ -5236,11 +4433,6 @@ extension Stripe.Shared {
         public var funding: Stripe.Shared.PaymentsPrimitivesPaymentRecordsResourcePaymentMethodRevolutPayDetailsResourceFunding?
         /// The Revolut Pay transaction ID associated with this payment.
         public var transactionId: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case funding
-            case transactionId
-        }
 
         public init(
             funding: Stripe.Shared.PaymentsPrimitivesPaymentRecordsResourcePaymentMethodRevolutPayDetailsResourceFunding? = nil,
@@ -5260,11 +4452,6 @@ extension Stripe.Shared {
         /// The Samsung Pay transaction ID associated with this payment.
         public var transactionId: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case buyerId
-            case transactionId
-        }
-
         public init(
             buyerId: String? = nil,
             transactionId: String? = nil
@@ -5281,10 +4468,6 @@ extension Stripe.Shared {
         /// The Satispay transaction ID associated with this payment.
         public var transactionId: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case transactionId
-        }
-
         public init(
             transactionId: String? = nil
         ) {
@@ -5298,10 +4481,6 @@ extension Stripe.Shared {
     public struct PaymentMethodDetailsPaymentRecordScalapay: Codable, Hashable, Sendable {
         /// The Scalapay transaction ID associated with this payment.
         public var transactionId: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case transactionId
-        }
 
         public init(
             transactionId: String? = nil
@@ -5328,16 +4507,6 @@ extension Stripe.Shared {
         public var last4: String?
         /// Find the ID of the mandate used for this payment under the payment_method_details.sepa_debit.mandate property on the C…
         public var mandate: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case bankCode
-            case branchCode
-            case country
-            case expectedDebitDate
-            case fingerprint
-            case last4
-            case mandate
-        }
 
         public init(
             bankCode: String? = nil,
@@ -5381,18 +4550,6 @@ extension Stripe.Shared {
         /// Owner's verified full name.
         public var verifiedName: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case bankCode
-            case bankName
-            case bic
-            case country
-            case generatedSepaDebit
-            case generatedSepaDebitMandate
-            case ibanLast4
-            case preferredLanguage
-            case verifiedName
-        }
-
         public init(
             bankCode: String? = nil,
             bankName: String? = nil,
@@ -5434,10 +4591,6 @@ extension Stripe.Shared {
         /// The Sunbit transaction ID associated with this payment.
         public var transactionId: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case transactionId
-        }
-
         public init(
             transactionId: String? = nil
         ) {
@@ -5455,12 +4608,6 @@ extension Stripe.Shared {
         public var paymentReference: String?
         /// The last four digits of the Swish account phone number
         public var verifiedPhoneLast4: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case fingerprint
-            case paymentReference
-            case verifiedPhoneLast4
-        }
 
         public init(
             fingerprint: String? = nil,
@@ -5480,10 +4627,6 @@ extension Stripe.Shared {
         /// ID of the multi use Mandate generated by the PaymentIntent
         public var mandate: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case mandate
-        }
-
         public init(
             mandate: String? = nil
         ) {
@@ -5497,10 +4640,6 @@ extension Stripe.Shared {
     public struct PaymentMethodDetailsPaymentRecordUpi: Codable, Hashable, Sendable {
         /// Customer's unique Virtual Payment Address.
         public var vpa: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case vpa
-        }
 
         public init(
             vpa: String? = nil
@@ -5531,18 +4670,6 @@ extension Stripe.Shared {
         public var paymentReference: String?
         /// The routing number for the bank account.
         public var routingNumber: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case accountHolderType
-            case accountType
-            case bankName
-            case expectedDebitDate
-            case fingerprint
-            case last4
-            case mandate
-            case paymentReference
-            case routingNumber
-        }
 
         public init(
             accountHolderType: AccountHolderType? = nil,
@@ -5592,13 +4719,6 @@ extension Stripe.Shared {
         /// Transaction ID of this particular WeChat Pay transaction.
         public var transactionId: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case fingerprint
-            case location
-            case reader
-            case transactionId
-        }
-
         public init(
             fingerprint: String? = nil,
             location: String? = nil,
@@ -5627,11 +4747,6 @@ extension Stripe.Shared {
         public var accountHolderType: AccountHolderType?
         /// The customer's bank, if provided.
         public var bank: Bank?
-
-        private enum CodingKeys: String, CodingKey {
-            case accountHolderType
-            case bank
-        }
 
         public init(
             accountHolderType: AccountHolderType? = nil,
@@ -5717,23 +4832,6 @@ extension Stripe.Shared {
         /// How card details were read in this transaction.
         public var readMethod: ReadMethod?
 
-        private enum CodingKeys: String, CodingKey {
-            case brand
-            case cardholderName
-            case country
-            case description
-            case expMonth
-            case expYear
-            case fingerprint
-            case funding
-            case iin
-            case issuer
-            case last4
-            case networks
-            case preferredLocales
-            case readMethod
-        }
-
         public init(
             brand: String? = nil,
             cardholderName: String? = nil,
@@ -5792,11 +4890,6 @@ extension Stripe.Shared {
         /// The last four digits of the card.
         public var last4: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case brand
-            case last4
-        }
-
         public init(
             brand: Brand? = nil,
             last4: String? = nil
@@ -5841,11 +4934,6 @@ extension Stripe.Shared {
         /// [Deprecated] This is a legacy parameter that no longer has any function.
         public var persistentToken: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case email
-            case persistentToken
-        }
-
         public init(
             email: String? = nil,
             persistentToken: String? = nil
@@ -5872,15 +4960,6 @@ extension Stripe.Shared {
         /// The suffix of the bank account number.
         public var suffix: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case accountHolderName
-            case bankCode
-            case bankName
-            case branchCode
-            case last4
-            case suffix
-        }
-
         public init(
             accountHolderName: String? = nil,
             bankCode: String? = nil,
@@ -5905,10 +4984,6 @@ extension Stripe.Shared {
         /// Mandate collection method
         public var collectionMethod: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case collectionMethod
-        }
-
         public init(
             collectionMethod: String? = nil
         ) {
@@ -5926,12 +5001,6 @@ extension Stripe.Shared {
         public var payerEmail: String?
         /// PayPal account PayerID.
         public var payerId: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case country
-            case payerEmail
-            case payerId
-        }
 
         public init(
             country: String? = nil,
@@ -5954,12 +5023,6 @@ extension Stripe.Shared {
         public var last4: String?
         /// The PayID alias for the bank account.
         public var payId: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case bsbNumber
-            case last4
-            case payId
-        }
 
         public init(
             bsbNumber: String? = nil,
@@ -5996,15 +5059,6 @@ extension Stripe.Shared {
         /// Last four characters of the IBAN.
         public var last4: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case bankCode
-            case branchCode
-            case country
-            case fingerprint
-            case generatedFrom
-            case last4
-        }
-
         public init(
             bankCode: String? = nil,
             branchCode: String? = nil,
@@ -6028,10 +5082,6 @@ extension Stripe.Shared {
     public struct PaymentMethodUpi: Codable, Hashable, Sendable {
         /// Customer's unique Virtual Payment Address
         public var vpa: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case vpa
-        }
 
         public init(
             vpa: String? = nil
@@ -6062,18 +5112,6 @@ extension Stripe.Shared {
         public var routingNumber: String?
         /// Contains information about the future reusability of this PaymentMethod.
         public var statusDetails: Stripe.Shared.StatusDetails?
-
-        private enum CodingKeys: String, CodingKey {
-            case accountHolderType
-            case accountType
-            case bankName
-            case financialConnectionsAccount
-            case fingerprint
-            case last4
-            case networks
-            case routingNumber
-            case statusDetails
-        }
 
         public init(
             accountHolderType: AccountHolderType? = nil,
@@ -6128,15 +5166,6 @@ extension Stripe.Shared {
         /// State, county, province, or region (ISO 3166-2).
         public var state: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case city
-            case country
-            case line1
-            case line2
-            case postalCode
-            case state
-        }
-
         public init(
             city: String? = nil,
             country: String? = nil,
@@ -6164,11 +5193,6 @@ extension Stripe.Shared {
         /// A positive integer representing the amount in the currency's minor unit.
         public var value: Int?
 
-        private enum CodingKeys: String, CodingKey {
-            case currency
-            case value
-        }
-
         public init(
             currency: Stripe.Currency? = nil,
             value: Int? = nil
@@ -6190,13 +5214,6 @@ extension Stripe.Shared {
         public var name: String?
         /// The billing phone number associated with the method of payment.
         public var phone: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case address
-            case email
-            case name
-            case phone
-        }
 
         public init(
             address: Stripe.Shared.PaymentsPrimitivesPaymentRecordsResourceAddress? = nil,
@@ -6224,13 +5241,6 @@ extension Stripe.Shared {
         public var name: String?
         /// The customer's phone number.
         public var phone: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case customer
-            case email
-            case name
-            case phone
-        }
 
         public init(
             customer: String? = nil,
@@ -6261,15 +5271,6 @@ extension Stripe.Shared {
         public var funding: String?
         /// The last four digits of the card.
         public var last4: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case brand
-            case country
-            case expMonth
-            case expYear
-            case funding
-            case last4
-        }
 
         public init(
             brand: String? = nil,
@@ -6337,31 +5338,6 @@ extension Stripe.Shared {
         public var threeDSecure: Stripe.Shared.ThreeDSecure?
         /// If this Card is part of a card wallet, this contains the details of the card wallet.
         public var wallet: Stripe.Shared.PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsResourceWallet?
-
-        private enum CodingKeys: String, CodingKey {
-            case authorizationCode
-            case brand
-            case captureBefore
-            case checks
-            case country
-            case description
-            case expMonth
-            case expYear
-            case fingerprint
-            case funding
-            case iin
-            case installments
-            case issuer
-            case last4
-            case moto
-            case network
-            case networkAdviceCode
-            case networkDeclineCode
-            case networkToken
-            case networkTransactionId
-            case threeDSecure
-            case wallet
-        }
 
         public init(
             authorizationCode: String? = nil,
@@ -6463,12 +5439,6 @@ extension Stripe.Shared {
         /// If you provide a CVC, the check results is one of `pass`, `fail`, `unavailable`, or `unchecked`.
         public var cvcCheck: CvcCheck?
 
-        private enum CodingKeys: String, CodingKey {
-            case addressLine1Check
-            case addressPostalCodeCheck
-            case cvcCheck
-        }
-
         public init(
             addressLine1Check: AddressLine1Check? = nil,
             addressPostalCodeCheck: AddressPostalCodeCheck? = nil,
@@ -6511,10 +5481,6 @@ extension Stripe.Shared {
         /// Installment plan selected for the payment.
         public var plan: Stripe.Shared.Plan?
 
-        private enum CodingKeys: String, CodingKey {
-            case plan
-        }
-
         public init(
             plan: Stripe.Shared.Plan? = nil
         ) {
@@ -6532,13 +5498,6 @@ extension Stripe.Shared {
         public var googlePay: Stripe.Shared.PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsResourceWalletResourceGooglePay?
         /// The type of the card wallet, one of `apple_pay` or `google_pay`.
         public var `type`: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case applePay
-            case dynamicLast4
-            case googlePay
-            case `type`
-        }
 
         public init(
             applePay: Stripe.Shared.PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsResourceWalletResourceApplePay? = nil,
@@ -6559,10 +5518,6 @@ extension Stripe.Shared {
     public struct PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsResourceWalletResourceApplePay: Codable, Hashable, Sendable {
         /// Type of the apple_pay transaction, one of `apple_pay` or `apple_pay_later`.
         public var `type`: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case `type`
-        }
 
         public init(
             `type`: String? = nil
@@ -7023,10 +5978,6 @@ extension Stripe.Shared {
         /// The payer address country
         public var country: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case country
-        }
-
         public init(
             country: String? = nil
         ) {
@@ -7048,14 +5999,6 @@ extension Stripe.Shared {
         public var expYear: Int?
         /// The last 4 digits of the card
         public var last4: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case brand
-            case country
-            case expMonth
-            case expYear
-            case last4
-        }
 
         public init(
             brand: String? = nil,
@@ -7079,11 +6022,6 @@ extension Stripe.Shared {
         public var card: Stripe.Shared.PaymentsPrimitivesPaymentRecordsResourcePaymentMethodRevolutPayDetailsResourceFundingResourceFundingCard?
         /// Funding type of the underlying payment method.
         public var `type`: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case card
-            case `type`
-        }
 
         public init(
             card: Stripe.Shared.PaymentsPrimitivesPaymentRecordsResourcePaymentMethodRevolutPayDetailsResourceFundingResourceFundingCard? = nil,
@@ -7111,15 +6049,6 @@ extension Stripe.Shared {
         /// The last four digits of the card.
         public var last4: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case brand
-            case country
-            case expMonth
-            case expYear
-            case funding
-            case last4
-        }
-
         public init(
             brand: String? = nil,
             country: String? = nil,
@@ -7144,10 +6073,6 @@ extension Stripe.Shared {
     public struct PaymentsPrimitivesPaymentRecordsResourceProcessorDetailsResourceCustomDetails: Codable, Hashable, Sendable {
         /// An opaque string for manual reconciliation of this payment, for example a check number or a payment processor ID.
         public var paymentReference: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case paymentReference
-        }
 
         public init(
             paymentReference: String? = nil
@@ -7180,15 +6105,6 @@ extension Stripe.Shared {
         /// A unique ID generated by PayPal for this transaction.
         public var transactionId: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case country
-            case payerEmail
-            case payerId
-            case payerName
-            case sellerProtection
-            case transactionId
-        }
-
         public init(
             country: String? = nil,
             payerEmail: String? = nil,
@@ -7212,10 +6128,6 @@ extension Stripe.Shared {
     public struct Payto: Codable, Hashable, Sendable {
         public var mandateOptions: Stripe.Shared.InvoiceMandateOptionsPayto?
 
-        private enum CodingKeys: String, CodingKey {
-            case mandateOptions
-        }
-
         public init(
             mandateOptions: Stripe.Shared.InvoiceMandateOptionsPayto? = nil
         ) {
@@ -7232,11 +6144,6 @@ extension Stripe.Shared {
         /// The start of the period.
         public var start: Date?
 
-        private enum CodingKeys: String, CodingKey {
-            case end
-            case start
-        }
-
         public init(
             end: Date? = nil,
             start: Date? = nil
@@ -7252,10 +6159,6 @@ extension Stripe.Shared {
     public struct Pix: Codable, Hashable, Sendable {
         /// Uniquely identifies this particular Pix account.
         public var fingerprint: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case fingerprint
-        }
 
         public init(
             fingerprint: String? = nil
@@ -7274,12 +6177,6 @@ extension Stripe.Shared {
         public var interval: String?
         /// Type of installment plan, one of `fixed_count`, `revolving`, or `bonus`.
         public var `type`: Type?
-
-        private enum CodingKeys: String, CodingKey {
-            case count
-            case interval
-            case `type`
-        }
 
         public init(
             count: Int? = nil,
@@ -7308,11 +6205,6 @@ extension Stripe.Shared {
         /// Currency presented to the customer during payment.
         public var presentmentCurrency: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case presentmentAmount
-            case presentmentCurrency
-        }
-
         public init(
             presentmentAmount: Int? = nil,
             presentmentCurrency: String? = nil
@@ -7334,13 +6226,6 @@ extension Stripe.Shared {
         @Expandable<Stripe.Shared.Discount, String> public var discount: String?
         /// Type of the pretax credit amount referenced.
         public var `type`: Type?
-
-        private enum CodingKeys: String, CodingKey {
-            case amount
-            case creditBalanceTransaction
-            case discount
-            case `type`
-        }
 
         public init(
             amount: Int? = nil,
@@ -7370,11 +6255,6 @@ extension Stripe.Shared {
         /// The ID of the product this item is associated with.
         public var product: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case price
-            case product
-        }
-
         public init(
             price: String? = nil,
             product: String? = nil
@@ -7393,12 +6273,6 @@ extension Stripe.Shared {
         public var `type`: String?
         /// The unit amount (in the `currency` specified) of the item which contains a decimal value with at most 12 decimal place…
         public var unitAmountDecimal: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case priceDetails
-            case `type`
-            case unitAmountDecimal
-        }
 
         public init(
             priceDetails: Stripe.Shared.PriceDetails? = nil,
@@ -7419,11 +6293,6 @@ extension Stripe.Shared {
         public var custom: Stripe.Shared.PaymentsPrimitivesPaymentRecordsResourceProcessorDetailsResourceCustomDetails?
         /// The processor used for this payment attempt.
         public var `type`: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case custom
-            case `type`
-        }
 
         public init(
             custom: Stripe.Shared.PaymentsPrimitivesPaymentRecordsResourceProcessorDetailsResourceCustomDetails? = nil,
@@ -7452,12 +6321,6 @@ extension Stripe.Shared {
         /// The image_url_svg string used to render QR code
         public var imageUrlSvg: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case expiresAt
-            case imageUrlPng
-            case imageUrlSvg
-        }
-
         public init(
             expiresAt: Date? = nil,
             imageUrlPng: String? = nil,
@@ -7476,10 +6339,6 @@ extension Stripe.Shared {
     public struct RadarOptions: Codable, Hashable, Sendable {
         /// A Radar Session is a snapshot of the browser metadata and device details that help Radar make more accurate prediction…
         public var session: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case session
-        }
 
         public init(
             session: String? = nil
@@ -7510,18 +6369,6 @@ extension Stripe.Shared {
         public var terminalVerificationResults: String?
         /// An indication of which steps were completed during the card read process.
         public var transactionStatusInformation: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case accountType
-            case applicationCryptogram
-            case applicationPreferredName
-            case authorizationCode
-            case authorizationResponseCode
-            case cardholderVerificationMethod
-            case dedicatedFileName
-            case terminalVerificationResults
-            case transactionStatusInformation
-        }
 
         public init(
             accountType: AccountType? = nil,
@@ -7563,11 +6410,6 @@ extension Stripe.Shared {
         /// The ReserveRelease which released funds from this ReserveHold (e.g., resrel_123).
         public var reserveRelease: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case amount
-            case reserveRelease
-        }
-
         public init(
             amount: Int? = nil,
             reserveRelease: String? = nil
@@ -7586,11 +6428,6 @@ extension Stripe.Shared {
         /// The time at which the ReserveHold is scheduled to be released, automatically set to midnight UTC of the day after `rel…
         public var scheduledRelease: Date?
 
-        private enum CodingKeys: String, CodingKey {
-            case releaseAfter
-            case scheduledRelease
-        }
-
         public init(
             releaseAfter: Date? = nil,
             scheduledRelease: Date? = nil
@@ -7608,11 +6445,6 @@ extension Stripe.Shared {
         public var amountTaxDisplay: String?
         /// ID of the invoice rendering template to be used for the generated invoice.
         public var template: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case amountTaxDisplay
-            case template
-        }
 
         public init(
             amountTaxDisplay: String? = nil,
@@ -7652,22 +6484,6 @@ extension Stripe.Shared {
         public var status: Status?
         /// The type of the ReservePlan.
         public var `type`: Type?
-
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case created
-            case createdBy
-            case currency
-            case disabledAt
-            case fixedRelease
-            case livemode
-            case metadata
-            case percent
-            case rollingRelease
-            case status
-            case `type`
-        }
 
         public init(
             id: ID,
@@ -7735,11 +6551,6 @@ extension Stripe.Shared {
         /// The time at which the ReservePlan expires.
         public var expiresOn: Int?
 
-        private enum CodingKeys: String, CodingKey {
-            case daysAfterCharge
-            case expiresOn
-        }
-
         public init(
             daysAfterCharge: Int? = nil,
             expiresOn: Int? = nil
@@ -7779,11 +6590,6 @@ extension Stripe.Shared {
         /// Indicates whether the transaction is eligible for PayPal's seller protection.
         public var status: Status?
 
-        private enum CodingKeys: String, CodingKey {
-            case disputeCategories
-            case status
-        }
-
         public init(
             disputeCategories: [DisputeCategories]? = nil,
             status: Status? = nil
@@ -7816,12 +6622,6 @@ extension Stripe.Shared {
         /// IBAN of the bank account to transfer funds to.
         public var iban: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case bankName
-            case bic
-            case iban
-        }
-
         public init(
             bankName: String? = nil,
             bic: String? = nil,
@@ -7849,11 +6649,6 @@ extension Stripe.Shared {
         /// The ID of the SetupAttempt that generated this PaymentMethod, if any.
         @Expandable<Stripe.Setup.Attempt, String> public var setupAttempt: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case charge
-            case setupAttempt
-        }
-
         public init(
             charge: String? = nil,
             setupAttempt: String? = nil
@@ -7868,10 +6663,6 @@ extension Stripe.Shared {
 extension Stripe.Shared {
     public struct ShipFromDetails: Codable, Hashable, Sendable {
         public var address: Stripe.Shared.Address?
-
-        private enum CodingKeys: String, CodingKey {
-            case address
-        }
 
         public init(
             address: Stripe.Shared.Address? = nil
@@ -7894,14 +6685,6 @@ extension Stripe.Shared {
         @Expandable<Stripe.Products.Shipping.Rate, String> public var shippingRate: String?
         /// The taxes applied to the shipping rate.
         public var taxes: [Stripe.Shared.Taxes]?
-
-        private enum CodingKeys: String, CodingKey {
-            case amountSubtotal
-            case amountTax
-            case amountTotal
-            case shippingRate
-            case taxes
-        }
 
         public init(
             amountSubtotal: Int? = nil,
@@ -7929,12 +6712,6 @@ extension Stripe.Shared {
         /// The shipping recipient's phone number.
         public var phone: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case address
-            case name
-            case phone
-        }
-
         public init(
             address: Stripe.Shared.PaymentsPrimitivesPaymentRecordsResourceAddress? = nil,
             name: String? = nil,
@@ -7953,10 +6730,6 @@ extension Stripe.Shared {
         /// Set to `true` to enable Managed Payments, Stripe's merchant of record solution, for this session.
         public var enabled: Bool?
 
-        private enum CodingKeys: String, CodingKey {
-            case enabled
-        }
-
         public init(
             enabled: Bool? = nil
         ) {
@@ -7970,10 +6743,6 @@ extension Stripe.Shared {
     public struct Sofort: Codable, Hashable, Sendable {
         /// Two-letter ISO code representing the country the bank account is located in.
         public var country: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case country
-        }
 
         public init(
             country: String? = nil
@@ -7995,14 +6764,6 @@ extension Stripe.Shared {
         public var bankAddress: Address?
         /// The six-digit sort code
         public var sortCode: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case accountHolderAddress
-            case accountHolderName
-            case accountNumber
-            case bankAddress
-            case sortCode
-        }
 
         public init(
             accountHolderAddress: Address? = nil,
@@ -8027,11 +6788,6 @@ extension Stripe.Shared {
         @Expandable<Stripe.Products.Coupon, String> public var coupon: String?
         /// The source type of the discount.
         public var `type`: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case coupon
-            case `type`
-        }
 
         public init(
             coupon: String? = nil,
@@ -8058,15 +6814,6 @@ extension Stripe.Shared {
         /// The CLABE number
         public var clabe: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case accountHolderAddress
-            case accountHolderName
-            case bankAddress
-            case bankCode
-            case bankName
-            case clabe
-        }
-
         public init(
             accountHolderAddress: Address? = nil,
             accountHolderName: String? = nil,
@@ -8090,10 +6837,6 @@ extension Stripe.Shared {
     public struct StatusDetails: Codable, Hashable, Sendable {
         public var blocked: Stripe.Shared.Blocked?
 
-        private enum CodingKeys: String, CodingKey {
-            case blocked
-        }
-
         public init(
             blocked: Stripe.Shared.Blocked? = nil
         ) {
@@ -8107,10 +6850,6 @@ extension Stripe.Shared {
     public struct Store: Codable, Hashable, Sendable {
         /// The name of the convenience store chain where the payment was completed.
         public var chain: Chain?
-
-        private enum CodingKeys: String, CodingKey {
-            case chain
-        }
 
         public init(
             chain: Chain? = nil
@@ -8140,10 +6879,6 @@ extension Stripe.Shared {
     public struct SubscriptionItemBillingThresholds: Codable, Hashable, Sendable {
         /// Usage threshold that triggers the subscription to create an invoice
         public var usageGte: Int?
-
-        private enum CodingKeys: String, CodingKey {
-            case usageGte
-        }
 
         public init(
             usageGte: Int? = nil
@@ -8176,16 +6911,6 @@ extension Stripe.Shared {
         public var bankName: String?
         /// The SWIFT code
         public var swiftCode: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case accountHolderAddress
-            case accountHolderName
-            case accountNumber
-            case accountType
-            case bankAddress
-            case bankName
-            case swiftCode
-        }
 
         public init(
             accountHolderAddress: Address? = nil,
@@ -8228,15 +6953,6 @@ extension Stripe.Shared {
         public var taxabilityReason: TaxabilityReason?
         /// The amount on which tax is calculated, in the smallest currency unit.
         public var taxableAmount: Int?
-
-        private enum CodingKeys: String, CodingKey {
-            case amount
-            case jurisdiction
-            case sourcing
-            case taxRateDetails
-            case taxabilityReason
-            case taxableAmount
-        }
 
         public init(
             amount: Int? = nil,
@@ -8288,11 +7004,6 @@ extension Stripe.Shared {
         public var `type`: Type?
         /// The value of the tax ID.
         public var value: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case `type`
-            case value
-        }
 
         public init(
             `type`: Type? = nil,
@@ -8436,12 +7147,6 @@ extension Stripe.Shared {
         /// The tax type, such as `vat` or `sales_tax`.
         public var taxType: TaxType?
 
-        private enum CodingKeys: String, CodingKey {
-            case displayName
-            case percentageDecimal
-            case taxType
-        }
-
         public init(
             displayName: String? = nil,
             percentageDecimal: String? = nil,
@@ -8480,10 +7185,6 @@ extension Stripe.Shared {
         /// ID of the tax rate
         @Expandable<Stripe.Tax.Rate, String> public var taxRate: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case taxRate
-        }
-
         public init(
             taxRate: String? = nil
         ) {
@@ -8502,13 +7203,6 @@ extension Stripe.Shared {
         public var taxabilityReason: TaxabilityReason?
         /// The amount on which tax is calculated, in cents (or local equivalent).
         public var taxableAmount: Int?
-
-        private enum CodingKeys: String, CodingKey {
-            case amount
-            case rate
-            case taxabilityReason
-            case taxableAmount
-        }
 
         public init(
             amount: Int? = nil,
@@ -8562,17 +7256,6 @@ extension Stripe.Shared {
         public var resultReason: ResultReason?
         /// The version of 3D Secure that was used.
         public var version: Version?
-
-        private enum CodingKeys: String, CodingKey {
-            case authenticationFlow
-            case cryptogram
-            case electronicCommerceIndicator
-            case exemptionIndicator
-            case exemptionIndicatorApplied
-            case result
-            case resultReason
-            case version
-        }
 
         public init(
             authenticationFlow: AuthenticationFlow? = nil,
@@ -8654,10 +7337,6 @@ extension Stripe.Shared {
         /// Whether 3D Secure is supported on this card.
         public var supported: Bool?
 
-        private enum CodingKeys: String, CodingKey {
-            case supported
-        }
-
         public init(
             supported: Bool? = nil
         ) {
@@ -8673,11 +7352,6 @@ extension Stripe.Shared {
         public var amountPercent: Double?
         /// The account where funds from the payment will be transferred to upon payment success.
         @Expandable<Stripe.Connect.Account, String> public var destination: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case amountPercent
-            case destination
-        }
 
         public init(
             amountPercent: Double? = nil,
@@ -8697,12 +7371,6 @@ extension Stripe.Shared {
         public var email: String?
         /// Full name.
         public var name: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case address
-            case email
-            case name
-        }
 
         public init(
             address: Address? = nil,
@@ -8725,12 +7393,6 @@ extension Stripe.Shared {
         public var last4: String?
         /// The routing number for the bank account.
         public var routingNumber: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case bankName
-            case last4
-            case routingNumber
-        }
 
         public init(
             bankName: String? = nil,
@@ -8756,10 +7418,6 @@ extension Stripe.Shared {
     public struct Upi: Codable, Hashable, Sendable {
         public var mandateOptions: Stripe.Shared.InvoicePaymentMethodOptionsMandateOptionsUpi?
 
-        private enum CodingKeys: String, CodingKey {
-            case mandateOptions
-        }
-
         public init(
             mandateOptions: Stripe.Shared.InvoicePaymentMethodOptionsMandateOptionsUpi? = nil
         ) {
@@ -8774,11 +7432,6 @@ extension Stripe.Shared {
         /// The URL to the hosted UPI instructions page, which allows customers to view the QR code.
         public var hostedInstructionsUrl: String?
         public var qrCode: Stripe.Shared.PaymentIntentNextActionUpiqrCode?
-
-        private enum CodingKeys: String, CodingKey {
-            case hostedInstructionsUrl
-            case qrCode
-        }
 
         public init(
             hostedInstructionsUrl: String? = nil,
@@ -8796,11 +7449,6 @@ extension Stripe.Shared {
         public var financialConnections: Stripe.Shared.InvoicePaymentMethodOptionsUsBankAccountLinkedAccountOptions?
         /// Bank account verification method.
         public var verificationMethod: VerificationMethod?
-
-        private enum CodingKeys: String, CodingKey {
-            case financialConnections
-            case verificationMethod
-        }
 
         public init(
             financialConnections: Stripe.Shared.InvoicePaymentMethodOptionsUsBankAccountLinkedAccountOptions? = nil,
@@ -8826,11 +7474,6 @@ extension Stripe.Shared {
         public var preferred: String?
         /// All supported networks.
         public var supported: [Supported]?
-
-        private enum CodingKeys: String, CodingKey {
-            case preferred
-            case supported
-        }
 
         public init(
             preferred: String? = nil,
@@ -8859,13 +7502,6 @@ extension Stripe.Shared {
         /// Owner's verified shipping address.
         public var shippingAddress: Address?
 
-        private enum CodingKeys: String, CodingKey {
-            case billingAddress
-            case email
-            case name
-            case shippingAddress
-        }
-
         public init(
             billingAddress: Address? = nil,
             email: String? = nil,
@@ -8885,10 +7521,6 @@ extension Stripe.Shared {
     public struct Wallet: Codable, Hashable, Sendable {
         /// The type of mobile wallet, one of `apple_pay`, `google_pay`, `samsung_pay`, or `unknown`.
         public var `type`: Type?
-
-        private enum CodingKeys: String, CodingKey {
-            case `type`
-        }
 
         public init(
             `type`: Type? = nil
@@ -8940,18 +7572,6 @@ extension Stripe.Shared {
         public var branchCode: String?
         /// The branch name of the account
         public var branchName: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case accountHolderAddress
-            case accountHolderName
-            case accountNumber
-            case accountType
-            case bankAddress
-            case bankCode
-            case bankName
-            case branchCode
-            case branchName
-        }
 
         public init(
             accountHolderAddress: Address? = nil,

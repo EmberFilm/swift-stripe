@@ -40,22 +40,6 @@ extension Stripe.Terminal.Readers {
         /// The networking status of the reader.
         public var status: Status?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case action
-            case deviceSwVersion
-            case deviceType
-            case ipAddress
-            case label
-            case lastSeenAt
-            case livemode
-            case location
-            case metadata
-            case serialNumber
-            case status
-        }
-
         public init(
             id: ID,
             object: String,
@@ -208,11 +192,6 @@ extension Stripe.Terminal.Readers {
                 /// Set of key-value pairs that you can attach to an object.
                 public var metadata: [String: String]?
 
-                private enum CodingKeys: String, CodingKey {
-                    case inputs
-                    case metadata
-                }
-
                 public init(
                     inputs: [Inputs]? = nil,
                     metadata: [String: String]? = nil
@@ -307,13 +286,6 @@ extension Stripe.Terminal.Readers {
                         /// Customize the default title for this input
                         public var title: String?
 
-                        private enum CodingKeys: String, CodingKey {
-                            case description
-                            case skipButton
-                            case submitButton
-                            case title
-                        }
-
                         public init(
                             description: String? = nil,
                             skipButton: String? = nil,
@@ -332,10 +304,6 @@ extension Stripe.Terminal.Readers {
                         /// The collected email address
                         public var value: String?
 
-                        private enum CodingKeys: String, CodingKey {
-                            case value
-                        }
-
                         public init(
                             value: String? = nil
                         ) {
@@ -348,10 +316,6 @@ extension Stripe.Terminal.Readers {
                         /// The collected number
                         public var value: String?
 
-                        private enum CodingKeys: String, CodingKey {
-                            case value
-                        }
-
                         public init(
                             value: String? = nil
                         ) {
@@ -363,10 +327,6 @@ extension Stripe.Terminal.Readers {
                     public struct Phone: Codable, Hashable, Sendable {
                         /// The collected phone number
                         public var value: String?
-
-                        private enum CodingKeys: String, CodingKey {
-                            case value
-                        }
 
                         public init(
                             value: String? = nil
@@ -383,12 +343,6 @@ extension Stripe.Terminal.Readers {
                         public var choices: [Choices]?
                         /// The text of the selected choice
                         public var text: String?
-
-                        private enum CodingKeys: String, CodingKey {
-                            case id
-                            case choices
-                            case text
-                        }
 
                         public init(
                             id: ID,
@@ -408,12 +362,6 @@ extension Stripe.Terminal.Readers {
                             public var style: Style?
                             /// The text to be selected.
                             public var text: String?
-
-                            private enum CodingKeys: String, CodingKey {
-                                case id
-                                case style
-                                case text
-                            }
 
                             public init(
                                 id: ID,
@@ -438,10 +386,6 @@ extension Stripe.Terminal.Readers {
                         /// The File ID of a collected signature image
                         public var value: String?
 
-                        private enum CodingKeys: String, CodingKey {
-                            case value
-                        }
-
                         public init(
                             value: String? = nil
                         ) {
@@ -453,10 +397,6 @@ extension Stripe.Terminal.Readers {
                     public struct Text: Codable, Hashable, Sendable {
                         /// The collected text value
                         public var value: String?
-
-                        private enum CodingKeys: String, CodingKey {
-                            case value
-                        }
 
                         public init(
                             value: String? = nil
@@ -475,13 +415,6 @@ extension Stripe.Terminal.Readers {
                         public var title: String?
                         /// The toggle's collected value.
                         public var value: Value?
-
-                        private enum CodingKeys: String, CodingKey {
-                            case defaultValue
-                            case description
-                            case title
-                            case value
-                        }
 
                         public init(
                             defaultValue: DefaultValue? = nil,
@@ -565,12 +498,6 @@ extension Stripe.Terminal.Readers {
                 @Expandable<Stripe.PaymentIntents.PaymentIntent, String> public var paymentIntent: String?
                 @Boxed public var paymentMethod: Stripe.PaymentMethods.PaymentMethod?
 
-                private enum CodingKeys: String, CodingKey {
-                    case collectConfig
-                    case paymentIntent
-                    case paymentMethod
-                }
-
                 public init(
                     collectConfig: CollectConfig? = nil,
                     paymentIntent: String? = nil,
@@ -589,12 +516,6 @@ extension Stripe.Terminal.Readers {
                     public var skipTipping: Bool?
                     public var tipping: Tipping?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case enableCustomerCancellation
-                        case skipTipping
-                        case tipping
-                    }
-
                     public init(
                         enableCustomerCancellation: Bool? = nil,
                         skipTipping: Bool? = nil,
@@ -609,10 +530,6 @@ extension Stripe.Terminal.Readers {
                     public struct Tipping: Codable, Hashable, Sendable {
                         /// Amount used to calculate tip suggestions on tipping selection screen for this transaction.
                         public var amountEligible: Int?
-
-                        private enum CodingKeys: String, CodingKey {
-                            case amountEligible
-                        }
 
                         public init(
                             amountEligible: Int? = nil
@@ -629,11 +546,6 @@ extension Stripe.Terminal.Readers {
                 /// Most recent PaymentIntent processed by the reader.
                 @Expandable<Stripe.PaymentIntents.PaymentIntent, String> public var paymentIntent: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case confirmConfig
-                    case paymentIntent
-                }
-
                 public init(
                     confirmConfig: ConfirmConfig? = nil,
                     paymentIntent: String? = nil
@@ -646,10 +558,6 @@ extension Stripe.Terminal.Readers {
                 public struct ConfirmConfig: Codable, Hashable, Sendable {
                     /// If the customer doesn't abandon authenticating the payment, they're redirected to this URL after completion.
                     public var returnUrl: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case returnUrl
-                    }
 
                     public init(
                         returnUrl: String? = nil
@@ -664,11 +572,6 @@ extension Stripe.Terminal.Readers {
                 public var image: Image?
                 /// The type of content to print.
                 public var `type`: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case image
-                    case `type`
-                }
 
                 public init(
                     image: Image? = nil,
@@ -688,13 +591,6 @@ extension Stripe.Terminal.Readers {
                     public var size: Int?
                     /// The format of the uploaded file.
                     public var `type`: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case createdAt
-                        case filename
-                        case size
-                        case `type`
-                    }
 
                     public init(
                         createdAt: Date? = nil,
@@ -716,11 +612,6 @@ extension Stripe.Terminal.Readers {
                 @Expandable<Stripe.PaymentIntents.PaymentIntent, String> public var paymentIntent: String?
                 public var processConfig: ProcessConfig?
 
-                private enum CodingKeys: String, CodingKey {
-                    case paymentIntent
-                    case processConfig
-                }
-
                 public init(
                     paymentIntent: String? = nil,
                     processConfig: ProcessConfig? = nil
@@ -739,13 +630,6 @@ extension Stripe.Terminal.Readers {
                     public var skipTipping: Bool?
                     public var tipping: Tipping?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case enableCustomerCancellation
-                        case returnUrl
-                        case skipTipping
-                        case tipping
-                    }
-
                     public init(
                         enableCustomerCancellation: Bool? = nil,
                         returnUrl: String? = nil,
@@ -762,10 +646,6 @@ extension Stripe.Terminal.Readers {
                     public struct Tipping: Codable, Hashable, Sendable {
                         /// Amount used to calculate tip suggestions on tipping selection screen for this transaction.
                         public var amountEligible: Int?
-
-                        private enum CodingKeys: String, CodingKey {
-                            case amountEligible
-                        }
 
                         public init(
                             amountEligible: Int? = nil
@@ -784,12 +664,6 @@ extension Stripe.Terminal.Readers {
                 /// Most recent SetupIntent processed by the reader.
                 @Expandable<Stripe.Setup.Intent, String> public var setupIntent: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case generatedCard
-                    case processConfig
-                    case setupIntent
-                }
-
                 public init(
                     generatedCard: String? = nil,
                     processConfig: ProcessConfig? = nil,
@@ -804,10 +678,6 @@ extension Stripe.Terminal.Readers {
                 public struct ProcessConfig: Codable, Hashable, Sendable {
                     /// Enable customer-initiated cancellation when processing this SetupIntent.
                     public var enableCustomerCancellation: Bool?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case enableCustomerCancellation
-                    }
 
                     public init(
                         enableCustomerCancellation: Bool? = nil
@@ -836,18 +706,6 @@ extension Stripe.Terminal.Readers {
                 public var refundPaymentConfig: RefundPaymentConfig?
                 /// Boolean indicating whether the transfer should be reversed when refunding this charge.
                 public var reverseTransfer: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case amount
-                    case charge
-                    case metadata
-                    case paymentIntent
-                    case reason
-                    case refund
-                    case refundApplicationFee
-                    case refundPaymentConfig
-                    case reverseTransfer
-                }
 
                 public init(
                     amount: Int? = nil,
@@ -883,10 +741,6 @@ extension Stripe.Terminal.Readers {
                     /// Enable customer-initiated cancellation when refunding this payment.
                     public var enableCustomerCancellation: Bool?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case enableCustomerCancellation
-                    }
-
                     public init(
                         enableCustomerCancellation: Bool? = nil
                     ) {
@@ -901,11 +755,6 @@ extension Stripe.Terminal.Readers {
                 public var cart: Cart?
                 /// Type of information to be displayed by the reader.
                 public var `type`: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case cart
-                    case `type`
-                }
 
                 public init(
                     cart: Cart? = nil,
@@ -925,13 +774,6 @@ extension Stripe.Terminal.Readers {
                     public var tax: Int?
                     /// Total amount for the entire cart, including tax.
                     public var total: Int?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case currency
-                        case lineItems
-                        case tax
-                        case total
-                    }
 
                     public init(
                         currency: Stripe.Currency? = nil,
@@ -953,12 +795,6 @@ extension Stripe.Terminal.Readers {
                         public var description: String?
                         /// The quantity of the line item.
                         public var quantity: Int?
-
-                        private enum CodingKeys: String, CodingKey {
-                            case amount
-                            case description
-                            case quantity
-                        }
 
                         public init(
                             amount: Int? = nil,

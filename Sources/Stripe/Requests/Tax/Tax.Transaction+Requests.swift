@@ -33,14 +33,6 @@ extension Stripe.Tax.Transaction.CreateFromCalculation {
         /// A custom order or sale identifier, such as 'myOrder_123'.
         public var reference: String
 
-        private enum CodingKeys: String, CodingKey {
-            case calculation
-            case expand
-            case metadata
-            case postedAt
-            case reference
-        }
-
         public init(
             calculation: String,
             expand: [String]? = nil,
@@ -78,17 +70,6 @@ extension Stripe.Tax.Transaction.CreateReversal {
         public var reference: String
         /// The shipping cost to reverse.
         public var shippingCost: ShippingCost?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case flatAmount
-            case lineItems
-            case metadata
-            case mode
-            case originalTransaction
-            case reference
-            case shippingCost
-        }
 
         public init(
             expand: [String]? = nil,
@@ -129,15 +110,6 @@ extension Stripe.Tax.Transaction.CreateReversal {
             /// A custom identifier for this line item in the reversal transaction, such as 'L1-refund'.
             public var reference: String
 
-            private enum CodingKeys: String, CodingKey {
-                case amount
-                case amountTax
-                case metadata
-                case originalLineItem
-                case quantity
-                case reference
-            }
-
             public init(
                 amount: Int,
                 amountTax: Int,
@@ -161,11 +133,6 @@ extension Stripe.Tax.Transaction.CreateReversal {
             public var amount: Int
             /// The amount of tax to reverse, in the smallest currency unit in negative.
             public var amountTax: Int
-
-            private enum CodingKeys: String, CodingKey {
-                case amount
-                case amountTax
-            }
 
             public init(
                 amount: Int,
@@ -192,13 +159,6 @@ extension Stripe.Tax.Transaction.ListLineItems {
         /// A cursor for use in pagination.
         public var startingAfter: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case endingBefore
-            case expand
-            case limit
-            case startingAfter
-        }
-
         public init(
             endingBefore: String? = nil,
             expand: [String]? = nil,
@@ -220,10 +180,6 @@ extension Stripe.Tax.Transaction.Retrieve {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil

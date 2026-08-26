@@ -39,16 +39,6 @@ extension Stripe.Billing.Meter.Create {
         /// Fields that specify how to calculate a meter event's value.
         public var valueSettings: ValueSettings?
 
-        private enum CodingKeys: String, CodingKey {
-            case customerMapping
-            case defaultAggregation
-            case displayName
-            case eventName
-            case eventTimeWindow
-            case expand
-            case valueSettings
-        }
-
         public init(
             customerMapping: CustomerMapping? = nil,
             defaultAggregation: DefaultAggregation,
@@ -79,11 +69,6 @@ extension Stripe.Billing.Meter.Create {
             /// The method for mapping a meter event to a customer.
             public var `type`: String
 
-            private enum CodingKeys: String, CodingKey {
-                case eventPayloadKey
-                case `type`
-            }
-
             public init(
                 eventPayloadKey: String,
                 `type`: String
@@ -97,10 +82,6 @@ extension Stripe.Billing.Meter.Create {
         public struct DefaultAggregation: Codable, Hashable, Sendable {
             /// Specifies how events are aggregated.
             public var formula: Formula
-
-            private enum CodingKeys: String, CodingKey {
-                case formula
-            }
 
             public init(
                 formula: Formula
@@ -120,10 +101,6 @@ extension Stripe.Billing.Meter.Create {
             /// The key in the usage event payload to use as the value for this meter.
             public var eventPayloadKey: String
 
-            private enum CodingKeys: String, CodingKey {
-                case eventPayloadKey
-            }
-
             public init(
                 eventPayloadKey: String
             ) {
@@ -140,10 +117,6 @@ extension Stripe.Billing.Meter.Deactivate {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil
@@ -168,14 +141,6 @@ extension Stripe.Billing.Meter.List {
         public var startingAfter: String?
         /// Filter results to only include meters with the given status.
         public var status: Status?
-
-        private enum CodingKeys: String, CodingKey {
-            case endingBefore
-            case expand
-            case limit
-            case startingAfter
-            case status
-        }
 
         public init(
             endingBefore: String? = nil,
@@ -206,10 +171,6 @@ extension Stripe.Billing.Meter.Reactivate {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
-
         public init(
             expand: [String]? = nil
         ) {
@@ -225,10 +186,6 @@ extension Stripe.Billing.Meter.Retrieve {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil
@@ -247,11 +204,6 @@ extension Stripe.Billing.Meter.Update {
         public var displayName: String?
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case displayName
-            case expand
-        }
 
         public init(
             displayName: String? = nil,

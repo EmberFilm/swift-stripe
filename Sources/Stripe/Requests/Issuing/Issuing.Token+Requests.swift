@@ -36,16 +36,6 @@ extension Stripe.Issuing.Token.List {
         /// Select Issuing tokens with the given status.
         public var status: Status?
 
-        private enum CodingKeys: String, CodingKey {
-            case card
-            case created
-            case endingBefore
-            case expand
-            case limit
-            case startingAfter
-            case status
-        }
-
         public init(
             card: String,
             created: Stripe.RangeQuery? = nil,
@@ -81,10 +71,6 @@ extension Stripe.Issuing.Token.Retrieve {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
-
         public init(
             expand: [String]? = nil
         ) {
@@ -102,11 +88,6 @@ extension Stripe.Issuing.Token.Update {
         public var expand: [String]?
         /// Specifies which status the token should be updated to.
         public var status: Status
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case status
-        }
 
         public init(
             expand: [String]? = nil,

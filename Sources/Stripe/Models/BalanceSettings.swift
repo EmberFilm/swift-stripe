@@ -17,11 +17,6 @@ extension Stripe {
         public let object: String
         public var payments: Payments?
 
-        private enum CodingKeys: String, CodingKey {
-            case object
-            case payments
-        }
-
         public init(
             object: String,
             payments: Payments? = nil
@@ -36,12 +31,6 @@ extension Stripe {
             /// Settings specific to the account's payouts.
             public var payouts: Payouts?
             public var settlementTiming: SettlementTiming?
-
-            private enum CodingKeys: String, CodingKey {
-                case debitNegativeBalances
-                case payouts
-                case settlementTiming
-            }
 
             public init(
                 debitNegativeBalances: Bool? = nil,
@@ -64,14 +53,6 @@ extension Stripe {
                 public var statementDescriptor: String?
                 /// Whether the funds in this account can be paid out.
                 public var status: Status?
-
-                private enum CodingKeys: String, CodingKey {
-                    case automaticTransferRulesByCurrency
-                    case minimumBalanceByCurrency
-                    case schedule
-                    case statementDescriptor
-                    case status
-                }
 
                 public init(
                     automaticTransferRulesByCurrency: [String: [AutomaticTransferRulesByCurrency]]? = nil,
@@ -101,12 +82,6 @@ extension Stripe {
                     /// The type of automatic transfer rule.
                     public var `type`: Type?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case payoutMethod
-                        case transferUpToAmount
-                        case `type`
-                    }
-
                     public init(
                         payoutMethod: String? = nil,
                         transferUpToAmount: Int? = nil,
@@ -131,12 +106,6 @@ extension Stripe {
                     public var monthlyPayoutDays: [Int]?
                     /// The days of the week when available funds are paid out, specified as an array, for example, [`monday`, `tuesday`].
                     public var weeklyPayoutDays: [WeeklyPayoutDays]?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case interval
-                        case monthlyPayoutDays
-                        case weeklyPayoutDays
-                    }
 
                     public init(
                         interval: Interval? = nil,
@@ -174,12 +143,6 @@ extension Stripe {
                 /// Customized start of day configuration for automatic payouts to group and send payments in local timezones with a custo…
                 public var startOfDay: StartOfDay?
 
-                private enum CodingKeys: String, CodingKey {
-                    case delayDays
-                    case delayDaysOverride
-                    case startOfDay
-                }
-
                 public init(
                     delayDays: Int? = nil,
                     delayDaysOverride: Int? = nil,
@@ -197,12 +160,6 @@ extension Stripe {
                     public var minutes: Int?
                     /// Timezone for the customized start of day.
                     public var timezone: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case hour
-                        case minutes
-                        case timezone
-                    }
 
                     public init(
                         hour: Int? = nil,

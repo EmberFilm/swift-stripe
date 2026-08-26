@@ -47,20 +47,6 @@ extension Stripe.Billing.Credit.Grant.Create {
         /// The desired priority for applying this credit grant.
         public var priority: Int?
 
-        private enum CodingKeys: String, CodingKey {
-            case amount
-            case applicabilityConfig
-            case category
-            case customer
-            case customerAccount
-            case effectiveAt
-            case expand
-            case expiresAt
-            case metadata
-            case name
-            case priority
-        }
-
         public init(
             amount: Amount,
             applicabilityConfig: ApplicabilityConfig,
@@ -99,11 +85,6 @@ extension Stripe.Billing.Credit.Grant.Create {
             /// The type of this amount.
             public var `type`: String
 
-            private enum CodingKeys: String, CodingKey {
-                case monetary
-                case `type`
-            }
-
             public init(
                 monetary: Monetary? = nil,
                 `type`: String
@@ -118,11 +99,6 @@ extension Stripe.Billing.Credit.Grant.Create {
                 public var currency: Stripe.Currency
                 /// A positive integer representing the amount of the credit grant.
                 public var value: Int
-
-                private enum CodingKeys: String, CodingKey {
-                    case currency
-                    case value
-                }
 
                 public init(
                     currency: Stripe.Currency,
@@ -139,10 +115,6 @@ extension Stripe.Billing.Credit.Grant.Create {
             /// Specify the scope of this applicability config.
             public var scope: Scope
 
-            private enum CodingKeys: String, CodingKey {
-                case scope
-            }
-
             public init(
                 scope: Scope
             ) {
@@ -156,11 +128,6 @@ extension Stripe.Billing.Credit.Grant.Create {
                 /// A list of prices that the credit grant can apply to.
                 public var prices: [Prices]?
 
-                private enum CodingKeys: String, CodingKey {
-                    case priceType
-                    case prices
-                }
-
                 public init(
                     priceType: String? = nil,
                     prices: [Prices]? = nil
@@ -172,10 +139,6 @@ extension Stripe.Billing.Credit.Grant.Create {
                 public struct Prices: Codable, Hashable, Sendable {
                     /// The price ID this credit grant should apply to.
                     public var id: String
-
-                    private enum CodingKeys: String, CodingKey {
-                        case id
-                    }
 
                     public init(
                         id: String
@@ -195,10 +158,6 @@ extension Stripe.Billing.Credit.Grant.Expire {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil
@@ -226,15 +185,6 @@ extension Stripe.Billing.Credit.Grant.List {
         /// A cursor for use in pagination.
         public var startingAfter: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case customer
-            case customerAccount
-            case endingBefore
-            case expand
-            case limit
-            case startingAfter
-        }
-
         public init(
             customer: String? = nil,
             customerAccount: String? = nil,
@@ -261,10 +211,6 @@ extension Stripe.Billing.Credit.Grant.Retrieve {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
-
         public init(
             expand: [String]? = nil
         ) {
@@ -285,12 +231,6 @@ extension Stripe.Billing.Credit.Grant.Update {
         /// Set of key-value pairs you can attach to an object.
         public var metadata: [String: String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case expiresAt
-            case metadata
-        }
-
         public init(
             expand: [String]? = nil,
             expiresAt: Stripe.Clearable<Date>? = nil,
@@ -310,10 +250,6 @@ extension Stripe.Billing.Credit.Grant.VoidGrant {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil

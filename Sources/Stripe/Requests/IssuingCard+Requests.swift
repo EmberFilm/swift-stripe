@@ -62,26 +62,6 @@ extension IssuingCard.Create {
         /// The type of card to issue.
         public var `type`: Type
 
-        private enum CodingKeys: String, CodingKey {
-            case cardholder
-            case currency
-            case expMonth
-            case expYear
-            case expand
-            case financialAccount
-            case lifecycleControls
-            case metadata
-            case personalizationDesign
-            case pin
-            case replacementFor
-            case replacementReason
-            case secondLine
-            case shipping
-            case spendingControls
-            case status
-            case `type`
-        }
-
         public init(
             cardholder: String? = nil,
             currency: String,
@@ -142,10 +122,6 @@ extension IssuingCard.Create {
             /// Cancels the card after the specified conditions are met.
             public var cancelAfter: CancelAfter
 
-            private enum CodingKeys: String, CodingKey {
-                case cancelAfter
-            }
-
             public init(
                 cancelAfter: CancelAfter
             ) {
@@ -156,10 +132,6 @@ extension IssuingCard.Create {
             public struct CancelAfter: Codable, Hashable, Sendable {
                 /// The card is automatically cancelled when it makes this number of non-zero payment authorizations and transactions.
                 public var paymentCount: Int
-
-                private enum CodingKeys: String, CodingKey {
-                    case paymentCount
-                }
 
                 public init(
                     paymentCount: Int
@@ -173,10 +145,6 @@ extension IssuingCard.Create {
         public struct Pin: Codable, Hashable, Sendable {
             /// The card's desired new PIN, encrypted under Stripe's public key.
             public var encryptedNumber: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case encryptedNumber
-            }
 
             public init(
                 encryptedNumber: String? = nil
@@ -205,18 +173,6 @@ extension IssuingCard.Create {
             public var service: Service?
             /// Packaging options.
             public var `type`: Type?
-
-            private enum CodingKeys: String, CodingKey {
-                case address
-                case addressValidation
-                case businessName
-                case customs
-                case name
-                case phoneNumber
-                case requireSignature
-                case service
-                case `type`
-            }
 
             public init(
                 address: Address,
@@ -266,15 +222,6 @@ extension IssuingCard.Create {
                 /// State, county, province, or region (ISO 3166-2).
                 public var state: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case city
-                    case country
-                    case line1
-                    case line2
-                    case postalCode
-                    case state
-                }
-
                 public init(
                     city: String,
                     country: String,
@@ -297,10 +244,6 @@ extension IssuingCard.Create {
                 /// The address validation capabilities to use.
                 public var mode: Mode
 
-                private enum CodingKeys: String, CodingKey {
-                    case mode
-                }
-
                 public init(
                     mode: Mode
                 ) {
@@ -318,10 +261,6 @@ extension IssuingCard.Create {
             public struct Customs: Codable, Hashable, Sendable {
                 /// The Economic Operators Registration and Identification (EORI) number to use for Customs.
                 public var eoriNumber: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case eoriNumber
-                }
 
                 public init(
                     eoriNumber: String? = nil
@@ -347,16 +286,6 @@ extension IssuingCard.Create {
             public var blockedMerchantCountries: [String]?
             /// Limit spending with amount-based rules that apply across any cards this card replaced (i.e., its `replacement_for` car…
             public var spendingLimits: [SpendingLimits]?
-
-            private enum CodingKeys: String, CodingKey {
-                case allowedCardPresences
-                case allowedCategories
-                case allowedMerchantCountries
-                case blockedCardPresences
-                case blockedCategories
-                case blockedMerchantCountries
-                case spendingLimits
-            }
 
             public init(
                 allowedCardPresences: [AllowedCardPresences]? = nil,
@@ -989,12 +918,6 @@ extension IssuingCard.Create {
                 public var categories: [Categories]?
                 /// Interval (or event) to which the amount applies.
                 public var interval: Interval
-
-                private enum CodingKeys: String, CodingKey {
-                    case amount
-                    case categories
-                    case interval
-                }
 
                 public init(
                     amount: Int,
@@ -1325,10 +1248,6 @@ extension IssuingCard.DeliverCard {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
-
         public init(
             expand: [String]? = nil
         ) {
@@ -1344,10 +1263,6 @@ extension IssuingCard.FailCard {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil
@@ -1385,21 +1300,6 @@ extension IssuingCard.List {
         public var status: Status?
         /// Only return cards that have the given type.
         public var `type`: Type?
-
-        private enum CodingKeys: String, CodingKey {
-            case cardholder
-            case created
-            case endingBefore
-            case expMonth
-            case expYear
-            case expand
-            case last4
-            case limit
-            case personalizationDesign
-            case startingAfter
-            case status
-            case `type`
-        }
 
         public init(
             cardholder: String? = nil,
@@ -1450,10 +1350,6 @@ extension IssuingCard.Retrieve {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
-
         public init(
             expand: [String]? = nil
         ) {
@@ -1469,10 +1365,6 @@ extension IssuingCard.ReturnCard {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil
@@ -1490,10 +1382,6 @@ extension IssuingCard.ShipCard {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
-
         public init(
             expand: [String]? = nil
         ) {
@@ -1509,10 +1397,6 @@ extension IssuingCard.SubmitCard {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil
@@ -1542,17 +1426,6 @@ extension IssuingCard.Update {
         public var spendingControls: SpendingControls?
         /// Dictates whether authorizations can be approved on this card.
         public var status: Status?
-
-        private enum CodingKeys: String, CodingKey {
-            case cancellationReason
-            case expand
-            case metadata
-            case personalizationDesign
-            case pin
-            case shipping
-            case spendingControls
-            case status
-        }
 
         public init(
             cancellationReason: CancellationReason? = nil,
@@ -1590,10 +1463,6 @@ extension IssuingCard.Update {
             /// The card's desired new PIN, encrypted under Stripe's public key.
             public var encryptedNumber: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case encryptedNumber
-            }
-
             public init(
                 encryptedNumber: String? = nil
             ) {
@@ -1621,18 +1490,6 @@ extension IssuingCard.Update {
             public var service: Service?
             /// Packaging options.
             public var `type`: Type?
-
-            private enum CodingKeys: String, CodingKey {
-                case address
-                case addressValidation
-                case businessName
-                case customs
-                case name
-                case phoneNumber
-                case requireSignature
-                case service
-                case `type`
-            }
 
             public init(
                 address: Address,
@@ -1682,15 +1539,6 @@ extension IssuingCard.Update {
                 /// State, county, province, or region (ISO 3166-2).
                 public var state: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case city
-                    case country
-                    case line1
-                    case line2
-                    case postalCode
-                    case state
-                }
-
                 public init(
                     city: String,
                     country: String,
@@ -1713,10 +1561,6 @@ extension IssuingCard.Update {
                 /// The address validation capabilities to use.
                 public var mode: Mode
 
-                private enum CodingKeys: String, CodingKey {
-                    case mode
-                }
-
                 public init(
                     mode: Mode
                 ) {
@@ -1734,10 +1578,6 @@ extension IssuingCard.Update {
             public struct Customs: Codable, Hashable, Sendable {
                 /// The Economic Operators Registration and Identification (EORI) number to use for Customs.
                 public var eoriNumber: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case eoriNumber
-                }
 
                 public init(
                     eoriNumber: String? = nil
@@ -1763,16 +1603,6 @@ extension IssuingCard.Update {
             public var blockedMerchantCountries: [String]?
             /// Limit spending with amount-based rules that apply across any cards this card replaced (i.e., its `replacement_for` car…
             public var spendingLimits: [SpendingLimits]?
-
-            private enum CodingKeys: String, CodingKey {
-                case allowedCardPresences
-                case allowedCategories
-                case allowedMerchantCountries
-                case blockedCardPresences
-                case blockedCategories
-                case blockedMerchantCountries
-                case spendingLimits
-            }
 
             public init(
                 allowedCardPresences: [AllowedCardPresences]? = nil,
@@ -2405,12 +2235,6 @@ extension IssuingCard.Update {
                 public var categories: [Categories]?
                 /// Interval (or event) to which the amount applies.
                 public var interval: Interval
-
-                private enum CodingKeys: String, CodingKey {
-                    case amount
-                    case categories
-                    case interval
-                }
 
                 public init(
                     amount: Int,

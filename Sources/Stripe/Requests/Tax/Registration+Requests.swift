@@ -33,14 +33,6 @@ extension Stripe.Tax.Registration.Create {
         /// If set, the Tax Registration stops being active at this time.
         public var expiresAt: Date?
 
-        private enum CodingKeys: String, CodingKey {
-            case activeFrom
-            case country
-            case countryOptions
-            case expand
-            case expiresAt
-        }
-
         public init(
             activeFrom: ActiveFrom,
             country: String,
@@ -283,110 +275,6 @@ extension Stripe.Tax.Registration.Create {
             /// Options for the registration in ZW.
             public var zw: Zw?
 
-            private enum CodingKeys: String, CodingKey {
-                case ae
-                case al
-                case am
-                case ao
-                case at
-                case au
-                case aw
-                case az
-                case ba
-                case bb
-                case bd
-                case be
-                case bf
-                case bg
-                case bh
-                case bj
-                case bs
-                case by
-                case ca
-                case cd
-                case ch
-                case cl
-                case cm
-                case co
-                case cr
-                case cv
-                case cy
-                case cz
-                case de
-                case dk
-                case ec
-                case ee
-                case eg
-                case es
-                case et
-                case fi
-                case fr
-                case gb
-                case ge
-                case gn
-                case gr
-                case hr
-                case hu
-                case id
-                case ie
-                case `in`
-                case `is`
-                case it
-                case jp
-                case ke
-                case kg
-                case kh
-                case kr
-                case kz
-                case la
-                case lk
-                case lt
-                case lu
-                case lv
-                case ma
-                case md
-                case me
-                case mk
-                case mr
-                case mt
-                case mx
-                case my
-                case ng
-                case nl
-                case no
-                case np
-                case nz
-                case om
-                case pe
-                case ph
-                case pl
-                case pt
-                case ro
-                case rs
-                case ru
-                case sa
-                case se
-                case sg
-                case si
-                case sk
-                case sn
-                case sr
-                case th
-                case tj
-                case tr
-                case tw
-                case tz
-                case ua
-                case ug
-                case us
-                case uy
-                case uz
-                case vn
-                case za
-                case zm
-                case zw
-            }
-
             public init(
                 ae: Ae? = nil,
                 al: Al? = nil,
@@ -600,11 +488,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case standard
-                    case `type`
-                }
-
                 public init(
                     standard: Standard? = nil,
                     `type`: String
@@ -617,10 +500,6 @@ extension Stripe.Tax.Registration.Create {
                 public struct Standard: Codable, Hashable, Sendable {
                     /// Place of supply scheme used in an standard registration.
                     public var placeOfSupplyScheme: PlaceOfSupplyScheme?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case placeOfSupplyScheme
-                    }
 
                     public init(
                         placeOfSupplyScheme: PlaceOfSupplyScheme? = nil
@@ -642,11 +521,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case standard
-                    case `type`
-                }
-
                 public init(
                     standard: Standard? = nil,
                     `type`: String
@@ -659,10 +533,6 @@ extension Stripe.Tax.Registration.Create {
                 public struct Standard: Codable, Hashable, Sendable {
                     /// Place of supply scheme used in an standard registration.
                     public var placeOfSupplyScheme: PlaceOfSupplyScheme?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case placeOfSupplyScheme
-                    }
 
                     public init(
                         placeOfSupplyScheme: PlaceOfSupplyScheme? = nil
@@ -682,10 +552,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case `type`
-                }
-
                 public init(
                     `type`: String
                 ) {
@@ -700,11 +566,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case standard
-                    case `type`
-                }
-
                 public init(
                     standard: Standard? = nil,
                     `type`: String
@@ -717,10 +578,6 @@ extension Stripe.Tax.Registration.Create {
                 public struct Standard: Codable, Hashable, Sendable {
                     /// Place of supply scheme used in an standard registration.
                     public var placeOfSupplyScheme: PlaceOfSupplyScheme?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case placeOfSupplyScheme
-                    }
 
                     public init(
                         placeOfSupplyScheme: PlaceOfSupplyScheme? = nil
@@ -742,11 +599,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in an EU country.
                 public var `type`: Type
 
-                private enum CodingKeys: String, CodingKey {
-                    case standard
-                    case `type`
-                }
-
                 public init(
                     standard: Standard? = nil,
                     `type`: Type
@@ -766,10 +618,6 @@ extension Stripe.Tax.Registration.Create {
                 public struct Standard: Codable, Hashable, Sendable {
                     /// Place of supply scheme used in an EU standard registration.
                     public var placeOfSupplyScheme: PlaceOfSupplyScheme
-
-                    private enum CodingKeys: String, CodingKey {
-                        case placeOfSupplyScheme
-                    }
 
                     public init(
                         placeOfSupplyScheme: PlaceOfSupplyScheme
@@ -792,11 +640,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case standard
-                    case `type`
-                }
-
                 public init(
                     standard: Standard? = nil,
                     `type`: String
@@ -809,10 +652,6 @@ extension Stripe.Tax.Registration.Create {
                 public struct Standard: Codable, Hashable, Sendable {
                     /// Place of supply scheme used in an standard registration.
                     public var placeOfSupplyScheme: PlaceOfSupplyScheme?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case placeOfSupplyScheme
-                    }
 
                     public init(
                         placeOfSupplyScheme: PlaceOfSupplyScheme? = nil
@@ -834,11 +673,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case standard
-                    case `type`
-                }
-
                 public init(
                     standard: Standard? = nil,
                     `type`: String
@@ -851,10 +685,6 @@ extension Stripe.Tax.Registration.Create {
                 public struct Standard: Codable, Hashable, Sendable {
                     /// Place of supply scheme used in an standard registration.
                     public var placeOfSupplyScheme: PlaceOfSupplyScheme?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case placeOfSupplyScheme
-                    }
 
                     public init(
                         placeOfSupplyScheme: PlaceOfSupplyScheme? = nil
@@ -874,10 +704,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case `type`
-                }
-
                 public init(
                     `type`: String
                 ) {
@@ -892,11 +718,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case standard
-                    case `type`
-                }
-
                 public init(
                     standard: Standard? = nil,
                     `type`: String
@@ -909,10 +730,6 @@ extension Stripe.Tax.Registration.Create {
                 public struct Standard: Codable, Hashable, Sendable {
                     /// Place of supply scheme used in an standard registration.
                     public var placeOfSupplyScheme: PlaceOfSupplyScheme?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case placeOfSupplyScheme
-                    }
 
                     public init(
                         placeOfSupplyScheme: PlaceOfSupplyScheme? = nil
@@ -934,11 +751,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case standard
-                    case `type`
-                }
-
                 public init(
                     standard: Standard? = nil,
                     `type`: String
@@ -951,10 +763,6 @@ extension Stripe.Tax.Registration.Create {
                 public struct Standard: Codable, Hashable, Sendable {
                     /// Place of supply scheme used in an standard registration.
                     public var placeOfSupplyScheme: PlaceOfSupplyScheme?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case placeOfSupplyScheme
-                    }
 
                     public init(
                         placeOfSupplyScheme: PlaceOfSupplyScheme? = nil
@@ -976,11 +784,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case standard
-                    case `type`
-                }
-
                 public init(
                     standard: Standard? = nil,
                     `type`: String
@@ -993,10 +796,6 @@ extension Stripe.Tax.Registration.Create {
                 public struct Standard: Codable, Hashable, Sendable {
                     /// Place of supply scheme used in an standard registration.
                     public var placeOfSupplyScheme: PlaceOfSupplyScheme?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case placeOfSupplyScheme
-                    }
 
                     public init(
                         placeOfSupplyScheme: PlaceOfSupplyScheme? = nil
@@ -1018,11 +817,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in an EU country.
                 public var `type`: Type
 
-                private enum CodingKeys: String, CodingKey {
-                    case standard
-                    case `type`
-                }
-
                 public init(
                     standard: Standard? = nil,
                     `type`: Type
@@ -1042,10 +836,6 @@ extension Stripe.Tax.Registration.Create {
                 public struct Standard: Codable, Hashable, Sendable {
                     /// Place of supply scheme used in an EU standard registration.
                     public var placeOfSupplyScheme: PlaceOfSupplyScheme
-
-                    private enum CodingKeys: String, CodingKey {
-                        case placeOfSupplyScheme
-                    }
 
                     public init(
                         placeOfSupplyScheme: PlaceOfSupplyScheme
@@ -1068,11 +858,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case standard
-                    case `type`
-                }
-
                 public init(
                     standard: Standard? = nil,
                     `type`: String
@@ -1085,10 +870,6 @@ extension Stripe.Tax.Registration.Create {
                 public struct Standard: Codable, Hashable, Sendable {
                     /// Place of supply scheme used in an standard registration.
                     public var placeOfSupplyScheme: PlaceOfSupplyScheme?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case placeOfSupplyScheme
-                    }
 
                     public init(
                         placeOfSupplyScheme: PlaceOfSupplyScheme? = nil
@@ -1110,11 +891,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in an EU country.
                 public var `type`: Type
 
-                private enum CodingKeys: String, CodingKey {
-                    case standard
-                    case `type`
-                }
-
                 public init(
                     standard: Standard? = nil,
                     `type`: Type
@@ -1134,10 +910,6 @@ extension Stripe.Tax.Registration.Create {
                 public struct Standard: Codable, Hashable, Sendable {
                     /// Place of supply scheme used in an EU standard registration.
                     public var placeOfSupplyScheme: PlaceOfSupplyScheme
-
-                    private enum CodingKeys: String, CodingKey {
-                        case placeOfSupplyScheme
-                    }
 
                     public init(
                         placeOfSupplyScheme: PlaceOfSupplyScheme
@@ -1160,11 +932,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case standard
-                    case `type`
-                }
-
                 public init(
                     standard: Standard? = nil,
                     `type`: String
@@ -1177,10 +944,6 @@ extension Stripe.Tax.Registration.Create {
                 public struct Standard: Codable, Hashable, Sendable {
                     /// Place of supply scheme used in an standard registration.
                     public var placeOfSupplyScheme: PlaceOfSupplyScheme?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case placeOfSupplyScheme
-                    }
 
                     public init(
                         placeOfSupplyScheme: PlaceOfSupplyScheme? = nil
@@ -1200,10 +963,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case `type`
-                }
-
                 public init(
                     `type`: String
                 ) {
@@ -1218,11 +977,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case standard
-                    case `type`
-                }
-
                 public init(
                     standard: Standard? = nil,
                     `type`: String
@@ -1235,10 +989,6 @@ extension Stripe.Tax.Registration.Create {
                 public struct Standard: Codable, Hashable, Sendable {
                     /// Place of supply scheme used in an standard registration.
                     public var placeOfSupplyScheme: PlaceOfSupplyScheme?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case placeOfSupplyScheme
-                    }
 
                     public init(
                         placeOfSupplyScheme: PlaceOfSupplyScheme? = nil
@@ -1258,10 +1008,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case `type`
-                }
-
                 public init(
                     `type`: String
                 ) {
@@ -1275,11 +1021,6 @@ extension Stripe.Tax.Registration.Create {
                 public var provinceStandard: ProvinceStandard?
                 /// Type of registration to be created in Canada.
                 public var `type`: Type
-
-                private enum CodingKeys: String, CodingKey {
-                    case provinceStandard
-                    case `type`
-                }
 
                 public init(
                     provinceStandard: ProvinceStandard? = nil,
@@ -1300,10 +1041,6 @@ extension Stripe.Tax.Registration.Create {
                     /// Two-letter CA province code (ISO 3166-2).
                     public var province: String
 
-                    private enum CodingKeys: String, CodingKey {
-                        case province
-                    }
-
                     public init(
                         province: String
                     ) {
@@ -1319,11 +1056,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case standard
-                    case `type`
-                }
-
                 public init(
                     standard: Standard? = nil,
                     `type`: String
@@ -1336,10 +1068,6 @@ extension Stripe.Tax.Registration.Create {
                 public struct Standard: Codable, Hashable, Sendable {
                     /// Place of supply scheme used in an standard registration.
                     public var placeOfSupplyScheme: PlaceOfSupplyScheme?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case placeOfSupplyScheme
-                    }
 
                     public init(
                         placeOfSupplyScheme: PlaceOfSupplyScheme? = nil
@@ -1361,11 +1089,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case standard
-                    case `type`
-                }
-
                 public init(
                     standard: Standard? = nil,
                     `type`: String
@@ -1378,10 +1101,6 @@ extension Stripe.Tax.Registration.Create {
                 public struct Standard: Codable, Hashable, Sendable {
                     /// Place of supply scheme used in an standard registration.
                     public var placeOfSupplyScheme: PlaceOfSupplyScheme?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case placeOfSupplyScheme
-                    }
 
                     public init(
                         placeOfSupplyScheme: PlaceOfSupplyScheme? = nil
@@ -1401,10 +1120,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case `type`
-                }
-
                 public init(
                     `type`: String
                 ) {
@@ -1416,10 +1131,6 @@ extension Stripe.Tax.Registration.Create {
             public struct Cm: Codable, Hashable, Sendable {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
-
-                private enum CodingKeys: String, CodingKey {
-                    case `type`
-                }
 
                 public init(
                     `type`: String
@@ -1433,10 +1144,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case `type`
-                }
-
                 public init(
                     `type`: String
                 ) {
@@ -1449,10 +1156,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case `type`
-                }
-
                 public init(
                     `type`: String
                 ) {
@@ -1464,10 +1167,6 @@ extension Stripe.Tax.Registration.Create {
             public struct Cv: Codable, Hashable, Sendable {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
-
-                private enum CodingKeys: String, CodingKey {
-                    case `type`
-                }
 
                 public init(
                     `type`: String
@@ -1482,11 +1181,6 @@ extension Stripe.Tax.Registration.Create {
                 public var standard: Standard?
                 /// Type of registration to be created in an EU country.
                 public var `type`: Type
-
-                private enum CodingKeys: String, CodingKey {
-                    case standard
-                    case `type`
-                }
 
                 public init(
                     standard: Standard? = nil,
@@ -1507,10 +1201,6 @@ extension Stripe.Tax.Registration.Create {
                 public struct Standard: Codable, Hashable, Sendable {
                     /// Place of supply scheme used in an EU standard registration.
                     public var placeOfSupplyScheme: PlaceOfSupplyScheme
-
-                    private enum CodingKeys: String, CodingKey {
-                        case placeOfSupplyScheme
-                    }
 
                     public init(
                         placeOfSupplyScheme: PlaceOfSupplyScheme
@@ -1533,11 +1223,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in an EU country.
                 public var `type`: Type
 
-                private enum CodingKeys: String, CodingKey {
-                    case standard
-                    case `type`
-                }
-
                 public init(
                     standard: Standard? = nil,
                     `type`: Type
@@ -1557,10 +1242,6 @@ extension Stripe.Tax.Registration.Create {
                 public struct Standard: Codable, Hashable, Sendable {
                     /// Place of supply scheme used in an EU standard registration.
                     public var placeOfSupplyScheme: PlaceOfSupplyScheme
-
-                    private enum CodingKeys: String, CodingKey {
-                        case placeOfSupplyScheme
-                    }
 
                     public init(
                         placeOfSupplyScheme: PlaceOfSupplyScheme
@@ -1583,11 +1264,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in an EU country.
                 public var `type`: Type
 
-                private enum CodingKeys: String, CodingKey {
-                    case standard
-                    case `type`
-                }
-
                 public init(
                     standard: Standard? = nil,
                     `type`: Type
@@ -1607,10 +1283,6 @@ extension Stripe.Tax.Registration.Create {
                 public struct Standard: Codable, Hashable, Sendable {
                     /// Place of supply scheme used in an EU standard registration.
                     public var placeOfSupplyScheme: PlaceOfSupplyScheme
-
-                    private enum CodingKeys: String, CodingKey {
-                        case placeOfSupplyScheme
-                    }
 
                     public init(
                         placeOfSupplyScheme: PlaceOfSupplyScheme
@@ -1633,11 +1305,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in an EU country.
                 public var `type`: Type
 
-                private enum CodingKeys: String, CodingKey {
-                    case standard
-                    case `type`
-                }
-
                 public init(
                     standard: Standard? = nil,
                     `type`: Type
@@ -1657,10 +1324,6 @@ extension Stripe.Tax.Registration.Create {
                 public struct Standard: Codable, Hashable, Sendable {
                     /// Place of supply scheme used in an EU standard registration.
                     public var placeOfSupplyScheme: PlaceOfSupplyScheme
-
-                    private enum CodingKeys: String, CodingKey {
-                        case placeOfSupplyScheme
-                    }
 
                     public init(
                         placeOfSupplyScheme: PlaceOfSupplyScheme
@@ -1681,10 +1344,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case `type`
-                }
-
                 public init(
                     `type`: String
                 ) {
@@ -1698,11 +1357,6 @@ extension Stripe.Tax.Registration.Create {
                 public var standard: Standard?
                 /// Type of registration to be created in an EU country.
                 public var `type`: Type
-
-                private enum CodingKeys: String, CodingKey {
-                    case standard
-                    case `type`
-                }
 
                 public init(
                     standard: Standard? = nil,
@@ -1723,10 +1377,6 @@ extension Stripe.Tax.Registration.Create {
                 public struct Standard: Codable, Hashable, Sendable {
                     /// Place of supply scheme used in an EU standard registration.
                     public var placeOfSupplyScheme: PlaceOfSupplyScheme
-
-                    private enum CodingKeys: String, CodingKey {
-                        case placeOfSupplyScheme
-                    }
 
                     public init(
                         placeOfSupplyScheme: PlaceOfSupplyScheme
@@ -1747,10 +1397,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case `type`
-                }
-
                 public init(
                     `type`: String
                 ) {
@@ -1764,11 +1410,6 @@ extension Stripe.Tax.Registration.Create {
                 public var standard: Standard?
                 /// Type of registration to be created in an EU country.
                 public var `type`: Type
-
-                private enum CodingKeys: String, CodingKey {
-                    case standard
-                    case `type`
-                }
 
                 public init(
                     standard: Standard? = nil,
@@ -1789,10 +1430,6 @@ extension Stripe.Tax.Registration.Create {
                 public struct Standard: Codable, Hashable, Sendable {
                     /// Place of supply scheme used in an EU standard registration.
                     public var placeOfSupplyScheme: PlaceOfSupplyScheme
-
-                    private enum CodingKeys: String, CodingKey {
-                        case placeOfSupplyScheme
-                    }
 
                     public init(
                         placeOfSupplyScheme: PlaceOfSupplyScheme
@@ -1815,11 +1452,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case standard
-                    case `type`
-                }
-
                 public init(
                     standard: Standard? = nil,
                     `type`: String
@@ -1832,10 +1464,6 @@ extension Stripe.Tax.Registration.Create {
                 public struct Standard: Codable, Hashable, Sendable {
                     /// Place of supply scheme used in an standard registration.
                     public var placeOfSupplyScheme: PlaceOfSupplyScheme?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case placeOfSupplyScheme
-                    }
 
                     public init(
                         placeOfSupplyScheme: PlaceOfSupplyScheme? = nil
@@ -1857,11 +1485,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in an EU country.
                 public var `type`: Type
 
-                private enum CodingKeys: String, CodingKey {
-                    case standard
-                    case `type`
-                }
-
                 public init(
                     standard: Standard? = nil,
                     `type`: Type
@@ -1881,10 +1504,6 @@ extension Stripe.Tax.Registration.Create {
                 public struct Standard: Codable, Hashable, Sendable {
                     /// Place of supply scheme used in an EU standard registration.
                     public var placeOfSupplyScheme: PlaceOfSupplyScheme
-
-                    private enum CodingKeys: String, CodingKey {
-                        case placeOfSupplyScheme
-                    }
 
                     public init(
                         placeOfSupplyScheme: PlaceOfSupplyScheme
@@ -1907,11 +1526,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in an EU country.
                 public var `type`: Type
 
-                private enum CodingKeys: String, CodingKey {
-                    case standard
-                    case `type`
-                }
-
                 public init(
                     standard: Standard? = nil,
                     `type`: Type
@@ -1931,10 +1545,6 @@ extension Stripe.Tax.Registration.Create {
                 public struct Standard: Codable, Hashable, Sendable {
                     /// Place of supply scheme used in an EU standard registration.
                     public var placeOfSupplyScheme: PlaceOfSupplyScheme
-
-                    private enum CodingKeys: String, CodingKey {
-                        case placeOfSupplyScheme
-                    }
 
                     public init(
                         placeOfSupplyScheme: PlaceOfSupplyScheme
@@ -1957,11 +1567,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case standard
-                    case `type`
-                }
-
                 public init(
                     standard: Standard? = nil,
                     `type`: String
@@ -1974,10 +1579,6 @@ extension Stripe.Tax.Registration.Create {
                 public struct Standard: Codable, Hashable, Sendable {
                     /// Place of supply scheme used in an standard registration.
                     public var placeOfSupplyScheme: PlaceOfSupplyScheme?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case placeOfSupplyScheme
-                    }
 
                     public init(
                         placeOfSupplyScheme: PlaceOfSupplyScheme? = nil
@@ -1997,10 +1598,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case `type`
-                }
-
                 public init(
                     `type`: String
                 ) {
@@ -2015,11 +1612,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case standard
-                    case `type`
-                }
-
                 public init(
                     standard: Standard? = nil,
                     `type`: String
@@ -2032,10 +1624,6 @@ extension Stripe.Tax.Registration.Create {
                 public struct Standard: Codable, Hashable, Sendable {
                     /// Place of supply scheme used in an standard registration.
                     public var placeOfSupplyScheme: PlaceOfSupplyScheme?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case placeOfSupplyScheme
-                    }
 
                     public init(
                         placeOfSupplyScheme: PlaceOfSupplyScheme? = nil
@@ -2057,11 +1645,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in an EU country.
                 public var `type`: Type
 
-                private enum CodingKeys: String, CodingKey {
-                    case standard
-                    case `type`
-                }
-
                 public init(
                     standard: Standard? = nil,
                     `type`: Type
@@ -2081,10 +1664,6 @@ extension Stripe.Tax.Registration.Create {
                 public struct Standard: Codable, Hashable, Sendable {
                     /// Place of supply scheme used in an EU standard registration.
                     public var placeOfSupplyScheme: PlaceOfSupplyScheme
-
-                    private enum CodingKeys: String, CodingKey {
-                        case placeOfSupplyScheme
-                    }
 
                     public init(
                         placeOfSupplyScheme: PlaceOfSupplyScheme
@@ -2107,11 +1686,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in an EU country.
                 public var `type`: Type
 
-                private enum CodingKeys: String, CodingKey {
-                    case standard
-                    case `type`
-                }
-
                 public init(
                     standard: Standard? = nil,
                     `type`: Type
@@ -2131,10 +1705,6 @@ extension Stripe.Tax.Registration.Create {
                 public struct Standard: Codable, Hashable, Sendable {
                     /// Place of supply scheme used in an EU standard registration.
                     public var placeOfSupplyScheme: PlaceOfSupplyScheme
-
-                    private enum CodingKeys: String, CodingKey {
-                        case placeOfSupplyScheme
-                    }
 
                     public init(
                         placeOfSupplyScheme: PlaceOfSupplyScheme
@@ -2157,11 +1727,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in an EU country.
                 public var `type`: Type
 
-                private enum CodingKeys: String, CodingKey {
-                    case standard
-                    case `type`
-                }
-
                 public init(
                     standard: Standard? = nil,
                     `type`: Type
@@ -2181,10 +1746,6 @@ extension Stripe.Tax.Registration.Create {
                 public struct Standard: Codable, Hashable, Sendable {
                     /// Place of supply scheme used in an EU standard registration.
                     public var placeOfSupplyScheme: PlaceOfSupplyScheme
-
-                    private enum CodingKeys: String, CodingKey {
-                        case placeOfSupplyScheme
-                    }
 
                     public init(
                         placeOfSupplyScheme: PlaceOfSupplyScheme
@@ -2205,10 +1766,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case `type`
-                }
-
                 public init(
                     `type`: String
                 ) {
@@ -2222,11 +1779,6 @@ extension Stripe.Tax.Registration.Create {
                 public var standard: Standard?
                 /// Type of registration to be created in an EU country.
                 public var `type`: Type
-
-                private enum CodingKeys: String, CodingKey {
-                    case standard
-                    case `type`
-                }
 
                 public init(
                     standard: Standard? = nil,
@@ -2248,10 +1800,6 @@ extension Stripe.Tax.Registration.Create {
                     /// Place of supply scheme used in an EU standard registration.
                     public var placeOfSupplyScheme: PlaceOfSupplyScheme
 
-                    private enum CodingKeys: String, CodingKey {
-                        case placeOfSupplyScheme
-                    }
-
                     public init(
                         placeOfSupplyScheme: PlaceOfSupplyScheme
                     ) {
@@ -2271,10 +1819,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case `type`
-                }
-
                 public init(
                     `type`: String
                 ) {
@@ -2289,11 +1833,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case standard
-                    case `type`
-                }
-
                 public init(
                     standard: Standard? = nil,
                     `type`: String
@@ -2306,10 +1845,6 @@ extension Stripe.Tax.Registration.Create {
                 public struct Standard: Codable, Hashable, Sendable {
                     /// Place of supply scheme used in an standard registration.
                     public var placeOfSupplyScheme: PlaceOfSupplyScheme?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case placeOfSupplyScheme
-                    }
 
                     public init(
                         placeOfSupplyScheme: PlaceOfSupplyScheme? = nil
@@ -2331,11 +1866,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in an EU country.
                 public var `type`: Type
 
-                private enum CodingKeys: String, CodingKey {
-                    case standard
-                    case `type`
-                }
-
                 public init(
                     standard: Standard? = nil,
                     `type`: Type
@@ -2355,10 +1885,6 @@ extension Stripe.Tax.Registration.Create {
                 public struct Standard: Codable, Hashable, Sendable {
                     /// Place of supply scheme used in an EU standard registration.
                     public var placeOfSupplyScheme: PlaceOfSupplyScheme
-
-                    private enum CodingKeys: String, CodingKey {
-                        case placeOfSupplyScheme
-                    }
 
                     public init(
                         placeOfSupplyScheme: PlaceOfSupplyScheme
@@ -2381,11 +1907,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case standard
-                    case `type`
-                }
-
                 public init(
                     standard: Standard? = nil,
                     `type`: String
@@ -2398,10 +1919,6 @@ extension Stripe.Tax.Registration.Create {
                 public struct Standard: Codable, Hashable, Sendable {
                     /// Place of supply scheme used in an standard registration.
                     public var placeOfSupplyScheme: PlaceOfSupplyScheme?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case placeOfSupplyScheme
-                    }
 
                     public init(
                         placeOfSupplyScheme: PlaceOfSupplyScheme? = nil
@@ -2421,10 +1938,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case `type`
-                }
-
                 public init(
                     `type`: String
                 ) {
@@ -2436,10 +1949,6 @@ extension Stripe.Tax.Registration.Create {
             public struct Kg: Codable, Hashable, Sendable {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
-
-                private enum CodingKeys: String, CodingKey {
-                    case `type`
-                }
 
                 public init(
                     `type`: String
@@ -2453,10 +1962,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case `type`
-                }
-
                 public init(
                     `type`: String
                 ) {
@@ -2468,10 +1973,6 @@ extension Stripe.Tax.Registration.Create {
             public struct Kr: Codable, Hashable, Sendable {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
-
-                private enum CodingKeys: String, CodingKey {
-                    case `type`
-                }
 
                 public init(
                     `type`: String
@@ -2485,10 +1986,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case `type`
-                }
-
                 public init(
                     `type`: String
                 ) {
@@ -2501,10 +1998,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case `type`
-                }
-
                 public init(
                     `type`: String
                 ) {
@@ -2516,10 +2009,6 @@ extension Stripe.Tax.Registration.Create {
             public struct Lk: Codable, Hashable, Sendable {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
-
-                private enum CodingKeys: String, CodingKey {
-                    case `type`
-                }
 
                 public init(
                     `type`: String
@@ -2534,11 +2023,6 @@ extension Stripe.Tax.Registration.Create {
                 public var standard: Standard?
                 /// Type of registration to be created in an EU country.
                 public var `type`: Type
-
-                private enum CodingKeys: String, CodingKey {
-                    case standard
-                    case `type`
-                }
 
                 public init(
                     standard: Standard? = nil,
@@ -2559,10 +2043,6 @@ extension Stripe.Tax.Registration.Create {
                 public struct Standard: Codable, Hashable, Sendable {
                     /// Place of supply scheme used in an EU standard registration.
                     public var placeOfSupplyScheme: PlaceOfSupplyScheme
-
-                    private enum CodingKeys: String, CodingKey {
-                        case placeOfSupplyScheme
-                    }
 
                     public init(
                         placeOfSupplyScheme: PlaceOfSupplyScheme
@@ -2585,11 +2065,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in an EU country.
                 public var `type`: Type
 
-                private enum CodingKeys: String, CodingKey {
-                    case standard
-                    case `type`
-                }
-
                 public init(
                     standard: Standard? = nil,
                     `type`: Type
@@ -2609,10 +2084,6 @@ extension Stripe.Tax.Registration.Create {
                 public struct Standard: Codable, Hashable, Sendable {
                     /// Place of supply scheme used in an EU standard registration.
                     public var placeOfSupplyScheme: PlaceOfSupplyScheme
-
-                    private enum CodingKeys: String, CodingKey {
-                        case placeOfSupplyScheme
-                    }
 
                     public init(
                         placeOfSupplyScheme: PlaceOfSupplyScheme
@@ -2635,11 +2106,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in an EU country.
                 public var `type`: Type
 
-                private enum CodingKeys: String, CodingKey {
-                    case standard
-                    case `type`
-                }
-
                 public init(
                     standard: Standard? = nil,
                     `type`: Type
@@ -2660,10 +2126,6 @@ extension Stripe.Tax.Registration.Create {
                     /// Place of supply scheme used in an EU standard registration.
                     public var placeOfSupplyScheme: PlaceOfSupplyScheme
 
-                    private enum CodingKeys: String, CodingKey {
-                        case placeOfSupplyScheme
-                    }
-
                     public init(
                         placeOfSupplyScheme: PlaceOfSupplyScheme
                     ) {
@@ -2683,10 +2145,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case `type`
-                }
-
                 public init(
                     `type`: String
                 ) {
@@ -2698,10 +2156,6 @@ extension Stripe.Tax.Registration.Create {
             public struct Md: Codable, Hashable, Sendable {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
-
-                private enum CodingKeys: String, CodingKey {
-                    case `type`
-                }
 
                 public init(
                     `type`: String
@@ -2717,11 +2171,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case standard
-                    case `type`
-                }
-
                 public init(
                     standard: Standard? = nil,
                     `type`: String
@@ -2734,10 +2183,6 @@ extension Stripe.Tax.Registration.Create {
                 public struct Standard: Codable, Hashable, Sendable {
                     /// Place of supply scheme used in an standard registration.
                     public var placeOfSupplyScheme: PlaceOfSupplyScheme?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case placeOfSupplyScheme
-                    }
 
                     public init(
                         placeOfSupplyScheme: PlaceOfSupplyScheme? = nil
@@ -2759,11 +2204,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case standard
-                    case `type`
-                }
-
                 public init(
                     standard: Standard? = nil,
                     `type`: String
@@ -2776,10 +2216,6 @@ extension Stripe.Tax.Registration.Create {
                 public struct Standard: Codable, Hashable, Sendable {
                     /// Place of supply scheme used in an standard registration.
                     public var placeOfSupplyScheme: PlaceOfSupplyScheme?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case placeOfSupplyScheme
-                    }
 
                     public init(
                         placeOfSupplyScheme: PlaceOfSupplyScheme? = nil
@@ -2801,11 +2237,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case standard
-                    case `type`
-                }
-
                 public init(
                     standard: Standard? = nil,
                     `type`: String
@@ -2818,10 +2249,6 @@ extension Stripe.Tax.Registration.Create {
                 public struct Standard: Codable, Hashable, Sendable {
                     /// Place of supply scheme used in an standard registration.
                     public var placeOfSupplyScheme: PlaceOfSupplyScheme?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case placeOfSupplyScheme
-                    }
 
                     public init(
                         placeOfSupplyScheme: PlaceOfSupplyScheme? = nil
@@ -2843,11 +2270,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in an EU country.
                 public var `type`: Type
 
-                private enum CodingKeys: String, CodingKey {
-                    case standard
-                    case `type`
-                }
-
                 public init(
                     standard: Standard? = nil,
                     `type`: Type
@@ -2867,10 +2289,6 @@ extension Stripe.Tax.Registration.Create {
                 public struct Standard: Codable, Hashable, Sendable {
                     /// Place of supply scheme used in an EU standard registration.
                     public var placeOfSupplyScheme: PlaceOfSupplyScheme
-
-                    private enum CodingKeys: String, CodingKey {
-                        case placeOfSupplyScheme
-                    }
 
                     public init(
                         placeOfSupplyScheme: PlaceOfSupplyScheme
@@ -2891,10 +2309,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case `type`
-                }
-
                 public init(
                     `type`: String
                 ) {
@@ -2907,10 +2321,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case `type`
-                }
-
                 public init(
                     `type`: String
                 ) {
@@ -2922,10 +2332,6 @@ extension Stripe.Tax.Registration.Create {
             public struct Ng: Codable, Hashable, Sendable {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
-
-                private enum CodingKeys: String, CodingKey {
-                    case `type`
-                }
 
                 public init(
                     `type`: String
@@ -2940,11 +2346,6 @@ extension Stripe.Tax.Registration.Create {
                 public var standard: Standard?
                 /// Type of registration to be created in an EU country.
                 public var `type`: Type
-
-                private enum CodingKeys: String, CodingKey {
-                    case standard
-                    case `type`
-                }
 
                 public init(
                     standard: Standard? = nil,
@@ -2965,10 +2366,6 @@ extension Stripe.Tax.Registration.Create {
                 public struct Standard: Codable, Hashable, Sendable {
                     /// Place of supply scheme used in an EU standard registration.
                     public var placeOfSupplyScheme: PlaceOfSupplyScheme
-
-                    private enum CodingKeys: String, CodingKey {
-                        case placeOfSupplyScheme
-                    }
 
                     public init(
                         placeOfSupplyScheme: PlaceOfSupplyScheme
@@ -2991,11 +2388,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case standard
-                    case `type`
-                }
-
                 public init(
                     standard: Standard? = nil,
                     `type`: String
@@ -3008,10 +2400,6 @@ extension Stripe.Tax.Registration.Create {
                 public struct Standard: Codable, Hashable, Sendable {
                     /// Place of supply scheme used in an standard registration.
                     public var placeOfSupplyScheme: PlaceOfSupplyScheme?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case placeOfSupplyScheme
-                    }
 
                     public init(
                         placeOfSupplyScheme: PlaceOfSupplyScheme? = nil
@@ -3031,10 +2419,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case `type`
-                }
-
                 public init(
                     `type`: String
                 ) {
@@ -3049,11 +2433,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case standard
-                    case `type`
-                }
-
                 public init(
                     standard: Standard? = nil,
                     `type`: String
@@ -3066,10 +2445,6 @@ extension Stripe.Tax.Registration.Create {
                 public struct Standard: Codable, Hashable, Sendable {
                     /// Place of supply scheme used in an standard registration.
                     public var placeOfSupplyScheme: PlaceOfSupplyScheme?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case placeOfSupplyScheme
-                    }
 
                     public init(
                         placeOfSupplyScheme: PlaceOfSupplyScheme? = nil
@@ -3091,11 +2466,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case standard
-                    case `type`
-                }
-
                 public init(
                     standard: Standard? = nil,
                     `type`: String
@@ -3108,10 +2478,6 @@ extension Stripe.Tax.Registration.Create {
                 public struct Standard: Codable, Hashable, Sendable {
                     /// Place of supply scheme used in an standard registration.
                     public var placeOfSupplyScheme: PlaceOfSupplyScheme?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case placeOfSupplyScheme
-                    }
 
                     public init(
                         placeOfSupplyScheme: PlaceOfSupplyScheme? = nil
@@ -3131,10 +2497,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case `type`
-                }
-
                 public init(
                     `type`: String
                 ) {
@@ -3146,10 +2508,6 @@ extension Stripe.Tax.Registration.Create {
             public struct Ph: Codable, Hashable, Sendable {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
-
-                private enum CodingKeys: String, CodingKey {
-                    case `type`
-                }
 
                 public init(
                     `type`: String
@@ -3164,11 +2522,6 @@ extension Stripe.Tax.Registration.Create {
                 public var standard: Standard?
                 /// Type of registration to be created in an EU country.
                 public var `type`: Type
-
-                private enum CodingKeys: String, CodingKey {
-                    case standard
-                    case `type`
-                }
 
                 public init(
                     standard: Standard? = nil,
@@ -3189,10 +2542,6 @@ extension Stripe.Tax.Registration.Create {
                 public struct Standard: Codable, Hashable, Sendable {
                     /// Place of supply scheme used in an EU standard registration.
                     public var placeOfSupplyScheme: PlaceOfSupplyScheme
-
-                    private enum CodingKeys: String, CodingKey {
-                        case placeOfSupplyScheme
-                    }
 
                     public init(
                         placeOfSupplyScheme: PlaceOfSupplyScheme
@@ -3215,11 +2564,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in an EU country.
                 public var `type`: Type
 
-                private enum CodingKeys: String, CodingKey {
-                    case standard
-                    case `type`
-                }
-
                 public init(
                     standard: Standard? = nil,
                     `type`: Type
@@ -3239,10 +2583,6 @@ extension Stripe.Tax.Registration.Create {
                 public struct Standard: Codable, Hashable, Sendable {
                     /// Place of supply scheme used in an EU standard registration.
                     public var placeOfSupplyScheme: PlaceOfSupplyScheme
-
-                    private enum CodingKeys: String, CodingKey {
-                        case placeOfSupplyScheme
-                    }
 
                     public init(
                         placeOfSupplyScheme: PlaceOfSupplyScheme
@@ -3265,11 +2605,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in an EU country.
                 public var `type`: Type
 
-                private enum CodingKeys: String, CodingKey {
-                    case standard
-                    case `type`
-                }
-
                 public init(
                     standard: Standard? = nil,
                     `type`: Type
@@ -3289,10 +2624,6 @@ extension Stripe.Tax.Registration.Create {
                 public struct Standard: Codable, Hashable, Sendable {
                     /// Place of supply scheme used in an EU standard registration.
                     public var placeOfSupplyScheme: PlaceOfSupplyScheme
-
-                    private enum CodingKeys: String, CodingKey {
-                        case placeOfSupplyScheme
-                    }
 
                     public init(
                         placeOfSupplyScheme: PlaceOfSupplyScheme
@@ -3315,11 +2646,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case standard
-                    case `type`
-                }
-
                 public init(
                     standard: Standard? = nil,
                     `type`: String
@@ -3332,10 +2658,6 @@ extension Stripe.Tax.Registration.Create {
                 public struct Standard: Codable, Hashable, Sendable {
                     /// Place of supply scheme used in an standard registration.
                     public var placeOfSupplyScheme: PlaceOfSupplyScheme?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case placeOfSupplyScheme
-                    }
 
                     public init(
                         placeOfSupplyScheme: PlaceOfSupplyScheme? = nil
@@ -3355,10 +2677,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case `type`
-                }
-
                 public init(
                     `type`: String
                 ) {
@@ -3370,10 +2688,6 @@ extension Stripe.Tax.Registration.Create {
             public struct Sa: Codable, Hashable, Sendable {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
-
-                private enum CodingKeys: String, CodingKey {
-                    case `type`
-                }
 
                 public init(
                     `type`: String
@@ -3388,11 +2702,6 @@ extension Stripe.Tax.Registration.Create {
                 public var standard: Standard?
                 /// Type of registration to be created in an EU country.
                 public var `type`: Type
-
-                private enum CodingKeys: String, CodingKey {
-                    case standard
-                    case `type`
-                }
 
                 public init(
                     standard: Standard? = nil,
@@ -3413,10 +2722,6 @@ extension Stripe.Tax.Registration.Create {
                 public struct Standard: Codable, Hashable, Sendable {
                     /// Place of supply scheme used in an EU standard registration.
                     public var placeOfSupplyScheme: PlaceOfSupplyScheme
-
-                    private enum CodingKeys: String, CodingKey {
-                        case placeOfSupplyScheme
-                    }
 
                     public init(
                         placeOfSupplyScheme: PlaceOfSupplyScheme
@@ -3439,11 +2744,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case standard
-                    case `type`
-                }
-
                 public init(
                     standard: Standard? = nil,
                     `type`: String
@@ -3456,10 +2756,6 @@ extension Stripe.Tax.Registration.Create {
                 public struct Standard: Codable, Hashable, Sendable {
                     /// Place of supply scheme used in an standard registration.
                     public var placeOfSupplyScheme: PlaceOfSupplyScheme?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case placeOfSupplyScheme
-                    }
 
                     public init(
                         placeOfSupplyScheme: PlaceOfSupplyScheme? = nil
@@ -3481,11 +2777,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in an EU country.
                 public var `type`: Type
 
-                private enum CodingKeys: String, CodingKey {
-                    case standard
-                    case `type`
-                }
-
                 public init(
                     standard: Standard? = nil,
                     `type`: Type
@@ -3505,10 +2796,6 @@ extension Stripe.Tax.Registration.Create {
                 public struct Standard: Codable, Hashable, Sendable {
                     /// Place of supply scheme used in an EU standard registration.
                     public var placeOfSupplyScheme: PlaceOfSupplyScheme
-
-                    private enum CodingKeys: String, CodingKey {
-                        case placeOfSupplyScheme
-                    }
 
                     public init(
                         placeOfSupplyScheme: PlaceOfSupplyScheme
@@ -3531,11 +2818,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in an EU country.
                 public var `type`: Type
 
-                private enum CodingKeys: String, CodingKey {
-                    case standard
-                    case `type`
-                }
-
                 public init(
                     standard: Standard? = nil,
                     `type`: Type
@@ -3556,10 +2838,6 @@ extension Stripe.Tax.Registration.Create {
                     /// Place of supply scheme used in an EU standard registration.
                     public var placeOfSupplyScheme: PlaceOfSupplyScheme
 
-                    private enum CodingKeys: String, CodingKey {
-                        case placeOfSupplyScheme
-                    }
-
                     public init(
                         placeOfSupplyScheme: PlaceOfSupplyScheme
                     ) {
@@ -3579,10 +2857,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case `type`
-                }
-
                 public init(
                     `type`: String
                 ) {
@@ -3597,11 +2871,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case standard
-                    case `type`
-                }
-
                 public init(
                     standard: Standard? = nil,
                     `type`: String
@@ -3614,10 +2883,6 @@ extension Stripe.Tax.Registration.Create {
                 public struct Standard: Codable, Hashable, Sendable {
                     /// Place of supply scheme used in an standard registration.
                     public var placeOfSupplyScheme: PlaceOfSupplyScheme?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case placeOfSupplyScheme
-                    }
 
                     public init(
                         placeOfSupplyScheme: PlaceOfSupplyScheme? = nil
@@ -3637,10 +2902,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case `type`
-                }
-
                 public init(
                     `type`: String
                 ) {
@@ -3652,10 +2913,6 @@ extension Stripe.Tax.Registration.Create {
             public struct Tj: Codable, Hashable, Sendable {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
-
-                private enum CodingKeys: String, CodingKey {
-                    case `type`
-                }
 
                 public init(
                     `type`: String
@@ -3669,10 +2926,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case `type`
-                }
-
                 public init(
                     `type`: String
                 ) {
@@ -3684,10 +2937,6 @@ extension Stripe.Tax.Registration.Create {
             public struct Tw: Codable, Hashable, Sendable {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
-
-                private enum CodingKeys: String, CodingKey {
-                    case `type`
-                }
 
                 public init(
                     `type`: String
@@ -3701,10 +2950,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case `type`
-                }
-
                 public init(
                     `type`: String
                 ) {
@@ -3717,10 +2962,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case `type`
-                }
-
                 public init(
                     `type`: String
                 ) {
@@ -3732,10 +2973,6 @@ extension Stripe.Tax.Registration.Create {
             public struct Ug: Codable, Hashable, Sendable {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
-
-                private enum CodingKeys: String, CodingKey {
-                    case `type`
-                }
 
                 public init(
                     `type`: String
@@ -3760,16 +2997,6 @@ extension Stripe.Tax.Registration.Create {
                 public var stateSalesTax: StateSalesTax?
                 /// Type of registration to be created in the US.
                 public var `type`: Type
-
-                private enum CodingKeys: String, CodingKey {
-                    case localAmusementTax
-                    case localLeaseTax
-                    case massTransitParkingTax
-                    case parkingTax
-                    case state
-                    case stateSalesTax
-                    case `type`
-                }
 
                 public init(
                     localAmusementTax: LocalAmusementTax? = nil,
@@ -3804,10 +3031,6 @@ extension Stripe.Tax.Registration.Create {
                     /// A jurisdiction code representing the local jurisdiction.
                     public var jurisdiction: String
 
-                    private enum CodingKeys: String, CodingKey {
-                        case jurisdiction
-                    }
-
                     public init(
                         jurisdiction: String
                     ) {
@@ -3819,10 +3042,6 @@ extension Stripe.Tax.Registration.Create {
                 public struct LocalLeaseTax: Codable, Hashable, Sendable {
                     /// A FIPS code representing the local jurisdiction.
                     public var jurisdiction: String
-
-                    private enum CodingKeys: String, CodingKey {
-                        case jurisdiction
-                    }
 
                     public init(
                         jurisdiction: String
@@ -3836,10 +3055,6 @@ extension Stripe.Tax.Registration.Create {
                     /// A jurisdiction code representing the local jurisdiction.
                     public var jurisdiction: String
 
-                    private enum CodingKeys: String, CodingKey {
-                        case jurisdiction
-                    }
-
                     public init(
                         jurisdiction: String
                     ) {
@@ -3851,10 +3066,6 @@ extension Stripe.Tax.Registration.Create {
                 public struct ParkingTax: Codable, Hashable, Sendable {
                     /// A jurisdiction code representing the local jurisdiction.
                     public var jurisdiction: String
-
-                    private enum CodingKeys: String, CodingKey {
-                        case jurisdiction
-                    }
 
                     public init(
                         jurisdiction: String
@@ -3868,10 +3079,6 @@ extension Stripe.Tax.Registration.Create {
                     /// Elections for the state sales tax registration.
                     public var elections: [Elections]
 
-                    private enum CodingKeys: String, CodingKey {
-                        case elections
-                    }
-
                     public init(
                         elections: [Elections]
                     ) {
@@ -3883,11 +3090,6 @@ extension Stripe.Tax.Registration.Create {
                         public var jurisdiction: String?
                         /// The type of the election for the state sales tax registration.
                         public var `type`: Type
-
-                        private enum CodingKeys: String, CodingKey {
-                            case jurisdiction
-                            case `type`
-                        }
 
                         public init(
                             jurisdiction: String? = nil,
@@ -3913,11 +3115,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case standard
-                    case `type`
-                }
-
                 public init(
                     standard: Standard? = nil,
                     `type`: String
@@ -3930,10 +3127,6 @@ extension Stripe.Tax.Registration.Create {
                 public struct Standard: Codable, Hashable, Sendable {
                     /// Place of supply scheme used in an standard registration.
                     public var placeOfSupplyScheme: PlaceOfSupplyScheme?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case placeOfSupplyScheme
-                    }
 
                     public init(
                         placeOfSupplyScheme: PlaceOfSupplyScheme? = nil
@@ -3953,10 +3146,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case `type`
-                }
-
                 public init(
                     `type`: String
                 ) {
@@ -3968,10 +3157,6 @@ extension Stripe.Tax.Registration.Create {
             public struct Vn: Codable, Hashable, Sendable {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
-
-                private enum CodingKeys: String, CodingKey {
-                    case `type`
-                }
 
                 public init(
                     `type`: String
@@ -3987,11 +3172,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case standard
-                    case `type`
-                }
-
                 public init(
                     standard: Standard? = nil,
                     `type`: String
@@ -4004,10 +3184,6 @@ extension Stripe.Tax.Registration.Create {
                 public struct Standard: Codable, Hashable, Sendable {
                     /// Place of supply scheme used in an standard registration.
                     public var placeOfSupplyScheme: PlaceOfSupplyScheme?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case placeOfSupplyScheme
-                    }
 
                     public init(
                         placeOfSupplyScheme: PlaceOfSupplyScheme? = nil
@@ -4027,10 +3203,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case `type`
-                }
-
                 public init(
                     `type`: String
                 ) {
@@ -4045,11 +3217,6 @@ extension Stripe.Tax.Registration.Create {
                 /// Type of registration to be created in `country`.
                 public var `type`: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case standard
-                    case `type`
-                }
-
                 public init(
                     standard: Standard? = nil,
                     `type`: String
@@ -4062,10 +3229,6 @@ extension Stripe.Tax.Registration.Create {
                 public struct Standard: Codable, Hashable, Sendable {
                     /// Place of supply scheme used in an standard registration.
                     public var placeOfSupplyScheme: PlaceOfSupplyScheme?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case placeOfSupplyScheme
-                    }
 
                     public init(
                         placeOfSupplyScheme: PlaceOfSupplyScheme? = nil
@@ -4099,14 +3262,6 @@ extension Stripe.Tax.Registration.List {
         /// The status of the Tax Registration.
         public var status: Status?
 
-        private enum CodingKeys: String, CodingKey {
-            case endingBefore
-            case expand
-            case limit
-            case startingAfter
-            case status
-        }
-
         public init(
             endingBefore: String? = nil,
             expand: [String]? = nil,
@@ -4138,10 +3293,6 @@ extension Stripe.Tax.Registration.Retrieve {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
-
         public init(
             expand: [String]? = nil
         ) {
@@ -4161,12 +3312,6 @@ extension Stripe.Tax.Registration.Update {
         public var expand: [String]?
         /// If set, the registration stops being active at this time.
         public var expiresAt: ExpiresAt?
-
-        private enum CodingKeys: String, CodingKey {
-            case activeFrom
-            case expand
-            case expiresAt
-        }
 
         public init(
             activeFrom: ActiveFrom? = nil,

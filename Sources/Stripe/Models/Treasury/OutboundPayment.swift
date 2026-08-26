@@ -57,31 +57,6 @@ extension Stripe.Treasury {
         /// The Transaction associated with this object.
         @Expandable<Stripe.Treasury.Transaction, String> public var transaction: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case amount
-            case cancelable
-            case created
-            case currency
-            case customer
-            case description
-            case destinationPaymentMethod
-            case destinationPaymentMethodDetails
-            case endUserDetails
-            case expectedArrivalDate
-            case financialAccount
-            case hostedRegulatoryReceiptUrl
-            case livemode
-            case metadata
-            case returnedDetails
-            case statementDescriptor
-            case status
-            case statusTransitions
-            case trackingDetails
-            case transaction
-        }
-
         public init(
             id: ID,
             object: String,
@@ -146,13 +121,6 @@ extension Stripe.Treasury {
             public var `type`: Type?
             public var usBankAccount: UsBankAccount?
 
-            private enum CodingKeys: String, CodingKey {
-                case billingDetails
-                case financialAccount
-                case `type`
-                case usBankAccount
-            }
-
             public init(
                 billingDetails: Stripe.Shared.TreasurySharedResourceBillingDetails? = nil,
                 financialAccount: FinancialAccount? = nil,
@@ -176,11 +144,6 @@ extension Stripe.Treasury {
                 public let id: ID
                 /// The rails used to send funds.
                 public var network: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case id
-                    case network
-                }
 
                 public init(
                     id: ID,
@@ -208,17 +171,6 @@ extension Stripe.Treasury {
                 public var network: Network?
                 /// Routing number of the bank account.
                 public var routingNumber: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case accountHolderType
-                    case accountType
-                    case bankName
-                    case fingerprint
-                    case last4
-                    case mandate
-                    case network
-                    case routingNumber
-                }
 
                 public init(
                     accountHolderType: AccountHolderType? = nil,
@@ -266,11 +218,6 @@ extension Stripe.Treasury {
             /// `true` if the OutboundPayment creation request is being made on behalf of an end user by a platform.
             public var present: Bool?
 
-            private enum CodingKeys: String, CodingKey {
-                case ipAddress
-                case present
-            }
-
             public init(
                 ipAddress: String? = nil,
                 present: Bool? = nil
@@ -285,11 +232,6 @@ extension Stripe.Treasury {
             public var code: Code?
             /// The Transaction associated with this object.
             @Expandable<Stripe.Treasury.Transaction, String> public var transaction: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case code
-                case transaction
-            }
 
             public init(
                 code: Code? = nil,
@@ -324,13 +266,6 @@ extension Stripe.Treasury {
             /// Timestamp describing when an OutboundPayment changed status to `returned`.
             public var returnedAt: Date?
 
-            private enum CodingKeys: String, CodingKey {
-                case canceledAt
-                case failedAt
-                case postedAt
-                case returnedAt
-            }
-
             public init(
                 canceledAt: Date? = nil,
                 failedAt: Date? = nil,
@@ -349,12 +284,6 @@ extension Stripe.Treasury {
             /// The US bank account network used to send funds.
             public var `type`: Type?
             public var usDomesticWire: UsDomesticWire?
-
-            private enum CodingKeys: String, CodingKey {
-                case ach
-                case `type`
-                case usDomesticWire
-            }
 
             public init(
                 ach: Ach? = nil,
@@ -376,10 +305,6 @@ extension Stripe.Treasury {
                 /// ACH trace ID of the OutboundPayment for payments sent over the `ach` network.
                 public var traceId: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case traceId
-                }
-
                 public init(
                     traceId: String? = nil
                 ) {
@@ -394,12 +319,6 @@ extension Stripe.Treasury {
                 public var imad: String?
                 /// OMAD of the OutboundPayment for payments sent over the `us_domestic_wire` network.
                 public var omad: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case chips
-                    case imad
-                    case omad
-                }
 
                 public init(
                     chips: String? = nil,

@@ -23,17 +23,6 @@ extension Stripe.Treasury {
         public var outboundPayments: OutboundPayments?
         public var outboundTransfers: OutboundTransfers?
 
-        private enum CodingKeys: String, CodingKey {
-            case object
-            case cardIssuing
-            case depositInsurance
-            case financialAddresses
-            case inboundTransfers
-            case intraStripeFlows
-            case outboundPayments
-            case outboundTransfers
-        }
-
         public init(
             object: String,
             cardIssuing: CardIssuing? = nil,
@@ -63,12 +52,6 @@ extension Stripe.Treasury {
             /// Additional details; includes at least one entry when the status is not `active`.
             public var statusDetails: [StatusDetails]?
 
-            private enum CodingKeys: String, CodingKey {
-                case requested
-                case status
-                case statusDetails
-            }
-
             public init(
                 requested: Bool? = nil,
                 status: Status? = nil,
@@ -94,12 +77,6 @@ extension Stripe.Treasury {
                 public var resolution: Resolution?
                 /// The `platform_restrictions` that are restricting this Feature.
                 public var restriction: Restriction?
-
-                private enum CodingKeys: String, CodingKey {
-                    case code
-                    case resolution
-                    case restriction
-                }
 
                 public init(
                     code: Code? = nil,
@@ -148,12 +125,6 @@ extension Stripe.Treasury {
             /// Additional details; includes at least one entry when the status is not `active`.
             public var statusDetails: [StatusDetails]?
 
-            private enum CodingKeys: String, CodingKey {
-                case requested
-                case status
-                case statusDetails
-            }
-
             public init(
                 requested: Bool? = nil,
                 status: Status? = nil,
@@ -179,12 +150,6 @@ extension Stripe.Treasury {
                 public var resolution: Resolution?
                 /// The `platform_restrictions` that are restricting this Feature.
                 public var restriction: Restriction?
-
-                private enum CodingKeys: String, CodingKey {
-                    case code
-                    case resolution
-                    case restriction
-                }
 
                 public init(
                     code: Code? = nil,
@@ -228,10 +193,6 @@ extension Stripe.Treasury {
         public struct FinancialAddresses: Codable, Hashable, Sendable {
             public var aba: Aba?
 
-            private enum CodingKeys: String, CodingKey {
-                case aba
-            }
-
             public init(
                 aba: Aba? = nil
             ) {
@@ -246,12 +207,6 @@ extension Stripe.Treasury {
                 public var status: Status?
                 /// Additional details; includes at least one entry when the status is not `active`.
                 public var statusDetails: [StatusDetails]?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                    case status
-                    case statusDetails
-                }
 
                 public init(
                     requested: Bool? = nil,
@@ -278,12 +233,6 @@ extension Stripe.Treasury {
                     public var resolution: Resolution?
                     /// The `platform_restrictions` that are restricting this Feature.
                     public var restriction: Restriction?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case code
-                        case resolution
-                        case restriction
-                    }
 
                     public init(
                         code: Code? = nil,
@@ -328,10 +277,6 @@ extension Stripe.Treasury {
         public struct InboundTransfers: Codable, Hashable, Sendable {
             public var ach: Ach?
 
-            private enum CodingKeys: String, CodingKey {
-                case ach
-            }
-
             public init(
                 ach: Ach? = nil
             ) {
@@ -346,12 +291,6 @@ extension Stripe.Treasury {
                 public var status: Status?
                 /// Additional details; includes at least one entry when the status is not `active`.
                 public var statusDetails: [StatusDetails]?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                    case status
-                    case statusDetails
-                }
 
                 public init(
                     requested: Bool? = nil,
@@ -378,12 +317,6 @@ extension Stripe.Treasury {
                     public var resolution: Resolution?
                     /// The `platform_restrictions` that are restricting this Feature.
                     public var restriction: Restriction?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case code
-                        case resolution
-                        case restriction
-                    }
 
                     public init(
                         code: Code? = nil,
@@ -433,12 +366,6 @@ extension Stripe.Treasury {
             /// Additional details; includes at least one entry when the status is not `active`.
             public var statusDetails: [StatusDetails]?
 
-            private enum CodingKeys: String, CodingKey {
-                case requested
-                case status
-                case statusDetails
-            }
-
             public init(
                 requested: Bool? = nil,
                 status: Status? = nil,
@@ -464,12 +391,6 @@ extension Stripe.Treasury {
                 public var resolution: Resolution?
                 /// The `platform_restrictions` that are restricting this Feature.
                 public var restriction: Restriction?
-
-                private enum CodingKeys: String, CodingKey {
-                    case code
-                    case resolution
-                    case restriction
-                }
 
                 public init(
                     code: Code? = nil,
@@ -514,11 +435,6 @@ extension Stripe.Treasury {
             public var ach: Ach?
             public var usDomesticWire: UsDomesticWire?
 
-            private enum CodingKeys: String, CodingKey {
-                case ach
-                case usDomesticWire
-            }
-
             public init(
                 ach: Ach? = nil,
                 usDomesticWire: UsDomesticWire? = nil
@@ -535,12 +451,6 @@ extension Stripe.Treasury {
                 public var status: Status?
                 /// Additional details; includes at least one entry when the status is not `active`.
                 public var statusDetails: [StatusDetails]?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                    case status
-                    case statusDetails
-                }
 
                 public init(
                     requested: Bool? = nil,
@@ -567,12 +477,6 @@ extension Stripe.Treasury {
                     public var resolution: Resolution?
                     /// The `platform_restrictions` that are restricting this Feature.
                     public var restriction: Restriction?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case code
-                        case resolution
-                        case restriction
-                    }
 
                     public init(
                         code: Code? = nil,
@@ -621,12 +525,6 @@ extension Stripe.Treasury {
                 /// Additional details; includes at least one entry when the status is not `active`.
                 public var statusDetails: [StatusDetails]?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                    case status
-                    case statusDetails
-                }
-
                 public init(
                     requested: Bool? = nil,
                     status: Status? = nil,
@@ -652,12 +550,6 @@ extension Stripe.Treasury {
                     public var resolution: Resolution?
                     /// The `platform_restrictions` that are restricting this Feature.
                     public var restriction: Restriction?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case code
-                        case resolution
-                        case restriction
-                    }
 
                     public init(
                         code: Code? = nil,
@@ -703,11 +595,6 @@ extension Stripe.Treasury {
             public var ach: Ach?
             public var usDomesticWire: UsDomesticWire?
 
-            private enum CodingKeys: String, CodingKey {
-                case ach
-                case usDomesticWire
-            }
-
             public init(
                 ach: Ach? = nil,
                 usDomesticWire: UsDomesticWire? = nil
@@ -724,12 +611,6 @@ extension Stripe.Treasury {
                 public var status: Status?
                 /// Additional details; includes at least one entry when the status is not `active`.
                 public var statusDetails: [StatusDetails]?
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                    case status
-                    case statusDetails
-                }
 
                 public init(
                     requested: Bool? = nil,
@@ -756,12 +637,6 @@ extension Stripe.Treasury {
                     public var resolution: Resolution?
                     /// The `platform_restrictions` that are restricting this Feature.
                     public var restriction: Restriction?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case code
-                        case resolution
-                        case restriction
-                    }
 
                     public init(
                         code: Code? = nil,
@@ -810,12 +685,6 @@ extension Stripe.Treasury {
                 /// Additional details; includes at least one entry when the status is not `active`.
                 public var statusDetails: [StatusDetails]?
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                    case status
-                    case statusDetails
-                }
-
                 public init(
                     requested: Bool? = nil,
                     status: Status? = nil,
@@ -841,12 +710,6 @@ extension Stripe.Treasury {
                     public var resolution: Resolution?
                     /// The `platform_restrictions` that are restricting this Feature.
                     public var restriction: Restriction?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case code
-                        case resolution
-                        case restriction
-                    }
 
                     public init(
                         code: Code? = nil,

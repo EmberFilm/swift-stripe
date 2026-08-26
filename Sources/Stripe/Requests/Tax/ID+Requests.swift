@@ -31,13 +31,6 @@ extension Stripe.Tax.ID.Create {
         /// Value of the tax ID.
         public var value: String
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case owner
-            case `type`
-            case value
-        }
-
         public init(
             expand: [String]? = nil,
             owner: Owner? = nil,
@@ -181,13 +174,6 @@ extension Stripe.Tax.ID.Create {
             /// Type of owner referenced.
             public var `type`: Type
 
-            private enum CodingKeys: String, CodingKey {
-                case account
-                case customer
-                case customerAccount
-                case `type`
-            }
-
             public init(
                 account: String? = nil,
                 customer: String? = nil,
@@ -231,14 +217,6 @@ extension Stripe.Tax.ID.List {
         /// A cursor for use in pagination.
         public var startingAfter: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case endingBefore
-            case expand
-            case limit
-            case owner
-            case startingAfter
-        }
-
         public init(
             endingBefore: String? = nil,
             expand: [String]? = nil,
@@ -263,13 +241,6 @@ extension Stripe.Tax.ID.List {
             public var customerAccount: String?
             /// Type of owner referenced.
             public var `type`: Type
-
-            private enum CodingKeys: String, CodingKey {
-                case account
-                case customer
-                case customerAccount
-                case `type`
-            }
 
             public init(
                 account: String? = nil,
@@ -300,10 +271,6 @@ extension Stripe.Tax.ID.Retrieve {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil

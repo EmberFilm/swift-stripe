@@ -37,23 +37,6 @@ extension Stripe {
         /// The type of source this transaction is attached to.
         public var `type`: Type?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case achCreditTransfer
-            case amount
-            case chfCreditTransfer
-            case created
-            case currency
-            case gbpCreditTransfer
-            case livemode
-            case paperCheck
-            case sepaCreditTransfer
-            case source
-            case status
-            case `type`
-        }
-
         public init(
             id: ID,
             object: String,
@@ -116,13 +99,6 @@ extension Stripe {
             /// Routing number associated with the transfer.
             public var routingNumber: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case customerData
-                case fingerprint
-                case last4
-                case routingNumber
-            }
-
             public init(
                 customerData: String? = nil,
                 fingerprint: String? = nil,
@@ -147,14 +123,6 @@ extension Stripe {
             public var senderIban: String?
             /// Sender's name.
             public var senderName: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case reference
-                case senderAddressCountry
-                case senderAddressLine1
-                case senderIban
-                case senderName
-            }
 
             public init(
                 reference: String? = nil,
@@ -187,16 +155,6 @@ extension Stripe {
             /// Sender sort code associated with the transfer.
             public var senderSortCode: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case fingerprint
-                case fundingMethod
-                case last4
-                case reference
-                case senderAccountNumber
-                case senderName
-                case senderSortCode
-            }
-
             public init(
                 fingerprint: String? = nil,
                 fundingMethod: String? = nil,
@@ -222,11 +180,6 @@ extension Stripe {
             /// Comma-separated list of invoice IDs associated with the paper check.
             public var invoices: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case availableAt
-                case invoices
-            }
-
             public init(
                 availableAt: String? = nil,
                 invoices: String? = nil
@@ -243,12 +196,6 @@ extension Stripe {
             public var senderIban: String?
             /// Sender's name.
             public var senderName: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case reference
-                case senderIban
-                case senderName
-            }
 
             public init(
                 reference: String? = nil,

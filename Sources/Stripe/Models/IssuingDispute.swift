@@ -38,22 +38,6 @@ public struct IssuingDispute: Codable, Hashable, Sendable, Identifiable {
     /// Treasury details related to this dispute if it was created on a FinancialAccount
     public var treasury: Treasury?
 
-    private enum CodingKeys: String, CodingKey {
-        case id
-        case object
-        case amount
-        case balanceTransactions
-        case created
-        case currency
-        case evidence
-        case livemode
-        case lossReason
-        case metadata
-        case status
-        case transaction
-        case treasury
-    }
-
     public init(
         id: ID,
         object: String,
@@ -129,18 +113,6 @@ public struct IssuingDispute: Codable, Hashable, Sendable, Identifiable {
         public var reason: Reason?
         public var serviceNotAsDescribed: ServiceNotAsDescribed?
 
-        private enum CodingKeys: String, CodingKey {
-            case canceled
-            case duplicate
-            case fraudulent
-            case merchandiseNotAsDescribed
-            case noValidAuthorization
-            case notReceived
-            case other
-            case reason
-            case serviceNotAsDescribed
-        }
-
         public init(
             canceled: Canceled? = nil,
             duplicate: Duplicate? = nil,
@@ -197,19 +169,6 @@ public struct IssuingDispute: Codable, Hashable, Sendable, Identifiable {
             /// Date when the product was returned or attempted to be returned.
             public var returnedAt: Date?
 
-            private enum CodingKeys: String, CodingKey {
-                case additionalDocumentation
-                case canceledAt
-                case cancellationPolicyProvided
-                case cancellationReason
-                case expectedAt
-                case explanation
-                case productDescription
-                case productType
-                case returnStatus
-                case returnedAt
-            }
-
             public init(
                 additionalDocumentation: String? = nil,
                 canceledAt: Date? = nil,
@@ -261,15 +220,6 @@ public struct IssuingDispute: Codable, Hashable, Sendable, Identifiable {
             /// Transaction (e.g., ipi_...) that the disputed transaction is a duplicate of.
             public var originalTransaction: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case additionalDocumentation
-                case cardStatement
-                case cashReceipt
-                case checkImage
-                case explanation
-                case originalTransaction
-            }
-
             public init(
                 additionalDocumentation: String? = nil,
                 cardStatement: String? = nil,
@@ -293,11 +243,6 @@ public struct IssuingDispute: Codable, Hashable, Sendable, Identifiable {
             /// Explanation of why the cardholder is disputing this transaction.
             public var explanation: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case additionalDocumentation
-                case explanation
-            }
-
             public init(
                 additionalDocumentation: String? = nil,
                 explanation: String? = nil
@@ -320,15 +265,6 @@ public struct IssuingDispute: Codable, Hashable, Sendable, Identifiable {
             public var returnStatus: ReturnStatus?
             /// Date when the product was returned or attempted to be returned.
             public var returnedAt: Date?
-
-            private enum CodingKeys: String, CodingKey {
-                case additionalDocumentation
-                case explanation
-                case receivedAt
-                case returnDescription
-                case returnStatus
-                case returnedAt
-            }
 
             public init(
                 additionalDocumentation: String? = nil,
@@ -359,11 +295,6 @@ public struct IssuingDispute: Codable, Hashable, Sendable, Identifiable {
             /// Explanation of why the cardholder is disputing this transaction.
             public var explanation: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case additionalDocumentation
-                case explanation
-            }
-
             public init(
                 additionalDocumentation: String? = nil,
                 explanation: String? = nil
@@ -384,14 +315,6 @@ public struct IssuingDispute: Codable, Hashable, Sendable, Identifiable {
             public var productDescription: String?
             /// Whether the product was a merchandise or service.
             public var productType: ProductType?
-
-            private enum CodingKeys: String, CodingKey {
-                case additionalDocumentation
-                case expectedAt
-                case explanation
-                case productDescription
-                case productType
-            }
 
             public init(
                 additionalDocumentation: String? = nil,
@@ -424,13 +347,6 @@ public struct IssuingDispute: Codable, Hashable, Sendable, Identifiable {
             /// Whether the product was a merchandise or service.
             public var productType: ProductType?
 
-            private enum CodingKeys: String, CodingKey {
-                case additionalDocumentation
-                case explanation
-                case productDescription
-                case productType
-            }
-
             public init(
                 additionalDocumentation: String? = nil,
                 explanation: String? = nil,
@@ -462,14 +378,6 @@ public struct IssuingDispute: Codable, Hashable, Sendable, Identifiable {
             /// Date when the product was received.
             public var receivedAt: Date?
 
-            private enum CodingKeys: String, CodingKey {
-                case additionalDocumentation
-                case canceledAt
-                case cancellationReason
-                case explanation
-                case receivedAt
-            }
-
             public init(
                 additionalDocumentation: String? = nil,
                 canceledAt: Date? = nil,
@@ -491,11 +399,6 @@ public struct IssuingDispute: Codable, Hashable, Sendable, Identifiable {
         public var debitReversal: String?
         /// The Treasury ReceivedDebit that is being disputed.
         public var receivedDebit: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case debitReversal
-            case receivedDebit
-        }
 
         public init(
             debitReversal: String? = nil,

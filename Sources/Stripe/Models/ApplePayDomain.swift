@@ -22,14 +22,6 @@ extension Stripe {
         /// If the object exists in live mode, the value is `true`.
         public var livemode: Bool?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case created
-            case domainName
-            case livemode
-        }
-
         public init(
             id: ID,
             object: String,

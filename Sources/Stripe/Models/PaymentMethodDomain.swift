@@ -32,21 +32,6 @@ extension Stripe {
         public var livemode: Bool?
         public var paypal: Paypal?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case amazonPay
-            case applePay
-            case created
-            case domainName
-            case enabled
-            case googlePay
-            case klarna
-            case link
-            case livemode
-            case paypal
-        }
-
         public init(
             id: ID,
             object: String,
@@ -81,11 +66,6 @@ extension Stripe {
             public var status: Status?
             public var statusDetails: StatusDetails?
 
-            private enum CodingKeys: String, CodingKey {
-                case status
-                case statusDetails
-            }
-
             public init(
                 status: Status? = nil,
                 statusDetails: StatusDetails? = nil
@@ -104,10 +84,6 @@ extension Stripe {
             public struct StatusDetails: Codable, Hashable, Sendable {
                 /// The error message associated with the status of the payment method on the domain.
                 public var errorMessage: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case errorMessage
-                }
 
                 public init(
                     errorMessage: String? = nil
@@ -123,11 +99,6 @@ extension Stripe {
             public var status: Status?
             public var statusDetails: StatusDetails?
 
-            private enum CodingKeys: String, CodingKey {
-                case status
-                case statusDetails
-            }
-
             public init(
                 status: Status? = nil,
                 statusDetails: StatusDetails? = nil
@@ -146,10 +117,6 @@ extension Stripe {
             public struct StatusDetails: Codable, Hashable, Sendable {
                 /// The error message associated with the status of the payment method on the domain.
                 public var errorMessage: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case errorMessage
-                }
 
                 public init(
                     errorMessage: String? = nil
@@ -165,11 +132,6 @@ extension Stripe {
             public var status: Status?
             public var statusDetails: StatusDetails?
 
-            private enum CodingKeys: String, CodingKey {
-                case status
-                case statusDetails
-            }
-
             public init(
                 status: Status? = nil,
                 statusDetails: StatusDetails? = nil
@@ -188,10 +150,6 @@ extension Stripe {
             public struct StatusDetails: Codable, Hashable, Sendable {
                 /// The error message associated with the status of the payment method on the domain.
                 public var errorMessage: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case errorMessage
-                }
 
                 public init(
                     errorMessage: String? = nil
@@ -207,11 +165,6 @@ extension Stripe {
             public var status: Status?
             public var statusDetails: StatusDetails?
 
-            private enum CodingKeys: String, CodingKey {
-                case status
-                case statusDetails
-            }
-
             public init(
                 status: Status? = nil,
                 statusDetails: StatusDetails? = nil
@@ -230,10 +183,6 @@ extension Stripe {
             public struct StatusDetails: Codable, Hashable, Sendable {
                 /// The error message associated with the status of the payment method on the domain.
                 public var errorMessage: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case errorMessage
-                }
 
                 public init(
                     errorMessage: String? = nil
@@ -249,11 +198,6 @@ extension Stripe {
             public var status: Status?
             public var statusDetails: StatusDetails?
 
-            private enum CodingKeys: String, CodingKey {
-                case status
-                case statusDetails
-            }
-
             public init(
                 status: Status? = nil,
                 statusDetails: StatusDetails? = nil
@@ -272,10 +216,6 @@ extension Stripe {
             public struct StatusDetails: Codable, Hashable, Sendable {
                 /// The error message associated with the status of the payment method on the domain.
                 public var errorMessage: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case errorMessage
-                }
 
                 public init(
                     errorMessage: String? = nil
@@ -291,11 +231,6 @@ extension Stripe {
             public var status: Status?
             public var statusDetails: StatusDetails?
 
-            private enum CodingKeys: String, CodingKey {
-                case status
-                case statusDetails
-            }
-
             public init(
                 status: Status? = nil,
                 statusDetails: StatusDetails? = nil
@@ -314,10 +249,6 @@ extension Stripe {
             public struct StatusDetails: Codable, Hashable, Sendable {
                 /// The error message associated with the status of the payment method on the domain.
                 public var errorMessage: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case errorMessage
-                }
 
                 public init(
                     errorMessage: String? = nil

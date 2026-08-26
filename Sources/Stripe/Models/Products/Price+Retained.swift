@@ -22,7 +22,6 @@ extension Stripe.Products.Price {
     public enum Billing {}
 }
 
-
 extension Stripe.Products.Price {
     public typealias Currency = Stripe.Currency
 }
@@ -90,14 +89,6 @@ extension Stripe.Products.Price {
         /// Up to and including to this quantity will be contained in the tier.
         public var upTo: Int?
 
-        private enum CodingKeys: String, CodingKey {
-            case flatAmount
-            case flatAmountDecimal
-            case unitAmount
-            case unitAmountDecimal
-            case upTo
-        }
-
         public init(
             flatAmount: Int? = nil,
             flatAmountDecimal: String? = nil,
@@ -113,8 +104,6 @@ extension Stripe.Products.Price {
         }
     }
 }
-
-
 
 extension Stripe.Products.Price {
     public struct SearchResult: Codable, Hashable, Sendable {

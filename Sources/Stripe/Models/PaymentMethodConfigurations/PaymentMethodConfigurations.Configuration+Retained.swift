@@ -23,10 +23,6 @@ extension Stripe.PaymentMethodConfigurations {
         /// Display preference for this payment method.
         public var displayPreference: DisplayPreference?
 
-        private enum CodingKeys: String, CodingKey {
-            case displayPreference
-        }
-
         public init(displayPreference: DisplayPreference? = nil) {
             self.displayPreference = displayPreference
         }

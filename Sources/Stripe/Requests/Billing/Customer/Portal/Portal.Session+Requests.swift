@@ -36,17 +36,6 @@ extension Stripe.Billing.Customer.Portal.Session.Create {
         /// The default URL to redirect customers to when they click on the portal's link to return to your website.
         public var returnUrl: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case configuration
-            case customer
-            case customerAccount
-            case expand
-            case flowData
-            case locale
-            case onBehalfOf
-            case returnUrl
-        }
-
         public init(
             configuration: String? = nil,
             customer: String? = nil,
@@ -130,14 +119,6 @@ extension Stripe.Billing.Customer.Portal.Session.Create {
             /// Type of flow that the customer will go through.
             public var `type`: Type
 
-            private enum CodingKeys: String, CodingKey {
-                case afterCompletion
-                case subscriptionCancel
-                case subscriptionUpdate
-                case subscriptionUpdateConfirm
-                case `type`
-            }
-
             public init(
                 afterCompletion: AfterCompletion? = nil,
                 subscriptionCancel: SubscriptionCancel? = nil,
@@ -168,12 +149,6 @@ extension Stripe.Billing.Customer.Portal.Session.Create {
                 /// The specified behavior after the flow is completed.
                 public var `type`: Type
 
-                private enum CodingKeys: String, CodingKey {
-                    case hostedConfirmation
-                    case redirect
-                    case `type`
-                }
-
                 public init(
                     hostedConfirmation: HostedConfirmation? = nil,
                     redirect: Redirect? = nil,
@@ -195,10 +170,6 @@ extension Stripe.Billing.Customer.Portal.Session.Create {
                     /// A custom message to display to the customer after the flow is completed.
                     public var customMessage: String?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case customMessage
-                    }
-
                     public init(
                         customMessage: String? = nil
                     ) {
@@ -210,10 +181,6 @@ extension Stripe.Billing.Customer.Portal.Session.Create {
                 public struct Redirect: Codable, Hashable, Sendable {
                     /// The URL the customer will be redirected to after the flow is completed.
                     public var returnUrl: String
-
-                    private enum CodingKeys: String, CodingKey {
-                        case returnUrl
-                    }
 
                     public init(
                         returnUrl: String
@@ -230,11 +197,6 @@ extension Stripe.Billing.Customer.Portal.Session.Create {
                 /// The ID of the subscription to be canceled.
                 public var subscription: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case retention
-                    case subscription
-                }
-
                 public init(
                     retention: Retention? = nil,
                     subscription: String
@@ -250,11 +212,6 @@ extension Stripe.Billing.Customer.Portal.Session.Create {
                     /// Type of retention strategy to use with the customer.
                     public var `type`: String
 
-                    private enum CodingKeys: String, CodingKey {
-                        case couponOffer
-                        case `type`
-                    }
-
                     public init(
                         couponOffer: CouponOffer,
                         `type`: String
@@ -267,10 +224,6 @@ extension Stripe.Billing.Customer.Portal.Session.Create {
                     public struct CouponOffer: Codable, Hashable, Sendable {
                         /// The ID of the coupon to be offered.
                         public var coupon: String
-
-                        private enum CodingKeys: String, CodingKey {
-                            case coupon
-                        }
 
                         public init(
                             coupon: String
@@ -285,10 +238,6 @@ extension Stripe.Billing.Customer.Portal.Session.Create {
             public struct SubscriptionUpdate: Codable, Hashable, Sendable {
                 /// The ID of the subscription to be updated.
                 public var subscription: String
-
-                private enum CodingKeys: String, CodingKey {
-                    case subscription
-                }
 
                 public init(
                     subscription: String
@@ -306,12 +255,6 @@ extension Stripe.Billing.Customer.Portal.Session.Create {
                 /// The ID of the subscription to be updated.
                 public var subscription: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case discounts
-                    case items
-                    case subscription
-                }
-
                 public init(
                     discounts: [Discounts]? = nil,
                     items: [Items],
@@ -327,11 +270,6 @@ extension Stripe.Billing.Customer.Portal.Session.Create {
                     public var coupon: String?
                     /// The ID of a promotion code to apply to this subscription update.
                     public var promotionCode: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case coupon
-                        case promotionCode
-                    }
 
                     public init(
                         coupon: String? = nil,
@@ -349,12 +287,6 @@ extension Stripe.Billing.Customer.Portal.Session.Create {
                     public var price: String?
                     /// Quantity for this item that the customer should subscribe to through this flow.
                     public var quantity: Int?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case id
-                        case price
-                        case quantity
-                    }
 
                     public init(
                         id: String,

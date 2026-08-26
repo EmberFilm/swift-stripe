@@ -24,14 +24,6 @@ extension Stripe.Entitlements {
         /// A unique key you provide as your own system identifier.
         public var lookupKey: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case feature
-            case livemode
-            case lookupKey
-        }
-
         public init(
             id: ID,
             object: String,

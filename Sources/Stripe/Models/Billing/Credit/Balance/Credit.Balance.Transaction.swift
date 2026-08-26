@@ -34,19 +34,6 @@ extension Stripe.Billing.Credit.Balance {
         /// The type of credit balance transaction (credit or debit).
         public var `type`: Type?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case created
-            case credit
-            case creditGrant
-            case debit
-            case effectiveAt
-            case livemode
-            case testClock
-            case `type`
-        }
-
         public init(
             id: ID,
             object: String,
@@ -84,12 +71,6 @@ extension Stripe.Billing.Credit.Balance {
             /// The type of credit transaction.
             public var `type`: Type?
 
-            private enum CodingKeys: String, CodingKey {
-                case amount
-                case creditsApplicationInvoiceVoided
-                case `type`
-            }
-
             public init(
                 amount: Stripe.Shared.BillingCreditGrantsResourceAmount? = nil,
                 creditsApplicationInvoiceVoided: CreditsApplicationInvoiceVoided? = nil,
@@ -112,11 +93,6 @@ extension Stripe.Billing.Credit.Balance {
                 /// The invoice line item to which the reinstated billing credits were originally applied.
                 public var invoiceLineItem: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case invoice
-                    case invoiceLineItem
-                }
-
                 public init(
                     invoice: String? = nil,
                     invoiceLineItem: String? = nil
@@ -133,12 +109,6 @@ extension Stripe.Billing.Credit.Balance {
             public var creditsApplied: CreditsApplied?
             /// The type of debit transaction.
             public var `type`: Type?
-
-            private enum CodingKeys: String, CodingKey {
-                case amount
-                case creditsApplied
-                case `type`
-            }
 
             public init(
                 amount: Stripe.Shared.BillingCreditGrantsResourceAmount? = nil,
@@ -162,11 +132,6 @@ extension Stripe.Billing.Credit.Balance {
                 @Expandable<Stripe.Billing.Invoice, String> public var invoice: String?
                 /// The invoice line item to which the billing credits were applied.
                 public var invoiceLineItem: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case invoice
-                    case invoiceLineItem
-                }
 
                 public init(
                     invoice: String? = nil,

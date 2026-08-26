@@ -41,23 +41,6 @@ extension Stripe.Treasury {
         /// The Transaction associated with this object.
         @Expandable<Stripe.Treasury.Transaction, String> public var transaction: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case amount
-            case created
-            case currency
-            case financialAccount
-            case hostedRegulatoryReceiptUrl
-            case livemode
-            case metadata
-            case network
-            case receivedCredit
-            case status
-            case statusTransitions
-            case transaction
-        }
-
         public init(
             id: ID,
             object: String,
@@ -106,10 +89,6 @@ extension Stripe.Treasury {
         public struct StatusTransitions: Codable, Hashable, Sendable {
             /// Timestamp describing when the CreditReversal changed status to `posted`
             public var postedAt: Date?
-
-            private enum CodingKeys: String, CodingKey {
-                case postedAt
-            }
 
             public init(
                 postedAt: Date? = nil

@@ -37,17 +37,6 @@ extension FinancialConnections.Session.Create {
         /// For webview integrations only.
         public var returnUrl: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case accountHolder
-            case expand
-            case filters
-            case limits
-            case manualEntry
-            case permissions
-            case prefetch
-            case returnUrl
-        }
-
         public init(
             accountHolder: AccountHolder,
             expand: [String]? = nil,
@@ -92,13 +81,6 @@ extension FinancialConnections.Session.Create {
             /// Type of account holder to collect accounts for.
             public var `type`: Type
 
-            private enum CodingKeys: String, CodingKey {
-                case account
-                case customer
-                case customerAccount
-                case `type`
-            }
-
             public init(
                 account: String? = nil,
                 customer: String? = nil,
@@ -125,12 +107,6 @@ extension FinancialConnections.Session.Create {
             public var countries: [String]?
             /// Whether the session should require payment method support and successful account number retrieval before completion.
             public var requirePaymentMethodSupport: RequirePaymentMethodSupport?
-
-            private enum CodingKeys: String, CodingKey {
-                case accountSubcategories
-                case countries
-                case requirePaymentMethodSupport
-            }
 
             public init(
                 accountSubcategories: [AccountSubcategories]? = nil,
@@ -162,10 +138,6 @@ extension FinancialConnections.Session.Create {
             /// The number of accounts that can be linked in this Session.
             public var accounts: Stripe.Clearable<Int>
 
-            private enum CodingKeys: String, CodingKey {
-                case accounts
-            }
-
             public init(
                 accounts: Stripe.Clearable<Int>
             ) {
@@ -177,10 +149,6 @@ extension FinancialConnections.Session.Create {
         public struct ManualEntry: Codable, Hashable, Sendable {
             /// How manual entry should be handled.
             public var mode: Mode?
-
-            private enum CodingKeys: String, CodingKey {
-                case mode
-            }
 
             public init(
                 mode: Mode? = nil
@@ -203,10 +171,6 @@ extension FinancialConnections.Session.Retrieve {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil

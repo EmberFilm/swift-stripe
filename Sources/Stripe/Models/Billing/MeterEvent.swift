@@ -28,16 +28,6 @@ extension Stripe.Billing {
         /// The timestamp passed in when creating the event.
         public var timestamp: Date?
 
-        private enum CodingKeys: String, CodingKey {
-            case object
-            case created
-            case eventName
-            case identifier
-            case livemode
-            case payload
-            case timestamp
-        }
-
         public init(
             object: String,
             created: Date? = nil,

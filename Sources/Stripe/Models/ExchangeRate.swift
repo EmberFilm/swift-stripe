@@ -20,12 +20,6 @@ extension Stripe {
         /// Hash where the keys are supported currencies and the values are the exchange rate at which the base id currency conver…
         public var rates: [String: Double]?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case rates
-        }
-
         public init(
             id: ID,
             object: String,

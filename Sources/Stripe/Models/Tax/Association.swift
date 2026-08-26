@@ -24,14 +24,6 @@ extension Stripe.Tax {
         /// Information about the tax transactions linked to this payment intent
         public var taxTransactionAttempts: [TaxTransactionAttempts]?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case calculation
-            case paymentIntent
-            case taxTransactionAttempts
-        }
-
         public init(
             id: ID,
             object: String,
@@ -54,13 +46,6 @@ extension Stripe.Tax {
             /// The status of the transaction attempt.
             public var status: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case committed
-                case errored
-                case source
-                case status
-            }
-
             public init(
                 committed: Committed? = nil,
                 errored: Errored? = nil,
@@ -77,10 +62,6 @@ extension Stripe.Tax {
                 /// The Tax Transaction
                 public var transaction: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case transaction
-                }
-
                 public init(
                     transaction: String? = nil
                 ) {
@@ -91,10 +72,6 @@ extension Stripe.Tax {
             public struct Errored: Codable, Hashable, Sendable {
                 /// Details on why we couldn't commit the tax transaction.
                 public var reason: Reason?
-
-                private enum CodingKeys: String, CodingKey {
-                    case reason
-                }
 
                 public init(
                     reason: Reason? = nil

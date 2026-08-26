@@ -50,22 +50,6 @@ extension Stripe.Products.Coupon.Create {
         /// Unix timestamp specifying the last time at which the coupon can be redeemed (cannot be set to more than 5 years in the…
         public var redeemBy: Date?
 
-        private enum CodingKeys: String, CodingKey {
-            case amountOff
-            case appliesTo
-            case currency
-            case currencyOptions
-            case duration
-            case durationInMonths
-            case expand
-            case id
-            case maxRedemptions
-            case metadata
-            case name
-            case percentOff
-            case redeemBy
-        }
-
         public init(
             amountOff: Int? = nil,
             appliesTo: AppliesTo? = nil,
@@ -107,10 +91,6 @@ extension Stripe.Products.Coupon.Create {
             /// An array of Product IDs that this Coupon will apply to.
             public var products: [String]?
 
-            private enum CodingKeys: String, CodingKey {
-                case products
-            }
-
             public init(
                 products: [String]? = nil
             ) {
@@ -121,10 +101,6 @@ extension Stripe.Products.Coupon.Create {
         public struct CurrencyOptions: Codable, Hashable, Sendable {
             /// A positive integer representing the amount to subtract from an invoice total.
             public var amountOff: Int
-
-            private enum CodingKeys: String, CodingKey {
-                case amountOff
-            }
 
             public init(
                 amountOff: Int
@@ -156,14 +132,6 @@ extension Stripe.Products.Coupon.List {
         /// A cursor for use in pagination.
         public var startingAfter: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case created
-            case endingBefore
-            case expand
-            case limit
-            case startingAfter
-        }
-
         public init(
             created: Stripe.RangeQuery? = nil,
             endingBefore: String? = nil,
@@ -188,10 +156,6 @@ extension Stripe.Products.Coupon.Retrieve {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
-
         public init(
             expand: [String]? = nil
         ) {
@@ -214,13 +178,6 @@ extension Stripe.Products.Coupon.Update {
         /// Name of the coupon displayed to customers on, for instance invoices, or receipts.
         public var name: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case currencyOptions
-            case expand
-            case metadata
-            case name
-        }
-
         public init(
             currencyOptions: [String: CurrencyOptions]? = nil,
             expand: [String]? = nil,
@@ -236,10 +193,6 @@ extension Stripe.Products.Coupon.Update {
         public struct CurrencyOptions: Codable, Hashable, Sendable {
             /// A positive integer representing the amount to subtract from an invoice total.
             public var amountOff: Int
-
-            private enum CodingKeys: String, CodingKey {
-                case amountOff
-            }
 
             public init(
                 amountOff: Int

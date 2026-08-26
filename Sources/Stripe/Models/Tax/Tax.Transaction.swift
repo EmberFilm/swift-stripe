@@ -45,25 +45,6 @@ extension Stripe.Tax {
         /// If `reversal`, this transaction reverses an earlier transaction.
         public var `type`: Type?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case created
-            case currency
-            case customer
-            case customerDetails
-            case lineItems
-            case livemode
-            case metadata
-            case postedAt
-            case reference
-            case reversal
-            case shipFromDetails
-            case shippingCost
-            case taxDate
-            case `type`
-        }
-
         public init(
             id: ID,
             object: String,
@@ -117,13 +98,6 @@ extension Stripe.Tax {
             /// The URL where this list can be accessed.
             public var url: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case object
-                case data
-                case hasMore
-                case url
-            }
-
             public init(
                 object: String,
                 data: [Stripe.Tax.TransactionLineItem]? = nil,
@@ -140,10 +114,6 @@ extension Stripe.Tax {
         public struct Reversal: Codable, Hashable, Sendable {
             /// The `id` of the reversed `Transaction` object.
             public var originalTransaction: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case originalTransaction
-            }
 
             public init(
                 originalTransaction: String? = nil
@@ -165,15 +135,6 @@ extension Stripe.Tax {
             public var taxBreakdown: [Stripe.Shared.TaxBreakdown]?
             /// The tax code ID used for shipping.
             public var taxCode: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case amount
-                case amountTax
-                case shippingRate
-                case taxBehavior
-                case taxBreakdown
-                case taxCode
-            }
 
             public init(
                 amount: Int? = nil,

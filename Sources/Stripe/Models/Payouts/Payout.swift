@@ -68,36 +68,6 @@ extension Stripe.Payouts {
         /// Can be `bank_account` or `card`.
         public var `type`: Type?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case amount
-            case applicationFee
-            case applicationFeeAmount
-            case arrivalDate
-            case automatic
-            case balanceTransaction
-            case created
-            case currency
-            case description
-            case destination
-            case failureBalanceTransaction
-            case failureCode
-            case failureMessage
-            case livemode
-            case metadata
-            case method
-            case originalPayout
-            case payoutMethod
-            case reconciliationStatus
-            case reversedBy
-            case sourceType
-            case statementDescriptor
-            case status
-            case traceId
-            case `type`
-        }
-
         public init(
             id: ID,
             object: String,
@@ -174,11 +144,6 @@ extension Stripe.Payouts {
             public var status: String?
             /// The trace ID value if `trace_id.status` is `supported`, otherwise `nil`.
             public var value: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case status
-                case value
-            }
 
             public init(
                 status: String? = nil,

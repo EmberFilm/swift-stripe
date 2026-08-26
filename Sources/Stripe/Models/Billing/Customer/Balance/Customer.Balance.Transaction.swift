@@ -44,24 +44,6 @@ extension Stripe.Billing.Customer.Balance {
         /// Transaction type: `adjustment`, `applied_to_invoice`, `credit_note`, `initial`, `invoice_overpaid`, `invoice_too_large…
         public var `type`: Type?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case amount
-            case checkoutSession
-            case created
-            case creditNote
-            case currency
-            case customer
-            case customerAccount
-            case description
-            case endingBalance
-            case invoice
-            case livemode
-            case metadata
-            case `type`
-        }
-
         public init(
             id: ID,
             object: String,

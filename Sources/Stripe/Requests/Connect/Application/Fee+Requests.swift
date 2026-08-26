@@ -33,15 +33,6 @@ extension Stripe.Connect.Application.Fee.List {
         /// A cursor for use in pagination.
         public var startingAfter: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case charge
-            case created
-            case endingBefore
-            case expand
-            case limit
-            case startingAfter
-        }
-
         public init(
             charge: String? = nil,
             created: Stripe.RangeQuery? = nil,
@@ -67,10 +58,6 @@ extension Stripe.Connect.Application.Fee.Retrieve {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil

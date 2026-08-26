@@ -82,43 +82,6 @@ extension Stripe.Billing.Credit {
         /// The time that the credit note was voided.
         public var voidedAt: Date?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case amount
-            case amountShipping
-            case created
-            case currency
-            case customer
-            case customerAccount
-            case customerBalanceTransaction
-            case discountAmount
-            case discountAmounts
-            case effectiveAt
-            case invoice
-            case lines
-            case livemode
-            case memo
-            case metadata
-            case number
-            case outOfBandAmount
-            case pdf
-            case postPaymentAmount
-            case prePaymentAmount
-            case pretaxCreditAmounts
-            case reason
-            case refunds
-            case shippingCost
-            case status
-            case subtotal
-            case subtotalExcludingTax
-            case total
-            case totalExcludingTax
-            case totalTaxes
-            case `type`
-            case voidedAt
-        }
-
         public init(
             id: ID,
             object: String,
@@ -223,13 +186,6 @@ extension Stripe.Billing.Credit {
             /// The URL where this list can be accessed.
             public var url: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case object
-                case data
-                case hasMore
-                case url
-            }
-
             public init(
                 object: String,
                 data: [Stripe.Billing.CreditNoteLineItem]? = nil,
@@ -252,13 +208,6 @@ extension Stripe.Billing.Credit {
             @Expandable<Stripe.Refunds.Refund, String> public var refund: String?
             /// Type of the refund, one of `refund` or `payment_record_refund`.
             public var `type`: Type?
-
-            private enum CodingKeys: String, CodingKey {
-                case amountRefunded
-                case paymentRecordRefund
-                case refund
-                case `type`
-            }
 
             public init(
                 amountRefunded: Int? = nil,
@@ -283,11 +232,6 @@ extension Stripe.Billing.Credit {
                 public var paymentRecord: String?
                 /// ID of the refund group.
                 public var refundGroup: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case paymentRecord
-                    case refundGroup
-                }
 
                 public init(
                     paymentRecord: String? = nil,

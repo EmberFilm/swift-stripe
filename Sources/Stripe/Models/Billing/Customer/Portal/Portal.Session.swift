@@ -38,21 +38,6 @@ extension Stripe.Billing.Customer.Portal {
         /// The short-lived URL of the session that gives customers access to the customer portal.
         public var url: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case configuration
-            case created
-            case customer
-            case customerAccount
-            case flow
-            case livemode
-            case locale
-            case onBehalfOf
-            case returnUrl
-            case url
-        }
-
         public init(
             id: ID,
             object: String,
@@ -187,12 +172,6 @@ extension Stripe.Billing.Customer.Portal {
                 /// The specified type of behavior after the flow is completed.
                 public var `type`: Type?
 
-                private enum CodingKeys: String, CodingKey {
-                    case hostedConfirmation
-                    case redirect
-                    case `type`
-                }
-
                 public init(
                     hostedConfirmation: HostedConfirmation? = nil,
                     redirect: Redirect? = nil,
@@ -214,10 +193,6 @@ extension Stripe.Billing.Customer.Portal {
                     /// A custom message to display to the customer after the flow is completed.
                     public var customMessage: String?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case customMessage
-                    }
-
                     public init(
                         customMessage: String? = nil
                     ) {
@@ -228,10 +203,6 @@ extension Stripe.Billing.Customer.Portal {
                 public struct Redirect: Codable, Hashable, Sendable {
                     /// The URL the customer will be redirected to after the flow is completed.
                     public var returnUrl: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case returnUrl
-                    }
 
                     public init(
                         returnUrl: String? = nil
@@ -247,11 +218,6 @@ extension Stripe.Billing.Customer.Portal {
                 /// The ID of the subscription to be canceled.
                 public var subscription: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case retention
-                    case subscription
-                }
-
                 public init(
                     retention: Retention? = nil,
                     subscription: String? = nil
@@ -266,11 +232,6 @@ extension Stripe.Billing.Customer.Portal {
                     /// Type of retention strategy that will be used.
                     public var `type`: String?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case couponOffer
-                        case `type`
-                    }
-
                     public init(
                         couponOffer: CouponOffer? = nil,
                         `type`: String? = nil
@@ -282,10 +243,6 @@ extension Stripe.Billing.Customer.Portal {
                     public struct CouponOffer: Codable, Hashable, Sendable {
                         /// The ID of the coupon to be offered.
                         public var coupon: String?
-
-                        private enum CodingKeys: String, CodingKey {
-                            case coupon
-                        }
 
                         public init(
                             coupon: String? = nil
@@ -299,10 +256,6 @@ extension Stripe.Billing.Customer.Portal {
             public struct SubscriptionUpdate: Codable, Hashable, Sendable {
                 /// The ID of the subscription to be updated.
                 public var subscription: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case subscription
-                }
 
                 public init(
                     subscription: String? = nil
@@ -318,12 +271,6 @@ extension Stripe.Billing.Customer.Portal {
                 public var items: [Items]?
                 /// The ID of the subscription to be updated.
                 public var subscription: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case discounts
-                    case items
-                    case subscription
-                }
 
                 public init(
                     discounts: [Discounts]? = nil,
@@ -341,11 +288,6 @@ extension Stripe.Billing.Customer.Portal {
                     /// The ID of a promotion code to apply to this subscription update.
                     public var promotionCode: String?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case coupon
-                        case promotionCode
-                    }
-
                     public init(
                         coupon: String? = nil,
                         promotionCode: String? = nil
@@ -362,12 +304,6 @@ extension Stripe.Billing.Customer.Portal {
                     public var price: String?
                     /// Quantity for this item that the customer should subscribe to through this flow.
                     public var quantity: Int?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case id
-                        case price
-                        case quantity
-                    }
 
                     public init(
                         id: ID,

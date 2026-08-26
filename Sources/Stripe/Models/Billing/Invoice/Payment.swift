@@ -36,21 +36,6 @@ extension Stripe.Billing.Invoice {
         public var status: String?
         public var statusTransitions: StatusTransitions?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case amountPaid
-            case amountRequested
-            case created
-            case currency
-            case invoice
-            case isDefault
-            case livemode
-            case payment
-            case status
-            case statusTransitions
-        }
-
         public init(
             id: ID,
             object: String,
@@ -161,11 +146,6 @@ extension Stripe.Billing.Invoice {
             public var canceledAt: Date?
             /// The time that the payment succeeded.
             public var paidAt: Date?
-
-            private enum CodingKeys: String, CodingKey {
-                case canceledAt
-                case paidAt
-            }
 
             public init(
                 canceledAt: Date? = nil,

@@ -39,22 +39,6 @@ extension Stripe.Treasury {
         /// The specific money movement that generated the TransactionEntry.
         public var `type`: Type?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case balanceImpact
-            case created
-            case currency
-            case effectiveAt
-            case financialAccount
-            case flow
-            case flowDetails
-            case flowType
-            case livemode
-            case transaction
-            case `type`
-        }
-
         public init(
             id: ID,
             object: String,

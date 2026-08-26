@@ -30,18 +30,6 @@ extension Stripe.Tokens {
         /// Determines if you have already used this token (you can only use tokens once).
         public var used: Bool?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case bankAccount
-            case card
-            case clientIp
-            case created
-            case livemode
-            case `type`
-            case used
-        }
-
         public init(
             id: ID,
             object: String,

@@ -97,12 +97,6 @@ extension Stripe.Billing.Subscription.Payment {
         /// Default payment method saving behavior
         public var saveDefaultPaymentMethod: SaveDefaultPaymentMethod?
 
-        private enum CodingKeys: String, CodingKey {
-            case paymentMethodOptions
-            case paymentMethodTypes
-            case saveDefaultPaymentMethod
-        }
-
         public enum SaveDefaultPaymentMethod: String, Codable, Sendable {
             case off
             case onSubscription = "on_subscription"
@@ -149,10 +143,6 @@ extension Stripe.Billing.Subscription.Trial {
     public struct EndBehavior: Codable, Hashable, Sendable {
         /// Behavior when payment method is missing
         public var missingPaymentMethod: MissingPaymentMethodBehavior?
-
-        private enum CodingKeys: String, CodingKey {
-            case missingPaymentMethod
-        }
 
         public init(
             missingPaymentMethod: MissingPaymentMethodBehavior? = nil

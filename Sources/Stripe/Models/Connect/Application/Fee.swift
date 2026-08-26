@@ -43,24 +43,6 @@ extension Stripe.Connect.Application {
         /// A list of refunds that have been applied to the fee.
         public var refunds: Refunds?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case account
-            case amount
-            case amountRefunded
-            case application
-            case balanceTransaction
-            case charge
-            case created
-            case currency
-            case feeSource
-            case livemode
-            case originatingTransaction
-            case refunded
-            case refunds
-        }
-
         public init(
             id: ID,
             object: String,
@@ -103,12 +85,6 @@ extension Stripe.Connect.Application {
             /// Type of object that created the application fee.
             public var `type`: Type?
 
-            private enum CodingKeys: String, CodingKey {
-                case charge
-                case payout
-                case `type`
-            }
-
             public init(
                 charge: String? = nil,
                 payout: String? = nil,
@@ -136,13 +112,6 @@ extension Stripe.Connect.Application {
             public var hasMore: Bool?
             /// The URL where this list can be accessed.
             public var url: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case object
-                case data
-                case hasMore
-                case url
-            }
 
             public init(
                 object: String,

@@ -24,11 +24,6 @@ extension TerminalConnectionToken.Create {
         /// The id of the location that this connection token is scoped to.
         public var location: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case location
-        }
-
         public init(
             expand: [String]? = nil,
             location: String? = nil

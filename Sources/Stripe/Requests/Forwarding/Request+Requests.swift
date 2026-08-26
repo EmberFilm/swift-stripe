@@ -34,15 +34,6 @@ extension Stripe.Forwarding.Request.Create {
         /// The destination URL for the forwarded request.
         public var url: String
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case metadata
-            case paymentMethod
-            case replacements
-            case request
-            case url
-        }
-
         public init(
             expand: [String]? = nil,
             metadata: [String: String]? = nil,
@@ -74,11 +65,6 @@ extension Stripe.Forwarding.Request.Create {
             /// The headers to include in the forwarded request.
             public var headers: [Headers]?
 
-            private enum CodingKeys: String, CodingKey {
-                case body
-                case headers
-            }
-
             public init(
                 body: String? = nil,
                 headers: [Headers]? = nil
@@ -92,11 +78,6 @@ extension Stripe.Forwarding.Request.Create {
                 public var name: String
                 /// The header value.
                 public var value: String
-
-                private enum CodingKeys: String, CodingKey {
-                    case name
-                    case value
-                }
 
                 public init(
                     name: String,
@@ -126,14 +107,6 @@ extension Stripe.Forwarding.Request.List {
         /// A pagination cursor to fetch the next page of the list.
         public var startingAfter: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case created
-            case endingBefore
-            case expand
-            case limit
-            case startingAfter
-        }
-
         public init(
             created: Created? = nil,
             endingBefore: String? = nil,
@@ -159,13 +132,6 @@ extension Stripe.Forwarding.Request.List {
             /// Return results where the `created` field is less than or equal to this value.
             public var lte: Int?
 
-            private enum CodingKeys: String, CodingKey {
-                case gt
-                case gte
-                case lt
-                case lte
-            }
-
             public init(
                 gt: Int? = nil,
                 gte: Int? = nil,
@@ -188,10 +154,6 @@ extension Stripe.Forwarding.Request.Retrieve {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil

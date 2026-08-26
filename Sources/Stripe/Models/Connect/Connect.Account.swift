@@ -53,32 +53,6 @@ extension Stripe.Connect {
         /// The Stripe account type.
         public var `type`: Type?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case businessProfile
-            case businessType
-            case capabilities
-            case chargesEnabled
-            case company
-            case controller
-            case country
-            case created
-            case defaultCurrency
-            case detailsSubmitted
-            case email
-            case externalAccounts
-            case futureRequirements
-            case groups
-            case individual
-            case metadata
-            case payoutsEnabled
-            case requirements
-            case settings
-            case tosAcceptance
-            case `type`
-        }
-
         public init(
             id: ID,
             object: String,
@@ -170,21 +144,6 @@ extension Stripe.Connect {
             /// The business's publicly available website.
             public var url: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case annualRevenue
-                case estimatedWorkerCount
-                case mcc
-                case minorityOwnedBusinessDesignation
-                case monthlyEstimatedRevenue
-                case name
-                case productDescription
-                case supportAddress
-                case supportEmail
-                case supportPhone
-                case supportUrl
-                case url
-            }
-
             public init(
                 annualRevenue: AnnualRevenue? = nil,
                 estimatedWorkerCount: Int? = nil,
@@ -229,12 +188,6 @@ extension Stripe.Connect {
                 /// The close-out date of the preceding fiscal year in ISO 8601 format.
                 public var fiscalYearEnd: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case amount
-                    case currency
-                    case fiscalYearEnd
-                }
-
                 public init(
                     amount: Int? = nil,
                     currency: Stripe.Currency? = nil,
@@ -251,11 +204,6 @@ extension Stripe.Connect {
                 public var amount: Int?
                 /// Three-letter ISO currency code, in lowercase.
                 public var currency: Stripe.Currency?
-
-                private enum CodingKeys: String, CodingKey {
-                    case amount
-                    case currency
-                }
 
                 public init(
                     amount: Int? = nil,
@@ -400,75 +348,6 @@ extension Stripe.Connect {
             public var usBankTransferPayments: UsBankTransferPayments?
             /// The status of the Zip capability of the account, or whether the account can directly process Zip charges.
             public var zipPayments: ZipPayments?
-
-            private enum CodingKeys: String, CodingKey {
-                case acssDebitPayments
-                case affirmPayments
-                case afterpayClearpayPayments
-                case almaPayments
-                case amazonPayPayments
-                case appDistribution
-                case auBecsDebitPayments
-                case bacsDebitPayments
-                case bancontactPayments
-                case bankTransferPayments
-                case billiePayments
-                case bizumPayments
-                case blikPayments
-                case boletoPayments
-                case cardIssuing
-                case cardPayments
-                case cartesBancairesPayments
-                case cashappPayments
-                case cryptoPayments
-                case epsPayments
-                case fpxPayments
-                case gbBankTransferPayments
-                case giropayPayments
-                case grabpayPayments
-                case idealPayments
-                case indiaInternationalPayments
-                case jcbPayments
-                case jpBankTransferPayments
-                case kakaoPayPayments
-                case klarnaPayments
-                case konbiniPayments
-                case krCardPayments
-                case legacyPayments
-                case linkPayments
-                case mbWayPayments
-                case mobilepayPayments
-                case multibancoPayments
-                case mxBankTransferPayments
-                case naverPayPayments
-                case nzBankAccountBecsDebitPayments
-                case oxxoPayments
-                case p24Payments
-                case payByBankPayments
-                case paycoPayments
-                case paynowPayments
-                case paytoPayments
-                case pixPayments
-                case promptpayPayments
-                case revolutPayPayments
-                case samsungPayPayments
-                case satispayPayments
-                case scalapayPayments
-                case sepaBankTransferPayments
-                case sepaDebitPayments
-                case sofortPayments
-                case sunbitPayments
-                case swishPayments
-                case taxReportingUs1099K
-                case taxReportingUs1099Misc
-                case transfers
-                case treasury
-                case twintPayments
-                case upiPayments
-                case usBankAccountAchPayments
-                case usBankTransferPayments
-                case zipPayments
-            }
 
             public init(
                 acssDebitPayments: AcssDebitPayments? = nil,
@@ -1115,33 +994,6 @@ extension Stripe.Connect {
             /// Information on the verification state of the company.
             public var verification: Verification?
 
-            private enum CodingKeys: String, CodingKey {
-                case address
-                case addressKana
-                case addressKanji
-                case administrativeAddress
-                case directorsProvided
-                case directorshipDeclaration
-                case executivesProvided
-                case exportLicenseId
-                case exportPurposeCode
-                case name
-                case nameKana
-                case nameKanji
-                case ownersProvided
-                case ownershipDeclaration
-                case ownershipExemptionReason
-                case phone
-                case principalPlaceOfBusiness
-                case registrationDate
-                case representativeDeclaration
-                case structure
-                case taxIdProvided
-                case taxIdRegistrar
-                case vatIdProvided
-                case verification
-            }
-
             public init(
                 address: Address? = nil,
                 addressKana: Stripe.Shared.LegalEntityJapanAddress? = nil,
@@ -1235,12 +1087,6 @@ extension Stripe.Connect {
                 /// The user-agent string from the browser where the directorship declaration attestation was made.
                 public var userAgent: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case date
-                    case ip
-                    case userAgent
-                }
-
                 public init(
                     date: Date? = nil,
                     ip: String? = nil,
@@ -1259,12 +1105,6 @@ extension Stripe.Connect {
                 public var ip: String?
                 /// The user-agent string from the browser where the beneficial owner attestation was made.
                 public var userAgent: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case date
-                    case ip
-                    case userAgent
-                }
 
                 public init(
                     date: Date? = nil,
@@ -1285,12 +1125,6 @@ extension Stripe.Connect {
                 /// The four-digit year of registration.
                 public var year: Int?
 
-                private enum CodingKeys: String, CodingKey {
-                    case day
-                    case month
-                    case year
-                }
-
                 public init(
                     day: Int? = nil,
                     month: Int? = nil,
@@ -1310,12 +1144,6 @@ extension Stripe.Connect {
                 /// The user-agent string from the browser where the representative declaration attestation was made.
                 public var userAgent: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case date
-                    case ip
-                    case userAgent
-                }
-
                 public init(
                     date: Date? = nil,
                     ip: String? = nil,
@@ -1329,10 +1157,6 @@ extension Stripe.Connect {
 
             public struct Verification: Codable, Hashable, Sendable {
                 public var document: Document?
-
-                private enum CodingKeys: String, CodingKey {
-                    case document
-                }
 
                 public init(
                     document: Document? = nil
@@ -1349,13 +1173,6 @@ extension Stripe.Connect {
                     public var detailsCode: String?
                     /// The front of a document returned by a file upload with a `purpose` value of `additional_verification`.
                     @Expandable<Stripe.Files.File, String> public var front: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case back
-                        case details
-                        case detailsCode
-                        case front
-                    }
 
                     public init(
                         back: String? = nil,
@@ -1382,15 +1199,6 @@ extension Stripe.Connect {
             public var stripeDashboard: StripeDashboard?
             /// The controller type.
             public var `type`: Type?
-
-            private enum CodingKeys: String, CodingKey {
-                case fees
-                case isController
-                case losses
-                case requirementCollection
-                case stripeDashboard
-                case `type`
-            }
 
             public init(
                 fees: Fees? = nil,
@@ -1424,10 +1232,6 @@ extension Stripe.Connect {
                 /// A value indicating the responsible payer of a bundle of Stripe fees for pricing-control eligible products on this acco…
                 public var payer: Payer?
 
-                private enum CodingKeys: String, CodingKey {
-                    case payer
-                }
-
                 public init(
                     payer: Payer? = nil
                 ) {
@@ -1447,10 +1251,6 @@ extension Stripe.Connect {
                 /// A value indicating who is liable when this account can't pay back negative balances from payments.
                 public var payments: Payments?
 
-                private enum CodingKeys: String, CodingKey {
-                    case payments
-                }
-
                 public init(
                     payments: Payments? = nil
                 ) {
@@ -1467,10 +1267,6 @@ extension Stripe.Connect {
             public struct StripeDashboard: Codable, Hashable, Sendable {
                 /// A value indicating the Stripe dashboard this account has access to independent of the Connect application.
                 public var `type`: Type?
-
-                private enum CodingKeys: String, CodingKey {
-                    case `type`
-                }
 
                 public init(
                     `type`: Type? = nil
@@ -1497,13 +1293,6 @@ extension Stripe.Connect {
             public var hasMore: Bool?
             /// The URL where this list can be accessed.
             public var url: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case object
-                case data
-                case hasMore
-                case url
-            }
 
             public init(
                 object: String,
@@ -1535,17 +1324,6 @@ extension Stripe.Connect {
             public var pastDue: [String]?
             /// Fields that are being reviewed, or might become required depending on the results of a review.
             public var pendingVerification: [String]?
-
-            private enum CodingKeys: String, CodingKey {
-                case alternatives
-                case currentDeadline
-                case currentlyDue
-                case disabledReason
-                case errors
-                case eventuallyDue
-                case pastDue
-                case pendingVerification
-            }
 
             public init(
                 alternatives: [Stripe.Shared.Alternatives]? = nil,
@@ -1591,10 +1369,6 @@ extension Stripe.Connect {
             /// The group the account is in to determine their payments pricing, and null if the account is on customized pricing.
             public var paymentsPricing: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case paymentsPricing
-            }
-
             public init(
                 paymentsPricing: String? = nil
             ) {
@@ -1619,17 +1393,6 @@ extension Stripe.Connect {
             public var pastDue: [String]?
             /// Fields that are being reviewed, or might become required depending on the results of a review.
             public var pendingVerification: [String]?
-
-            private enum CodingKeys: String, CodingKey {
-                case alternatives
-                case currentDeadline
-                case currentlyDue
-                case disabledReason
-                case errors
-                case eventuallyDue
-                case pastDue
-                case pendingVerification
-            }
 
             public init(
                 alternatives: [Stripe.Shared.Alternatives]? = nil,
@@ -1683,19 +1446,6 @@ extension Stripe.Connect {
             public var sepaDebitPayments: SepaDebitPayments?
             public var treasury: Treasury?
 
-            private enum CodingKeys: String, CodingKey {
-                case bacsDebitPayments
-                case branding
-                case cardIssuing
-                case cardPayments
-                case dashboard
-                case invoices
-                case payments
-                case payouts
-                case sepaDebitPayments
-                case treasury
-            }
-
             public init(
                 bacsDebitPayments: BacsDebitPayments? = nil,
                 branding: Branding? = nil,
@@ -1726,11 +1476,6 @@ extension Stripe.Connect {
                 /// The Bacs Direct Debit Service user number for this account.
                 public var serviceUserNumber: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case displayName
-                    case serviceUserNumber
-                }
-
                 public init(
                     displayName: String? = nil,
                     serviceUserNumber: String? = nil
@@ -1750,13 +1495,6 @@ extension Stripe.Connect {
                 /// A CSS hex color value representing the secondary branding color for this account
                 public var secondaryColor: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case icon
-                    case logo
-                    case primaryColor
-                    case secondaryColor
-                }
-
                 public init(
                     icon: String? = nil,
                     logo: String? = nil,
@@ -1773,10 +1511,6 @@ extension Stripe.Connect {
             public struct CardIssuing: Codable, Hashable, Sendable {
                 public var tosAcceptance: TosAcceptance?
 
-                private enum CodingKeys: String, CodingKey {
-                    case tosAcceptance
-                }
-
                 public init(
                     tosAcceptance: TosAcceptance? = nil
                 ) {
@@ -1790,12 +1524,6 @@ extension Stripe.Connect {
                     public var ip: String?
                     /// The user agent of the browser from which the account representative accepted the service agreement.
                     public var userAgent: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case date
-                        case ip
-                        case userAgent
-                    }
 
                     public init(
                         date: Int? = nil,
@@ -1818,13 +1546,6 @@ extension Stripe.Connect {
                 /// The Kanji variation of the default text that appears on credit card statements when a charge is made (Japan only).
                 public var statementDescriptorPrefixKanji: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case declineOn
-                    case statementDescriptorPrefix
-                    case statementDescriptorPrefixKana
-                    case statementDescriptorPrefixKanji
-                }
-
                 public init(
                     declineOn: DeclineOn? = nil,
                     statementDescriptorPrefix: String? = nil,
@@ -1843,11 +1564,6 @@ extension Stripe.Connect {
                     /// Whether Stripe automatically declines charges with an incorrect CVC.
                     public var cvcFailure: Bool?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case avsFailure
-                        case cvcFailure
-                    }
-
                     public init(
                         avsFailure: Bool? = nil,
                         cvcFailure: Bool? = nil
@@ -1864,11 +1580,6 @@ extension Stripe.Connect {
                 /// The timezone used in the Stripe Dashboard for this account.
                 public var timezone: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case displayName
-                    case timezone
-                }
-
                 public init(
                     displayName: String? = nil,
                     timezone: String? = nil
@@ -1883,11 +1594,6 @@ extension Stripe.Connect {
                 @ExpandableCollection<Stripe.Tax.ID> public var defaultAccountTaxIds: [String]?
                 /// Whether to save the payment method after a payment is completed for a one-time invoice or a subscription invoice when …
                 public var hostedPaymentMethodSave: HostedPaymentMethodSave?
-
-                private enum CodingKeys: String, CodingKey {
-                    case defaultAccountTaxIds
-                    case hostedPaymentMethodSave
-                }
 
                 public init(
                     defaultAccountTaxIds: [String]? = nil,
@@ -1917,14 +1623,6 @@ extension Stripe.Connect {
                 /// The Kanji variation of `statement_descriptor_prefix` used for card charges in Japan.
                 public var statementDescriptorPrefixKanji: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case statementDescriptor
-                    case statementDescriptorKana
-                    case statementDescriptorKanji
-                    case statementDescriptorPrefixKana
-                    case statementDescriptorPrefixKanji
-                }
-
                 public init(
                     statementDescriptor: String? = nil,
                     statementDescriptorKana: String? = nil,
@@ -1946,12 +1644,6 @@ extension Stripe.Connect {
                 public var schedule: Schedule?
                 /// The text that appears on the bank account statement for payouts.
                 public var statementDescriptor: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case debitNegativeBalances
-                    case schedule
-                    case statementDescriptor
-                }
 
                 public init(
                     debitNegativeBalances: Bool? = nil,
@@ -1976,15 +1668,6 @@ extension Stripe.Connect {
                     public var weeklyAnchor: String?
                     /// The days of the week when available funds are paid out, specified as an array, for example, [`monday`, `tuesday`].
                     public var weeklyPayoutDays: [WeeklyPayoutDays]?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case delayDays
-                        case interval
-                        case monthlyAnchor
-                        case monthlyPayoutDays
-                        case weeklyAnchor
-                        case weeklyPayoutDays
-                    }
 
                     public init(
                         delayDays: Int? = nil,
@@ -2016,10 +1699,6 @@ extension Stripe.Connect {
                 /// SEPA creditor identifier that identifies the company making the payment.
                 public var creditorId: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case creditorId
-                }
-
                 public init(
                     creditorId: String? = nil
                 ) {
@@ -2029,10 +1708,6 @@ extension Stripe.Connect {
 
             public struct Treasury: Codable, Hashable, Sendable {
                 public var tosAcceptance: TosAcceptance?
-
-                private enum CodingKeys: String, CodingKey {
-                    case tosAcceptance
-                }
 
                 public init(
                     tosAcceptance: TosAcceptance? = nil
@@ -2047,12 +1722,6 @@ extension Stripe.Connect {
                     public var ip: String?
                     /// The user agent of the browser from which the account representative accepted the service agreement.
                     public var userAgent: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case date
-                        case ip
-                        case userAgent
-                    }
 
                     public init(
                         date: Int? = nil,
@@ -2076,13 +1745,6 @@ extension Stripe.Connect {
             public var serviceAgreement: String?
             /// The user agent of the browser from which the account representative accepted their service agreement
             public var userAgent: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case date
-                case ip
-                case serviceAgreement
-                case userAgent
-            }
 
             public init(
                 date: Date? = nil,

@@ -48,30 +48,6 @@ extension Stripe {
         /// Shipping information for this payment.
         public var shippingDetails: Stripe.Shared.ShippingDetails?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case amount
-            case amountAuthorized
-            case amountCanceled
-            case amountFailed
-            case amountGuaranteed
-            case amountRefunded
-            case amountRequested
-            case application
-            case created
-            case customerDetails
-            case customerPresence
-            case description
-            case latestPaymentAttemptRecord
-            case livemode
-            case metadata
-            case paymentMethodDetails
-            case processorDetails
-            case reportedBy
-            case shippingDetails
-        }
-
         public init(
             id: ID,
             object: String,

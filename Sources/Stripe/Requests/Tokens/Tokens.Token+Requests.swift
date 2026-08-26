@@ -37,17 +37,6 @@ extension Stripe.Tokens.Token.Create {
         /// The PII this token represents.
         public var pii: Pii?
 
-        private enum CodingKeys: String, CodingKey {
-            case account
-            case bankAccount
-            case card
-            case customer
-            case cvcUpdate
-            case expand
-            case person
-            case pii
-        }
-
         public init(
             account: Account? = nil,
             bankAccount: BankAccount? = nil,
@@ -78,13 +67,6 @@ extension Stripe.Tokens.Token.Create {
             public var individual: Individual?
             /// Whether the user described by the data in the token has been shown the Stripe Connected Account Agreement.
             public var tosShownAndAccepted: Bool?
-
-            private enum CodingKeys: String, CodingKey {
-                case businessType
-                case company
-                case individual
-                case tosShownAndAccepted
-            }
 
             public init(
                 businessType: BusinessType? = nil,
@@ -157,35 +139,6 @@ extension Stripe.Tokens.Token.Create {
                 public var vatId: String?
                 /// Information on the verification state of the company.
                 public var verification: Verification?
-
-                private enum CodingKeys: String, CodingKey {
-                    case address
-                    case addressKana
-                    case addressKanji
-                    case administrativeAddress
-                    case directorsProvided
-                    case directorshipDeclaration
-                    case executivesProvided
-                    case exportLicenseId
-                    case exportPurposeCode
-                    case name
-                    case nameKana
-                    case nameKanji
-                    case ownersProvided
-                    case ownershipDeclaration
-                    case ownershipDeclarationShownAndSigned
-                    case ownershipExemptionReason
-                    case phone
-                    case principalPlaceOfBusiness
-                    case registrationDate
-                    case registrationNumber
-                    case representativeDeclaration
-                    case structure
-                    case taxId
-                    case taxIdRegistrar
-                    case vatId
-                    case verification
-                }
 
                 public init(
                     address: Address? = nil,
@@ -291,15 +244,6 @@ extension Stripe.Tokens.Token.Create {
                     /// State, county, province, or region (ISO 3166-2).
                     public var state: String?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case city
-                        case country
-                        case line1
-                        case line2
-                        case postalCode
-                        case state
-                    }
-
                     public init(
                         city: String? = nil,
                         country: String? = nil,
@@ -333,16 +277,6 @@ extension Stripe.Tokens.Token.Create {
                     public var state: String?
                     /// Town or cho-me.
                     public var town: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case city
-                        case country
-                        case line1
-                        case line2
-                        case postalCode
-                        case state
-                        case town
-                    }
 
                     public init(
                         city: String? = nil,
@@ -380,16 +314,6 @@ extension Stripe.Tokens.Token.Create {
                     /// Town or cho-me.
                     public var town: String?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case city
-                        case country
-                        case line1
-                        case line2
-                        case postalCode
-                        case state
-                        case town
-                    }
-
                     public init(
                         city: String? = nil,
                         country: String? = nil,
@@ -423,15 +347,6 @@ extension Stripe.Tokens.Token.Create {
                     /// State, county, province, or region (ISO 3166-2).
                     public var state: String?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case city
-                        case country
-                        case line1
-                        case line2
-                        case postalCode
-                        case state
-                    }
-
                     public init(
                         city: String? = nil,
                         country: String? = nil,
@@ -458,12 +373,6 @@ extension Stripe.Tokens.Token.Create {
                     /// The user agent of the browser from which the directorship declaration attestation was made.
                     public var userAgent: String?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case date
-                        case ip
-                        case userAgent
-                    }
-
                     public init(
                         date: Date? = nil,
                         ip: String? = nil,
@@ -483,12 +392,6 @@ extension Stripe.Tokens.Token.Create {
                     public var ip: String?
                     /// The user agent of the browser from which the beneficial owner attestation was made.
                     public var userAgent: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case date
-                        case ip
-                        case userAgent
-                    }
 
                     public init(
                         date: Date? = nil,
@@ -515,15 +418,6 @@ extension Stripe.Tokens.Token.Create {
                     /// State, county, province, or region (ISO 3166-2).
                     public var state: String?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case city
-                        case country
-                        case line1
-                        case line2
-                        case postalCode
-                        case state
-                    }
-
                     public init(
                         city: String? = nil,
                         country: String? = nil,
@@ -549,12 +443,6 @@ extension Stripe.Tokens.Token.Create {
                     /// The four-digit year of registration.
                     public var year: Int
 
-                    private enum CodingKeys: String, CodingKey {
-                        case day
-                        case month
-                        case year
-                    }
-
                     public init(
                         day: Int,
                         month: Int,
@@ -575,12 +463,6 @@ extension Stripe.Tokens.Token.Create {
                     /// The user agent of the browser from which the representative declaration attestation was made.
                     public var userAgent: String?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case date
-                        case ip
-                        case userAgent
-                    }
-
                     public init(
                         date: Date? = nil,
                         ip: String? = nil,
@@ -597,10 +479,6 @@ extension Stripe.Tokens.Token.Create {
                     /// A document verifying the business.
                     public var document: Document?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case document
-                    }
-
                     public init(
                         document: Document? = nil
                     ) {
@@ -613,11 +491,6 @@ extension Stripe.Tokens.Token.Create {
                         public var back: String?
                         /// The front of a document returned by a file upload with a `purpose` value of `additional_verification`.
                         public var front: String?
-
-                        private enum CodingKeys: String, CodingKey {
-                            case back
-                            case front
-                        }
 
                         public init(
                             back: String? = nil,
@@ -678,32 +551,6 @@ extension Stripe.Tokens.Token.Create {
                 public var ssnLast4: String?
                 /// The individual's verification document information.
                 public var verification: Verification?
-
-                private enum CodingKeys: String, CodingKey {
-                    case address
-                    case addressKana
-                    case addressKanji
-                    case dob
-                    case email
-                    case firstName
-                    case firstNameKana
-                    case firstNameKanji
-                    case fullNameAliases
-                    case gender
-                    case idNumber
-                    case idNumberSecondary
-                    case lastName
-                    case lastNameKana
-                    case lastNameKanji
-                    case maidenName
-                    case metadata
-                    case phone
-                    case politicalExposure
-                    case registeredAddress
-                    case relationship
-                    case ssnLast4
-                    case verification
-                }
 
                 public init(
                     address: Address? = nil,
@@ -775,15 +622,6 @@ extension Stripe.Tokens.Token.Create {
                     /// State, county, province, or region (ISO 3166-2).
                     public var state: String?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case city
-                        case country
-                        case line1
-                        case line2
-                        case postalCode
-                        case state
-                    }
-
                     public init(
                         city: String? = nil,
                         country: String? = nil,
@@ -817,16 +655,6 @@ extension Stripe.Tokens.Token.Create {
                     public var state: String?
                     /// Town or cho-me.
                     public var town: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case city
-                        case country
-                        case line1
-                        case line2
-                        case postalCode
-                        case state
-                        case town
-                    }
 
                     public init(
                         city: String? = nil,
@@ -864,16 +692,6 @@ extension Stripe.Tokens.Token.Create {
                     /// Town or cho-me.
                     public var town: String?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case city
-                        case country
-                        case line1
-                        case line2
-                        case postalCode
-                        case state
-                        case town
-                    }
-
                     public init(
                         city: String? = nil,
                         country: String? = nil,
@@ -901,12 +719,6 @@ extension Stripe.Tokens.Token.Create {
                     /// The four-digit year of birth.
                     public var year: Int
 
-                    private enum CodingKeys: String, CodingKey {
-                        case day
-                        case month
-                        case year
-                    }
-
                     public init(
                         day: Int,
                         month: Int,
@@ -932,15 +744,6 @@ extension Stripe.Tokens.Token.Create {
                     public var postalCode: String?
                     /// State, county, province, or region (ISO 3166-2).
                     public var state: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case city
-                        case country
-                        case line1
-                        case line2
-                        case postalCode
-                        case state
-                    }
 
                     public init(
                         city: String? = nil,
@@ -972,14 +775,6 @@ extension Stripe.Tokens.Token.Create {
                     /// The person's title (e.g., CEO, Support Engineer).
                     public var title: String?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case director
-                        case executive
-                        case owner
-                        case percentOwnership
-                        case title
-                    }
-
                     public init(
                         director: Bool? = nil,
                         executive: Bool? = nil,
@@ -1002,11 +797,6 @@ extension Stripe.Tokens.Token.Create {
                     /// An identifying document, either a passport or local ID card.
                     public var document: Document?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case additionalDocument
-                        case document
-                    }
-
                     public init(
                         additionalDocument: AdditionalDocument? = nil,
                         document: Document? = nil
@@ -1021,11 +811,6 @@ extension Stripe.Tokens.Token.Create {
                         public var back: String?
                         /// The front of an ID returned by a file upload with a `purpose` value of `identity_document`.
                         public var front: String?
-
-                        private enum CodingKeys: String, CodingKey {
-                            case back
-                            case front
-                        }
 
                         public init(
                             back: String? = nil,
@@ -1042,11 +827,6 @@ extension Stripe.Tokens.Token.Create {
                         public var back: String?
                         /// The front of an ID returned by a file upload with a `purpose` value of `identity_document`.
                         public var front: String?
-
-                        private enum CodingKeys: String, CodingKey {
-                            case back
-                            case front
-                        }
 
                         public init(
                             back: String? = nil,
@@ -1078,17 +858,6 @@ extension Stripe.Tokens.Token.Create {
             public var paymentMethod: String?
             /// The routing number, sort code, or other country-appropriate institution number for the bank account.
             public var routingNumber: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case accountHolderName
-                case accountHolderType
-                case accountNumber
-                case accountType
-                case country
-                case currency
-                case paymentMethod
-                case routingNumber
-            }
 
             public init(
                 accountHolderName: String? = nil,
@@ -1127,10 +896,6 @@ extension Stripe.Tokens.Token.Create {
         public struct CvcUpdate: Codable, Hashable, Sendable {
             /// The CVC value, in string form.
             public var cvc: String
-
-            private enum CodingKeys: String, CodingKey {
-                case cvc
-            }
 
             public init(
                 cvc: String
@@ -1195,36 +960,6 @@ extension Stripe.Tokens.Token.Create {
             public var usCfpbData: UsCfpbData?
             /// The person's verification status.
             public var verification: Verification?
-
-            private enum CodingKeys: String, CodingKey {
-                case additionalTosAcceptances
-                case address
-                case addressKana
-                case addressKanji
-                case dob
-                case documents
-                case email
-                case firstName
-                case firstNameKana
-                case firstNameKanji
-                case fullNameAliases
-                case gender
-                case idNumber
-                case idNumberSecondary
-                case lastName
-                case lastNameKana
-                case lastNameKanji
-                case maidenName
-                case metadata
-                case nationality
-                case phone
-                case politicalExposure
-                case registeredAddress
-                case relationship
-                case ssnLast4
-                case usCfpbData
-                case verification
-            }
 
             public init(
                 additionalTosAcceptances: AdditionalTosAcceptances? = nil,
@@ -1294,10 +1029,6 @@ extension Stripe.Tokens.Token.Create {
                 /// Details on the legal guardian's acceptance of the main Stripe service agreement.
                 public var account: Account?
 
-                private enum CodingKeys: String, CodingKey {
-                    case account
-                }
-
                 public init(
                     account: Account? = nil
                 ) {
@@ -1312,12 +1043,6 @@ extension Stripe.Tokens.Token.Create {
                     public var ip: String?
                     /// The user agent of the browser from which the account representative accepted the service agreement.
                     public var userAgent: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case date
-                        case ip
-                        case userAgent
-                    }
 
                     public init(
                         date: Date? = nil,
@@ -1345,15 +1070,6 @@ extension Stripe.Tokens.Token.Create {
                 public var postalCode: String?
                 /// State, county, province, or region (ISO 3166-2).
                 public var state: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case city
-                    case country
-                    case line1
-                    case line2
-                    case postalCode
-                    case state
-                }
 
                 public init(
                     city: String? = nil,
@@ -1388,16 +1104,6 @@ extension Stripe.Tokens.Token.Create {
                 public var state: String?
                 /// Town or cho-me.
                 public var town: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case city
-                    case country
-                    case line1
-                    case line2
-                    case postalCode
-                    case state
-                    case town
-                }
 
                 public init(
                     city: String? = nil,
@@ -1435,16 +1141,6 @@ extension Stripe.Tokens.Token.Create {
                 /// Town or cho-me.
                 public var town: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case city
-                    case country
-                    case line1
-                    case line2
-                    case postalCode
-                    case state
-                    case town
-                }
-
                 public init(
                     city: String? = nil,
                     country: String? = nil,
@@ -1472,12 +1168,6 @@ extension Stripe.Tokens.Token.Create {
                 /// The four-digit year of birth.
                 public var year: Int
 
-                private enum CodingKeys: String, CodingKey {
-                    case day
-                    case month
-                    case year
-                }
-
                 public init(
                     day: Int,
                     month: Int,
@@ -1498,12 +1188,6 @@ extension Stripe.Tokens.Token.Create {
                 /// One or more documents showing the person's visa required for living in the country where they are residing.
                 public var visa: Visa?
 
-                private enum CodingKeys: String, CodingKey {
-                    case companyAuthorization
-                    case passport
-                    case visa
-                }
-
                 public init(
                     companyAuthorization: CompanyAuthorization? = nil,
                     passport: Passport? = nil,
@@ -1519,10 +1203,6 @@ extension Stripe.Tokens.Token.Create {
                     /// One or more document ids returned by a file upload with a `purpose` value of `account_requirement`.
                     public var files: [String]?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case files
-                    }
-
                     public init(
                         files: [String]? = nil
                     ) {
@@ -1535,10 +1215,6 @@ extension Stripe.Tokens.Token.Create {
                     /// One or more document ids returned by a file upload with a `purpose` value of `account_requirement`.
                     public var files: [String]?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case files
-                    }
-
                     public init(
                         files: [String]? = nil
                     ) {
@@ -1550,10 +1226,6 @@ extension Stripe.Tokens.Token.Create {
                 public struct Visa: Codable, Hashable, Sendable {
                     /// One or more document ids returned by a file upload with a `purpose` value of `account_requirement`.
                     public var files: [String]?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case files
-                    }
 
                     public init(
                         files: [String]? = nil
@@ -1577,15 +1249,6 @@ extension Stripe.Tokens.Token.Create {
                 public var postalCode: String?
                 /// State, county, province, or region (ISO 3166-2).
                 public var state: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case city
-                    case country
-                    case line1
-                    case line2
-                    case postalCode
-                    case state
-                }
 
                 public init(
                     city: String? = nil,
@@ -1623,17 +1286,6 @@ extension Stripe.Tokens.Token.Create {
                 /// The person's title (e.g., CEO, Support Engineer).
                 public var title: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case authorizer
-                    case director
-                    case executive
-                    case legalGuardian
-                    case owner
-                    case percentOwnership
-                    case representative
-                    case title
-                }
-
                 public init(
                     authorizer: Bool? = nil,
                     director: Bool? = nil,
@@ -1664,12 +1316,6 @@ extension Stripe.Tokens.Token.Create {
                 /// The persons self-identified gender
                 public var selfIdentifiedGender: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case ethnicityDetails
-                    case raceDetails
-                    case selfIdentifiedGender
-                }
-
                 public init(
                     ethnicityDetails: EthnicityDetails? = nil,
                     raceDetails: RaceDetails? = nil,
@@ -1686,11 +1332,6 @@ extension Stripe.Tokens.Token.Create {
                     public var ethnicity: [Ethnicity]?
                     /// Please specify your origin, when other is selected.
                     public var ethnicityOther: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case ethnicity
-                        case ethnicityOther
-                    }
 
                     public init(
                         ethnicity: [Ethnicity]? = nil,
@@ -1717,11 +1358,6 @@ extension Stripe.Tokens.Token.Create {
                     public var race: [Race]?
                     /// Please specify your race, when other is selected.
                     public var raceOther: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case race
-                        case raceOther
-                    }
 
                     public init(
                         race: [Race]? = nil,
@@ -1767,11 +1403,6 @@ extension Stripe.Tokens.Token.Create {
                 /// An identifying document, either a passport or local ID card.
                 public var document: Document?
 
-                private enum CodingKeys: String, CodingKey {
-                    case additionalDocument
-                    case document
-                }
-
                 public init(
                     additionalDocument: AdditionalDocument? = nil,
                     document: Document? = nil
@@ -1786,11 +1417,6 @@ extension Stripe.Tokens.Token.Create {
                     public var back: String?
                     /// The front of an ID returned by a file upload with a `purpose` value of `identity_document`.
                     public var front: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case back
-                        case front
-                    }
 
                     public init(
                         back: String? = nil,
@@ -1808,11 +1434,6 @@ extension Stripe.Tokens.Token.Create {
                     /// The front of an ID returned by a file upload with a `purpose` value of `identity_document`.
                     public var front: String?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case back
-                        case front
-                    }
-
                     public init(
                         back: String? = nil,
                         front: String? = nil
@@ -1828,10 +1449,6 @@ extension Stripe.Tokens.Token.Create {
         public struct Pii: Codable, Hashable, Sendable {
             /// The `id_number` for the PII, in string form.
             public var idNumber: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case idNumber
-            }
 
             public init(
                 idNumber: String? = nil
@@ -1849,10 +1466,6 @@ extension Stripe.Tokens.Token.Retrieve {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil

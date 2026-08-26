@@ -40,23 +40,6 @@ extension Promotion {
         /// Number of times this promotion code has been used.
         public var timesRedeemed: Int?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case active
-            case code
-            case created
-            case customer
-            case customerAccount
-            case expiresAt
-            case livemode
-            case maxRedemptions
-            case metadata
-            case promotion
-            case restrictions
-            case timesRedeemed
-        }
-
         public init(
             id: ID,
             object: String,
@@ -95,11 +78,6 @@ extension Promotion {
             /// The type of promotion.
             public var `type`: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case coupon
-                case `type`
-            }
-
             public init(
                 coupon: String? = nil,
                 `type`: String? = nil
@@ -119,13 +97,6 @@ extension Promotion {
             /// Three-letter ISO code for minimum_amount
             public var minimumAmountCurrency: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case currencyOptions
-                case firstTimeTransaction
-                case minimumAmount
-                case minimumAmountCurrency
-            }
-
             public init(
                 currencyOptions: [String: CurrencyOptions]? = nil,
                 firstTimeTransaction: Bool? = nil,
@@ -141,10 +112,6 @@ extension Promotion {
             public struct CurrencyOptions: Codable, Hashable, Sendable {
                 /// Minimum amount required to redeem this Promotion Code into a Coupon (e.g., a purchase must be $100 or more to work).
                 public var minimumAmount: Int?
-
-                private enum CodingKeys: String, CodingKey {
-                    case minimumAmount
-                }
 
                 public init(
                     minimumAmount: Int? = nil

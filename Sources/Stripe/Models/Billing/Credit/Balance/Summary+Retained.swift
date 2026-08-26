@@ -33,10 +33,6 @@ extension Stripe.Billing.Credit.Balance.Summary {
             self.ledgerBalance = ledgerBalance
         }
 
-        private enum CodingKeys: String, CodingKey {
-            case availableBalance
-            case ledgerBalance
-        }
     }
 
     public struct BalanceAmount: Codable, Hashable, Sendable {
@@ -53,10 +49,6 @@ extension Stripe.Billing.Credit.Balance.Summary {
             self.type = type
         }
 
-        private enum CodingKeys: String, CodingKey {
-            case monetary
-            case type
-        }
     }
 
     public struct Monetary: Codable, Hashable, Sendable {
@@ -73,10 +65,6 @@ extension Stripe.Billing.Credit.Balance.Summary {
             self.value = value
         }
 
-        private enum CodingKeys: String, CodingKey {
-            case currency
-            case value
-        }
     }
 }
 
@@ -99,11 +87,6 @@ extension Stripe.Billing.Credit.Balance.Summary {
             self.creditGrant = creditGrant
         }
 
-        private enum CodingKeys: String, CodingKey {
-            case type
-            case applicabilityScope
-            case creditGrant
-        }
     }
 
     public enum FilterType: String, Codable, Sendable {
@@ -125,10 +108,6 @@ extension Stripe.Billing.Credit.Balance.Summary {
             self.prices = prices
         }
 
-        private enum CodingKeys: String, CodingKey {
-            case priceType
-            case prices
-        }
     }
 
     public enum PriceType: String, Codable, Sendable {

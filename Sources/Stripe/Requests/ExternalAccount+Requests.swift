@@ -32,13 +32,6 @@ extension Stripe.ExternalAccount.Create {
         /// Set of key-value pairs that you can attach to an object.
         public var metadata: [String: String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case defaultForCurrency
-            case expand
-            case externalAccount
-            case metadata
-        }
-
         public init(
             defaultForCurrency: Bool? = nil,
             expand: [String]? = nil,
@@ -74,14 +67,6 @@ extension Stripe.ExternalAccount.List {
         /// A cursor for use in pagination.
         public var startingAfter: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case endingBefore
-            case expand
-            case limit
-            case object
-            case startingAfter
-        }
-
         public init(
             endingBefore: String? = nil,
             expand: [String]? = nil,
@@ -110,10 +95,6 @@ extension Stripe.ExternalAccount.Retrieve {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil
@@ -160,25 +141,6 @@ extension Stripe.ExternalAccount.Update {
         public var metadata: Stripe.Clearable<[String: String]>?
         /// Cardholder name.
         public var name: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case accountHolderName
-            case accountHolderType
-            case accountType
-            case addressCity
-            case addressCountry
-            case addressLine1
-            case addressLine2
-            case addressState
-            case addressZip
-            case defaultForCurrency
-            case documents
-            case expMonth
-            case expYear
-            case expand
-            case metadata
-            case name
-        }
 
         public init(
             accountHolderName: String? = nil,
@@ -234,10 +196,6 @@ extension Stripe.ExternalAccount.Update {
             /// One or more documents that support the Bank account ownership verification requirement.
             public var bankAccountOwnershipVerification: BankAccountOwnershipVerification?
 
-            private enum CodingKeys: String, CodingKey {
-                case bankAccountOwnershipVerification
-            }
-
             public init(
                 bankAccountOwnershipVerification: BankAccountOwnershipVerification? = nil
             ) {
@@ -248,10 +206,6 @@ extension Stripe.ExternalAccount.Update {
             public struct BankAccountOwnershipVerification: Codable, Hashable, Sendable {
                 /// One or more document ids returned by a file upload with a `purpose` value of `account_requirement`.
                 public var files: [String]?
-
-                private enum CodingKeys: String, CodingKey {
-                    case files
-                }
 
                 public init(
                     files: [String]? = nil

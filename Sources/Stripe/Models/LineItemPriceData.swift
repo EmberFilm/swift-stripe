@@ -84,14 +84,6 @@ extension Stripe {
             /// A tax code ID
             public let taxCode: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case name
-                case description
-                case images
-                case metadata
-                case taxCode
-            }
-
             public init(
                 name: String,
                 description: String? = nil,
@@ -114,11 +106,6 @@ extension Stripe {
 
             /// The number of intervals between subscription billings
             public let intervalCount: Int?
-
-            private enum CodingKeys: String, CodingKey {
-                case interval
-                case intervalCount
-            }
 
             public init(
                 interval: Stripe.Interval,

@@ -47,23 +47,6 @@ extension Card.Update {
         public var name: String?
         public var owner: Owner?
 
-        private enum CodingKeys: String, CodingKey {
-            case accountHolderName
-            case accountHolderType
-            case addressCity
-            case addressCountry
-            case addressLine1
-            case addressLine2
-            case addressState
-            case addressZip
-            case expMonth
-            case expYear
-            case expand
-            case metadata
-            case name
-            case owner
-        }
-
         public init(
             accountHolderName: String? = nil,
             accountHolderType: AccountHolderType? = nil,
@@ -111,13 +94,6 @@ extension Card.Update {
             /// Owner's phone number.
             public var phone: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case address
-                case email
-                case name
-                case phone
-            }
-
             public init(
                 address: Address? = nil,
                 email: String? = nil,
@@ -144,15 +120,6 @@ extension Card.Update {
                 public var postalCode: String?
                 /// State, county, province, or region (ISO 3166-2).
                 public var state: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case city
-                    case country
-                    case line1
-                    case line2
-                    case postalCode
-                    case state
-                }
 
                 public init(
                     city: String? = nil,

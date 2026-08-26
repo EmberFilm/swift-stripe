@@ -31,13 +31,6 @@ extension Stripe.FileLinks.FileLink.Create {
         /// Set of key-value pairs that you can attach to an object.
         public var metadata: Stripe.Clearable<[String: String]>?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case expiresAt
-            case file
-            case metadata
-        }
-
         public init(
             expand: [String]? = nil,
             expiresAt: Date? = nil,
@@ -72,16 +65,6 @@ extension Stripe.FileLinks.FileLink.List {
         /// A cursor for use in pagination.
         public var startingAfter: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case created
-            case endingBefore
-            case expand
-            case expired
-            case file
-            case limit
-            case startingAfter
-        }
-
         public init(
             created: Stripe.RangeQuery? = nil,
             endingBefore: String? = nil,
@@ -110,10 +93,6 @@ extension Stripe.FileLinks.FileLink.Retrieve {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
-
         public init(
             expand: [String]? = nil
         ) {
@@ -133,12 +112,6 @@ extension Stripe.FileLinks.FileLink.Update {
         public var expiresAt: ExpiresAt?
         /// Set of key-value pairs that you can attach to an object.
         public var metadata: Stripe.Clearable<[String: String]>?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case expiresAt
-            case metadata
-        }
 
         public init(
             expand: [String]? = nil,

@@ -39,22 +39,6 @@ extension Stripe.Tax {
         /// If `reversal`, this line item reverses an earlier transaction.
         public var `type`: Type?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case amount
-            case amountTax
-            case livemode
-            case metadata
-            case product
-            case quantity
-            case reference
-            case reversal
-            case taxBehavior
-            case taxCode
-            case `type`
-        }
-
         public init(
             id: ID,
             object: String,
@@ -100,10 +84,6 @@ extension Stripe.Tax {
         public struct Reversal: Codable, Hashable, Sendable {
             /// The `id` of the line item to reverse in the original transaction.
             public var originalLineItem: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case originalLineItem
-            }
 
             public init(
                 originalLineItem: String? = nil

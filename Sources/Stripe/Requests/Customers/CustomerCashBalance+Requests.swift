@@ -23,10 +23,6 @@ extension Stripe.Customers.CustomerCashBalance.Retrieve {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
-
         public init(
             expand: [String]? = nil
         ) {
@@ -45,11 +41,6 @@ extension Stripe.Customers.CustomerCashBalance.Update {
         /// A hash of settings for this cash balance.
         public var settings: Settings?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case settings
-        }
-
         public init(
             expand: [String]? = nil,
             settings: Settings? = nil
@@ -62,10 +53,6 @@ extension Stripe.Customers.CustomerCashBalance.Update {
         public struct Settings: Codable, Hashable, Sendable {
             /// Controls how funds transferred by the customer are applied to payment intents and invoices.
             public var reconciliationMode: ReconciliationMode?
-
-            private enum CodingKeys: String, CodingKey {
-                case reconciliationMode
-            }
 
             public init(
                 reconciliationMode: ReconciliationMode? = nil

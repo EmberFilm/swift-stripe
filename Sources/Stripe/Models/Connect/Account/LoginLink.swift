@@ -20,12 +20,6 @@ extension Stripe.Connect.Account {
         /// The URL for the login link.
         public var url: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case object
-            case created
-            case url
-        }
-
         public init(
             object: String,
             created: Date? = nil,

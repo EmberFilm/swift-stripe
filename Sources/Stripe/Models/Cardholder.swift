@@ -43,25 +43,6 @@ public struct Cardholder: Codable, Hashable, Sendable, Identifiable {
     /// One of `individual` or `company`.
     public var `type`: Type?
 
-    private enum CodingKeys: String, CodingKey {
-        case id
-        case object
-        case billing
-        case company
-        case created
-        case email
-        case individual
-        case livemode
-        case metadata
-        case name
-        case phoneNumber
-        case preferredLocales
-        case requirements
-        case spendingControls
-        case status
-        case `type`
-    }
-
     public init(
         id: ID,
         object: String,
@@ -122,10 +103,6 @@ public struct Cardholder: Codable, Hashable, Sendable, Identifiable {
     public struct Billing: Codable, Hashable, Sendable {
         public var address: Address?
 
-        private enum CodingKeys: String, CodingKey {
-            case address
-        }
-
         public init(
             address: Address? = nil
         ) {
@@ -136,10 +113,6 @@ public struct Cardholder: Codable, Hashable, Sendable, Identifiable {
     public struct Company: Codable, Hashable, Sendable {
         /// Whether the company's business ID number was provided.
         public var taxIdProvided: Bool?
-
-        private enum CodingKeys: String, CodingKey {
-            case taxIdProvided
-        }
 
         public init(
             taxIdProvided: Bool? = nil
@@ -160,14 +133,6 @@ public struct Cardholder: Codable, Hashable, Sendable, Identifiable {
         /// Government-issued ID document for this cardholder.
         public var verification: Verification?
 
-        private enum CodingKeys: String, CodingKey {
-            case cardIssuing
-            case dob
-            case firstName
-            case lastName
-            case verification
-        }
-
         public init(
             cardIssuing: CardIssuing? = nil,
             dob: Dob? = nil,
@@ -186,10 +151,6 @@ public struct Cardholder: Codable, Hashable, Sendable, Identifiable {
             /// Information about cardholder acceptance of Celtic Authorized User Terms.
             public var userTermsAcceptance: UserTermsAcceptance?
 
-            private enum CodingKeys: String, CodingKey {
-                case userTermsAcceptance
-            }
-
             public init(
                 userTermsAcceptance: UserTermsAcceptance? = nil
             ) {
@@ -203,12 +164,6 @@ public struct Cardholder: Codable, Hashable, Sendable, Identifiable {
                 public var ip: String?
                 /// The user agent of the browser from which the cardholder accepted the Authorized User Terms.
                 public var userAgent: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case date
-                    case ip
-                    case userAgent
-                }
 
                 public init(
                     date: Date? = nil,
@@ -230,12 +185,6 @@ public struct Cardholder: Codable, Hashable, Sendable, Identifiable {
             /// The four-digit year of birth.
             public var year: Int?
 
-            private enum CodingKeys: String, CodingKey {
-                case day
-                case month
-                case year
-            }
-
             public init(
                 day: Int? = nil,
                 month: Int? = nil,
@@ -251,10 +200,6 @@ public struct Cardholder: Codable, Hashable, Sendable, Identifiable {
             /// An identifying document, either a passport or local ID card.
             public var document: Document?
 
-            private enum CodingKeys: String, CodingKey {
-                case document
-            }
-
             public init(
                 document: Document? = nil
             ) {
@@ -266,11 +211,6 @@ public struct Cardholder: Codable, Hashable, Sendable, Identifiable {
                 @Expandable<Stripe.Files.File, String> public var back: String?
                 /// The front of a document returned by a file upload with a `purpose` value of `identity_document`.
                 @Expandable<Stripe.Files.File, String> public var front: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case back
-                    case front
-                }
 
                 public init(
                     back: String? = nil,
@@ -288,11 +228,6 @@ public struct Cardholder: Codable, Hashable, Sendable, Identifiable {
         public var disabledReason: DisabledReason?
         /// Array of fields that need to be collected in order to verify and re-enable the cardholder.
         public var pastDue: [PastDue]?
-
-        private enum CodingKeys: String, CodingKey {
-            case disabledReason
-            case pastDue
-        }
 
         public init(
             disabledReason: DisabledReason? = nil,
@@ -340,17 +275,6 @@ public struct Cardholder: Codable, Hashable, Sendable, Identifiable {
         public var spendingLimits: [SpendingLimits]?
         /// Currency of the amounts within `spending_limits`.
         public var spendingLimitsCurrency: Stripe.Currency?
-
-        private enum CodingKeys: String, CodingKey {
-            case allowedCardPresences
-            case allowedCategories
-            case allowedMerchantCountries
-            case blockedCardPresences
-            case blockedCategories
-            case blockedMerchantCountries
-            case spendingLimits
-            case spendingLimitsCurrency
-        }
 
         public init(
             allowedCardPresences: [AllowedCardPresences]? = nil,
@@ -985,12 +909,6 @@ public struct Cardholder: Codable, Hashable, Sendable, Identifiable {
             public var categories: [Categories]?
             /// Interval (or event) to which the amount applies.
             public var interval: Interval?
-
-            private enum CodingKeys: String, CodingKey {
-                case amount
-                case categories
-                case interval
-            }
 
             public init(
                 amount: Int? = nil,

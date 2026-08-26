@@ -29,10 +29,6 @@ extension Stripe.Refunds.Refund.Cancel {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
-
         public init(
             expand: [String]? = nil
         ) {
@@ -69,21 +65,6 @@ extension Stripe.Refunds.Refund.Create {
         public var refundApplicationFee: Bool?
         /// Boolean indicating whether the transfer should be reversed when refunding this charge.
         public var reverseTransfer: Bool?
-
-        private enum CodingKeys: String, CodingKey {
-            case amount
-            case charge
-            case currency
-            case customer
-            case expand
-            case instructionsEmail
-            case metadata
-            case origin
-            case paymentIntent
-            case reason
-            case refundApplicationFee
-            case reverseTransfer
-        }
 
         public init(
             amount: Int? = nil,
@@ -129,10 +110,6 @@ extension Stripe.Refunds.Refund.Expire {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
-
         public init(
             expand: [String]? = nil
         ) {
@@ -160,16 +137,6 @@ extension Stripe.Refunds.Refund.List {
         public var paymentIntent: String?
         /// A cursor for use in pagination.
         public var startingAfter: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case charge
-            case created
-            case endingBefore
-            case expand
-            case limit
-            case paymentIntent
-            case startingAfter
-        }
 
         public init(
             charge: String? = nil,
@@ -205,13 +172,6 @@ extension Stripe.Refunds.Refund.ListRefunds {
         /// A cursor for use in pagination.
         public var startingAfter: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case endingBefore
-            case expand
-            case limit
-            case startingAfter
-        }
-
         public init(
             endingBefore: String? = nil,
             expand: [String]? = nil,
@@ -234,10 +194,6 @@ extension Stripe.Refunds.Refund.Retrieve {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
-
         public init(
             expand: [String]? = nil
         ) {
@@ -253,10 +209,6 @@ extension Stripe.Refunds.Refund.RetrieveRefund {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil
@@ -275,11 +227,6 @@ extension Stripe.Refunds.Refund.Update {
         public var expand: [String]?
         /// Set of key-value pairs that you can attach to an object.
         public var metadata: Stripe.Clearable<[String: String]>?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case metadata
-        }
 
         public init(
             expand: [String]? = nil,

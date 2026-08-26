@@ -130,11 +130,6 @@ extension Stripe.Customers {
             /// The Cash Balance Transaction that brought the customer balance negative, triggering the clawback of funds.
             @Expandable<Stripe.Customers.CashBalanceTransaction, String> public var linkedTransaction: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case balanceTransaction
-                case linkedTransaction
-            }
-
             public init(
                 balanceTransaction: String? = nil,
                 linkedTransaction: String? = nil
@@ -148,10 +143,6 @@ extension Stripe.Customers {
             /// The Payment Intent that funds were applied to.
             @Expandable<Stripe.PaymentIntents.PaymentIntent, String> public var paymentIntent: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case paymentIntent
-            }
-
             public init(
                 paymentIntent: String? = nil
             ) {
@@ -161,10 +152,6 @@ extension Stripe.Customers {
 
         public struct Funded: Codable, Hashable, Sendable {
             public var bankTransfer: BankTransfer?
-
-            private enum CodingKeys: String, CodingKey {
-                case bankTransfer
-            }
 
             public init(
                 bankTransfer: BankTransfer? = nil
@@ -230,12 +217,6 @@ extension Stripe.Customers {
                     /// The full name of the sender, as supplied by the sending bank.
                     public var senderName: String?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case bic
-                        case ibanLast4
-                        case senderName
-                    }
-
                     public init(
                         bic: String? = nil,
                         ibanLast4: String? = nil,
@@ -254,12 +235,6 @@ extension Stripe.Customers {
                     public var senderName: String?
                     /// The sort code of the bank of the sender of the funding
                     public var sortCode: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case accountNumberLast4
-                        case senderName
-                        case sortCode
-                    }
 
                     public init(
                         accountNumberLast4: String? = nil,
@@ -280,12 +255,6 @@ extension Stripe.Customers {
                     /// The full name of the sender, as supplied by the sending bank.
                     public var senderName: String?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case senderBank
-                        case senderBranch
-                        case senderName
-                    }
-
                     public init(
                         senderBank: String? = nil,
                         senderBranch: String? = nil,
@@ -302,11 +271,6 @@ extension Stripe.Customers {
                     public var network: Network?
                     /// The full name of the sender, as supplied by the sending bank.
                     public var senderName: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case network
-                        case senderName
-                    }
 
                     public init(
                         network: Network? = nil,
@@ -370,10 +334,6 @@ extension Stripe.Customers {
             /// The Refund that moved these funds into the customer's cash balance.
             @Expandable<Stripe.Refunds.Refund, String> public var refund: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case refund
-            }
-
             public init(
                 refund: String? = nil
             ) {
@@ -385,10 +345,6 @@ extension Stripe.Customers {
             /// The Balance Transaction that corresponds to funds transferred to your Stripe balance.
             @Expandable<Stripe.Balance.Transaction, String> public var balanceTransaction: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case balanceTransaction
-            }
-
             public init(
                 balanceTransaction: String? = nil
             ) {
@@ -399,10 +355,6 @@ extension Stripe.Customers {
         public struct UnappliedFromPayment: Codable, Hashable, Sendable {
             /// The Payment Intent that funds were unapplied from.
             @Expandable<Stripe.PaymentIntents.PaymentIntent, String> public var paymentIntent: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case paymentIntent
-            }
 
             public init(
                 paymentIntent: String? = nil

@@ -29,12 +29,6 @@ extension Stripe.Fraud.ValueListItems.ValueListItem.Create {
         /// The identifier of the value list which the created item will be added to.
         public var valueList: String
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case value
-            case valueList
-        }
-
         public init(
             expand: [String]? = nil,
             value: String,
@@ -72,16 +66,6 @@ extension Stripe.Fraud.ValueListItems.ValueListItem.List {
         /// Identifier for the parent value list this item belongs to.
         public var valueList: String
 
-        private enum CodingKeys: String, CodingKey {
-            case created
-            case endingBefore
-            case expand
-            case limit
-            case startingAfter
-            case value
-            case valueList
-        }
-
         public init(
             created: Stripe.RangeQuery? = nil,
             endingBefore: String? = nil,
@@ -109,10 +93,6 @@ extension Stripe.Fraud.ValueListItems.ValueListItem.Retrieve {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil

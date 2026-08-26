@@ -14,9 +14,7 @@ import Foundation
 // The PaymentLink struct is generated (Models/Generated). These are the nested types the
 // request layer still names under `Stripe.PaymentLink` that the generator spells differently.
 
-
 // https://docs.stripe.com/api/payment-link/object.md
-
 
 extension Stripe.PaymentLink {
     public struct LineItem: Codable, Hashable, Sendable, Identifiable {
@@ -161,11 +159,6 @@ extension Stripe.PaymentLink.After {
             self.type = type
         }
 
-        private enum CodingKeys: String, CodingKey {
-            case hostedConfirmation
-            case redirect
-            case type
-        }
     }
 }
 
@@ -221,7 +214,6 @@ extension Stripe.PaymentLink.After.Completion {
         case hostedConfirmation = "hosted_confirmation"
     }
 }
-
 
 extension Stripe.PaymentLink {
     public enum Billing {}

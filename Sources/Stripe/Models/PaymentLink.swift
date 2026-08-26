@@ -82,46 +82,6 @@ extension Stripe {
         /// The public URL that can be shared with customers.
         public var url: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case active
-            case afterCompletion
-            case allowPromotionCodes
-            case application
-            case applicationFeeAmount
-            case applicationFeePercent
-            case automaticTax
-            case billingAddressCollection
-            case consentCollection
-            case currency
-            case customFields
-            case customText
-            case customerCreation
-            case inactiveMessage
-            case invoiceCreation
-            case lineItems
-            case livemode
-            case managedPayments
-            case metadata
-            case nameCollection
-            case onBehalfOf
-            case optionalItems
-            case paymentIntentData
-            case paymentMethodCollection
-            case paymentMethodOptions
-            case paymentMethodTypes
-            case phoneNumberCollection
-            case restrictions
-            case shippingAddressCollection
-            case shippingOptions
-            case submitType
-            case subscriptionData
-            case taxIdCollection
-            case transferData
-            case url
-        }
-
         public init(
             id: ID,
             object: String,
@@ -278,12 +238,6 @@ extension Stripe {
             /// The specified behavior after the purchase is complete.
             public var `type`: Type?
 
-            private enum CodingKeys: String, CodingKey {
-                case hostedConfirmation
-                case redirect
-                case `type`
-            }
-
             public init(
                 hostedConfirmation: HostedConfirmation? = nil,
                 redirect: Redirect? = nil,
@@ -304,10 +258,6 @@ extension Stripe {
                 /// The custom message that is displayed to the customer after the purchase is complete.
                 public var customMessage: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case customMessage
-                }
-
                 public init(
                     customMessage: String? = nil
                 ) {
@@ -318,10 +268,6 @@ extension Stripe {
             public struct Redirect: Codable, Hashable, Sendable {
                 /// The URL the customer will be redirected to after the purchase is complete.
                 public var url: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case url
-                }
 
                 public init(
                     url: String? = nil
@@ -336,11 +282,6 @@ extension Stripe {
             public var enabled: Bool?
             /// The account that's liable for tax.
             public var liability: Stripe.Shared.ConnectAccountReference?
-
-            private enum CodingKeys: String, CodingKey {
-                case enabled
-                case liability
-            }
 
             public init(
                 enabled: Bool? = nil,
@@ -358,12 +299,6 @@ extension Stripe {
             public var promotions: Promotions?
             /// If set to `required`, it requires cutomers to accept the terms of service before being able to pay.
             public var termsOfService: TermsOfService?
-
-            private enum CodingKeys: String, CodingKey {
-                case paymentMethodReuseAgreement
-                case promotions
-                case termsOfService
-            }
 
             public init(
                 paymentMethodReuseAgreement: PaymentMethodReuseAgreement? = nil,
@@ -390,10 +325,6 @@ extension Stripe {
             public struct PaymentMethodReuseAgreement: Codable, Hashable, Sendable {
                 /// Determines the position and visibility of the payment method reuse agreement in the UI.
                 public var position: Position?
-
-                private enum CodingKeys: String, CodingKey {
-                    case position
-                }
 
                 public init(
                     position: Position? = nil
@@ -475,11 +406,6 @@ extension Stripe {
                 /// The options available for the customer to select.
                 public var options: [Options]?
 
-                private enum CodingKeys: String, CodingKey {
-                    case defaultValue
-                    case options
-                }
-
                 public init(
                     defaultValue: String? = nil,
                     options: [Options]? = nil
@@ -493,11 +419,6 @@ extension Stripe {
                     public var label: String?
                     /// The value for this option, not displayed to the customer, used by your integration to reconcile the option selected by…
                     public var value: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case label
-                        case value
-                    }
 
                     public init(
                         label: String? = nil,
@@ -515,11 +436,6 @@ extension Stripe {
                 /// The type of the label.
                 public var `type`: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case custom
-                    case `type`
-                }
-
                 public init(
                     custom: String? = nil,
                     `type`: String? = nil
@@ -536,12 +452,6 @@ extension Stripe {
                 public var maximumLength: Int?
                 /// The minimum character length requirement for the customer's input.
                 public var minimumLength: Int?
-
-                private enum CodingKeys: String, CodingKey {
-                    case defaultValue
-                    case maximumLength
-                    case minimumLength
-                }
 
                 public init(
                     defaultValue: String? = nil,
@@ -561,12 +471,6 @@ extension Stripe {
                 public var maximumLength: Int?
                 /// The minimum character length requirement for the customer's input.
                 public var minimumLength: Int?
-
-                private enum CodingKeys: String, CodingKey {
-                    case defaultValue
-                    case maximumLength
-                    case minimumLength
-                }
 
                 public init(
                     defaultValue: String? = nil,
@@ -623,13 +527,6 @@ extension Stripe {
             /// Custom text that should be displayed in place of the default terms of service agreement text.
             public var termsOfServiceAcceptance: TermsOfServiceAcceptance?
 
-            private enum CodingKeys: String, CodingKey {
-                case afterSubmit
-                case shippingAddress
-                case submit
-                case termsOfServiceAcceptance
-            }
-
             public init(
                 afterSubmit: AfterSubmit? = nil,
                 shippingAddress: ShippingAddress? = nil,
@@ -646,10 +543,6 @@ extension Stripe {
                 /// Text can be up to 1200 characters in length.
                 public var message: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case message
-                }
-
                 public init(
                     message: String? = nil
                 ) {
@@ -660,10 +553,6 @@ extension Stripe {
             public struct ShippingAddress: Codable, Hashable, Sendable {
                 /// Text can be up to 1200 characters in length.
                 public var message: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case message
-                }
 
                 public init(
                     message: String? = nil
@@ -676,10 +565,6 @@ extension Stripe {
                 /// Text can be up to 1200 characters in length.
                 public var message: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case message
-                }
-
                 public init(
                     message: String? = nil
                 ) {
@@ -690,10 +575,6 @@ extension Stripe {
             public struct TermsOfServiceAcceptance: Codable, Hashable, Sendable {
                 /// Text can be up to 1200 characters in length.
                 public var message: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case message
-                }
 
                 public init(
                     message: String? = nil
@@ -708,11 +589,6 @@ extension Stripe {
             public var enabled: Bool?
             /// Configuration for the invoice.
             public var invoiceData: InvoiceData?
-
-            private enum CodingKeys: String, CodingKey {
-                case enabled
-                case invoiceData
-            }
 
             public init(
                 enabled: Bool? = nil,
@@ -737,16 +613,6 @@ extension Stripe {
                 public var metadata: [String: String]?
                 /// Options for invoice PDF rendering.
                 public var renderingOptions: Stripe.Shared.RenderingOptions?
-
-                private enum CodingKeys: String, CodingKey {
-                    case accountTaxIds
-                    case customFields
-                    case description
-                    case footer
-                    case issuer
-                    case metadata
-                    case renderingOptions
-                }
 
                 public init(
                     accountTaxIds: [String]? = nil,
@@ -779,13 +645,6 @@ extension Stripe {
             /// The URL where this list can be accessed.
             public var url: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case object
-                case data
-                case hasMore
-                case url
-            }
-
             public init(
                 object: String,
                 data: [Stripe.Checkout.Session.LineItem]? = nil,
@@ -803,11 +662,6 @@ extension Stripe {
             public var business: Business?
             public var individual: Individual?
 
-            private enum CodingKeys: String, CodingKey {
-                case business
-                case individual
-            }
-
             public init(
                 business: Business? = nil,
                 individual: Individual? = nil
@@ -821,11 +675,6 @@ extension Stripe {
                 public var enabled: Bool?
                 /// Whether the customer is required to complete the field before checking out.
                 public var optional: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case enabled
-                    case optional
-                }
 
                 public init(
                     enabled: Bool? = nil,
@@ -842,11 +691,6 @@ extension Stripe {
                 /// Whether the customer is required to complete the field before checking out.
                 public var optional: Bool?
 
-                private enum CodingKeys: String, CodingKey {
-                    case enabled
-                    case optional
-                }
-
                 public init(
                     enabled: Bool? = nil,
                     optional: Bool? = nil
@@ -861,12 +705,6 @@ extension Stripe {
             public var adjustableQuantity: AdjustableQuantity?
             public var price: String?
             public var quantity: Int?
-
-            private enum CodingKeys: String, CodingKey {
-                case adjustableQuantity
-                case price
-                case quantity
-            }
 
             public init(
                 adjustableQuantity: AdjustableQuantity? = nil,
@@ -885,12 +723,6 @@ extension Stripe {
                 public var maximum: Int?
                 /// The minimum quantity of this item the customer must purchase, if they choose to purchase it.
                 public var minimum: Int?
-
-                private enum CodingKeys: String, CodingKey {
-                    case enabled
-                    case maximum
-                    case minimum
-                }
 
                 public init(
                     enabled: Bool? = nil,
@@ -919,16 +751,6 @@ extension Stripe {
             public var statementDescriptorSuffix: String?
             /// A string that identifies the resulting payment as part of a group.
             public var transferGroup: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case captureMethod
-                case description
-                case metadata
-                case setupFutureUsage
-                case statementDescriptor
-                case statementDescriptorSuffix
-                case transferGroup
-            }
 
             public init(
                 captureMethod: CaptureMethod? = nil,
@@ -966,10 +788,6 @@ extension Stripe {
             /// Configuration for `card` payment methods.
             @Boxed public var card: Card?
 
-            private enum CodingKeys: String, CodingKey {
-                case card
-            }
-
             public init(
                 card: Card? = nil
             ) {
@@ -980,10 +798,6 @@ extension Stripe {
                 /// Restrictions to apply to the card payment method.
                 public var restrictions: Restrictions?
 
-                private enum CodingKeys: String, CodingKey {
-                    case restrictions
-                }
-
                 public init(
                     restrictions: Restrictions? = nil
                 ) {
@@ -993,10 +807,6 @@ extension Stripe {
                 public struct Restrictions: Codable, Hashable, Sendable {
                     /// The card brands to block.
                     public var brandsBlocked: [BrandsBlocked]?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case brandsBlocked
-                    }
 
                     public init(
                         brandsBlocked: [BrandsBlocked]? = nil
@@ -1018,10 +828,6 @@ extension Stripe {
             /// If `true`, a phone number will be collected during checkout.
             public var enabled: Bool?
 
-            private enum CodingKeys: String, CodingKey {
-                case enabled
-            }
-
             public init(
                 enabled: Bool? = nil
             ) {
@@ -1031,10 +837,6 @@ extension Stripe {
 
         public struct Restrictions: Codable, Hashable, Sendable {
             public var completedSessions: CompletedSessions?
-
-            private enum CodingKeys: String, CodingKey {
-                case completedSessions
-            }
 
             public init(
                 completedSessions: CompletedSessions? = nil
@@ -1047,11 +849,6 @@ extension Stripe {
                 public var count: Int?
                 /// The maximum number of checkout sessions that can be completed for the `completed_sessions` restriction to be met.
                 public var limit: Int?
-
-                private enum CodingKeys: String, CodingKey {
-                    case count
-                    case limit
-                }
 
                 public init(
                     count: Int? = nil,
@@ -1066,10 +863,6 @@ extension Stripe {
         public struct ShippingAddressCollection: Codable, Hashable, Sendable {
             /// An array of two-letter ISO country codes representing which countries Checkout should provide as options for shipping …
             public var allowedCountries: [AllowedCountries]?
-
-            private enum CodingKeys: String, CodingKey {
-                case allowedCountries
-            }
 
             public init(
                 allowedCountries: [AllowedCountries]? = nil
@@ -1325,11 +1118,6 @@ extension Stripe {
             /// The ID of the Shipping Rate to use for this shipping option.
             @Expandable<Stripe.Products.Shipping.Rate, String> public var shippingRate: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case shippingAmount
-                case shippingRate
-            }
-
             public init(
                 shippingAmount: Int? = nil,
                 shippingRate: String? = nil
@@ -1350,14 +1138,6 @@ extension Stripe {
             /// Settings related to subscription trials.
             public var trialSettings: TrialSettings?
 
-            private enum CodingKeys: String, CodingKey {
-                case description
-                case invoiceSettings
-                case metadata
-                case trialPeriodDays
-                case trialSettings
-            }
-
             public init(
                 description: String? = nil,
                 invoiceSettings: InvoiceSettings? = nil,
@@ -1375,10 +1155,6 @@ extension Stripe {
             public struct InvoiceSettings: Codable, Hashable, Sendable {
                 public var issuer: Stripe.Shared.ConnectAccountReference?
 
-                private enum CodingKeys: String, CodingKey {
-                    case issuer
-                }
-
                 public init(
                     issuer: Stripe.Shared.ConnectAccountReference? = nil
                 ) {
@@ -1390,10 +1166,6 @@ extension Stripe {
             public struct TrialSettings: Codable, Hashable, Sendable {
                 public var endBehavior: EndBehavior?
 
-                private enum CodingKeys: String, CodingKey {
-                    case endBehavior
-                }
-
                 public init(
                     endBehavior: EndBehavior? = nil
                 ) {
@@ -1404,10 +1176,6 @@ extension Stripe {
                 public struct EndBehavior: Codable, Hashable, Sendable {
                     /// Indicates how the subscription should change when the trial ends if the user did not provide a payment method.
                     public var missingPaymentMethod: MissingPaymentMethod?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case missingPaymentMethod
-                    }
 
                     public init(
                         missingPaymentMethod: MissingPaymentMethod? = nil
@@ -1430,11 +1198,6 @@ extension Stripe {
             public var enabled: Bool?
             public var required: Required?
 
-            private enum CodingKeys: String, CodingKey {
-                case enabled
-                case required
-            }
-
             public init(
                 enabled: Bool? = nil,
                 required: Required? = nil
@@ -1454,11 +1217,6 @@ extension Stripe {
             public var amount: Int?
             /// The connected account receiving the transfer.
             @Expandable<Stripe.Connect.Account, String> public var destination: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case amount
-                case destination
-            }
 
             public init(
                 amount: Int? = nil,

@@ -28,13 +28,6 @@ extension Stripe.Customers.Customer.Session.Create {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case components
-            case customer
-            case customerAccount
-            case expand
-        }
-
         public init(
             components: Components,
             customer: String? = nil,
@@ -60,14 +53,6 @@ extension Stripe.Customers.Customer.Session.Create {
             /// Configuration for the pricing table.
             public var pricingTable: PricingTable?
 
-            private enum CodingKeys: String, CodingKey {
-                case buyButton
-                case customerSheet
-                case mobilePaymentElement
-                case paymentElement
-                case pricingTable
-            }
-
             public init(
                 buyButton: BuyButton? = nil,
                 customerSheet: CustomerSheet? = nil,
@@ -87,10 +72,6 @@ extension Stripe.Customers.Customer.Session.Create {
                 /// Whether the buy button is enabled.
                 public var enabled: Bool
 
-                private enum CodingKeys: String, CodingKey {
-                    case enabled
-                }
-
                 public init(
                     enabled: Bool
                 ) {
@@ -104,11 +85,6 @@ extension Stripe.Customers.Customer.Session.Create {
                 public var enabled: Bool
                 /// This hash defines whether the customer sheet supports certain features.
                 public var features: Features?
-
-                private enum CodingKeys: String, CodingKey {
-                    case enabled
-                    case features
-                }
 
                 public init(
                     enabled: Bool,
@@ -124,11 +100,6 @@ extension Stripe.Customers.Customer.Session.Create {
                     public var paymentMethodAllowRedisplayFilters: [PaymentMethodAllowRedisplayFilters]?
                     /// Controls whether the customer sheet displays the option to remove a saved payment method." Allowing buyers to remove t…
                     public var paymentMethodRemove: PaymentMethodRemove?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case paymentMethodAllowRedisplayFilters
-                        case paymentMethodRemove
-                    }
 
                     public init(
                         paymentMethodAllowRedisplayFilters: [PaymentMethodAllowRedisplayFilters]? = nil,
@@ -158,11 +129,6 @@ extension Stripe.Customers.Customer.Session.Create {
                 /// This hash defines whether the mobile payment element supports certain features.
                 public var features: Features?
 
-                private enum CodingKeys: String, CodingKey {
-                    case enabled
-                    case features
-                }
-
                 public init(
                     enabled: Bool,
                     features: Features? = nil
@@ -183,14 +149,6 @@ extension Stripe.Customers.Customer.Session.Create {
                     public var paymentMethodSave: PaymentMethodSave?
                     /// Allows overriding the value of allow_override when saving a new payment method when payment_method_save is set to disa…
                     public var paymentMethodSaveAllowRedisplayOverride: PaymentMethodSaveAllowRedisplayOverride?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case paymentMethodAllowRedisplayFilters
-                        case paymentMethodRedisplay
-                        case paymentMethodRemove
-                        case paymentMethodSave
-                        case paymentMethodSaveAllowRedisplayOverride
-                    }
 
                     public init(
                         paymentMethodAllowRedisplayFilters: [PaymentMethodAllowRedisplayFilters]? = nil,
@@ -242,11 +200,6 @@ extension Stripe.Customers.Customer.Session.Create {
                 /// This hash defines whether the Payment Element supports certain features.
                 public var features: Features?
 
-                private enum CodingKeys: String, CodingKey {
-                    case enabled
-                    case features
-                }
-
                 public init(
                     enabled: Bool,
                     features: Features? = nil
@@ -269,15 +222,6 @@ extension Stripe.Customers.Customer.Session.Create {
                     public var paymentMethodSave: PaymentMethodSave?
                     /// When using PaymentIntents and the customer checks the save checkbox, this field determines the `setup_future_usage` va…
                     public var paymentMethodSaveUsage: PaymentMethodSaveUsage?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case paymentMethodAllowRedisplayFilters
-                        case paymentMethodRedisplay
-                        case paymentMethodRedisplayLimit
-                        case paymentMethodRemove
-                        case paymentMethodSave
-                        case paymentMethodSaveUsage
-                    }
 
                     public init(
                         paymentMethodAllowRedisplayFilters: [PaymentMethodAllowRedisplayFilters]? = nil,
@@ -327,10 +271,6 @@ extension Stripe.Customers.Customer.Session.Create {
             public struct PricingTable: Codable, Hashable, Sendable {
                 /// Whether the pricing table is enabled.
                 public var enabled: Bool
-
-                private enum CodingKeys: String, CodingKey {
-                    case enabled
-                }
 
                 public init(
                     enabled: Bool

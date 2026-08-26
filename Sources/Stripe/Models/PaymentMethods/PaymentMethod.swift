@@ -242,12 +242,6 @@ extension Stripe.PaymentMethods {
             /// ID of the Dashboard-only CustomPaymentMethodType.
             public var `type`: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayName
-                case logo
-                case `type`
-            }
-
             public init(
                 displayName: String? = nil,
                 logo: Logo? = nil,
@@ -263,11 +257,6 @@ extension Stripe.PaymentMethods {
                 public var contentType: String?
                 /// URL of the Dashboard-only CustomPaymentMethodType logo.
                 public var url: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case contentType
-                    case url
-                }
 
                 public init(
                     contentType: String? = nil,

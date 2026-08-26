@@ -28,10 +28,6 @@ extension FinancialConnections.Account.Disconnect {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
-
         public init(
             expand: [String]? = nil
         ) {
@@ -58,15 +54,6 @@ extension FinancialConnections.Account.List {
         /// A cursor for use in pagination.
         public var startingAfter: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case accountHolder
-            case endingBefore
-            case expand
-            case limit
-            case session
-            case startingAfter
-        }
-
         public init(
             accountHolder: AccountHolder? = nil,
             endingBefore: String? = nil,
@@ -91,12 +78,6 @@ extension FinancialConnections.Account.List {
             public var customer: String?
             /// The ID of the Account representing a customer whose accounts you will retrieve.
             public var customerAccount: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case account
-                case customer
-                case customerAccount
-            }
 
             public init(
                 account: String? = nil,
@@ -127,14 +108,6 @@ extension FinancialConnections.Account.ListOwners {
         /// A cursor for use in pagination.
         public var startingAfter: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case endingBefore
-            case expand
-            case limit
-            case ownership
-            case startingAfter
-        }
-
         public init(
             endingBefore: String? = nil,
             expand: [String]? = nil,
@@ -161,11 +134,6 @@ extension FinancialConnections.Account.Refresh {
         /// The list of account features that you would like to refresh.
         public var features: [Features]
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case features
-        }
-
         public init(
             expand: [String]? = nil,
             features: [Features]
@@ -190,10 +158,6 @@ extension FinancialConnections.Account.Retrieve {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
-
         public init(
             expand: [String]? = nil
         ) {
@@ -211,11 +175,6 @@ extension FinancialConnections.Account.Subscribe {
         public var expand: [String]?
         /// The list of account features to which you would like to subscribe.
         public var features: [String]
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case features
-        }
 
         public init(
             expand: [String]? = nil,
@@ -236,11 +195,6 @@ extension FinancialConnections.Account.Unsubscribe {
         public var expand: [String]?
         /// The list of account features from which you would like to unsubscribe.
         public var features: [String]
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case features
-        }
 
         public init(
             expand: [String]? = nil,

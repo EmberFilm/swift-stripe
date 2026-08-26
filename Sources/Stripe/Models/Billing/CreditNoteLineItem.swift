@@ -46,25 +46,6 @@ extension Stripe.Billing {
         /// Same as `unit_amount`, but contains a decimal value with at most 12 decimal places.
         public var unitAmountDecimal: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case amount
-            case description
-            case discountAmount
-            case discountAmounts
-            case invoiceLineItem
-            case livemode
-            case metadata
-            case pretaxCreditAmounts
-            case quantity
-            case taxRates
-            case taxes
-            case `type`
-            case unitAmount
-            case unitAmountDecimal
-        }
-
         public init(
             id: ID,
             object: String,

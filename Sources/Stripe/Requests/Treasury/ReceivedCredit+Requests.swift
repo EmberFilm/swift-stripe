@@ -36,16 +36,6 @@ extension Stripe.Treasury.ReceivedCredit.Create {
         /// Specifies the network rails to be used.
         public var network: Network
 
-        private enum CodingKeys: String, CodingKey {
-            case amount
-            case currency
-            case description
-            case expand
-            case financialAccount
-            case initiatingPaymentMethodDetails
-            case network
-        }
-
         public init(
             amount: Int,
             currency: Stripe.Currency,
@@ -76,11 +66,6 @@ extension Stripe.Treasury.ReceivedCredit.Create {
             /// Optional fields for `us_bank_account`.
             public var usBankAccount: UsBankAccount?
 
-            private enum CodingKeys: String, CodingKey {
-                case `type`
-                case usBankAccount
-            }
-
             public init(
                 `type`: String,
                 usBankAccount: UsBankAccount? = nil
@@ -97,12 +82,6 @@ extension Stripe.Treasury.ReceivedCredit.Create {
                 public var accountNumber: String?
                 /// The bank account's routing number.
                 public var routingNumber: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case accountHolderName
-                    case accountNumber
-                    case routingNumber
-                }
 
                 public init(
                     accountHolderName: String? = nil,
@@ -138,16 +117,6 @@ extension Stripe.Treasury.ReceivedCredit.List {
         /// Only return ReceivedCredits that have the given status: `succeeded` or `failed`.
         public var status: Status?
 
-        private enum CodingKeys: String, CodingKey {
-            case endingBefore
-            case expand
-            case financialAccount
-            case limit
-            case linkedFlows
-            case startingAfter
-            case status
-        }
-
         public init(
             endingBefore: String? = nil,
             expand: [String]? = nil,
@@ -176,10 +145,6 @@ extension Stripe.Treasury.ReceivedCredit.List {
             /// The source flow type.
             public var sourceFlowType: SourceFlowType
 
-            private enum CodingKeys: String, CodingKey {
-                case sourceFlowType
-            }
-
             public init(
                 sourceFlowType: SourceFlowType
             ) {
@@ -204,10 +169,6 @@ extension Stripe.Treasury.ReceivedCredit.Retrieve {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil

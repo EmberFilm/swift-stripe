@@ -33,14 +33,6 @@ extension Stripe.Connect.Secret.Create {
         /// Specifies the scoping of the secret.
         public var scope: Scope
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case expiresAt
-            case name
-            case payload
-            case scope
-        }
-
         public init(
             expand: [String]? = nil,
             expiresAt: Date? = nil,
@@ -61,11 +53,6 @@ extension Stripe.Connect.Secret.Create {
             public var `type`: Type
             /// The user ID.
             public var user: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case `type`
-                case user
-            }
 
             public init(
                 `type`: Type,
@@ -95,12 +82,6 @@ extension Stripe.Connect.Secret.DeleteWhere {
         /// Specifies the scoping of the secret.
         public var scope: Scope
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case name
-            case scope
-        }
-
         public init(
             expand: [String]? = nil,
             name: String,
@@ -117,11 +98,6 @@ extension Stripe.Connect.Secret.DeleteWhere {
             public var `type`: Type
             /// The user ID.
             public var user: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case `type`
-                case user
-            }
 
             public init(
                 `type`: Type,
@@ -151,12 +127,6 @@ extension Stripe.Connect.Secret.Find {
         /// Specifies the scoping of the secret.
         public var scope: Scope
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case name
-            case scope
-        }
-
         public init(
             expand: [String]? = nil,
             name: String,
@@ -173,11 +143,6 @@ extension Stripe.Connect.Secret.Find {
             public var `type`: Type
             /// The user ID.
             public var user: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case `type`
-                case user
-            }
 
             public init(
                 `type`: Type,
@@ -211,14 +176,6 @@ extension Stripe.Connect.Secret.List {
         /// A cursor for use in pagination.
         public var startingAfter: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case endingBefore
-            case expand
-            case limit
-            case scope
-            case startingAfter
-        }
-
         public init(
             endingBefore: String? = nil,
             expand: [String]? = nil,
@@ -239,11 +196,6 @@ extension Stripe.Connect.Secret.List {
             public var `type`: Type
             /// The user ID.
             public var user: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case `type`
-                case user
-            }
 
             public init(
                 `type`: Type,

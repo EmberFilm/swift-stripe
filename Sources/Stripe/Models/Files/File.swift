@@ -36,20 +36,6 @@ extension Stripe.Files {
         /// Use your live secret API key to download the file from this URL.
         public var url: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case created
-            case expiresAt
-            case filename
-            case links
-            case purpose
-            case size
-            case title
-            case `type`
-            case url
-        }
-
         public init(
             id: ID,
             object: String,
@@ -111,13 +97,6 @@ extension Stripe.Files {
             public var hasMore: Bool?
             /// The URL where this list can be accessed.
             public var url: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case object
-                case data
-                case hasMore
-                case url
-            }
 
             public init(
                 object: String,

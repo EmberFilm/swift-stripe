@@ -29,13 +29,6 @@ extension Stripe.Billing.Invoice.LineItem.List {
         /// A cursor for use in pagination.
         public var startingAfter: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case endingBefore
-            case expand
-            case limit
-            case startingAfter
-        }
-
         public init(
             endingBefore: String? = nil,
             expand: [String]? = nil,
@@ -82,22 +75,6 @@ extension Stripe.Billing.Invoice.LineItem.Update {
         /// The tax rates which apply to the line item.
         public var taxRates: Stripe.Clearable<[String]>?
 
-        private enum CodingKeys: String, CodingKey {
-            case amount
-            case description
-            case discountable
-            case discounts
-            case expand
-            case metadata
-            case period
-            case priceData
-            case pricing
-            case quantity
-            case quantityDecimal
-            case taxAmounts
-            case taxRates
-        }
-
         public init(
             amount: Int? = nil,
             description: String? = nil,
@@ -136,12 +113,6 @@ extension Stripe.Billing.Invoice.LineItem.Update {
             /// ID of the promotion code to create a new discount for.
             public var promotionCode: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case coupon
-                case discount
-                case promotionCode
-            }
-
             public init(
                 coupon: String? = nil,
                 discount: String? = nil,
@@ -159,11 +130,6 @@ extension Stripe.Billing.Invoice.LineItem.Update {
             public var end: Date
             /// The start of the period.
             public var start: Date
-
-            private enum CodingKeys: String, CodingKey {
-                case end
-                case start
-            }
 
             public init(
                 end: Date,
@@ -188,15 +154,6 @@ extension Stripe.Billing.Invoice.LineItem.Update {
             public var unitAmount: Int?
             /// Same as `unit_amount`, but accepts a decimal value in cents (or local equivalent) with at most 12 decimal places.
             public var unitAmountDecimal: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case currency
-                case product
-                case productData
-                case taxBehavior
-                case unitAmount
-                case unitAmountDecimal
-            }
 
             public init(
                 currency: Stripe.Currency,
@@ -235,15 +192,6 @@ extension Stripe.Billing.Invoice.LineItem.Update {
                 /// A label that represents units of this product.
                 public var unitLabel: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case description
-                    case images
-                    case metadata
-                    case name
-                    case taxCode
-                    case unitLabel
-                }
-
                 public init(
                     description: String? = nil,
                     images: [String]? = nil,
@@ -267,10 +215,6 @@ extension Stripe.Billing.Invoice.LineItem.Update {
             /// The ID of the price object.
             public var price: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case price
-            }
-
             public init(
                 price: String? = nil
             ) {
@@ -287,13 +231,6 @@ extension Stripe.Billing.Invoice.LineItem.Update {
             public var taxabilityReason: TaxabilityReason?
             /// The amount on which tax is calculated, in cents (or local equivalent).
             public var taxableAmount: Int
-
-            private enum CodingKeys: String, CodingKey {
-                case amount
-                case taxRateData
-                case taxabilityReason
-                case taxableAmount
-            }
 
             public init(
                 amount: Int,
@@ -345,18 +282,6 @@ extension Stripe.Billing.Invoice.LineItem.Update {
                 public var state: String?
                 /// The high-level tax type, such as `vat` or `sales_tax`.
                 public var taxType: TaxType?
-
-                private enum CodingKeys: String, CodingKey {
-                    case country
-                    case description
-                    case displayName
-                    case inclusive
-                    case jurisdiction
-                    case jurisdictionLevel
-                    case percentage
-                    case state
-                    case taxType
-                }
 
                 public init(
                     country: String? = nil,

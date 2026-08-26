@@ -26,10 +26,6 @@ extension Stripe.Connect.TopUp.Cancel {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
-
         public init(
             expand: [String]? = nil
         ) {
@@ -64,19 +60,6 @@ extension Stripe.Connect.TopUp.Create {
         /// A string that identifies this top-up as part of a group.
         public var transferGroup: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case amount
-            case currency
-            case description
-            case expand
-            case metadata
-            case paymentMethod
-            case paymentMethodOptions
-            case source
-            case statementDescriptor
-            case transferGroup
-        }
-
         public init(
             amount: Int,
             currency: String,
@@ -105,10 +88,6 @@ extension Stripe.Connect.TopUp.Create {
         public struct PaymentMethodOptions: Codable, Hashable, Sendable {
             public var usBankAccount: UsBankAccount?
 
-            private enum CodingKeys: String, CodingKey {
-                case usBankAccount
-            }
-
             public init(
                 usBankAccount: UsBankAccount? = nil
             ) {
@@ -117,10 +96,6 @@ extension Stripe.Connect.TopUp.Create {
 
             public struct UsBankAccount: Codable, Hashable, Sendable {
                 public var network: String
-
-                private enum CodingKeys: String, CodingKey {
-                    case network
-                }
 
                 public init(
                     network: String
@@ -151,16 +126,6 @@ extension Stripe.Connect.TopUp.List {
         public var startingAfter: String?
         /// Only return top-ups that have the given status.
         public var status: Status?
-
-        private enum CodingKeys: String, CodingKey {
-            case amount
-            case created
-            case endingBefore
-            case expand
-            case limit
-            case startingAfter
-            case status
-        }
 
         public init(
             amount: Stripe.RangeQuery? = nil,
@@ -197,10 +162,6 @@ extension Stripe.Connect.TopUp.Retrieve {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
-
         public init(
             expand: [String]? = nil
         ) {
@@ -220,12 +181,6 @@ extension Stripe.Connect.TopUp.Update {
         public var expand: [String]?
         /// Set of key-value pairs that you can attach to an object.
         public var metadata: Stripe.Clearable<[String: String]>?
-
-        private enum CodingKeys: String, CodingKey {
-            case description
-            case expand
-            case metadata
-        }
 
         public init(
             description: String? = nil,

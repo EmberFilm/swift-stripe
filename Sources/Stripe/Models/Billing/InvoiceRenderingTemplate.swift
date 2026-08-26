@@ -30,17 +30,6 @@ extension Stripe.Billing {
         /// Version of this template; version increases by one when an update on the template changes any field that controls invo…
         public var version: Int?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case created
-            case livemode
-            case metadata
-            case nickname
-            case status
-            case version
-        }
-
         public init(
             id: ID,
             object: String,

@@ -58,32 +58,6 @@ extension Stripe.Billing.Invoice {
         /// ID of the test clock this invoice item belongs to.
         @Expandable<Stripe.Billing.TestClocks.TestClock, String> public var testClock: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case amount
-            case currency
-            case customer
-            case customerAccount
-            case date
-            case description
-            case discountable
-            case discounts
-            case invoice
-            case livemode
-            case metadata
-            case netAmount
-            case parent
-            case period
-            case pricing
-            case proration
-            case prorationDetails
-            case quantity
-            case quantityDecimal
-            case taxRates
-            case testClock
-        }
-
         public init(
             id: ID,
             object: String,
@@ -140,11 +114,6 @@ extension Stripe.Billing.Invoice {
             /// The type of parent that generated this invoice item
             public var `type`: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case subscriptionDetails
-                case `type`
-            }
-
             public init(
                 subscriptionDetails: SubscriptionDetails? = nil,
                 `type`: String? = nil
@@ -158,11 +127,6 @@ extension Stripe.Billing.Invoice {
                 public var subscription: String?
                 /// The subscription item that generated this invoice item
                 public var subscriptionItem: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case subscription
-                    case subscriptionItem
-                }
 
                 public init(
                     subscription: String? = nil,
@@ -180,11 +144,6 @@ extension Stripe.Billing.Invoice {
             /// Discount amounts applied when the proration was created.
             public var discountAmounts: [Stripe.Shared.DiscountsResourceDiscountAmount]?
 
-            private enum CodingKeys: String, CodingKey {
-                case creditedItems
-                case discountAmounts
-            }
-
             public init(
                 creditedItems: CreditedItems? = nil,
                 discountAmounts: [Stripe.Shared.DiscountsResourceDiscountAmount]? = nil
@@ -199,12 +158,6 @@ extension Stripe.Billing.Invoice {
                 public var invoiceLineItemDetails: InvoiceLineItemDetails?
                 /// Whether the credit references a pending invoice item or one or more invoice line items on an invoice.
                 public var `type`: Type?
-
-                private enum CodingKeys: String, CodingKey {
-                    case invoiceItem
-                    case invoiceLineItemDetails
-                    case `type`
-                }
 
                 public init(
                     invoiceItem: String? = nil,
@@ -227,11 +180,6 @@ extension Stripe.Billing.Invoice {
                     public var invoice: String?
                     /// IDs of the debited invoice line item(s) on the invoice that correspond to the credit proration.
                     public var invoiceLineItems: [String]?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case invoice
-                        case invoiceLineItems
-                    }
 
                     public init(
                         invoice: String? = nil,

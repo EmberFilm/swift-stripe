@@ -44,25 +44,6 @@ extension Stripe.Treasury {
         /// The Transaction associated with this object.
         @Expandable<Stripe.Treasury.Transaction, String> public var transaction: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case amount
-            case created
-            case currency
-            case description
-            case failureCode
-            case financialAccount
-            case hostedRegulatoryReceiptUrl
-            case initiatingPaymentMethodDetails
-            case linkedFlows
-            case livemode
-            case network
-            case reversalDetails
-            case status
-            case transaction
-        }
-
         public init(
             id: ID,
             object: String,
@@ -134,15 +115,6 @@ extension Stripe.Treasury {
             public var sourceFlowDetails: SourceFlowDetails?
             /// The type of flow that originated the ReceivedCredit (for example, `outbound_payment`).
             public var sourceFlowType: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case creditReversal
-                case issuingAuthorization
-                case issuingTransaction
-                case sourceFlow
-                case sourceFlowDetails
-                case sourceFlowType
-            }
 
             public init(
                 creditReversal: String? = nil,
@@ -250,11 +222,6 @@ extension Stripe.Treasury {
             public var deadline: Date?
             /// Set if a ReceivedCredit cannot be reversed.
             public var restrictedReason: RestrictedReason?
-
-            private enum CodingKeys: String, CodingKey {
-                case deadline
-                case restrictedReason
-            }
 
             public init(
                 deadline: Date? = nil,

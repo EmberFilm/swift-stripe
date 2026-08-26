@@ -56,31 +56,6 @@ public struct Transaction: Codable, Hashable, Sendable, Identifiable {
     /// The digital wallet used for this transaction.
     public var wallet: Wallet?
 
-    private enum CodingKeys: String, CodingKey {
-        case id
-        case object
-        case amount
-        case amountDetails
-        case authorization
-        case balanceTransaction
-        case card
-        case cardholder
-        case created
-        case currency
-        case dispute
-        case livemode
-        case merchantAmount
-        case merchantCurrency
-        case merchantData
-        case metadata
-        case networkData
-        case purchaseDetails
-        case token
-        case treasury
-        case `type`
-        case wallet
-    }
-
     public init(
         id: ID,
         object: String,
@@ -148,11 +123,6 @@ public struct Transaction: Codable, Hashable, Sendable, Identifiable {
         /// The amount of cash requested by the cardholder.
         public var cashbackAmount: Int?
 
-        private enum CodingKeys: String, CodingKey {
-            case atmFee
-            case cashbackAmount
-        }
-
         public init(
             atmFee: Int? = nil,
             cashbackAmount: Int? = nil
@@ -169,12 +139,6 @@ public struct Transaction: Codable, Hashable, Sendable, Identifiable {
         public var processingDate: String?
         /// Unique identifier for the authorization assigned by the card network used to match subsequent messages, disputes, and …
         public var transactionId: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case authorizationCode
-            case processingDate
-            case transactionId
-        }
 
         public init(
             authorizationCode: String? = nil,
@@ -200,15 +164,6 @@ public struct Transaction: Codable, Hashable, Sendable, Identifiable {
         public var receipt: [Receipt]?
         /// A merchant-specific order number.
         public var reference: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case fleet
-            case flight
-            case fuel
-            case lodging
-            case receipt
-            case reference
-        }
 
         public init(
             fleet: Fleet? = nil,
@@ -236,13 +191,6 @@ public struct Transaction: Codable, Hashable, Sendable, Identifiable {
             /// The type of fuel service.
             public var serviceType: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case cardholderPromptData
-                case purchaseType
-                case reportedBreakdown
-                case serviceType
-            }
-
             public init(
                 cardholderPromptData: CardholderPromptData? = nil,
                 purchaseType: String? = nil,
@@ -267,14 +215,6 @@ public struct Transaction: Codable, Hashable, Sendable, Identifiable {
                 /// Vehicle number.
                 public var vehicleNumber: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case driverId
-                    case odometer
-                    case unspecifiedId
-                    case userId
-                    case vehicleNumber
-                }
-
                 public init(
                     driverId: String? = nil,
                     odometer: Int? = nil,
@@ -298,12 +238,6 @@ public struct Transaction: Codable, Hashable, Sendable, Identifiable {
                 /// Information about tax included in this transaction.
                 public var tax: Tax?
 
-                private enum CodingKeys: String, CodingKey {
-                    case fuel
-                    case nonFuel
-                    case tax
-                }
-
                 public init(
                     fuel: Fuel? = nil,
                     nonFuel: NonFuel? = nil,
@@ -318,10 +252,6 @@ public struct Transaction: Codable, Hashable, Sendable, Identifiable {
                     /// Gross fuel amount that should equal Fuel Volume multiplied by Fuel Unit Cost, inclusive of taxes.
                     public var grossAmountDecimal: String?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case grossAmountDecimal
-                    }
-
                     public init(
                         grossAmountDecimal: String? = nil
                     ) {
@@ -332,10 +262,6 @@ public struct Transaction: Codable, Hashable, Sendable, Identifiable {
                 public struct NonFuel: Codable, Hashable, Sendable {
                     /// Gross non-fuel amount that should equal the sum of the line items, inclusive of taxes.
                     public var grossAmountDecimal: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case grossAmountDecimal
-                    }
 
                     public init(
                         grossAmountDecimal: String? = nil
@@ -349,11 +275,6 @@ public struct Transaction: Codable, Hashable, Sendable, Identifiable {
                     public var localAmountDecimal: String?
                     /// Amount of national Sales Tax or VAT included in the transaction amount.
                     public var nationalAmountDecimal: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case localAmountDecimal
-                        case nationalAmountDecimal
-                    }
 
                     public init(
                         localAmountDecimal: String? = nil,
@@ -377,14 +298,6 @@ public struct Transaction: Codable, Hashable, Sendable, Identifiable {
             public var segments: [Segments]?
             /// The travel agency that issued the ticket.
             public var travelAgency: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case departureAt
-                case passengerName
-                case refundable
-                case segments
-                case travelAgency
-            }
 
             public init(
                 departureAt: Int? = nil,
@@ -413,15 +326,6 @@ public struct Transaction: Codable, Hashable, Sendable, Identifiable {
                 public var serviceClass: String?
                 /// Whether a stopover is allowed on this flight.
                 public var stopoverAllowed: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case arrivalAirportCode
-                    case carrier
-                    case departureAirportCode
-                    case flightNumber
-                    case serviceClass
-                    case stopoverAllowed
-                }
 
                 public init(
                     arrivalAirportCode: String? = nil,
@@ -453,14 +357,6 @@ public struct Transaction: Codable, Hashable, Sendable, Identifiable {
             /// The cost in cents per each unit of fuel, represented as a decimal string with at most 12 decimal places.
             public var unitCostDecimal: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case industryProductCode
-                case quantityDecimal
-                case `type`
-                case unit
-                case unitCostDecimal
-            }
-
             public init(
                 industryProductCode: String? = nil,
                 quantityDecimal: String? = nil,
@@ -482,11 +378,6 @@ public struct Transaction: Codable, Hashable, Sendable, Identifiable {
             /// The number of nights stayed at the lodging.
             public var nights: Int?
 
-            private enum CodingKeys: String, CodingKey {
-                case checkInAt
-                case nights
-            }
-
             public init(
                 checkInAt: Int? = nil,
                 nights: Int? = nil
@@ -505,13 +396,6 @@ public struct Transaction: Codable, Hashable, Sendable, Identifiable {
             public var total: Int?
             /// The unit cost of the item in cents.
             public var unitCost: Int?
-
-            private enum CodingKeys: String, CodingKey {
-                case description
-                case quantity
-                case total
-                case unitCost
-            }
 
             public init(
                 description: String? = nil,
@@ -532,11 +416,6 @@ public struct Transaction: Codable, Hashable, Sendable, Identifiable {
         public var receivedCredit: String?
         /// The Treasury ReceivedDebit representing this Issuing transaction if it is a capture
         public var receivedDebit: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case receivedCredit
-            case receivedDebit
-        }
 
         public init(
             receivedCredit: String? = nil,

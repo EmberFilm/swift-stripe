@@ -30,14 +30,6 @@ extension Stripe.Billing.MeterEvent.Create {
         /// The time of the event.
         public var timestamp: Date?
 
-        private enum CodingKeys: String, CodingKey {
-            case eventName
-            case expand
-            case identifier
-            case payload
-            case timestamp
-        }
-
         public init(
             eventName: String,
             expand: [String]? = nil,

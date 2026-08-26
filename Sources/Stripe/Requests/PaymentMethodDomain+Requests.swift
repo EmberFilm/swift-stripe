@@ -30,12 +30,6 @@ extension Stripe.PaymentMethodDomain.Create {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case domainName
-            case enabled
-            case expand
-        }
-
         public init(
             domainName: String,
             enabled: Bool? = nil,
@@ -66,15 +60,6 @@ extension Stripe.PaymentMethodDomain.List {
         /// A cursor for use in pagination.
         public var startingAfter: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case domainName
-            case enabled
-            case endingBefore
-            case expand
-            case limit
-            case startingAfter
-        }
-
         public init(
             domainName: String? = nil,
             enabled: Bool? = nil,
@@ -101,10 +86,6 @@ extension Stripe.PaymentMethodDomain.Retrieve {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
-
         public init(
             expand: [String]? = nil
         ) {
@@ -123,11 +104,6 @@ extension Stripe.PaymentMethodDomain.Update {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case enabled
-            case expand
-        }
-
         public init(
             enabled: Bool? = nil,
             expand: [String]? = nil
@@ -145,10 +121,6 @@ extension Stripe.PaymentMethodDomain.Validate {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil

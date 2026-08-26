@@ -37,21 +37,6 @@ extension Stripe.Issuing {
         /// The digital wallet for this token, if one was used.
         public var walletProvider: WalletProvider?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case card
-            case created
-            case deviceFingerprint
-            case last4
-            case livemode
-            case network
-            case networkData
-            case networkUpdatedAt
-            case status
-            case walletProvider
-        }
-
         public init(
             id: ID,
             object: String,
@@ -109,14 +94,6 @@ extension Stripe.Issuing {
             public var visa: Visa?
             public var walletProvider: WalletProvider?
 
-            private enum CodingKeys: String, CodingKey {
-                case device
-                case mastercard
-                case `type`
-                case visa
-                case walletProvider
-            }
-
             public init(
                 device: Device? = nil,
                 mastercard: Mastercard? = nil,
@@ -150,15 +127,6 @@ extension Stripe.Issuing {
                 public var phoneNumber: String?
                 /// The type of device used for tokenization.
                 public var `type`: Type?
-
-                private enum CodingKeys: String, CodingKey {
-                    case deviceFingerprint
-                    case ipAddress
-                    case location
-                    case name
-                    case phoneNumber
-                    case `type`
-                }
 
                 public init(
                     deviceFingerprint: String? = nil,
@@ -194,13 +162,6 @@ extension Stripe.Issuing {
                 /// The name of the entity requesting tokenization, if known.
                 public var tokenRequestorName: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case cardReferenceId
-                    case tokenReferenceId
-                    case tokenRequestorId
-                    case tokenRequestorName
-                }
-
                 public init(
                     cardReferenceId: String? = nil,
                     tokenReferenceId: String? = nil,
@@ -223,13 +184,6 @@ extension Stripe.Issuing {
                 public var tokenRequestorId: String?
                 /// Degree of risk associated with the token between `01` and `99`, with higher number indicating higher risk.
                 public var tokenRiskScore: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case cardReferenceId
-                    case tokenReferenceId
-                    case tokenRequestorId
-                    case tokenRiskScore
-                }
 
                 public init(
                     cardReferenceId: String? = nil,
@@ -264,19 +218,6 @@ extension Stripe.Issuing {
                 public var suggestedDecision: SuggestedDecision?
                 /// The version of the standard for mapping reason codes followed by the wallet provider.
                 public var suggestedDecisionVersion: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case accountId
-                    case accountTrustScore
-                    case cardNumberSource
-                    case cardholderAddress
-                    case cardholderName
-                    case deviceTrustScore
-                    case hashedAccountEmailAddress
-                    case reasonCodes
-                    case suggestedDecision
-                    case suggestedDecisionVersion
-                }
 
                 public init(
                     accountId: String? = nil,
@@ -353,11 +294,6 @@ extension Stripe.Issuing {
                     public var line1: String?
                     /// The postal code of the cardholder tokenizing the card.
                     public var postalCode: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case line1
-                        case postalCode
-                    }
 
                     public init(
                         line1: String? = nil,

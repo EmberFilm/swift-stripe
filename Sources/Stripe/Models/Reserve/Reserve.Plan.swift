@@ -38,22 +38,6 @@ extension Stripe.Reserve {
         /// The type of the ReservePlan.
         public var `type`: Type?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case created
-            case createdBy
-            case currency
-            case disabledAt
-            case fixedRelease
-            case livemode
-            case metadata
-            case percent
-            case rollingRelease
-            case status
-            case `type`
-        }
-
         public init(
             id: ID,
             object: String,

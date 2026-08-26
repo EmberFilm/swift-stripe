@@ -28,16 +28,6 @@ extension Stripe.Billing {
         /// Encapsulates configuration of the alert to monitor usage on a specific Billing Meter.
         public var usageThreshold: UsageThreshold?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case alertType
-            case livemode
-            case status
-            case title
-            case usageThreshold
-        }
-
         public init(
             id: ID,
             object: String,
@@ -74,13 +64,6 @@ extension Stripe.Billing {
             /// Defines how the alert will behave.
             public var recurrence: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case filters
-                case gte
-                case meter
-                case recurrence
-            }
-
             public init(
                 filters: [Filters]? = nil,
                 gte: Int? = nil,
@@ -97,11 +80,6 @@ extension Stripe.Billing {
                 /// Limit the scope of the alert to this customer ID
                 @Expandable<Stripe.Customers.Customer, String> public var customer: String?
                 public var `type`: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case customer
-                    case `type`
-                }
 
                 public init(
                     customer: String? = nil,

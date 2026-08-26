@@ -25,10 +25,6 @@ extension Stripe.Billing.InvoiceRenderingTemplate.Archive {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
-
         public init(
             expand: [String]? = nil
         ) {
@@ -51,14 +47,6 @@ extension Stripe.Billing.InvoiceRenderingTemplate.List {
         /// A cursor for use in pagination.
         public var startingAfter: String?
         public var status: Status?
-
-        private enum CodingKeys: String, CodingKey {
-            case endingBefore
-            case expand
-            case limit
-            case startingAfter
-            case status
-        }
 
         public init(
             endingBefore: String? = nil,
@@ -90,11 +78,6 @@ extension Stripe.Billing.InvoiceRenderingTemplate.Retrieve {
         public var expand: [String]?
         public var version: Int?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case version
-        }
-
         public init(
             expand: [String]? = nil,
             version: Int? = nil
@@ -112,10 +95,6 @@ extension Stripe.Billing.InvoiceRenderingTemplate.Unarchive {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil

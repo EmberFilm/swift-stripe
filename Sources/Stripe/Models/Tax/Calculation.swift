@@ -43,24 +43,6 @@ extension Stripe.Tax {
         /// The calculation uses the tax rules and rates that are in effect at this timestamp.
         public var taxDate: Date?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case amountTotal
-            case currency
-            case customer
-            case customerDetails
-            case expiresAt
-            case lineItems
-            case livemode
-            case shipFromDetails
-            case shippingCost
-            case taxAmountExclusive
-            case taxAmountInclusive
-            case taxBreakdown
-            case taxDate
-        }
-
         public init(
             id: ID,
             object: String,
@@ -106,13 +88,6 @@ extension Stripe.Tax {
             /// The URL where this list can be accessed.
             public var url: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case object
-                case data
-                case hasMore
-                case url
-            }
-
             public init(
                 object: String,
                 data: [Stripe.Tax.CalculationLineItem]? = nil,
@@ -139,15 +114,6 @@ extension Stripe.Tax {
             public var taxBreakdown: [Stripe.Shared.TaxBreakdown]?
             /// The tax code ID used for shipping.
             public var taxCode: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case amount
-                case amountTax
-                case shippingRate
-                case taxBehavior
-                case taxBreakdown
-                case taxCode
-            }
 
             public init(
                 amount: Int? = nil,
@@ -182,14 +148,6 @@ extension Stripe.Tax {
             public var taxabilityReason: TaxabilityReason?
             /// The amount on which tax is calculated, in the smallest currency unit.
             public var taxableAmount: Int?
-
-            private enum CodingKeys: String, CodingKey {
-                case amount
-                case inclusive
-                case taxRateDetails
-                case taxabilityReason
-                case taxableAmount
-            }
 
             public init(
                 amount: Int? = nil,
@@ -237,15 +195,6 @@ extension Stripe.Tax {
                 public var state: String?
                 /// The tax type, such as `vat` or `sales_tax`.
                 public var taxType: TaxType?
-
-                private enum CodingKeys: String, CodingKey {
-                    case country
-                    case flatAmount
-                    case percentageDecimal
-                    case rateType
-                    case state
-                    case taxType
-                }
 
                 public init(
                     country: String? = nil,

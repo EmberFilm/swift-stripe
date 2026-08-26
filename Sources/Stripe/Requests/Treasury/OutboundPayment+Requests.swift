@@ -29,10 +29,6 @@ extension Stripe.Treasury.OutboundPayment.Cancel {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
-
         public init(
             expand: [String]? = nil
         ) {
@@ -70,21 +66,6 @@ extension Stripe.Treasury.OutboundPayment.Create {
         public var metadata: [String: String]?
         /// The description that appears on the receiving end for this OutboundPayment (for example, bank statement for external b…
         public var statementDescriptor: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case amount
-            case currency
-            case customer
-            case description
-            case destinationPaymentMethod
-            case destinationPaymentMethodData
-            case destinationPaymentMethodOptions
-            case endUserDetails
-            case expand
-            case financialAccount
-            case metadata
-            case statementDescriptor
-        }
 
         public init(
             amount: Int,
@@ -127,14 +108,6 @@ extension Stripe.Treasury.OutboundPayment.Create {
             /// Required hash if type is set to `us_bank_account`.
             public var usBankAccount: UsBankAccount?
 
-            private enum CodingKeys: String, CodingKey {
-                case billingDetails
-                case financialAccount
-                case metadata
-                case `type`
-                case usBankAccount
-            }
-
             public init(
                 billingDetails: BillingDetails? = nil,
                 financialAccount: String? = nil,
@@ -165,13 +138,6 @@ extension Stripe.Treasury.OutboundPayment.Create {
                 /// Billing phone number (including extension).
                 public var phone: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case address
-                    case email
-                    case name
-                    case phone
-                }
-
                 public init(
                     address: Stripe.Clearable<Address>? = nil,
                     email: String? = nil,
@@ -197,15 +163,6 @@ extension Stripe.Treasury.OutboundPayment.Create {
                     public var postalCode: String?
                     /// State, county, province, or region (ISO 3166-2).
                     public var state: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case city
-                        case country
-                        case line1
-                        case line2
-                        case postalCode
-                        case state
-                    }
 
                     public init(
                         city: String? = nil,
@@ -238,14 +195,6 @@ extension Stripe.Treasury.OutboundPayment.Create {
                 /// Routing number of the bank account.
                 public var routingNumber: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case accountHolderType
-                    case accountNumber
-                    case accountType
-                    case financialConnectionsAccount
-                    case routingNumber
-                }
-
                 public init(
                     accountHolderType: AccountHolderType? = nil,
                     accountNumber: String? = nil,
@@ -277,10 +226,6 @@ extension Stripe.Treasury.OutboundPayment.Create {
             /// Optional fields for `us_bank_account`.
             public var usBankAccount: Stripe.Clearable<UsBankAccount>?
 
-            private enum CodingKeys: String, CodingKey {
-                case usBankAccount
-            }
-
             public init(
                 usBankAccount: Stripe.Clearable<UsBankAccount>? = nil
             ) {
@@ -290,10 +235,6 @@ extension Stripe.Treasury.OutboundPayment.Create {
             public struct UsBankAccount: Codable, Hashable, Sendable {
                 /// Specifies the network rails to be used.
                 public var network: Network?
-
-                private enum CodingKeys: String, CodingKey {
-                    case network
-                }
 
                 public init(
                     network: Network? = nil
@@ -315,11 +256,6 @@ extension Stripe.Treasury.OutboundPayment.Create {
             /// `True` if the OutboundPayment creation request is being made on behalf of an end user by a platform.
             public var present: Bool
 
-            private enum CodingKeys: String, CodingKey {
-                case ipAddress
-                case present
-            }
-
             public init(
                 ipAddress: String? = nil,
                 present: Bool
@@ -338,10 +274,6 @@ extension Stripe.Treasury.OutboundPayment.Fail {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil
@@ -372,17 +304,6 @@ extension Stripe.Treasury.OutboundPayment.List {
         public var startingAfter: String?
         /// Only return OutboundPayments that have the given status: `processing`, `failed`, `posted`, `returned`, or `canceled`.
         public var status: Status?
-
-        private enum CodingKeys: String, CodingKey {
-            case created
-            case customer
-            case endingBefore
-            case expand
-            case financialAccount
-            case limit
-            case startingAfter
-            case status
-        }
 
         public init(
             created: Stripe.RangeQuery? = nil,
@@ -422,10 +343,6 @@ extension Stripe.Treasury.OutboundPayment.Post {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
-
         public init(
             expand: [String]? = nil
         ) {
@@ -441,10 +358,6 @@ extension Stripe.Treasury.OutboundPayment.Retrieve {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil
@@ -464,11 +377,6 @@ extension Stripe.Treasury.OutboundPayment.ReturnOutboundPayment {
         /// Optional hash to set the return code.
         public var returnedDetails: ReturnedDetails?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case returnedDetails
-        }
-
         public init(
             expand: [String]? = nil,
             returnedDetails: ReturnedDetails? = nil
@@ -481,10 +389,6 @@ extension Stripe.Treasury.OutboundPayment.ReturnOutboundPayment {
         public struct ReturnedDetails: Codable, Hashable, Sendable {
             /// The return code to be set on the OutboundPayment object.
             public var code: Code?
-
-            private enum CodingKeys: String, CodingKey {
-                case code
-            }
 
             public init(
                 code: Code? = nil
@@ -518,11 +422,6 @@ extension Stripe.Treasury.OutboundPayment.Update {
         /// Details about network-specific tracking information.
         public var trackingDetails: TrackingDetails
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case trackingDetails
-        }
-
         public init(
             expand: [String]? = nil,
             trackingDetails: TrackingDetails
@@ -539,12 +438,6 @@ extension Stripe.Treasury.OutboundPayment.Update {
             public var `type`: Type
             /// US domestic wire network tracking details.
             public var usDomesticWire: UsDomesticWire?
-
-            private enum CodingKeys: String, CodingKey {
-                case ach
-                case `type`
-                case usDomesticWire
-            }
 
             public init(
                 ach: Ach? = nil,
@@ -566,10 +459,6 @@ extension Stripe.Treasury.OutboundPayment.Update {
                 /// ACH trace ID for funds sent over the `ach` network.
                 public var traceId: String
 
-                private enum CodingKeys: String, CodingKey {
-                    case traceId
-                }
-
                 public init(
                     traceId: String
                 ) {
@@ -585,12 +474,6 @@ extension Stripe.Treasury.OutboundPayment.Update {
                 public var imad: String?
                 /// OMAD for funds sent over the `us_domestic_wire` network.
                 public var omad: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case chips
-                    case imad
-                    case omad
-                }
 
                 public init(
                     chips: String? = nil,

@@ -41,23 +41,6 @@ extension Stripe.Checkout.Session {
         /// The taxes applied to the line item.
         public var taxes: [Stripe.Shared.Taxes]?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case adjustableQuantity
-            case amountDiscount
-            case amountSubtotal
-            case amountTax
-            case amountTotal
-            case currency
-            case description
-            case discounts
-            case metadata
-            case price
-            case quantity
-            case taxes
-        }
-
         public init(
             id: ID,
             object: String,
@@ -94,12 +77,6 @@ extension Stripe.Checkout.Session {
             public var enabled: Bool?
             public var maximum: Int?
             public var minimum: Int?
-
-            private enum CodingKeys: String, CodingKey {
-                case enabled
-                case maximum
-                case minimum
-            }
 
             public init(
                 enabled: Bool? = nil,

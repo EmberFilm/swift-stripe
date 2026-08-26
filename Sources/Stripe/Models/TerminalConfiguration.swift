@@ -37,28 +37,6 @@ public struct TerminalConfiguration: Codable, Hashable, Sendable, Identifiable {
     public var verifoneV660p: VerifoneV660p?
     public var wifi: Wifi?
 
-    private enum CodingKeys: String, CodingKey {
-        case id
-        case object
-        case bbposWisepad3
-        case bbposWiseposE
-        case cellular
-        case isAccountDefault
-        case livemode
-        case name
-        case offline
-        case rebootWindow
-        case stripeS700
-        case stripeS710
-        case tipping
-        case verifoneM425
-        case verifoneP400
-        case verifoneP630
-        case verifoneUx700
-        case verifoneV660p
-        case wifi
-    }
-
     public init(
         id: ID,
         object: String,
@@ -105,10 +83,6 @@ public struct TerminalConfiguration: Codable, Hashable, Sendable, Identifiable {
         /// A File ID representing an image to display on the reader
         @Expandable<Stripe.Files.File, String> public var splashscreen: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case splashscreen
-        }
-
         public init(
             splashscreen: String? = nil
         ) {
@@ -119,10 +93,6 @@ public struct TerminalConfiguration: Codable, Hashable, Sendable, Identifiable {
     public struct BbposWiseposE: Codable, Hashable, Sendable {
         /// A File ID representing an image to display on the reader
         @Expandable<Stripe.Files.File, String> public var splashscreen: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case splashscreen
-        }
 
         public init(
             splashscreen: String? = nil
@@ -135,10 +105,6 @@ public struct TerminalConfiguration: Codable, Hashable, Sendable, Identifiable {
         /// Whether a cellular-capable reader can connect to the internet over cellular.
         public var enabled: Bool?
 
-        private enum CodingKeys: String, CodingKey {
-            case enabled
-        }
-
         public init(
             enabled: Bool? = nil
         ) {
@@ -149,10 +115,6 @@ public struct TerminalConfiguration: Codable, Hashable, Sendable, Identifiable {
     public struct Offline: Codable, Hashable, Sendable {
         /// Determines whether to allow transactions to be collected while reader is offline.
         public var enabled: Bool?
-
-        private enum CodingKeys: String, CodingKey {
-            case enabled
-        }
 
         public init(
             enabled: Bool? = nil
@@ -167,11 +129,6 @@ public struct TerminalConfiguration: Codable, Hashable, Sendable, Identifiable {
         /// Integer between 0 to 23 that represents the start hour of the reboot time window.
         public var startHour: Int?
 
-        private enum CodingKeys: String, CodingKey {
-            case endHour
-            case startHour
-        }
-
         public init(
             endHour: Int? = nil,
             startHour: Int? = nil
@@ -185,10 +142,6 @@ public struct TerminalConfiguration: Codable, Hashable, Sendable, Identifiable {
         /// A File ID representing an image to display on the reader
         @Expandable<Stripe.Files.File, String> public var splashscreen: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case splashscreen
-        }
-
         public init(
             splashscreen: String? = nil
         ) {
@@ -199,10 +152,6 @@ public struct TerminalConfiguration: Codable, Hashable, Sendable, Identifiable {
     public struct StripeS710: Codable, Hashable, Sendable {
         /// A File ID representing an image to display on the reader
         @Expandable<Stripe.Files.File, String> public var splashscreen: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case splashscreen
-        }
 
         public init(
             splashscreen: String? = nil
@@ -233,30 +182,6 @@ public struct TerminalConfiguration: Codable, Hashable, Sendable, Identifiable {
         public var sek: Sek?
         public var sgd: Sgd?
         public var usd: Usd?
-
-        private enum CodingKeys: String, CodingKey {
-            case aed
-            case aud
-            case cad
-            case chf
-            case czk
-            case dkk
-            case eur
-            case gbp
-            case gip
-            case hkd
-            case huf
-            case jpy
-            case mxn
-            case myr
-            case nok
-            case nzd
-            case pln
-            case ron
-            case sek
-            case sgd
-            case usd
-        }
 
         public init(
             aed: Aed? = nil,
@@ -312,12 +237,6 @@ public struct TerminalConfiguration: Codable, Hashable, Sendable, Identifiable {
             /// Below this amount, fixed amounts will be displayed; above it, percentages will be displayed
             public var smartTipThreshold: Int?
 
-            private enum CodingKeys: String, CodingKey {
-                case fixedAmounts
-                case percentages
-                case smartTipThreshold
-            }
-
             public init(
                 fixedAmounts: [Int]? = nil,
                 percentages: [Int]? = nil,
@@ -336,12 +255,6 @@ public struct TerminalConfiguration: Codable, Hashable, Sendable, Identifiable {
             public var percentages: [Int]?
             /// Below this amount, fixed amounts will be displayed; above it, percentages will be displayed
             public var smartTipThreshold: Int?
-
-            private enum CodingKeys: String, CodingKey {
-                case fixedAmounts
-                case percentages
-                case smartTipThreshold
-            }
 
             public init(
                 fixedAmounts: [Int]? = nil,
@@ -362,12 +275,6 @@ public struct TerminalConfiguration: Codable, Hashable, Sendable, Identifiable {
             /// Below this amount, fixed amounts will be displayed; above it, percentages will be displayed
             public var smartTipThreshold: Int?
 
-            private enum CodingKeys: String, CodingKey {
-                case fixedAmounts
-                case percentages
-                case smartTipThreshold
-            }
-
             public init(
                 fixedAmounts: [Int]? = nil,
                 percentages: [Int]? = nil,
@@ -386,12 +293,6 @@ public struct TerminalConfiguration: Codable, Hashable, Sendable, Identifiable {
             public var percentages: [Int]?
             /// Below this amount, fixed amounts will be displayed; above it, percentages will be displayed
             public var smartTipThreshold: Int?
-
-            private enum CodingKeys: String, CodingKey {
-                case fixedAmounts
-                case percentages
-                case smartTipThreshold
-            }
 
             public init(
                 fixedAmounts: [Int]? = nil,
@@ -412,12 +313,6 @@ public struct TerminalConfiguration: Codable, Hashable, Sendable, Identifiable {
             /// Below this amount, fixed amounts will be displayed; above it, percentages will be displayed
             public var smartTipThreshold: Int?
 
-            private enum CodingKeys: String, CodingKey {
-                case fixedAmounts
-                case percentages
-                case smartTipThreshold
-            }
-
             public init(
                 fixedAmounts: [Int]? = nil,
                 percentages: [Int]? = nil,
@@ -436,12 +331,6 @@ public struct TerminalConfiguration: Codable, Hashable, Sendable, Identifiable {
             public var percentages: [Int]?
             /// Below this amount, fixed amounts will be displayed; above it, percentages will be displayed
             public var smartTipThreshold: Int?
-
-            private enum CodingKeys: String, CodingKey {
-                case fixedAmounts
-                case percentages
-                case smartTipThreshold
-            }
 
             public init(
                 fixedAmounts: [Int]? = nil,
@@ -462,12 +351,6 @@ public struct TerminalConfiguration: Codable, Hashable, Sendable, Identifiable {
             /// Below this amount, fixed amounts will be displayed; above it, percentages will be displayed
             public var smartTipThreshold: Int?
 
-            private enum CodingKeys: String, CodingKey {
-                case fixedAmounts
-                case percentages
-                case smartTipThreshold
-            }
-
             public init(
                 fixedAmounts: [Int]? = nil,
                 percentages: [Int]? = nil,
@@ -486,12 +369,6 @@ public struct TerminalConfiguration: Codable, Hashable, Sendable, Identifiable {
             public var percentages: [Int]?
             /// Below this amount, fixed amounts will be displayed; above it, percentages will be displayed
             public var smartTipThreshold: Int?
-
-            private enum CodingKeys: String, CodingKey {
-                case fixedAmounts
-                case percentages
-                case smartTipThreshold
-            }
 
             public init(
                 fixedAmounts: [Int]? = nil,
@@ -512,12 +389,6 @@ public struct TerminalConfiguration: Codable, Hashable, Sendable, Identifiable {
             /// Below this amount, fixed amounts will be displayed; above it, percentages will be displayed
             public var smartTipThreshold: Int?
 
-            private enum CodingKeys: String, CodingKey {
-                case fixedAmounts
-                case percentages
-                case smartTipThreshold
-            }
-
             public init(
                 fixedAmounts: [Int]? = nil,
                 percentages: [Int]? = nil,
@@ -536,12 +407,6 @@ public struct TerminalConfiguration: Codable, Hashable, Sendable, Identifiable {
             public var percentages: [Int]?
             /// Below this amount, fixed amounts will be displayed; above it, percentages will be displayed
             public var smartTipThreshold: Int?
-
-            private enum CodingKeys: String, CodingKey {
-                case fixedAmounts
-                case percentages
-                case smartTipThreshold
-            }
 
             public init(
                 fixedAmounts: [Int]? = nil,
@@ -562,12 +427,6 @@ public struct TerminalConfiguration: Codable, Hashable, Sendable, Identifiable {
             /// Below this amount, fixed amounts will be displayed; above it, percentages will be displayed
             public var smartTipThreshold: Int?
 
-            private enum CodingKeys: String, CodingKey {
-                case fixedAmounts
-                case percentages
-                case smartTipThreshold
-            }
-
             public init(
                 fixedAmounts: [Int]? = nil,
                 percentages: [Int]? = nil,
@@ -586,12 +445,6 @@ public struct TerminalConfiguration: Codable, Hashable, Sendable, Identifiable {
             public var percentages: [Int]?
             /// Below this amount, fixed amounts will be displayed; above it, percentages will be displayed
             public var smartTipThreshold: Int?
-
-            private enum CodingKeys: String, CodingKey {
-                case fixedAmounts
-                case percentages
-                case smartTipThreshold
-            }
 
             public init(
                 fixedAmounts: [Int]? = nil,
@@ -612,12 +465,6 @@ public struct TerminalConfiguration: Codable, Hashable, Sendable, Identifiable {
             /// Below this amount, fixed amounts will be displayed; above it, percentages will be displayed
             public var smartTipThreshold: Int?
 
-            private enum CodingKeys: String, CodingKey {
-                case fixedAmounts
-                case percentages
-                case smartTipThreshold
-            }
-
             public init(
                 fixedAmounts: [Int]? = nil,
                 percentages: [Int]? = nil,
@@ -636,12 +483,6 @@ public struct TerminalConfiguration: Codable, Hashable, Sendable, Identifiable {
             public var percentages: [Int]?
             /// Below this amount, fixed amounts will be displayed; above it, percentages will be displayed
             public var smartTipThreshold: Int?
-
-            private enum CodingKeys: String, CodingKey {
-                case fixedAmounts
-                case percentages
-                case smartTipThreshold
-            }
 
             public init(
                 fixedAmounts: [Int]? = nil,
@@ -662,12 +503,6 @@ public struct TerminalConfiguration: Codable, Hashable, Sendable, Identifiable {
             /// Below this amount, fixed amounts will be displayed; above it, percentages will be displayed
             public var smartTipThreshold: Int?
 
-            private enum CodingKeys: String, CodingKey {
-                case fixedAmounts
-                case percentages
-                case smartTipThreshold
-            }
-
             public init(
                 fixedAmounts: [Int]? = nil,
                 percentages: [Int]? = nil,
@@ -686,12 +521,6 @@ public struct TerminalConfiguration: Codable, Hashable, Sendable, Identifiable {
             public var percentages: [Int]?
             /// Below this amount, fixed amounts will be displayed; above it, percentages will be displayed
             public var smartTipThreshold: Int?
-
-            private enum CodingKeys: String, CodingKey {
-                case fixedAmounts
-                case percentages
-                case smartTipThreshold
-            }
 
             public init(
                 fixedAmounts: [Int]? = nil,
@@ -712,12 +541,6 @@ public struct TerminalConfiguration: Codable, Hashable, Sendable, Identifiable {
             /// Below this amount, fixed amounts will be displayed; above it, percentages will be displayed
             public var smartTipThreshold: Int?
 
-            private enum CodingKeys: String, CodingKey {
-                case fixedAmounts
-                case percentages
-                case smartTipThreshold
-            }
-
             public init(
                 fixedAmounts: [Int]? = nil,
                 percentages: [Int]? = nil,
@@ -736,12 +559,6 @@ public struct TerminalConfiguration: Codable, Hashable, Sendable, Identifiable {
             public var percentages: [Int]?
             /// Below this amount, fixed amounts will be displayed; above it, percentages will be displayed
             public var smartTipThreshold: Int?
-
-            private enum CodingKeys: String, CodingKey {
-                case fixedAmounts
-                case percentages
-                case smartTipThreshold
-            }
 
             public init(
                 fixedAmounts: [Int]? = nil,
@@ -762,12 +579,6 @@ public struct TerminalConfiguration: Codable, Hashable, Sendable, Identifiable {
             /// Below this amount, fixed amounts will be displayed; above it, percentages will be displayed
             public var smartTipThreshold: Int?
 
-            private enum CodingKeys: String, CodingKey {
-                case fixedAmounts
-                case percentages
-                case smartTipThreshold
-            }
-
             public init(
                 fixedAmounts: [Int]? = nil,
                 percentages: [Int]? = nil,
@@ -786,12 +597,6 @@ public struct TerminalConfiguration: Codable, Hashable, Sendable, Identifiable {
             public var percentages: [Int]?
             /// Below this amount, fixed amounts will be displayed; above it, percentages will be displayed
             public var smartTipThreshold: Int?
-
-            private enum CodingKeys: String, CodingKey {
-                case fixedAmounts
-                case percentages
-                case smartTipThreshold
-            }
 
             public init(
                 fixedAmounts: [Int]? = nil,
@@ -812,12 +617,6 @@ public struct TerminalConfiguration: Codable, Hashable, Sendable, Identifiable {
             /// Below this amount, fixed amounts will be displayed; above it, percentages will be displayed
             public var smartTipThreshold: Int?
 
-            private enum CodingKeys: String, CodingKey {
-                case fixedAmounts
-                case percentages
-                case smartTipThreshold
-            }
-
             public init(
                 fixedAmounts: [Int]? = nil,
                 percentages: [Int]? = nil,
@@ -834,10 +633,6 @@ public struct TerminalConfiguration: Codable, Hashable, Sendable, Identifiable {
         /// A File ID representing an image to display on the reader
         @Expandable<Stripe.Files.File, String> public var splashscreen: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case splashscreen
-        }
-
         public init(
             splashscreen: String? = nil
         ) {
@@ -848,10 +643,6 @@ public struct TerminalConfiguration: Codable, Hashable, Sendable, Identifiable {
     public struct VerifoneP400: Codable, Hashable, Sendable {
         /// A File ID representing an image to display on the reader
         @Expandable<Stripe.Files.File, String> public var splashscreen: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case splashscreen
-        }
 
         public init(
             splashscreen: String? = nil
@@ -864,10 +655,6 @@ public struct TerminalConfiguration: Codable, Hashable, Sendable, Identifiable {
         /// A File ID representing an image to display on the reader
         @Expandable<Stripe.Files.File, String> public var splashscreen: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case splashscreen
-        }
-
         public init(
             splashscreen: String? = nil
         ) {
@@ -879,10 +666,6 @@ public struct TerminalConfiguration: Codable, Hashable, Sendable, Identifiable {
         /// A File ID representing an image to display on the reader
         @Expandable<Stripe.Files.File, String> public var splashscreen: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case splashscreen
-        }
-
         public init(
             splashscreen: String? = nil
         ) {
@@ -893,10 +676,6 @@ public struct TerminalConfiguration: Codable, Hashable, Sendable, Identifiable {
     public struct VerifoneV660p: Codable, Hashable, Sendable {
         /// A File ID representing an image to display on the reader
         @Expandable<Stripe.Files.File, String> public var splashscreen: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case splashscreen
-        }
 
         public init(
             splashscreen: String? = nil
@@ -955,13 +734,6 @@ public struct TerminalConfiguration: Codable, Hashable, Sendable, Identifiable {
             /// Username for connecting to the WiFi network
             public var username: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case caCertificateFile
-                case password
-                case ssid
-                case username
-            }
-
             public init(
                 caCertificateFile: String? = nil,
                 password: String? = nil,
@@ -987,14 +759,6 @@ public struct TerminalConfiguration: Codable, Hashable, Sendable, Identifiable {
             /// Name of the WiFi network
             public var ssid: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case caCertificateFile
-                case clientCertificateFile
-                case privateKeyFile
-                case privateKeyFilePassword
-                case ssid
-            }
-
             public init(
                 caCertificateFile: String? = nil,
                 clientCertificateFile: String? = nil,
@@ -1015,11 +779,6 @@ public struct TerminalConfiguration: Codable, Hashable, Sendable, Identifiable {
             public var password: String?
             /// Name of the WiFi network
             public var ssid: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case password
-                case ssid
-            }
 
             public init(
                 password: String? = nil,

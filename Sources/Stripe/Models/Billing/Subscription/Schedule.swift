@@ -52,29 +52,6 @@ extension Stripe.Billing.Subscription {
         /// ID of the test clock this subscription schedule belongs to.
         @Expandable<Stripe.Billing.TestClocks.TestClock, String> public var testClock: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case application
-            case billingMode
-            case canceledAt
-            case completedAt
-            case created
-            case currentPhase
-            case customer
-            case customerAccount
-            case defaultSettings
-            case endBehavior
-            case livemode
-            case metadata
-            case phases
-            case releasedAt
-            case releasedSubscription
-            case status
-            case subscription
-            case testClock
-        }
-
         public init(
             id: ID,
             object: String,
@@ -142,11 +119,6 @@ extension Stripe.Billing.Subscription {
             /// The start of this phase of the subscription schedule.
             public var startDate: Date?
 
-            private enum CodingKeys: String, CodingKey {
-                case endDate
-                case startDate
-            }
-
             public init(
                 endDate: Date? = nil,
                 startDate: Date? = nil
@@ -175,19 +147,6 @@ extension Stripe.Billing.Subscription {
             @Expandable<Stripe.Connect.Account, String> public var onBehalfOf: String?
             /// The account (if any) the associated subscription's payments will be attributed to for tax reporting, and where funds f…
             public var transferData: Stripe.Shared.TransferData?
-
-            private enum CodingKeys: String, CodingKey {
-                case applicationFeePercent
-                case automaticTax
-                case billingCycleAnchor
-                case billingThresholds
-                case collectionMethod
-                case defaultPaymentMethod
-                case description
-                case invoiceSettings
-                case onBehalfOf
-                case transferData
-            }
 
             public init(
                 applicationFeePercent: Double? = nil,
@@ -233,12 +192,6 @@ extension Stripe.Billing.Subscription {
                 /// The account that's liable for tax.
                 public var liability: Stripe.Shared.ConnectAccountReference?
 
-                private enum CodingKeys: String, CodingKey {
-                    case disabledReason
-                    case enabled
-                    case liability
-                }
-
                 public init(
                     disabledReason: String? = nil,
                     enabled: Bool? = nil,
@@ -262,15 +215,6 @@ extension Stripe.Billing.Subscription {
                 /// Footer to be displayed on the invoice.
                 public var footer: String?
                 public var issuer: Stripe.Shared.ConnectAccountReference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case accountTaxIds
-                    case customFields
-                    case daysUntilDue
-                    case description
-                    case footer
-                    case issuer
-                }
 
                 public init(
                     accountTaxIds: [String]? = nil,
@@ -333,30 +277,6 @@ extension Stripe.Billing.Subscription {
             public var trial: Bool?
             /// When the trial ends within the phase.
             public var trialEnd: Date?
-
-            private enum CodingKeys: String, CodingKey {
-                case addInvoiceItems
-                case applicationFeePercent
-                case automaticTax
-                case billingCycleAnchor
-                case billingThresholds
-                case collectionMethod
-                case currency
-                case defaultPaymentMethod
-                case defaultTaxRates
-                case description
-                case discounts
-                case endDate
-                case invoiceSettings
-                case items
-                case metadata
-                case onBehalfOf
-                case prorationBehavior
-                case startDate
-                case transferData
-                case trial
-                case trialEnd
-            }
 
             public init(
                 addInvoiceItems: [AddInvoiceItems]? = nil,
@@ -439,16 +359,6 @@ extension Stripe.Billing.Subscription {
                 /// The tax rates which apply to the item.
                 public var taxRates: [Stripe.Tax.Rate]?
 
-                private enum CodingKeys: String, CodingKey {
-                    case discountable
-                    case discounts
-                    case metadata
-                    case period
-                    case price
-                    case quantity
-                    case taxRates
-                }
-
                 public init(
                     discountable: Bool? = nil,
                     discounts: [Discounts]? = nil,
@@ -475,12 +385,6 @@ extension Stripe.Billing.Subscription {
                     /// ID of the promotion code to create a new discount for.
                     @Expandable<Promotion.Code, String> public var promotionCode: String?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case coupon
-                        case discount
-                        case promotionCode
-                    }
-
                     public init(
                         coupon: String? = nil,
                         discount: String? = nil,
@@ -496,11 +400,6 @@ extension Stripe.Billing.Subscription {
                     public var end: End?
                     public var start: Start?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case end
-                        case start
-                    }
-
                     public init(
                         end: End? = nil,
                         start: Start? = nil
@@ -514,11 +413,6 @@ extension Stripe.Billing.Subscription {
                         public var timestamp: Date?
                         /// Select how to calculate the end of the invoice item period.
                         public var `type`: Type?
-
-                        private enum CodingKeys: String, CodingKey {
-                            case timestamp
-                            case `type`
-                        }
 
                         public init(
                             timestamp: Date? = nil,
@@ -541,11 +435,6 @@ extension Stripe.Billing.Subscription {
                         public var timestamp: Date?
                         /// Select how to calculate the start of the invoice item period.
                         public var `type`: Type?
-
-                        private enum CodingKeys: String, CodingKey {
-                            case timestamp
-                            case `type`
-                        }
 
                         public init(
                             timestamp: Date? = nil,
@@ -573,12 +462,6 @@ extension Stripe.Billing.Subscription {
                 /// The account that's liable for tax.
                 public var liability: Stripe.Shared.ConnectAccountReference?
 
-                private enum CodingKeys: String, CodingKey {
-                    case disabledReason
-                    case enabled
-                    case liability
-                }
-
                 public init(
                     disabledReason: String? = nil,
                     enabled: Bool? = nil,
@@ -597,12 +480,6 @@ extension Stripe.Billing.Subscription {
                 @Expandable<Stripe.Shared.Discount, String> public var discount: String?
                 /// ID of the promotion code to create a new discount for.
                 @Expandable<Promotion.Code, String> public var promotionCode: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case coupon
-                    case discount
-                    case promotionCode
-                }
 
                 public init(
                     coupon: String? = nil,
@@ -628,15 +505,6 @@ extension Stripe.Billing.Subscription {
                 public var footer: String?
                 /// The connected account that issues the invoice.
                 public var issuer: Stripe.Shared.ConnectAccountReference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case accountTaxIds
-                    case customFields
-                    case daysUntilDue
-                    case description
-                    case footer
-                    case issuer
-                }
 
                 public init(
                     accountTaxIds: [String]? = nil,
@@ -672,16 +540,6 @@ extension Stripe.Billing.Subscription {
                 /// The tax rates which apply to this `phase_item`.
                 public var taxRates: [Stripe.Tax.Rate]?
 
-                private enum CodingKeys: String, CodingKey {
-                    case billingThresholds
-                    case discounts
-                    case metadata
-                    case plan
-                    case price
-                    case quantity
-                    case taxRates
-                }
-
                 public init(
                     billingThresholds: Stripe.Shared.SubscriptionItemBillingThresholds? = nil,
                     discounts: [Discounts]? = nil,
@@ -707,12 +565,6 @@ extension Stripe.Billing.Subscription {
                     @Expandable<Stripe.Shared.Discount, String> public var discount: String?
                     /// ID of the promotion code to create a new discount for.
                     @Expandable<Promotion.Code, String> public var promotionCode: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case coupon
-                        case discount
-                        case promotionCode
-                    }
 
                     public init(
                         coupon: String? = nil,

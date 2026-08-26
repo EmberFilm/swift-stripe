@@ -19,12 +19,6 @@ public struct TerminalConnectionToken: Codable, Hashable, Sendable {
     /// Your application should pass this token to the Stripe Terminal SDK.
     public var secret: String?
 
-    private enum CodingKeys: String, CodingKey {
-        case object
-        case location
-        case secret
-    }
-
     public init(
         object: String,
         location: String? = nil,

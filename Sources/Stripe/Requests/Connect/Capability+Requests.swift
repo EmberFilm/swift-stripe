@@ -24,10 +24,6 @@ extension Stripe.Connect.Capability.List {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
-
         public init(
             expand: [String]? = nil
         ) {
@@ -43,10 +39,6 @@ extension Stripe.Connect.Capability.Retrieve {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil
@@ -65,11 +57,6 @@ extension Stripe.Connect.Capability.Update {
         public var expand: [String]?
         /// To request a new capability for an account, pass true.
         public var requested: Bool?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case requested
-        }
 
         public init(
             expand: [String]? = nil,

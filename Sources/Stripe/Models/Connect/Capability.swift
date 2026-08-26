@@ -28,17 +28,6 @@ extension Stripe.Connect {
         /// The status of the capability.
         public var status: Status?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case account
-            case futureRequirements
-            case requested
-            case requestedAt
-            case requirements
-            case status
-        }
-
         public init(
             id: ID,
             object: String,
@@ -84,17 +73,6 @@ extension Stripe.Connect {
             public var pastDue: [String]?
             /// Fields that are being reviewed, or might become required depending on the results of a review.
             public var pendingVerification: [String]?
-
-            private enum CodingKeys: String, CodingKey {
-                case alternatives
-                case currentDeadline
-                case currentlyDue
-                case disabledReason
-                case errors
-                case eventuallyDue
-                case pastDue
-                case pendingVerification
-            }
 
             public init(
                 alternatives: [Stripe.Shared.Alternatives]? = nil,
@@ -148,17 +126,6 @@ extension Stripe.Connect {
             public var pastDue: [String]?
             /// Fields that are being reviewed, or might become required depending on the results of a review.
             public var pendingVerification: [String]?
-
-            private enum CodingKeys: String, CodingKey {
-                case alternatives
-                case currentDeadline
-                case currentlyDue
-                case disabledReason
-                case errors
-                case eventuallyDue
-                case pastDue
-                case pendingVerification
-            }
 
             public init(
                 alternatives: [Stripe.Shared.Alternatives]? = nil,

@@ -33,14 +33,6 @@ extension Stripe.Connect.Transfer.Reversal.Create {
         /// Boolean indicating whether the application fee should be refunded when reversing this transfer.
         public var refundApplicationFee: Bool?
 
-        private enum CodingKeys: String, CodingKey {
-            case amount
-            case description
-            case expand
-            case metadata
-            case refundApplicationFee
-        }
-
         public init(
             amount: Int? = nil,
             description: String? = nil,
@@ -71,13 +63,6 @@ extension Stripe.Connect.Transfer.Reversal.List {
         /// A cursor for use in pagination.
         public var startingAfter: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case endingBefore
-            case expand
-            case limit
-            case startingAfter
-        }
-
         public init(
             endingBefore: String? = nil,
             expand: [String]? = nil,
@@ -100,10 +85,6 @@ extension Stripe.Connect.Transfer.Reversal.Retrieve {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
-
         public init(
             expand: [String]? = nil
         ) {
@@ -121,11 +102,6 @@ extension Stripe.Connect.Transfer.Reversal.Update {
         public var expand: [String]?
         /// Set of key-value pairs that you can attach to an object.
         public var metadata: Stripe.Clearable<[String: String]>?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case metadata
-        }
 
         public init(
             expand: [String]? = nil,

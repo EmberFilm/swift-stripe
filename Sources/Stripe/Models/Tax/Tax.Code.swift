@@ -22,13 +22,6 @@ extension Stripe.Tax {
         /// A short name for the tax code.
         public var name: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case description
-            case name
-        }
-
         public init(
             id: ID,
             object: String,

@@ -28,16 +28,6 @@ extension Stripe.Entitlements {
         /// The feature's name, for your own purpose, not meant to be displayable to the customer.
         public var name: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case active
-            case livemode
-            case lookupKey
-            case metadata
-            case name
-        }
-
         public init(
             id: ID,
             object: String,

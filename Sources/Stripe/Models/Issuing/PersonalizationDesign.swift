@@ -38,22 +38,6 @@ extension Stripe.Issuing {
         /// Whether this personalization design can be used to create cards.
         public var status: Status?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case cardLogo
-            case carrierText
-            case created
-            case livemode
-            case lookupKey
-            case metadata
-            case name
-            case physicalBundle
-            case preferences
-            case rejectionReasons
-            case status
-        }
-
         public init(
             id: ID,
             object: String,
@@ -102,13 +86,6 @@ extension Stripe.Issuing {
             /// The header title text of the carrier letter.
             public var headerTitle: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case footerBody
-                case footerTitle
-                case headerBody
-                case headerTitle
-            }
-
             public init(
                 footerBody: String? = nil,
                 footerTitle: String? = nil,
@@ -128,11 +105,6 @@ extension Stripe.Issuing {
             /// Whether this personalization design is used to create cards when one is not specified and a default for this connected…
             public var isPlatformDefault: Bool?
 
-            private enum CodingKeys: String, CodingKey {
-                case isDefault
-                case isPlatformDefault
-            }
-
             public init(
                 isDefault: Bool? = nil,
                 isPlatformDefault: Bool? = nil
@@ -147,11 +119,6 @@ extension Stripe.Issuing {
             public var cardLogo: [CardLogo]?
             /// The reason(s) the carrier text was rejected.
             public var carrierText: [CarrierText]?
-
-            private enum CodingKeys: String, CodingKey {
-                case cardLogo
-                case carrierText
-            }
 
             public init(
                 cardLogo: [CardLogo]? = nil,

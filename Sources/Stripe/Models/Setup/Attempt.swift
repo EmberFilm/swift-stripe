@@ -45,25 +45,6 @@ extension Stripe.Setup {
         /// The value of usage on the SetupIntent at the time of this confirmation, one of `off_session` or `on_session`.
         public var usage: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case application
-            case attachToSelf
-            case created
-            case customer
-            case customerAccount
-            case flowDirections
-            case livemode
-            case onBehalfOf
-            case paymentMethod
-            case paymentMethodDetails
-            case setupError
-            case setupIntent
-            case status
-            case usage
-        }
-
         public init(
             id: ID,
             object: String,
@@ -195,17 +176,6 @@ extension Stripe.Setup {
                 /// Owner's verified full name.
                 public var verifiedName: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case bankCode
-                    case bankName
-                    case bic
-                    case generatedSepaDebit
-                    case generatedSepaDebitMandate
-                    case ibanLast4
-                    case preferredLanguage
-                    case verifiedName
-                }
-
                 public init(
                     bankCode: String? = nil,
                     bankName: String? = nil,
@@ -271,24 +241,6 @@ extension Stripe.Setup {
                 /// If this Card is part of a card wallet, this contains the details of the card wallet.
                 public var wallet: Wallet?
 
-                private enum CodingKeys: String, CodingKey {
-                    case brand
-                    case checks
-                    case country
-                    case description
-                    case expMonth
-                    case expYear
-                    case fingerprint
-                    case funding
-                    case iin
-                    case issuer
-                    case last4
-                    case moto
-                    case network
-                    case threeDSecure
-                    case wallet
-                }
-
                 public init(
                     brand: String? = nil,
                     checks: Checks? = nil,
@@ -331,12 +283,6 @@ extension Stripe.Setup {
                     /// If a CVC was provided, results of the check, one of `pass`, `fail`, `unavailable`, or `unchecked`.
                     public var cvcCheck: String?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case addressLine1Check
-                        case addressPostalCodeCheck
-                        case cvcCheck
-                    }
-
                     public init(
                         addressLine1Check: String? = nil,
                         addressPostalCodeCheck: String? = nil,
@@ -361,15 +307,6 @@ extension Stripe.Setup {
                     public var transactionId: String?
                     /// The version of 3D Secure that was used.
                     public var version: Version?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case authenticationFlow
-                        case electronicCommerceIndicator
-                        case result
-                        case resultReason
-                        case transactionId
-                        case version
-                    }
 
                     public init(
                         authenticationFlow: AuthenticationFlow? = nil,
@@ -440,12 +377,6 @@ extension Stripe.Setup {
                     /// The type of the card wallet, one of `apple_pay`, `google_pay`, or `link`.
                     public var `type`: Type?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case applePay
-                        case googlePay
-                        case `type`
-                    }
-
                     public init(
                         applePay: Stripe.Shared.ApplePay? = nil,
                         googlePay: Stripe.Shared.GooglePay? = nil,
@@ -470,11 +401,6 @@ extension Stripe.Setup {
                 @Expandable<Stripe.PaymentMethods.PaymentMethod, String> public var generatedCard: String?
                 /// Details about payments collected offline.
                 public var offline: Stripe.Shared.Offline?
-
-                private enum CodingKeys: String, CodingKey {
-                    case generatedCard
-                    case offline
-                }
 
                 public init(
                     generatedCard: String? = nil,
@@ -502,15 +428,6 @@ extension Stripe.Setup {
                 public var ibanLast4: String?
                 /// Owner's verified full name.
                 public var verifiedName: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case bank
-                    case bic
-                    case generatedSepaDebit
-                    case generatedSepaDebitMandate
-                    case ibanLast4
-                    case verifiedName
-                }
 
                 public init(
                     bank: Bank? = nil,
@@ -598,10 +515,6 @@ extension Stripe.Setup {
                 /// Uniquely identifies this particular Naver Pay account.
                 public var buyerId: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case buyerId
-                }
-
                 public init(
                     buyerId: String? = nil
                 ) {
@@ -624,10 +537,6 @@ extension Stripe.Setup {
             public struct Pix: Codable, Hashable, Sendable {
                 /// Uniquely identifies this particular Pix account.
                 public var fingerprint: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case fingerprint
-                }
 
                 public init(
                     fingerprint: String? = nil
@@ -665,17 +574,6 @@ extension Stripe.Setup {
                 public var preferredLanguage: PreferredLanguage?
                 /// Owner's verified full name.
                 public var verifiedName: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case bankCode
-                    case bankName
-                    case bic
-                    case generatedSepaDebit
-                    case generatedSepaDebitMandate
-                    case ibanLast4
-                    case preferredLanguage
-                    case verifiedName
-                }
 
                 public init(
                     bankCode: String? = nil,

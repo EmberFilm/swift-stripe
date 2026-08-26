@@ -34,19 +34,6 @@ extension Stripe.Fraud.ValueLists {
         /// The name of the value list.
         public var name: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case alias
-            case created
-            case createdBy
-            case itemType
-            case listItems
-            case livemode
-            case metadata
-            case name
-        }
-
         public init(
             id: ID,
             object: String,
@@ -97,13 +84,6 @@ extension Stripe.Fraud.ValueLists {
             public var hasMore: Bool?
             /// The URL where this list can be accessed.
             public var url: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case object
-                case data
-                case hasMore
-                case url
-            }
 
             public init(
                 object: String,

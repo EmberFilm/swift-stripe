@@ -29,13 +29,6 @@ extension Stripe.PaymentAttemptRecord.List {
         /// A cursor for use in pagination.
         public var startingAfter: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case limit
-            case paymentRecord
-            case startingAfter
-        }
-
         public init(
             expand: [String]? = nil,
             limit: Int? = nil,
@@ -57,10 +50,6 @@ extension Stripe.PaymentAttemptRecord.Retrieve {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil

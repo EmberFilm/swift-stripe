@@ -25,15 +25,6 @@ extension FinancialConnections {
         public var status: Status?
         public var statusDetails: StatusDetails?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case institutionName
-            case livemode
-            case status
-            case statusDetails
-        }
-
         public init(
             id: ID,
             object: String,
@@ -60,11 +51,6 @@ extension FinancialConnections {
             public var active: Active?
             public var inactive: Inactive?
 
-            private enum CodingKeys: String, CodingKey {
-                case active
-                case inactive
-            }
-
             public init(
                 active: Active? = nil,
                 inactive: Inactive? = nil
@@ -78,11 +64,6 @@ extension FinancialConnections {
                 public var action: Action?
                 /// When the Authorization is expected to become inactive, if applicable.
                 public var expectedDeactivationDate: Date?
-
-                private enum CodingKeys: String, CodingKey {
-                    case action
-                    case expectedDeactivationDate
-                }
 
                 public init(
                     action: Action? = nil,
@@ -102,10 +83,6 @@ extension FinancialConnections {
             public struct Inactive: Codable, Hashable, Sendable {
                 /// The action (if any) to relink the inactive Authorization.
                 public var action: Action?
-
-                private enum CodingKeys: String, CodingKey {
-                    case action
-                }
 
                 public init(
                     action: Action? = nil

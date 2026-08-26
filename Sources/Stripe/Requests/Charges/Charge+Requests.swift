@@ -43,18 +43,6 @@ extension Stripe.Charges.Charge.Capture {
         /// A string that identifies this transaction as part of a group.
         public var transferGroup: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case amount
-            case applicationFee
-            case applicationFeeAmount
-            case expand
-            case receiptEmail
-            case statementDescriptor
-            case statementDescriptorSuffix
-            case transferData
-            case transferGroup
-        }
-
         public init(
             amount: Int? = nil,
             applicationFee: Int? = nil,
@@ -81,10 +69,6 @@ extension Stripe.Charges.Charge.Capture {
         public struct TransferData: Codable, Hashable, Sendable {
             /// The amount transferred to the destination account, if specified.
             public var amount: Int?
-
-            private enum CodingKeys: String, CodingKey {
-                case amount
-            }
 
             public init(
                 amount: Int? = nil
@@ -137,28 +121,6 @@ extension Stripe.Charges.Charge.Create {
         /// A string that identifies this transaction as part of a group.
         public var transferGroup: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case amount
-            case applicationFee
-            case applicationFeeAmount
-            case capture
-            case currency
-            case customer
-            case description
-            case destination
-            case expand
-            case metadata
-            case onBehalfOf
-            case radarOptions
-            case receiptEmail
-            case shipping
-            case source
-            case statementDescriptor
-            case statementDescriptorSuffix
-            case transferData
-            case transferGroup
-        }
-
         public init(
             amount: Int? = nil,
             applicationFee: Int? = nil,
@@ -207,11 +169,6 @@ extension Stripe.Charges.Charge.Create {
             /// The amount to transfer to the destination account without creating an `Application Fee` object.
             public var amount: Int?
 
-            private enum CodingKeys: String, CodingKey {
-                case account
-                case amount
-            }
-
             public init(
                 account: String,
                 amount: Int? = nil
@@ -225,10 +182,6 @@ extension Stripe.Charges.Charge.Create {
         public struct RadarOptions: Codable, Hashable, Sendable {
             /// A Radar Session is a snapshot of the browser metadata and device details that help Radar make more accurate prediction…
             public var session: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case session
-            }
 
             public init(
                 session: String? = nil
@@ -249,14 +202,6 @@ extension Stripe.Charges.Charge.Create {
             public var phone: String?
             /// The tracking number for a physical product, obtained from the delivery service.
             public var trackingNumber: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case address
-                case carrier
-                case name
-                case phone
-                case trackingNumber
-            }
 
             public init(
                 address: Address,
@@ -287,15 +232,6 @@ extension Stripe.Charges.Charge.Create {
                 /// State, county, province, or region (ISO 3166-2).
                 public var state: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case city
-                    case country
-                    case line1
-                    case line2
-                    case postalCode
-                    case state
-                }
-
                 public init(
                     city: String? = nil,
                     country: String? = nil,
@@ -322,12 +258,6 @@ extension Stripe.Charges.Charge.Create {
             public var description: String?
             /// ID of an existing, connected Stripe account.
             public var destination: String
-
-            private enum CodingKeys: String, CodingKey {
-                case amount
-                case description
-                case destination
-            }
 
             public init(
                 amount: Int? = nil,
@@ -364,17 +294,6 @@ extension Stripe.Charges.Charge.List {
         /// Only return charges for this transfer group, limited to 100.
         public var transferGroup: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case created
-            case customer
-            case endingBefore
-            case expand
-            case limit
-            case paymentIntent
-            case startingAfter
-            case transferGroup
-        }
-
         public init(
             created: Stripe.RangeQuery? = nil,
             customer: String? = nil,
@@ -405,10 +324,6 @@ extension Stripe.Charges.Charge.Retrieve {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
-
         public init(
             expand: [String]? = nil
         ) {
@@ -430,13 +345,6 @@ extension Stripe.Charges.Charge.Search {
         public var page: String?
         /// The search query string.
         public var query: String
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case limit
-            case page
-            case query
-        }
 
         public init(
             expand: [String]? = nil,
@@ -474,17 +382,6 @@ extension Stripe.Charges.Charge.Update {
         /// A string that identifies this transaction as part of a group.
         public var transferGroup: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case customer
-            case description
-            case expand
-            case fraudDetails
-            case metadata
-            case receiptEmail
-            case shipping
-            case transferGroup
-        }
-
         public init(
             customer: String? = nil,
             description: String? = nil,
@@ -509,10 +406,6 @@ extension Stripe.Charges.Charge.Update {
         public struct FraudDetails: Codable, Hashable, Sendable {
             /// Either `safe` or `fraudulent`.
             public var userReport: UserReport
-
-            private enum CodingKeys: String, CodingKey {
-                case userReport
-            }
 
             public init(
                 userReport: UserReport
@@ -539,14 +432,6 @@ extension Stripe.Charges.Charge.Update {
             public var phone: String?
             /// The tracking number for a physical product, obtained from the delivery service.
             public var trackingNumber: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case address
-                case carrier
-                case name
-                case phone
-                case trackingNumber
-            }
 
             public init(
                 address: Address,
@@ -576,15 +461,6 @@ extension Stripe.Charges.Charge.Update {
                 public var postalCode: String?
                 /// State, county, province, or region (ISO 3166-2).
                 public var state: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case city
-                    case country
-                    case line1
-                    case line2
-                    case postalCode
-                    case state
-                }
 
                 public init(
                     city: String? = nil,

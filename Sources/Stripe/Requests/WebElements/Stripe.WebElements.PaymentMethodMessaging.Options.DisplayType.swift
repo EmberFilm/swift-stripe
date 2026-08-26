@@ -21,14 +21,6 @@ extension Stripe.WebElements {
             public let countryCode: String?
             public let displayType: DisplayType?
 
-            enum CodingKeys: String, CodingKey {
-                case amount
-                case currency
-                case paymentMethodTypes
-                case countryCode
-                case displayType
-            }
-
             public init(
                 amount: Int? = nil,
                 currency: Stripe.Currency? = nil,

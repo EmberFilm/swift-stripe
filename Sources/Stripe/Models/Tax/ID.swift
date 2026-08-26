@@ -36,20 +36,6 @@ extension Stripe.Tax {
         /// Tax ID verification information.
         public var verification: Verification?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case country
-            case created
-            case customer
-            case customerAccount
-            case livemode
-            case owner
-            case `type`
-            case value
-            case verification
-        }
-
         public init(
             id: ID,
             object: String,
@@ -292,12 +278,6 @@ extension Stripe.Tax {
             public var verifiedAddress: String?
             /// Verified name.
             public var verifiedName: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case status
-                case verifiedAddress
-                case verifiedName
-            }
 
             public init(
                 status: Status? = nil,

@@ -35,23 +35,6 @@ public struct VerificationReport: Codable, Hashable, Sendable, Identifiable {
     /// ID of the VerificationSession that created this report.
     public var verificationSession: String?
 
-    private enum CodingKeys: String, CodingKey {
-        case id
-        case object
-        case clientReferenceId
-        case created
-        case document
-        case email
-        case idNumber
-        case livemode
-        case options
-        case phone
-        case selfie
-        case `type`
-        case verificationFlow
-        case verificationSession
-    }
-
     public init(
         id: ID,
         object: String,
@@ -124,24 +107,6 @@ public struct VerificationReport: Codable, Hashable, Sendable, Identifiable {
         /// Sex as it appears in the document.
         public var unparsedSex: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case address
-            case dob
-            case error
-            case expirationDate
-            case files
-            case firstName
-            case issuedDate
-            case issuingCountry
-            case lastName
-            case number
-            case sex
-            case status
-            case `type`
-            case unparsedPlaceOfBirth
-            case unparsedSex
-        }
-
         public init(
             address: Address? = nil,
             dob: Dob? = nil,
@@ -206,12 +171,6 @@ public struct VerificationReport: Codable, Hashable, Sendable, Identifiable {
             /// The four-digit year.
             public var year: Int?
 
-            private enum CodingKeys: String, CodingKey {
-                case day
-                case month
-                case year
-            }
-
             public init(
                 day: Int? = nil,
                 month: Int? = nil,
@@ -228,11 +187,6 @@ public struct VerificationReport: Codable, Hashable, Sendable, Identifiable {
             public var code: Code?
             /// A human-readable message giving the reason for the failure.
             public var reason: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case code
-                case reason
-            }
 
             public init(
                 code: Code? = nil,
@@ -259,12 +213,6 @@ public struct VerificationReport: Codable, Hashable, Sendable, Identifiable {
             /// The four-digit year.
             public var year: Int?
 
-            private enum CodingKeys: String, CodingKey {
-                case day
-                case month
-                case year
-            }
-
             public init(
                 day: Int? = nil,
                 month: Int? = nil,
@@ -284,12 +232,6 @@ public struct VerificationReport: Codable, Hashable, Sendable, Identifiable {
             public var month: Int?
             /// The four-digit year.
             public var year: Int?
-
-            private enum CodingKeys: String, CodingKey {
-                case day
-                case month
-                case year
-            }
 
             public init(
                 day: Int? = nil,
@@ -312,12 +254,6 @@ public struct VerificationReport: Codable, Hashable, Sendable, Identifiable {
         /// Status of this `email` check.
         public var status: Status?
 
-        private enum CodingKeys: String, CodingKey {
-            case email
-            case error
-            case status
-        }
-
         public init(
             email: String? = nil,
             error: Error? = nil,
@@ -339,11 +275,6 @@ public struct VerificationReport: Codable, Hashable, Sendable, Identifiable {
             public var code: Code?
             /// A human-readable message giving the reason for the failure.
             public var reason: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case code
-                case reason
-            }
 
             public init(
                 code: Code? = nil,
@@ -377,16 +308,6 @@ public struct VerificationReport: Codable, Hashable, Sendable, Identifiable {
         public var lastName: String?
         /// Status of this `id_number` check.
         public var status: Status?
-
-        private enum CodingKeys: String, CodingKey {
-            case dob
-            case error
-            case firstName
-            case idNumber
-            case idNumberType
-            case lastName
-            case status
-        }
 
         public init(
             dob: Dob? = nil,
@@ -428,12 +349,6 @@ public struct VerificationReport: Codable, Hashable, Sendable, Identifiable {
             /// The four-digit year.
             public var year: Int?
 
-            private enum CodingKeys: String, CodingKey {
-                case day
-                case month
-                case year
-            }
-
             public init(
                 day: Int? = nil,
                 month: Int? = nil,
@@ -450,11 +365,6 @@ public struct VerificationReport: Codable, Hashable, Sendable, Identifiable {
             public var code: Code?
             /// A human-readable message giving the reason for the failure.
             public var reason: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case code
-                case reason
-            }
 
             public init(
                 code: Code? = nil,
@@ -477,11 +387,6 @@ public struct VerificationReport: Codable, Hashable, Sendable, Identifiable {
         public var document: Document?
         public var idNumber: IdNumber?
 
-        private enum CodingKeys: String, CodingKey {
-            case document
-            case idNumber
-        }
-
         public init(
             document: Document? = nil,
             idNumber: IdNumber? = nil
@@ -499,13 +404,6 @@ public struct VerificationReport: Codable, Hashable, Sendable, Identifiable {
             public var requireLiveCapture: Bool?
             /// Capture a face image and perform a selfie check comparing a photo ID and a picture of your user’s face.
             public var requireMatchingSelfie: Bool?
-
-            private enum CodingKeys: String, CodingKey {
-                case allowedTypes
-                case requireIdNumber
-                case requireLiveCapture
-                case requireMatchingSelfie
-            }
 
             public init(
                 allowedTypes: [AllowedTypes]? = nil,
@@ -540,12 +438,6 @@ public struct VerificationReport: Codable, Hashable, Sendable, Identifiable {
         /// Status of this `phone` check.
         public var status: Status?
 
-        private enum CodingKeys: String, CodingKey {
-            case error
-            case phone
-            case status
-        }
-
         public init(
             error: Error? = nil,
             phone: String? = nil,
@@ -567,11 +459,6 @@ public struct VerificationReport: Codable, Hashable, Sendable, Identifiable {
             public var code: Code?
             /// A human-readable message giving the reason for the failure.
             public var reason: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case code
-                case reason
-            }
 
             public init(
                 code: Code? = nil,
@@ -600,13 +487,6 @@ public struct VerificationReport: Codable, Hashable, Sendable, Identifiable {
         /// Status of this `selfie` check.
         public var status: Status?
 
-        private enum CodingKeys: String, CodingKey {
-            case document
-            case error
-            case selfie
-            case status
-        }
-
         public init(
             document: String? = nil,
             error: Error? = nil,
@@ -630,11 +510,6 @@ public struct VerificationReport: Codable, Hashable, Sendable, Identifiable {
             public var code: Code?
             /// A human-readable message giving the reason for the failure.
             public var reason: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case code
-                case reason
-            }
 
             public init(
                 code: Code? = nil,

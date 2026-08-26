@@ -45,20 +45,6 @@ extension Stripe.Tax.Rate.Create {
         /// The high-level tax type, such as `vat` or `sales_tax`.
         public var taxType: TaxType?
 
-        private enum CodingKeys: String, CodingKey {
-            case active
-            case country
-            case description
-            case displayName
-            case expand
-            case inclusive
-            case jurisdiction
-            case metadata
-            case percentage
-            case state
-            case taxType
-        }
-
         public init(
             active: Bool? = nil,
             country: String? = nil,
@@ -126,16 +112,6 @@ extension Stripe.Tax.Rate.List {
         /// A cursor for use in pagination.
         public var startingAfter: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case active
-            case created
-            case endingBefore
-            case expand
-            case inclusive
-            case limit
-            case startingAfter
-        }
-
         public init(
             active: Bool? = nil,
             created: Stripe.RangeQuery? = nil,
@@ -163,10 +139,6 @@ extension Stripe.Tax.Rate.Retrieve {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil
@@ -199,18 +171,6 @@ extension Stripe.Tax.Rate.Update {
         public var state: String?
         /// The high-level tax type, such as `vat` or `sales_tax`.
         public var taxType: TaxType?
-
-        private enum CodingKeys: String, CodingKey {
-            case active
-            case country
-            case description
-            case displayName
-            case expand
-            case jurisdiction
-            case metadata
-            case state
-            case taxType
-        }
 
         public init(
             active: Bool? = nil,

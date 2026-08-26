@@ -37,21 +37,6 @@ extension Stripe.Products.Shipping {
         /// The type of calculation to use on the shipping rate.
         public var `type`: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case active
-            case created
-            case deliveryEstimate
-            case displayName
-            case fixedAmount
-            case livemode
-            case metadata
-            case taxBehavior
-            case taxCode
-            case `type`
-        }
-
         public init(
             id: ID,
             object: String,
@@ -93,11 +78,6 @@ extension Stripe.Products.Shipping {
             /// The lower bound of the estimated range.
             public var minimum: Minimum?
 
-            private enum CodingKeys: String, CodingKey {
-                case maximum
-                case minimum
-            }
-
             public init(
                 maximum: Maximum? = nil,
                 minimum: Minimum? = nil
@@ -111,11 +91,6 @@ extension Stripe.Products.Shipping {
                 public var unit: Unit?
                 /// Must be greater than 0.
                 public var value: Int?
-
-                private enum CodingKeys: String, CodingKey {
-                    case unit
-                    case value
-                }
 
                 public init(
                     unit: Unit? = nil,
@@ -140,11 +115,6 @@ extension Stripe.Products.Shipping {
                 public var unit: Unit?
                 /// Must be greater than 0.
                 public var value: Int?
-
-                private enum CodingKeys: String, CodingKey {
-                    case unit
-                    case value
-                }
 
                 public init(
                     unit: Unit? = nil,
@@ -173,12 +143,6 @@ extension Stripe.Products.Shipping {
             /// Shipping rates defined in each available currency option.
             public var currencyOptions: [String: CurrencyOptions]?
 
-            private enum CodingKeys: String, CodingKey {
-                case amount
-                case currency
-                case currencyOptions
-            }
-
             public init(
                 amount: Int? = nil,
                 currency: Stripe.Currency? = nil,
@@ -194,11 +158,6 @@ extension Stripe.Products.Shipping {
                 public var amount: Int?
                 /// Specifies whether the rate is considered inclusive of taxes or exclusive of taxes.
                 public var taxBehavior: TaxBehavior?
-
-                private enum CodingKeys: String, CodingKey {
-                    case amount
-                    case taxBehavior
-                }
 
                 public init(
                     amount: Int? = nil,

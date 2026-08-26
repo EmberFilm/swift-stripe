@@ -48,26 +48,6 @@ extension Stripe.Connect {
         /// A string that identifies this transaction as part of a group.
         public var transferGroup: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case amount
-            case amountReversed
-            case balanceTransaction
-            case created
-            case currency
-            case description
-            case destination
-            case destinationPayment
-            case livemode
-            case metadata
-            case reversals
-            case reversed
-            case sourceTransaction
-            case sourceType
-            case transferGroup
-        }
-
         public init(
             id: ID,
             object: String,
@@ -116,13 +96,6 @@ extension Stripe.Connect {
             public var hasMore: Bool?
             /// The URL where this list can be accessed.
             public var url: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case object
-                case data
-                case hasMore
-                case url
-            }
 
             public init(
                 object: String,

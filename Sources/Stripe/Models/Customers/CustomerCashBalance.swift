@@ -25,15 +25,6 @@ extension Stripe.Customers {
         public var livemode: Bool?
         public var settings: Settings?
 
-        private enum CodingKeys: String, CodingKey {
-            case object
-            case available
-            case customer
-            case customerAccount
-            case livemode
-            case settings
-        }
-
         public init(
             object: String,
             available: [String: Int]? = nil,
@@ -55,11 +46,6 @@ extension Stripe.Customers {
             public var reconciliationMode: ReconciliationMode?
             /// A flag to indicate if reconciliation mode returned is the user's default or is specific to this customer cash balance
             public var usingMerchantDefault: Bool?
-
-            private enum CodingKeys: String, CodingKey {
-                case reconciliationMode
-                case usingMerchantDefault
-            }
 
             public init(
                 reconciliationMode: ReconciliationMode? = nil,

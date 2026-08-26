@@ -35,16 +35,6 @@ extension FinancialConnections.Transaction.List {
         /// A filter on the list based on the object `transaction_refresh` field.
         public var transactionRefresh: TransactionRefresh?
 
-        private enum CodingKeys: String, CodingKey {
-            case account
-            case endingBefore
-            case expand
-            case limit
-            case startingAfter
-            case transactedAt
-            case transactionRefresh
-        }
-
         public init(
             account: String,
             endingBefore: String? = nil,
@@ -68,10 +58,6 @@ extension FinancialConnections.Transaction.List {
             /// Return results where the transactions were created or updated by a refresh that took place after this refresh (non-inc…
             public var after: String
 
-            private enum CodingKeys: String, CodingKey {
-                case after
-            }
-
             public init(
                 after: String
             ) {
@@ -88,10 +74,6 @@ extension FinancialConnections.Transaction.Retrieve {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil

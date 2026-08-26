@@ -41,12 +41,6 @@ extension Stripe.Billing.Invoice.AddLines {
         /// The line items to add.
         public var lines: [Lines]
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case invoiceMetadata
-            case lines
-        }
-
         public init(
             expand: [String]? = nil,
             invoiceMetadata: Stripe.Clearable<[String: String]>? = nil,
@@ -84,22 +78,6 @@ extension Stripe.Billing.Invoice.AddLines {
             public var taxAmounts: Stripe.Clearable<[TaxAmounts]>?
             /// The tax rates which apply to the line item.
             public var taxRates: Stripe.Clearable<[String]>?
-
-            private enum CodingKeys: String, CodingKey {
-                case amount
-                case description
-                case discountable
-                case discounts
-                case invoiceItem
-                case metadata
-                case period
-                case priceData
-                case pricing
-                case quantity
-                case quantityDecimal
-                case taxAmounts
-                case taxRates
-            }
 
             public init(
                 amount: Int? = nil,
@@ -139,12 +117,6 @@ extension Stripe.Billing.Invoice.AddLines {
                 /// ID of the promotion code to create a new discount for.
                 public var promotionCode: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case coupon
-                    case discount
-                    case promotionCode
-                }
-
                 public init(
                     coupon: String? = nil,
                     discount: String? = nil,
@@ -162,11 +134,6 @@ extension Stripe.Billing.Invoice.AddLines {
                 public var end: Date
                 /// The start of the period.
                 public var start: Date
-
-                private enum CodingKeys: String, CodingKey {
-                    case end
-                    case start
-                }
 
                 public init(
                     end: Date,
@@ -191,15 +158,6 @@ extension Stripe.Billing.Invoice.AddLines {
                 public var unitAmount: Int?
                 /// Same as `unit_amount`, but accepts a decimal value in cents (or local equivalent) with at most 12 decimal places.
                 public var unitAmountDecimal: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case currency
-                    case product
-                    case productData
-                    case taxBehavior
-                    case unitAmount
-                    case unitAmountDecimal
-                }
 
                 public init(
                     currency: Stripe.Currency,
@@ -238,15 +196,6 @@ extension Stripe.Billing.Invoice.AddLines {
                     /// A label that represents units of this product.
                     public var unitLabel: String?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case description
-                        case images
-                        case metadata
-                        case name
-                        case taxCode
-                        case unitLabel
-                    }
-
                     public init(
                         description: String? = nil,
                         images: [String]? = nil,
@@ -270,10 +219,6 @@ extension Stripe.Billing.Invoice.AddLines {
                 /// The ID of the price object.
                 public var price: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case price
-                }
-
                 public init(
                     price: String? = nil
                 ) {
@@ -290,13 +235,6 @@ extension Stripe.Billing.Invoice.AddLines {
                 public var taxabilityReason: TaxabilityReason?
                 /// The amount on which tax is calculated, in cents (or local equivalent).
                 public var taxableAmount: Int
-
-                private enum CodingKeys: String, CodingKey {
-                    case amount
-                    case taxRateData
-                    case taxabilityReason
-                    case taxableAmount
-                }
 
                 public init(
                     amount: Int,
@@ -348,18 +286,6 @@ extension Stripe.Billing.Invoice.AddLines {
                     public var state: String?
                     /// The high-level tax type, such as `vat` or `sales_tax`.
                     public var taxType: TaxType?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case country
-                        case description
-                        case displayName
-                        case inclusive
-                        case jurisdiction
-                        case jurisdictionLevel
-                        case percentage
-                        case state
-                        case taxType
-                    }
 
                     public init(
                         country: String? = nil,
@@ -427,12 +353,6 @@ extension Stripe.Billing.Invoice.AttachPayment {
         public var paymentIntent: String?
         /// The ID of the PaymentRecord to attach to the invoice.
         public var paymentRecord: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case paymentIntent
-            case paymentRecord
-        }
 
         public init(
             expand: [String]? = nil,
@@ -517,42 +437,6 @@ extension Stripe.Billing.Invoice.Create {
         public var subscription: String?
         /// If specified, the funds from the invoice will be transferred to the destination and the ID of the resulting transfer w…
         public var transferData: TransferData?
-
-        private enum CodingKeys: String, CodingKey {
-            case accountTaxIds
-            case applicationFeeAmount
-            case autoAdvance
-            case automaticTax
-            case automaticallyFinalizesAt
-            case collectionMethod
-            case currency
-            case customFields
-            case customer
-            case customerAccount
-            case daysUntilDue
-            case defaultPaymentMethod
-            case defaultSource
-            case defaultTaxRates
-            case description
-            case discounts
-            case dueDate
-            case effectiveAt
-            case expand
-            case footer
-            case fromInvoice
-            case issuer
-            case metadata
-            case number
-            case onBehalfOf
-            case paymentSettings
-            case pendingInvoiceItemsBehavior
-            case rendering
-            case shippingCost
-            case shippingDetails
-            case statementDescriptor
-            case subscription
-            case transferData
-        }
 
         public init(
             accountTaxIds: Stripe.Clearable<[String]>? = nil,
@@ -641,11 +525,6 @@ extension Stripe.Billing.Invoice.Create {
             /// The account that's liable for tax.
             public var liability: Liability?
 
-            private enum CodingKeys: String, CodingKey {
-                case enabled
-                case liability
-            }
-
             public init(
                 enabled: Bool,
                 liability: Liability? = nil
@@ -660,11 +539,6 @@ extension Stripe.Billing.Invoice.Create {
                 public var account: String?
                 /// Type of the account referenced in the request.
                 public var `type`: Type
-
-                private enum CodingKeys: String, CodingKey {
-                    case account
-                    case `type`
-                }
 
                 public init(
                     account: String? = nil,
@@ -687,11 +561,6 @@ extension Stripe.Billing.Invoice.Create {
             /// The value of the custom field.
             public var value: String
 
-            private enum CodingKeys: String, CodingKey {
-                case name
-                case value
-            }
-
             public init(
                 name: String,
                 value: String
@@ -708,12 +577,6 @@ extension Stripe.Billing.Invoice.Create {
             public var discount: String?
             /// ID of the promotion code to create a new discount for.
             public var promotionCode: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case coupon
-                case discount
-                case promotionCode
-            }
 
             public init(
                 coupon: String? = nil,
@@ -733,11 +596,6 @@ extension Stripe.Billing.Invoice.Create {
             /// The `id` of the invoice that will be cloned.
             public var invoice: String
 
-            private enum CodingKeys: String, CodingKey {
-                case action
-                case invoice
-            }
-
             public init(
                 action: String,
                 invoice: String
@@ -753,11 +611,6 @@ extension Stripe.Billing.Invoice.Create {
             public var account: String?
             /// Type of the account referenced in the request.
             public var `type`: Type
-
-            private enum CodingKeys: String, CodingKey {
-                case account
-                case `type`
-            }
 
             public init(
                 account: String? = nil,
@@ -781,12 +634,6 @@ extension Stripe.Billing.Invoice.Create {
             public var paymentMethodOptions: PaymentMethodOptions?
             /// The list of payment method types (e.g.
             public var paymentMethodTypes: Stripe.Clearable<[PaymentMethodTypes]>?
-
-            private enum CodingKeys: String, CodingKey {
-                case defaultMandate
-                case paymentMethodOptions
-                case paymentMethodTypes
-            }
 
             public init(
                 defaultMandate: String? = nil,
@@ -872,19 +719,6 @@ extension Stripe.Billing.Invoice.Create {
                 /// If paying by `us_bank_account`, this sub-hash contains details about the ACH direct debit payment method options to pa…
                 public var usBankAccount: Stripe.Clearable<UsBankAccount>?
 
-                private enum CodingKeys: String, CodingKey {
-                    case acssDebit
-                    case bancontact
-                    case card
-                    case customerBalance
-                    case konbini
-                    case payto
-                    case pix
-                    case sepaDebit
-                    case upi
-                    case usBankAccount
-                }
-
                 public init(
                     acssDebit: Stripe.Clearable<AcssDebit>? = nil,
                     bancontact: Stripe.Clearable<Bancontact>? = nil,
@@ -915,11 +749,6 @@ extension Stripe.Billing.Invoice.Create {
                     /// Verification method for the intent
                     public var verificationMethod: VerificationMethod?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case mandateOptions
-                        case verificationMethod
-                    }
-
                     public init(
                         mandateOptions: MandateOptions? = nil,
                         verificationMethod: VerificationMethod? = nil
@@ -939,10 +768,6 @@ extension Stripe.Billing.Invoice.Create {
                         /// Transaction type of the mandate.
                         public var transactionType: TransactionType?
 
-                        private enum CodingKeys: String, CodingKey {
-                            case transactionType
-                        }
-
                         public init(
                             transactionType: TransactionType? = nil
                         ) {
@@ -959,10 +784,6 @@ extension Stripe.Billing.Invoice.Create {
                 public struct Bancontact: Codable, Hashable, Sendable {
                     /// Preferred language of the Bancontact authorization page that the customer is redirected to.
                     public var preferredLanguage: PreferredLanguage?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case preferredLanguage
-                    }
 
                     public init(
                         preferredLanguage: PreferredLanguage? = nil
@@ -983,11 +804,6 @@ extension Stripe.Billing.Invoice.Create {
                     public var installments: Installments?
                     /// We strongly recommend that you rely on our SCA Engine to automatically prompt your customers for authentication based …
                     public var requestThreeDSecure: RequestThreeDSecure?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case installments
-                        case requestThreeDSecure
-                    }
 
                     public init(
                         installments: Installments? = nil,
@@ -1010,11 +826,6 @@ extension Stripe.Billing.Invoice.Create {
                         /// The selected installment plan to use for this invoice.
                         public var plan: Stripe.Clearable<Plan>?
 
-                        private enum CodingKeys: String, CodingKey {
-                            case enabled
-                            case plan
-                        }
-
                         public init(
                             enabled: Bool? = nil,
                             plan: Stripe.Clearable<Plan>? = nil
@@ -1030,12 +841,6 @@ extension Stripe.Billing.Invoice.Create {
                             public var interval: String?
                             /// Type of installment plan, one of `fixed_count`, `bonus`, or `revolving`.
                             public var `type`: Type
-
-                            private enum CodingKeys: String, CodingKey {
-                                case count
-                                case interval
-                                case `type`
-                            }
 
                             public init(
                                 count: Int? = nil,
@@ -1062,11 +867,6 @@ extension Stripe.Billing.Invoice.Create {
                     /// The funding method type to be used when there are not enough funds in the customer balance.
                     public var fundingType: String?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case bankTransfer
-                        case fundingType
-                    }
-
                     public init(
                         bankTransfer: BankTransfer? = nil,
                         fundingType: String? = nil
@@ -1082,11 +882,6 @@ extension Stripe.Billing.Invoice.Create {
                         /// The bank transfer type that can be used for funding.
                         public var `type`: String?
 
-                        private enum CodingKeys: String, CodingKey {
-                            case euBankTransfer
-                            case `type`
-                        }
-
                         public init(
                             euBankTransfer: EuBankTransfer? = nil,
                             `type`: String? = nil
@@ -1099,10 +894,6 @@ extension Stripe.Billing.Invoice.Create {
                         public struct EuBankTransfer: Codable, Hashable, Sendable {
                             /// The desired country code of the bank account information.
                             public var country: String
-
-                            private enum CodingKeys: String, CodingKey {
-                                case country
-                            }
 
                             public init(
                                 country: String
@@ -1121,10 +912,6 @@ extension Stripe.Billing.Invoice.Create {
                     /// Additional fields for Mandate creation.
                     public var mandateOptions: MandateOptions?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case mandateOptions
-                    }
-
                     public init(
                         mandateOptions: MandateOptions? = nil
                     ) {
@@ -1137,11 +924,6 @@ extension Stripe.Billing.Invoice.Create {
                         public var amount: Int?
                         /// The purpose for which payments are made.
                         public var purpose: Purpose?
-
-                        private enum CodingKeys: String, CodingKey {
-                            case amount
-                            case purpose
-                        }
 
                         public init(
                             amount: Int? = nil,
@@ -1173,11 +955,6 @@ extension Stripe.Billing.Invoice.Create {
                     /// The number of seconds (between 10 and 1209600) after which Pix payment will expire.
                     public var expiresAfterSeconds: Int?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case amountIncludesIof
-                        case expiresAfterSeconds
-                    }
-
                     public init(
                         amountIncludesIof: AmountIncludesIof? = nil,
                         expiresAfterSeconds: Int? = nil
@@ -1200,10 +977,6 @@ extension Stripe.Billing.Invoice.Create {
                     /// Configuration options for setting up an eMandate
                     public var mandateOptions: MandateOptions?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case mandateOptions
-                    }
-
                     public init(
                         mandateOptions: MandateOptions? = nil
                     ) {
@@ -1220,13 +993,6 @@ extension Stripe.Billing.Invoice.Create {
                         public var description: String?
                         /// End date of the mandate or subscription.
                         public var endDate: Date?
-
-                        private enum CodingKeys: String, CodingKey {
-                            case amount
-                            case amountType
-                            case description
-                            case endDate
-                        }
 
                         public init(
                             amount: Int? = nil,
@@ -1253,11 +1019,6 @@ extension Stripe.Billing.Invoice.Create {
                     /// Verification method for the intent
                     public var verificationMethod: VerificationMethod?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case financialConnections
-                        case verificationMethod
-                    }
-
                     public init(
                         financialConnections: FinancialConnections? = nil,
                         verificationMethod: VerificationMethod? = nil
@@ -1280,12 +1041,6 @@ extension Stripe.Billing.Invoice.Create {
                         public var permissions: [Permissions]?
                         /// List of data features that you would like to retrieve upon account creation.
                         public var prefetch: [Prefetch]?
-
-                        private enum CodingKeys: String, CodingKey {
-                            case filters
-                            case permissions
-                            case prefetch
-                        }
 
                         public init(
                             filters: Filters? = nil,
@@ -1315,10 +1070,6 @@ extension Stripe.Billing.Invoice.Create {
                             /// The account subcategories to use to filter for selectable accounts.
                             public var accountSubcategories: [AccountSubcategories]?
 
-                            private enum CodingKeys: String, CodingKey {
-                                case accountSubcategories
-                            }
-
                             public init(
                                 accountSubcategories: [AccountSubcategories]? = nil
                             ) {
@@ -1346,13 +1097,6 @@ extension Stripe.Billing.Invoice.Create {
             /// The specific version of invoice rendering template to use for this invoice.
             public var templateVersion: Stripe.Clearable<Int>?
 
-            private enum CodingKeys: String, CodingKey {
-                case amountTaxDisplay
-                case pdf
-                case template
-                case templateVersion
-            }
-
             public init(
                 amountTaxDisplay: AmountTaxDisplay? = nil,
                 pdf: Pdf? = nil,
@@ -1376,10 +1120,6 @@ extension Stripe.Billing.Invoice.Create {
                 /// Page size for invoice PDF.
                 public var pageSize: PageSize?
 
-                private enum CodingKeys: String, CodingKey {
-                    case pageSize
-                }
-
                 public init(
                     pageSize: PageSize? = nil
                 ) {
@@ -1400,11 +1140,6 @@ extension Stripe.Billing.Invoice.Create {
             public var shippingRate: String?
             /// Parameters to create a new ad-hoc shipping rate for this order.
             public var shippingRateData: ShippingRateData?
-
-            private enum CodingKeys: String, CodingKey {
-                case shippingRate
-                case shippingRateData
-            }
 
             public init(
                 shippingRate: String? = nil,
@@ -1430,16 +1165,6 @@ extension Stripe.Billing.Invoice.Create {
                 public var taxCode: String?
                 /// The type of calculation to use on the shipping rate.
                 public var `type`: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case deliveryEstimate
-                    case displayName
-                    case fixedAmount
-                    case metadata
-                    case taxBehavior
-                    case taxCode
-                    case `type`
-                }
 
                 public init(
                     deliveryEstimate: DeliveryEstimate? = nil,
@@ -1472,11 +1197,6 @@ extension Stripe.Billing.Invoice.Create {
                     /// The lower bound of the estimated range.
                     public var minimum: Minimum?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case maximum
-                        case minimum
-                    }
-
                     public init(
                         maximum: Maximum? = nil,
                         minimum: Minimum? = nil
@@ -1491,11 +1211,6 @@ extension Stripe.Billing.Invoice.Create {
                         public var unit: Unit
                         /// Must be greater than 0.
                         public var value: Int
-
-                        private enum CodingKeys: String, CodingKey {
-                            case unit
-                            case value
-                        }
 
                         public init(
                             unit: Unit,
@@ -1520,11 +1235,6 @@ extension Stripe.Billing.Invoice.Create {
                         public var unit: Unit
                         /// Must be greater than 0.
                         public var value: Int
-
-                        private enum CodingKeys: String, CodingKey {
-                            case unit
-                            case value
-                        }
 
                         public init(
                             unit: Unit,
@@ -1553,12 +1263,6 @@ extension Stripe.Billing.Invoice.Create {
                     /// Shipping rates defined in each available currency option.
                     public var currencyOptions: [String: CurrencyOptions]?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case amount
-                        case currency
-                        case currencyOptions
-                    }
-
                     public init(
                         amount: Int,
                         currency: Stripe.Currency,
@@ -1574,11 +1278,6 @@ extension Stripe.Billing.Invoice.Create {
                         public var amount: Int
                         /// Specifies whether the rate is considered inclusive of taxes or exclusive of taxes.
                         public var taxBehavior: TaxBehavior?
-
-                        private enum CodingKeys: String, CodingKey {
-                            case amount
-                            case taxBehavior
-                        }
 
                         public init(
                             amount: Int,
@@ -1607,12 +1306,6 @@ extension Stripe.Billing.Invoice.Create {
             /// Recipient phone (including extension)
             public var phone: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case address
-                case name
-                case phone
-            }
-
             public init(
                 address: Address,
                 name: String,
@@ -1638,15 +1331,6 @@ extension Stripe.Billing.Invoice.Create {
                 /// State, county, province, or region (ISO 3166-2).
                 public var state: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case city
-                    case country
-                    case line1
-                    case line2
-                    case postalCode
-                    case state
-                }
-
                 public init(
                     city: String? = nil,
                     country: String? = nil,
@@ -1671,11 +1355,6 @@ extension Stripe.Billing.Invoice.Create {
             public var amount: Int?
             /// ID of an existing, connected Stripe account.
             public var destination: String
-
-            private enum CodingKeys: String, CodingKey {
-                case amount
-                case destination
-            }
 
             public init(
                 amount: Int? = nil,
@@ -1724,24 +1403,6 @@ extension Stripe.Billing.Invoice.CreatePreview {
         /// The subscription creation or modification params to apply as a preview.
         public var subscriptionDetails: SubscriptionDetails?
 
-        private enum CodingKeys: String, CodingKey {
-            case automaticTax
-            case currency
-            case customer
-            case customerAccount
-            case customerDetails
-            case discounts
-            case expand
-            case invoiceItems
-            case issuer
-            case onBehalfOf
-            case previewMode
-            case schedule
-            case scheduleDetails
-            case subscription
-            case subscriptionDetails
-        }
-
         public init(
             automaticTax: AutomaticTax? = nil,
             currency: Stripe.Currency? = nil,
@@ -1788,11 +1449,6 @@ extension Stripe.Billing.Invoice.CreatePreview {
             /// The account that's liable for tax.
             public var liability: Liability?
 
-            private enum CodingKeys: String, CodingKey {
-                case enabled
-                case liability
-            }
-
             public init(
                 enabled: Bool,
                 liability: Liability? = nil
@@ -1807,11 +1463,6 @@ extension Stripe.Billing.Invoice.CreatePreview {
                 public var account: String?
                 /// Type of the account referenced in the request.
                 public var `type`: Type
-
-                private enum CodingKeys: String, CodingKey {
-                    case account
-                    case `type`
-                }
 
                 public init(
                     account: String? = nil,
@@ -1840,14 +1491,6 @@ extension Stripe.Billing.Invoice.CreatePreview {
             public var taxExempt: TaxExempt?
             /// The customer's tax IDs.
             public var taxIds: [TaxIds]?
-
-            private enum CodingKeys: String, CodingKey {
-                case address
-                case shipping
-                case tax
-                case taxExempt
-                case taxIds
-            }
 
             public init(
                 address: Stripe.Clearable<Address>? = nil,
@@ -1884,15 +1527,6 @@ extension Stripe.Billing.Invoice.CreatePreview {
                 /// State, county, province, or region (ISO 3166-2).
                 public var state: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case city
-                    case country
-                    case line1
-                    case line2
-                    case postalCode
-                    case state
-                }
-
                 public init(
                     city: String? = nil,
                     country: String? = nil,
@@ -1917,12 +1551,6 @@ extension Stripe.Billing.Invoice.CreatePreview {
                 public var name: String
                 /// Customer phone (including extension).
                 public var phone: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case address
-                    case name
-                    case phone
-                }
 
                 public init(
                     address: Address,
@@ -1949,15 +1577,6 @@ extension Stripe.Billing.Invoice.CreatePreview {
                     /// State, county, province, or region (ISO 3166-2).
                     public var state: String?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case city
-                        case country
-                        case line1
-                        case line2
-                        case postalCode
-                        case state
-                    }
-
                     public init(
                         city: String? = nil,
                         country: String? = nil,
@@ -1981,10 +1600,6 @@ extension Stripe.Billing.Invoice.CreatePreview {
                 /// A recent IP address of the customer used for tax reporting and tax location inference.
                 public var ipAddress: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case ipAddress
-                }
-
                 public init(
                     ipAddress: String? = nil
                 ) {
@@ -1997,11 +1612,6 @@ extension Stripe.Billing.Invoice.CreatePreview {
                 public var `type`: Type
                 /// Value of the tax ID.
                 public var value: String
-
-                private enum CodingKeys: String, CodingKey {
-                    case `type`
-                    case value
-                }
 
                 public init(
                     `type`: Type,
@@ -2141,12 +1751,6 @@ extension Stripe.Billing.Invoice.CreatePreview {
             /// ID of the promotion code to create a new discount for.
             public var promotionCode: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case coupon
-                case discount
-                case promotionCode
-            }
-
             public init(
                 coupon: String? = nil,
                 discount: String? = nil,
@@ -2193,26 +1797,6 @@ extension Stripe.Billing.Invoice.CreatePreview {
             public var unitAmount: Int?
             /// Same as `unit_amount`, but accepts a decimal value in cents (or local equivalent) with at most 12 decimal places.
             public var unitAmountDecimal: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case amount
-                case currency
-                case description
-                case discountable
-                case discounts
-                case invoiceitem
-                case metadata
-                case period
-                case price
-                case priceData
-                case quantity
-                case quantityDecimal
-                case taxBehavior
-                case taxCode
-                case taxRates
-                case unitAmount
-                case unitAmountDecimal
-            }
 
             public init(
                 amount: Int? = nil,
@@ -2266,12 +1850,6 @@ extension Stripe.Billing.Invoice.CreatePreview {
                 /// ID of the promotion code to create a new discount for.
                 public var promotionCode: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case coupon
-                    case discount
-                    case promotionCode
-                }
-
                 public init(
                     coupon: String? = nil,
                     discount: String? = nil,
@@ -2289,11 +1867,6 @@ extension Stripe.Billing.Invoice.CreatePreview {
                 public var end: Date
                 /// The start of the period.
                 public var start: Date
-
-                private enum CodingKeys: String, CodingKey {
-                    case end
-                    case start
-                }
 
                 public init(
                     end: Date,
@@ -2316,14 +1889,6 @@ extension Stripe.Billing.Invoice.CreatePreview {
                 public var unitAmount: Int?
                 /// Same as `unit_amount`, but accepts a decimal value in cents (or local equivalent) with at most 12 decimal places.
                 public var unitAmountDecimal: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case currency
-                    case product
-                    case taxBehavior
-                    case unitAmount
-                    case unitAmountDecimal
-                }
 
                 public init(
                     currency: Stripe.Currency,
@@ -2354,11 +1919,6 @@ extension Stripe.Billing.Invoice.CreatePreview {
             /// Type of the account referenced in the request.
             public var `type`: Type
 
-            private enum CodingKeys: String, CodingKey {
-                case account
-                case `type`
-            }
-
             public init(
                 account: String? = nil,
                 `type`: Type
@@ -2383,13 +1943,6 @@ extension Stripe.Billing.Invoice.CreatePreview {
             public var phases: [Phases]?
             /// In cases where the `schedule_details` params update the currently active phase, specifies if and how to prorate at the…
             public var prorationBehavior: ProrationBehavior?
-
-            private enum CodingKeys: String, CodingKey {
-                case billingMode
-                case endBehavior
-                case phases
-                case prorationBehavior
-            }
 
             public init(
                 billingMode: BillingMode? = nil,
@@ -2421,11 +1974,6 @@ extension Stripe.Billing.Invoice.CreatePreview {
                 /// Controls the calculation and orchestration of prorations and invoices for subscriptions.
                 public var `type`: Type
 
-                private enum CodingKeys: String, CodingKey {
-                    case flexible
-                    case `type`
-                }
-
                 public init(
                     flexible: Flexible? = nil,
                     `type`: Type
@@ -2443,10 +1991,6 @@ extension Stripe.Billing.Invoice.CreatePreview {
                 public struct Flexible: Codable, Hashable, Sendable {
                     /// Controls how invoices and invoice items display proration amounts and discount amounts.
                     public var prorationDiscounts: ProrationDiscounts?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case prorationDiscounts
-                    }
 
                     public init(
                         prorationDiscounts: ProrationDiscounts? = nil
@@ -2506,31 +2050,6 @@ extension Stripe.Billing.Invoice.CreatePreview {
                 public var trial: Bool?
                 /// Sets the phase to trialing from the start date to this date.
                 public var trialEnd: TrialEnd?
-
-                private enum CodingKeys: String, CodingKey {
-                    case addInvoiceItems
-                    case applicationFeePercent
-                    case automaticTax
-                    case billingCycleAnchor
-                    case billingThresholds
-                    case collectionMethod
-                    case currency
-                    case defaultPaymentMethod
-                    case defaultTaxRates
-                    case description
-                    case discounts
-                    case duration
-                    case endDate
-                    case invoiceSettings
-                    case items
-                    case metadata
-                    case onBehalfOf
-                    case prorationBehavior
-                    case startDate
-                    case transferData
-                    case trial
-                    case trialEnd
-                }
 
                 public init(
                     addInvoiceItems: [AddInvoiceItems]? = nil,
@@ -2614,17 +2133,6 @@ extension Stripe.Billing.Invoice.CreatePreview {
                     /// The tax rates which apply to the item.
                     public var taxRates: Stripe.Clearable<[String]>?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case discountable
-                        case discounts
-                        case metadata
-                        case period
-                        case price
-                        case priceData
-                        case quantity
-                        case taxRates
-                    }
-
                     public init(
                         discountable: Bool? = nil,
                         discounts: [Discounts]? = nil,
@@ -2653,12 +2161,6 @@ extension Stripe.Billing.Invoice.CreatePreview {
                         /// ID of the promotion code to create a new discount for.
                         public var promotionCode: String?
 
-                        private enum CodingKeys: String, CodingKey {
-                            case coupon
-                            case discount
-                            case promotionCode
-                        }
-
                         public init(
                             coupon: String? = nil,
                             discount: String? = nil,
@@ -2677,11 +2179,6 @@ extension Stripe.Billing.Invoice.CreatePreview {
                         /// Start of the invoice item period.
                         public var start: Start
 
-                        private enum CodingKeys: String, CodingKey {
-                            case end
-                            case start
-                        }
-
                         public init(
                             end: End,
                             start: Start
@@ -2696,11 +2193,6 @@ extension Stripe.Billing.Invoice.CreatePreview {
                             public var timestamp: Date?
                             /// Select how to calculate the end of the invoice item period.
                             public var `type`: Type
-
-                            private enum CodingKeys: String, CodingKey {
-                                case timestamp
-                                case `type`
-                            }
 
                             public init(
                                 timestamp: Date? = nil,
@@ -2723,11 +2215,6 @@ extension Stripe.Billing.Invoice.CreatePreview {
                             public var timestamp: Date?
                             /// Select how to calculate the start of the invoice item period.
                             public var `type`: Type
-
-                            private enum CodingKeys: String, CodingKey {
-                                case timestamp
-                                case `type`
-                            }
 
                             public init(
                                 timestamp: Date? = nil,
@@ -2758,14 +2245,6 @@ extension Stripe.Billing.Invoice.CreatePreview {
                         /// Same as `unit_amount`, but accepts a decimal value in cents (or local equivalent) with at most 12 decimal places.
                         public var unitAmountDecimal: String?
 
-                        private enum CodingKeys: String, CodingKey {
-                            case currency
-                            case product
-                            case taxBehavior
-                            case unitAmount
-                            case unitAmountDecimal
-                        }
-
                         public init(
                             currency: Stripe.Currency,
                             product: String,
@@ -2795,11 +2274,6 @@ extension Stripe.Billing.Invoice.CreatePreview {
                     /// The account that's liable for tax.
                     public var liability: Liability?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case enabled
-                        case liability
-                    }
-
                     public init(
                         enabled: Bool,
                         liability: Liability? = nil
@@ -2814,11 +2288,6 @@ extension Stripe.Billing.Invoice.CreatePreview {
                         public var account: String?
                         /// Type of the account referenced in the request.
                         public var `type`: Type
-
-                        private enum CodingKeys: String, CodingKey {
-                            case account
-                            case `type`
-                        }
 
                         public init(
                             account: String? = nil,
@@ -2841,11 +2310,6 @@ extension Stripe.Billing.Invoice.CreatePreview {
                     /// Indicates if the `billing_cycle_anchor` should be reset when a threshold is reached.
                     public var resetBillingCycleAnchor: Bool?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case amountGte
-                        case resetBillingCycleAnchor
-                    }
-
                     public init(
                         amountGte: Int? = nil,
                         resetBillingCycleAnchor: Bool? = nil
@@ -2862,12 +2326,6 @@ extension Stripe.Billing.Invoice.CreatePreview {
                     public var discount: String?
                     /// ID of the promotion code to create a new discount for.
                     public var promotionCode: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case coupon
-                        case discount
-                        case promotionCode
-                    }
 
                     public init(
                         coupon: String? = nil,
@@ -2886,11 +2344,6 @@ extension Stripe.Billing.Invoice.CreatePreview {
                     public var interval: Interval
                     /// The multiplier applied to the interval.
                     public var intervalCount: Int?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case interval
-                        case intervalCount
-                    }
 
                     public init(
                         interval: Interval,
@@ -2940,12 +2393,6 @@ extension Stripe.Billing.Invoice.CreatePreview {
                     /// The connected account that issues the invoice.
                     public var issuer: Issuer?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case accountTaxIds
-                        case daysUntilDue
-                        case issuer
-                    }
-
                     public init(
                         accountTaxIds: Stripe.Clearable<[String]>? = nil,
                         daysUntilDue: Int? = nil,
@@ -2962,11 +2409,6 @@ extension Stripe.Billing.Invoice.CreatePreview {
                         public var account: String?
                         /// Type of the account referenced in the request.
                         public var `type`: Type
-
-                        private enum CodingKeys: String, CodingKey {
-                            case account
-                            case `type`
-                        }
 
                         public init(
                             account: String? = nil,
@@ -3001,17 +2443,6 @@ extension Stripe.Billing.Invoice.CreatePreview {
                     /// A list of Tax Rate ids.
                     public var taxRates: Stripe.Clearable<[String]>?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case billingThresholds
-                        case discounts
-                        case metadata
-                        case plan
-                        case price
-                        case priceData
-                        case quantity
-                        case taxRates
-                    }
-
                     public init(
                         billingThresholds: Stripe.Clearable<BillingThresholds>? = nil,
                         discounts: Stripe.Clearable<[Discounts]>? = nil,
@@ -3036,10 +2467,6 @@ extension Stripe.Billing.Invoice.CreatePreview {
                         /// Number of units that meets the billing threshold to advance the subscription to a new billing period (e.g., it takes 1…
                         public var usageGte: Int
 
-                        private enum CodingKeys: String, CodingKey {
-                            case usageGte
-                        }
-
                         public init(
                             usageGte: Int
                         ) {
@@ -3054,12 +2481,6 @@ extension Stripe.Billing.Invoice.CreatePreview {
                         public var discount: String?
                         /// ID of the promotion code to create a new discount for.
                         public var promotionCode: String?
-
-                        private enum CodingKeys: String, CodingKey {
-                            case coupon
-                            case discount
-                            case promotionCode
-                        }
 
                         public init(
                             coupon: String? = nil,
@@ -3086,15 +2507,6 @@ extension Stripe.Billing.Invoice.CreatePreview {
                         public var unitAmount: Int?
                         /// Same as `unit_amount`, but accepts a decimal value in cents (or local equivalent) with at most 12 decimal places.
                         public var unitAmountDecimal: String?
-
-                        private enum CodingKeys: String, CodingKey {
-                            case currency
-                            case product
-                            case recurring
-                            case taxBehavior
-                            case unitAmount
-                            case unitAmountDecimal
-                        }
 
                         public init(
                             currency: Stripe.Currency,
@@ -3124,11 +2536,6 @@ extension Stripe.Billing.Invoice.CreatePreview {
                             public var interval: Interval
                             /// The number of intervals between subscription billings.
                             public var intervalCount: Int?
-
-                            private enum CodingKeys: String, CodingKey {
-                                case interval
-                                case intervalCount
-                            }
 
                             public init(
                                 interval: Interval,
@@ -3177,11 +2584,6 @@ extension Stripe.Billing.Invoice.CreatePreview {
                     public var amountPercent: Decimal?
                     /// ID of an existing, connected Stripe account.
                     public var destination: String
-
-                    private enum CodingKeys: String, CodingKey {
-                        case amountPercent
-                        case destination
-                    }
 
                     public init(
                         amountPercent: Decimal? = nil,
@@ -3247,23 +2649,6 @@ extension Stripe.Billing.Invoice.CreatePreview {
             public var startDate: Date?
             /// If provided, the invoice returned will preview updating or creating a subscription with that trial end.
             public var trialEnd: TrialEnd?
-
-            private enum CodingKeys: String, CodingKey {
-                case billingCycleAnchor
-                case billingMode
-                case billingSchedules
-                case cancelAt
-                case cancelAtPeriodEnd
-                case cancelNow
-                case defaultTaxRates
-                case items
-                case metadata
-                case prorationBehavior
-                case prorationDate
-                case resumeAt
-                case startDate
-                case trialEnd
-            }
 
             public init(
                 billingCycleAnchor: BillingCycleAnchor? = nil,
@@ -3336,11 +2721,6 @@ extension Stripe.Billing.Invoice.CreatePreview {
                 /// Controls the calculation and orchestration of prorations and invoices for subscriptions.
                 public var `type`: Type
 
-                private enum CodingKeys: String, CodingKey {
-                    case flexible
-                    case `type`
-                }
-
                 public init(
                     flexible: Flexible? = nil,
                     `type`: Type
@@ -3358,10 +2738,6 @@ extension Stripe.Billing.Invoice.CreatePreview {
                 public struct Flexible: Codable, Hashable, Sendable {
                     /// Controls how invoices and invoice items display proration amounts and discount amounts.
                     public var prorationDiscounts: ProrationDiscounts?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case prorationDiscounts
-                    }
 
                     public init(
                         prorationDiscounts: ProrationDiscounts? = nil
@@ -3384,12 +2760,6 @@ extension Stripe.Billing.Invoice.CreatePreview {
                 /// Specify a key for the billing schedule.
                 public var key: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case appliesTo
-                    case billUntil
-                    case key
-                }
-
                 public init(
                     appliesTo: [AppliesTo]? = nil,
                     billUntil: BillUntil? = nil,
@@ -3405,11 +2775,6 @@ extension Stripe.Billing.Invoice.CreatePreview {
                     public var price: String?
                     /// Controls which subscription items the billing schedule applies to.
                     public var `type`: String
-
-                    private enum CodingKeys: String, CodingKey {
-                        case price
-                        case `type`
-                    }
 
                     public init(
                         price: String? = nil,
@@ -3428,12 +2793,6 @@ extension Stripe.Billing.Invoice.CreatePreview {
                     public var timestamp: Date?
                     /// Describes how the billing schedule will determine the end date.
                     public var `type`: Type
-
-                    private enum CodingKeys: String, CodingKey {
-                        case duration
-                        case timestamp
-                        case `type`
-                    }
 
                     public init(
                         duration: Duration? = nil,
@@ -3456,11 +2815,6 @@ extension Stripe.Billing.Invoice.CreatePreview {
                         public var interval: Interval
                         /// The multiplier applied to the interval.
                         public var intervalCount: Int?
-
-                        private enum CodingKeys: String, CodingKey {
-                            case interval
-                            case intervalCount
-                        }
 
                         public init(
                             interval: Interval,
@@ -3537,20 +2891,6 @@ extension Stripe.Billing.Invoice.CreatePreview {
                 /// A list of Tax Rate ids.
                 public var taxRates: Stripe.Clearable<[String]>?
 
-                private enum CodingKeys: String, CodingKey {
-                    case billingThresholds
-                    case clearUsage
-                    case deleted
-                    case discounts
-                    case id
-                    case metadata
-                    case plan
-                    case price
-                    case priceData
-                    case quantity
-                    case taxRates
-                }
-
                 public init(
                     billingThresholds: Stripe.Clearable<BillingThresholds>? = nil,
                     clearUsage: Bool? = nil,
@@ -3581,10 +2921,6 @@ extension Stripe.Billing.Invoice.CreatePreview {
                     /// Number of units that meets the billing threshold to advance the subscription to a new billing period (e.g., it takes 1…
                     public var usageGte: Int
 
-                    private enum CodingKeys: String, CodingKey {
-                        case usageGte
-                    }
-
                     public init(
                         usageGte: Int
                     ) {
@@ -3599,12 +2935,6 @@ extension Stripe.Billing.Invoice.CreatePreview {
                     public var discount: String?
                     /// ID of the promotion code to create a new discount for.
                     public var promotionCode: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case coupon
-                        case discount
-                        case promotionCode
-                    }
 
                     public init(
                         coupon: String? = nil,
@@ -3631,15 +2961,6 @@ extension Stripe.Billing.Invoice.CreatePreview {
                     public var unitAmount: Int?
                     /// Same as `unit_amount`, but accepts a decimal value in cents (or local equivalent) with at most 12 decimal places.
                     public var unitAmountDecimal: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case currency
-                        case product
-                        case recurring
-                        case taxBehavior
-                        case unitAmount
-                        case unitAmountDecimal
-                    }
 
                     public init(
                         currency: Stripe.Currency,
@@ -3669,11 +2990,6 @@ extension Stripe.Billing.Invoice.CreatePreview {
                         public var interval: Interval
                         /// The number of intervals between subscription billings.
                         public var intervalCount: Int?
-
-                        private enum CodingKeys: String, CodingKey {
-                            case interval
-                            case intervalCount
-                        }
 
                         public init(
                             interval: Interval,
@@ -3734,11 +3050,6 @@ extension Stripe.Billing.Invoice.FinalizeInvoice {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case autoAdvance
-            case expand
-        }
-
         public init(
             autoAdvance: Bool? = nil,
             expand: [String]? = nil
@@ -3775,20 +3086,6 @@ extension Stripe.Billing.Invoice.List {
         public var status: Status?
         /// Only return invoices for the subscription specified by this subscription ID.
         public var subscription: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case collectionMethod
-            case created
-            case customer
-            case customerAccount
-            case dueDate
-            case endingBefore
-            case expand
-            case limit
-            case startingAfter
-            case status
-            case subscription
-        }
 
         public init(
             collectionMethod: CollectionMethod? = nil,
@@ -3839,10 +3136,6 @@ extension Stripe.Billing.Invoice.MarkUncollectible {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
-
         public init(
             expand: [String]? = nil
         ) {
@@ -3870,16 +3163,6 @@ extension Stripe.Billing.Invoice.Pay {
         public var paymentMethod: String?
         /// A payment source to be charged.
         public var source: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case forgive
-            case mandate
-            case offSession
-            case paidOutOfBand
-            case paymentMethod
-            case source
-        }
 
         public init(
             expand: [String]? = nil,
@@ -3913,12 +3196,6 @@ extension Stripe.Billing.Invoice.RemoveLines {
         /// The line items to remove.
         public var lines: [Lines]
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case invoiceMetadata
-            case lines
-        }
-
         public init(
             expand: [String]? = nil,
             invoiceMetadata: Stripe.Clearable<[String: String]>? = nil,
@@ -3934,11 +3211,6 @@ extension Stripe.Billing.Invoice.RemoveLines {
             public var behavior: Behavior
             /// ID of an existing line item to remove from this invoice.
             public var id: String
-
-            private enum CodingKeys: String, CodingKey {
-                case behavior
-                case id
-            }
 
             public init(
                 behavior: Behavior,
@@ -3964,10 +3236,6 @@ extension Stripe.Billing.Invoice.Retrieve {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
-
         public init(
             expand: [String]? = nil
         ) {
@@ -3990,13 +3258,6 @@ extension Stripe.Billing.Invoice.Search {
         /// The search query string.
         public var query: String
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case limit
-            case page
-            case query
-        }
-
         public init(
             expand: [String]? = nil,
             limit: Int? = nil,
@@ -4018,10 +3279,6 @@ extension Stripe.Billing.Invoice.SendInvoice {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil
@@ -4090,36 +3347,6 @@ extension Stripe.Billing.Invoice.Update {
         public var statementDescriptor: String?
         /// If specified, the funds from the invoice will be transferred to the destination and the ID of the resulting transfer w…
         public var transferData: Stripe.Clearable<TransferData>?
-
-        private enum CodingKeys: String, CodingKey {
-            case accountTaxIds
-            case applicationFeeAmount
-            case autoAdvance
-            case automaticTax
-            case automaticallyFinalizesAt
-            case collectionMethod
-            case customFields
-            case daysUntilDue
-            case defaultPaymentMethod
-            case defaultSource
-            case defaultTaxRates
-            case description
-            case discounts
-            case dueDate
-            case effectiveAt
-            case expand
-            case footer
-            case issuer
-            case metadata
-            case number
-            case onBehalfOf
-            case paymentSettings
-            case rendering
-            case shippingCost
-            case shippingDetails
-            case statementDescriptor
-            case transferData
-        }
 
         public init(
             accountTaxIds: Stripe.Clearable<[String]>? = nil,
@@ -4191,11 +3418,6 @@ extension Stripe.Billing.Invoice.Update {
             /// The account that's liable for tax.
             public var liability: Liability?
 
-            private enum CodingKeys: String, CodingKey {
-                case enabled
-                case liability
-            }
-
             public init(
                 enabled: Bool,
                 liability: Liability? = nil
@@ -4210,11 +3432,6 @@ extension Stripe.Billing.Invoice.Update {
                 public var account: String?
                 /// Type of the account referenced in the request.
                 public var `type`: Type
-
-                private enum CodingKeys: String, CodingKey {
-                    case account
-                    case `type`
-                }
 
                 public init(
                     account: String? = nil,
@@ -4237,11 +3454,6 @@ extension Stripe.Billing.Invoice.Update {
             /// The value of the custom field.
             public var value: String
 
-            private enum CodingKeys: String, CodingKey {
-                case name
-                case value
-            }
-
             public init(
                 name: String,
                 value: String
@@ -4258,12 +3470,6 @@ extension Stripe.Billing.Invoice.Update {
             public var discount: String?
             /// ID of the promotion code to create a new discount for.
             public var promotionCode: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case coupon
-                case discount
-                case promotionCode
-            }
 
             public init(
                 coupon: String? = nil,
@@ -4282,11 +3488,6 @@ extension Stripe.Billing.Invoice.Update {
             public var account: String?
             /// Type of the account referenced in the request.
             public var `type`: Type
-
-            private enum CodingKeys: String, CodingKey {
-                case account
-                case `type`
-            }
 
             public init(
                 account: String? = nil,
@@ -4310,12 +3511,6 @@ extension Stripe.Billing.Invoice.Update {
             public var paymentMethodOptions: PaymentMethodOptions?
             /// The list of payment method types (e.g.
             public var paymentMethodTypes: Stripe.Clearable<[PaymentMethodTypes]>?
-
-            private enum CodingKeys: String, CodingKey {
-                case defaultMandate
-                case paymentMethodOptions
-                case paymentMethodTypes
-            }
 
             public init(
                 defaultMandate: String? = nil,
@@ -4401,19 +3596,6 @@ extension Stripe.Billing.Invoice.Update {
                 /// If paying by `us_bank_account`, this sub-hash contains details about the ACH direct debit payment method options to pa…
                 public var usBankAccount: Stripe.Clearable<UsBankAccount>?
 
-                private enum CodingKeys: String, CodingKey {
-                    case acssDebit
-                    case bancontact
-                    case card
-                    case customerBalance
-                    case konbini
-                    case payto
-                    case pix
-                    case sepaDebit
-                    case upi
-                    case usBankAccount
-                }
-
                 public init(
                     acssDebit: Stripe.Clearable<AcssDebit>? = nil,
                     bancontact: Stripe.Clearable<Bancontact>? = nil,
@@ -4444,11 +3626,6 @@ extension Stripe.Billing.Invoice.Update {
                     /// Verification method for the intent
                     public var verificationMethod: VerificationMethod?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case mandateOptions
-                        case verificationMethod
-                    }
-
                     public init(
                         mandateOptions: MandateOptions? = nil,
                         verificationMethod: VerificationMethod? = nil
@@ -4468,10 +3645,6 @@ extension Stripe.Billing.Invoice.Update {
                         /// Transaction type of the mandate.
                         public var transactionType: TransactionType?
 
-                        private enum CodingKeys: String, CodingKey {
-                            case transactionType
-                        }
-
                         public init(
                             transactionType: TransactionType? = nil
                         ) {
@@ -4488,10 +3661,6 @@ extension Stripe.Billing.Invoice.Update {
                 public struct Bancontact: Codable, Hashable, Sendable {
                     /// Preferred language of the Bancontact authorization page that the customer is redirected to.
                     public var preferredLanguage: PreferredLanguage?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case preferredLanguage
-                    }
 
                     public init(
                         preferredLanguage: PreferredLanguage? = nil
@@ -4512,11 +3681,6 @@ extension Stripe.Billing.Invoice.Update {
                     public var installments: Installments?
                     /// We strongly recommend that you rely on our SCA Engine to automatically prompt your customers for authentication based …
                     public var requestThreeDSecure: RequestThreeDSecure?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case installments
-                        case requestThreeDSecure
-                    }
 
                     public init(
                         installments: Installments? = nil,
@@ -4539,11 +3703,6 @@ extension Stripe.Billing.Invoice.Update {
                         /// The selected installment plan to use for this invoice.
                         public var plan: Stripe.Clearable<Plan>?
 
-                        private enum CodingKeys: String, CodingKey {
-                            case enabled
-                            case plan
-                        }
-
                         public init(
                             enabled: Bool? = nil,
                             plan: Stripe.Clearable<Plan>? = nil
@@ -4559,12 +3718,6 @@ extension Stripe.Billing.Invoice.Update {
                             public var interval: String?
                             /// Type of installment plan, one of `fixed_count`, `bonus`, or `revolving`.
                             public var `type`: Type
-
-                            private enum CodingKeys: String, CodingKey {
-                                case count
-                                case interval
-                                case `type`
-                            }
 
                             public init(
                                 count: Int? = nil,
@@ -4591,11 +3744,6 @@ extension Stripe.Billing.Invoice.Update {
                     /// The funding method type to be used when there are not enough funds in the customer balance.
                     public var fundingType: String?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case bankTransfer
-                        case fundingType
-                    }
-
                     public init(
                         bankTransfer: BankTransfer? = nil,
                         fundingType: String? = nil
@@ -4611,11 +3759,6 @@ extension Stripe.Billing.Invoice.Update {
                         /// The bank transfer type that can be used for funding.
                         public var `type`: String?
 
-                        private enum CodingKeys: String, CodingKey {
-                            case euBankTransfer
-                            case `type`
-                        }
-
                         public init(
                             euBankTransfer: EuBankTransfer? = nil,
                             `type`: String? = nil
@@ -4628,10 +3771,6 @@ extension Stripe.Billing.Invoice.Update {
                         public struct EuBankTransfer: Codable, Hashable, Sendable {
                             /// The desired country code of the bank account information.
                             public var country: String
-
-                            private enum CodingKeys: String, CodingKey {
-                                case country
-                            }
 
                             public init(
                                 country: String
@@ -4650,10 +3789,6 @@ extension Stripe.Billing.Invoice.Update {
                     /// Additional fields for Mandate creation.
                     public var mandateOptions: MandateOptions?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case mandateOptions
-                    }
-
                     public init(
                         mandateOptions: MandateOptions? = nil
                     ) {
@@ -4666,11 +3801,6 @@ extension Stripe.Billing.Invoice.Update {
                         public var amount: Int?
                         /// The purpose for which payments are made.
                         public var purpose: Purpose?
-
-                        private enum CodingKeys: String, CodingKey {
-                            case amount
-                            case purpose
-                        }
 
                         public init(
                             amount: Int? = nil,
@@ -4702,11 +3832,6 @@ extension Stripe.Billing.Invoice.Update {
                     /// The number of seconds (between 10 and 1209600) after which Pix payment will expire.
                     public var expiresAfterSeconds: Int?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case amountIncludesIof
-                        case expiresAfterSeconds
-                    }
-
                     public init(
                         amountIncludesIof: AmountIncludesIof? = nil,
                         expiresAfterSeconds: Int? = nil
@@ -4729,10 +3854,6 @@ extension Stripe.Billing.Invoice.Update {
                     /// Configuration options for setting up an eMandate
                     public var mandateOptions: MandateOptions?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case mandateOptions
-                    }
-
                     public init(
                         mandateOptions: MandateOptions? = nil
                     ) {
@@ -4749,13 +3870,6 @@ extension Stripe.Billing.Invoice.Update {
                         public var description: String?
                         /// End date of the mandate or subscription.
                         public var endDate: Date?
-
-                        private enum CodingKeys: String, CodingKey {
-                            case amount
-                            case amountType
-                            case description
-                            case endDate
-                        }
 
                         public init(
                             amount: Int? = nil,
@@ -4782,11 +3896,6 @@ extension Stripe.Billing.Invoice.Update {
                     /// Verification method for the intent
                     public var verificationMethod: VerificationMethod?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case financialConnections
-                        case verificationMethod
-                    }
-
                     public init(
                         financialConnections: FinancialConnections? = nil,
                         verificationMethod: VerificationMethod? = nil
@@ -4809,12 +3918,6 @@ extension Stripe.Billing.Invoice.Update {
                         public var permissions: [Permissions]?
                         /// List of data features that you would like to retrieve upon account creation.
                         public var prefetch: [Prefetch]?
-
-                        private enum CodingKeys: String, CodingKey {
-                            case filters
-                            case permissions
-                            case prefetch
-                        }
 
                         public init(
                             filters: Filters? = nil,
@@ -4844,10 +3947,6 @@ extension Stripe.Billing.Invoice.Update {
                             /// The account subcategories to use to filter for selectable accounts.
                             public var accountSubcategories: [AccountSubcategories]?
 
-                            private enum CodingKeys: String, CodingKey {
-                                case accountSubcategories
-                            }
-
                             public init(
                                 accountSubcategories: [AccountSubcategories]? = nil
                             ) {
@@ -4875,13 +3974,6 @@ extension Stripe.Billing.Invoice.Update {
             /// The specific version of invoice rendering template to use for this invoice.
             public var templateVersion: Stripe.Clearable<Int>?
 
-            private enum CodingKeys: String, CodingKey {
-                case amountTaxDisplay
-                case pdf
-                case template
-                case templateVersion
-            }
-
             public init(
                 amountTaxDisplay: AmountTaxDisplay? = nil,
                 pdf: Pdf? = nil,
@@ -4905,10 +3997,6 @@ extension Stripe.Billing.Invoice.Update {
                 /// Page size for invoice PDF.
                 public var pageSize: PageSize?
 
-                private enum CodingKeys: String, CodingKey {
-                    case pageSize
-                }
-
                 public init(
                     pageSize: PageSize? = nil
                 ) {
@@ -4928,11 +4016,6 @@ extension Stripe.Billing.Invoice.Update {
             public var shippingRate: String?
             /// Parameters to create a new ad-hoc shipping rate for this order.
             public var shippingRateData: ShippingRateData?
-
-            private enum CodingKeys: String, CodingKey {
-                case shippingRate
-                case shippingRateData
-            }
 
             public init(
                 shippingRate: String? = nil,
@@ -4958,16 +4041,6 @@ extension Stripe.Billing.Invoice.Update {
                 public var taxCode: String?
                 /// The type of calculation to use on the shipping rate.
                 public var `type`: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case deliveryEstimate
-                    case displayName
-                    case fixedAmount
-                    case metadata
-                    case taxBehavior
-                    case taxCode
-                    case `type`
-                }
 
                 public init(
                     deliveryEstimate: DeliveryEstimate? = nil,
@@ -5000,11 +4073,6 @@ extension Stripe.Billing.Invoice.Update {
                     /// The lower bound of the estimated range.
                     public var minimum: Minimum?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case maximum
-                        case minimum
-                    }
-
                     public init(
                         maximum: Maximum? = nil,
                         minimum: Minimum? = nil
@@ -5019,11 +4087,6 @@ extension Stripe.Billing.Invoice.Update {
                         public var unit: Unit
                         /// Must be greater than 0.
                         public var value: Int
-
-                        private enum CodingKeys: String, CodingKey {
-                            case unit
-                            case value
-                        }
 
                         public init(
                             unit: Unit,
@@ -5048,11 +4111,6 @@ extension Stripe.Billing.Invoice.Update {
                         public var unit: Unit
                         /// Must be greater than 0.
                         public var value: Int
-
-                        private enum CodingKeys: String, CodingKey {
-                            case unit
-                            case value
-                        }
 
                         public init(
                             unit: Unit,
@@ -5081,12 +4139,6 @@ extension Stripe.Billing.Invoice.Update {
                     /// Shipping rates defined in each available currency option.
                     public var currencyOptions: [String: CurrencyOptions]?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case amount
-                        case currency
-                        case currencyOptions
-                    }
-
                     public init(
                         amount: Int,
                         currency: Stripe.Currency,
@@ -5102,11 +4154,6 @@ extension Stripe.Billing.Invoice.Update {
                         public var amount: Int
                         /// Specifies whether the rate is considered inclusive of taxes or exclusive of taxes.
                         public var taxBehavior: TaxBehavior?
-
-                        private enum CodingKeys: String, CodingKey {
-                            case amount
-                            case taxBehavior
-                        }
 
                         public init(
                             amount: Int,
@@ -5134,12 +4181,6 @@ extension Stripe.Billing.Invoice.Update {
             /// Recipient phone (including extension)
             public var phone: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case address
-                case name
-                case phone
-            }
-
             public init(
                 address: Address,
                 name: String,
@@ -5165,15 +4206,6 @@ extension Stripe.Billing.Invoice.Update {
                 /// State, county, province, or region (ISO 3166-2).
                 public var state: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case city
-                    case country
-                    case line1
-                    case line2
-                    case postalCode
-                    case state
-                }
-
                 public init(
                     city: String? = nil,
                     country: String? = nil,
@@ -5198,11 +4230,6 @@ extension Stripe.Billing.Invoice.Update {
             /// ID of an existing, connected Stripe account.
             public var destination: String
 
-            private enum CodingKeys: String, CodingKey {
-                case amount
-                case destination
-            }
-
             public init(
                 amount: Int? = nil,
                 destination: String
@@ -5225,12 +4252,6 @@ extension Stripe.Billing.Invoice.UpdateLines {
         public var invoiceMetadata: Stripe.Clearable<[String: String]>?
         /// The line items to update.
         public var lines: [Lines]
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case invoiceMetadata
-            case lines
-        }
 
         public init(
             expand: [String]? = nil,
@@ -5270,22 +4291,6 @@ extension Stripe.Billing.Invoice.UpdateLines {
             /// The tax rates which apply to the line item.
             public var taxRates: Stripe.Clearable<[String]>?
 
-            private enum CodingKeys: String, CodingKey {
-                case amount
-                case description
-                case discountable
-                case discounts
-                case id
-                case metadata
-                case period
-                case priceData
-                case pricing
-                case quantity
-                case quantityDecimal
-                case taxAmounts
-                case taxRates
-            }
-
             public init(
                 amount: Int? = nil,
                 description: String? = nil,
@@ -5324,12 +4329,6 @@ extension Stripe.Billing.Invoice.UpdateLines {
                 /// ID of the promotion code to create a new discount for.
                 public var promotionCode: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case coupon
-                    case discount
-                    case promotionCode
-                }
-
                 public init(
                     coupon: String? = nil,
                     discount: String? = nil,
@@ -5347,11 +4346,6 @@ extension Stripe.Billing.Invoice.UpdateLines {
                 public var end: Date
                 /// The start of the period.
                 public var start: Date
-
-                private enum CodingKeys: String, CodingKey {
-                    case end
-                    case start
-                }
 
                 public init(
                     end: Date,
@@ -5376,15 +4370,6 @@ extension Stripe.Billing.Invoice.UpdateLines {
                 public var unitAmount: Int?
                 /// Same as `unit_amount`, but accepts a decimal value in cents (or local equivalent) with at most 12 decimal places.
                 public var unitAmountDecimal: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case currency
-                    case product
-                    case productData
-                    case taxBehavior
-                    case unitAmount
-                    case unitAmountDecimal
-                }
 
                 public init(
                     currency: Stripe.Currency,
@@ -5423,15 +4408,6 @@ extension Stripe.Billing.Invoice.UpdateLines {
                     /// A label that represents units of this product.
                     public var unitLabel: String?
 
-                    private enum CodingKeys: String, CodingKey {
-                        case description
-                        case images
-                        case metadata
-                        case name
-                        case taxCode
-                        case unitLabel
-                    }
-
                     public init(
                         description: String? = nil,
                         images: [String]? = nil,
@@ -5455,10 +4431,6 @@ extension Stripe.Billing.Invoice.UpdateLines {
                 /// The ID of the price object.
                 public var price: String?
 
-                private enum CodingKeys: String, CodingKey {
-                    case price
-                }
-
                 public init(
                     price: String? = nil
                 ) {
@@ -5475,13 +4447,6 @@ extension Stripe.Billing.Invoice.UpdateLines {
                 public var taxabilityReason: TaxabilityReason?
                 /// The amount on which tax is calculated, in cents (or local equivalent).
                 public var taxableAmount: Int
-
-                private enum CodingKeys: String, CodingKey {
-                    case amount
-                    case taxRateData
-                    case taxabilityReason
-                    case taxableAmount
-                }
 
                 public init(
                     amount: Int,
@@ -5533,18 +4498,6 @@ extension Stripe.Billing.Invoice.UpdateLines {
                     public var state: String?
                     /// The high-level tax type, such as `vat` or `sales_tax`.
                     public var taxType: TaxType?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case country
-                        case description
-                        case displayName
-                        case inclusive
-                        case jurisdiction
-                        case jurisdictionLevel
-                        case percentage
-                        case state
-                        case taxType
-                    }
 
                     public init(
                         country: String? = nil,
@@ -5608,10 +4561,6 @@ extension Stripe.Billing.Invoice.VoidInvoice {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil

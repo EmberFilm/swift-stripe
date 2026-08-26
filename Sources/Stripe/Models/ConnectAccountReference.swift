@@ -11,11 +11,6 @@ extension Stripe {
         @ExpandableOf<Stripe.Connect.Account> public var account: Stripe.Connect.Account.ID?
         public var type: `Type`?
 
-        private enum CodingKeys: String, CodingKey {
-            case account
-            case type
-        }
-
         public init(account: Stripe.Connect.Account.ID? = nil, type: `Type`? = nil) {
             self._account = Expandable(id: account)
             self.type = type

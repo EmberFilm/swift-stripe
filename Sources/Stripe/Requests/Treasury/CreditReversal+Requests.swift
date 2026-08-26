@@ -28,12 +28,6 @@ extension Stripe.Treasury.CreditReversal.Create {
         /// The ReceivedCredit to reverse.
         public var receivedCredit: String
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case metadata
-            case receivedCredit
-        }
-
         public init(
             expand: [String]? = nil,
             metadata: [String: String]? = nil,
@@ -65,16 +59,6 @@ extension Stripe.Treasury.CreditReversal.List {
         public var startingAfter: String?
         /// Only return CreditReversals for a given status.
         public var status: Status?
-
-        private enum CodingKeys: String, CodingKey {
-            case endingBefore
-            case expand
-            case financialAccount
-            case limit
-            case receivedCredit
-            case startingAfter
-            case status
-        }
 
         public init(
             endingBefore: String? = nil,
@@ -109,10 +93,6 @@ extension Stripe.Treasury.CreditReversal.Retrieve {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil

@@ -11,11 +11,6 @@ extension Stripe {
         public var presentmentAmount: Int?
         public var presentmentCurrency: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case presentmentAmount
-            case presentmentCurrency
-        }
-
         public init(presentmentAmount: Int? = nil, presentmentCurrency: String? = nil) {
             self.presentmentAmount = presentmentAmount
             self.presentmentCurrency = presentmentCurrency

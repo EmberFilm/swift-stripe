@@ -32,18 +32,6 @@ extension Stripe.Climate {
         /// The carbon removal suppliers that fulfill orders for this Climate product.
         public var suppliers: [Stripe.Climate.Supplier]?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case created
-            case currentPricesPerMetricTon
-            case deliveryYear
-            case livemode
-            case metricTonsAvailable
-            case name
-            case suppliers
-        }
-
         public init(
             id: ID,
             object: String,
@@ -73,12 +61,6 @@ extension Stripe.Climate {
             public var amountSubtotal: Int?
             /// Total for one metric ton of carbon removal (including fees) in the currency's smallest unit.
             public var amountTotal: Int?
-
-            private enum CodingKeys: String, CodingKey {
-                case amountFees
-                case amountSubtotal
-                case amountTotal
-            }
 
             public init(
                 amountFees: Int? = nil,

@@ -62,28 +62,6 @@ extension Stripe.Products.Price.Create {
         /// Same as `unit_amount`, but accepts a decimal value in cents (or local equivalent) with at most 12 decimal places.
         public var unitAmountDecimal: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case active
-            case billingScheme
-            case currency
-            case currencyOptions
-            case customUnitAmount
-            case expand
-            case lookupKey
-            case metadata
-            case nickname
-            case product
-            case productData
-            case recurring
-            case taxBehavior
-            case tiers
-            case tiersMode
-            case transferLookupKey
-            case transformQuantity
-            case unitAmount
-            case unitAmountDecimal
-        }
-
         public init(
             active: Bool? = nil,
             billingScheme: BillingScheme? = nil,
@@ -154,14 +132,6 @@ extension Stripe.Products.Price.Create {
             /// Same as `unit_amount`, but accepts a decimal value in cents (or local equivalent) with at most 12 decimal places.
             public var unitAmountDecimal: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case customUnitAmount
-                case taxBehavior
-                case tiers
-                case unitAmount
-                case unitAmountDecimal
-            }
-
             public init(
                 customUnitAmount: CustomUnitAmount? = nil,
                 taxBehavior: TaxBehavior? = nil,
@@ -193,13 +163,6 @@ extension Stripe.Products.Price.Create {
                 /// The starting unit amount which can be updated by the customer.
                 public var preset: Int?
 
-                private enum CodingKeys: String, CodingKey {
-                    case enabled
-                    case maximum
-                    case minimum
-                    case preset
-                }
-
                 public init(
                     enabled: Bool,
                     maximum: Int? = nil,
@@ -224,14 +187,6 @@ extension Stripe.Products.Price.Create {
                 public var unitAmountDecimal: String?
                 /// Specifies the upper bound of this tier.
                 public var upTo: UpTo
-
-                private enum CodingKeys: String, CodingKey {
-                    case flatAmount
-                    case flatAmountDecimal
-                    case unitAmount
-                    case unitAmountDecimal
-                    case upTo
-                }
 
                 public init(
                     flatAmount: Int? = nil,
@@ -283,13 +238,6 @@ extension Stripe.Products.Price.Create {
             /// The starting unit amount which can be updated by the customer.
             public var preset: Int?
 
-            private enum CodingKeys: String, CodingKey {
-                case enabled
-                case maximum
-                case minimum
-                case preset
-            }
-
             public init(
                 enabled: Bool,
                 maximum: Int? = nil,
@@ -319,16 +267,6 @@ extension Stripe.Products.Price.Create {
             public var taxCode: String?
             /// A label that represents units of this product.
             public var unitLabel: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case active
-                case id
-                case metadata
-                case name
-                case statementDescriptor
-                case taxCode
-                case unitLabel
-            }
 
             public init(
                 active: Bool? = nil,
@@ -361,14 +299,6 @@ extension Stripe.Products.Price.Create {
             public var trialPeriodDays: Int?
             /// Configures how the quantity per period should be determined.
             public var usageType: UsageType?
-
-            private enum CodingKeys: String, CodingKey {
-                case interval
-                case intervalCount
-                case meter
-                case trialPeriodDays
-                case usageType
-            }
 
             public init(
                 interval: Interval,
@@ -408,14 +338,6 @@ extension Stripe.Products.Price.Create {
             public var unitAmountDecimal: String?
             /// Specifies the upper bound of this tier.
             public var upTo: UpTo
-
-            private enum CodingKeys: String, CodingKey {
-                case flatAmount
-                case flatAmountDecimal
-                case unitAmount
-                case unitAmountDecimal
-                case upTo
-            }
 
             public init(
                 flatAmount: Int? = nil,
@@ -462,11 +384,6 @@ extension Stripe.Products.Price.Create {
             /// After division, either round the result `up` or `down`.
             public var round: Round
 
-            private enum CodingKeys: String, CodingKey {
-                case divideBy
-                case round
-            }
-
             public init(
                 divideBy: Int,
                 round: Round
@@ -511,20 +428,6 @@ extension Stripe.Products.Price.List {
         /// Only return prices of type `recurring` or `one_time`.
         public var `type`: Type?
 
-        private enum CodingKeys: String, CodingKey {
-            case active
-            case created
-            case currency
-            case endingBefore
-            case expand
-            case limit
-            case lookupKeys
-            case product
-            case recurring
-            case startingAfter
-            case `type`
-        }
-
         public init(
             active: Bool? = nil,
             created: Stripe.RangeQuery? = nil,
@@ -565,12 +468,6 @@ extension Stripe.Products.Price.List {
             /// Filter by the usage type for this price.
             public var usageType: UsageType?
 
-            private enum CodingKeys: String, CodingKey {
-                case interval
-                case meter
-                case usageType
-            }
-
             public init(
                 interval: Interval? = nil,
                 meter: String? = nil,
@@ -604,10 +501,6 @@ extension Stripe.Products.Price.Retrieve {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
-
         public init(
             expand: [String]? = nil
         ) {
@@ -629,13 +522,6 @@ extension Stripe.Products.Price.Search {
         public var page: String?
         /// The search query string.
         public var query: String
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case limit
-            case page
-            case query
-        }
 
         public init(
             expand: [String]? = nil,
@@ -672,17 +558,6 @@ extension Stripe.Products.Price.Update {
         public var taxBehavior: TaxBehavior?
         /// If set to true, will atomically remove the lookup key from the existing price, and assign it to this price.
         public var transferLookupKey: Bool?
-
-        private enum CodingKeys: String, CodingKey {
-            case active
-            case currencyOptions
-            case expand
-            case lookupKey
-            case metadata
-            case nickname
-            case taxBehavior
-            case transferLookupKey
-        }
 
         public init(
             active: Bool? = nil,
@@ -722,14 +597,6 @@ extension Stripe.Products.Price.Update {
             /// Same as `unit_amount`, but accepts a decimal value in cents (or local equivalent) with at most 12 decimal places.
             public var unitAmountDecimal: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case customUnitAmount
-                case taxBehavior
-                case tiers
-                case unitAmount
-                case unitAmountDecimal
-            }
-
             public init(
                 customUnitAmount: CustomUnitAmount? = nil,
                 taxBehavior: TaxBehavior? = nil,
@@ -761,13 +628,6 @@ extension Stripe.Products.Price.Update {
                 /// The starting unit amount which can be updated by the customer.
                 public var preset: Int?
 
-                private enum CodingKeys: String, CodingKey {
-                    case enabled
-                    case maximum
-                    case minimum
-                    case preset
-                }
-
                 public init(
                     enabled: Bool,
                     maximum: Int? = nil,
@@ -792,14 +652,6 @@ extension Stripe.Products.Price.Update {
                 public var unitAmountDecimal: String?
                 /// Specifies the upper bound of this tier.
                 public var upTo: UpTo
-
-                private enum CodingKeys: String, CodingKey {
-                    case flatAmount
-                    case flatAmountDecimal
-                    case unitAmount
-                    case unitAmountDecimal
-                    case upTo
-                }
 
                 public init(
                     flatAmount: Int? = nil,

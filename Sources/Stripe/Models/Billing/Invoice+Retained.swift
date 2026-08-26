@@ -32,7 +32,6 @@ extension Stripe.Billing.Subscription {
     }
 }
 
-
 extension Stripe.Billing.Invoice {
     public enum Reason: String, Codable, Sendable {
         case subscriptionCycle = "subscription_cycle"
@@ -61,8 +60,6 @@ extension Stripe.Billing.Invoice {
         }
     }
 }
-
-
 
 extension Stripe.Billing.Invoice {
     public struct RenderingOptions: Codable, Hashable, Sendable {
@@ -141,7 +138,6 @@ extension Stripe.Billing.Invoice.TotalTaxAmount {
     }
 }
 
-
 extension Stripe.Billing.Invoice {
     public struct TransferData: Codable, Hashable, Sendable {
         /// The amount in cents that will be transferred to the destination account when the invoice is paid. By default, the entire amount is transferred to the destination.
@@ -159,7 +155,6 @@ extension Stripe.Billing.Invoice {
     }
 }
 
-
 // MARK: - Parent
 extension Stripe.Billing.Invoice {
 
@@ -173,12 +168,6 @@ extension Stripe.Billing.Invoice {
         public var metadata: [String: String]?
         /// Only set on upcoming invoices that preview prorations: the time used to calculate them.
         public var subscriptionProrationDate: Date?
-
-        private enum CodingKeys: String, CodingKey {
-            case subscription
-            case metadata
-            case subscriptionProrationDate
-        }
 
         public init(
             subscription: Stripe.Billing.Subscription.ID? = nil,

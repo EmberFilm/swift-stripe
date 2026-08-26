@@ -30,11 +30,6 @@ extension Stripe.Treasury.FinancialAccount.Close {
         /// A different bank account where funds can be deposited/debited in order to get the closing FA's balance to $0
         public var forwardingSettings: ForwardingSettings?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case forwardingSettings
-        }
-
         public init(
             expand: [String]? = nil,
             forwardingSettings: ForwardingSettings? = nil
@@ -51,12 +46,6 @@ extension Stripe.Treasury.FinancialAccount.Close {
             public var paymentMethod: String?
             /// The type of the bank account provided.
             public var `type`: Type
-
-            private enum CodingKeys: String, CodingKey {
-                case financialAccount
-                case paymentMethod
-                case `type`
-            }
 
             public init(
                 financialAccount: String? = nil,
@@ -94,15 +83,6 @@ extension Stripe.Treasury.FinancialAccount.Create {
         /// The currencies the FinancialAccount can hold a balance in.
         public var supportedCurrencies: [String]
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case features
-            case metadata
-            case nickname
-            case platformRestrictions
-            case supportedCurrencies
-        }
-
         public init(
             expand: [String]? = nil,
             features: Features? = nil,
@@ -136,16 +116,6 @@ extension Stripe.Treasury.FinancialAccount.Create {
             /// Contains a Feature and settings related to moving money out of the FinancialAccount into another Account with the same…
             public var outboundTransfers: OutboundTransfers?
 
-            private enum CodingKeys: String, CodingKey {
-                case cardIssuing
-                case depositInsurance
-                case financialAddresses
-                case inboundTransfers
-                case intraStripeFlows
-                case outboundPayments
-                case outboundTransfers
-            }
-
             public init(
                 cardIssuing: CardIssuing? = nil,
                 depositInsurance: DepositInsurance? = nil,
@@ -169,10 +139,6 @@ extension Stripe.Treasury.FinancialAccount.Create {
                 /// Whether the FinancialAccount should have the Feature.
                 public var requested: Bool
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool
                 ) {
@@ -184,10 +150,6 @@ extension Stripe.Treasury.FinancialAccount.Create {
             public struct DepositInsurance: Codable, Hashable, Sendable {
                 /// Whether the FinancialAccount should have the Feature.
                 public var requested: Bool
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool
@@ -201,10 +163,6 @@ extension Stripe.Treasury.FinancialAccount.Create {
                 /// Adds an ABA FinancialAddress to the FinancialAccount.
                 public var aba: Aba?
 
-                private enum CodingKeys: String, CodingKey {
-                    case aba
-                }
-
                 public init(
                     aba: Aba? = nil
                 ) {
@@ -215,10 +173,6 @@ extension Stripe.Treasury.FinancialAccount.Create {
                 public struct Aba: Codable, Hashable, Sendable {
                     /// Whether the FinancialAccount should have the Feature.
                     public var requested: Bool
-
-                    private enum CodingKeys: String, CodingKey {
-                        case requested
-                    }
 
                     public init(
                         requested: Bool
@@ -233,10 +187,6 @@ extension Stripe.Treasury.FinancialAccount.Create {
                 /// Enables ACH Debits via the InboundTransfers API.
                 public var ach: Ach?
 
-                private enum CodingKeys: String, CodingKey {
-                    case ach
-                }
-
                 public init(
                     ach: Ach? = nil
                 ) {
@@ -247,10 +197,6 @@ extension Stripe.Treasury.FinancialAccount.Create {
                 public struct Ach: Codable, Hashable, Sendable {
                     /// Whether the FinancialAccount should have the Feature.
                     public var requested: Bool
-
-                    private enum CodingKeys: String, CodingKey {
-                        case requested
-                    }
 
                     public init(
                         requested: Bool
@@ -264,10 +210,6 @@ extension Stripe.Treasury.FinancialAccount.Create {
             public struct IntraStripeFlows: Codable, Hashable, Sendable {
                 /// Whether the FinancialAccount should have the Feature.
                 public var requested: Bool
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool
@@ -283,11 +225,6 @@ extension Stripe.Treasury.FinancialAccount.Create {
                 /// Enables US domestic wire transfers via the OutboundPayments API.
                 public var usDomesticWire: UsDomesticWire?
 
-                private enum CodingKeys: String, CodingKey {
-                    case ach
-                    case usDomesticWire
-                }
-
                 public init(
                     ach: Ach? = nil,
                     usDomesticWire: UsDomesticWire? = nil
@@ -301,10 +238,6 @@ extension Stripe.Treasury.FinancialAccount.Create {
                     /// Whether the FinancialAccount should have the Feature.
                     public var requested: Bool
 
-                    private enum CodingKeys: String, CodingKey {
-                        case requested
-                    }
-
                     public init(
                         requested: Bool
                     ) {
@@ -316,10 +249,6 @@ extension Stripe.Treasury.FinancialAccount.Create {
                 public struct UsDomesticWire: Codable, Hashable, Sendable {
                     /// Whether the FinancialAccount should have the Feature.
                     public var requested: Bool
-
-                    private enum CodingKeys: String, CodingKey {
-                        case requested
-                    }
 
                     public init(
                         requested: Bool
@@ -336,11 +265,6 @@ extension Stripe.Treasury.FinancialAccount.Create {
                 /// Enables US domestic wire transfers via the OutboundTransfers API.
                 public var usDomesticWire: UsDomesticWire?
 
-                private enum CodingKeys: String, CodingKey {
-                    case ach
-                    case usDomesticWire
-                }
-
                 public init(
                     ach: Ach? = nil,
                     usDomesticWire: UsDomesticWire? = nil
@@ -354,10 +278,6 @@ extension Stripe.Treasury.FinancialAccount.Create {
                     /// Whether the FinancialAccount should have the Feature.
                     public var requested: Bool
 
-                    private enum CodingKeys: String, CodingKey {
-                        case requested
-                    }
-
                     public init(
                         requested: Bool
                     ) {
@@ -369,10 +289,6 @@ extension Stripe.Treasury.FinancialAccount.Create {
                 public struct UsDomesticWire: Codable, Hashable, Sendable {
                     /// Whether the FinancialAccount should have the Feature.
                     public var requested: Bool
-
-                    private enum CodingKeys: String, CodingKey {
-                        case requested
-                    }
 
                     public init(
                         requested: Bool
@@ -389,11 +305,6 @@ extension Stripe.Treasury.FinancialAccount.Create {
             public var inboundFlows: InboundFlows?
             /// Restricts all outbound money movement.
             public var outboundFlows: OutboundFlows?
-
-            private enum CodingKeys: String, CodingKey {
-                case inboundFlows
-                case outboundFlows
-            }
 
             public init(
                 inboundFlows: InboundFlows? = nil,
@@ -434,15 +345,6 @@ extension Stripe.Treasury.FinancialAccount.List {
         /// Only return FinancialAccounts that have the given status: `open` or `closed`
         public var status: Status?
 
-        private enum CodingKeys: String, CodingKey {
-            case created
-            case endingBefore
-            case expand
-            case limit
-            case startingAfter
-            case status
-        }
-
         public init(
             created: Stripe.RangeQuery? = nil,
             endingBefore: String? = nil,
@@ -474,10 +376,6 @@ extension Stripe.Treasury.FinancialAccount.Retrieve {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
-
         public init(
             expand: [String]? = nil
         ) {
@@ -493,10 +391,6 @@ extension Stripe.Treasury.FinancialAccount.RetrieveFeatures {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil
@@ -523,15 +417,6 @@ extension Stripe.Treasury.FinancialAccount.Update {
         public var nickname: String?
         /// The set of functionalities that the platform can restrict on the FinancialAccount.
         public var platformRestrictions: PlatformRestrictions?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-            case features
-            case forwardingSettings
-            case metadata
-            case nickname
-            case platformRestrictions
-        }
 
         public init(
             expand: [String]? = nil,
@@ -566,16 +451,6 @@ extension Stripe.Treasury.FinancialAccount.Update {
             /// Contains a Feature and settings related to moving money out of the FinancialAccount into another Account with the same…
             public var outboundTransfers: OutboundTransfers?
 
-            private enum CodingKeys: String, CodingKey {
-                case cardIssuing
-                case depositInsurance
-                case financialAddresses
-                case inboundTransfers
-                case intraStripeFlows
-                case outboundPayments
-                case outboundTransfers
-            }
-
             public init(
                 cardIssuing: CardIssuing? = nil,
                 depositInsurance: DepositInsurance? = nil,
@@ -599,10 +474,6 @@ extension Stripe.Treasury.FinancialAccount.Update {
                 /// Whether the FinancialAccount should have the Feature.
                 public var requested: Bool
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool
                 ) {
@@ -614,10 +485,6 @@ extension Stripe.Treasury.FinancialAccount.Update {
             public struct DepositInsurance: Codable, Hashable, Sendable {
                 /// Whether the FinancialAccount should have the Feature.
                 public var requested: Bool
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool
@@ -631,10 +498,6 @@ extension Stripe.Treasury.FinancialAccount.Update {
                 /// Adds an ABA FinancialAddress to the FinancialAccount.
                 public var aba: Aba?
 
-                private enum CodingKeys: String, CodingKey {
-                    case aba
-                }
-
                 public init(
                     aba: Aba? = nil
                 ) {
@@ -645,10 +508,6 @@ extension Stripe.Treasury.FinancialAccount.Update {
                 public struct Aba: Codable, Hashable, Sendable {
                     /// Whether the FinancialAccount should have the Feature.
                     public var requested: Bool
-
-                    private enum CodingKeys: String, CodingKey {
-                        case requested
-                    }
 
                     public init(
                         requested: Bool
@@ -663,10 +522,6 @@ extension Stripe.Treasury.FinancialAccount.Update {
                 /// Enables ACH Debits via the InboundTransfers API.
                 public var ach: Ach?
 
-                private enum CodingKeys: String, CodingKey {
-                    case ach
-                }
-
                 public init(
                     ach: Ach? = nil
                 ) {
@@ -677,10 +532,6 @@ extension Stripe.Treasury.FinancialAccount.Update {
                 public struct Ach: Codable, Hashable, Sendable {
                     /// Whether the FinancialAccount should have the Feature.
                     public var requested: Bool
-
-                    private enum CodingKeys: String, CodingKey {
-                        case requested
-                    }
 
                     public init(
                         requested: Bool
@@ -694,10 +545,6 @@ extension Stripe.Treasury.FinancialAccount.Update {
             public struct IntraStripeFlows: Codable, Hashable, Sendable {
                 /// Whether the FinancialAccount should have the Feature.
                 public var requested: Bool
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool
@@ -713,11 +560,6 @@ extension Stripe.Treasury.FinancialAccount.Update {
                 /// Enables US domestic wire transfers via the OutboundPayments API.
                 public var usDomesticWire: UsDomesticWire?
 
-                private enum CodingKeys: String, CodingKey {
-                    case ach
-                    case usDomesticWire
-                }
-
                 public init(
                     ach: Ach? = nil,
                     usDomesticWire: UsDomesticWire? = nil
@@ -731,10 +573,6 @@ extension Stripe.Treasury.FinancialAccount.Update {
                     /// Whether the FinancialAccount should have the Feature.
                     public var requested: Bool
 
-                    private enum CodingKeys: String, CodingKey {
-                        case requested
-                    }
-
                     public init(
                         requested: Bool
                     ) {
@@ -746,10 +584,6 @@ extension Stripe.Treasury.FinancialAccount.Update {
                 public struct UsDomesticWire: Codable, Hashable, Sendable {
                     /// Whether the FinancialAccount should have the Feature.
                     public var requested: Bool
-
-                    private enum CodingKeys: String, CodingKey {
-                        case requested
-                    }
 
                     public init(
                         requested: Bool
@@ -766,11 +600,6 @@ extension Stripe.Treasury.FinancialAccount.Update {
                 /// Enables US domestic wire transfers via the OutboundTransfers API.
                 public var usDomesticWire: UsDomesticWire?
 
-                private enum CodingKeys: String, CodingKey {
-                    case ach
-                    case usDomesticWire
-                }
-
                 public init(
                     ach: Ach? = nil,
                     usDomesticWire: UsDomesticWire? = nil
@@ -784,10 +613,6 @@ extension Stripe.Treasury.FinancialAccount.Update {
                     /// Whether the FinancialAccount should have the Feature.
                     public var requested: Bool
 
-                    private enum CodingKeys: String, CodingKey {
-                        case requested
-                    }
-
                     public init(
                         requested: Bool
                     ) {
@@ -799,10 +624,6 @@ extension Stripe.Treasury.FinancialAccount.Update {
                 public struct UsDomesticWire: Codable, Hashable, Sendable {
                     /// Whether the FinancialAccount should have the Feature.
                     public var requested: Bool
-
-                    private enum CodingKeys: String, CodingKey {
-                        case requested
-                    }
 
                     public init(
                         requested: Bool
@@ -821,12 +642,6 @@ extension Stripe.Treasury.FinancialAccount.Update {
             public var paymentMethod: String?
             /// The type of the bank account provided.
             public var `type`: Type
-
-            private enum CodingKeys: String, CodingKey {
-                case financialAccount
-                case paymentMethod
-                case `type`
-            }
 
             public init(
                 financialAccount: String? = nil,
@@ -850,11 +665,6 @@ extension Stripe.Treasury.FinancialAccount.Update {
             public var inboundFlows: InboundFlows?
             /// Restricts all outbound money movement.
             public var outboundFlows: OutboundFlows?
-
-            private enum CodingKeys: String, CodingKey {
-                case inboundFlows
-                case outboundFlows
-            }
 
             public init(
                 inboundFlows: InboundFlows? = nil,
@@ -899,17 +709,6 @@ extension Stripe.Treasury.FinancialAccount.UpdateFeatures {
         /// Contains a Feature and settings related to moving money out of the FinancialAccount into another Account with the same…
         public var outboundTransfers: OutboundTransfers?
 
-        private enum CodingKeys: String, CodingKey {
-            case cardIssuing
-            case depositInsurance
-            case expand
-            case financialAddresses
-            case inboundTransfers
-            case intraStripeFlows
-            case outboundPayments
-            case outboundTransfers
-        }
-
         public init(
             cardIssuing: CardIssuing? = nil,
             depositInsurance: DepositInsurance? = nil,
@@ -935,10 +734,6 @@ extension Stripe.Treasury.FinancialAccount.UpdateFeatures {
             /// Whether the FinancialAccount should have the Feature.
             public var requested: Bool
 
-            private enum CodingKeys: String, CodingKey {
-                case requested
-            }
-
             public init(
                 requested: Bool
             ) {
@@ -950,10 +745,6 @@ extension Stripe.Treasury.FinancialAccount.UpdateFeatures {
         public struct DepositInsurance: Codable, Hashable, Sendable {
             /// Whether the FinancialAccount should have the Feature.
             public var requested: Bool
-
-            private enum CodingKeys: String, CodingKey {
-                case requested
-            }
 
             public init(
                 requested: Bool
@@ -967,10 +758,6 @@ extension Stripe.Treasury.FinancialAccount.UpdateFeatures {
             /// Adds an ABA FinancialAddress to the FinancialAccount.
             public var aba: Aba?
 
-            private enum CodingKeys: String, CodingKey {
-                case aba
-            }
-
             public init(
                 aba: Aba? = nil
             ) {
@@ -981,10 +768,6 @@ extension Stripe.Treasury.FinancialAccount.UpdateFeatures {
             public struct Aba: Codable, Hashable, Sendable {
                 /// Whether the FinancialAccount should have the Feature.
                 public var requested: Bool
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool
@@ -999,10 +782,6 @@ extension Stripe.Treasury.FinancialAccount.UpdateFeatures {
             /// Enables ACH Debits via the InboundTransfers API.
             public var ach: Ach?
 
-            private enum CodingKeys: String, CodingKey {
-                case ach
-            }
-
             public init(
                 ach: Ach? = nil
             ) {
@@ -1013,10 +792,6 @@ extension Stripe.Treasury.FinancialAccount.UpdateFeatures {
             public struct Ach: Codable, Hashable, Sendable {
                 /// Whether the FinancialAccount should have the Feature.
                 public var requested: Bool
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool
@@ -1030,10 +805,6 @@ extension Stripe.Treasury.FinancialAccount.UpdateFeatures {
         public struct IntraStripeFlows: Codable, Hashable, Sendable {
             /// Whether the FinancialAccount should have the Feature.
             public var requested: Bool
-
-            private enum CodingKeys: String, CodingKey {
-                case requested
-            }
 
             public init(
                 requested: Bool
@@ -1049,11 +820,6 @@ extension Stripe.Treasury.FinancialAccount.UpdateFeatures {
             /// Enables US domestic wire transfers via the OutboundPayments API.
             public var usDomesticWire: UsDomesticWire?
 
-            private enum CodingKeys: String, CodingKey {
-                case ach
-                case usDomesticWire
-            }
-
             public init(
                 ach: Ach? = nil,
                 usDomesticWire: UsDomesticWire? = nil
@@ -1067,10 +833,6 @@ extension Stripe.Treasury.FinancialAccount.UpdateFeatures {
                 /// Whether the FinancialAccount should have the Feature.
                 public var requested: Bool
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool
                 ) {
@@ -1082,10 +844,6 @@ extension Stripe.Treasury.FinancialAccount.UpdateFeatures {
             public struct UsDomesticWire: Codable, Hashable, Sendable {
                 /// Whether the FinancialAccount should have the Feature.
                 public var requested: Bool
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool
@@ -1102,11 +860,6 @@ extension Stripe.Treasury.FinancialAccount.UpdateFeatures {
             /// Enables US domestic wire transfers via the OutboundTransfers API.
             public var usDomesticWire: UsDomesticWire?
 
-            private enum CodingKeys: String, CodingKey {
-                case ach
-                case usDomesticWire
-            }
-
             public init(
                 ach: Ach? = nil,
                 usDomesticWire: UsDomesticWire? = nil
@@ -1120,10 +873,6 @@ extension Stripe.Treasury.FinancialAccount.UpdateFeatures {
                 /// Whether the FinancialAccount should have the Feature.
                 public var requested: Bool
 
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
-
                 public init(
                     requested: Bool
                 ) {
@@ -1135,10 +884,6 @@ extension Stripe.Treasury.FinancialAccount.UpdateFeatures {
             public struct UsDomesticWire: Codable, Hashable, Sendable {
                 /// Whether the FinancialAccount should have the Feature.
                 public var requested: Bool
-
-                private enum CodingKeys: String, CodingKey {
-                    case requested
-                }
 
                 public init(
                     requested: Bool

@@ -149,72 +149,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
         /// Zip gives your customers a way to split purchases over a series of payments.
         public var zip: Zip?
 
-        private enum CodingKeys: String, CodingKey {
-            case acssDebit
-            case affirm
-            case afterpayClearpay
-            case alipay
-            case alma
-            case amazonPay
-            case applePay
-            case applePayLater
-            case auBecsDebit
-            case bacsDebit
-            case bancontact
-            case billie
-            case bizum
-            case blik
-            case boleto
-            case card
-            case cartesBancaires
-            case cashapp
-            case crypto
-            case customerBalance
-            case eps
-            case expand
-            case fpx
-            case frMealVoucherConecs
-            case giropay
-            case googlePay
-            case grabpay
-            case ideal
-            case jcb
-            case kakaoPay
-            case klarna
-            case konbini
-            case krCard
-            case link
-            case mbWay
-            case mobilepay
-            case multibanco
-            case name
-            case naverPay
-            case nzBankAccount
-            case oxxo
-            case p24
-            case parent
-            case payByBank
-            case payco
-            case paynow
-            case paypal
-            case payto
-            case pix
-            case promptpay
-            case revolutPay
-            case samsungPay
-            case satispay
-            case scalapay
-            case sepaDebit
-            case sofort
-            case sunbit
-            case swish
-            case twint
-            case upi
-            case usBankAccount
-            case wechatPay
-            case zip
-        }
-
         public init(
             acssDebit: AcssDebit? = nil,
             affirm: Affirm? = nil,
@@ -350,10 +284,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -364,10 +294,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -388,10 +314,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -402,10 +324,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -426,10 +344,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -440,10 +354,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -464,10 +374,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -478,10 +384,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -502,10 +404,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -516,10 +414,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -540,10 +434,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -554,10 +444,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -578,10 +464,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -592,10 +474,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -616,10 +494,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -630,10 +504,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -654,10 +524,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -668,10 +534,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -692,10 +554,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -706,10 +564,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -730,10 +584,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -744,10 +594,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -768,10 +614,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -782,10 +624,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -806,10 +644,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -820,10 +654,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -844,10 +674,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -858,10 +684,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -882,10 +704,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -896,10 +714,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -920,10 +734,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -934,10 +744,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -958,10 +764,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -972,10 +774,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -996,10 +794,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -1010,10 +804,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -1034,10 +824,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -1048,10 +834,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -1072,10 +854,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -1086,10 +864,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -1110,10 +884,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -1124,10 +894,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -1148,10 +914,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -1162,10 +924,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -1186,10 +944,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -1200,10 +954,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -1224,10 +974,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -1238,10 +984,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -1262,10 +1004,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -1276,10 +1014,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -1300,10 +1034,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -1314,10 +1044,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -1338,10 +1064,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -1352,10 +1074,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -1376,10 +1094,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -1390,10 +1104,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -1414,10 +1124,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -1428,10 +1134,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -1452,10 +1154,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -1466,10 +1164,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -1490,10 +1184,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -1504,10 +1194,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -1528,10 +1214,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -1542,10 +1224,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -1566,10 +1244,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -1580,10 +1254,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -1604,10 +1274,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -1618,10 +1284,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -1642,10 +1304,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -1656,10 +1314,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -1680,10 +1334,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -1694,10 +1344,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -1718,10 +1364,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -1732,10 +1374,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -1756,10 +1394,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -1770,10 +1404,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -1794,10 +1424,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -1808,10 +1434,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -1832,10 +1454,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -1846,10 +1464,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -1870,10 +1484,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -1884,10 +1494,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -1908,10 +1514,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -1922,10 +1524,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -1946,10 +1544,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -1960,10 +1554,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -1984,10 +1574,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -1998,10 +1584,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -2022,10 +1604,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -2036,10 +1614,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -2060,10 +1634,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -2074,10 +1644,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -2098,10 +1664,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -2112,10 +1674,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -2136,10 +1694,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -2150,10 +1704,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -2174,10 +1724,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -2188,10 +1734,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -2212,10 +1754,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -2226,10 +1764,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -2250,10 +1784,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -2264,10 +1794,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -2288,10 +1814,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -2302,10 +1824,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -2326,10 +1844,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -2340,10 +1854,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -2364,10 +1874,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -2378,10 +1884,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -2402,10 +1904,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -2416,10 +1914,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -2440,10 +1934,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -2454,10 +1944,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -2478,10 +1964,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -2492,10 +1974,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -2516,10 +1994,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -2530,10 +2004,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -2554,10 +2024,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -2568,10 +2034,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -2592,10 +2054,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -2606,10 +2064,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Create {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -2645,15 +2099,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.List {
         /// A cursor for use in pagination.
         public var startingAfter: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case active
-            case application
-            case endingBefore
-            case expand
-            case limit
-            case startingAfter
-        }
-
         public init(
             active: Bool? = nil,
             application: String? = nil,
@@ -2679,10 +2124,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Retrieve {
     public struct Request: Codable, Hashable, Sendable {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
 
         public init(
             expand: [String]? = nil
@@ -2824,72 +2265,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
         /// Zip gives your customers a way to split purchases over a series of payments.
         public var zip: Zip?
 
-        private enum CodingKeys: String, CodingKey {
-            case acssDebit
-            case active
-            case affirm
-            case afterpayClearpay
-            case alipay
-            case alma
-            case amazonPay
-            case applePay
-            case applePayLater
-            case auBecsDebit
-            case bacsDebit
-            case bancontact
-            case billie
-            case bizum
-            case blik
-            case boleto
-            case card
-            case cartesBancaires
-            case cashapp
-            case crypto
-            case customerBalance
-            case eps
-            case expand
-            case fpx
-            case frMealVoucherConecs
-            case giropay
-            case googlePay
-            case grabpay
-            case ideal
-            case jcb
-            case kakaoPay
-            case klarna
-            case konbini
-            case krCard
-            case link
-            case mbWay
-            case mobilepay
-            case multibanco
-            case name
-            case naverPay
-            case nzBankAccount
-            case oxxo
-            case p24
-            case payByBank
-            case payco
-            case paynow
-            case paypal
-            case payto
-            case pix
-            case promptpay
-            case revolutPay
-            case samsungPay
-            case satispay
-            case scalapay
-            case sepaDebit
-            case sofort
-            case sunbit
-            case swish
-            case twint
-            case upi
-            case usBankAccount
-            case wechatPay
-            case zip
-        }
-
         public init(
             acssDebit: AcssDebit? = nil,
             active: Bool? = nil,
@@ -3025,10 +2400,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -3039,10 +2410,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -3063,10 +2430,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -3077,10 +2440,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -3101,10 +2460,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -3115,10 +2470,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -3139,10 +2490,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -3153,10 +2500,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -3177,10 +2520,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -3191,10 +2530,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -3215,10 +2550,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -3229,10 +2560,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -3253,10 +2580,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -3267,10 +2590,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -3291,10 +2610,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -3305,10 +2620,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -3329,10 +2640,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -3343,10 +2650,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -3367,10 +2670,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -3381,10 +2680,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -3405,10 +2700,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -3419,10 +2710,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -3443,10 +2730,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -3457,10 +2740,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -3481,10 +2760,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -3495,10 +2770,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -3519,10 +2790,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -3533,10 +2800,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -3557,10 +2820,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -3571,10 +2830,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -3595,10 +2850,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -3609,10 +2860,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -3633,10 +2880,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -3647,10 +2890,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -3671,10 +2910,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -3685,10 +2920,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -3709,10 +2940,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -3723,10 +2950,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -3747,10 +2970,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -3761,10 +2980,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -3785,10 +3000,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -3799,10 +3010,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -3823,10 +3030,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -3837,10 +3040,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -3861,10 +3060,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -3875,10 +3070,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -3899,10 +3090,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -3913,10 +3100,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -3937,10 +3120,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -3951,10 +3130,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -3975,10 +3150,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -3989,10 +3160,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -4013,10 +3180,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -4027,10 +3190,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -4051,10 +3210,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -4065,10 +3220,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -4089,10 +3240,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -4103,10 +3250,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -4127,10 +3270,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -4141,10 +3280,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -4165,10 +3300,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -4179,10 +3310,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -4203,10 +3330,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -4217,10 +3340,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -4241,10 +3360,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -4255,10 +3370,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -4279,10 +3390,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -4293,10 +3400,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -4317,10 +3420,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -4331,10 +3430,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -4355,10 +3450,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -4369,10 +3460,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -4393,10 +3480,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -4407,10 +3490,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -4431,10 +3510,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -4445,10 +3520,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -4469,10 +3540,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -4483,10 +3550,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -4507,10 +3570,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -4521,10 +3580,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -4545,10 +3600,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -4559,10 +3610,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -4583,10 +3630,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -4597,10 +3640,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -4621,10 +3660,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -4635,10 +3670,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -4659,10 +3690,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -4673,10 +3700,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -4697,10 +3720,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -4711,10 +3730,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -4735,10 +3750,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -4749,10 +3760,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -4773,10 +3780,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -4787,10 +3790,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -4811,10 +3810,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -4825,10 +3820,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -4849,10 +3840,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -4863,10 +3850,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -4887,10 +3870,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -4901,10 +3880,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -4925,10 +3900,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -4939,10 +3910,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -4963,10 +3930,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -4977,10 +3940,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -5001,10 +3960,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -5015,10 +3970,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -5039,10 +3990,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -5053,10 +4000,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -5077,10 +4020,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -5091,10 +4030,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -5115,10 +4050,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -5129,10 +4060,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -5153,10 +4080,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -5167,10 +4090,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -5191,10 +4110,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -5205,10 +4120,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -5229,10 +4140,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -5243,10 +4150,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil
@@ -5267,10 +4170,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             /// Whether or not the payment method should be displayed.
             public var displayPreference: DisplayPreference?
 
-            private enum CodingKeys: String, CodingKey {
-                case displayPreference
-            }
-
             public init(
                 displayPreference: DisplayPreference? = nil
             ) {
@@ -5281,10 +4180,6 @@ extension Stripe.PaymentMethodConfigurations.Configuration.Update {
             public struct DisplayPreference: Codable, Hashable, Sendable {
                 /// The account's preference for whether or not to display this payment method.
                 public var preference: Preference?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preference
-                }
 
                 public init(
                     preference: Preference? = nil

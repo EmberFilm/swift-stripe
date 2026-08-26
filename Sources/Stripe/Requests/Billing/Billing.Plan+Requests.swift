@@ -59,27 +59,6 @@ extension Stripe.Billing.Plan.Create {
         /// Configures how the quantity per period should be determined.
         public var usageType: UsageType?
 
-        private enum CodingKeys: String, CodingKey {
-            case active
-            case amount
-            case amountDecimal
-            case billingScheme
-            case currency
-            case expand
-            case id
-            case interval
-            case intervalCount
-            case metadata
-            case meter
-            case nickname
-            case product
-            case tiers
-            case tiersMode
-            case transformUsage
-            case trialPeriodDays
-            case usageType
-        }
-
         public init(
             active: Bool? = nil,
             amount: Int? = nil,
@@ -154,14 +133,6 @@ extension Stripe.Billing.Plan.Create {
             /// Specifies the upper bound of this tier.
             public var upTo: UpTo
 
-            private enum CodingKeys: String, CodingKey {
-                case flatAmount
-                case flatAmountDecimal
-                case unitAmount
-                case unitAmountDecimal
-                case upTo
-            }
-
             public init(
                 flatAmount: Int? = nil,
                 flatAmountDecimal: String? = nil,
@@ -207,11 +178,6 @@ extension Stripe.Billing.Plan.Create {
             /// After division, either round the result `up` or `down`.
             public var round: Round
 
-            private enum CodingKeys: String, CodingKey {
-                case divideBy
-                case round
-            }
-
             public init(
                 divideBy: Int,
                 round: Round
@@ -253,16 +219,6 @@ extension Stripe.Billing.Plan.List {
         /// A cursor for use in pagination.
         public var startingAfter: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case active
-            case created
-            case endingBefore
-            case expand
-            case limit
-            case product
-            case startingAfter
-        }
-
         public init(
             active: Bool? = nil,
             created: Stripe.RangeQuery? = nil,
@@ -291,10 +247,6 @@ extension Stripe.Billing.Plan.Retrieve {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
 
-        private enum CodingKeys: String, CodingKey {
-            case expand
-        }
-
         public init(
             expand: [String]? = nil
         ) {
@@ -320,15 +272,6 @@ extension Stripe.Billing.Plan.Update {
         public var product: String?
         /// Default number of trial days when subscribing a customer to this plan using `trial_from_plan=true`.
         public var trialPeriodDays: Int?
-
-        private enum CodingKeys: String, CodingKey {
-            case active
-            case expand
-            case metadata
-            case nickname
-            case product
-            case trialPeriodDays
-        }
 
         public init(
             active: Bool? = nil,

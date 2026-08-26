@@ -52,28 +52,6 @@ extension Stripe.Products {
         /// A URL of a publicly-accessible webpage for this product.
         public var url: String?
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case active
-            case created
-            case defaultPrice
-            case description
-            case images
-            case livemode
-            case marketingFeatures
-            case metadata
-            case name
-            case packageDimensions
-            case shippable
-            case statementDescriptor
-            case taxCode
-            case `type`
-            case unitLabel
-            case updated
-            case url
-        }
-
         public init(
             id: ID,
             object: String,
@@ -126,10 +104,6 @@ extension Stripe.Products {
             /// The marketing feature name.
             public var name: String?
 
-            private enum CodingKeys: String, CodingKey {
-                case name
-            }
-
             public init(
                 name: String? = nil
             ) {
@@ -146,13 +120,6 @@ extension Stripe.Products {
             public var weight: Double?
             /// Width, in inches.
             public var width: Double?
-
-            private enum CodingKeys: String, CodingKey {
-                case height
-                case length
-                case weight
-                case width
-            }
 
             public init(
                 height: Double? = nil,

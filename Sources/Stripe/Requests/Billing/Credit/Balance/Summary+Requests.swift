@@ -28,13 +28,6 @@ extension Stripe.Billing.Credit.Balance.Summary.Retrieve {
         /// The filter criteria for the credit balance summary.
         public var filter: Filter
 
-        private enum CodingKeys: String, CodingKey {
-            case customer
-            case customerAccount
-            case expand
-            case filter
-        }
-
         public init(
             customer: String? = nil,
             customerAccount: String? = nil,
@@ -55,12 +48,6 @@ extension Stripe.Billing.Credit.Balance.Summary.Retrieve {
             public var creditGrant: String?
             /// Specify the type of this filter.
             public var `type`: Type
-
-            private enum CodingKeys: String, CodingKey {
-                case applicabilityScope
-                case creditGrant
-                case `type`
-            }
 
             public init(
                 applicabilityScope: ApplicabilityScope? = nil,
@@ -84,11 +71,6 @@ extension Stripe.Billing.Credit.Balance.Summary.Retrieve {
                 /// A list of prices that the credit grant can apply to.
                 public var prices: [Prices]?
 
-                private enum CodingKeys: String, CodingKey {
-                    case priceType
-                    case prices
-                }
-
                 public init(
                     priceType: String? = nil,
                     prices: [Prices]? = nil
@@ -100,10 +82,6 @@ extension Stripe.Billing.Credit.Balance.Summary.Retrieve {
                 public struct Prices: Codable, Hashable, Sendable {
                     /// The price ID this credit grant should apply to.
                     public var id: String
-
-                    private enum CodingKeys: String, CodingKey {
-                        case id
-                    }
 
                     public init(
                         id: String
