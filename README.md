@@ -472,7 +472,7 @@ The request engine, form encoding, error handling, retries, idempotency keys,
 and webhook verification are complete and covered by tests.
 
 **Nearly every model is generated from Stripe's OpenAPI spec.** 131 of the 137 root resources
-are emitted by `Scripts/generate-models.py` into `Sources/Stripe/Models/Generated/` from
+are emitted by `Scripts/generate-models.py` into `Sources/Stripe/Models/` from
 `spec3.sdk.json`, pinned by commit in CI. Every field the spec describes is present, every enum
 carries the spec's cases, and each struct's `CodingKeys` is emitted from the same list as its
 properties. `Event` and the unions are typed too:

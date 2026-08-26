@@ -11,6 +11,9 @@ differently. Works at declaration level, so a block that groups a stale enum wit
 loses only the stale one.
 """
 import pathlib, re, sys
+import importlib.util
+_spec = importlib.util.spec_from_file_location("generate_models", pathlib.Path(__file__).with_name("generate-models.py"))
+gm = importlib.util.module_from_spec(_spec); _spec.loader.exec_module(gm)
 
 if sys.argv[1] == "--sweep":
     # Sibling sweep: other hand files that extend the resource, or one of its generated nested
@@ -19,7 +22,7 @@ if sys.argv[1] == "--sweep":
     gen_names = set(re.findall(r"^        public (?:struct|enum|typealias) `?(\w+)`?", pathlib.Path(generated).read_text(), re.M))
     swept = []
     for f in pathlib.Path("Sources/Stripe/Models").rglob("*.swift"):
-        if "Generated" in f.parts: continue
+        if gm.is_generated(f): continue
         s = f.read_text()
         if f"extension {namespace}" not in s: continue
         blocks = re.split(r"(?m)^(?=(?://[^\n]*\n|\n)*(?:extension |// MARK|// extension|//extension))", s)
@@ -129,7 +132,7 @@ if not re.search(r"^\s*(public|extension)\s", head + "".join(kept), re.M):
     hand_p.unlink(); print(f"{struct_name}: nothing to retain; hand file removed"); sys.exit(0)
 new_p = hand_p if hand_p.name.endswith(".Retained.swift") else hand_p.with_name(hand_p.name.replace(".swift", ".Retained.swift"))
 out = head.replace(hand_p.name, new_p.name).rstrip("\n") + \
-      f"\n\n// The {struct_name} struct is generated (Models/Generated). These are the nested types the\n" \
+      f"\n\n// The {struct_name} struct is generated. These are the nested types the\n" \
       f"// request layer still names under `{namespace}` that the generator spells differently.\n\n" + "".join(kept)
 new_p.write_text(out); hand_p.unlink()
 print(f"{struct_name}: dropped {len(dropped)}, kept {len(kept)} block(s)")

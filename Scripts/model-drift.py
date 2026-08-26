@@ -106,13 +106,14 @@ VERSION_GATED: dict[str, dict[str, str]] = {
 }
 
 M = "Sources/Stripe/Models/"
-G = M + "Generated/"   # emitted by generate-models.py; event stays hand-written
+G = M   # generated files sit beside the hand-written ones; event stays hand-written
 # schema name, model file, struct name
 import importlib.util as _ilu
 _spec = _ilu.spec_from_file_location("gen", pathlib.Path(__file__).with_name("generate-models.py"))
 _gen = _ilu.module_from_spec(_spec); _spec.loader.exec_module(_gen)
 # Every generated resource, from the generator's own list, plus the one hand-written resource.
-TARGETS = [(name, G + f"{path.lstrip('/')}.swift", path.split(".")[-1]) for name, path in _gen.RESOURCES.items()]
+_places = _gen.layout()
+TARGETS = [(name, G + _gen.model_file(*_places[name]), path.split(".")[-1]) for name, path in _gen.RESOURCES.items()]
 TARGETS.append(("event", M + "CoreResources/Events/Stripe.Events.Event.swift", "Event"))
 
 def main() -> int:

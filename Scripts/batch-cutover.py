@@ -17,7 +17,7 @@ ap.add_argument("--dry-run", action="store_true"); args = ap.parse_args()
 S = json.load(open(args.spec))["components"]["schemas"]
 GEN = pathlib.Path("Scripts/generate-models.py")
 spec = importlib.util.spec_from_file_location("gen", GEN); gen = importlib.util.module_from_spec(spec); spec.loader.exec_module(gen)
-hand_files = {p: p.read_text() for p in pathlib.Path("Sources/Stripe/Models").rglob("*.swift") if "Generated" not in p.parts}
+hand_files = {p: p.read_text() for p in pathlib.Path("Sources/Stripe/Models").rglob("*.swift") if not gen.is_generated(p)}
 requests = "\n".join(p.read_text() for p in list(pathlib.Path("Sources/Stripe/Requests").rglob("*.swift")) + list(pathlib.Path("Sources/Stripe/Clients").rglob("*.swift")))
 KEEP_BY_HAND = {"event"}   # lenient decoding and the Object union
 
@@ -130,5 +130,5 @@ GEN.write_text(head + tmarker + tail)
 subprocess.run([sys.executable, str(GEN), args.spec, "--only", *[n for n, *_ in todo], "--keep"], check=True)
 for n, p, f, struct, full in todo:
     ns = ".".join(full.split(".")[:-1])
-    r = subprocess.run([sys.executable, "Scripts/cutover.py", str(f), struct, full, f"Sources/Stripe/Models/Generated/{p.lstrip('/')}.swift"], capture_output=True, text=True)
+    r = subprocess.run([sys.executable, "Scripts/cutover.py", str(f), struct, full, "Sources/Stripe/Models/" + gen.model_file(*gen.layout()[n])], capture_output=True, text=True)
     print(("   ok   " if r.returncode == 0 else "   FAIL ") + f"{n:<36} {r.stdout.splitlines()[0] if r.stdout else r.stderr.strip().splitlines()[-1]}")

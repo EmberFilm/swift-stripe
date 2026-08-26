@@ -504,6 +504,7 @@ class Generator:
         clients: dict[str, str] = {}
         properties: list[tuple[str, str]] = []
         version = self.spec["info"]["version"]
+        places = gm.layout()
         for resource, ops in sorted(self.operations().items()):
             swift_type = swift_type_for_resource(resource)
             if swift_type is None:
@@ -515,8 +516,12 @@ class Generator:
                     op.request = self.build_struct("Request", {"properties": props, "required": required}, f"{op.http} {op.path}")
                 op.response = self.response_type(op)
                 self.notes.extend(f"{op.http} {op.path}: {n}" for n in op.notes)
-            path = swift_type[len("Stripe."):] if swift_type.startswith("Stripe.") else swift_type
-            name = f"{path}.Requests.swift"
+            if resource in places:
+                folder, stem = places[resource]
+            else:   # a hand-written resource (event): beside its type, by the type's path
+                parts = (swift_type[len("Stripe."):] if swift_type.startswith("Stripe.") else swift_type).split(".")
+                folder, stem = "/".join(parts[:-1]), parts[-1]
+            name = gm.model_file(folder, stem, suffix="+Requests")
             files[name] = HEADER.format(file=name, version=version) + "\n" + self.render_resource(swift_type, ops)
             client_name, body = self.render_client(resource, swift_type, ops)
             if body:
@@ -534,8 +539,8 @@ class Generator:
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("spec")
-    ap.add_argument("--out", default="Sources/Stripe/Requests/Generated")
-    ap.add_argument("--clients-out", default="Sources/Stripe/Clients/Generated")
+    ap.add_argument("--out", default="Sources/Stripe/Requests")
+    ap.add_argument("--clients-out", default="Sources/Stripe/Clients")
     ap.add_argument("--check", action="store_true", help="exit 1 if the output differs from what is on disk")
     args = ap.parse_args()
     spec = json.load(open(args.spec))
@@ -546,19 +551,23 @@ def main() -> int:
         bad = False
         for out, files in outputs:
             stale = [n for n, body in files.items() if not (out / n).exists() or (out / n).read_text() != body]
-            extra = [p.name for p in out.glob("*.swift") if p.name not in files]
+            extra = [p for p in gm.generated_files(out) if str(p.relative_to(out)) not in files]
             for n in stale:
                 print(f"out of date: {out / n}")
-            for n in extra:
-                print(f"unexpected: {out / n}")
+            for p in extra:
+                print(f"unexpected: {p}")
             bad = bad or bool(stale or extra)
         return 1 if bad else 0
     for out, files in outputs:
-        out.mkdir(parents=True, exist_ok=True)
-        for stale in out.glob("*.swift"):
-            stale.unlink()
+        for p in gm.generated_files(out):
+            if str(p.relative_to(out)) not in files:
+                p.unlink()
         for n, body in files.items():
+            (out / n).parent.mkdir(parents=True, exist_ok=True)
             (out / n).write_text(body)
+        for d in sorted((d for d in out.rglob("*") if d.is_dir()), reverse=True):
+            if not any(d.iterdir()):
+                d.rmdir()
     for note in sorted(set(gen.notes)):
         print("note:", note, file=sys.stderr)
     print(f"wrote {len(requests)} request files and {len(clients)} client files ({spec['info']['version']})")
