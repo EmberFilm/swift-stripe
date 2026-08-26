@@ -217,7 +217,13 @@ Signatures are compared in constant time, timestamps are checked against a five-
 tolerance (`tolerance:`), and multiple `v1` signatures are accepted so secrets can rotate.
 `Event.Type` and `Event.Object` cover every event and object Stripe documents; a newer one
 decodes as `type == nil` (with `rawType` set) or `.unknown(type:)` rather than rejecting the
-delivery.
+delivery. A malformed payload, on the other hand, throws — answer 5xx and Stripe redelivers.
+On `*.updated` events, `event.data.previousAttributes` holds what changed.
+
+A webhook payload takes the shape of the *endpoint's* API version, not the version this
+package sends on requests: set the endpoint to `Stripe.generatedAPIVersion` in the Stripe
+dashboard so the two agree. Snapshot (v1) events are supported; Event Destinations' thin
+`v2.core.event` payloads are not.
 
 ### File uploads
 

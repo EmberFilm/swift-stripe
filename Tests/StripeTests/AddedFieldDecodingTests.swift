@@ -118,7 +118,8 @@ struct AddedFieldDecodingTests {
     @Test("event carries its fetch context")
     func event() throws {
         let event = try Self.decode(Stripe.Events.Event.self, #"""
-        {"id":"evt_1","object":"event","created":1,"type":"charge.succeeded","context":"acct_1"}
+        {"id":"evt_1","object":"event","created":1,"api_version":"2026-07-29.dahlia","livemode":false,"pending_webhooks":0,
+         "type":"charge.succeeded","context":"acct_1","data":{"object":{"id":"ch_1","object":"charge"}}}
         """#)
         #expect(event.context == "acct_1")
     }

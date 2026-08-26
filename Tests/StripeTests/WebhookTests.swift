@@ -145,7 +145,8 @@ struct WebhookTests {
           "created": 1614556800,
           "livemode": false,
           "pending_webhooks": 0,
-          "type": "payment_intent.succeeded"
+          "type": "payment_intent.succeeded",
+          "data": {"object": {"id": "pi_1", "object": "payment_intent"}}
         }
         """#.utf8)
 

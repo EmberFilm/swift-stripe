@@ -91,21 +91,21 @@ struct UnionDecodingTests {
     @Test("an event carries its object as the matching case, or as unknown")
     func eventObject() throws {
         let event = try Self.decode(Stripe.Events.Event.self, """
-        {"id": "evt_1", "object": "event", "type": "checkout.session.completed",
+        {"id": "evt_1", "object": "event", "created": 1, "api_version": "2026-07-29.dahlia", "livemode": false, "pending_webhooks": 0, "type": "checkout.session.completed",
          "data": {"object": {"id": "cs_1", "object": "checkout.session", "status": "complete"}}}
         """)
         #expect(event.type == .checkoutSessionCompleted)
-        guard case .checkoutSession(let session) = try #require(event.data?.object) else {
+        guard case .checkoutSession(let session) = event.data.object else {
             Issue.record("expected .checkoutSession"); return
         }
         #expect(session.id == "cs_1")
 
         let other = try Self.decode(Stripe.Events.Event.self, """
-        {"id": "evt_2", "object": "event", "type": "emberfilm.made_up.event",
+        {"id": "evt_2", "object": "event", "created": 1, "api_version": "2026-07-29.dahlia", "livemode": false, "pending_webhooks": 0, "type": "emberfilm.made_up.event",
          "data": {"object": {"id": "wd_1", "object": "emberfilm.widget"}}}
         """)
         #expect(other.type == nil, "a type the enum lacks decodes as nil")
         #expect(other.rawType == "emberfilm.made_up.event")
-        #expect(other.data?.object == .unknown(type: "emberfilm.widget"))
+        #expect(other.data.object == .unknown(type: "emberfilm.widget"))
     }
 }

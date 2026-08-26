@@ -202,6 +202,12 @@ let the decode path regress to match it.
 - **Webhooks verify against raw bytes.** Never decode-and-re-encode a payload
   before verification. Signature comparison is constant-time; multiple `v1`
   signatures are accepted for secret rotation.
+- **Event decoding is strict about the envelope and lenient about novelty.** `Event`'s
+  required fields (`api_version`, `created`, `data`, `livemode`, `pending_webhooks`) are
+  non-optional and a malformed object throws — never wrap `data` in `try?` again: that turned
+  a model bug into `data == nil`, a 200 response, and an event Stripe never redelivered. Only
+  an unknown type (`type == nil`, `rawType`) or object (`.unknown(type:)`) is tolerated. The
+  payload's shape follows the webhook endpoint's API version, not the request header.
 - **Configuration is taken as given** — no range checking, and an unconvertible
   value falls back to the default rather than throwing. This is deliberate
   (commit `deb8c27`); don't add validation back without asking.
@@ -256,7 +262,9 @@ Unions are generated too, in three shapes:
 - `Event.Object` and `Event.Type` are emitted from the spec's 265 `x-stripeEvent` schemas: one
   `Object` case per resource any event carries, decoded by `object` in `@inline(never)` groups
   of eight (the musl stack rule), and one `Type` case per event. `Event` itself stays
-  hand-written for its lenient `type`/`rawType` decoding.
+  hand-written: strict about the envelope and the object (a malformed payload throws so the
+  endpoint answers 5xx and Stripe redelivers), lenient only about novelty (`type` nil with
+  `rawType`, `Object.unknown`). `previousAttributes` is `[String: Stripe.JSONValue]`.
 
 `Scripts/model-drift.py` counts a `Details` case as the property it replaced.
 
