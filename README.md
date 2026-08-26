@@ -504,10 +504,6 @@ Stripe clears with an empty value is `Stripe.Clearable` — `metadata: .clear` u
 literal sets it. File uploads (`stripe.files.create(_:file:)`) and the quote PDF
 (`stripe.quotes.pdf(id:)`) go to `files.stripe.com`.
 
-Not yet implemented:
-
-- `swift-log` / `swift-distributed-tracing` instrumentation;
-- automatic pagination helpers (`AsyncSequence` over list endpoints).
 
 ## License
 
