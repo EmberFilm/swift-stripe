@@ -122,18 +122,9 @@ try await stripe.customers.listPaymentMethods(id: customer.id)
 
 ### Pagination
 
-List responses are `Stripe.Page<Resource>` with `data` and `hasMore`; page with the cursor:
-
-```swift
-var startingAfter: String?
-repeat {
-    let page = try await stripe.customers.list(.init(limit: 100, startingAfter: startingAfter))
-    process(page.data)
-    startingAfter = page.hasMore ? page.data.last?.id : nil
-} while startingAfter != nil
-```
-
-Search endpoints return `Stripe.SearchPage`, which paginates by `nextPage` token.
+List responses are `Stripe.Page<Resource>`: `data`, `hasMore`, and the cursor is the last
+element's `id`, passed as `startingAfter` on the next request. Search endpoints return
+`Stripe.SearchPage`, which paginates by `nextPage` token instead.
 
 ### Clearing a field
 
@@ -202,14 +193,17 @@ Verify against the raw request body — re-encoding the JSON changes the bytes:
 ```swift
 let event = try StripeWebhook.constructEvent(
     payload: rawBody,
-    signatureHeader: request.headers["Stripe-Signature"].first ?? "",
+    signatureHeader: signatureHeader,
     secret: webhookSecret
 )
 
-switch event.data?.object {
-case .checkoutSession(let session): try await fulfil(session)
-case .subscription(let subscription): try await reconcile(subscription)
-default: break
+switch (event.type, event.data.object) {
+case (.checkoutSessionCompleted, .checkoutSession(let session)):
+    try await fulfil(session)
+case (.customerSubscriptionUpdated, .subscription(let subscription)):
+    try await reconcile(subscription)
+default:
+    break
 }
 ```
 
