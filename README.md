@@ -3,10 +3,11 @@
 [![CI](https://github.com/EmberFilm/swift-stripe/actions/workflows/ci.yml/badge.svg)](https://github.com/EmberFilm/swift-stripe/actions/workflows/ci.yml)
 [![Swift 6.3](https://img.shields.io/badge/swift-6.3-orange.svg)](https://swift.org)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
+[![Stripe API 2026-07-29.dahlia](https://img.shields.io/badge/Stripe%20API-2026--07--29.dahlia-635bff.svg)](https://docs.stripe.com/api/versioning)
 
 A Stripe API client for server-side Swift. Every resource, request type and client is
-generated from Stripe's OpenAPI specification and checked against it in CI, so the types on
-your side match the bytes on the wire. Built on
+generated from Stripe's OpenAPI specification — currently API version **2026-07-29.dahlia** —
+and checked against it in CI, so the types on your side match the bytes on the wire. Built on
 [AsyncHTTPClient](https://github.com/swift-server/async-http-client), `FoundationEssentials`,
 and strict Swift 6 concurrency.
 
@@ -86,9 +87,8 @@ let stripe = StripeClient(configuration: configuration, httpClient: httpClient)
 try await httpClient.shutdown()
 ```
 
-Configuration can also come from a
-[swift-configuration](https://github.com/apple/swift-configuration) reader — see
-[Configuration](#configuration).
+`StripeConfiguration` can also be read from a
+[swift-configuration](https://github.com/apple/swift-configuration) `ConfigReader`.
 
 ## Usage
 
@@ -231,26 +231,6 @@ let pdf: Data = try await stripe.quotes.pdf(id: "qt_123")
 
 Uploads and downloads go to `files.stripe.com` (`filesBaseURL`).
 
-### Configuration
-
-`StripeConfiguration` can be built directly or read from a swift-configuration
-`ConfigReader`. Keys are read unscoped, so scope the reader yourself:
-
-```swift
-let config = ConfigReader(provider: EnvironmentVariablesProvider())
-let stripe = StripeClient(configuration: try StripeConfiguration(config: config.scoped(to: "stripe")))
-```
-
-| Key | Environment variable | Default |
-|---|---|---|
-| `secretKey` | `STRIPE_SECRET_KEY` | required; read as a secret |
-| `apiVersion` | `STRIPE_API_VERSION` | the version the models were generated from |
-| `connectedAccount` | `STRIPE_CONNECTED_ACCOUNT` | none |
-| `maxRetries` | `STRIPE_MAX_RETRIES` | `2` |
-| `timeoutSeconds` | `STRIPE_TIMEOUT_SECONDS` | `60` |
-| `baseURL` | `STRIPE_BASE_URL` | `https://api.stripe.com` |
-| `filesBaseURL` | `STRIPE_FILES_BASE_URL` | `https://files.stripe.com` |
-
 ### Testing
 
 Every resource client is a protocol, so a test double needs no network:
@@ -282,8 +262,9 @@ Scripts/generate-requests.py spec3.sdk.json    # Sources/Stripe/Requests and Sou
 
 CI regenerates and fails if anything on disk differs, measures each model against the spec
 field by field, and decodes a fixture with every field populated for every resource.
-Requests send that spec version as `Stripe-Version`, so a field Stripe has moved between
-versions is where the model expects it whatever the account's default.
+Requests send that version — `2026-07-29.dahlia`, available as `Stripe.generatedAPIVersion` — as
+`Stripe-Version`, so a field Stripe has moved between versions is where the model expects it
+whatever the account's default; pass `apiVersion:` to override it.
 
 Hand-written code is confined to the request engine (`Core/`), webhook verification
 (`Webhooks/`), the property wrappers and shared types (`Shared/`), and `Event`'s lenient

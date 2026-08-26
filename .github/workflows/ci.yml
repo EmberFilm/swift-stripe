@@ -46,6 +46,8 @@ jobs:
         run: |
           Scripts/generate-models.py spec3.sdk.json --check
           Scripts/generate-requests.py spec3.sdk.json --check
+      - name: README shows the generated API version
+        run: grep -q "$(sed -n 's/.*generatedAPIVersion = "\(.*\)"/\1/p' Sources/Stripe/Models/APIVersion.swift)" README.md
 
   linux:
     name: Linux / Swift ${{ matrix.swift }}

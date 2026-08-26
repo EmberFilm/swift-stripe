@@ -362,7 +362,10 @@ libraries: what it is, how to add it, how to use each part, how it is built, lic
 Keep it that way — usage and guarantees, not history or internals; internals belong here.
 Its code snippets are **not** compile-checked by the test suite — when changing public API,
 update the README by hand and verify the snippets still type-check (the client method
-shapes, request spellings and configuration table in particular).
+shapes and request spellings in particular). The README shows the API version the models
+were generated from (badge and intro); CI checks it matches `Stripe.generatedAPIVersion`, so
+bumping the spec pin means updating the README too. swift-configuration support is stated in
+one sentence there — no key table or examples, by request.
 
 ## Attribution
 
