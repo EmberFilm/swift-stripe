@@ -1,9 +1,16 @@
+//===----------------------------------------------------------------------===//
 //
-//  UsageRecord.swift
-//  Stripe
+// This source file is part of the swift-stripe open source project
 //
-//  Created by Andrew Edwards on 5/14/19.
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
 //
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
 
 #if canImport(FoundationEssentials)
 import FoundationEssentials
@@ -17,7 +24,9 @@ public struct UsageRecord: Codable, Hashable, Sendable, Identifiable {
     public typealias ID = String
     /// Unique identifier for the object.
     public var id: ID
-    /// String representing the object’s type. Objects of the same type share the same value.
+    /// String representing the object’s type.
+    ///
+    /// Objects of the same type share the same value.
     public var object: String
     /// Has the value true if the object exists in live mode or the value false if the object exists in test mode.
     public var livemode: Bool
@@ -54,7 +63,9 @@ public struct UsageRecordSummary: Codable, Hashable, Sendable, Identifiable {
     public typealias ID = String
     /// Unique identifier for the object.
     public var id: ID
-    /// String representing the object's type. Objects of the same type share the same value.
+    /// String representing the object's type.
+    ///
+    /// Objects of the same type share the same value.
     public var object: String
     /// The invoice in which this usage period has been billed for.
     public var invoice: Stripe.Billing.Invoice.ID?
@@ -62,7 +73,7 @@ public struct UsageRecordSummary: Codable, Hashable, Sendable, Identifiable {
     public var livemode: Bool
     ///
     public var period: UsageRecordSummaryPeriod?
-    /// The ID of the subscription item this summary is describing
+    /// The ID of the subscription item this summary is describing.
     public var subscriptionItem: String?
     /// The total usage within this usage period.
     public var totalUsage: Int?
@@ -87,9 +98,13 @@ public struct UsageRecordSummary: Codable, Hashable, Sendable, Identifiable {
 }
 
 public struct UsageRecordSummaryPeriod: Codable, Hashable, Sendable {
-    /// The end date of this usage period. All usage up to and including this point in time is included.
+    /// The end date of this usage period.
+    ///
+    /// All usage up to and including this point in time is included.
     public var end: Date?
-    /// The start date of this usage period. All usage after this point in time is included.
+    /// The start date of this usage period.
+    ///
+    /// All usage after this point in time is included.
     public var start: Date?
 
     public init(

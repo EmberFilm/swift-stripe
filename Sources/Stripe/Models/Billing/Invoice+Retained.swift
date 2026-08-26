@@ -1,9 +1,17 @@
+//===----------------------------------------------------------------------===//
 //
-//  Invoice.swift
-//  Stripe
+// This source file is part of the swift-stripe open source project
 //
-//  Created by Anthony Castelli on 9/4/17.
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
 //
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
+
 //
 
 #if canImport(FoundationEssentials)
@@ -21,7 +29,10 @@ import Foundation
 
 extension Stripe.Billing.Subscription {
     public struct Details: Codable, Hashable, Sendable {
-        /// Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+        /// Set of key-value pairs that you can attach to an object.
+        ///
+        /// This can be useful for storing additional information about the object in a structured
+        /// format.
         public var metadata: [String: String]?
 
         public init(
@@ -82,7 +93,9 @@ extension Stripe.Billing.Invoice {
         public var inclusive: Bool?
         /// The tax rate that was applied to get this tax amount.
         @ExpandableOf<Stripe.Tax.Rate> public var taxRate
-        /// The reasoning behind this tax, for example, if the product is tax exempt. The possible values for this field may be extended as new tax rules are supported.
+        /// The reasoning behind this tax, for example, if the product is tax exempt.
+        ///
+        /// The possible values for this field may be extended as new tax rules are supported.
         public var taxabilityReason: Stripe.Billing.Invoice.TotalTaxAmount.TaxabilityReason?
         /// The amount on which tax is calculated, in cents.
         public var taxableAmount: Int?
@@ -140,7 +153,9 @@ extension Stripe.Billing.Invoice.TotalTaxAmount {
 
 extension Stripe.Billing.Invoice {
     public struct TransferData: Codable, Hashable, Sendable {
-        /// The amount in cents that will be transferred to the destination account when the invoice is paid. By default, the entire amount is transferred to the destination.
+        /// The amount in cents that will be transferred to the destination account when the invoice is paid.
+        ///
+        /// By default, the entire amount is transferred to the destination.
         public var amount: Int?
         /// The account where funds from the payment will be transferred to upon payment success.
         @ExpandableOf<Stripe.Connect.Account> public var destination
@@ -161,9 +176,9 @@ extension Stripe.Billing.Invoice {
     /// Details about the subscription that created an invoice.
     public struct SubscriptionDetails: Codable, Hashable, Sendable {
         /// The subscription that generated this invoice.
-        @ExpandableOf<Stripe.Billing.Subscription> public var subscription:
-            Stripe.Billing.Subscription.ID?
+        @ExpandableOf<Stripe.Billing.Subscription> public var subscription: Stripe.Billing.Subscription.ID?
         /// An immutable snapshot of the subscription's metadata as of invoice finalization.
+        ///
         /// Populated only for invoices created on or after 2023-06-29.
         public var metadata: [String: String]?
         /// Only set on upcoming invoices that preview prorations: the time used to calculate them.

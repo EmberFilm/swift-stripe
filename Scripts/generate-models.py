@@ -29,11 +29,11 @@ happen here.
 from __future__ import annotations
 
 import argparse
+from collections import Counter, defaultdict
 import json
 import pathlib
 import re
 import sys
-from collections import Counter, defaultdict
 
 # --------------------------------------------------------------------------------------------
 # Configuration
@@ -362,7 +362,7 @@ UNION_RESOURCES: dict[str, str] = {
 }
 
 ID_ONLY_RESOURCES: set[str] = {
-      # no hand type, and a top-level placement the generator does not do yet
+    # no hand type, and a top-level placement the generator does not do yet
 }
 
 # Types the generator emits; a resource embedded by value in another is boxed to break cycles.
@@ -387,6 +387,7 @@ SWIFT_KEYWORDS = {
 # Naming
 # --------------------------------------------------------------------------------------------
 
+
 def camel(name: str) -> str:
     parts = re.split(r"[_\-.]", name)
     parts = [p for p in parts if p]
@@ -398,12 +399,15 @@ def camel(name: str) -> str:
         out = "_" + out
     return out
 
+
 def pascal(name: str) -> str:
     c = camel(name)
     return c[:1].upper() + c[1:]
 
+
 def ident(name: str) -> str:
     return f"`{name}`" if name in SWIFT_KEYWORDS else name
+
 
 def enum_case(value: str) -> str:
     """A Swift case name for a spec enum value; the raw value is always emitted alongside."""
@@ -415,17 +419,26 @@ def enum_case(value: str) -> str:
         c = "_" + c
     return ident(c)
 
+
 def doc(description: str | None) -> str | None:
     if not description:
         return None
     text = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", description)   # [text](url) -> text
     text = re.sub(r"\s+", " ", text).strip()
-    first = re.split(r"(?<=[.!?])\s", text, maxsplit=1)[0]
-    return first[:118] + ("…" if len(first) > 118 else "")
+    text = re.sub(r"^\([^)]*\)\s*", "", text)                     # "(For tokenized numbers only.) The …"
+    first = re.split(r"(?<=[.!?])[\"')\]]*\s", text, maxsplit=1)[0]   # a sentence may close with a quote
+    if len(first) > 118:
+        first = first[:118].rsplit(" ", 1)[0].rstrip(",;:")
+        if first.count('"') % 2:                                    # do not cut inside a quotation
+            first = first[:first.rfind('"')].rstrip(" ,;:")
+    if first.endswith(('."', ".'")):                                  # `set to "user."` -> `set to "user".`
+        first = first[:-2] + first[-1] + "."
+    return first if first.endswith((".", "!", "?")) else first + "."
 
 # --------------------------------------------------------------------------------------------
 # Spec walking
 # --------------------------------------------------------------------------------------------
+
 
 class Generator:
     def __init__(self, spec: dict, only: set[str] | None = None):
@@ -517,7 +530,7 @@ class Generator:
             item_refs = [r for r in self.refs_in(items) if r]
             if expandable and item_refs:
                 t = self.type_for_ref(item_refs[0], prop, owner)
-                return Field(name, prop, f"[String]", description,
+                return Field(name, prop, "[String]", description,
                              wrapper=f"@ExpandableCollection<{t}>", collection_wrapper=True)
             elem = self.element_type(items, prop, owner)
             return Field(name, prop, f"[{elem}]", description)
@@ -653,6 +666,7 @@ class Generator:
         t = props.get("type")
         if not isinstance(t, dict) or t.get("type") != "string" or "type" not in schema.get("required", []):
             return
+
         def is_object(v: dict) -> bool:
             return "$ref" in v or v.get("type") == "object" or \
                 any("$ref" in a or a.get("type") == "object" for a in v.get("anyOf", []))
@@ -743,7 +757,8 @@ class Generator:
             out += f"            if let value = try Self.decodeGroup{i}(object, decoder) {{ self = value; return }}\n"
         out += "            self = .unknown(type: object)\n        }\n"
         for i, group in enumerate(groups):
-            out += f"\n        @inline(never)\n        private static func decodeGroup{i}(_ object: String, _ decoder: any Decoder) throws -> Object? {{\n"
+            out += f"\n        @inline(never)\n        private static func decodeGroup{i}("
+            out += "_ object: String, _ decoder: any Decoder) throws -> Object? {\n"
             out += "            switch object {\n"
             for case, wire, t in group:
                 out += f'            case "{wire}": return .{case}(try {t}(from: decoder))\n'
@@ -759,8 +774,8 @@ class Generator:
         names = sorted(n for n, sc in self.schemas.items() if "x-stripeEvent" in sc)
         out = HEADER.format(version=self.version, schema="event (every event type)")
         out += f"extension {self.ns}.Events.Event {{\n"
-        out += "    /// Every event type Stripe documents. An event of a newer type decodes with `type == nil`\n"
-        out += "    /// and its `rawType` set.\n"
+        out += "    /// Every event type Stripe documents.\n    ///\n"
+        out += "    /// An event of a newer type decodes with `type == nil` and its `rawType` set.\n"
         out += "    public enum `Type`: String, Codable, Hashable, Sendable {\n"
         for n in names:
             out += f'        case {enum_case(n)} = "{n}"\n'
@@ -782,6 +797,7 @@ class Generator:
                 if len(parents) > 1:
                     self.type_for_ref(ref, next(iter(self.ref_prop_names[ref])), Struct("_", "_", None))
         files: dict[str, str] = {}
+        self.emitted: set[str] = set()
         places = layout()
         for name, swift_path in RESOURCES.items():
             if self.only and name not in self.only:
@@ -790,6 +806,7 @@ class Generator:
             root = self.build_struct(path.split(".")[-1], self.schemas[name],
                                      path if swift_path.startswith("/") else f"{self.ns}.{path}", root=True)
             files[model_file(*places[name])] = self.render_resource(name, swift_path, root)
+            self.emitted.add(model_file(*places[name]))
         for union, name in UNION_RESOURCES.items():
             if not self.only or union in self.only:
                 files[model_file(*places[union])] = self.render_union_resource(union, name)
@@ -827,11 +844,20 @@ class Generator:
             out += f"// {ref}\nextension {self.ns}.Shared {{\n{s.render(indent='    ')}}}\n\n"
         return out
 
+    def writes(self, path: pathlib.Path) -> bool:
+        """Whether this run emits `path` — a hand-source scan must not read last run's output."""
+        try:
+            rel = str(pathlib.Path(path).resolve().relative_to(REPO / "Sources" / "Stripe" / "Models"))
+        except ValueError:
+            return False
+        return rel in self.emitted
+
     def render_missing_namespaces(self) -> str:
         """Declares first-level containers (`Stripe.Treasury`) the hand sources do not."""
         hand = "\n".join(p.read_text() for p in pathlib.Path("Sources/Stripe").rglob("*.swift")
-                         if not is_generated(p))
+                         if not is_generated(p) and not self.writes(p))
         wanted = sorted({p.split(".")[0] for p in RESOURCES.values() if "." in p and not p.startswith("/")})
+
         def exists(e):   # `Stripe.X` in use, or declared directly inside the root enum's extension
             return re.search(rf"\bStripe\.{e}\b", hand) or re.search(rf"^    public enum {e}\b", hand, re.M)
         missing = [e for e in wanted if not exists(e)]
@@ -840,18 +866,36 @@ class Generator:
         return out
 
 
+REPO = pathlib.Path(__file__).resolve().parent.parent
+MANIFEST = REPO / "Scripts" / "generated-files.txt"
 
-GENERATED_MARKER = "//  Generated by Scripts/"
+
+def manifest() -> set[str]:
+    """Repository-relative paths of every generated file. Generated files carry nothing that
+    marks them; this list, written by the generators, is what tells them from hand-written ones."""
+    if not MANIFEST.exists():
+        return set()
+    return {line.strip() for line in MANIFEST.read_text().splitlines() if line.strip()}
 
 
 def is_generated(path: pathlib.Path) -> bool:
-    """Generated files sit beside hand-written ones; their header tells them apart."""
-    with open(path) as f:
-        return any(GENERATED_MARKER in line for line, _ in zip(f, range(8)))
+    try:
+        return str(pathlib.Path(path).resolve().relative_to(REPO)) in manifest()
+    except ValueError:
+        return False
 
 
 def generated_files(root: pathlib.Path) -> list[pathlib.Path]:
-    return [p for p in root.rglob("*.swift") if is_generated(p)]
+    root = pathlib.Path(root).resolve()
+    return [REPO / m for m in sorted(manifest()) if (REPO / m).is_relative_to(root) and (REPO / m).exists()]
+
+
+def record_generated(root: pathlib.Path, names) -> None:
+    """Replaces the manifest's entries under `root` with `names` (relative to it)."""
+    root = pathlib.Path(root).resolve()
+    kept = {m for m in manifest() if not (REPO / m).is_relative_to(root)}
+    kept |= {str((root / n).relative_to(REPO)) for n in names}
+    MANIFEST.write_text("\n".join(sorted(kept)) + "\n")
 
 
 def shortest_unique(dotted: dict[str, str], taken: set[str]) -> dict[str, str]:
@@ -890,16 +934,56 @@ def layout(source_root: str = "Sources/Stripe") -> dict[str, tuple[str, str]]:
     return {n: ("/".join(dotted[n].split(".")[:-1]), stems[n]) for n in dotted}
 
 
+def swift_format(paths: list[pathlib.Path]) -> None:
+    """Formats freshly written files with the repository's `.swift-format`, so what the
+    generator writes is what `swift format lint --strict` accepts and what `--check` compares."""
+    import shutil
+    import subprocess
+    if not paths:
+        return
+    if shutil.which("swift") is None:
+        raise SystemExit("swift is required on PATH to format generated sources")
+    # The configuration is named explicitly: swift-format otherwise searches upward from each
+    # file, and the files `--check` renders live in a temporary directory.
+    configuration = pathlib.Path(__file__).resolve().parent.parent / ".swift-format"
+    subprocess.run(
+        ["swift", "format", "format", "--in-place", "--parallel", "--configuration", str(configuration), *map(str, paths)],
+        check=True,
+    )
+
+
+def formatted(files: dict[str, str]) -> dict[str, str]:
+    """The files as swift-format would leave them, without touching the tree."""
+    import tempfile
+    with tempfile.TemporaryDirectory() as tmp:
+        root = pathlib.Path(tmp)
+        for name, body in files.items():
+            (root / name).parent.mkdir(parents=True, exist_ok=True)
+            (root / name).write_text(body)
+        swift_format([root / name for name in files])
+        return {name: (root / name).read_text() for name in files}
+
+
 def model_file(folder: str, stem: str, suffix: str = "") -> str:
     return f"{folder}/{stem}{suffix}.swift" if folder else f"{stem}{suffix}.swift"
 
 
-HEADER = """//
-//  Generated by Scripts/generate-models.py — do not edit.
-//  Source: Stripe OpenAPI spec, version {version}
-//  Schema: {schema}
+LICENSE_HEADER = """//===----------------------------------------------------------------------===//
 //
+// This source file is part of the swift-stripe open source project
+//
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
+//
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
+"""
 
+HEADER = LICENSE_HEADER + """
 #if canImport(FoundationEssentials)
 import FoundationEssentials
 #else
@@ -1069,6 +1153,7 @@ class Struct:
         u = self.union
         out = f"{i}/// The payload `type` selects; `unknown` carries a type this package does not model.\n"
         out += f"{i}public indirect enum {u.name}: Hashable, Sendable {{\n"
+
         def payload(f):   # an expandable id keeps its wrapper, so an expanded object is not lost
             return self.wrapper_type(f) if f.id_wrapper else f.swift_type
         for f in u.cases:
@@ -1087,9 +1172,11 @@ class Struct:
             out += f'{i}        case "{f.wire}":\n'
             if f.id_wrapper:
                 out += f"{i}            let value = try container.decode({payload(f)}.self, forKey: .{n})\n"
-                out += f"{i}            if value.wrappedValue != nil || value.projectedValue != nil {{ self = .{n}(value) }} else {{ self = .unknown(type: type) }}\n"
+                out += f"{i}            if value.wrappedValue != nil || value.projectedValue != nil {{ self = .{n}(value) }}"
+                out += " else { self = .unknown(type: type) }\n"
             else:
-                out += f"{i}            if let value = try container.decodeIfPresent({f.swift_type}.self, forKey: .{n}) {{ self = .{n}(value) }} else {{ self = .unknown(type: type) }}\n"
+                out += f"{i}            if let value = try container.decodeIfPresent({
+                    f.swift_type}.self, forKey: .{n}) {{ self = .{n}(value) }} else {{ self = .unknown(type: type) }}\n"
         for k in u.keywords:
             out += f'{i}        case "{k}": self = .{enum_case(k)}\n'
         out += f"{i}        default: self = .unknown(type: type)\n{i}        }}\n{i}    }}\n\n"
@@ -1128,8 +1215,9 @@ def main() -> int:
         return 1
     out = pathlib.Path(args.out)
     if args.check:
+        files = formatted(files)
         stale = [n for n, body in files.items() if not (out / n).exists() or (out / n).read_text() != body]
-        extra = [p for p in generated_files(out) if str(p.relative_to(out)) not in files]
+        extra = [p for p in generated_files(out) if str(p.relative_to(out.resolve())) not in files]
         for n in stale:
             print(f"out of date: {out / n}")
         for p in extra:
@@ -1138,11 +1226,14 @@ def main() -> int:
 
     if not args.keep:
         for p in generated_files(out):
-            if str(p.relative_to(out)) not in files:
+            if str(p.relative_to(out.resolve())) not in files:
                 p.unlink()
     for name, content in files.items():
         (out / name).parent.mkdir(parents=True, exist_ok=True)
         (out / name).write_text(content)
+    swift_format([out / name for name in files])
+    if not args.keep:
+        record_generated(out, files)
     for d in sorted((d for d in out.rglob("*") if d.is_dir()), reverse=True):
         if not any(d.iterdir()):
             d.rmdir()

@@ -1,9 +1,17 @@
+//===----------------------------------------------------------------------===//
 //
-//  Subscription.Item.swift
-//  Stripe
+// This source file is part of the swift-stripe open source project
 //
-//  Created by Andrew Edwards on 6/6/17.
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
 //
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
+
 //
 
 #if canImport(FoundationEssentials)
@@ -23,9 +31,16 @@ extension Stripe.Billing.Subscription.Item {
         case allowIncomplete = "allow_incomplete"
         /// Use `error_if_incomplete` if you want Stripe to return an HTTP 402 status code if a subscription’s first invoice cannot be paid.
         case errorIfIncomplete = "error_if_incomplete"
-        /// Use `pending_if_incomplete` to update the subscription using pending updates. When you use `pending_if_incomplete` you can only pass the parameters supported by pending updates.
+        /// Use `pending_if_incomplete` to update the subscription using pending updates.
+        ///
+        /// When you use `pending_if_incomplete` you can only pass the parameters supported by pending
+        /// updates.
         case pendingIfIncomplete = "pending_if_incomplete"
-        /// Use `default_incomplete` to transition the subscription to `status=past_due` when payment is required and await explicit confirmation of the invoice’s payment intent. This allows simpler management of scenarios where additional user actions are needed to pay a subscription’s invoice. Such as failed payments, SCA regulation, or collecting a mandate for a bank debit payment method.
+        /// Use `default_incomplete` to transition the subscription to `status=past_due` when payment is required and await explicit confirmation of the invoice’s payment intent.
+        ///
+        /// This allows simpler management of scenarios where additional user actions are needed to pay
+        /// a subscription’s invoice. Such as failed payments, SCA regulation, or collecting a mandate
+        /// for a bank debit payment method.
         case defaultIncomplete = "default_incomplete"
 
     }
@@ -38,4 +53,3 @@ extension Stripe.Billing.Subscription.Item {
         case none
     }
 }
-

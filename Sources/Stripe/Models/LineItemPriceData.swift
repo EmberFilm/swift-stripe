@@ -1,9 +1,16 @@
+//===----------------------------------------------------------------------===//
 //
-//  LineItemPriceData.swift
-//  swift-stripe-types
+// This source file is part of the swift-stripe open source project
 //
-//  Created by Coen ten Thije Boonkkamp on 13/01/2025.
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
 //
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
 
 #if canImport(FoundationEssentials)
 import FoundationEssentials
@@ -16,27 +23,27 @@ import Foundation
 // Shared price data structure for line items across Payment Links and Checkout Sessions
 
 extension Stripe {
-    /// Price data for creating line items inline without a pre-existing Price object
+    /// Price data for creating line items inline without a pre-existing Price object.
     public struct LineItemPriceData: Codable, Equatable, Hashable, Sendable {
-        /// Three-letter ISO currency code, in lowercase
+        /// Three-letter ISO currency code, in lowercase.
         public let currency: Stripe.Currency
 
-        /// The ID of the product that this price will belong to
+        /// The ID of the product that this price will belong to.
         public let product: Stripe.Products.Product.ID?
 
-        /// Data used to generate a new product object inline
+        /// Data used to generate a new product object inline.
         public let productData: ProductData?
 
-        /// The recurring components of a price
+        /// The recurring components of a price.
         public let recurring: Recurring?
 
-        /// Specifies whether the price is considered inclusive of taxes or exclusive of taxes
+        /// Specifies whether the price is considered inclusive of taxes or exclusive of taxes.
         public let taxBehavior: TaxBehavior?
 
-        /// A positive integer in cents (or 0 for a free price)
+        /// A positive integer in cents (or 0 for a free price).
         public let unitAmount: Int?
 
-        /// Same as unit_amount, but accepts a decimal value with up to 12 decimal places
+        /// Same as unit_amount, but accepts a decimal value with up to 12 decimal places.
         public let unitAmountDecimal: String?
 
         private enum CodingKeys: String, CodingKey {
@@ -67,21 +74,21 @@ extension Stripe {
             self.unitAmountDecimal = unitAmountDecimal
         }
 
-        /// Product data for creating a product inline
+        /// Product data for creating a product inline.
         public struct ProductData: Codable, Equatable, Hashable, Sendable {
-            /// The product's name, meant to be displayable to the customer
+            /// The product's name, meant to be displayable to the customer.
             public let name: String
 
-            /// The product's description, meant to be displayable to the customer
+            /// The product's description, meant to be displayable to the customer.
             public let description: String?
 
-            /// A list of up to 8 URLs of images for this product
+            /// A list of up to 8 URLs of images for this product.
             public let images: [String]?
 
-            /// Set of key-value pairs that you can attach to an object
+            /// Set of key-value pairs that you can attach to an object.
             public let metadata: [String: String]?
 
-            /// A tax code ID
+            /// A tax code ID.
             public let taxCode: String?
 
             public init(
@@ -99,12 +106,12 @@ extension Stripe {
             }
         }
 
-        /// The recurring components of a price
+        /// The recurring components of a price.
         public struct Recurring: Codable, Equatable, Hashable, Sendable {
-            /// Specifies billing frequency
+            /// Specifies billing frequency.
             public let interval: Stripe.Interval
 
-            /// The number of intervals between subscription billings
+            /// The number of intervals between subscription billings.
             public let intervalCount: Int?
 
             public init(

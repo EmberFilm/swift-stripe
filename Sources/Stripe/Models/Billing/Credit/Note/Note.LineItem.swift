@@ -1,10 +1,21 @@
+//===----------------------------------------------------------------------===//
+//
+// This source file is part of the swift-stripe open source project
+//
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
+//
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
+
 //
 //  CreditNote.LineItem.swift
 //
 //
-//  Created by Andrew Edwards on 3/7/20.
-//
-
 #if canImport(FoundationEssentials)
 import FoundationEssentials
 #else
@@ -14,11 +25,13 @@ import Foundation
 // https://docs.stripe.com/api/creditNotes/line_item.md
 
 extension Stripe.Billing.Credit.Note {
-    /// The [Credit Note Line Item](https://stripe.com/docs/api/creditNotes/line_item)
+    /// The [Credit Note Line Item](https://stripe.com/docs/api/creditNotes/line_item).
     public struct LineItem: Codable, Hashable, Sendable {
         /// Unique identifier for the object.
         public var id: ID
-        /// String representing the object's type. Objects of the same type share the same value.
+        /// String representing the object's type.
+        ///
+        /// Objects of the same type share the same value.
         public var object: String
         /// The integer amount in `cents` representing the total amount being credited for this line item, excluding (exclusive) tax and discounts.
         public var amount: Int?
@@ -26,19 +39,22 @@ extension Stripe.Billing.Credit.Note {
         public var amountExcludingTax: Int?
         /// Description of the item being credited.
         public var description: String?
-        /// The amount of discount calculated per discount for this line item
+        /// The amount of discount calculated per discount for this line item.
         public var discountAmounts: [LineItem.Discount.Amount]?
-        /// ID of the invoice line item being credited
+        /// ID of the invoice line item being credited.
         public var invoiceLineItem: String?
         /// Has the value true if the object exists in live mode or the value false if the object exists in test mode.
         public var livemode: Bool?
         /// The number of units of product being credited.
         public var quantity: Int?
-        /// The amount of tax calculated per tax rate for this line item
+        /// The amount of tax calculated per tax rate for this line item.
         public var taxAmounts: [LineItem.Tax.Amount]?
         /// The tax rates which apply to the line item.
         public var taxRates: [Stripe.Tax.Rate]?
-        /// The type of the credit note line item, one of `invoice_line_item` or `custom_line_item`. When the type is `invoice_line_item` there is an additional `invoice_line_item` property on the resource the value of which is the id of the credited line item on the invoice.
+        /// The type of the credit note line item, one of `invoice_line_item` or `custom_line_item`.
+        ///
+        /// When the type is `invoice_line_item` there is an additional `invoice_line_item` property on
+        /// the resource the value of which is the id of the credited line item on the invoice.
         public var type: LineItem.`Type`?
         /// The cost of each unit of product being credited.
         public var unitAmount: Int?
@@ -135,7 +151,9 @@ extension Stripe.Billing.Credit.Note.LineItem {
 
 extension Stripe.Billing.Credit.Note.LineItem {
     public struct List: Codable, Hashable, Sendable {
-        /// String representing the object's type. Objects of the same type share the same value. Always has the value list.
+        /// String representing the object's type.
+        ///
+        /// Objects of the same type share the same value. Always has the value list.
         public var object: String?
         /// Details about each object.
         public var data: [Stripe.Billing.Credit.Note.LineItem]?

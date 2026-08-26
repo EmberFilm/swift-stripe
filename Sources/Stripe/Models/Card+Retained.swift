@@ -1,9 +1,17 @@
+//===----------------------------------------------------------------------===//
 //
-//  Card+Retained.swift
-//  Stripe
+// This source file is part of the swift-stripe open source project
 //
-//  Created by Anthony Castelli on 4/15/17.
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
 //
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
+
 //
 
 // https://docs.stripe.com/api/cards/object.md
@@ -47,7 +55,10 @@ public enum CardTokenizedMethod: String, Codable, Sendable {
 public struct CardWallet: Codable, Hashable, Sendable {
     /// If this is an `apple_pay` card wallet, this hash contains details about the wallet.
     public var applePay: CardWalletApplePay?
-    /// The type of the card wallet, one of `apple_pay`. An additional hash is included on the Wallet subhash with a name matching this value. It contains additional information specific to the card wallet type.
+    /// The type of the card wallet, one of `apple_pay`.
+    ///
+    /// An additional hash is included on the Wallet subhash with a name matching this value. It
+    /// contains additional information specific to the card wallet type.
     public var type: String?
 
     public init(
@@ -68,4 +79,3 @@ public struct CardWalletApplePay: Codable, Hashable, Sendable {
         self.type = type
     }
 }
-

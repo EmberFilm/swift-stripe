@@ -17,6 +17,8 @@ let package = Package(
         // and this package links only FoundationEssentials. A dependent that wants JSON config
         // files enables the trait itself; traits unify across the graph.
         .package(url: "https://github.com/apple/swift-configuration.git", from: "1.2.0", traits: []),
+        // Build-time only: the soundness workflow's documentation check and Swift Package Index.
+        .package(url: "https://github.com/swiftlang/swift-docc-plugin", from: "1.4.0"),
     ],
     targets: [
         .target(

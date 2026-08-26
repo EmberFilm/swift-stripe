@@ -1,9 +1,16 @@
+//===----------------------------------------------------------------------===//
 //
-//  CreditNote.swift
-//  Stripe
+// This source file is part of the swift-stripe open source project
 //
-//  Created by Andrew Edwards on 5/13/19.
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
 //
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
 
 #if canImport(FoundationEssentials)
 import FoundationEssentials
@@ -26,13 +33,18 @@ extension Stripe.Billing.Credit.Note.Shipping {
     public struct Cost: Codable, Hashable, Sendable {
         /// Total shipping cost before any taxes are applied.
         public var amountSubtotal: Int?
-        /// Total tax amount applied due to shipping costs. If no tax was applied, defaults to 0.
+        /// Total tax amount applied due to shipping costs.
+        ///
+        /// If no tax was applied, defaults to 0.
         public var amountTax: Int?
         /// Total shipping cost after taxes are applied.
         public var amountTotal: Int?
         /// The ID of the Shipping.Rate for this invoice.
         @Expandable<Stripe.Products.Shipping.Rate, String> public var shippingRate: String?
-        /// The taxes applied to the shipping rate. This field is not included by default. To include it in the response, [expand](https://stripe.com/docs/api/expanding_objects) the `taxes` field.
+        /// The taxes applied to the shipping rate.
+        ///
+        /// This field is not included by default. To include it in the response,
+        /// [expand](https://stripe.com/docs/api/expanding_objects) the `taxes` field.
         public var taxes: [Cost.Tax]?
 
         public init(
@@ -92,4 +104,3 @@ extension Stripe.Billing.Credit.Note.Tax {
         }
     }
 }
-

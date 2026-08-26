@@ -1,9 +1,19 @@
+//===----------------------------------------------------------------------===//
 //
-//  StripeConfiguration+ConfigReader.swift
-//  swift-stripe
+// This source file is part of the swift-stripe open source project
 //
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
+//
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
 
 import Configuration
+
 #if canImport(FoundationEssentials)
 import FoundationEssentials
 #else

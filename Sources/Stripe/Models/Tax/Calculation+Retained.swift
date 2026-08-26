@@ -1,7 +1,17 @@
+//===----------------------------------------------------------------------===//
 //
-//  TaxCalculation.swift
-//  Stripe Types Models
+// This source file is part of the swift-stripe open source project
 //
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
+//
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
+
 //  Created on 2025-01-14.
 //
 
@@ -24,7 +34,9 @@ extension Stripe.Tax.Calculation {
         public var addressSource: AddressSource?
         /// The customer's IP address (IPv4 or IPv6).
         public var ipAddress: String?
-        /// The customer's tax exemption. One of none, exempt, or reverse.
+        /// The customer's tax exemption.
+        ///
+        /// One of none, exempt, or reverse.
         public var taxability: Taxability?
         /// The customer's tax IDs.
         public var taxIds: [TaxID]?
@@ -49,7 +61,9 @@ extension Stripe.Tax.Calculation {
 
         /// Unique identifier for the object.
         public var id: ID
-        /// String representing the object's type. Objects of the same type share the same value.
+        /// String representing the object's type.
+        ///
+        /// Objects of the same type share the same value.
         public var object: String
         /// The line item amount in the smallest currency unit.
         public var amount: Int

@@ -1,10 +1,21 @@
+//===----------------------------------------------------------------------===//
+//
+// This source file is part of the swift-stripe open source project
+//
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
+//
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
+
 //
 //  TerminalHardwareShippingMethod.swift
 //
 //
-//  Created by Andrew Edwards on 5/17/23.
-//
-
 #if canImport(FoundationEssentials)
 import FoundationEssentials
 #else
@@ -19,15 +30,21 @@ public struct TerminalHardwareShippingMethod: Codable, Hashable, Sendable, Ident
     public var id: ID
     /// The country in which this Shipping Method is available.
     public var country: String?
-    /// The estimated delivery period containing the estimated minimum and maximum delivery dates. These dates are not guaranteed.
+    /// The estimated delivery period containing the estimated minimum and maximum delivery dates.
+    ///
+    /// These dates are not guaranteed.
     public var estimatedDeliveryWindow: TerminalHardwareShippingMethodEstimatedDeliveryWindow?
     /// The name of the Terminal Hardware Shipping Method.
     public var name: TerminalHardwareShippingMethodName?
-    /// String representing the object’s type. Objects of the same type share the same value.
+    /// String representing the object’s type.
+    ///
+    /// Objects of the same type share the same value.
     public var object: String
     /// The Shipping Method’s status.
     public var status: TerminalHardwareShippingMethodStatus?
-    /// A UNIX timestamp, after which time this Shipping Method has a status of `unavailable` and it can’t be used for order creation. If absent, we have no plans to make this Shipping Method unavailable.
+    /// A UNIX timestamp, after which time this Shipping Method has a status of `unavailable` and it can’t be used for order creation.
+    ///
+    /// If absent, we have no plans to make this Shipping Method unavailable.
     public var unavailableAfter: Date?
 
     public init(
@@ -65,11 +82,11 @@ public struct TerminalHardwareShippingMethodEstimatedDeliveryWindow: Codable, Ha
 }
 
 public enum TerminalHardwareShippingMethodName: String, Codable, Sendable {
-    /// Standard
+    /// Standard.
     case standard
-    /// Express
+    /// Express.
     case express
-    /// Priority
+    /// Priority.
     case priority
 }
 

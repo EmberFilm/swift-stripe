@@ -1,0 +1,6 @@
+version: 1
+builder:
+  configs:
+    - swift_version: '6.3'
+      documentation_targets:
+        - Stripe

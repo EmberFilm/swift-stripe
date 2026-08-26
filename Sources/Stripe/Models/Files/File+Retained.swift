@@ -1,9 +1,16 @@
+//===----------------------------------------------------------------------===//
 //
-//  File.swift
-//  Stripe
+// This source file is part of the swift-stripe open source project
 //
-//  Created by Andrew Edwards on 9/15/18.
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
 //
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
 
 #if canImport(FoundationEssentials)
 import FoundationEssentials
@@ -14,13 +21,11 @@ import Foundation
 // The File struct is generated (Models/Generated). These are the nested types the
 // request layer still names under `Stripe.Files.File` that the generator spells differently.
 
-
 // https://docs.stripe.com/api/files/object.md
 
 extension Stripe {
     public typealias File = Stripe.Files.File
 }
-
 
 extension Stripe.Files.File {
 
@@ -35,4 +40,3 @@ extension Stripe.Files.File {
         case xlsx
     }
 }
-

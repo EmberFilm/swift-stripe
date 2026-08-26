@@ -1,3 +1,17 @@
+//===----------------------------------------------------------------------===//
+//
+// This source file is part of the swift-stripe open source project
+//
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
+//
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
+
 #if canImport(FoundationEssentials)
 import FoundationEssentials
 #else
@@ -5,7 +19,8 @@ import Foundation
 #endif
 
 extension Stripe.WebElements {
-    /// Payment Method Messaging Element for displaying payment method messaging
+    /// Payment Method Messaging Element for displaying payment method messaging.
+    ///
     /// See: https://docs.stripe.com/elements/payment-method-messaging
     public struct PaymentMethodMessaging: Codable, Hashable, Sendable {
         public let options: Options?

@@ -1,9 +1,17 @@
+//===----------------------------------------------------------------------===//
 //
-//  Sessions.swift
-//  Stripe
+// This source file is part of the swift-stripe open source project
 //
-//  Created by Andrew Edwards on 5/4/19.
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
 //
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
+
 #if canImport(FoundationEssentials)
 import FoundationEssentials
 #else
@@ -30,13 +38,17 @@ extension Stripe.Checkout.Session.Custom {
     public struct Field: Codable, Hashable, Sendable {
         /// Configuration for `type=dropdown` fields.
         public var dropdown: Stripe.Checkout.Session.Custom.Field.Dropdown?
-        /// String of your choice that your integration can use to reconcile this field. Must be unique to this field, alphanumeric, and up to 200 characters.
+        /// String of your choice that your integration can use to reconcile this field.
+        ///
+        /// Must be unique to this field, alphanumeric, and up to 200 characters.
         public var key: String?
         /// The label for the field, displayed to the customer.
         public var label: Stripe.Checkout.Session.Custom.Field.Label?
         /// Configuration for `type=numeric` fields.
         public var numeric: Stripe.Checkout.Session.Custom.Field.Numeric?
-        /// Whether the customer is required to complete the field before completing the Checkout Session. Defaults to `false`.
+        /// Whether the customer is required to complete the field before completing the Checkout Session.
+        ///
+        /// Defaults to `false`.
         public var optional: Bool?
         /// Configuration for `type=text` fields.
         public var text: Stripe.Checkout.Session.Custom.Field.Text?
@@ -65,9 +77,13 @@ extension Stripe.Checkout.Session.Custom {
 
 extension Stripe.Checkout.Session.Custom.Field {
     public struct Dropdown: Codable, Hashable, Sendable {
-        /// The options available for the customer to select. Up to 200 options allowed
+        /// The options available for the customer to select.
+        ///
+        /// Up to 200 options allowed.
         public var options: [Stripe.Checkout.Session.Custom.Field.Dropdown.Option]?
-        /// The option selected by the customer. This will be the `value` for the option.
+        /// The option selected by the customer.
+        ///
+        /// This will be the `value` for the option.
         public var value: String?
 
         public init(
@@ -81,9 +97,13 @@ extension Stripe.Checkout.Session.Custom.Field {
 }
 extension Stripe.Checkout.Session.Custom.Field.Dropdown {
     public struct Option: Codable, Hashable, Sendable {
-        /// The label for the option, displayed to the customer. Up to 100 characters.
+        /// The label for the option, displayed to the customer.
+        ///
+        /// Up to 100 characters.
         public var label: String?
-        /// The value for this option, not displayed to the customer, used by your integration to reconcile the option selected by the customer. Must be unique to this option, alphanumeric, and up to 100 characters.
+        /// The value for this option, not displayed to the customer, used by your integration to reconcile the option selected by the customer.
+        ///
+        /// Must be unique to this option, alphanumeric, and up to 100 characters.
         public var value: String?
 
         public init(
@@ -98,7 +118,9 @@ extension Stripe.Checkout.Session.Custom.Field.Dropdown {
 
 extension Stripe.Checkout.Session.Custom.Field {
     public struct Label: Codable, Hashable, Sendable {
-        /// Custom text for the label, displayed to the customer. Up to 50 characters.
+        /// Custom text for the label, displayed to the customer.
+        ///
+        /// Up to 50 characters.
         public var custom: String?
         /// The type of the label.
         public var type: Stripe.Checkout.Session.Custom.Field.Label.`Type`?
@@ -226,7 +248,9 @@ extension Stripe.Checkout.Session {
 
 extension Stripe.Checkout.Session.Customer {
     public enum Creation: String, Codable, Sendable {
-        /// The Checkout Session will only create a Customer if it is required for Session confirmation. Currently, only `subscription` mode Sessions require a Customer.
+        /// The Checkout Session will only create a Customer if it is required for Session confirmation.
+        ///
+        /// Currently, only `subscription` mode Sessions require a Customer.
         case ifRequired = "if_required"
         /// The Checkout Session will always create a Customer when a Session confirmation is attempted.
         case always
@@ -260,20 +284,23 @@ extension Stripe.Checkout.Session.Invoice.Creation {
 
 extension Stripe.Checkout.Session.Invoice.Creation.Invoice {
     public struct Data: Codable, Hashable, Sendable {
-        /// The account tax IDs associated with the invoice
+        /// The account tax IDs associated with the invoice.
         @ExpandableCollection<Stripe.Tax.ID> public var accountTaxIds: [String]?
         /// Custom fields displayed on the invoice.
-        public var customFields:
-            [Stripe.Checkout.Session.Invoice.Creation.Invoice.Data.Custom.Fields]?
-        /// An arbitrary string attached to the object. Often useful for displaying to users.
+        public var customFields: [Stripe.Checkout.Session.Invoice.Creation.Invoice.Data.Custom.Fields]?
+        /// An arbitrary string attached to the object.
+        ///
+        /// Often useful for displaying to users.
         public var description: String?
         /// Footer displayed on the invoice.
         public var footer: String?
-        /// Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+        /// Set of key-value pairs that you can attach to an object.
+        ///
+        /// This can be useful for storing additional information about the object in a structured
+        /// format.
         public var metadata: [String: String]?
         /// Options for invoice PDF rendering.
-        public var renderingOptions:
-            Stripe.Checkout.Session.Invoice.Creation.Invoice.Data.Rendering.Options?
+        public var renderingOptions: Stripe.Checkout.Session.Invoice.Creation.Invoice.Data.Rendering.Options?
 
         public init(
             accountTaxIds: [String]? = nil,
@@ -343,7 +370,10 @@ extension Stripe.Checkout.Session.Billing {
 
 extension Stripe.Checkout.Session.Billing.Address {
     public enum Collection: String, Codable, Sendable {
-        /// Checkout will only collect the billing address when necessary. When using `automatic_tax`, Checkout will collect the minimum number of fields required for tax calculation.
+        /// Checkout will only collect the billing address when necessary.
+        ///
+        /// When using `automatic_tax`, Checkout will collect the minimum number of fields required for
+        /// tax calculation.
         case auto
         /// Checkout will always collect the customer’s billing address.
         case required
@@ -356,13 +386,17 @@ extension Stripe.Checkout.Session {
 
 extension Stripe.Checkout.Session.Customer {
     public struct Details: Codable, Hashable, Sendable {
-        /// The customer’s address after a completed Checkout Session. Note: This property is populated only for sessions on or after March 30, 2022.
+        /// The customer’s address after a completed Checkout Session.
+        ///
+        /// Note: This property is populated only for sessions on or after March 30, 2022.
         public var address: Address?
         /// The customer’s email at time of checkout.
         public var email: String?
-        /// The customer’s name after a completed Checkout Session. Note: This property is populated only for sessions on or after March 30, 2022.
+        /// The customer’s name after a completed Checkout Session.
+        ///
+        /// Note: This property is populated only for sessions on or after March 30, 2022.
         public var name: String?
-        /// The customer’s phone number at the time of checkout
+        /// The customer’s phone number at the time of checkout.
         public var phone: String?
         /// The customer’s tax exempt status at time of checkout.
         public var taxExempt: String?
@@ -478,7 +512,9 @@ extension Stripe.Checkout.Session.Shipping {
 
 extension Stripe.Checkout.Session.Shipping.Address {
     public struct Collection: Codable, Hashable, Sendable {
-        /// An array of two-letter ISO country codes representing which countries Checkout should provide as options for shipping locations. Unsupported country codes: `AS, CX, CC, CU, HM, IR, KP, MH, FM, NF, MP, PW, SD, SY, UM, VI`.
+        /// An array of two-letter ISO country codes representing which countries Checkout should provide as options for shipping locations.
+        ///
+        /// Unsupported country codes: `AS, CX, CC, CU, HM, IR, KP, MH, FM, NF, MP, PW, SD, SY, UM, VI`.
         public var allowedCountries: [String]?
 
         public init(
@@ -493,13 +529,18 @@ extension Stripe.Checkout.Session.Shipping {
     public struct Cost: Codable, Hashable, Sendable {
         /// Total shipping cost before any discounts or taxes are applied.
         public var amountSubtotal: Int?
-        /// Total tax amount applied due to shipping costs. If no tax was applied, defaults to 0.
+        /// Total tax amount applied due to shipping costs.
+        ///
+        /// If no tax was applied, defaults to 0.
         public var amountTax: Int?
         /// Total shipping cost after discounts and taxes are applied.
         public var amountTotal: Int?
         /// The ID of the Shipping.Rate for this order.
         @ExpandableOf<Stripe.Products.Shipping.Rate> public var shippingRate
-        /// The taxes applied to the shipping rate. This field is not included by default. To include it in the response, expand the `taxes` field.
+        /// The taxes applied to the shipping rate.
+        ///
+        /// This field is not included by default. To include it in the response, expand the `taxes`
+        /// field.
         public var taxes: [Stripe.Checkout.Session.Shipping.Cost.Taxes]?
 
         public init(
@@ -578,7 +619,10 @@ extension Stripe.Checkout.Session.Total {
         public var amountShipping: Int?
         /// This is the sum of all the line item tax amounts.
         public var amountTax: Int?
-        /// Breakdown of individual tax and discount amounts that add up to the totals. This field is not included by default. To include it in the response, expand the breakdown field.
+        /// Breakdown of individual tax and discount amounts that add up to the totals.
+        ///
+        /// This field is not included by default. To include it in the response, expand the breakdown
+        /// field.
         public var breakdown: Stripe.Checkout.Session.Total.Details.Breakdown?
 
         public init(
@@ -659,7 +703,7 @@ extension Stripe.Checkout.Session {
 
 extension Stripe.Checkout.Session.TaxId {
     public struct Collection: Codable, Hashable, Sendable {
-        /// Indicates whether tax ID collection is enabled for the session
+        /// Indicates whether tax ID collection is enabled for the session.
         public var enabled: Bool?
 
         public init(

@@ -1,9 +1,17 @@
+//===----------------------------------------------------------------------===//
 //
-//  Discount.swift
-//  Stripe
+// This source file is part of the swift-stripe open source project
 //
-//  Created by Andrew Edwards on 6/7/17.
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
 //
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
+
 //
 
 #if canImport(FoundationEssentials)
@@ -15,25 +23,34 @@ import Foundation
 // https://docs.stripe.com/api/discounts/object.md
 
 extension Stripe.Products {
-    /// The [Discount Object](https://stripe.com/docs/api/discounts/object)
+    /// The [Discount Object](https://stripe.com/docs/api/discounts/object).
     public struct Discount: Codable, Hashable, Sendable, Identifiable {
         public typealias ID = String
 
-        /// The ID of the discount object. Discounts cannot be fetched by ID. Use expand[]=discounts in API calls to expand discount IDs in an array.
+        /// The ID of the discount object.
+        ///
+        /// Discounts cannot be fetched by ID. Use expand[]=discounts in API calls to expand discount
+        /// IDs in an array.
         public var id: ID
         /// Hash describing the coupon applied to create this discount.
         public var coupon: Stripe.Products.Coupon?
         /// The id of the customer this discount is associated with.
         @ExpandableOf<Stripe.Customers.Customer> public var customer: Stripe.Customers.Customer.ID?
-        /// If the coupon has a duration of repeating, the date that this discount will end. If the coupon has a duration of once or forever, this attribute will be null.
+        /// If the coupon has a duration of repeating, the date that this discount will end.
+        ///
+        /// If the coupon has a duration of once or forever, this attribute will be null.
         public var end: Date?
         /// Date that the coupon was applied.
         public var start: Date?
         /// The subscription that this coupon is applied to, if it is applied to a particular subscription.
         public var subscription: Stripe.Billing.Subscription.ID?
-        /// String representing the object’s type. Objects of the same type share the same value.
+        /// String representing the object’s type.
+        ///
+        /// Objects of the same type share the same value.
         public var object: String
-        /// The Checkout session that this coupon is applied to, if it is applied to a particular session in payment mode. Will not be present for subscription mode.
+        /// The Checkout session that this coupon is applied to, if it is applied to a particular session in payment mode.
+        ///
+        /// Will not be present for subscription mode.
         public var checkoutSession: String?
         /// The invoice that the discount’s coupon was applied to, if it was applied directly to a particular invoice.
         public var invoice: Stripe.Billing.Invoice.ID?

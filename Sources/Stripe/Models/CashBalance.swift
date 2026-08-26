@@ -1,10 +1,21 @@
+//===----------------------------------------------------------------------===//
+//
+// This source file is part of the swift-stripe open source project
+//
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
+//
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
+
 //
 //  CashBalance.swift
 //
 //
-//  Created by Andrew Edwards on 5/1/23.
-//
-
 #if canImport(FoundationEssentials)
 import FoundationEssentials
 #else
@@ -13,11 +24,19 @@ import Foundation
 
 // https://docs.stripe.com/api/cash_balance/object.md
 
-/// A customer's `Cash balance` represents real funds. Customers can add funds to their cash balance by sending a bank transfer. These funds can be used for payment and can eventually be paid out to your bank account.
+/// A customer's `Cash balance` represents real funds.
+///
+/// Customers can add funds to their cash balance by sending a bank transfer. These funds can be used
+/// for payment and can eventually be paid out to your bank account.
 public struct CashBalance: Codable, Hashable, Sendable {
-    /// String representing the object’s type. Objects of the same type share the same value.
+    /// String representing the object’s type.
+    ///
+    /// Objects of the same type share the same value.
     public var object: String
-    /// A hash of all cash balances available to this customer. You cannot delete a customer with any cash balances, even if the balance is 0. Amounts are represented in the smallest currency unit.
+    /// A hash of all cash balances available to this customer.
+    ///
+    /// You cannot delete a customer with any cash balances, even if the balance is 0. Amounts are
+    /// represented in the smallest currency unit.
     public var available: [String: Int]?
     /// The ID of the customer whose cash balance this object represents.
     public var customer: Stripe.Customers.Customer.ID?

@@ -1,41 +1,53 @@
+//===----------------------------------------------------------------------===//
 //
-//  DecodingTests.swift
-//  swift-stripe
+// This source file is part of the swift-stripe open source project
 //
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
+//
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
+
+import Testing
+
+@testable import Stripe
 
 #if canImport(FoundationEssentials)
 import FoundationEssentials
 #else
 import Foundation
 #endif
-import Testing
-
-@testable import Stripe
 
 @Suite("Stripe response decoding")
 struct DecodingTests {
 
     /// A trimmed but faithful `customer` object as Stripe returns it.
-    static let customerJSON = Data(#"""
-    {
-      "id": "cus_NffrFeUfNV2Hib",
-      "object": "customer",
-      "balance": 0,
-      "created": 1680893993,
-      "currency": "usd",
-      "delinquent": false,
-      "email": "ada@example.com",
-      "invoice_prefix": "0759376C",
-      "next_invoice_sequence": 47,
-      "livemode": false,
-      "name": "Ada Lovelace",
-      "tax_exempt": "exempt",
-      "invoice_settings": {
-        "custom_fields": null,
-        "footer": "Thanks for your business"
-      }
-    }
-    """#.utf8)
+    static let customerJSON = Data(
+        #"""
+        {
+          "id": "cus_NffrFeUfNV2Hib",
+          "object": "customer",
+          "balance": 0,
+          "created": 1680893993,
+          "currency": "usd",
+          "delinquent": false,
+          "email": "ada@example.com",
+          "invoice_prefix": "0759376C",
+          "next_invoice_sequence": 47,
+          "livemode": false,
+          "name": "Ada Lovelace",
+          "tax_exempt": "exempt",
+          "invoice_settings": {
+            "custom_fields": null,
+            "footer": "Thanks for your business"
+          }
+        }
+        """#.utf8
+    )
 
     @Test("snake_case fields decode into camelCase properties")
     func decodesSnakeCaseFields() throws {
@@ -75,22 +87,24 @@ struct DecodingTests {
 
     @Test("list responses decode pagination")
     func decodesListResponse() throws {
-        let json = Data(#"""
-        {
-          "object": "list",
-          "url": "/v1/customers",
-          "has_more": true,
-          "data": [
+        let json = Data(
+            #"""
             {
-              "id": "cus_1",
-              "object": "customer",
-              "created": 1680893993,
-              "livemode": false,
-              "invoice_prefix": "ABC123"
+              "object": "list",
+              "url": "/v1/customers",
+              "has_more": true,
+              "data": [
+                {
+                  "id": "cus_1",
+                  "object": "customer",
+                  "created": 1680893993,
+                  "livemode": false,
+                  "invoice_prefix": "ABC123"
+                }
+              ]
             }
-          ]
-        }
-        """#.utf8)
+            """#.utf8
+        )
 
         let page = try StripeAPI.decoder.decode(
             Stripe.Customers.Customer.List.Response.self,
@@ -103,17 +117,19 @@ struct DecodingTests {
 
     @Test("Stripe error payloads decode")
     func decodesErrors() throws {
-        let json = Data(#"""
-        {
-          "error": {
-            "type": "card_error",
-            "code": "card_declined",
-            "decline_code": "insufficient_funds",
-            "message": "Your card has insufficient funds.",
-            "param": "payment_method"
-          }
-        }
-        """#.utf8)
+        let json = Data(
+            #"""
+            {
+              "error": {
+                "type": "card_error",
+                "code": "card_declined",
+                "decline_code": "insufficient_funds",
+                "message": "Your card has insufficient funds.",
+                "param": "payment_method"
+              }
+            }
+            """#.utf8
+        )
 
         struct Envelope: Decodable { let error: StripeError.Error }
         let decoded = try StripeAPI.decoder.decode(Envelope.self, from: json)
@@ -145,7 +161,6 @@ struct DecodingTests {
         )
         #expect(invoice.amountRemaining == 250)
     }
-
 
     @Test("percentages are decimals, as the spec declares them")
     func fractionalPercentages() throws {

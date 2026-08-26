@@ -1,9 +1,19 @@
+//===----------------------------------------------------------------------===//
 //
-//  StripeWebhook.swift
-//  swift-stripe
+// This source file is part of the swift-stripe open source project
 //
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
+//
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
 
 import Crypto
+
 #if canImport(FoundationEssentials)
 import FoundationEssentials
 #else
@@ -143,7 +153,7 @@ extension Data {
         bytes.reserveCapacity(characters.count / 2)
         for index in stride(from: 0, to: characters.count, by: 2) {
             guard let high = Data.hexValue(characters[index]),
-                  let low = Data.hexValue(characters[index + 1])
+                let low = Data.hexValue(characters[index + 1])
             else { return nil }
             bytes.append(high << 4 | low)
         }

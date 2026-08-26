@@ -1,7 +1,17 @@
+//===----------------------------------------------------------------------===//
 //
-//  StripeFormEncoder.swift
-//  swift-stripe
+// This source file is part of the swift-stripe open source project
 //
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
+//
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
+
 //  Stripe's REST API takes request bodies as `application/x-www-form-urlencoded`
 //  with bracket notation for nesting:
 //
@@ -44,9 +54,9 @@ public struct StripeFormEncoder: Sendable {
             .joined(separator: "&")
     }
 
-    /// Percent-encoding for form bodies: space becomes `+`, and every byte outside the unreserved
-    /// set is escaped. `CharacterSet.urlQueryAllowed` is too permissive here — it leaves `&`, `=`
-    /// and `+` intact.
+    /// Percent-encoding for form bodies: space becomes `+`, and every byte outside the unreserved. set is escaped.
+    ///
+    /// `CharacterSet.urlQueryAllowed` is too permissive here — it leaves `&`, `=` and `+` intact.
     ///
     /// Written over UTF-8 bytes rather than `CharacterSet`, which FoundationEssentials does not
     /// vend. That also fixes the encoding of non-ASCII text: `CharacterSet.alphanumerics` counts
@@ -57,9 +67,9 @@ public struct StripeFormEncoder: Sendable {
         for byte in string.utf8 {
             switch byte {
             case UInt8(ascii: "A")...UInt8(ascii: "Z"),
-                 UInt8(ascii: "a")...UInt8(ascii: "z"),
-                 UInt8(ascii: "0")...UInt8(ascii: "9"),
-                 UInt8(ascii: "-"), UInt8(ascii: "."), UInt8(ascii: "_"), UInt8(ascii: "~"):
+                UInt8(ascii: "a")...UInt8(ascii: "z"),
+                UInt8(ascii: "0")...UInt8(ascii: "9"),
+                UInt8(ascii: "-"), UInt8(ascii: "."), UInt8(ascii: "_"), UInt8(ascii: "~"):
                 out.append(Character(UnicodeScalar(byte)))
 
             case UInt8(ascii: " "):
@@ -75,8 +85,13 @@ public struct StripeFormEncoder: Sendable {
     }
 
     private static func hexDigit(_ nibble: UInt8) -> Character {
-        Character(UnicodeScalar(nibble < 10 ? nibble + UInt8(ascii: "0")
-                                            : nibble - 10 + UInt8(ascii: "A")))
+        Character(
+            UnicodeScalar(
+                nibble < 10
+                    ? nibble + UInt8(ascii: "0")
+                    : nibble - 10 + UInt8(ascii: "A")
+            )
+        )
     }
 }
 
@@ -185,7 +200,8 @@ private struct KeyedContainer<Key: CodingKey>: KeyedEncodingContainerProtocol {
     }
 
     mutating func nestedContainer<NestedKey: CodingKey>(
-        keyedBy: NestedKey.Type, forKey key: Key
+        keyedBy: NestedKey.Type,
+        forKey key: Key
     ) -> KeyedEncodingContainer<NestedKey> {
         KeyedEncodingContainer(
             KeyedContainer<NestedKey>(storage: storage, codingPath: codingPath + [key])

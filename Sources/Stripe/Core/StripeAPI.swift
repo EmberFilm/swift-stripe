@@ -1,18 +1,28 @@
+//===----------------------------------------------------------------------===//
 //
-//  StripeAPI.swift
-//  swift-stripe
+// This source file is part of the swift-stripe open source project
 //
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
+//
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
 
 import AsyncHTTPClient
+import NIOCore
+import NIOHTTP1
+
 #if canImport(FoundationEssentials)
 import FoundationEssentials
 #else
 import Foundation
 #endif
-import NIOCore
-import NIOHTTP1
 
-/// Executes Stripe API requests: builds them, signs them, retries them, and
+/// Executes Stripe API requests: builds them, signs them, retries them, and.
 /// decodes the result.
 ///
 /// Resource clients are thin wrappers over this type.
@@ -49,9 +59,12 @@ public struct StripeAPI: Sendable {
 
     /// Sends a request with no body.
     ///
-    /// - Parameter idempotencyKey: Sent as `Idempotency-Key`. Stripe replays the
-    ///   first response for a repeated key, which is also what makes this
-    ///   request safe to retry — see ``perform(_:)``.
+    /// - Parameters:
+    ///   - method: The HTTP method.
+    ///   - path: The path under the API host, such as `v1/customers`.
+    ///   - as: The type to decode the response into; inferred from the call site.
+    ///   - idempotencyKey: Sent as `Idempotency-Key`. Stripe replays the first response for a
+    ///     repeated key, which is also what makes the request safe to retry.
     public func send<Response: Decodable>(
         _ method: HTTPMethod,
         _ path: String,
@@ -63,9 +76,13 @@ public struct StripeAPI: Sendable {
 
     /// Sends a request whose parameters are form-encoded into the body.
     ///
-    /// - Parameter idempotencyKey: Sent as `Idempotency-Key`. Stripe replays the
-    ///   first response for a repeated key, which is also what makes this
-    ///   request safe to retry — see ``perform(_:)``.
+    /// - Parameters:
+    ///   - method: The HTTP method.
+    ///   - path: The path under the API host, such as `v1/customers`.
+    ///   - body: The request, form-encoded by ``StripeFormEncoder``.
+    ///   - as: The type to decode the response into; inferred from the call site.
+    ///   - idempotencyKey: Sent as `Idempotency-Key`. Stripe replays the first response for a
+    ///     repeated key, which is also what makes the request safe to retry.
     public func send<Body: Encodable, Response: Decodable>(
         _ method: HTTPMethod,
         _ path: String,
@@ -110,13 +127,21 @@ public struct StripeAPI: Sendable {
         for (key, value) in try formEncoder.pairs(of: fields) {
             part("Content-Disposition: form-data; name=\"\(key)\"", Data(value.utf8))
         }
-        part("Content-Disposition: form-data; name=\"file\"; filename=\"\(file.filename)\"\r\nContent-Type: \(file.contentType)",
-             file.data)
+        part(
+            "Content-Disposition: form-data; name=\"file\"; filename=\"\(file.filename)\"\r\nContent-Type: \(file.contentType)",
+            file.data
+        )
         body.append(Data("--\(boundary)--\r\n".utf8))
-        return try await perform(makeRequest(
-            .POST, path, body: body, idempotencyKey: idempotencyKey,
-            baseURL: configuration.filesBaseURL, contentType: "multipart/form-data; boundary=\(boundary)"
-        ))
+        return try await perform(
+            makeRequest(
+                .POST,
+                path,
+                body: body,
+                idempotencyKey: idempotencyKey,
+                baseURL: configuration.filesBaseURL,
+                contentType: "multipart/form-data; boundary=\(boundary)"
+            )
+        )
     }
 
     /// Fetches a binary document (a quote PDF) from the files host.
@@ -144,14 +169,17 @@ public struct StripeAPI: Sendable {
         baseURL: URL? = nil,
         contentType: String = "application/x-www-form-urlencoded"
     ) throws -> HTTPClientRequest {
-        guard var components = URLComponents(
-            url: (baseURL ?? configuration.baseURL).appendingPathComponent(path),
-            resolvingAgainstBaseURL: false
-        ) else {
+        guard
+            var components = URLComponents(
+                url: (baseURL ?? configuration.baseURL).appendingPathComponent(path),
+                resolvingAgainstBaseURL: false
+            )
+        else {
             throw StripeClientError.invalidURL(path)
         }
         if !query.isEmpty {
-            components.percentEncodedQuery = query
+            components.percentEncodedQuery =
+                query
                 .map { "\(StripeFormEncoder.escape($0.key))=\(StripeFormEncoder.escape($0.value))" }
                 .joined(separator: "&")
         }
@@ -219,7 +247,9 @@ public struct StripeAPI: Sendable {
         _ finish: (Int, String?, Data) throws -> Result
     ) async throws -> Result {
         var lastError: any Swift.Error = StripeClientError.unexpectedStatus(
-            status: 0, body: "", requestID: nil
+            status: 0,
+            body: "",
+            requestID: nil
         )
         let maxRetries = Self.isSafeToRetry(request) ? configuration.maxRetries : 0
 

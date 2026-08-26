@@ -1,21 +1,32 @@
+//===----------------------------------------------------------------------===//
 //
-//  StripeAPITests.swift
-//  swift-stripe
+// This source file is part of the swift-stripe open source project
 //
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
+//
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
+
 //  Request construction and response handling, tested as pure functions —
 //  no network, no transport abstraction.
 //
 
 import AsyncHTTPClient
+import NIOHTTP1
+import Testing
+
+@testable import Stripe
+
 #if canImport(FoundationEssentials)
 import FoundationEssentials
 #else
 import Foundation
 #endif
-import NIOHTTP1
-import Testing
-
-@testable import Stripe
 
 @Suite("StripeAPI request building")
 struct RequestBuildingTests {
@@ -109,14 +120,18 @@ struct ResponseHandlingTests {
 
     @Test("a Stripe error payload becomes a typed error carrying the request id")
     func apiError() throws {
-        let body = Data(#"""
-        {"error":{"type":"card_error","code":"card_declined",
-                  "message":"Your card was declined.","param":"payment_method"}}
-        """#.utf8)
+        let body = Data(
+            #"""
+            {"error":{"type":"card_error","code":"card_declined",
+                      "message":"Your card was declined.","param":"payment_method"}}
+            """#.utf8
+        )
 
         do {
             let _: Stripe.Customers.Customer = try StripeAPI.decode(
-                status: 402, requestID: "req_test_123", body: body
+                status: 402,
+                requestID: "req_test_123",
+                body: body
             )
             Issue.record("expected an error")
         } catch let error as StripeClientError {
@@ -135,7 +150,9 @@ struct ResponseHandlingTests {
     func unexpectedStatus() throws {
         do {
             let _: Stripe.Customers.Customer = try StripeAPI.decode(
-                status: 502, requestID: nil, body: Data("<html>bad gateway</html>".utf8)
+                status: 502,
+                requestID: nil,
+                body: Data("<html>bad gateway</html>".utf8)
             )
             Issue.record("expected an error")
         } catch let error as StripeClientError {
@@ -152,7 +169,9 @@ struct ResponseHandlingTests {
     func decodingFailure() throws {
         do {
             let _: Stripe.Customers.Customer = try StripeAPI.decode(
-                status: 200, requestID: nil, body: Data(#"{"unexpected":true}"#.utf8)
+                status: 200,
+                requestID: nil,
+                body: Data(#"{"unexpected":true}"#.utf8)
             )
             Issue.record("expected an error")
         } catch let error as StripeClientError {
@@ -163,10 +182,13 @@ struct ResponseHandlingTests {
         }
     }
 
-    @Test("retry policy: 429 and 5xx retry, 4xx does not", arguments: [
-        (429, true), (500, true), (503, true), (501, false),
-        (400, false), (402, false), (404, false),
-    ])
+    @Test(
+        "retry policy: 429 and 5xx retry, 4xx does not",
+        arguments: [
+            (429, true), (500, true), (503, true), (501, false),
+            (400, false), (402, false), (404, false),
+        ]
+    )
     func retryPolicy(status: Int, retryable: Bool) {
         let error = StripeClientError.unexpectedStatus(status: status, body: "", requestID: nil)
         #expect(error.isRetryable == retryable)

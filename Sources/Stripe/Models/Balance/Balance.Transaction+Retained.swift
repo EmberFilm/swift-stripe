@@ -1,9 +1,17 @@
+//===----------------------------------------------------------------------===//
 //
-//  Balance.TransactionItem.swift
-//  Stripe
+// This source file is part of the swift-stripe open source project
 //
-//  Created by Anthony Castelli on 4/15/17.
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
 //
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
+
 //
 
 #if canImport(FoundationEssentials)
@@ -27,9 +35,13 @@ extension Stripe.Balance.Transaction.Fee {
         public var amount: Int?
         /// ID of the Connect application that earned the fee.
         public var application: String?
-        /// Three-letter ISO currency code, in lowercase. Must be a supported currency.
+        /// Three-letter ISO currency code, in lowercase.
+        ///
+        /// Must be a supported currency.
         public var currency: Stripe.Currency?
-        /// An arbitrary string attached to the object. Often useful for displaying to users.
+        /// An arbitrary string attached to the object.
+        ///
+        /// Often useful for displaying to users.
         public var description: String?
         /// Type of the fee, one of: `application_fee`, `stripe_fee` or `tax`.
         public var type: Stripe.Balance.Transaction.Fee.Details.`Type`?
@@ -64,4 +76,3 @@ extension Stripe.Balance.Transaction {
         case pending
     }
 }
-

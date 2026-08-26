@@ -1,9 +1,16 @@
+//===----------------------------------------------------------------------===//
 //
-//  QuoteLineItem.swift
-//  StripeKit
+// This source file is part of the swift-stripe open source project
 //
-//  Created by Andrew Edwards on 7/25/21.
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
 //
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
 
 #if canImport(FoundationEssentials)
 import FoundationEssentials
@@ -18,21 +25,33 @@ extension Stripe.Billing.Quote {
         public typealias ID = String
         /// Unique identifier for the object.
         public var id: ID
-        /// String representing the object's type. Objects of the same type share the same value.
+        /// String representing the object's type.
+        ///
+        /// Objects of the same type share the same value.
         public var object: String
-        /// Total discount amount applied. If no discounts were applied, defaults to 0.
+        /// Total discount amount applied.
+        ///
+        /// If no discounts were applied, defaults to 0.
         public var amountDiscount: Int?
         /// Total before any discounts or taxes are applied.
         public var amountSubtotal: Int?
-        /// Total tax amount applied. If no tax was applied, defaults to 0.
+        /// Total tax amount applied.
+        ///
+        /// If no tax was applied, defaults to 0.
         public var amountTax: Int?
         /// Total after discounts and taxes.
         public var amountTotal: Int?
-        /// Three-letter ISO currency code, in lowercase. Must be a supported currency.
+        /// Three-letter ISO currency code, in lowercase.
+        ///
+        /// Must be a supported currency.
         public var currency: Stripe.Currency?
-        /// An arbitrary string attached to the object. Often useful for displaying to users. Defaults to product name.
+        /// An arbitrary string attached to the object.
+        ///
+        /// Often useful for displaying to users. Defaults to product name.
         public var description: String?
-        /// This field is not included by default. To include it in the response, expand the `discounts` field.
+        /// This field is not included by default.
+        ///
+        /// To include it in the response, expand the `discounts` field.
         public var discounts: [Discount]?
         /// The price used to generate the line item.
         public var price: Stripe.Products.Price?
@@ -96,7 +115,9 @@ extension Stripe.Billing.Quote.LineItem {
         public var amount: Int?
         /// The tax rate applied.
         public var rate: Stripe.Tax.Rate?
-        /// The reasoning behind this tax, for example, if the product is tax exempt. The possible values for this field may be extended as new tax rules are supported.
+        /// The reasoning behind this tax, for example, if the product is tax exempt.
+        ///
+        /// The possible values for this field may be extended as new tax rules are supported.
         public var taxabilityReason: TaxabilityReason?
 
         public init(

@@ -1,9 +1,16 @@
+//===----------------------------------------------------------------------===//
 //
-//  Review.swift
-//  Stripe
+// This source file is part of the swift-stripe open source project
 //
-//  Created by Andrew Edwards on 3/26/19.
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
 //
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
 
 #if canImport(FoundationEssentials)
 import FoundationEssentials
@@ -15,4 +22,3 @@ import Foundation
 
 // The Review struct is generated (Models/Generated). These are the nested types the
 // request layer still names under `Stripe.Fraud.Reviews.Review` that the generator spells differently.
-

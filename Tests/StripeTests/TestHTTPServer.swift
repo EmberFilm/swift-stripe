@@ -1,7 +1,17 @@
+//===----------------------------------------------------------------------===//
 //
-//  TestHTTPServer.swift
-//  swift-stripe
+// This source file is part of the swift-stripe open source project
 //
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
+//
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
+
 //  A local HTTP/1.1 server so the client can be tested over a real
 //  `AsyncHTTPClient` connection: the request bytes asserted here are the bytes
 //  that actually went over the socket.
@@ -59,7 +69,7 @@ final class TestHTTPServer: Sendable {
         self.state = state
     }
 
-    /// Starts a server that replies with `responses` in order, repeating the
+    /// Starts a server that replies with `responses` in order, repeating the.
     /// last entry once exhausted.
     static func start(responses: [ScriptedResponse]) async throws -> TestHTTPServer {
         let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)

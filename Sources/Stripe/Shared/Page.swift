@@ -1,7 +1,16 @@
+//===----------------------------------------------------------------------===//
 //
-//  Page.swift
-//  Stripe
+// This source file is part of the swift-stripe open source project
 //
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
+//
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
 
 #if canImport(FoundationEssentials)
 import FoundationEssentials
@@ -51,8 +60,14 @@ extension Stripe {
         /// The total number of objects that match the query, when the request asked for it.
         public var totalCount: Int?
 
-        public init(object: String = "search_result", data: [Element], hasMore: Bool, url: String,
-                    nextPage: String? = nil, totalCount: Int? = nil) {
+        public init(
+            object: String = "search_result",
+            data: [Element],
+            hasMore: Bool,
+            url: String,
+            nextPage: String? = nil,
+            totalCount: Int? = nil
+        ) {
             self.object = object
             self.data = data
             self.hasMore = hasMore

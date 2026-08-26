@@ -7,7 +7,7 @@ The models came from swift-stripe-standard and are not regenerated, so fields St
 absent and fields it moves decode to nil — silently, because every property is optional. This
 turns that into a number.
 
-    curl -sSLO https://raw.githubusercontent.com/stripe/openapi/master/openapi/spec3.sdk.json
+    curl -sSLO https://raw.githubusercontent.com/stripe/openapi/$STRIPE_OPENAPI_COMMIT/openapi/spec3.sdk.json
     Scripts/model-drift.py spec3.sdk.json
 
 "missing" = in the spec, not on the Swift type: the value is dropped on decode.
@@ -20,7 +20,12 @@ Tests/StripeTests/AddedFieldDecodingTests.swift — and note that most of these 
 `CodingKeys` of their own, so a case added to the first block in the file usually lands on a
 nested type instead.
 """
-import json, re, pathlib, sys
+import importlib.util as _ilu
+import json
+import pathlib
+import re
+import sys
+
 
 def camel(key: str) -> str:
     """The wire key as JSONDecoder.convertFromSnakeCase and the generator both spell it.
@@ -30,6 +35,7 @@ def camel(key: str) -> str:
     """
     parts = key.split("_")
     return parts[0] + "".join(w[:1].upper() + w[1:] for w in parts[1:])
+
 
 def swift_fields(path: pathlib.Path, struct: str) -> set[str]:
     src = path.read_text()
@@ -42,12 +48,14 @@ def swift_fields(path: pathlib.Path, struct: str) -> set[str]:
     names |= set(re.findall(r"public (?:var|let) `?(\w+)`?\s*$", body, re.M))
     # A type-discriminated resource carries its payload properties as the cases of `Details`.
     # The root's own enum sits one level inside the struct; nested structs' are deeper.
-    m = re.search(r"^(?: {4}| {8})public indirect enum (?:Details|Kind): Hashable, Sendable \{\n(.*?)\n\s+fileprivate init\(type:", src[src.index(f"public struct {struct}"):], re.S | re.M)
+    m = re.search(r"^(?: {4}| {8})public indirect enum (?:Details|Kind): Hashable, Sendable \{\n(.*?)\n\s+fileprivate init\(type:",
+                  src[src.index(f"public struct {struct}"):], re.S | re.M)
     if m:
         names |= set(re.findall(r"case `?(\w+)`?\(", m.group(1)))
         names.discard("unknown")
     names.discard("details")
     return names
+
 
 # Properties this package adds on purpose, which will never appear in the spec.
 INTENTIONAL_EXTRA: dict[str, set[str]] = {
@@ -108,13 +116,14 @@ VERSION_GATED: dict[str, dict[str, str]] = {
 M = "Sources/Stripe/Models/"
 G = M   # generated files sit beside the hand-written ones; event stays hand-written
 # schema name, model file, struct name
-import importlib.util as _ilu
 _spec = _ilu.spec_from_file_location("gen", pathlib.Path(__file__).with_name("generate-models.py"))
-_gen = _ilu.module_from_spec(_spec); _spec.loader.exec_module(_gen)
+_gen = _ilu.module_from_spec(_spec)
+_spec.loader.exec_module(_gen)
 # Every generated resource, from the generator's own list, plus the one hand-written resource.
 _places = _gen.layout()
 TARGETS = [(name, G + _gen.model_file(*_places[name]), path.split(".")[-1]) for name, path in _gen.RESOURCES.items()]
 TARGETS.append(("event", M + "CoreResources/Events/Stripe.Events.Event.swift", "Event"))
+
 
 def main() -> int:
     if len(sys.argv) < 2:
@@ -153,6 +162,7 @@ def main() -> int:
     else:
         print("No unacknowledged drift.")
     return 1 if worst else 0
+
 
 if __name__ == "__main__":
     sys.exit(main())

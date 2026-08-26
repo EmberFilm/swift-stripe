@@ -1,10 +1,21 @@
+//===----------------------------------------------------------------------===//
+//
+// This source file is part of the swift-stripe open source project
+//
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
+//
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
+
 //
 //  Shipping.Rate.swift
 //
 //
-//  Created by Andrew Edwards on 12/17/21.
-//
-
 #if canImport(FoundationEssentials)
 import FoundationEssentials
 #else
@@ -13,7 +24,6 @@ import Foundation
 
 // The Rate struct is generated (Models/Generated). These are the nested types the
 // request layer still names under `Stripe.Products.Shipping.Rate` that the generator spells differently.
-
 
 // https://docs.stripe.com/api/shipping_rates/object.md
 
@@ -41,11 +51,17 @@ extension Stripe.Products.Shipping.Rate.Fixed {
     public struct Amount: Codable, Hashable, Sendable {
         /// A non-negative integer in cents representing how much to charge.
         public var amount: Int?
-        /// Three-letter ISO currency code, in lowercase. Must be a supported currency.
+        /// Three-letter ISO currency code, in lowercase.
+        ///
+        /// Must be a supported currency.
         public var currency: Stripe.Currency?
-        /// Shipping rates defined in each available currency option. Each key must be a three-letter ISO currency code and a supported currency. For example, to get your shipping rate in `eur`, fetch the value of the `eur` key in `currency_options`. This field is not included by default. To include it in the response, expand the `currency_options` field.
-        public var currencyOptions:
-            [Stripe.Currency: Stripe.Products.Shipping.Rate.Fixed.Amount.Currency.Options]?
+        /// Shipping rates defined in each available currency option.
+        ///
+        /// Each key must be a three-letter ISO currency code and a supported currency. For example, to
+        /// get your shipping rate in `eur`, fetch the value of the `eur` key in `currency_options`.
+        /// This field is not included by default. To include it in the response, expand the
+        /// `currency_options` field.
+        public var currencyOptions: [Stripe.Currency: Stripe.Products.Shipping.Rate.Fixed.Amount.Currency.Options]?
 
         public init(
             amount: Int? = nil,
@@ -64,9 +80,10 @@ extension Stripe.Products.Shipping.Rate.Fixed.Amount.Currency {
     public struct Options: Codable, Hashable, Sendable {
         /// A non-negative integer in cents representing how much to charge.
         public var amount: Int?
-        /// Specifies whether the rate is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`.
-        public var taxBehavior:
-            Stripe.Products.Shipping.Rate.Fixed.Amount.Currency.Options.TaxBehavior?
+        /// Specifies whether the rate is considered inclusive of taxes or exclusive of taxes.
+        ///
+        /// One of `inclusive`, `exclusive`, or `unspecified`.
+        public var taxBehavior: Stripe.Products.Shipping.Rate.Fixed.Amount.Currency.Options.TaxBehavior?
 
         public init(
             amount: Int? = nil,
@@ -95,9 +112,13 @@ extension Stripe.Products.Shipping.Rate {
 
 extension Stripe.Products.Shipping.Rate.Delivery {
     public struct Estimate: Codable, Hashable, Sendable {
-        /// The upper bound of the estimated range. If empty, represents no upper bound i.e., infinite.
+        /// The upper bound of the estimated range.
+        ///
+        /// If empty, represents no upper bound i.e., infinite.
         public var maximum: Stripe.Products.Shipping.Rate.Delivery.Estimate.MaxMin?
-        /// The lower bound of the estimated range. If empty, represents no lower bound.
+        /// The lower bound of the estimated range.
+        ///
+        /// If empty, represents no lower bound.
         public var minimum: Stripe.Products.Shipping.Rate.Delivery.Estimate.MaxMin?
 
         public init(
@@ -144,4 +165,3 @@ extension Stripe.Products.Shipping.Rate.Tax {
         case unspecified
     }
 }
-

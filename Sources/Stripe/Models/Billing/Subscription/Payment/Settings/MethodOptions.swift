@@ -1,3 +1,17 @@
+//===----------------------------------------------------------------------===//
+//
+// This source file is part of the swift-stripe open source project
+//
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
+//
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
+
 #if canImport(FoundationEssentials)
 import FoundationEssentials
 #else
@@ -6,17 +20,17 @@ import Foundation
 
 extension Stripe.Billing.Subscription.Payment.Settings {
     public struct MethodOptions: Codable, Hashable, Sendable {
-        /// ACSS Debit payment method options
+        /// ACSS Debit payment method options.
         public var acssDebit: ACSSDebit.Configuration?
-        /// Bancontact payment method options
+        /// Bancontact payment method options.
         public var bancontact: Bancontact.Configuration?
-        /// Card payment method options
+        /// Card payment method options.
         public var card: Card.Configuration?
-        /// Customer Balance payment method options
+        /// Customer Balance payment method options.
         public var customerBalance: CustomerBalance.Configuration?
-        /// Konbini payment method options
+        /// Konbini payment method options.
         public var konbini: Konbini.Configuration?
-        /// US Bank Account payment method options
+        /// US Bank Account payment method options.
         public var usBankAccount: USBankAccount.Configuration?
 
         public init(
@@ -44,9 +58,9 @@ extension Stripe.Billing.Subscription.Payment.Settings.MethodOptions {
 
 extension Stripe.Billing.Subscription.Payment.Settings.MethodOptions.ACSSDebit {
     public struct Configuration: Codable, Hashable, Sendable {
-        /// Additional fields for Mandate creation
+        /// Additional fields for Mandate creation.
         public var mandateOptions: MandateOptions?
-        /// Bank account verification method
+        /// Bank account verification method.
         public var verificationMethod: VerificationMethod?
 
         public init(
@@ -59,7 +73,7 @@ extension Stripe.Billing.Subscription.Payment.Settings.MethodOptions.ACSSDebit {
     }
 
     public struct MandateOptions: Codable, Hashable, Sendable {
-        /// Transaction type of the mandate
+        /// Transaction type of the mandate.
         public var transactionType: TransactionType?
 
         public init(
@@ -88,7 +102,7 @@ extension Stripe.Billing.Subscription.Payment.Settings.MethodOptions {
 
 extension Stripe.Billing.Subscription.Payment.Settings.MethodOptions.Bancontact {
     public struct Configuration: Codable, Hashable, Sendable {
-        /// Preferred language for the authorization page
+        /// Preferred language for the authorization page.
         public var preferredLanguage: String?
 
         public init(
@@ -106,11 +120,11 @@ extension Stripe.Billing.Subscription.Payment.Settings.MethodOptions {
 
 extension Stripe.Billing.Subscription.Payment.Settings.MethodOptions.Card {
     public struct Configuration: Codable, Hashable, Sendable {
-        /// Mandate options for this subscription
+        /// Mandate options for this subscription.
         public var mandateOptions: MandateOptions?
-        /// Selected network to process this Subscription
+        /// Selected network to process this Subscription.
         public var network: String?
-        /// 3D Secure configuration
+        /// 3D Secure configuration.
         public var requestThreeDSecure: RequestThreeDSecure?
 
         public init(
@@ -125,9 +139,9 @@ extension Stripe.Billing.Subscription.Payment.Settings.MethodOptions.Card {
     }
 
     public struct MandateOptions: Codable, Hashable, Sendable {
-        /// Amount for future payments
+        /// Amount for future payments.
         public var amount: Int?
-        /// Amount type configuration
+        /// Amount type configuration.
         public var amountType: AmountType?
 
         public init(
@@ -157,9 +171,9 @@ extension Stripe.Billing.Subscription.Payment.Settings.MethodOptions {
 
 extension Stripe.Billing.Subscription.Payment.Settings.MethodOptions.CustomerBalance {
     public struct Configuration: Codable, Hashable, Sendable {
-        /// Bank transfer configuration
+        /// Bank transfer configuration.
         public var bankTransfer: BankTransfer?
-        /// Funding method type
+        /// Funding method type.
         public var fundingType: FundingType?
 
         public init(
@@ -172,9 +186,9 @@ extension Stripe.Billing.Subscription.Payment.Settings.MethodOptions.CustomerBal
     }
 
     public struct BankTransfer: Codable, Hashable, Sendable {
-        /// EU bank transfer configuration
+        /// EU bank transfer configuration.
         public var euBankTransfer: EUBankTransfer?
-        /// Bank transfer type
+        /// Bank transfer type.
         public var type: TransferType?
 
         public init(
@@ -187,7 +201,7 @@ extension Stripe.Billing.Subscription.Payment.Settings.MethodOptions.CustomerBal
     }
 
     public struct EUBankTransfer: Codable, Hashable, Sendable {
-        /// Desired country code
+        /// Desired country code.
         public var country: String?
 
         public init(
@@ -227,9 +241,9 @@ extension Stripe.Billing.Subscription.Payment.Settings.MethodOptions {
 
 extension Stripe.Billing.Subscription.Payment.Settings.MethodOptions.USBankAccount {
     public struct Configuration: Codable, Hashable, Sendable {
-        /// Financial connections configuration
+        /// Financial connections configuration.
         public var financialConnections: FinancialConnections?
-        /// Verification method
+        /// Verification method.
         public var verificationMethod: VerificationMethod?
 
         public init(
@@ -242,7 +256,7 @@ extension Stripe.Billing.Subscription.Payment.Settings.MethodOptions.USBankAccou
     }
 
     public struct FinancialConnections: Codable, Hashable, Sendable {
-        /// Required permissions
+        /// Required permissions.
         public var permissions: [Permission]?
 
         public init(

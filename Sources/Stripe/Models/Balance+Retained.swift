@@ -1,9 +1,17 @@
+//===----------------------------------------------------------------------===//
 //
-//  Balance.swift
-//  Stripe
+// This source file is part of the swift-stripe open source project
 //
-//  Created by Anthony Castelli on 4/13/17.
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
 //
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
+
 //
 
 // https://docs.stripe.com/api/balance/object.md
@@ -15,7 +23,9 @@ extension Stripe.Balance {
     public struct Amount: Codable, Hashable, Sendable {
         /// Balance amount.
         public var amount: Int?
-        /// Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies) .
+        /// Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase.
+        ///
+        /// Must be a [supported currency](https://stripe.com/docs/currencies) .
         public var currency: Stripe.Currency?
         /// Breakdown of balance by source types.
         public var sourceTypes: Stripe.Balance.Amount.Source.`Type`?

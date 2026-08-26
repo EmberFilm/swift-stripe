@@ -1,9 +1,17 @@
+//===----------------------------------------------------------------------===//
 //
-//  InvoiceLineItem.swift
-//  Stripe
+// This source file is part of the swift-stripe open source project
 //
-//  Created by Anthony Castelli on 9/5/17.
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
 //
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
+
 //
 
 #if canImport(FoundationEssentials)
@@ -21,9 +29,9 @@ import Foundation
 
 extension Stripe.Billing.Invoice.LineItem {
     public struct Period: Codable, Hashable, Sendable {
-        /// Start of the line item's billing period
+        /// Start of the line item's billing period.
         public var start: Date?
-        /// End of the line item's billing period
+        /// End of the line item's billing period.
         public var end: Date?
 
         public init(
@@ -54,9 +62,9 @@ extension Stripe.Billing.Invoice.LineItem {
 
 extension Stripe.Billing.Invoice.LineItem.ProrationDetails {
     public struct CreditedItem: Codable, Hashable, Sendable {
-        /// Invoice containing the credited invoice line items
+        /// Invoice containing the credited invoice line items.
         public var invoice: Stripe.Billing.Invoice.ID?
-        /// Credited invoice line items
+        /// Credited invoice line items.
         public var invoiceLineItems: [String]?
 
         public init(
@@ -68,7 +76,6 @@ extension Stripe.Billing.Invoice.LineItem.ProrationDetails {
         }
     }
 }
-
 
 extension Stripe.Billing.Invoice {
     public struct SearchResult: Codable, Hashable, Sendable {

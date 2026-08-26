@@ -1,16 +1,26 @@
+//===----------------------------------------------------------------------===//
 //
-//  FormEncoderTests.swift
-//  swift-stripe
+// This source file is part of the swift-stripe open source project
 //
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
+//
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
+
+import Testing
+
+@testable import Stripe
 
 #if canImport(FoundationEssentials)
 import FoundationEssentials
 #else
 import Foundation
 #endif
-import Testing
-
-@testable import Stripe
 
 @Suite("Stripe form encoding")
 struct FormEncoderTests {
@@ -36,17 +46,22 @@ struct FormEncoderTests {
 
     @Test("arrays are indexed, as Stripe requires")
     func indexedArrays() throws {
-        struct Item: Encodable { let price: String; let quantity: Int }
+        struct Item: Encodable {
+            let price: String
+            let quantity: Int
+        }
         struct Request: Encodable { let items: [Item] }
         let request = Request(items: [
             .init(price: "price_1", quantity: 2),
             .init(price: "price_2", quantity: 1),
         ])
         let pairs = try StripeFormEncoder().pairs(of: request)
-        #expect(pairs.map(\.key) == [
-            "items[0][price]", "items[0][quantity]",
-            "items[1][price]", "items[1][quantity]",
-        ])
+        #expect(
+            pairs.map(\.key) == [
+                "items[0][price]", "items[0][quantity]",
+                "items[1][price]", "items[1][quantity]",
+            ]
+        )
         #expect(pairs.map(\.value) == ["price_1", "2", "price_2", "1"])
     }
 
@@ -70,7 +85,8 @@ struct FormEncoderTests {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         let decoded = try decoder.decode(
-            Response.self, from: Data(#"{"metadata":{"user_id":"u_1"}}"#.utf8)
+            Response.self,
+            from: Data(#"{"metadata":{"user_id":"u_1"}}"#.utf8)
         )
         #expect(decoded.metadata["user_id"] == "u_1")
         #expect(decoded.metadata["userId"] == nil)
@@ -95,7 +111,10 @@ struct FormEncoderTests {
 
     @Test("nil values are omitted entirely")
     func nilOmitted() throws {
-        struct Request: Encodable { let email: String?; let name: String? }
+        struct Request: Encodable {
+            let email: String?
+            let name: String?
+        }
         let pairs = try StripeFormEncoder().pairs(of: Request(email: "a@b.com", name: nil))
         #expect(pairs.map(\.key) == ["email"])
     }

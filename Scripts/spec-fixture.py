@@ -7,21 +7,29 @@ Every property is populated with a deterministic sample, so a type that drops a 
 shows up as a difference in the parity test rather than as a nil nobody noticed. Written to
 Tests/StripeTests/Fixtures/<schema>.json and committed.
 """
-import json, pathlib, sys
+import importlib.util
+import json
+import pathlib
+import re
+import sys
 
 SPEC = json.load(open(sys.argv[1]))
 S = SPEC["components"]["schemas"]
-import importlib.util, sys
 _spec = importlib.util.spec_from_file_location("gen", pathlib.Path(__file__).with_name("generate-models.py"))
-_gen = importlib.util.module_from_spec(_spec); _spec.loader.exec_module(_gen)
+_gen = importlib.util.module_from_spec(_spec)
+_spec.loader.exec_module(_gen)
 RESOURCES = dict(_gen.RESOURCES)          # schema -> Swift path, the generator's own list
 DEPTH = 4
 
+
 def ref(node):
-    if "$ref" in node: return node["$ref"].split("/")[-1]
+    if "$ref" in node:
+        return node["$ref"].split("/")[-1]
     for m in node.get("anyOf", []):
-        if "$ref" in m: return m["$ref"].split("/")[-1]
+        if "$ref" in m:
+            return m["$ref"].split("/")[-1]
     return None
+
 
 def offers_id(node):
     """`anyOf: [string, $ref]` — an id that may be expanded. Only then is a string valid."""
@@ -29,7 +37,6 @@ def offers_id(node):
         node = node.get("items", {})
     return any(m.get("type") == "string" for m in node.get("anyOf", []))
 
-import re
 
 def documented_value(node, exclude):
     """The first back-ticked token in a description: many free strings document their values
@@ -41,12 +48,14 @@ def documented_value(node, exclude):
             return m.group(1)
     return None
 
+
 def is_resource_union(node):
     refs = [m["$ref"].split("/")[-1] for m in node.get("anyOf", []) if "$ref" in m]
     if len(refs) > 1 and not offers_id(node):
         return True
     r = ref(node)          # a bare $ref to a schema that is itself a union (`payment_source`)
     return bool(r) and len(refs) <= 1 and "anyOf" in S.get(r, {}) and "properties" not in S.get(r, {})
+
 
 def sample(node, prop, expandable, depth, stack, parent=None, siblings=()):
     """A sample value for one property schema."""
@@ -74,8 +83,10 @@ def sample(node, prop, expandable, depth, stack, parent=None, siblings=()):
         return documented_value(node, {prop, parent, *siblings}) or f"{prop}_1"
     if t == "integer":
         return 1700000000 if node.get("format") == "unix-time" else 1
-    if t == "number": return 1.5
-    if t == "boolean": return True
+    if t == "number":
+        return 1.5
+    if t == "boolean":
+        return True
     if t == "object":
         if "properties" in node:
             return build_inline(node, depth - 1, stack, parent=prop)
@@ -87,21 +98,28 @@ def sample(node, prop, expandable, depth, stack, parent=None, siblings=()):
         return {"key": "value"}
     return None
 
+
 def build_inline(schema, depth, stack, parent=None):
-    if depth < 0: return None
+    if depth < 0:
+        return None
     out = {}
     expandable = set(schema.get("x-expandableFields", []))
     names = tuple(schema.get("properties", {}).keys())
     for prop, node in schema.get("properties", {}).items():
         v = sample(node, prop, expandable, depth, stack, parent=parent, siblings=names)
-        if v is not None: out[prop] = v
+        if v is not None:
+            out[prop] = v
     return out
 
+
 def build(name, depth, stack, parent=None):
-    if depth < 0 or name in stack: return None
+    if depth < 0 or name in stack:
+        return None
     return build_inline(S[name], depth, stack | {name}, parent=parent)
 
-out_dir = pathlib.Path("Tests/StripeTests/Fixtures"); out_dir.mkdir(parents=True, exist_ok=True)
+
+out_dir = pathlib.Path("Tests/StripeTests/Fixtures")
+out_dir.mkdir(parents=True, exist_ok=True)
 for name in RESOURCES:
     obj = build(name, DEPTH, frozenset())
     obj["id"] = f"{name}_1"
@@ -109,23 +127,27 @@ for name in RESOURCES:
 print(f"{len(RESOURCES)} fixtures written")
 
 # The decode gate, one case per generated resource, kept in step with the generator's list.
-cases = "".join(
-    f'    @Test("{name}") func {"".join(w.title() for w in re.split(r"[._]", name))[0].lower() + "".join(w.title() for w in re.split(r"[._]", name))[1:]}() throws {{ try Self.decodes("{name}", as: {path}.self) }}\n'
-    for name, path in ((n, p.lstrip("/") if p.startswith("/") else f"Stripe.{p}") for n, p in RESOURCES.items()))
-pathlib.Path("Tests/StripeTests/FixtureDecodingTests.swift").write_text(f'''//
-//  FixtureDecodingTests.swift
-//  swift-stripe
-//
-//  Written by Scripts/spec-fixture.py — do not edit. Every generated resource decodes a fixture
-//  in which every spec field is populated, and must accept every value the spec allows. A
-//  rejection here is a model that will throw on a real object one day.
-//
 
+
+def test_name(resource: str) -> str:
+    words = "".join(w.title() for w in re.split(r"[._]", resource))
+    return words[0].lower() + words[1:]
+
+
+cases = "".join(
+    f'    @Test("{name}") func {test_name(name)}() throws {{ try Self.decodes("{name}", as: {path}.self) }}\n'
+    for name, path in ((n, p.lstrip("/") if p.startswith("/") else f"Stripe.{p}") for n, p in RESOURCES.items()))
+TEST_FILE = pathlib.Path("Tests/StripeTests/FixtureDecodingTests.swift")
+TEST_FILE.write_text(f'''{_gen.LICENSE_HEADER}
 import Foundation
 import Testing
 
 @testable import Stripe
 
+/// Every generated resource decodes a fixture in which every spec field is populated.
+///
+/// Written by Scripts/spec-fixture.py. A resource must accept every value the spec allows; a
+/// rejection here is a model that will throw on a real object one day.
 @Suite("Spec fixture decoding")
 struct FixtureDecodingTests {{
 
@@ -134,8 +156,9 @@ struct FixtureDecodingTests {{
         return try Data(contentsOf: url)
     }}
 
-    /// Hand-written types the generated ones reference that reject a value the spec allows —
-    /// a strict enum on a field the spec types as a free string. Each is a defect in that hand
+    /// Hand-written types the generated ones reference that reject a value the spec allows.
+    ///
+    /// A strict enum on a field the spec types as a free string. Each is a defect in that hand
     /// type, listed here by path so it is acknowledged rather than silently tolerated; remove an
     /// entry when the hand type is fixed. Anything not listed fails.
     private static let knownHandStrictness: [String: Set<String>] = [
@@ -143,9 +166,11 @@ struct FixtureDecodingTests {{
         "treasury.received_debit": ["linked_flows.source_flow_details.payout.failure_code"],
     ]
 
-    /// Hand-written enums that are strict on a field the spec types as a free string, reached
-    /// from many resources through the card types. Same status as the paths above: acknowledged
-    /// defects, matched by the enum's name in the decoding error, to be removed as each is fixed.
+    /// Hand-written enums that are strict on a field the spec types as a free string.
+    ///
+    /// Reached from many resources through the card types. Same status as the paths above:
+    /// acknowledged defects, matched by the enum's name in the decoding error, to be removed as
+    /// each is fixed.
     private static let knownStrictHandEnums: Set<String> = [
         "CardBrand", "CardFundingType", "CardValidationCheck", "CardTokenizedMethod",
     ]
@@ -207,4 +232,5 @@ struct FixtureDecodingTests {{
 
 {cases}}}
 ''')
+_gen.swift_format([TEST_FILE])
 print("FixtureDecodingTests.swift written")

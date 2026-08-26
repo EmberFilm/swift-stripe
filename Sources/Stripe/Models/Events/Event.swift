@@ -1,9 +1,16 @@
+//===----------------------------------------------------------------------===//
 //
-//  Event.swift
-//  Stripe
+// This source file is part of the swift-stripe open source project
 //
-//  Created by Andrew Edwards on 12/8/19.
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
 //
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
 
 #if canImport(FoundationEssentials)
 import FoundationEssentials
@@ -37,7 +44,9 @@ extension Stripe.Events {
         public var livemode: Bool
         /// Webhooks yet to be successfully delivered for this event.
         public var pendingWebhooks: Int
-        /// The event's type, or `nil` for a type newer than this package. `rawType` always has it.
+        /// The event's type, or `nil` for a type newer than this package.
+        ///
+        /// `rawType` always has it.
         public var type: `Type`?
         /// The event's type as Stripe sent it.
         public var rawType: String
@@ -102,7 +111,7 @@ extension Stripe.Events.Event {
     public struct Data: Codable, Hashable, Sendable {
         /// The object the event is about, at the time of the event.
         public var object: Stripe.Events.Event.Object
-        /// On `*.updated` events, the attributes that changed with their previous values, keyed
+        /// On `*.updated` events, the attributes that changed with their previous values, keyed.
         /// by wire name and shaped as they are on the object.
         public var previousAttributes: [String: Stripe.JSONValue]?
 

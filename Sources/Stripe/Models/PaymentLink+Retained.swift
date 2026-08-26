@@ -1,10 +1,21 @@
+//===----------------------------------------------------------------------===//
+//
+// This source file is part of the swift-stripe open source project
+//
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
+//
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
+
 //
 //  PaymentLink.swift
 //
 //
-//  Created by Andrew Edwards on 5/7/23.
-//
-
 #if canImport(FoundationEssentials)
 import FoundationEssentials
 #else
@@ -20,27 +31,43 @@ extension Stripe.PaymentLink {
     public struct LineItem: Codable, Hashable, Sendable, Identifiable {
         /// Unique identifier for the object.
         public var id: Stripe.PaymentLink.LineItem.ID
-        /// String representing the object’s type. Objects of the same type share the same value.
+        /// String representing the object’s type.
+        ///
+        /// Objects of the same type share the same value.
         public var object: String
-        /// Total discount amount applied. If no discounts were applied, defaults to 0.
+        /// Total discount amount applied.
+        ///
+        /// If no discounts were applied, defaults to 0.
         public var amountDiscount: Int?
         /// Total before any discounts or taxes is applied.
         public var amountSubtotal: Int?
-        /// Total tax amount applied. If no tax was applied, defaults to 0.
+        /// Total tax amount applied.
+        ///
+        /// If no tax was applied, defaults to 0.
         public var amountTax: Int?
         /// Total after discounts and taxes.
         public var amountTotal: Int?
-        /// Three-letter ISO currency code, in lowercase. Must be a supported currency.
+        /// Three-letter ISO currency code, in lowercase.
+        ///
+        /// Must be a supported currency.
         public var currency: Stripe.Currency?
-        /// An arbitrary string attached to the object. Often useful for displaying to users. Defaults to product name.
+        /// An arbitrary string attached to the object.
+        ///
+        /// Often useful for displaying to users. Defaults to product name.
         public var description: String?
-        /// The discounts applied to the line item. This field is not included by default. To include it in the response, expand the `discounts` field.
+        /// The discounts applied to the line item.
+        ///
+        /// This field is not included by default. To include it in the response, expand the `discounts`
+        /// field.
         public var discounts: [Stripe.PaymentLink.LineItem.Discount]?
         /// The price used to generate the line item.
         public var price: Stripe.Products.Price?
         /// The quantity of products being purchased.
         public var quantity: Int?
-        /// The taxes applied to the line item. This field is not included by default. To include it in the response, expand the `taxes` field.
+        /// The taxes applied to the line item.
+        ///
+        /// This field is not included by default. To include it in the response, expand the `taxes`
+        /// field.
         public var taxes: [Stripe.PaymentLink.LineItem.Tax]?
 
         public init(
@@ -113,7 +140,9 @@ extension Stripe.PaymentLink.LineItem {
 
 extension Stripe.PaymentLink.LineItem {
     public struct List: Codable, Hashable, Sendable {
-        /// String representing the object’s type. Objects of the same type share the same value. Always has the value `list`.
+        /// String representing the object’s type.
+        ///
+        /// Objects of the same type share the same value. Always has the value `list`.
         public var object: String
         /// Details about each object.
         public var data: [Stripe.PaymentLink.LineItem]?
@@ -142,9 +171,9 @@ extension Stripe.PaymentLink {
 
 extension Stripe.PaymentLink.After {
     public struct Completion: Codable, Hashable, Sendable {
-        /// Configuration when `type=hosted_confirmation`
+        /// Configuration when `type=hosted_confirmation`.
         public var hostedConfirmation: Stripe.PaymentLink.After.Completion.Hosted.Confirmation?
-        /// Configuration when `type=redirect`
+        /// Configuration when `type=redirect`.
         public var redirect: Stripe.PaymentLink.After.Completion.Redirect?
         /// The specified behavior after the purchase is complete.
         public var type: Stripe.PaymentLink.After.Completion.`Type`?
@@ -195,7 +224,7 @@ extension Stripe.PaymentLink.After.Completion.Hosted {
 
 extension Stripe.PaymentLink.After.Completion {
     public struct Redirect: Codable, Hashable, Sendable {
-        /// The URL the customer will be redirected to after the purchase is complete
+        /// The URL the customer will be redirected to after the purchase is complete.
         public var url: String?
 
         public init(
@@ -225,7 +254,10 @@ extension Stripe.PaymentLink.Billing {
 
 extension Stripe.PaymentLink.Billing.Address {
     public enum Collection: String, Codable, Sendable {
-        /// Checkout will only collect the billing address when necessary. When using `automatic_tax`, Checkout will collect the minimum number of fields required for tax calculation
+        /// Checkout will only collect the billing address when necessary.
+        ///
+        /// When using `automatic_tax`, Checkout will collect the minimum number of fields required for
+        /// tax calculation.
         case auto
         /// Checkout will always collect the customer’s billing address.
         case `required`
@@ -240,7 +272,9 @@ extension Stripe.PaymentLink.Consent {
     public struct Collection: Codable, Hashable, Sendable {
         /// If set to `auto`, enables the collection of customer consent for promotional communications.
         public var promotions: String?
-        /// If set to `required`, it requires cutomers to accept the terms of service before being able to pay. If set to none, customers won’t be shown a checkbox to accept the terms of service.
+        /// If set to `required`, it requires cutomers to accept the terms of service before being able to pay.
+        ///
+        /// If set to none, customers won’t be shown a checkbox to accept the terms of service.
         public var termsOfService: String?
 
         public init(
@@ -257,13 +291,17 @@ extension Stripe.PaymentLink {
     public struct CustomField: Codable, Hashable, Sendable {
         /// Configuration for `type=dropdown` fields.
         public var dropdown: Stripe.PaymentLink.CustomField.Dropdown?
-        /// String of your choice that your integration can use to reconcile this field. Must be unique to this field, alphanumeric, and up to 200 characters.
+        /// String of your choice that your integration can use to reconcile this field.
+        ///
+        /// Must be unique to this field, alphanumeric, and up to 200 characters.
         public var key: String?
         /// The label for the field, displayed to the customer.
         public var label: Stripe.PaymentLink.CustomField.Label?
         /// Configuration for `type=numeric` fields.
         public var numeric: Stripe.PaymentLink.CustomField.Numeric?
-        /// Whether the customer is required to complete the field before completing the Checkout Session. Defaults to `false`.
+        /// Whether the customer is required to complete the field before completing the Checkout Session.
+        ///
+        /// Defaults to `false`.
         public var optional: Bool?
         /// Configuration for `type=text` fields.
         public var text: Stripe.PaymentLink.CustomField.Text?
@@ -292,9 +330,13 @@ extension Stripe.PaymentLink {
 
 extension Stripe.PaymentLink.CustomField {
     public struct Dropdown: Codable, Hashable, Sendable {
-        /// The options available for the customer to select. Up to 200 options allowed
+        /// The options available for the customer to select.
+        ///
+        /// Up to 200 options allowed.
         public var options: [Stripe.PaymentLink.CustomField.Dropdown.Option]?
-        /// The option selected by the customer. This will be the `value` for the option.
+        /// The option selected by the customer.
+        ///
+        /// This will be the `value` for the option.
         public var value: String?
 
         public init(
@@ -309,9 +351,13 @@ extension Stripe.PaymentLink.CustomField {
 
 extension Stripe.PaymentLink.CustomField.Dropdown {
     public struct Option: Codable, Hashable, Sendable {
-        /// The label for the option, displayed to the customer. Up to 100 characters.
+        /// The label for the option, displayed to the customer.
+        ///
+        /// Up to 100 characters.
         public var label: String?
-        /// The value for this option, not displayed to the customer, used by your integration to reconcile the option selected by the customer. Must be unique to this option, alphanumeric, and up to 100 characters.
+        /// The value for this option, not displayed to the customer, used by your integration to reconcile the option selected by the customer.
+        ///
+        /// Must be unique to this option, alphanumeric, and up to 100 characters.
         public var value: String?
 
         public init(
@@ -326,7 +372,9 @@ extension Stripe.PaymentLink.CustomField.Dropdown {
 
 extension Stripe.PaymentLink.CustomField {
     public struct Label: Codable, Hashable, Sendable {
-        /// Custom text for the label, displayed to the customer. Up to 50 characters.
+        /// Custom text for the label, displayed to the customer.
+        ///
+        /// Up to 50 characters.
         public var custom: String?
         /// The type of the label.
         public var type: Stripe.PaymentLink.CustomField.LabelType?
@@ -458,7 +506,9 @@ extension Stripe.PaymentLink {
 
 extension Stripe.PaymentLink.Customer {
     public enum Creation: String, Codable, Sendable {
-        /// The Checkout Session will only create a Customer if it is required for Session confirmation. Currently, only `subscription` mode Sessions require a Customer.
+        /// The Checkout Session will only create a Customer if it is required for Session confirmation.
+        ///
+        /// Currently, only `subscription` mode Sessions require a Customer.
         case ifRequired = "if_required"
         /// The Checkout Session will always create a Customer when a Session confirmation is attempted.
         case always
@@ -492,19 +542,23 @@ extension Stripe.PaymentLink.Invoice.Creation {
 
 extension Stripe.PaymentLink.Invoice.Creation.Invoice {
     public struct Data: Codable, Hashable, Sendable {
-        /// The account tax IDs associated with the invoice
+        /// The account tax IDs associated with the invoice.
         @ExpandableCollection<Stripe.Tax.ID> public var accountTaxIds: [String]?
         /// Custom fields displayed on the invoice.
         public var customFields: [Stripe.PaymentLink.Invoice.Creation.Invoice.Data.CustomFields]?
-        /// An arbitrary string attached to the object. Often useful for displaying to users.
+        /// An arbitrary string attached to the object.
+        ///
+        /// Often useful for displaying to users.
         public var description: String?
         /// Footer displayed on the invoice.
         public var footer: String?
-        /// Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+        /// Set of key-value pairs that you can attach to an object.
+        ///
+        /// This can be useful for storing additional information about the object in a structured
+        /// format.
         public var metadata: [String: String]?
         /// Options for invoice PDF rendering.
-        public var renderingOptions:
-            Stripe.PaymentLink.Invoice.Creation.Invoice.Data.Rendering.Options?
+        public var renderingOptions: Stripe.PaymentLink.Invoice.Creation.Invoice.Data.Rendering.Options?
 
         public init(
             accountTaxIds: [String]? = nil,
@@ -592,9 +646,16 @@ extension Stripe.PaymentLink.PaymentIntent.Data.Capture {
     public enum Method: String, Codable, Sendable {
         /// (Default) Stripe automatically captures funds when the customer authorizes the payment.
         case automatic
-        /// Stripe asynchronously captures funds when the customer authorizes the payment. Recommended over `capture_method=automatic` due to improved latency, but [may require additional integration changes](https://stripe.com/docs/payments/payment-intents/asynchronous-capture-automatic-async) .
+        /// Stripe asynchronously captures funds when the customer authorizes the payment.
+        ///
+        /// Recommended over `capture_method=automatic` due to improved latency, but [may require
+        /// additional integration
+        /// changes](https://stripe.com/docs/payments/payment-intents/asynchronous-capture-automatic-async)
+        /// .
         case automaticAsync = "automatic_async"
-        /// Place a hold on the funds when the customer authorizes the payment, but [don’t capture the funds until later](https://stripe.com/docs/payments/capture-later). (Not all payment methods support this.)
+        /// Place a hold on the funds when the customer authorizes the payment, but [don’t capture the funds until later](https://stripe.com/docs/payments/capture-later).
+        ///
+        /// (Not all payment methods support this.).
         case manual
     }
 }
@@ -631,7 +692,9 @@ extension Stripe.PaymentLink.Shipping {
 
 extension Stripe.PaymentLink.Shipping.Address {
     public struct Collection: Codable, Hashable, Sendable {
-        /// An array of two-letter ISO country codes representing which countries Checkout should provide as options for shipping locations. Unsupported country codes: `AS, CX, CC, CU, HM, IR, KP, MH, FM, NF, MP, PW, SD, SY, UM, VI`.
+        /// An array of two-letter ISO country codes representing which countries Checkout should provide as options for shipping locations.
+        ///
+        /// Unsupported country codes: `AS, CX, CC, CU, HM, IR, KP, MH, FM, NF, MP, PW, SD, SY, UM, VI`.
         public var allowedCountries: [String]?
 
         public init(
@@ -678,7 +741,9 @@ extension Stripe.PaymentLink {
 
 extension Stripe.PaymentLink.Subscription {
     public struct Data: Codable, Hashable, Sendable {
-        /// The subscription’s description, meant to be displayable to the customer. Use this field to optionally store an explanation of the subscription.
+        /// The subscription’s description, meant to be displayable to the customer.
+        ///
+        /// Use this field to optionally store an explanation of the subscription.
         public var description: String?
         /// Integer representing the number of trial period days before the customer is charged for the first time.
         public var trialPeriodDays: Int?
@@ -699,7 +764,7 @@ extension Stripe.PaymentLink {
 
 extension Stripe.PaymentLink.TaxId {
     public struct Collection: Codable, Hashable, Sendable {
-        /// Indicates whether tax ID collection is enabled for the session
+        /// Indicates whether tax ID collection is enabled for the session.
         public var enabled: Bool?
 
         public init(
@@ -716,7 +781,9 @@ extension Stripe.PaymentLink {
 
 extension Stripe.PaymentLink.Transfer {
     public struct Data: Codable, Hashable, Sendable {
-        /// The amount in cents that will be transferred to the destination account. By default, the entire amount is transferred to the destination.
+        /// The amount in cents that will be transferred to the destination account.
+        ///
+        /// By default, the entire amount is transferred to the destination.
         public var amount: Int?
         /// The connected account receiving the transfer.
         @ExpandableOf<Stripe.Connect.Account> public var destination: Stripe.Connect.Account.ID?
@@ -730,4 +797,3 @@ extension Stripe.PaymentLink.Transfer {
         }
     }
 }
-

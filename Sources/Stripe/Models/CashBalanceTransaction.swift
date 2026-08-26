@@ -1,10 +1,21 @@
+//===----------------------------------------------------------------------===//
+//
+// This source file is part of the swift-stripe open source project
+//
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
+//
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
+
 //
 //  CashBalanceTransaction.swift
 //
 //
-//  Created by Andrew Edwards on 5/1/23.
-//
-
 #if canImport(FoundationEssentials)
 import FoundationEssentials
 #else
@@ -17,27 +28,42 @@ public struct CashBalanceTransaction: Codable, Hashable, Sendable, Identifiable 
     public typealias ID = String
     /// Unique identifier for the object.
     public var id: ID
-    /// String representing the object’s type. Objects of the same type share the same value.
+    /// String representing the object’s type.
+    ///
+    /// Objects of the same type share the same value.
     public var object: String
     /// If this is a `type=applied_to_payment` transaction, contains information about how funds were applied.
     public var appliedToPayment: CashBalanceTransactionAppliedToPayment?
-    /// Time at which the object was created. Measured in seconds since the Unix epoch.
+    /// Time at which the object was created.
+    ///
+    /// Measured in seconds since the Unix epoch.
     public var created: Date
-    /// Three-letter ISO currency code, in lowercase. Must be a supported currency.
+    /// Three-letter ISO currency code, in lowercase.
+    ///
+    /// Must be a supported currency.
     public var currency: Stripe.Currency?
     /// The customer whose available cash balance changed as a result of this transaction.
     @ExpandableOf<Stripe.Customers.Customer> public var customer: Stripe.Customers.Customer.ID?
-    /// The total available cash balance for the specified currency after this transaction was applied. Represented in the smallest currency unit.
+    /// The total available cash balance for the specified currency after this transaction was applied.
+    ///
+    /// Represented in the smallest currency unit.
     public var endingBalance: Int?
     /// If this is a`type=funded` transaction, contains information about the funding.
     public var funded: CashBalanceTransactionFunded?
     /// Has the value true if the object exists in live mode or the value false if the object exists in test mode.
     public var livemode: Bool
-    /// The amount by which the cash balance changed, represented in the smallest currency unit. A positive value represents funds being added to the cash balance, a negative value represents funds being removed from the cash balance.
+    /// The amount by which the cash balance changed, represented in the smallest currency unit.
+    ///
+    /// A positive value represents funds being added to the cash balance, a negative value represents
+    /// funds being removed from the cash balance.
     public var netAmount: Int?
     /// If this is a `type=refunded_from_payment` transaction, contains information about the source of the refund.
     public var refundedFromPayment: CashBalanceTransactionRefundedFromPayment?
-    /// The type of the cash balance transaction. One of `applied_to_payment`, `unapplied_from_payment`, `refunded_from_payment`, `funded`, `return_initiated`, or `return_canceled`. New types may be added in future. See Customer Balance to learn more about these types.
+    /// The type of the cash balance transaction.
+    ///
+    /// One of `applied_to_payment`, `unapplied_from_payment`, `refunded_from_payment`, `funded`,
+    /// `return_initiated`, or `return_canceled`. New types may be added in future. See Customer Balance
+    /// to learn more about these types.
     public var type: String?
     /// If this is a `type=unapplied_from_payment` transaction, contains information about how funds were unapplied.
     public var unappliedFromPayment: CashBalanceTransactionUnappliedFromPayment?
@@ -75,8 +101,7 @@ public struct CashBalanceTransaction: Codable, Hashable, Sendable, Identifiable 
 
 public struct CashBalanceTransactionAppliedToPayment: Codable, Hashable, Sendable {
     /// The Payment Intent that funds were applied to.
-    @ExpandableOf<Stripe.PaymentIntents.PaymentIntent> public var paymentIntent:
-        Stripe.PaymentIntents.PaymentIntent.ID?
+    @ExpandableOf<Stripe.PaymentIntents.PaymentIntent> public var paymentIntent: Stripe.PaymentIntents.PaymentIntent.ID?
 
     public init(
         paymentIntent: Stripe.PaymentIntents.PaymentIntent.ID? = nil
@@ -101,7 +126,10 @@ public struct CashBalanceTransactionFundedBankTransfer: Codable, Hashable, Senda
     public var euBankTransfer: CashBalanceTransactionFundedBankTransferEUBankTransfer?
     /// The user-supplied reference field on the bank transfer.
     public var reference: String?
-    /// The funding method type used to fund the customer balance. Permitted values include: `eu_bank_transfer`, `gb_bank_transfer`, `jp_bank_transfer`, or `mx_bank_transfer`.
+    /// The funding method type used to fund the customer balance.
+    ///
+    /// Permitted values include: `eu_bank_transfer`, `gb_bank_transfer`, `jp_bank_transfer`, or
+    /// `mx_bank_transfer`.
     public var type: CashBalanceTransactionFundedBankTransferType?
 
     public init(
@@ -116,13 +144,13 @@ public struct CashBalanceTransactionFundedBankTransfer: Codable, Hashable, Senda
 }
 
 public enum CashBalanceTransactionFundedBankTransferType: String, Codable, Sendable {
-    /// A bank transfer of type `eu_bank_transfer`
+    /// A bank transfer of type `eu_bank_transfer`.
     case euBankTransfer = "eu_bank_transfer"
-    /// A bank transfer of type `gb_bank_transfer`
+    /// A bank transfer of type `gb_bank_transfer`.
     case gbBankTransfer = "gb_bank_transfer"
-    /// A bank transfer of type `jp_bank_transfer`
+    /// A bank transfer of type `jp_bank_transfer`.
     case jpBankTransfer = "jp_bank_transfer"
-    /// A bank transfer of type `mx_bank_transfer`
+    /// A bank transfer of type `mx_bank_transfer`.
     case mxBankTransfer = "mx_bank_transfer"
 }
 
@@ -158,8 +186,7 @@ public struct CashBalanceTransactionRefundedFromPayment: Codable, Hashable, Send
 
 public struct CashBalanceTransactionUnappliedFromPayment: Codable, Hashable, Sendable {
     /// The Payment Intent that funds were unapplied from.
-    @ExpandableOf<Stripe.PaymentIntents.PaymentIntent> public var paymentIntent:
-        Stripe.PaymentIntents.PaymentIntent.ID?
+    @ExpandableOf<Stripe.PaymentIntents.PaymentIntent> public var paymentIntent: Stripe.PaymentIntents.PaymentIntent.ID?
 
     public init(
         paymentIntent: Stripe.PaymentIntents.PaymentIntent.ID? = nil
@@ -169,7 +196,9 @@ public struct CashBalanceTransactionUnappliedFromPayment: Codable, Hashable, Sen
 }
 
 public struct CashBalanceTransactionList: Codable, Hashable, Sendable {
-    /// String representing the object’s type. Objects of the same type share the same value. Always has the value list.
+    /// String representing the object’s type.
+    ///
+    /// Objects of the same type share the same value. Always has the value list.
     public var object: String
     /// An array of `CashBalanceTransaction`s associated with the account.
     public var data: [CashBalanceTransaction]?

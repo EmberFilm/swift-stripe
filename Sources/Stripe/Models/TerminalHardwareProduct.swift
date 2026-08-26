@@ -1,10 +1,21 @@
+//===----------------------------------------------------------------------===//
+//
+// This source file is part of the swift-stripe open source project
+//
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
+//
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
+
 //
 //  TerminalHardwareProduct.swift
 //
 //
-//  Created by Andrew Edwards on 5/17/23.
-//
-
 #if canImport(FoundationEssentials)
 import FoundationEssentials
 #else
@@ -17,13 +28,17 @@ public struct TerminalHardwareProduct: Codable, Hashable, Sendable, Identifiable
     public typealias ID = String
     /// Unique identifier for the object.
     public var id: ID
-    /// String representing the object’s type. Objects of the same type share the same value.
+    /// String representing the object’s type.
+    ///
+    /// Objects of the same type share the same value.
     public var object: String
     /// The status of the terminal hardware product.
     public var status: TerminalHardwareProductStatus?
     /// The type of product.
     public var type: String?
-    /// If all the SKUs for this product have an `unavailable_after` then this is the max `unavailable_after` in UNIX timestamp. Otherwise, null.
+    /// If all the SKUs for this product have an `unavailable_after` then this is the max `unavailable_after` in UNIX timestamp.
+    ///
+    /// Otherwise, null.
     public var unavailableAfter: Date?
 
     public init(

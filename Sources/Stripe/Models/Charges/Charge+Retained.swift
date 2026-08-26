@@ -1,9 +1,17 @@
+//===----------------------------------------------------------------------===//
 //
-//  Charge.swift
-//  Stripe
+// This source file is part of the swift-stripe open source project
 //
-//  Created by Anthony Castelli on 4/15/17.
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
 //
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
+
 //
 
 #if canImport(FoundationEssentials)
@@ -27,9 +35,13 @@ extension Stripe.Charges.Charge {
 
 extension Stripe.Charges.Charge.Fraud {
     public struct Details: Codable, Hashable, Sendable {
-        /// Assessments reported by you. If set, possible values of are `safe` and `fraudulent`.
+        /// Assessments reported by you.
+        ///
+        /// If set, possible values of are `safe` and `fraudulent`.
         public var userReport: Stripe.Charges.Charge.Fraud.Details.Report.`Type`?
-        /// Assessments from Stripe. If set, the value is `fraudulent`.
+        /// Assessments from Stripe.
+        ///
+        /// If set, the value is `fraudulent`.
         public var stripeReport: Stripe.Charges.Charge.Fraud.Details.Report.`Type`?
 
         public init(
@@ -59,7 +71,9 @@ extension Stripe.Charges.Charge {
 
 extension Stripe.Charges.Charge.Transfer {
     public struct Data: Codable, Hashable, Sendable {
-        /// The amount transferred to the destination account, if specified. By default, the entire charge amount is transferred to the destination account.
+        /// The amount transferred to the destination account, if specified.
+        ///
+        /// By default, the entire charge amount is transferred to the destination account.
         public var amount: Int?
         /// ID of an existing, connected Stripe account to transfer funds to if `transfer_data` was specified in the charge request.
         @ExpandableOf<Stripe.Connect.Account> public var destination: Stripe.Connect.Account.ID?
@@ -73,7 +87,6 @@ extension Stripe.Charges.Charge.Transfer {
         }
     }
 }
-
 
 extension Stripe.Charges.Charge.Search {
     public struct Result: Codable, Hashable, Sendable {
@@ -115,8 +128,7 @@ extension Stripe.Charges.Charge {
 extension Stripe.Charges.Charge.PaymentMethod {
     public struct Details: Codable, Hashable, Sendable {
         /// If this is a `ach_credit_transfer` payment, this hash contains a snapshot of the transaction specific details of the `ach_credit_transfer` payment method.
-        public var achCreditTransfer:
-            Stripe.Charges.Charge.PaymentMethod.Details.ACHCredit.Transfer?
+        public var achCreditTransfer: Stripe.Charges.Charge.PaymentMethod.Details.ACHCredit.Transfer?
         /// If this is a `ach_debit` payment, this hash contains a snapshot of the transaction specific details of the `ach_debit` payment method.
         public var achDebit: Stripe.Charges.Charge.PaymentMethod.Details.ACHDebit?
         /// If this is a `acss_debit` payment, this hash contains a snapshot of the transaction specific details of the `acss_debit` payment method.
@@ -179,11 +191,14 @@ extension Stripe.Charges.Charge.PaymentMethod {
         public var promptpay: Stripe.Charges.Charge.PaymentMethod.Details.Promptpay?
         /// If this is a `sepa_debit` payment, this hash contains a snapshot of the transaction specific details of the `sepa_debit` payment method.
         public var sepaDebit: Stripe.Charges.Charge.PaymentMethod.Details.SepaDebit?
-        /// If this is a `sofort` payment, this hash contains a snapshot of the transaction specific details of the `sofort` payment method
+        /// If this is a `sofort` payment, this hash contains a snapshot of the transaction specific details of the `sofort` payment method.
         public var sofort: Stripe.Charges.Charge.PaymentMethod.Details.Sofort?
-        /// If this is a `stripe_account` payment, this hash contains a snapshot of the transaction specific details of the `stripe_account` payment method
+        /// If this is a `stripe_account` payment, this hash contains a snapshot of the transaction specific details of the `stripe_account` payment method.
         public var stripeAccount: Stripe.Charges.Charge.PaymentMethod.Details.StripeAccount?
-        /// The type of transaction-specific details of the payment method used in the payment, one of `ach_credit_transfer`, `ach_debit`, `alipay`, `bancontact`, `card`, `card_present`, `eps`, `giropay`, `ideal`, `multibanco`, `p24`, `sepa_debit`, `sofort`, `stripe_account`, or `wechat`. An additional hash is included on `payment_method_details` with a name matching this value. It contains information specific to the payment method.
+        /// The type of transaction-specific details of the payment method used in the payment, one of `ach_credit_transfer`, `ach_debit`, `alipay`, `bancontact`, `card`, `card_present`, `eps`, `giropay`, `ideal`, `multibanco`, `p24`, `sepa_debit`, `sofort`, `stripe_account`, or `wechat`.
+        ///
+        /// An additional hash is included on `payment_method_details` with a name matching this value.
+        /// It contains information specific to the payment method.
         public var type: Stripe.Charges.Charge.PaymentMethod.Details.`Type`?
         /// If this is a `us_bank_account` payment, this hash contains a snapshot of the transaction specific details of the `us_bank_account` payment method.
         public var usBankAccount: Stripe.Charges.Charge.PaymentMethod.Details.USBankAccount?

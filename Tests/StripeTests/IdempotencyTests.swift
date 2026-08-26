@@ -1,20 +1,31 @@
+//===----------------------------------------------------------------------===//
 //
-//  IdempotencyTests.swift
-//  swift-stripe
+// This source file is part of the swift-stripe open source project
 //
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
+//
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
+
 //  The `Idempotency-Key` header and the retry policy it unlocks.
 //
 
 import AsyncHTTPClient
+import NIOHTTP1
+import Testing
+
+@testable import Stripe
+
 #if canImport(FoundationEssentials)
 import FoundationEssentials
 #else
 import Foundation
 #endif
-import NIOHTTP1
-import Testing
-
-@testable import Stripe
 
 @Suite("Idempotency keys")
 struct IdempotencyTests {
@@ -29,7 +40,9 @@ struct IdempotencyTests {
     @Test("a key becomes the Idempotency-Key header")
     func headerSent() throws {
         let request = try Self.api().makeRequest(
-            .POST, "v1/customers", idempotencyKey: "customer-42"
+            .POST,
+            "v1/customers",
+            idempotencyKey: "customer-42"
         )
         #expect(request.headers.first(name: "Idempotency-Key") == "customer-42")
     }
@@ -74,9 +87,11 @@ struct IdempotencyTests {
             )
             #expect(customer.id == "cus_1")
             #expect(server.received.count == 2)
-            #expect(server.received.allSatisfy {
-                $0.headers.first(name: "Idempotency-Key") == "customer-42"
-            })
+            #expect(
+                server.received.allSatisfy {
+                    $0.headers.first(name: "Idempotency-Key") == "customer-42"
+                }
+            )
         }
     }
 

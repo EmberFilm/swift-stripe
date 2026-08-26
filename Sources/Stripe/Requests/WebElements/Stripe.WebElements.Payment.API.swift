@@ -1,3 +1,17 @@
+//===----------------------------------------------------------------------===//
+//
+// This source file is part of the swift-stripe open source project
+//
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
+//
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
+
 #if canImport(FoundationEssentials)
 import FoundationEssentials
 #else
@@ -5,12 +19,13 @@ import Foundation
 #endif
 
 extension Stripe.WebElements {
-    /// Payment Element for collecting payment method details
+    /// Payment Element for collecting payment method details.
+    ///
     /// See: https://docs.stripe.com/payments/payment-element
     public struct Payment: Codable, Hashable, Sendable {
-        /// The type of Element being created
+        /// The type of Element being created.
         public var type: String { "payment" }
-        /// Options for creating the Payment Element
+        /// Options for creating the Payment Element.
         public let options: Options?
 
         public init(options: Options? = nil) {

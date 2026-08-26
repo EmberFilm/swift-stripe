@@ -1,10 +1,21 @@
+//===----------------------------------------------------------------------===//
+//
+// This source file is part of the swift-stripe open source project
+//
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
+//
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
+
 //
 //  TerminalHardwareOrder.swift
 //
 //
-//  Created by Andrew Edwards on 5/17/23.
-//
-
 #if canImport(FoundationEssentials)
 import FoundationEssentials
 #else
@@ -17,13 +28,19 @@ public struct TerminalHardwareOrder: Codable, Hashable, Sendable, Identifiable {
     public typealias ID = String
     /// Unique identifier for the object.
     public var id: ID
-    /// A positive integer in the smallest currency unit. Represents the total cost for the order.
+    /// A positive integer in the smallest currency unit.
+    ///
+    /// Represents the total cost for the order.
     public var amount: Int?
-    /// Three-letter ISO currency code, in lowercase. Must be a supported currency.
+    /// Three-letter ISO currency code, in lowercase.
+    ///
+    /// Must be a supported currency.
     public var currency: Stripe.Currency?
     /// An array of line items ordered.
     public var hardwareOrderItems: [TerminalHardwareOrderLineItem]?
-    /// Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+    /// Set of key-value pairs that you can attach to an object.
+    ///
+    /// This can be useful for storing additional information about the object in a structured format.
     public var metadata: [String: String]?
     /// One of `monthly_invoice`, `payment_intent`, or `none`.
     public var paymentType: TerminalHardwareOrderPaymentType?
@@ -33,9 +50,13 @@ public struct TerminalHardwareOrder: Codable, Hashable, Sendable, Identifiable {
     public var shippingMethod: String?
     /// The status of the terminal hardware order.
     public var status: TerminalHardwareOrderStatus?
-    /// String representing the object’s type. Objects of the same type share the same value.
+    /// String representing the object’s type.
+    ///
+    /// Objects of the same type share the same value.
     public var object: String
-    /// Time at which the object was created. Measured in seconds since the Unix epoch.
+    /// Time at which the object was created.
+    ///
+    /// Measured in seconds since the Unix epoch.
     public var created: Date
     /// Has the value true if the object exists in live mode or the value false if the object exists in test mode.
     public var livemode: Bool
@@ -45,7 +66,9 @@ public struct TerminalHardwareOrder: Codable, Hashable, Sendable, Identifiable {
     public var tax: Int?
     /// The aggregate amounts calculated per tax rate for all of the items on the order.
     public var totalTaxAmounts: [TerminalHardwareOrderTotalTaxAmount]?
-    /// Time at which the object was last updated. Measured in seconds since the Unix epoch.
+    /// Time at which the object was last updated.
+    ///
+    /// Measured in seconds since the Unix epoch.
     public var updated: Date?
 
     public init(
@@ -88,7 +111,9 @@ public struct TerminalHardwareOrder: Codable, Hashable, Sendable, Identifiable {
 public struct TerminalHardwareOrderLineItem: Codable, Hashable, Sendable {
     /// A positive integer that represents the cost of the order in the smallest currency unit.
     public var amount: Int?
-    /// Three-letter ISO currency code, in lowercase. Must be a supported currency.
+    /// Three-letter ISO currency code, in lowercase.
+    ///
+    /// Must be a supported currency.
     public var currency: Stripe.Currency?
     /// The quantity to be ordered.
     public var quantity: Int?
@@ -117,13 +142,19 @@ public enum TerminalHardwareOrderPaymentType: String, Codable, Sendable {
 public struct TerminalHardwareOrderShipping: Codable, Hashable, Sendable {
     /// Shipping address.
     public var address: Address?
-    /// A positive integer in the smallest currency unit. Represents the cost for shippingthe order.
+    /// A positive integer in the smallest currency unit.
+    ///
+    /// Represents the cost for shippingthe order.
     public var amount: Int?
     /// Company name.
     public var company: String?
-    /// Three-letter ISO currency code, in lowercase. Must be a supported currency.
+    /// Three-letter ISO currency code, in lowercase.
+    ///
+    /// Must be a supported currency.
     public var currency: Stripe.Currency?
-    /// Customer email. This email will receive Stripe-branded update emails when the status of the order changes.
+    /// Customer email.
+    ///
+    /// This email will receive Stripe-branded update emails when the status of the order changes.
     public var email: String?
     /// Customer name.
     public var name: String?
@@ -152,7 +183,9 @@ public struct TerminalHardwareOrderShipping: Codable, Hashable, Sendable {
 public enum TerminalHardwareOrderStatus: String, Codable, Sendable {
     /// Order has been received and can still be canceled.
     case pending
-    /// Order was canceled. Please create a new order to receive these items.
+    /// Order was canceled.
+    ///
+    /// Please create a new order to receive these items.
     case canceled
     /// Order has been shipped, and can no longer be canceled.
     case shipped
@@ -180,28 +213,28 @@ public struct TerminalHardwareOrderShipmentTracking: Codable, Hashable, Sendable
 public enum TerminalHardwareOrderShipmentTrackingCarrier: String, Codable, Sendable {
     /// A placeholder to catch new carriers in your integration as we introduce them.
     case other
-    /// UPS
+    /// UPS.
     case ups
-    /// Purolator
+    /// Purolator.
     case purolator
-    /// FedEx
+    /// FedEx.
     case fedex
-    /// Australia Post
+    /// Australia Post.
     case australiaPost = "australia_post"
-    /// USPS
+    /// USPS.
     case usps
-    /// Canada Post
+    /// Canada Post.
     case canadaPost = "canada_post"
-    /// DHL
+    /// DHL.
     case dhl
-    /// DPD
+    /// DPD.
     case dpd
 }
 
 public struct TerminalHardwareOrderTotalTaxAmount: Codable, Hashable, Sendable {
     /// A positive integer that represents the cost of tax in the smallest currency unit.
     public var amount: Int?
-    /// Whether the tax rate is inclusive or exclusive
+    /// Whether the tax rate is inclusive or exclusive.
     public var inclusive: Bool?
     /// The tax rate that applies to this order.
     public var rate: TerminalHardwareOrderTotalTaxAmountRate?

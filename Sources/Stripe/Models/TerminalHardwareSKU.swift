@@ -1,10 +1,21 @@
+//===----------------------------------------------------------------------===//
+//
+// This source file is part of the swift-stripe open source project
+//
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
+//
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
+
 //
 //  TerminalHardwareSKU.swift
 //
 //
-//  Created by Andrew Edwards on 5/17/23.
-//
-
 #if canImport(FoundationEssentials)
 import FoundationEssentials
 #else
@@ -19,19 +30,27 @@ public struct TerminalHardwareSKU: Codable, Hashable, Sendable, Identifiable {
     public var id: ID
     /// The price of this SKU.
     public var amount: Int?
-    /// Three-letter ISO currency code, in lowercase. Must be a supported currency.
+    /// Three-letter ISO currency code, in lowercase.
+    ///
+    /// Must be a supported currency.
     public var currency: Stripe.Currency?
-    /// String representing the object’s type. Objects of the same type share the same value.
+    /// String representing the object’s type.
+    ///
+    /// Objects of the same type share the same value.
     public var object: String
     /// The country in which this SKU is available.
     public var country: String?
-    /// The maximum quantity of this TerminalHardwareSKU that can be ordered. This will change over time due to inventory and other constraints.
+    /// The maximum quantity of this TerminalHardwareSKU that can be ordered.
+    ///
+    /// This will change over time due to inventory and other constraints.
     public var orderable: Int?
     /// ID of the product for this SKU.
     @ExpandableOf<TerminalHardwareProduct> public var product
     /// The SKU’s status.
     public var status: TerminalHardwareSKUStatus?
-    /// A UNIX timestamp, after which time this SKU has a status of unavailable and it can’t be used for order creation. If absent, we have no plans to make this SKU unavailable.
+    /// A UNIX timestamp, after which time this SKU has a status of unavailable and it can’t be used for order creation.
+    ///
+    /// If absent, we have no plans to make this SKU unavailable.
     public var unavailableAfter: Date?
 
     public init(

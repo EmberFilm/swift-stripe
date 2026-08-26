@@ -1,10 +1,21 @@
+//===----------------------------------------------------------------------===//
+//
+// This source file is part of the swift-stripe open source project
+//
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
+//
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
+
 //
 //  swift
 //
 //
-//  Created by Andrew Edwards on 7/19/20.
-//
-
 #if canImport(FoundationEssentials)
 import FoundationEssentials
 #else
@@ -13,7 +24,7 @@ import Foundation
 
 // https://docs.stripe.com/api/prices/object.md
 
-/// The [Price Object](https://stripe.com/docs/api/prices/object)
+/// The [Price Object](https://stripe.com/docs/api/prices/object).
 
 // The Price struct is generated (Models/Generated). These are the nested types the request
 // layer still names under `Stripe.Products.Price` that the generator spells differently.
@@ -30,13 +41,25 @@ extension Stripe.Products.Price.Currency {
     public struct Option: Codable, Hashable, Sendable {
         /// When set, provides configuration for the amount to be adjusted by the customer during Checkout Sessions and Payment Links.
         public var customUnitAmount: CustomUnitAmount?
-        /// Only required if a default tax behavior was not provided in the Stripe Tax settings. Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`. Once specified as either `inclusive` or `exclusive`, it cannot be changed.
+        /// Only required if a default tax behavior was not provided in the Stripe Tax settings.
+        ///
+        /// Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of
+        /// `inclusive`, `exclusive`, or `unspecified`. Once specified as either `inclusive` or
+        /// `exclusive`, it cannot be changed.
         public var taxBehavior: Stripe.Products.Price.TaxBehavior?
-        /// Each element represents a pricing tier. This parameter requires `billing_scheme` to be set to `tiered`. See also the documentation for `billing_scheme`. This field is not included by default. To include it in the response, expand the `<currency>.tiers` field.
+        /// Each element represents a pricing tier.
+        ///
+        /// This parameter requires `billing_scheme` to be set to `tiered`. See also the documentation
+        /// for `billing_scheme`. This field is not included by default. To include it in the response,
+        /// expand the `<currency>.tiers` field.
         public var tiers: [Stripe.Products.Price.Tier]?
-        /// The unit amount in cents to be charged, represented as a whole integer if possible. Only set if `billing_scheme=per_unit`.
+        /// The unit amount in cents to be charged, represented as a whole integer if possible.
+        ///
+        /// Only set if `billing_scheme=per_unit`.
         public var unitAmount: Int?
-        /// The unit amount in cents to be charged, represented as a decimal string with at most 12 decimal places. Only set if `billing_scheme=per_unit`.
+        /// The unit amount in cents to be charged, represented as a decimal string with at most 12 decimal places.
+        ///
+        /// Only set if `billing_scheme=per_unit`.
         public var unitAmountDecimal: String?
 
         public init(
@@ -59,7 +82,9 @@ extension Stripe.Products.Price.Currency.Option {
     public struct CustomUnitAmount: Codable, Hashable, Sendable {
         /// The maximum unit amount the customer can specify for this item.
         public var maximum: Int?
-        /// The minimum unit amount the customer can specify for this item. Must be at least the minimum charge amount.
+        /// The minimum unit amount the customer can specify for this item.
+        ///
+        /// Must be at least the minimum charge amount.
         public var minimum: Int?
         /// The starting unit amount which can be updated by the customer.
         public var preset: Int?
@@ -137,4 +162,3 @@ extension Stripe.Products.Price {
         }
     }
 }
-

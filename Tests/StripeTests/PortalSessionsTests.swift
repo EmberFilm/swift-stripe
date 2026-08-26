@@ -1,16 +1,26 @@
+//===----------------------------------------------------------------------===//
 //
-//  PortalSessionsTests.swift
-//  swift-stripe
+// This source file is part of the swift-stripe open source project
 //
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
+//
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
+
+import Testing
+
+@testable import Stripe
 
 #if canImport(FoundationEssentials)
 import FoundationEssentials
 #else
 import Foundation
 #endif
-import Testing
-
-@testable import Stripe
 
 @Suite("Billing portal sessions")
 struct PortalSessionsTests {
@@ -18,11 +28,13 @@ struct PortalSessionsTests {
     @Test("creating a session posts to billing_portal and decodes the short-lived URL")
     func create() async throws {
         try await IntegrationTests.withServer(responses: [
-            ScriptedResponse(body: #"""
-            {"id":"bps_1","object":"billing_portal.session","created":1680893993,
-             "customer":"cus_1","livemode":false,"return_url":"https://example.com/account",
-             "url":"https://billing.stripe.com/session/live_YWNj"}
-            """#)
+            ScriptedResponse(
+                body: #"""
+                    {"id":"bps_1","object":"billing_portal.session","created":1680893993,
+                     "customer":"cus_1","livemode":false,"return_url":"https://example.com/account",
+                     "url":"https://billing.stripe.com/session/live_YWNj"}
+                    """#
+            )
         ]) { stripe, server in
             let session = try await stripe.portalSessions.create(
                 .init(customer: "cus_1", returnUrl: "https://example.com/account")
@@ -45,9 +57,11 @@ struct PortalSessionsTests {
     @Test("a session create takes an idempotency key like any other write")
     func idempotencyKey() async throws {
         try await IntegrationTests.withServer(responses: [
-            ScriptedResponse(body: #"""
-            {"id":"bps_1","object":"billing_portal.session","created":1,"url":"https://b.stripe.com/s"}
-            """#)
+            ScriptedResponse(
+                body: #"""
+                    {"id":"bps_1","object":"billing_portal.session","created":1,"url":"https://b.stripe.com/s"}
+                    """#
+            )
         ]) { stripe, server in
             _ = try await stripe.portalSessions.create(
                 .init(customer: "cus_1", returnUrl: "https://example.com/account"),

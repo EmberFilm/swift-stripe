@@ -1,0 +1,48 @@
+name: PR
+
+permissions:
+  contents: read
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+
+jobs:
+  soundness:
+    name: Soundness
+    uses: swiftlang/github-workflows/.github/workflows/soundness.yml@0.0.13
+    with:
+      license_header_check_project_name: "swift-stripe"
+      api_breakage_check_enabled: false
+
+  unit-tests:
+    name: Unit tests
+    uses: apple/swift-nio/.github/workflows/unit_tests.yml@main
+    with:
+      # The manifest is swift-tools-version 6.3; older toolchains cannot read it.
+      linux_6_0_enabled: false
+      linux_6_1_enabled: false
+      linux_6_2_enabled: false
+      linux_nightly_6_0_enabled: false
+      linux_nightly_6_1_enabled: false
+      linux_6_3_arguments_override: "-Xswiftc -require-explicit-sendable"
+      linux_nightly_next_arguments_override: "-Xswiftc -require-explicit-sendable"
+      linux_nightly_main_arguments_override: "-Xswiftc -require-explicit-sendable"
+
+  static-sdk:
+    name: Static Linux Swift SDK
+    uses: apple/swift-nio/.github/workflows/static_sdk.yml@main
+
+  release-builds:
+    name: Release builds
+    uses: apple/swift-nio/.github/workflows/release_builds.yml@main
+    with:
+      linux_6_0_enabled: false
+      linux_6_1_enabled: false
+      linux_6_2_enabled: false
+
+  foundation-linking:
+    name: Foundation linking
+    uses: vapor/ci/.github/workflows/check-foundation-linking.yml@main
+    with:
+      swift_image: swift:6.3-noble

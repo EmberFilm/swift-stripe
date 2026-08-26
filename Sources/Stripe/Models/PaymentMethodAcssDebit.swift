@@ -1,10 +1,21 @@
+//===----------------------------------------------------------------------===//
+//
+// This source file is part of the swift-stripe open source project
+//
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
+//
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
+
 //
 //  PaymentMethods.swift
 //
 //
-//  Created by Andrew Edwards on 4/29/23.
-//
-
 #if canImport(FoundationEssentials)
 import FoundationEssentials
 #else
@@ -15,7 +26,9 @@ import Foundation
 public struct PaymentMethodAcssDebit: Codable, Hashable, Sendable {
     /// Name of the bank associated with the bank account.
     public var bankName: String?
-    /// Uniquely identifies this particular bank account. You can use this attribute to check whether two bank accounts are the same.
+    /// Uniquely identifies this particular bank account.
+    ///
+    /// You can use this attribute to check whether two bank accounts are the same.
     public var fingerprint: String?
     /// Institution number of the bank account.
     public var institutionNumber: String?
@@ -58,9 +71,11 @@ public struct PaymentMethodAlipay: Codable, Hashable, Sendable {
 public struct PaymentMethodAuBecsDebit: Codable, Hashable, Sendable {
     /// Six-digit number identifying bank and branch associated with this bank account.
     public var bsbNumber: String?
-    /// Uniquely identifies this particular bank account. You can use this attribute to check whether two bank accounts are the same.
+    /// Uniquely identifies this particular bank account.
+    ///
+    /// You can use this attribute to check whether two bank accounts are the same.
     public var fingerprint: String?
-    /// Last four digits of the bank account number
+    /// Last four digits of the bank account number.
     public var last4: String?
 
     public init(
@@ -76,11 +91,15 @@ public struct PaymentMethodAuBecsDebit: Codable, Hashable, Sendable {
 
 // MARK: Bacs Debit
 public struct PaymentMethodBacsDebit: Codable, Hashable, Sendable {
-    /// Uniquely identifies this particular bank account. You can use this attribute to check whether two bank accounts are the same.
+    /// Uniquely identifies this particular bank account.
+    ///
+    /// You can use this attribute to check whether two bank accounts are the same.
     public var fingerprint: String?
-    /// Last four digits of the bank account number
+    /// Last four digits of the bank account number.
     public var last4: String?
-    /// Sort code of the bank account. (e.g., `10-20-30`)
+    /// Sort code of the bank account.
+    ///
+    /// (e.g., `10-20-30`).
     public var sortCode: String?
 
     public init(
@@ -107,7 +126,7 @@ public struct PaymentMethodBlik: Codable, Hashable, Sendable {
 // MARK: Boleto
 public struct PaymentMethodBoleto: Codable, Hashable, Sendable {
     public var fingerprint: String?
-    /// Uniquely identifies this customer tax_id (CNPJ or CPF)
+    /// Uniquely identifies this customer tax_id (CNPJ or CPF).
     public var taxId: String?
 
     public init(
@@ -121,19 +140,30 @@ public struct PaymentMethodBoleto: Codable, Hashable, Sendable {
 
 // MARK: Card
 public struct PaymentMethodCard: Codable, Hashable, Sendable {
-    /// Card brand. Can be `amex`, `diners`, `discover`, `eftpos_au`, `jcb`, `mastercard`, `unionpay`, `visa`, or `unknown`.
+    /// Card brand.
+    ///
+    /// Can be `amex`, `diners`, `discover`, `eftpos_au`, `jcb`, `mastercard`, `unionpay`, `visa`, or
+    /// `unknown`.
     public var brand: PaymentMethodDetailsCardBrand?
     /// Checks on Card address and CVC if provided.
     public var checks: PaymentMethodDetailsCardChecks?
-    /// Two-letter ISO code representing the country of the card. You could use this attribute to get a sense of the international breakdown of cards you’ve collected.
+    /// Two-letter ISO code representing the country of the card.
+    ///
+    /// You could use this attribute to get a sense of the international breakdown of cards you’ve
+    /// collected.
     public var country: String?
     /// Two-digit number representing the card’s expiration month.
     public var expMonth: Int?
     /// Four-digit number representing the card’s expiration year.
     public var expYear: Int?
-    /// Uniquely identifies this particular card number. You can use this attribute to check whether two customers who’ve signed up with you are using the same card number, for example.
+    /// Uniquely identifies this particular card number.
+    ///
+    /// You can use this attribute to check whether two customers who’ve signed up with you are using
+    /// the same card number, for example.
     public var fingerprint: String?
-    /// Card funding type. Can be `credit`, `debit`, `prepaid`, or `unknown`.
+    /// Card funding type.
+    ///
+    /// Can be `credit`, `debit`, `prepaid`, or `unknown`.
     public var funding: CardFundingType?
     /// Details of the original PaymentMethod that created this object.
     public var generatedFrom: PaymentMethodCardGeneratedFrom?
@@ -145,7 +175,9 @@ public struct PaymentMethodCard: Codable, Hashable, Sendable {
     public var threeDSecureUsage: PaymentMethodCardThreeDSecureUsage?
     /// If this Card is part of a card wallet, this contains the details of the card wallet.
     public var wallet: PaymentMethodCardWallet?
-    /// The issuer identification number for the card. This is the first six digits of a card number.
+    /// The issuer identification number for the card.
+    ///
+    /// This is the first six digits of a card number.
     public var iin: String?
 
     public init(
@@ -246,7 +278,9 @@ public struct PaymentMethodCardGeneratedFrom: Codable, Hashable, Sendable {
 public struct PaymentMethodCardGeneratedFromPaymentMethodDetails: Codable, Hashable, Sendable {
     /// This hash contains the snapshot of the `card_present` transaction-specific details which generated this card payment method.
     public var cardPresent: PaymentMethodCardGeneratedFromPaymentMethodDetailsCardPresent?
-    /// The type of payment method transaction-specific details from the transaction that generated this card payment method. Always card_present.
+    /// The type of payment method transaction-specific details from the transaction that generated this card payment method.
+    ///
+    /// Always card_present.
     public var type: String?
 
     public init(
@@ -261,15 +295,25 @@ public struct PaymentMethodCardGeneratedFromPaymentMethodDetails: Codable, Hasha
 public struct PaymentMethodCardGeneratedFromPaymentMethodDetailsCardPresent: Codable, Hashable,
     Sendable
 {
-    /// The authorized amount
+    /// The authorized amount.
     public var authorizedAmount: Int?
-    /// Card brand. Can be `amex`, `diners`, `discover`, `jcb`, `mastercard`, `unionpay`, `visa`, or `unknown`.
+    /// Card brand.
+    ///
+    /// Can be `amex`, `diners`, `discover`, `jcb`, `mastercard`, `unionpay`, `visa`, or `unknown`.
     public var brand: PaymentMethodDetailsCardBrand?
     /// When using manual capture, a future timestamp after which the charge will be automatically refunded if uncaptured.
     public var captureBefore: Date?
-    /// The cardholder name as read from the card, in ISO 7813 format. May include alphanumeric characters, special characters and first/last name separator (/). In some cases, the cardholder name may not be available depending on how the issuer has configured the card. Cardholder name is typically not available on swipe or contactless payments, such as those made with Apple Pay and Google Pay.
+    /// The cardholder name as read from the card, in ISO 7813 format.
+    ///
+    /// May include alphanumeric characters, special characters and first/last name separator (/). In
+    /// some cases, the cardholder name may not be available depending on how the issuer has configured
+    /// the card. Cardholder name is typically not available on swipe or contactless payments, such as
+    /// those made with Apple Pay and Google Pay.
     public var cardholderName: String?
-    /// Two-letter ISO code representing the country of the card. You could use this attribute to get a sense of the international breakdown of cards you’ve collected.
+    /// Two-letter ISO code representing the country of the card.
+    ///
+    /// You could use this attribute to get a sense of the international breakdown of cards you’ve
+    /// collected.
     public var country: String?
     /// Authorization response cryptogram.
     public var emvAuthData: String?
@@ -277,23 +321,38 @@ public struct PaymentMethodCardGeneratedFromPaymentMethodDetailsCardPresent: Cod
     public var expMonth: Int?
     /// Four-digit number representing the card’s expiration year.
     public var expYear: Int?
-    /// Uniquely identifies this particular card number. You can use this attribute to check whether two customers who’ve signed up with you are using the same card number, for example.
+    /// Uniquely identifies this particular card number.
+    ///
+    /// You can use this attribute to check whether two customers who’ve signed up with you are using
+    /// the same card number, for example.
     public var fingerprint: String?
-    /// Card funding type. Can be `credit`, `debit`, `prepaid`, or `unknown`.
+    /// Card funding type.
+    ///
+    /// Can be `credit`, `debit`, `prepaid`, or `unknown`.
     public var funding: CardFundingType?
-    /// ID of a card PaymentMethod generated from the `card_present` PaymentMethod that may be attached to a Customer for future transactions. Only present if it was possible to generate a card PaymentMethod.
+    /// ID of a card PaymentMethod generated from the `card_present` PaymentMethod that may be attached to a Customer for future transactions.
+    ///
+    /// Only present if it was possible to generate a card PaymentMethod.
     public var generatedCard: String?
     /// Whether this PaymentIntent is eligible for incremental authorizations.
     public var incrementalAuthorizationSupported: Bool?
     /// The last four digits of the card.
     public var last4: String?
-    /// Identifies which network this charge was processed on. Can be `amex`, `diners`, `discover`, `interac`, `jcb`, `mastercard`, `unionpay`, `visa`, or `unknown`.
+    /// Identifies which network this charge was processed on.
+    ///
+    /// Can be `amex`, `diners`, `discover`, `interac`, `jcb`, `mastercard`, `unionpay`, `visa`, or
+    /// `unknown`.
     public var network: PaymentMethodCardNetwork?
-    /// Defines whether the authorized amount can be over-captured or not
+    /// Defines whether the authorized amount can be over-captured or not.
     public var overCaptureSupported: Bool?
-    /// How were card details read in this transaction. Can be `contact_emv`, `contactless_emv`, `magnetic_stripe_fallback`, `magnetic_stripe_track2`, or `contactless_magstripe_mode`
+    /// How were card details read in this transaction.
+    ///
+    /// Can be `contact_emv`, `contactless_emv`, `magnetic_stripe_fallback`, `magnetic_stripe_track2`,
+    /// or `contactless_magstripe_mode`.
     public var readMethod: PaymentMethodCardGeneratedFromPaymentMethodDetailsCardPresentReadMethod?
-    /// A collection of fields required to be displayed on receipts. Only required for EMV transactions.
+    /// A collection of fields required to be displayed on receipts.
+    ///
+    /// Only required for EMV transactions.
     public var receipt: PaymentMethodCardGeneratedFromPaymentMethodDetailsCardPresentReceipt?
 
     public init(
@@ -353,20 +412,23 @@ public enum PaymentMethodCardGeneratedFromPaymentMethodDetailsCardPresentReadMet
 public struct PaymentMethodCardGeneratedFromPaymentMethodDetailsCardPresentReceipt: Codable,
     Hashable, Sendable
 {
-    /// The type of account being debited or credited
-    public var accountType:
-        PaymentMethodCardGeneratedFromPaymentMethodDetailsCardPresentReceiptAccountType?
+    /// The type of account being debited or credited.
+    public var accountType: PaymentMethodCardGeneratedFromPaymentMethodDetailsCardPresentReceiptAccountType?
     /// EMV tag 9F26, cryptogram generated by the integrated circuit chip.
     public var applicationCryptogram: String?
     /// Mnenomic of the Application Identifier.
     public var applicationPreferredName: String?
     /// Identifier for this transaction.
     public var authorizationCode: String?
-    /// EMV tag 8A. A code returned by the card issuer.
+    /// EMV tag 8A.
+    ///
+    /// A code returned by the card issuer.
     public var authorizationResponseCode: String?
     /// How the cardholder verified ownership of the card.
     public var cardholderVerificationMethod: String?
-    /// EMV tag 84. Similar to the application identifier stored on the integrated circuit chip.
+    /// EMV tag 84.
+    ///
+    /// Similar to the application identifier stored on the integrated circuit chip.
     public var dedicatedFileName: String?
     /// The outcome of a series of EMV functions performed by the card reader.
     public var terminalVerificationResults: String?
@@ -401,13 +463,13 @@ public struct PaymentMethodCardGeneratedFromPaymentMethodDetailsCardPresentRecei
 public enum PaymentMethodCardGeneratedFromPaymentMethodDetailsCardPresentReceiptAccountType: String,
     Codable, Sendable
 {
-    /// A credit account, as when using a credit card
+    /// A credit account, as when using a credit card.
     case credit
-    /// A checking account, as when using a debit card
+    /// A checking account, as when using a debit card.
     case checking
-    /// A prepaid account, as when using a debit gift card
+    /// A prepaid account, as when using a debit gift card.
     case prepaid
-    /// An unknown account
+    /// An unknown account.
     case unknown
 }
 
@@ -439,15 +501,24 @@ public struct PaymentMethodCardThreeDSecureUsage: Codable, Hashable, Sendable {
 
 public struct PaymentMethodCardWallet: Codable, Hashable, Sendable {
     /// If this is a `amex_express_checkout` card wallet, this hash contains details about the wallet.
-    /// Stripe does not [provide any details](https://stripe.com/docs/api/paymentMethods/object#payment_method_object-card-wallet-amex_express_checkout) about possible values so this will remain nil/unimplemented.
+    ///
+    /// Stripe does not [provide any
+    /// details](https://stripe.com/docs/api/paymentMethods/object#payment_method_object-card-wallet-amex_express_checkout)
+    /// about possible values so this will remain nil/unimplemented.
     public var amexExpressCheckout: PaymentMethodCardWalletAmexExpressCheckout?
     /// If this is a `apple_pay` card wallet, this hash contains details about the wallet.
-    /// Stripe does not [provide any details](https://stripe.com/docs/api/paymentMethods/object#payment_method_object-card-wallet-apple_pay) about possible values so this will remain nil/unimplemented.
+    ///
+    /// Stripe does not [provide any
+    /// details](https://stripe.com/docs/api/paymentMethods/object#payment_method_object-card-wallet-apple_pay)
+    /// about possible values so this will remain nil/unimplemented.
     public var applePay: PaymentMethodCardWalletApplePay?
-    /// (For tokenized numbers only.) The last four digits of the device account number.
+    /// The last four digits of the device account number, for tokenized numbers only.
     public var dynamicLast4: String?
     /// If this is a `google_pay` card wallet, this hash contains details about the wallet.
-    /// Stripe does not [provide any details](https://stripe.com/docs/api/paymentMethods/object#payment_method_object-card-wallet-google_pay) about possible values so this will remain nil/unimplemented.
+    ///
+    /// Stripe does not [provide any
+    /// details](https://stripe.com/docs/api/paymentMethods/object#payment_method_object-card-wallet-google_pay)
+    /// about possible values so this will remain nil/unimplemented.
     public var googlePay: PaymentMethodCardWalletGooglePay?
     // REASON: Mirrors Stripe's documented `masterpass` field (Mastercard's Masterpass wallet brand).
     // swiftlint:disable inclusive_language
@@ -455,9 +526,15 @@ public struct PaymentMethodCardWallet: Codable, Hashable, Sendable {
     public var masterpass: PaymentMethodCardWalletMasterPass?
     // swiftlint:enable inclusive_language
     /// If this is a `samsung_pay` card wallet, this hash contains details about the wallet.
-    /// Stripe does not [provide any details](https://stripe.com/docs/api/paymentMethods/object#payment_method_object-card-wallet-samsung_pay) about possible values so this will remain nil/unimplemented.
+    ///
+    /// Stripe does not [provide any
+    /// details](https://stripe.com/docs/api/paymentMethods/object#payment_method_object-card-wallet-samsung_pay)
+    /// about possible values so this will remain nil/unimplemented.
     public var samsungPay: PaymentMethodCardWalletSamsungPay?
-    /// The type of the card wallet, one of `amex_express_checkout`, `apple_pay`, `google_pay`, `masterpass`, `samsung_pay`, or `visa_checkout`. An additional hash is included on the Wallet subhash with a name matching this value. It contains additional information specific to the card wallet type.
+    /// The type of the card wallet, one of `amex_express_checkout`, `apple_pay`, `google_pay`, `masterpass`, `samsung_pay`, or `visa_checkout`.
+    ///
+    /// An additional hash is included on the Wallet subhash with a name matching this value. It
+    /// contains additional information specific to the card wallet type.
     public var type: PaymentMethodDetailsCardWalletType?
     /// If this is a `visa_checkout` card wallet, this hash contains details about the wallet.
     public var visaCheckout: PaymentMethodCardWalletVisaCheckout?
@@ -506,13 +583,25 @@ public struct PaymentMethodCardWalletGooglePay: Codable, Hashable, Sendable {
 // REASON: Mirrors Stripe's documented `masterpass` card wallet type (Mastercard's Masterpass wallet brand).
 // swiftlint:disable:next inclusive_language
 public struct PaymentMethodCardWalletMasterPass: Codable, Hashable, Sendable {
-    /// Owner’s verified billing address. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.
+    /// Owner’s verified billing address.
+    ///
+    /// Values are verified or provided by the wallet directly (if supported) at the time of
+    /// authorization or settlement. They cannot be set or mutated.
     public var billingAddress: Address?
-    /// Owner’s verified email. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.
+    /// Owner’s verified email.
+    ///
+    /// Values are verified or provided by the wallet directly (if supported) at the time of
+    /// authorization or settlement. They cannot be set or mutated.
     public var email: String?
-    /// Owner’s verified full name. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.
+    /// Owner’s verified full name.
+    ///
+    /// Values are verified or provided by the wallet directly (if supported) at the time of
+    /// authorization or settlement. They cannot be set or mutated.
     public var name: String?
-    /// Owner’s verified shipping address. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.
+    /// Owner’s verified shipping address.
+    ///
+    /// Values are verified or provided by the wallet directly (if supported) at the time of
+    /// authorization or settlement. They cannot be set or mutated.
     public var shippingAddress: Address?
 
     public init(
@@ -545,13 +634,25 @@ public enum PaymentMethodDetailsCardWalletType: String, Codable, Sendable {
 }
 
 public struct PaymentMethodCardWalletVisaCheckout: Codable, Hashable, Sendable {
-    /// Owner’s verified billing address. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.
+    /// Owner’s verified billing address.
+    ///
+    /// Values are verified or provided by the wallet directly (if supported) at the time of
+    /// authorization or settlement. They cannot be set or mutated.
     public var billingAddress: Address?
-    /// Owner’s verified email. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.
+    /// Owner’s verified email.
+    ///
+    /// Values are verified or provided by the wallet directly (if supported) at the time of
+    /// authorization or settlement. They cannot be set or mutated.
     public var email: String?
-    /// Owner’s verified full name. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.
+    /// Owner’s verified full name.
+    ///
+    /// Values are verified or provided by the wallet directly (if supported) at the time of
+    /// authorization or settlement. They cannot be set or mutated.
     public var name: String?
-    /// Owner’s verified shipping address. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.
+    /// Owner’s verified shipping address.
+    ///
+    /// Values are verified or provided by the wallet directly (if supported) at the time of
+    /// authorization or settlement. They cannot be set or mutated.
     public var shippingAddress: Address?
 
     public init(
@@ -569,25 +670,46 @@ public struct PaymentMethodCardWalletVisaCheckout: Codable, Hashable, Sendable {
 
 // MARK: Card Present
 public struct PaymentMethodCardPresent: Codable, Hashable, Sendable {
-    /// Card brand. Can be `amex`, `diners`, `discover`, `jcb`, `mastercard`, `unionpay`, `visa`, or `unknown`.
+    /// Card brand.
+    ///
+    /// Can be `amex`, `diners`, `discover`, `jcb`, `mastercard`, `unionpay`, `visa`, or `unknown`.
     public var brand: PaymentMethodDetailsCardBrand?
-    /// The cardholder name as read from the card, in ISO 7813 format. May include alphanumeric characters, special characters and first/last name separator (/). In some cases, the cardholder name may not be available depending on how the issuer has configured the card. Cardholder name is typically not available on swipe or contactless payments, such as those made with Apple Pay and Google Pay.
+    /// The cardholder name as read from the card, in ISO 7813 format.
+    ///
+    /// May include alphanumeric characters, special characters and first/last name separator (/). In
+    /// some cases, the cardholder name may not be available depending on how the issuer has configured
+    /// the card. Cardholder name is typically not available on swipe or contactless payments, such as
+    /// those made with Apple Pay and Google Pay.
     public var cardholderName: String?
-    /// Two-letter ISO code representing the country of the card. You could use this attribute to get a sense of the international breakdown of cards you’ve collected.
+    /// Two-letter ISO code representing the country of the card.
+    ///
+    /// You could use this attribute to get a sense of the international breakdown of cards you’ve
+    /// collected.
     public var country: String?
     /// Two-digit number representing the card’s expiration month.
     public var expMonth: Int?
     /// Four-digit number representing the card’s expiration year.
     public var expYear: Int?
-    /// Uniquely identifies this particular card number. You can use this attribute to check whether two customers who’ve signed up with you are using the same card number, for example.
+    /// Uniquely identifies this particular card number.
+    ///
+    /// You can use this attribute to check whether two customers who’ve signed up with you are using
+    /// the same card number, for example.
     public var fingerprint: String?
-    /// Card funding type. Can be `credit`, `debit`, `prepaid`, or `unknown`.
+    /// Card funding type.
+    ///
+    /// Can be `credit`, `debit`, `prepaid`, or `unknown`.
     public var funding: CardFundingType?
     /// The last four digits of the card.
     public var last4: String?
-    /// Identifies which network this charge was processed on. Can be `amex`, `diners`, `discover`, `interac`, `jcb`, `mastercard`, `unionpay`, `visa`, or `unknown`.
+    /// Identifies which network this charge was processed on.
+    ///
+    /// Can be `amex`, `diners`, `discover`, `interac`, `jcb`, `mastercard`, `unionpay`, `visa`, or
+    /// `unknown`.
     public var networks: PaymentMethodCardNetworks?
-    /// How were card details read in this transaction. Can be `contact_emv`, `contactless_emv`, `magnetic_stripe_fallback`, `magnetic_stripe_track2`, or `contactless_magstripe_mode`
+    /// How were card details read in this transaction.
+    ///
+    /// Can be `contact_emv`, `contactless_emv`, `magnetic_stripe_fallback`, `magnetic_stripe_track2`,
+    /// or `contactless_magstripe_mode`.
     public var readMethod: PaymentMethodCardPresentReadMethod?
 
     public init(
@@ -640,7 +762,17 @@ public struct PaymentMethodCustomerBalance: Codable, Hashable, Sendable {
 
 // MARK: EPS
 public struct PaymentMethodEps: Codable, Hashable, Sendable {
-    /// The customer’s bank. Should be one of `arzte_und_apotheker_bank`, `austrian_anadi_bank_ag`, `bank_austria`, `bankhaus_carl_spangler`, `bankhaus_schelhammer_und_schattera_ag`, `bawag_psk_ag`, `bks_bank_ag`, `brull_kallmus_bank_ag`, `btv_vier_lander_bank`, `capital_bank_grawe_gruppe_ag`, `deutsche_bank_ag`, `dolomitenbank`, `easybank_ag`, `erste_bank_und_sparkassen`, `hypo_alpeadriabank_international_ag`, `hypo_noe_lb_fur_niederosterreich_u_wien`, `hypo_oberosterreich_salzburg_steiermark`, `hypo_tirol_bank_ag`, `hypo_vorarlberg_bank_ag`, `hypo_bank_burgenland_aktiengesellschaft`, `marchfelder_bank`, `oberbank_ag`, `raiffeisen_bankengruppe_osterreich`, `schoellerbank_ag`, `sparda_bank_wien`, `volksbank_gruppe`, `volkskreditbank_ag`, or `vr_bank_braunau`.
+    /// The customer’s bank.
+    ///
+    /// Should be one of `arzte_und_apotheker_bank`, `austrian_anadi_bank_ag`, `bank_austria`,
+    /// `bankhaus_carl_spangler`, `bankhaus_schelhammer_und_schattera_ag`, `bawag_psk_ag`,
+    /// `bks_bank_ag`, `brull_kallmus_bank_ag`, `btv_vier_lander_bank`, `capital_bank_grawe_gruppe_ag`,
+    /// `deutsche_bank_ag`, `dolomitenbank`, `easybank_ag`, `erste_bank_und_sparkassen`,
+    /// `hypo_alpeadriabank_international_ag`, `hypo_noe_lb_fur_niederosterreich_u_wien`,
+    /// `hypo_oberosterreich_salzburg_steiermark`, `hypo_tirol_bank_ag`, `hypo_vorarlberg_bank_ag`,
+    /// `hypo_bank_burgenland_aktiengesellschaft`, `marchfelder_bank`, `oberbank_ag`,
+    /// `raiffeisen_bankengruppe_osterreich`, `schoellerbank_ag`, `sparda_bank_wien`,
+    /// `volksbank_gruppe`, `volkskreditbank_ag`, or `vr_bank_braunau`.
     public var bank: PaymentMethodEpsBank?
 
     public init(bank: PaymentMethodEpsBank? = nil) {
@@ -681,7 +813,12 @@ public enum PaymentMethodEpsBank: String, Codable, Sendable {
 
 // MARK: FPX
 public struct PaymentMethodFpx: Codable, Hashable, Sendable {
-    /// The customer’s bank, if provided. Can be one of `affin_bank`, `agrobank`, `alliance_bank`, `ambank`, `bank_islam`, `bank_muamalat`, `bank_rakyat`, `bsn`, `cimb`, `hong_leong_bank`, `hsbc`, `kfh`, `maybank2u`, `ocbc`, `public_bank`, `rhb`, `standard_chartered`, `uob`, `deutsche_bank`, `maybank2e`, `pb_enterprise`, or  `bank_of_china`.
+    /// The customer’s bank, if provided.
+    ///
+    /// Can be one of `affin_bank`, `agrobank`, `alliance_bank`, `ambank`, `bank_islam`,
+    /// `bank_muamalat`, `bank_rakyat`, `bsn`, `cimb`, `hong_leong_bank`, `hsbc`, `kfh`, `maybank2u`,
+    /// `ocbc`, `public_bank`, `rhb`, `standard_chartered`, `uob`, `deutsche_bank`, `maybank2e`,
+    /// `pb_enterprise`, or `bank_of_china`.
     public var bank: PaymentMethodFpxBank?
 }
 
@@ -722,7 +859,10 @@ public struct PaymentMethodGrabpay: Codable, Hashable, Sendable {
 
 // MARK: Ideal
 public struct PaymentMethodIdeal: Codable, Hashable, Sendable {
-    /// The customer’s bank, if provided. Can be one of `abn_amro`, `asn_bank`, `bunq`, `handelsbanken`, `ing`, `knab`, `moneyou`, `rabobank`, `regiobank`, `revolut`, `sns_bank`, `triodos_bank`,`van_lanschot` or `yoursafe`.
+    /// The customer’s bank, if provided.
+    ///
+    /// Can be one of `abn_amro`, `asn_bank`, `bunq`, `handelsbanken`, `ing`, `knab`, `moneyou`,
+    /// `rabobank`, `regiobank`, `revolut`, `sns_bank`, `triodos_bank`,`van_lanschot` or `yoursafe`.
     public var bank: PaymentMethodIdealBank?
     /// The Bank Identifier Code of the customer’s bank, if the bank was provided.
     public var bic: String?
@@ -752,26 +892,45 @@ public enum PaymentMethodIdealBank: String, Codable, Sendable {
 
 // MARK: InteracPresent
 public struct PaymentMethodInteractPresent: Codable, Hashable, Sendable {
-    /// Card brand. Can be interac, mastercard or visa.
+    /// Card brand.
+    ///
+    /// Can be interac, mastercard or visa.
     public var brand: String?
-    /// The cardholder name as read from the card, in ISO 7813 format. May include alphanumeric characters, special characters and first/last name separator (/). In some cases, the cardholder name may not be available depending on how the issuer has configured the card. Cardholder name is typically not available on swipe or contactless payments, such as those made with Apple Pay and Google Pay.
+    /// The cardholder name as read from the card, in ISO 7813 format.
+    ///
+    /// May include alphanumeric characters, special characters and first/last name separator (/). In
+    /// some cases, the cardholder name may not be available depending on how the issuer has configured
+    /// the card. Cardholder name is typically not available on swipe or contactless payments, such as
+    /// those made with Apple Pay and Google Pay.
     public var cardholderName: String?
-    /// Two-letter ISO code representing the country of the card. You could use this attribute to get a sense of the international breakdown of cards you’ve collected.
+    /// Two-letter ISO code representing the country of the card.
+    ///
+    /// You could use this attribute to get a sense of the international breakdown of cards you’ve
+    /// collected.
     public var country: String?
     /// Two-digit number representing the card’s expiration month.
     public var expMonth: Int?
     /// Four-digit number representing the card’s expiration year.
     public var expYear: Int?
-    /// Uniquely identifies this particular card number. You can use this attribute to check whether two customers who’ve signed up with you are using the same card number, for example. For payment methods that tokenize card information (Apple Pay, Google Pay), the tokenized number might be provided instead of the underlying card number.
-    /// Starting May 1, 2021, card fingerprint in India for Connect will change to allow two fingerprints for the same card — one for India and one for the rest of the world.
+    /// Uniquely identifies this particular card number.
+    ///
+    /// You can use this attribute to check whether two customers who’ve signed up with you are using
+    /// the same card number, for example. For payment methods that tokenize card information (Apple
+    /// Pay, Google Pay), the tokenized number might be provided instead of the underlying card number.
+    /// Starting May 1, 2021, card fingerprint in India for Connect will change to allow two
+    /// fingerprints for the same card — one for India and one for the rest of the world.
     public var fingerprint: String?
-    /// Card funding type. Can be credit, debit, prepaid, or unknown.
+    /// Card funding type.
+    ///
+    /// Can be credit, debit, prepaid, or unknown.
     public var funding: CardFundingType?
     /// The last four digits of the card.
     public var last4: String?
     /// Contains information about card networks that can be used to process the payment.
     public var networks: PaymentMethodCardNetworks?
-    /// EMV tag 5F2D. Preferred languages specified by the integrated circuit chip.
+    /// EMV tag 5F2D.
+    ///
+    /// Preferred languages specified by the integrated circuit chip.
     public var preferredLocales: [String]?
     /// How card details were read in this transaction.
     public var readMethod: PaymentMethodInteractPresentReadMethod?
@@ -819,6 +978,7 @@ public enum PaymentMethodInteractPresentReadMethod: String, Codable, Sendable {
 // MARK: Klarna
 public struct PaymentMethodKlarna: Codable, Hashable, Sendable {
     /// The customer’s date of birth, if provided.
+    ///
     /// This field is not included by default. To include it in the response, expand the dob field.
     public var dob: Stripe.Connect.Person.DOB?
 
@@ -911,7 +1071,9 @@ public struct PaymentMethodSepaDebit: Codable, Hashable, Sendable {
     public var branchCode: String?
     /// Two-letter ISO code representing the country the bank account is located in.
     public var country: String?
-    /// Uniquely identifies this particular bank account. You can use this attribute to check whether two bank accounts are the same.
+    /// Uniquely identifies this particular bank account.
+    ///
+    /// You can use this attribute to check whether two bank accounts are the same.
     public var fingerprint: String?
     /// Information about the object that generated this PaymentMethod.
     public var generatedFrom: PaymentMethodSepaDebitGeneratedFrom?
@@ -964,15 +1126,19 @@ public struct PaymentMethodSofort: Codable, Hashable, Sendable {
 public struct PaymentMethodUSBankAccount: Codable, Hashable, Sendable {
     /// Account holder type: individual or company.
     public var accountHolderType: PaymentMethodUSBankAccountAccountHolderType?
-    /// Account type: checkings or savings. Defaults to checking if omitted.
+    /// Account type: checkings or savings.
+    ///
+    /// Defaults to checking if omitted.
     public var accountType: PaymentMethodUSBankAccountAccountType?
     /// The name of the bank.
     public var bankName: String?
     /// The ID of the Financial Connections Account used to create the payment method.
     public var financialConnectionsAccount: String?
-    /// Uniquely identifies this particular bank account. You can use this attribute to check whether two bank accounts are the same.
+    /// Uniquely identifies this particular bank account.
+    ///
+    /// You can use this attribute to check whether two bank accounts are the same.
     public var fingerprint: String?
-    /// Last four digits of the bank account number
+    /// Last four digits of the bank account number.
     public var last4: String?
     /// Contains information about US bank account networks that can be used.
     public var networks: PaymentMethodUSBankAccountNetworks?
@@ -1005,16 +1171,16 @@ public struct PaymentMethodUSBankAccount: Codable, Hashable, Sendable {
 }
 
 public enum PaymentMethodUSBankAccountAccountHolderType: String, Codable, Sendable {
-    /// Account belongs to an individual
+    /// Account belongs to an individual.
     case individual
-    /// Account belongs to a company
+    /// Account belongs to a company.
     case company
 }
 
 public enum PaymentMethodUSBankAccountAccountType: String, Codable, Sendable {
-    /// Bank account type is checking
+    /// Bank account type is checking.
     case checking
-    /// Bank account type is savings
+    /// Bank account type is savings.
     case savings
 }
 
@@ -1031,7 +1197,9 @@ public struct PaymentMethodUSBankAccountNetworks: Codable, Hashable, Sendable {
 }
 
 public struct PaymentMethodUSBankAccountStatusDetails: Codable, Hashable, Sendable {
-    /// Contains more information about the underlying block. This field will only be rendered if the PaymentMethod is blocked.
+    /// Contains more information about the underlying block.
+    ///
+    /// This field will only be rendered if the PaymentMethod is blocked.
     public var blocked: PaymentMethodUSBankAccountStatusDetailsBlocked?
 
     public init(blocked: PaymentMethodUSBankAccountStatusDetailsBlocked? = nil) {
@@ -1042,7 +1210,7 @@ public struct PaymentMethodUSBankAccountStatusDetails: Codable, Hashable, Sendab
 public struct PaymentMethodUSBankAccountStatusDetailsBlocked: Codable, Hashable, Sendable {
     /// The ACH network code that resulted in this block.
     public var network: PaymentMethodUSBankAccountStatusDetailsBlockedNetwork?
-    /// The reason why this PaymentMethod’s fingerprint has been blocked
+    /// The reason why this PaymentMethod’s fingerprint has been blocked.
     public var reason: PaymentMethodUSBankAccountStatusDetailsBlockedReason?
 
     public init(
@@ -1055,44 +1223,51 @@ public struct PaymentMethodUSBankAccountStatusDetailsBlocked: Codable, Hashable,
 }
 
 public enum PaymentMethodUSBankAccountStatusDetailsBlockedNetwork: String, Codable, Sendable {
-    /// Account Closed
+    /// Account Closed.
     case r02 = "R02"
-    /// No Account, Unable to Locate Account
+    /// No Account, Unable to Locate Account.
     case r03 = "R03"
-    /// Invalid Account Number Structure
+    /// Invalid Account Number Structure.
     case r04 = "R04"
-    /// Unauthorized Debit to Consumer Account Using Corporate SEC Code
+    /// Unauthorized Debit to Consumer Account Using Corporate SEC Code.
     case r05 = "R05"
-    /// Authorization Revoked By Consumer
+    /// Authorization Revoked By Consumer.
     case r07 = "R07"
-    /// Payment Stopped
+    /// Payment Stopped.
     case r08 = "R08"
-    /// Customer Advises Originator is Not Known to Receiver and/or Originator is Not Authorized by Receiver to Debit Receiver’s Account
+    /// Customer Advises Originator is Not Known to Receiver and/or Originator is Not Authorized by Receiver to Debit Receiver’s Account.
     case r10 = "R10"
-    /// Customer Advises Entry Not in Accordance with the Terms of Authorization
+    /// Customer Advises Entry Not in Accordance with the Terms of Authorization.
     case r11 = "R11"
-    /// Account Frozen, Entry Returned Per OFAC Instructions
+    /// Account Frozen, Entry Returned Per OFAC Instructions.
     case r16 = "R16"
-    /// Non-Transaction Account
+    /// Non-Transaction Account.
     case r20 = "R20"
-    /// Corporate Customer Advises Not Authorized
+    /// Corporate Customer Advises Not Authorized.
     case r29 = "R29"
-    /// Permissible Return Entry (CCD and CTX only)
+    /// Permissible Return Entry (CCD and CTX only).
     case r31 = "R31"
 }
 
 public enum PaymentMethodUSBankAccountStatusDetailsBlockedReason: String, Codable, Sendable {
-    /// Customer has disputed a previous payment with their bank. If the `network_code` is R29, please confirm that Stripe’s Company IDs are allowlisted before attempting additional payments.
+    /// Customer has disputed a previous payment with their bank.
+    ///
+    /// If the `network_code` is R29, please confirm that Stripe’s Company IDs are allowlisted before
+    /// attempting additional payments.
     case debitNotAuthorized = "debit_not_authorized"
     /// Bank account has been closed.
     case bankAccountClosed = "bank_account_closed"
     /// Bank account has been frozen.
     case bankAccountFrozen = "bank_account_frozen"
-    /// Bank account details are incorrect. Please check the account number, routing number, account holder name, and account type.
+    /// Bank account details are incorrect.
+    ///
+    /// Please check the account number, routing number, account holder name, and account type.
     case bankAccountInvalidDetails = "bank_account_invalid_details"
     /// Bank account does not support debits.
     case bankAccountRestricted = "bank_account_restricted"
-    /// Bank account has been blocked by Stripe. Please contact Support.
+    /// Bank account has been blocked by Stripe.
+    ///
+    /// Please contact Support.
     case bankAccountUnusable = "bank_account_unusable"
 }
 

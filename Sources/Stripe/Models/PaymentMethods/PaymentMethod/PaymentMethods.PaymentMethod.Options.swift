@@ -1,3 +1,17 @@
+//===----------------------------------------------------------------------===//
+//
+// This source file is part of the swift-stripe open source project
+//
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
+//
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
+
 #if canImport(FoundationEssentials)
 import FoundationEssentials
 #else
@@ -16,9 +30,9 @@ extension Stripe.PaymentMethods.PaymentMethod.Options {
 
 extension Stripe.PaymentMethods.PaymentMethod.Options.ACSSDebit {
     public struct Configuration: Codable, Hashable, Sendable {
-        /// Additional fields for Mandate creation
+        /// Additional fields for Mandate creation.
         public var mandateOptions: MandateOptions?
-        /// Bank account verification method
+        /// Bank account verification method.
         public var verificationMethod: VerificationMethod?
 
         public init(
@@ -31,13 +45,15 @@ extension Stripe.PaymentMethods.PaymentMethod.Options.ACSSDebit {
     }
 
     public struct MandateOptions: Codable, Hashable, Sendable {
-        /// A URL for custom mandate text
+        /// A URL for custom mandate text.
         public var customMandateUrl: String?
-        /// Description of the interval. Only required if `payment_schedule` parameter is `interval` or `combined`
+        /// Description of the interval.
+        ///
+        /// Only required if `payment_schedule` parameter is `interval` or `combined`.
         public var intervalDescription: String?
-        /// Payment schedule for the mandate
+        /// Payment schedule for the mandate.
         public var paymentSchedule: PaymentSchedule?
-        /// Transaction type of the mandate
+        /// Transaction type of the mandate.
         public var transactionType: TransactionType?
 
         public init(
@@ -54,27 +70,27 @@ extension Stripe.PaymentMethods.PaymentMethod.Options.ACSSDebit {
     }
 
     public enum PaymentSchedule: String, Codable, Sendable {
-        /// Payments are initiated at a regular pre-defined interval
+        /// Payments are initiated at a regular pre-defined interval.
         case interval
-        /// Payments are initiated sporadically
+        /// Payments are initiated sporadically.
         case sporadic
-        /// Payments can be initiated at a pre-defined interval or sporadically
+        /// Payments can be initiated at a pre-defined interval or sporadically.
         case combined
     }
 
     public enum TransactionType: String, Codable, Sendable {
-        /// Transactions are made for personal reasons
+        /// Transactions are made for personal reasons.
         case personal
-        /// Transactions are made for business reasons
+        /// Transactions are made for business reasons.
         case business
     }
 
     public enum VerificationMethod: String, Codable, Sendable {
-        /// Instant verification with fallback to microdeposits
+        /// Instant verification with fallback to microdeposits.
         case automatic
-        /// Instant verification
+        /// Instant verification.
         case instant
-        /// Verification using microdeposits
+        /// Verification using microdeposits.
         case microdeposits
     }
 }
@@ -86,9 +102,9 @@ extension Stripe.PaymentMethods.PaymentMethod.Options {
 
 extension Stripe.PaymentMethods.PaymentMethod.Options.Affirm {
     public struct Configuration: Codable, Hashable, Sendable {
-        /// Controls when the funds will be captured from the customer's account
+        /// Controls when the funds will be captured from the customer's account.
         public var captureMethod: CaptureMethod?
-        /// Indicates that you intend to make future payments with this PaymentIntent's payment method
+        /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
         public var setupFutureUsage: SetupFutureUsage?
 
         public init(
@@ -101,12 +117,12 @@ extension Stripe.PaymentMethods.PaymentMethod.Options.Affirm {
     }
 
     public enum CaptureMethod: String, Codable, Sendable {
-        /// Use manual if you intend to place the funds on hold
+        /// Use manual if you intend to place the funds on hold.
         case manual
     }
 
     public enum SetupFutureUsage: String, Codable, Sendable {
-        /// Use `none` if you do not intend to reuse this payment method
+        /// Use `none` if you do not intend to reuse this payment method.
         case none
     }
 }
@@ -118,11 +134,11 @@ extension Stripe.PaymentMethods.PaymentMethod.Options {
 
 extension Stripe.PaymentMethods.PaymentMethod.Options.AfterpayClearpay {
     public struct Configuration: Codable, Hashable, Sendable {
-        /// Controls when the funds will be captured from the customer's account
+        /// Controls when the funds will be captured from the customer's account.
         public var captureMethod: CaptureMethod?
-        /// Order identifier shown to the merchant in Afterpay's online portal
+        /// Order identifier shown to the merchant in Afterpay's online portal.
         public var reference: String?
-        /// Indicates that you intend to make future payments with this PaymentIntent's payment method
+        /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
         public var setupFutureUsage: SetupFutureUsage?
 
         public init(
@@ -152,7 +168,7 @@ extension Stripe.PaymentMethods.PaymentMethod.Options {
 
 extension Stripe.PaymentMethods.PaymentMethod.Options.Alipay {
     public struct Configuration: Codable, Hashable, Sendable {
-        /// Indicates that you intend to make future payments with this PaymentIntent's payment method
+        /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
         public var setupFutureUsage: SetupFutureUsage?
 
         public init(
@@ -175,7 +191,7 @@ extension Stripe.PaymentMethods.PaymentMethod.Options {
 
 extension Stripe.PaymentMethods.PaymentMethod.Options.AUBecsDebit {
     public struct Configuration: Codable, Hashable, Sendable {
-        /// Indicates that you intend to make future payments with this PaymentIntent's payment method
+        /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
         public var setupFutureUsage: SetupFutureUsage?
 
         public init(
@@ -199,7 +215,7 @@ extension Stripe.PaymentMethods.PaymentMethod.Options {
 
 extension Stripe.PaymentMethods.PaymentMethod.Options.BacsDebit {
     public struct Configuration: Codable, Hashable, Sendable {
-        /// Indicates that you intend to make future payments with this PaymentIntent's payment method
+        /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
         public var setupFutureUsage: SetupFutureUsage?
 
         public init(
@@ -223,9 +239,9 @@ extension Stripe.PaymentMethods.PaymentMethod.Options {
 
 extension Stripe.PaymentMethods.PaymentMethod.Options.Bancontact {
     public struct Configuration: Codable, Hashable, Sendable {
-        /// Preferred language of the Bancontact authorization page
+        /// Preferred language of the Bancontact authorization page.
         public var preferredLanguage: String?
-        /// Indicates that you intend to make future payments with this PaymentIntent's payment method
+        /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
         public var setupFutureUsage: SetupFutureUsage?
 
         public init(
@@ -261,9 +277,9 @@ extension Stripe.PaymentMethods.PaymentMethod.Options {
 
 extension Stripe.PaymentMethods.PaymentMethod.Options.Boleto {
     public struct Configuration: Codable, Hashable, Sendable {
-        /// The number of calendar days before a Boleto voucher expires
+        /// The number of calendar days before a Boleto voucher expires.
         public var expiresAfterDays: Int?
-        /// Indicates that you intend to make future payments with this PaymentIntent's payment method
+        /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
         public var setupFutureUsage: SetupFutureUsage?
 
         public init(
@@ -289,21 +305,21 @@ extension Stripe.PaymentMethods.PaymentMethod.Options {
 
 extension Stripe.PaymentMethods.PaymentMethod.Options.Card {
     public struct Configuration: Codable, Hashable, Sendable {
-        /// Controls when the funds will be captured from the customer's account
+        /// Controls when the funds will be captured from the customer's account.
         public var captureMethod: CaptureMethod?
-        /// Installment details for this payment (Mexico only)
+        /// Installment details for this payment (Mexico only).
         public var installments: Installments?
-        /// Configuration options for setting up an eMandate for cards issued in India
+        /// Configuration options for setting up an eMandate for cards issued in India.
         public var mandateOptions: MandateOptions?
-        /// Selected network to process this PaymentIntent on
+        /// Selected network to process this PaymentIntent on.
         public var network: String?
-        /// 3D Secure configuration
+        /// 3D Secure configuration.
         public var requestThreeDSecure: String?
-        /// Future usage settings
+        /// Future usage settings.
         public var setupFutureUsage: SetupFutureUsage?
-        /// Statement descriptor suffix in Kana
+        /// Statement descriptor suffix in Kana.
         public var statementDescriptorSuffixKana: String?
-        /// Statement descriptor suffix in Kanji
+        /// Statement descriptor suffix in Kanji.
         public var statementDescriptorSuffixKanji: String?
 
         public init(
@@ -458,11 +474,11 @@ extension Stripe.PaymentMethods.PaymentMethod.Options {
 
 extension Stripe.PaymentMethods.PaymentMethod.Options.CustomerBalance {
     public struct Configuration: Codable, Hashable, Sendable {
-        /// Configuration for the bank transfer funding type
+        /// Configuration for the bank transfer funding type.
         public var bankTransfer: BankTransfer?
-        /// The funding method type to be used when there are not enough funds
+        /// The funding method type to be used when there are not enough funds.
         public var fundingType: String?
-        /// Future payment settings
+        /// Future payment settings.
         public var setupFutureUsage: SetupFutureUsage?
 
         public init(
@@ -477,11 +493,11 @@ extension Stripe.PaymentMethods.PaymentMethod.Options.CustomerBalance {
     }
 
     public struct BankTransfer: Codable, Hashable, Sendable {
-        /// Configuration for EU bank transfer
+        /// Configuration for EU bank transfer.
         public var euBankTransfer: EUBankTransfer?
-        /// List of address types for financial addresses
+        /// List of address types for financial addresses.
         public var requestedAddressTypes: RequestedAddressType?
-        /// Bank transfer type
+        /// Bank transfer type.
         public var type: TransferType?
 
         public init(
@@ -496,7 +512,7 @@ extension Stripe.PaymentMethods.PaymentMethod.Options.CustomerBalance {
     }
 
     public struct EUBankTransfer: Codable, Hashable, Sendable {
-        /// The desired country code of the bank account
+        /// The desired country code of the bank account.
         public var country: String?
 
         public init(
@@ -533,7 +549,7 @@ extension Stripe.PaymentMethods.PaymentMethod.Options {
 
 extension Stripe.PaymentMethods.PaymentMethod.Options.EPS {
     public struct Configuration: Codable, Hashable, Sendable {
-        /// Future payment settings
+        /// Future payment settings.
         public var setupFutureUsage: SetupFutureUsage?
 
         public init(
@@ -555,7 +571,7 @@ extension Stripe.PaymentMethods.PaymentMethod.Options {
 
 extension Stripe.PaymentMethods.PaymentMethod.Options.FPX {
     public struct Configuration: Codable, Hashable, Sendable {
-        /// Future payment settings
+        /// Future payment settings.
         public var setupFutureUsage: SetupFutureUsage?
 
         public init(
@@ -577,7 +593,7 @@ extension Stripe.PaymentMethods.PaymentMethod.Options {
 
 extension Stripe.PaymentMethods.PaymentMethod.Options.Giropay {
     public struct Configuration: Codable, Hashable, Sendable {
-        /// Future payment settings
+        /// Future payment settings.
         public var setupFutureUsage: SetupFutureUsage?
 
         public init(
@@ -599,7 +615,7 @@ extension Stripe.PaymentMethods.PaymentMethod.Options {
 
 extension Stripe.PaymentMethods.PaymentMethod.Options.GrabPay {
     public struct Configuration: Codable, Hashable, Sendable {
-        /// Future payment settings
+        /// Future payment settings.
         public var setupFutureUsage: SetupFutureUsage?
 
         public init(
@@ -621,7 +637,7 @@ extension Stripe.PaymentMethods.PaymentMethod.Options {
 
 extension Stripe.PaymentMethods.PaymentMethod.Options.Ideal {
     public struct Configuration: Codable, Hashable, Sendable {
-        /// Future payment settings
+        /// Future payment settings.
         public var setupFutureUsage: SetupFutureUsage?
 
         public init(
@@ -655,11 +671,11 @@ extension Stripe.PaymentMethods.PaymentMethod.Options {
 
 extension Stripe.PaymentMethods.PaymentMethod.Options.Klarna {
     public struct Configuration: Codable, Hashable, Sendable {
-        /// Controls when the funds will be captured
+        /// Controls when the funds will be captured.
         public var captureMethod: CaptureMethod?
-        /// Preferred locale of the Klarna checkout page
+        /// Preferred locale of the Klarna checkout page.
         public var preferredLocale: String?
-        /// Future payment settings
+        /// Future payment settings.
         public var setupFutureUsage: SetupFutureUsage?
 
         public init(
@@ -689,15 +705,15 @@ extension Stripe.PaymentMethods.PaymentMethod.Options {
 
 extension Stripe.PaymentMethods.PaymentMethod.Options.Konbini {
     public struct Configuration: Codable, Hashable, Sendable {
-        /// Optional confirmation code string
+        /// Optional confirmation code string.
         public var confirmationNumber: String?
-        /// Days until expiration
+        /// Days until expiration.
         public var expiringAfterdays: Int?
-        /// Expiration timestamp
+        /// Expiration timestamp.
         public var expiresAt: Date?
-        /// Product description
+        /// Product description.
         public var productDescription: String?
-        /// Future payment settings
+        /// Future payment settings.
         public var setupFutureUsage: SetupFutureUsage?
 
         public init(
@@ -727,9 +743,9 @@ extension Stripe.PaymentMethods.PaymentMethod.Options {
 
 extension Stripe.PaymentMethods.PaymentMethod.Options.Link {
     public struct Configuration: Codable, Hashable, Sendable {
-        /// Controls when the funds will be captured
+        /// Controls when the funds will be captured.
         public var captureMethod: CaptureMethod?
-        /// Future payment settings
+        /// Future payment settings.
         public var setupFutureUsage: SetupFutureUsage?
 
         public init(
@@ -758,9 +774,9 @@ extension Stripe.PaymentMethods.PaymentMethod.Options {
 
 extension Stripe.PaymentMethods.PaymentMethod.Options.OXXO {
     public struct Configuration: Codable, Hashable, Sendable {
-        /// Days until expiration
+        /// Days until expiration.
         public var expiresAfterDays: Int?
-        /// Future payment settings
+        /// Future payment settings.
         public var setupFutureUsage: SetupFutureUsage?
 
         public init(
@@ -784,7 +800,7 @@ extension Stripe.PaymentMethods.PaymentMethod.Options {
 
 extension Stripe.PaymentMethods.PaymentMethod.Options.P24 {
     public struct Configuration: Codable, Hashable, Sendable {
-        /// Future payment settings
+        /// Future payment settings.
         public var setupFutureUsage: SetupFutureUsage?
 
         public init(
@@ -806,7 +822,7 @@ extension Stripe.PaymentMethods.PaymentMethod.Options {
 
 extension Stripe.PaymentMethods.PaymentMethod.Options.Paynow {
     public struct Configuration: Codable, Hashable, Sendable {
-        /// Future payment settings
+        /// Future payment settings.
         public var setupFutureUsage: SetupFutureUsage?
 
         public init(
@@ -828,11 +844,11 @@ extension Stripe.PaymentMethods.PaymentMethod.Options {
 
 extension Stripe.PaymentMethods.PaymentMethod.Options.Pix {
     public struct Configuration: Codable, Hashable, Sendable {
-        /// Seconds until expiration
+        /// Seconds until expiration.
         public var expiresAfterSeconds: Int?
-        /// Expiration timestamp
+        /// Expiration timestamp.
         public var expiresAt: Int?
-        /// Future payment settings
+        /// Future payment settings.
         public var setupFutureUsage: SetupFutureUsage?
 
         public init(
@@ -858,7 +874,7 @@ extension Stripe.PaymentMethods.PaymentMethod.Options {
 
 extension Stripe.PaymentMethods.PaymentMethod.Options.PromptPay {
     public struct Configuration: Codable, Hashable, Sendable {
-        /// Future payment settings
+        /// Future payment settings.
         public var setupFutureUsage: SetupFutureUsage?
 
         public init(
@@ -880,9 +896,9 @@ extension Stripe.PaymentMethods.PaymentMethod.Options {
 
 extension Stripe.PaymentMethods.PaymentMethod.Options.SepaDebit {
     public struct Configuration: Codable, Hashable, Sendable {
-        /// Additional fields for mandate creation
+        /// Additional fields for mandate creation.
         public var mandateOptions: MandateOptions?
-        /// Future payment settings
+        /// Future payment settings.
         public var setupFutureUsage: SetupFutureUsage?
 
         public init(
@@ -912,9 +928,9 @@ extension Stripe.PaymentMethods.PaymentMethod.Options {
 
 extension Stripe.PaymentMethods.PaymentMethod.Options.Sofort {
     public struct Configuration: Codable, Hashable, Sendable {
-        /// Preferred language for the authorization page
+        /// Preferred language for the authorization page.
         public var preferredLanguage: String?
-        /// Future payment settings
+        /// Future payment settings.
         public var setupFutureUsage: SetupFutureUsage?
 
         public init(
@@ -939,11 +955,11 @@ extension Stripe.PaymentMethods.PaymentMethod.Options {
 
 extension Stripe.PaymentMethods.PaymentMethod.Options.USBankAccount {
     public struct Configuration: Codable, Hashable, Sendable {
-        /// Additional fields for Financial Connections Session creation
+        /// Additional fields for Financial Connections Session creation.
         public var financialConnections: FinancialConnections?
-        /// Future payment settings
+        /// Future payment settings.
         public var setupFutureUsage: SetupFutureUsage?
-        /// Bank account verification method
+        /// Bank account verification method.
         public var verificationMethod: VerificationMethod?
 
         public init(
@@ -958,7 +974,9 @@ extension Stripe.PaymentMethods.PaymentMethod.Options.USBankAccount {
     }
 
     public struct FinancialConnections: Codable, Hashable, Sendable {
-        /// The list of permissions to request. The `payment_method` permission must be included.
+        /// The list of permissions to request.
+        ///
+        /// The `payment_method` permission must be included.
         public var permissions: [Permission]?
 
         public init(
@@ -969,31 +987,31 @@ extension Stripe.PaymentMethods.PaymentMethod.Options.USBankAccount {
     }
 
     public enum Permission: String, Codable, Sendable {
-        /// Allows the creation of a payment method from the account
+        /// Allows the creation of a payment method from the account.
         case paymentMethod = "payment_method"
-        /// Allows accessing balance data from the account
+        /// Allows accessing balance data from the account.
         case balances
-        /// Allows accessing transactions data from the account
+        /// Allows accessing transactions data from the account.
         case transactions
-        /// Allows accessing ownership data from the account
+        /// Allows accessing ownership data from the account.
         case ownership
     }
 
     public enum SetupFutureUsage: String, Codable, Sendable {
-        /// Use when customer is present in checkout flow
+        /// Use when customer is present in checkout flow.
         case onSession = "on_session"
-        /// Use when customer may or may not be present
+        /// Use when customer may or may not be present.
         case offSession = "off_session"
-        /// Do not reuse payment method
+        /// Do not reuse payment method.
         case none
     }
 
     public enum VerificationMethod: String, Codable, Sendable {
-        /// Instant verification with fallback to microdeposits
+        /// Instant verification with fallback to microdeposits.
         case automatic
-        /// Instant verification only
+        /// Instant verification only.
         case instant
-        /// Verification using microdeposits
+        /// Verification using microdeposits.
         case microdeposits
     }
 }
@@ -1005,11 +1023,11 @@ extension Stripe.PaymentMethods.PaymentMethod.Options {
 
 extension Stripe.PaymentMethods.PaymentMethod.Options.WechatPay {
     public struct Configuration: Codable, Hashable, Sendable {
-        /// The app ID registered with WeChat Pay
+        /// The app ID registered with WeChat Pay.
         public var appId: String?
-        /// The client type for customer payment
+        /// The client type for customer payment.
         public var client: Client?
-        /// Future payment settings
+        /// Future payment settings.
         public var setupFutureUsage: SetupFutureUsage?
 
         public init(
@@ -1024,11 +1042,11 @@ extension Stripe.PaymentMethods.PaymentMethod.Options.WechatPay {
     }
 
     public enum Client: String, Codable, Sendable {
-        /// Web browser payment
+        /// Web browser payment.
         case web
-        /// iOS app payment
+        /// iOS app payment.
         case ios
-        /// Android app payment
+        /// Android app payment.
         case android
     }
 

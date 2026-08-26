@@ -1,9 +1,17 @@
+//===----------------------------------------------------------------------===//
 //
-//  Address.swift
-//  Stripe
+// This source file is part of the swift-stripe open source project
 //
-//  Created by Anthony Castelli on 4/15/17.
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
 //
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
+
 //
 
 public struct Address: Codable, Hashable, Sendable {
@@ -38,7 +46,7 @@ public struct Address: Codable, Hashable, Sendable {
 }
 
 public struct AddressKana: Codable, Hashable, Sendable {
-    /// City/Ward
+    /// City/Ward.
     public var city: String?
     /// Two-letter country code (ISO 3166-1 alpha-2).
     public var country: String?
@@ -46,11 +54,11 @@ public struct AddressKana: Codable, Hashable, Sendable {
     public var line1: String?
     /// Building details.
     public var line2: String?
-    /// Zip/Postal Code
+    /// Zip/Postal Code.
     public var postalCode: String?
-    /// Prefecture
+    /// Prefecture.
     public var state: String?
-    /// Town/cho-me
+    /// Town/cho-me.
     public var town: String?
 
     public init(
@@ -73,7 +81,7 @@ public struct AddressKana: Codable, Hashable, Sendable {
 }
 
 public struct AddressKanji: Codable, Hashable, Sendable {
-    /// City/Ward
+    /// City/Ward.
     public var city: String?
     /// Two-letter country code (ISO 3166-1 alpha-2).
     public var country: String?
@@ -81,11 +89,11 @@ public struct AddressKanji: Codable, Hashable, Sendable {
     public var line1: String?
     /// Building details.
     public var line2: String?
-    /// Zip/Postal Code
+    /// Zip/Postal Code.
     public var postalCode: String?
-    /// Prefecture
+    /// Prefecture.
     public var state: String?
-    /// Town/cho-me
+    /// Town/cho-me.
     public var town: String?
 
     public init(

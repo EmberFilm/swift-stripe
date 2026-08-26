@@ -1,6 +1,6 @@
 # swift-stripe
 
-[![CI](https://github.com/EmberFilm/swift-stripe/actions/workflows/ci.yml/badge.svg)](https://github.com/EmberFilm/swift-stripe/actions/workflows/ci.yml)
+[![CI](https://github.com/EmberFilm/swift-stripe/actions/workflows/main.yml/badge.svg)](https://github.com/EmberFilm/swift-stripe/actions/workflows/main.yml)
 [![Swift 6.3](https://img.shields.io/badge/swift-6.3-orange.svg)](https://swift.org)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
 [![Stripe API 2026-07-29.dahlia](https://img.shields.io/badge/Stripe%20API-2026--07--29.dahlia-635bff.svg)](https://docs.stripe.com/api/versioning)
@@ -275,12 +275,13 @@ decoding. Anything Stripe adds to the specification is a regenerate away.
 ```bash
 swift build
 swift test
+swift format lint --strict --recursive Sources Tests
 Scripts/generate-models.py spec3.sdk.json --check
 Scripts/generate-requests.py spec3.sdk.json --check
 ```
 
-[CLAUDE.md](CLAUDE.md) describes the architecture, the generator's rules, and the conventions
-contributions follow.
+[CONTRIBUTING.md](CONTRIBUTING.md) covers bug reports, pull requests and the release process;
+[CLAUDE.md](CLAUDE.md) describes the architecture and the generator's rules.
 
 ## License
 

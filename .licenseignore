@@ -1,0 +1,16 @@
+.gitignore
+.licenseignore
+.unacceptablelanguageignore
+.spi.yml
+.swift-format
+.github/
+**.md
+**.txt
+**.json
+**Package.swift
+Package.resolved
+.editorconfig
+.yamllint.yml
+LICENSE
+NOTICE
+Scripts/*

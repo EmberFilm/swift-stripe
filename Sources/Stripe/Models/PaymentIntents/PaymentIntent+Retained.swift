@@ -1,9 +1,16 @@
+//===----------------------------------------------------------------------===//
 //
-//  PaymentIntent.swift
-//  Stripe
+// This source file is part of the swift-stripe open source project
 //
-//  Created by Andrew Edwards on 4/15/19.
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
 //
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
 
 #if canImport(FoundationEssentials)
 import FoundationEssentials
@@ -26,7 +33,7 @@ extension Stripe.PaymentIntents.PaymentIntent.Automatic {
 
 extension Stripe.PaymentIntents.PaymentIntent.Automatic.Payment {
     public struct Methods: Codable, Hashable, Sendable {
-        /// Automatically calculates compatible payment methods
+        /// Automatically calculates compatible payment methods.
         public var enabled: Bool?
 
         public init(
@@ -43,7 +50,12 @@ extension Stripe.PaymentIntents.PaymentIntent {
 
 extension Stripe.PaymentIntents.PaymentIntent.Transfer {
     public struct Data: Codable, Hashable, Sendable {
-        /// Amount intended to be collected by this PaymentIntent. A positive integer representing how much to charge in the smallest currency unit (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency). The minimum amount is $0.50 US or equivalent in charge currency. The amount value supports up to eight digits (e.g., a value of 99999999 for a USD charge of $999,999.99).
+        /// Amount intended to be collected by this PaymentIntent.
+        ///
+        /// A positive integer representing how much to charge in the smallest currency unit (e.g., 100
+        /// cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency). The minimum amount is
+        /// $0.50 US or equivalent in charge currency. The amount value supports up to eight digits
+        /// (e.g., a value of 99999999 for a USD charge of $999,999.99).
         public var amount: Int?
         /// The account (if any) the payment will be attributed to for tax reporting, and where funds from the payment will be transferred to upon payment success.
         @ExpandableOf<Stripe.Connect.Account> public var destination: Stripe.Connect.Account.ID?
@@ -74,13 +86,14 @@ extension Stripe.PaymentIntents.PaymentIntent.Cancellation {
     }
 }
 
-
 extension Stripe.PaymentIntents.PaymentIntent.Capture {
     public enum Method: String, Codable, Sendable {
         /// (Default) Stripe automatically captures funds when the customer authorizes the payment.
         case automatic
         case automaticAsync = "automatic_async"
-        /// Place a hold on the funds when the customer authorizes the payment, but don’t capture the funds until later. (Not all payment methods support this.)
+        /// Place a hold on the funds when the customer authorizes the payment, but don’t capture the funds until later.
+        ///
+        /// (Not all payment methods support this.).
         case manual
     }
 }
@@ -93,9 +106,16 @@ extension Stripe.PaymentIntents.PaymentIntent {
 
 extension Stripe.PaymentIntents.PaymentIntent.Confirmation {
     public enum Method: String, Codable, Sendable {
-        /// (Default) PaymentIntent can be confirmed using a publishable key. After `next_action`s are handled, no additional confirmation is required to complete the payment.
+        /// (Default) PaymentIntent can be confirmed using a publishable key.
+        ///
+        /// After `next_action`s are handled, no additional confirmation is required to complete the
+        /// payment.
         case automatic
-        /// All payment attempts must be made using a secret key. The PaymentIntent returns to the `requires_confirmation` state after handling `next_action`s, and requires your server to initiate each payment attempt with an explicit confirmation.
+        /// All payment attempts must be made using a secret key.
+        ///
+        /// The PaymentIntent returns to the `requires_confirmation` state after handling
+        /// `next_action`s, and requires your server to initiate each payment attempt with an explicit
+        /// confirmation.
         case manual
     }
 }
@@ -152,13 +172,11 @@ extension Stripe.PaymentIntents.PaymentIntent.Payment.Method {
         /// If the PaymentIntent’s `payment_method_types` includes `affirm`, this hash contains the configurations that will be applied to each payment attempt of that type.
         public let affirm: Stripe.PaymentMethods.PaymentMethod.Options.Affirm.Configuration?
         /// If the PaymentIntent’s `payment_method_types` includes `afterpay_clearpay`, this hash contains the configurations that will be applied to each payment attempt of that type.
-        public let afterpayClearpay:
-            Stripe.PaymentMethods.PaymentMethod.Options.AfterpayClearpay.Configuration?
+        public let afterpayClearpay: Stripe.PaymentMethods.PaymentMethod.Options.AfterpayClearpay.Configuration?
         /// If the PaymentIntent’s `payment_method_types` includes `alipay`, this hash contains the configurations that will be applied to each payment attempt of that type.
         public let alipay: Stripe.PaymentMethods.PaymentMethod.Options.Alipay.Configuration?
         /// If the PaymentIntent’s `payment_method_types` includes `au_becs_debit`, this hash contains the configurations that will be applied to each payment attempt of that type.
-        public let auBecsDebit:
-            Stripe.PaymentMethods.PaymentMethod.Options.AUBecsDebit.Configuration?
+        public let auBecsDebit: Stripe.PaymentMethods.PaymentMethod.Options.AUBecsDebit.Configuration?
         /// If the PaymentIntent’s `payment_method_types` includes `bacs_debit`, this hash contains the configurations that will be applied to each payment attempt of that type.
         public let bacsDebit: Stripe.PaymentMethods.PaymentMethod.Options.BacsDebit.Configuration?
         /// If the PaymentIntent’s `payment_method_types` includes `bancontact`, this hash contains the configurations that will be applied to each payment attempt of that type.
@@ -170,11 +188,9 @@ extension Stripe.PaymentIntents.PaymentIntent.Payment.Method {
         /// If the PaymentIntent’s `payment_method_types` includes `card`, this hash contains the configurations that will be applied to each payment attempt of that type.
         public let card: Stripe.PaymentMethods.PaymentMethod.Options.Card.Configuration?
         /// If the PaymentIntent’s `payment_method_types` includes `card_present`, this hash contains the configurations that will be applied to each payment attempt of that type.
-        public let cardPresent:
-            Stripe.PaymentMethods.PaymentMethod.Options.CardPresent.Configuration?
+        public let cardPresent: Stripe.PaymentMethods.PaymentMethod.Options.CardPresent.Configuration?
         /// If the PaymentIntent’s `payment_method_types` includes `customer_balance`, this hash contains the configurations that will be applied to each payment attempt of that type.
-        public let customerBalance:
-            Stripe.PaymentMethods.PaymentMethod.Options.CustomerBalance.Configuration?
+        public let customerBalance: Stripe.PaymentMethods.PaymentMethod.Options.CustomerBalance.Configuration?
         /// If the PaymentIntent’s `payment_method_types` includes `eps`, this hash contains the configurations that will be applied to each payment attempt of that type.
         public let eps: Stripe.PaymentMethods.PaymentMethod.Options.EPS.Configuration?
         /// If the PaymentIntent’s `payment_method_types` includes `fpx`, this hash contains the configurations that will be applied to each payment attempt of that type.
@@ -186,8 +202,7 @@ extension Stripe.PaymentIntents.PaymentIntent.Payment.Method {
         /// If the PaymentIntent’s `payment_method_types` includes `ideal`, this hash contains the configurations that will be applied to each payment attempt of that type.
         public let ideal: Stripe.PaymentMethods.PaymentMethod.Options.Ideal.Configuration?
         /// If the PaymentIntent’s `payment_method_types` includes `interac_present`, this hash contains the configurations that will be applied to each payment attempt of that type.
-        public let interacPresent:
-            Stripe.PaymentMethods.PaymentMethod.Options.InteracPresent.Configuration?
+        public let interacPresent: Stripe.PaymentMethods.PaymentMethod.Options.InteracPresent.Configuration?
         /// If the PaymentIntent’s `payment_method_types` includes `klarna`, this hash contains the configurations that will be applied to each payment attempt of that type.
         public let klarna: Stripe.PaymentMethods.PaymentMethod.Options.Klarna.Configuration?
         /// If the PaymentIntent’s `payment_method_types` includes `konbini`, this hash contains the configurations that will be applied to each payment attempt of that type.
@@ -209,8 +224,7 @@ extension Stripe.PaymentIntents.PaymentIntent.Payment.Method {
         /// If the PaymentIntent’s `payment_method_types` includes `sofort`, this hash contains the configurations that will be applied to each payment attempt of that type.
         public let sofort: Stripe.PaymentMethods.PaymentMethod.Options.Sofort.Configuration?
         /// If the PaymentIntent’s `payment_method_types` includes `us_bank_account`, this hash contains the configurations that will be applied to each payment attempt of that type.
-        public let usBankAccount:
-            Stripe.PaymentMethods.PaymentMethod.Options.USBankAccount.Configuration?
+        public let usBankAccount: Stripe.PaymentMethods.PaymentMethod.Options.USBankAccount.Configuration?
         /// If the PaymentIntent’s `payment_method_types` includes `wechat_pay`, this hash contains the configurations that will be applied to each payment attempt of that type.
         public let wechatPay: Stripe.PaymentMethods.PaymentMethod.Options.WechatPay.Configuration?
 
@@ -287,7 +301,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Payment.Method {
         }
     }
 }
-
 
 extension Stripe.PaymentIntents.PaymentIntent.Search {
     public struct Result: Codable, Hashable, Sendable {

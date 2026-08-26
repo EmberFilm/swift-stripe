@@ -1,9 +1,16 @@
+//===----------------------------------------------------------------------===//
 //
-//  Billing Credit Balance Transaction.swift
-//  swift-stripe-types
+// This source file is part of the swift-stripe open source project
 //
-//  Created by Coen ten Thije Boonkkamp on 13/01/2025.
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
 //
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
 
 #if canImport(FoundationEssentials)
 import FoundationEssentials
@@ -20,9 +27,9 @@ import Foundation
 
 extension Stripe.Billing.Credit.Balance.Transaction {
     public struct Amount: Codable, Hashable, Sendable {
-        /// Monetary amount details
+        /// Monetary amount details.
         public var monetary: Monetary?
-        /// The type of amount
+        /// The type of amount.
         public var type: String?
 
         public init(
@@ -36,9 +43,9 @@ extension Stripe.Billing.Credit.Balance.Transaction {
     }
 
     public struct Monetary: Codable, Hashable, Sendable {
-        /// Three-letter ISO currency code, in lowercase
+        /// Three-letter ISO currency code, in lowercase.
         public var currency: Stripe.Currency?
-        /// The amount in the smallest currency unit (e.g., cents for USD)
+        /// The amount in the smallest currency unit (e.g., cents for USD).
         public var value: Int?
 
         public init(
@@ -52,9 +59,9 @@ extension Stripe.Billing.Credit.Balance.Transaction {
     }
 
     public struct CreditsApplied: Codable, Hashable, Sendable {
-        /// The ID of the invoice the credits were applied to
+        /// The ID of the invoice the credits were applied to.
         public var invoice: Stripe.Billing.Invoice.ID?
-        /// The ID of the invoice line item the credits were applied to
+        /// The ID of the invoice line item the credits were applied to.
         public var invoiceLineItem: String?
 
         public init(
@@ -67,4 +74,3 @@ extension Stripe.Billing.Credit.Balance.Transaction {
 
     }
 }
-

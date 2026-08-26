@@ -1,3 +1,17 @@
+//===----------------------------------------------------------------------===//
+//
+// This source file is part of the swift-stripe open source project
+//
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
+//
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
+
 #if canImport(FoundationEssentials)
 import FoundationEssentials
 #else
@@ -6,7 +20,7 @@ import Foundation
 
 // https://docs.stripe.com/api/subscriptions/object.md
 
-/// The [Subscription Object](https://stripe.com/docs/api/subscriptions/object)
+/// The [Subscription Object](https://stripe.com/docs/api/subscriptions/object).
 
 // The Subscription struct is generated (Models/Generated). These are the nested types the
 // request layer still names under `Stripe.Billing.Subscription` that the generator spells differently.
@@ -41,11 +55,11 @@ extension Stripe.Billing.Subscription {
 
 extension Stripe.Billing.Subscription.Cancellation {
     public struct Details: Codable, Hashable, Sendable {
-        /// Additional comments about cancellation
+        /// Additional comments about cancellation.
         public var comment: String?
-        /// Customer submitted reason
+        /// Customer submitted reason.
         public var feedback: Feedback?
-        /// Cancellation reason
+        /// Cancellation reason.
         public var reason: String?
 
         public init(
@@ -90,11 +104,11 @@ extension Stripe.Billing.Subscription {
 
 extension Stripe.Billing.Subscription.Payment {
     public struct Settings: Codable, Hashable, Sendable {
-        /// Payment method options configuration
+        /// Payment method options configuration.
         public var paymentMethodOptions: MethodOptions?
-        /// Allowed payment method types
+        /// Allowed payment method types.
         public var paymentMethodTypes: [Stripe.PaymentMethods.PaymentMethod.`Type`]?
-        /// Default payment method saving behavior
+        /// Default payment method saving behavior.
         public var saveDefaultPaymentMethod: SaveDefaultPaymentMethod?
 
         public enum SaveDefaultPaymentMethod: String, Codable, Sendable {
@@ -130,7 +144,7 @@ extension Stripe.Billing.Subscription {
 
 extension Stripe.Billing.Subscription.Trial {
     public struct Settings: Codable, Hashable, Sendable {
-        /// End behavior configuration
+        /// End behavior configuration.
         public var endBehavior: EndBehavior?
 
         public init(
@@ -141,7 +155,7 @@ extension Stripe.Billing.Subscription.Trial {
     }
 
     public struct EndBehavior: Codable, Hashable, Sendable {
-        /// Behavior when payment method is missing
+        /// Behavior when payment method is missing.
         public var missingPaymentMethod: MissingPaymentMethodBehavior?
 
         public init(

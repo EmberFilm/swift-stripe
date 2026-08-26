@@ -1,9 +1,17 @@
+//===----------------------------------------------------------------------===//
 //
-//  Coupon.swift
-//  Stripe
+// This source file is part of the swift-stripe open source project
 //
-//  Created by Andrew Edwards on 5/28/17.
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
 //
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
+
 //
 
 #if canImport(FoundationEssentials)
@@ -14,9 +22,6 @@ import Foundation
 
 // The Coupon struct is generated (Models/Generated). These are the nested types the
 // request layer still names under `Stripe.Products.Coupon` that the generator spells differently.
-
-
-
 
 extension Stripe.Products.Coupon {
     public enum Currency {}
@@ -34,5 +39,3 @@ extension Stripe.Products.Coupon.Currency {
         }
     }
 }
-
-

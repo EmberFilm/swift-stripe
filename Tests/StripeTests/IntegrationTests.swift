@@ -1,20 +1,31 @@
+//===----------------------------------------------------------------------===//
 //
-//  IntegrationTests.swift
-//  swift-stripe
+// This source file is part of the swift-stripe open source project
 //
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
+//
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
+
 //  End-to-end over a real AsyncHTTPClient connection to a local server, so the
 //  assertions are on bytes that actually crossed a socket.
 //
 
 import AsyncHTTPClient
+import Testing
+
+@testable import Stripe
+
 #if canImport(FoundationEssentials)
 import FoundationEssentials
 #else
 import Foundation
 #endif
-import Testing
-
-@testable import Stripe
 
 @Suite("StripeClient over a real connection")
 struct IntegrationTests {
@@ -50,10 +61,12 @@ struct IntegrationTests {
     @Test("creating a customer sends the right method, path, headers and body")
     func createCustomer() async throws {
         try await Self.withServer(responses: [
-            ScriptedResponse(body: #"""
-            {"id":"cus_1","object":"customer","created":1680893993,"livemode":false,
-             "email":"ada@example.com","invoice_prefix":"ABC"}
-            """#)
+            ScriptedResponse(
+                body: #"""
+                    {"id":"cus_1","object":"customer","created":1680893993,"livemode":false,
+                     "email":"ada@example.com","invoice_prefix":"ABC"}
+                    """#
+            )
         ]) { stripe, server in
             let customer = try await stripe.customers.create(
                 .init(email: "ada@example.com", metadata: ["plan": "pro"], name: "Ada Lovelace")
@@ -100,9 +113,9 @@ struct IntegrationTests {
             ScriptedResponse(
                 status: 402,
                 body: #"""
-                {"error":{"type":"card_error","code":"card_declined",
-                          "message":"Your card was declined."}}
-                """#,
+                    {"error":{"type":"card_error","code":"card_declined",
+                              "message":"Your card was declined."}}
+                    """#,
                 headers: [("Request-Id", "req_test_123")]
             )
         ]) { stripe, _ in
@@ -200,9 +213,11 @@ struct IntegrationTests {
 
             let sent = server.received
             #expect(sent.map(\.method) == [.GET, .GET, .POST])
-            #expect(sent.map(\.uri) == [
-                "/v1/customers/cus_1/tax_ids/txi_1", "/v1/balance", "/v1/checkout/sessions/cs_1/expire",
-            ])
+            #expect(
+                sent.map(\.uri) == [
+                    "/v1/customers/cus_1/tax_ids/txi_1", "/v1/balance", "/v1/checkout/sessions/cs_1/expire",
+                ]
+            )
             #expect(sent[2].headers.first(name: "Idempotency-Key") == "k_1")
         }
     }

@@ -1,17 +1,27 @@
+//===----------------------------------------------------------------------===//
 //
-//  WebhookTests.swift
-//  swift-stripe
+// This source file is part of the swift-stripe open source project
 //
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
+//
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
 
 import Crypto
+import Testing
+
+@testable import Stripe
+
 #if canImport(FoundationEssentials)
 import FoundationEssentials
 #else
 import Foundation
 #endif
-import Testing
-
-@testable import Stripe
 
 @Suite("Stripe webhook signatures")
 struct WebhookTests {
@@ -109,9 +119,12 @@ struct WebhookTests {
         )
     }
 
-    @Test("malformed headers are rejected", arguments: [
-        "", "garbage", "t=1614556800", "v1=abc", "t=,v1=",
-    ])
+    @Test(
+        "malformed headers are rejected",
+        arguments: [
+            "", "garbage", "t=1614556800", "v1=abc", "t=,v1=",
+        ]
+    )
     func malformedHeaders(header: String) {
         #expect(throws: (any Error).self) {
             try StripeWebhook.verify(
@@ -137,18 +150,20 @@ struct WebhookTests {
 
     @Test("constructEvent verifies and decodes in one step")
     func constructEvent() throws {
-        let payload = Data(#"""
-        {
-          "id": "evt_1",
-          "object": "event",
-          "api_version": "2024-06-20",
-          "created": 1614556800,
-          "livemode": false,
-          "pending_webhooks": 0,
-          "type": "payment_intent.succeeded",
-          "data": {"object": {"id": "pi_1", "object": "payment_intent"}}
-        }
-        """#.utf8)
+        let payload = Data(
+            #"""
+            {
+              "id": "evt_1",
+              "object": "event",
+              "api_version": "2024-06-20",
+              "created": 1614556800,
+              "livemode": false,
+              "pending_webhooks": 0,
+              "type": "payment_intent.succeeded",
+              "data": {"object": {"id": "pi_1", "object": "payment_intent"}}
+            }
+            """#.utf8
+        )
 
         let event = try StripeWebhook.constructEvent(
             payload: payload,

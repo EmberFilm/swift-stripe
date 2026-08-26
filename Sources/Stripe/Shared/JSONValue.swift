@@ -1,7 +1,16 @@
+//===----------------------------------------------------------------------===//
 //
-//  JSONValue.swift
-//  Stripe
+// This source file is part of the swift-stripe open source project
 //
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
+//
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
 
 #if canImport(FoundationEssentials)
 import FoundationEssentials
@@ -22,13 +31,34 @@ extension Stripe {
         case array([JSONValue])
         case object([String: JSONValue])
 
-        public var stringValue: String? { if case .string(let v) = self { return v }; return nil }
-        public var doubleValue: Double? { if case .number(let v) = self { return v }; return nil }
-        public var intValue: Int? { if case .number(let v) = self, v == v.rounded() { return Int(v) }; return nil }
-        public var boolValue: Bool? { if case .bool(let v) = self { return v }; return nil }
-        public var arrayValue: [JSONValue]? { if case .array(let v) = self { return v }; return nil }
-        public var objectValue: [String: JSONValue]? { if case .object(let v) = self { return v }; return nil }
-        public var isNull: Bool { if case .null = self { return true }; return false }
+        public var stringValue: String? {
+            if case .string(let v) = self { return v }
+            return nil
+        }
+        public var doubleValue: Double? {
+            if case .number(let v) = self { return v }
+            return nil
+        }
+        public var intValue: Int? {
+            if case .number(let v) = self, v == v.rounded() { return Int(v) }
+            return nil
+        }
+        public var boolValue: Bool? {
+            if case .bool(let v) = self { return v }
+            return nil
+        }
+        public var arrayValue: [JSONValue]? {
+            if case .array(let v) = self { return v }
+            return nil
+        }
+        public var objectValue: [String: JSONValue]? {
+            if case .object(let v) = self { return v }
+            return nil
+        }
+        public var isNull: Bool {
+            if case .null = self { return true }
+            return false
+        }
 
         public subscript(key: String) -> JSONValue? { objectValue?[key] }
         public subscript(index: Int) -> JSONValue? {
