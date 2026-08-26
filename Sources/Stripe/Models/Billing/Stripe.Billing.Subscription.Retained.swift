@@ -32,16 +32,6 @@ extension Stripe.Billing.Subscription {
 }
 
 // MARK: - Automatic Tax
-extension Stripe.Billing.Subscription {
-
-    public struct TaxLiability: Codable, Hashable, Sendable {
-        public var type: String?
-
-        public init(type: String? = nil) {
-            self.type = type
-        }
-    }
-}
 
 // MARK: - Billing
 // MARK: - Cancellation
@@ -181,12 +171,6 @@ extension Stripe.Billing.Subscription.Trial {
 // MARK: - TransferData
 // MARK: - Search and List Results
 extension Stripe.Billing.Subscription {
-    public struct List: Codable, Hashable, Sendable {
-        public var object: String
-        public var hasMore: Bool?
-        public var url: String?
-        public var data: [Stripe.Billing.Subscription]?
-    }
 
     public struct SearchResult: Codable, Hashable, Sendable {
         public var object: String
@@ -204,79 +188,6 @@ extension Stripe.Billing.Subscription {
 // MARK: - InvoiceSettings
 // MARK: - Billing schedules
 extension Stripe.Billing.Subscription {
-    /// A schedule controlling how long a subscription bills for.
-    public struct BillingSchedule: Codable, Hashable, Sendable {
-        /// Which subscription items the schedule applies to. Nil means all of them.
-        public var appliesTo: [AppliesTo]?
-        /// When the schedule bills until.
-        public var billUntil: BillUntil?
-        /// Unique identifier for the billing schedule.
-        public var key: String?
-
-        public init(
-            appliesTo: [AppliesTo]? = nil,
-            billUntil: BillUntil? = nil,
-            key: String? = nil
-        ) {
-            self.appliesTo = appliesTo
-            self.billUntil = billUntil
-            self.key = key
-        }
-
-        public struct AppliesTo: Codable, Hashable, Sendable {
-            /// The subscription item with this price is the one the schedule applies to.
-            @ExpandableOf<Stripe.Products.Price> public var price: Stripe.Products.Price.ID?
-            public var type: `Type`?
-
-            private enum CodingKeys: String, CodingKey {
-                case price
-                case type
-            }
-
-            public init(price: Stripe.Products.Price.ID? = nil, type: `Type`? = nil) {
-                self._price = Expandable(id: price)
-                self.type = type
-            }
-
-            public enum `Type`: String, Codable, Sendable {
-                case price
-            }
-        }
-
-        public struct BillUntil: Codable, Hashable, Sendable {
-            /// The timestamp the billing schedule applies until.
-            public var computedTimestamp: Date?
-            /// The billing period, when expressed as a duration rather than a timestamp.
-            public var duration: Duration?
-            /// The timestamp the billing schedule applies until, when given explicitly.
-            public var timestamp: Date?
-
-            public init(
-                computedTimestamp: Date? = nil,
-                duration: Duration? = nil,
-                timestamp: Date? = nil
-            ) {
-                self.computedTimestamp = computedTimestamp
-                self.duration = duration
-                self.timestamp = timestamp
-            }
-
-            public struct Duration: Codable, Hashable, Sendable {
-                public var interval: Stripe.Interval?
-                public var intervalCount: Int?
-
-                private enum CodingKeys: String, CodingKey {
-                    case interval
-                    case intervalCount
-                }
-
-                public init(interval: Stripe.Interval? = nil, intervalCount: Int? = nil) {
-                    self.interval = interval
-                    self.intervalCount = intervalCount
-                }
-            }
-        }
-    }
 
     /// Managed Payments settings for a subscription.
     public struct ManagedPayments: Codable, Hashable, Sendable {

@@ -13,23 +13,23 @@ import NIOHTTP1
 /// Operations on the `/v1/subscriptions` resource.
 public protocol SubscriptionsAPI: Sendable {
     func create(
-        _ request: Stripe.Billing.Subscriptions.Create.Request,
+        _ request: Stripe.Billing.Subscription.Create.Request,
         idempotencyKey: String?
     ) async throws -> Stripe.Billing.Subscription
     func retrieve(id: Stripe.Billing.Subscription.ID) async throws -> Stripe.Billing.Subscription
     func update(
         id: Stripe.Billing.Subscription.ID,
-        _ request: Stripe.Billing.Subscriptions.Update.Request,
+        _ request: Stripe.Billing.Subscription.Update.Request,
         idempotencyKey: String?
     ) async throws -> Stripe.Billing.Subscription
     func cancel(
         id: Stripe.Billing.Subscription.ID,
-        _ request: Stripe.Billing.Subscriptions.Cancel.Request,
+        _ request: Stripe.Billing.Subscription.Cancel.Request,
         idempotencyKey: String?
     ) async throws -> Stripe.Billing.Subscription
     func list(
-        _ request: Stripe.Billing.Subscriptions.List.Request
-    ) async throws -> Stripe.Billing.Subscriptions.List.Response
+        _ request: Stripe.Billing.Subscription.List.Request
+    ) async throws -> Stripe.Billing.Subscription.List.Response
 }
 
 public struct SubscriptionsClient: SubscriptionsAPI {
@@ -40,7 +40,7 @@ public struct SubscriptionsClient: SubscriptionsAPI {
     private static let path = "v1/subscriptions"
 
     public func create(
-        _ request: Stripe.Billing.Subscriptions.Create.Request,
+        _ request: Stripe.Billing.Subscription.Create.Request,
         idempotencyKey: String?
     ) async throws -> Stripe.Billing.Subscription {
         try await api.send(.POST, Self.path, body: request, idempotencyKey: idempotencyKey)
@@ -54,7 +54,7 @@ public struct SubscriptionsClient: SubscriptionsAPI {
 
     public func update(
         id: Stripe.Billing.Subscription.ID,
-        _ request: Stripe.Billing.Subscriptions.Update.Request,
+        _ request: Stripe.Billing.Subscription.Update.Request,
         idempotencyKey: String?
     ) async throws -> Stripe.Billing.Subscription {
         try await api.send(
@@ -67,7 +67,7 @@ public struct SubscriptionsClient: SubscriptionsAPI {
 
     public func cancel(
         id: Stripe.Billing.Subscription.ID,
-        _ request: Stripe.Billing.Subscriptions.Cancel.Request,
+        _ request: Stripe.Billing.Subscription.Cancel.Request,
         idempotencyKey: String?
     ) async throws -> Stripe.Billing.Subscription {
         try await api.send(
@@ -79,8 +79,8 @@ public struct SubscriptionsClient: SubscriptionsAPI {
     }
 
     public func list(
-        _ request: Stripe.Billing.Subscriptions.List.Request
-    ) async throws -> Stripe.Billing.Subscriptions.List.Response {
+        _ request: Stripe.Billing.Subscription.List.Request
+    ) async throws -> Stripe.Billing.Subscription.List.Response {
         try await api.list(Self.path, parameters: request)
     }
 }
@@ -89,21 +89,21 @@ public struct SubscriptionsClient: SubscriptionsAPI {
 // no retry. See ``StripeAPI/isSafeToRetry(_:)``.
 extension SubscriptionsAPI {
     public func create(
-        _ request: Stripe.Billing.Subscriptions.Create.Request
+        _ request: Stripe.Billing.Subscription.Create.Request
     ) async throws -> Stripe.Billing.Subscription {
         try await create(request, idempotencyKey: nil)
     }
 
     public func update(
         id: Stripe.Billing.Subscription.ID,
-        _ request: Stripe.Billing.Subscriptions.Update.Request
+        _ request: Stripe.Billing.Subscription.Update.Request
     ) async throws -> Stripe.Billing.Subscription {
         try await update(id: id, request, idempotencyKey: nil)
     }
 
     public func cancel(
         id: Stripe.Billing.Subscription.ID,
-        _ request: Stripe.Billing.Subscriptions.Cancel.Request
+        _ request: Stripe.Billing.Subscription.Cancel.Request
     ) async throws -> Stripe.Billing.Subscription {
         try await cancel(id: id, request, idempotencyKey: nil)
     }

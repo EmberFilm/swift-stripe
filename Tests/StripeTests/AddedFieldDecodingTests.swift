@@ -205,8 +205,8 @@ struct AddedFieldDecodingTests {
     @Test("the create request sends the UI mode Stripe accepts")
     func requestUIMode() throws {
         // `ui_mode` was typed as `Session.Mode` (payment/setup/subscription), which Stripe rejects.
-        let request = Stripe.Checkout.Sessions.Create.Request(
-            successUrl: "https://x/ok", mode: .payment, uiMode: .hostedPage
+        let request = Stripe.Checkout.Session.Create.Request(
+            mode: .payment, successUrl: "https://x/ok", uiMode: .hostedPage
         )
         let pairs = Dictionary(uniqueKeysWithValues: try StripeFormEncoder().pairs(of: request))
         #expect(pairs["ui_mode"] == "hosted_page")

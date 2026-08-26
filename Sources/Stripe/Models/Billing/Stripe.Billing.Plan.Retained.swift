@@ -18,14 +18,6 @@ import Foundation
 
 // https://docs.stripe.com/api/plans/object.md
 
-extension Stripe.Billing.Plan {
-    public enum AggregateUsage: String, Codable, Sendable {
-        case sum
-        case lastDuringPeriod = "last_during_period"
-        case lastEver = "last_ever"
-        case max
-    }
-}
 
 
 

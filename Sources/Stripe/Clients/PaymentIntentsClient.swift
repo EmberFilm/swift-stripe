@@ -13,7 +13,7 @@ import NIOHTTP1
 /// Operations on the `/v1/payment_intents` resource.
 public protocol PaymentIntentsAPI: Sendable {
     func create(
-        _ request: Stripe.PaymentIntents.Create.Request,
+        _ request: Stripe.PaymentIntents.PaymentIntent.Create.Request,
         idempotencyKey: String?
     ) async throws -> Stripe.PaymentIntents.PaymentIntent
     func retrieve(
@@ -21,27 +21,27 @@ public protocol PaymentIntentsAPI: Sendable {
     ) async throws -> Stripe.PaymentIntents.PaymentIntent
     func update(
         id: Stripe.PaymentIntents.PaymentIntent.ID,
-        _ request: Stripe.PaymentIntents.Update.Request,
+        _ request: Stripe.PaymentIntents.PaymentIntent.Update.Request,
         idempotencyKey: String?
     ) async throws -> Stripe.PaymentIntents.PaymentIntent
     func confirm(
         id: Stripe.PaymentIntents.PaymentIntent.ID,
-        _ request: Stripe.PaymentIntents.Confirm.Request,
+        _ request: Stripe.PaymentIntents.PaymentIntent.Confirm.Request,
         idempotencyKey: String?
     ) async throws -> Stripe.PaymentIntents.PaymentIntent
     func capture(
         id: Stripe.PaymentIntents.PaymentIntent.ID,
-        _ request: Stripe.PaymentIntents.Capture.Request,
+        _ request: Stripe.PaymentIntents.PaymentIntent.Capture.Request,
         idempotencyKey: String?
     ) async throws -> Stripe.PaymentIntents.PaymentIntent
     func cancel(
         id: Stripe.PaymentIntents.PaymentIntent.ID,
-        _ request: Stripe.PaymentIntents.Cancel.Request,
+        _ request: Stripe.PaymentIntents.PaymentIntent.Cancel.Request,
         idempotencyKey: String?
     ) async throws -> Stripe.PaymentIntents.PaymentIntent
     func list(
-        _ request: Stripe.PaymentIntents.List.Request
-    ) async throws -> Stripe.PaymentIntents.List.Response
+        _ request: Stripe.PaymentIntents.PaymentIntent.List.Request
+    ) async throws -> Stripe.PaymentIntents.PaymentIntent.List.Response
 }
 
 public struct PaymentIntentsClient: PaymentIntentsAPI {
@@ -52,7 +52,7 @@ public struct PaymentIntentsClient: PaymentIntentsAPI {
     private static let path = "v1/payment_intents"
 
     public func create(
-        _ request: Stripe.PaymentIntents.Create.Request,
+        _ request: Stripe.PaymentIntents.PaymentIntent.Create.Request,
         idempotencyKey: String?
     ) async throws -> Stripe.PaymentIntents.PaymentIntent {
         try await api.send(.POST, Self.path, body: request, idempotencyKey: idempotencyKey)
@@ -66,7 +66,7 @@ public struct PaymentIntentsClient: PaymentIntentsAPI {
 
     public func update(
         id: Stripe.PaymentIntents.PaymentIntent.ID,
-        _ request: Stripe.PaymentIntents.Update.Request,
+        _ request: Stripe.PaymentIntents.PaymentIntent.Update.Request,
         idempotencyKey: String?
     ) async throws -> Stripe.PaymentIntents.PaymentIntent {
         try await api.send(
@@ -79,7 +79,7 @@ public struct PaymentIntentsClient: PaymentIntentsAPI {
 
     public func confirm(
         id: Stripe.PaymentIntents.PaymentIntent.ID,
-        _ request: Stripe.PaymentIntents.Confirm.Request,
+        _ request: Stripe.PaymentIntents.PaymentIntent.Confirm.Request,
         idempotencyKey: String?
     ) async throws -> Stripe.PaymentIntents.PaymentIntent {
         try await api.send(
@@ -92,7 +92,7 @@ public struct PaymentIntentsClient: PaymentIntentsAPI {
 
     public func capture(
         id: Stripe.PaymentIntents.PaymentIntent.ID,
-        _ request: Stripe.PaymentIntents.Capture.Request,
+        _ request: Stripe.PaymentIntents.PaymentIntent.Capture.Request,
         idempotencyKey: String?
     ) async throws -> Stripe.PaymentIntents.PaymentIntent {
         try await api.send(
@@ -105,7 +105,7 @@ public struct PaymentIntentsClient: PaymentIntentsAPI {
 
     public func cancel(
         id: Stripe.PaymentIntents.PaymentIntent.ID,
-        _ request: Stripe.PaymentIntents.Cancel.Request,
+        _ request: Stripe.PaymentIntents.PaymentIntent.Cancel.Request,
         idempotencyKey: String?
     ) async throws -> Stripe.PaymentIntents.PaymentIntent {
         try await api.send(
@@ -117,8 +117,8 @@ public struct PaymentIntentsClient: PaymentIntentsAPI {
     }
 
     public func list(
-        _ request: Stripe.PaymentIntents.List.Request
-    ) async throws -> Stripe.PaymentIntents.List.Response {
+        _ request: Stripe.PaymentIntents.PaymentIntent.List.Request
+    ) async throws -> Stripe.PaymentIntents.PaymentIntent.List.Response {
         try await api.list(Self.path, parameters: request)
     }
 }
@@ -127,35 +127,35 @@ public struct PaymentIntentsClient: PaymentIntentsAPI {
 // no retry. See ``StripeAPI/isSafeToRetry(_:)``.
 extension PaymentIntentsAPI {
     public func create(
-        _ request: Stripe.PaymentIntents.Create.Request
+        _ request: Stripe.PaymentIntents.PaymentIntent.Create.Request
     ) async throws -> Stripe.PaymentIntents.PaymentIntent {
         try await create(request, idempotencyKey: nil)
     }
 
     public func update(
         id: Stripe.PaymentIntents.PaymentIntent.ID,
-        _ request: Stripe.PaymentIntents.Update.Request
+        _ request: Stripe.PaymentIntents.PaymentIntent.Update.Request
     ) async throws -> Stripe.PaymentIntents.PaymentIntent {
         try await update(id: id, request, idempotencyKey: nil)
     }
 
     public func confirm(
         id: Stripe.PaymentIntents.PaymentIntent.ID,
-        _ request: Stripe.PaymentIntents.Confirm.Request
+        _ request: Stripe.PaymentIntents.PaymentIntent.Confirm.Request
     ) async throws -> Stripe.PaymentIntents.PaymentIntent {
         try await confirm(id: id, request, idempotencyKey: nil)
     }
 
     public func capture(
         id: Stripe.PaymentIntents.PaymentIntent.ID,
-        _ request: Stripe.PaymentIntents.Capture.Request
+        _ request: Stripe.PaymentIntents.PaymentIntent.Capture.Request
     ) async throws -> Stripe.PaymentIntents.PaymentIntent {
         try await capture(id: id, request, idempotencyKey: nil)
     }
 
     public func cancel(
         id: Stripe.PaymentIntents.PaymentIntent.ID,
-        _ request: Stripe.PaymentIntents.Cancel.Request
+        _ request: Stripe.PaymentIntents.PaymentIntent.Cancel.Request
     ) async throws -> Stripe.PaymentIntents.PaymentIntent {
         try await cancel(id: id, request, idempotencyKey: nil)
     }

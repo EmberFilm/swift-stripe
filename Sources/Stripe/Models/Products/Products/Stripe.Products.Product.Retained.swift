@@ -19,17 +19,6 @@ import Foundation
 // The Product struct is generated (Models/Generated). These are the nested types the request
 // layer still names under `Stripe.Products.Product` that the generator spells differently.
 
-extension Stripe.Products.Product {
-    public enum Package {}
-
-    /// The type of the product.
-    public enum ProductType: String, Codable, Hashable, Sendable {
-        /// A service product.
-        case service
-        /// A physical good product.
-        case good
-    }
-}
 
 public enum Marketing {}
 
@@ -45,34 +34,7 @@ extension Marketing {
     }
 }
 
-extension Stripe.Products.Product.Package {
-    public struct Dimensions: Codable, Hashable, Sendable {
-        /// Height, in inches.
-        public var height: Decimal?
-        /// Length, in inches.
-        public var length: Decimal?
-        /// Weight, in inches.
-        public var weight: Decimal?
-        /// Width, in inches.
-        public var width: Decimal?
 
-        public init(
-            height: Decimal? = nil,
-            length: Decimal? = nil,
-            weight: Decimal? = nil,
-            width: Decimal? = nil
-        ) {
-            self.height = height
-            self.length = length
-            self.weight = weight
-            self.width = width
-        }
-    }
-}
-
-extension Stripe.Products.Product {
-    public enum Search {}
-}
 
 extension Stripe.Products.Product.Search {
     public struct Result: Codable, Hashable, Sendable {
@@ -107,23 +69,3 @@ extension Stripe.Products.Product.Search {
     }
 }
 
-extension Stripe.Products.Product {
-    public struct List: Codable, Hashable, Sendable {
-        public var object: String
-        public var hasMore: Bool?
-        public var url: String?
-        public var data: [Stripe.Products.Product]?
-
-        public init(
-            object: String,
-            hasMore: Bool? = nil,
-            url: String? = nil,
-            data: [Stripe.Products.Product]? = nil
-        ) {
-            self.object = object
-            self.hasMore = hasMore
-            self.url = url
-            self.data = data
-        }
-    }
-}

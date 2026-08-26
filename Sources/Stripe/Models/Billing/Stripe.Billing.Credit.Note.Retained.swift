@@ -93,23 +93,3 @@ extension Stripe.Billing.Credit.Note.Tax {
     }
 }
 
-extension Stripe.Billing.Credit.Note {
-    public struct List: Codable, Hashable, Sendable {
-        public var object: String
-        public var data: [Stripe.Billing.Credit.Note]?
-        public var hasMore: Bool?
-        public var url: String?
-
-        public init(
-            object: String,
-            data: [Stripe.Billing.Credit.Note]? = nil,
-            hasMore: Bool? = nil,
-            url: String? = nil
-        ) {
-            self.object = object
-            self.data = data
-            self.hasMore = hasMore
-            self.url = url
-        }
-    }
-}

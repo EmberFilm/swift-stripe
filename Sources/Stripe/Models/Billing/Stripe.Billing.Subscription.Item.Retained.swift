@@ -39,34 +39,3 @@ extension Stripe.Billing.Subscription.Item {
     }
 }
 
-extension Stripe.Billing.Subscription.Item {
-    public struct List: Codable, Hashable, Sendable {
-        public var object: String
-        public var hasMore: Bool?
-        public var url: String?
-        public var data: [Stripe.Billing.Subscription.Item]?
-        public var totalCount: Int?
-
-        private enum CodingKeys: String, CodingKey {
-            case object
-            case hasMore
-            case url
-            case data
-            case totalCount
-        }
-
-        public init(
-            object: String,
-            hasMore: Bool? = nil,
-            url: String? = nil,
-            data: [Stripe.Billing.Subscription.Item]? = nil,
-            totalCount: Int? = nil
-        ) {
-            self.object = object
-            self.hasMore = hasMore
-            self.url = url
-            self.data = data
-            self.totalCount = totalCount
-        }
-    }
-}

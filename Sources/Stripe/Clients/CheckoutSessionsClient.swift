@@ -13,7 +13,7 @@ import NIOHTTP1
 /// Operations on the `/v1/checkout/sessions` resource.
 public protocol CheckoutSessionsAPI: Sendable {
     func create(
-        _ request: Stripe.Checkout.Sessions.Create.Request,
+        _ request: Stripe.Checkout.Session.Create.Request,
         idempotencyKey: String?
     ) async throws -> Stripe.Checkout.Session
     func retrieve(id: Stripe.Checkout.Session.ID) async throws -> Stripe.Checkout.Session
@@ -22,8 +22,8 @@ public protocol CheckoutSessionsAPI: Sendable {
         idempotencyKey: String?
     ) async throws -> Stripe.Checkout.Session
     func list(
-        _ request: Stripe.Checkout.Sessions.List.Request
-    ) async throws -> Stripe.Checkout.Sessions.List.Response
+        _ request: Stripe.Checkout.Session.List.Request
+    ) async throws -> Stripe.Checkout.Session.List.Response
 }
 
 public struct CheckoutSessionsClient: CheckoutSessionsAPI {
@@ -34,7 +34,7 @@ public struct CheckoutSessionsClient: CheckoutSessionsAPI {
     private static let path = "v1/checkout/sessions"
 
     public func create(
-        _ request: Stripe.Checkout.Sessions.Create.Request,
+        _ request: Stripe.Checkout.Session.Create.Request,
         idempotencyKey: String?
     ) async throws -> Stripe.Checkout.Session {
         try await api.send(.POST, Self.path, body: request, idempotencyKey: idempotencyKey)
@@ -52,8 +52,8 @@ public struct CheckoutSessionsClient: CheckoutSessionsAPI {
     }
 
     public func list(
-        _ request: Stripe.Checkout.Sessions.List.Request
-    ) async throws -> Stripe.Checkout.Sessions.List.Response {
+        _ request: Stripe.Checkout.Session.List.Request
+    ) async throws -> Stripe.Checkout.Session.List.Response {
         try await api.list(Self.path, parameters: request)
     }
 }
@@ -62,7 +62,7 @@ public struct CheckoutSessionsClient: CheckoutSessionsAPI {
 // no retry. See ``StripeAPI/isSafeToRetry(_:)``.
 extension CheckoutSessionsAPI {
     public func create(
-        _ request: Stripe.Checkout.Sessions.Create.Request
+        _ request: Stripe.Checkout.Session.Create.Request
     ) async throws -> Stripe.Checkout.Session {
         try await create(request, idempotencyKey: nil)
     }

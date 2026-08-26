@@ -19,18 +19,6 @@ import Foundation
 
 
 
-extension Stripe.Billing.Subscription.Schedule {
-    public struct DefaultSettingsAutomaticTax: Codable, Hashable, Sendable {
-        /// Whether Stripe automatically computes tax on invoices created during this phase.
-        public var enabled: Bool?
-
-        public init(
-            enabled: Bool? = nil
-        ) {
-            self.enabled = enabled
-        }
-    }
-}
 
 extension Stripe.Billing.Subscription.Schedule {
     public enum CollectionMethod: String, Codable, Sendable {
@@ -290,23 +278,3 @@ extension Stripe.Billing.Subscription.Schedule.Phase {
     }
 }
 
-extension Stripe.Billing.Subscription.Schedule {
-    public struct List: Codable, Hashable, Sendable {
-        public var object: String
-        public var hasMore: Bool?
-        public var url: String?
-        public var data: [Stripe.Billing.Subscription.Schedule]?
-
-        public init(
-            object: String,
-            hasMore: Bool? = nil,
-            url: String? = nil,
-            data: [Stripe.Billing.Subscription.Schedule]? = nil
-        ) {
-            self.object = object
-            self.hasMore = hasMore
-            self.url = url
-            self.data = data
-        }
-    }
-}

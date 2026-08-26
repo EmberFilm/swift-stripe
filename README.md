@@ -484,7 +484,14 @@ expresses yet. The remaining six are unions or ID-only references (`payment_sour
 `Tests/StripeTests/FixtureDecodingTests.swift` — which decodes a fixture with every spec
 field populated per resource — catches a hand type a generated one references rejecting a
 value Stripe has since added. The few it has caught and not yet fixed are listed in that test
-by path; an entry there is an acknowledged defect in a hand type, and anything unlisted fails. Typed resource clients currently
+by path; an entry there is an acknowledged defect in a hand type, and anything unlisted fails. **Request types are generated as well.** Every one of the spec's 536 operations has a request
+type under its resource — `Stripe.Customers.Customer.Create.Request`,
+`Stripe.Billing.Invoice.FinalizeInvoice.Request` — with every parameter the spec lists, nested
+enums for enumerated ones, and a `Response` typealias (`Stripe.Page<Customer>` for a list). The
+generator tracks the pinned spec in CI, so a parameter Stripe adds shows up here as a build
+failure of the `--check` step rather than as a silent `nil`.
+
+Typed resource clients currently
 cover Customers, PaymentIntents, Checkout Sessions, Products, Prices,
 Subscriptions, and Billing Portal Sessions; every other endpoint is reachable
 through `stripe.api` with the modelled request and response types.

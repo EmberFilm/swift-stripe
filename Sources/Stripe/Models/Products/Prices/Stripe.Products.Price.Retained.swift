@@ -22,12 +22,6 @@ extension Stripe.Products.Price {
     public enum Billing {}
 }
 
-extension Stripe.Products.Price.Billing {
-    public enum Scheme: String, Codable, Sendable {
-        case perUnit = "per_unit"
-        case tiered
-    }
-}
 
 extension Stripe.Products.Price {
     public typealias Currency = Stripe.Currency
@@ -120,19 +114,7 @@ extension Stripe.Products.Price {
     }
 }
 
-extension Stripe.Products.Price {
-    public enum TierMode: String, Codable, Sendable {
-        case graduated
-        case volume
-    }
-}
 
-extension Stripe.Products.Price {
-    public enum TransformQuantityRound: String, Codable, Sendable {
-        case up
-        case down
-    }
-}
 
 extension Stripe.Products.Price {
     public struct SearchResult: Codable, Hashable, Sendable {
@@ -167,23 +149,3 @@ extension Stripe.Products.Price {
     }
 }
 
-extension Stripe.Products.Price {
-    public struct List: Codable, Hashable, Sendable {
-        public var object: String
-        public var hasMore: Bool?
-        public var url: String?
-        public var data: [Stripe.Products.Price]?
-
-        public init(
-            object: String,
-            hasMore: Bool? = nil,
-            url: String? = nil,
-            data: [Stripe.Products.Price]? = nil
-        ) {
-            self.object = object
-            self.hasMore = hasMore
-            self.url = url
-            self.data = data
-        }
-    }
-}

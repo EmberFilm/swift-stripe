@@ -40,21 +40,6 @@ extension Stripe.Billing.Invoice.LineItem {
         case subscription
     }
 
-    public struct DiscountAmount: Codable, Hashable, Sendable {
-        /// The amount, in cents, of the discount.
-        public var amount: Int?
-        /// The discount that was applied to get this discount amount.
-        @ExpandableOf<Stripe.Products.Discount> public var discount: Stripe.Products.Discount.ID?
-
-        public init(
-            amount: Int? = nil,
-            discount: Stripe.Products.Discount.ID? = nil
-        ) {
-            self.amount = amount
-            self._discount = Expandable(id: discount)
-        }
-    }
-
     public struct ProrationDetails: Codable, Hashable, Sendable {
         /// For a credit proration `line_item`, the original debit `lineItems` to which the credit proration applies.
         public var creditedItems: CreditedItem?
@@ -84,26 +69,6 @@ extension Stripe.Billing.Invoice.LineItem.ProrationDetails {
     }
 }
 
-extension Stripe.Billing.Invoice.LineItem {
-    public struct List: Codable, Hashable, Sendable {
-        public var object: String
-        public var hasMore: Bool?
-        public var url: String?
-        public var data: [Stripe.Billing.Invoice.LineItem]?
-
-        public init(
-            object: String,
-            hasMore: Bool? = nil,
-            url: String? = nil,
-            data: [Stripe.Billing.Invoice.LineItem]? = nil
-        ) {
-            self.object = object
-            self.hasMore = hasMore
-            self.url = url
-            self.data = data
-        }
-    }
-}
 
 extension Stripe.Billing.Invoice {
     public struct SearchResult: Codable, Hashable, Sendable {

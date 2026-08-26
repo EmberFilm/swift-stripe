@@ -18,13 +18,6 @@ import Foundation
 // MARK: - Nested Types
 
 extension Stripe.Forwarding.Request {
-    public enum Replacement: String, Codable, Sendable {
-        case cardCvc = "card_cvc"
-        case cardExpiry = "card_expiry"
-        case cardNumber = "card_number"
-        case cardholderName = "cardholder_name"
-        case requestSignature = "request_signature"
-    }
 
     public struct Header: Codable, Hashable, Sendable {
         /// The header name.

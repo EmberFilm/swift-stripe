@@ -74,9 +74,6 @@ extension Stripe.Charges.Charge.Transfer {
     }
 }
 
-extension Stripe.Charges.Charge {
-    public enum Search {}
-}
 
 extension Stripe.Charges.Charge.Search {
     public struct Result: Codable, Hashable, Sendable {

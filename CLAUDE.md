@@ -227,6 +227,31 @@ the request layer references at most N times. The collision set is computed, not
 Still hand-written: `event` (lenient union decoding the generator does not express) and
 `payment_source` (a union). Everything else is generated.
 
+## Generated requests
+
+Every API operation's request type is generated too, by `Scripts/generate-requests.py`, into
+`Sources/Stripe/Requests/Generated/`. Operations hang off the resource's Swift type, named by
+the spec's `x-stripeOperations`: `Stripe.Customers.Customer.Create.Request`,
+`Stripe.Checkout.Session.Create.Request`, `Stripe.Billing.Invoice.FinalizeInvoice.Request`.
+Path parameters are not in the request — they are the client method's arguments. Each
+operation also has a `Response` typealias: the resource, `DeletedObject<Resource>`, or
+`Stripe.Page<Resource>` / `Stripe.SearchPage<Resource>` for list and search endpoints.
+
+An operation on a child collection is named on its owner the way Stripe's own SDKs name it:
+`Customer.CreateTaxId`, `Customer.ListBalanceTransactions`, `Account.RetrieveCapability`.
+A resource with the same operation on two paths keeps the parameterised one and names the
+account-level one `RetrieveCurrent` (`/v1/account`).
+
+Parameter rules that are not obvious from the types: `integer | "now"`-style unions become a
+nested enum with `.value(_:)` and the keyword cases; `created`-style filters are
+`Stripe.RangeQuery` (`.exactly(_:)` or `.range(gt:gte:lt:lte:)`); the empty-string "unset"
+alternative Stripe accepts is not modelled; an object-or-ID parameter is the ID; a `number`
+is `Decimal`, which `StripeFormEncoder` renders as decimal text. The timezone list on report
+runs is a `String`, not a 600-case enum.
+
+There is no hand-written request layer left except `Requests/WebElements/`, which describes
+Stripe.js element options rather than an API surface.
+
 Rules the generator enforces, and why:
 
 - `format: currency` is `Stripe.Currency`; callers rely on the enum.

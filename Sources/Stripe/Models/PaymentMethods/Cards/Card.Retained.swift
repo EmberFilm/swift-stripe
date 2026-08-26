@@ -69,29 +69,3 @@ public struct CardWalletApplePay: Codable, Hashable, Sendable {
     }
 }
 
-public struct CardList: Codable, Hashable, Sendable {
-    /// String representing the object’s type. Objects of the same type share the same value. Always has the value list.
-    public var object: String
-    /// An array of `Card`s associated with the account.
-    public var data: [Card]?
-    /// True if this list has another page of items after this one that can be fetched.
-    public var hasMore: Bool?
-    /// The URL where this list can be accessed.
-    public var url: String?
-
-    init(
-        object: String,
-        data: [Card]? = nil,
-        hasMore: Bool? = nil,
-        url: String? = nil
-    ) {
-        self.object = object
-        self.data = data
-        self.hasMore = hasMore
-        self.url = url
-    }
-}
-
-// The Card struct is generated (Models/Generated). These are the nested types the
-// request layer still names under `Card` that the generator spells differently.
-

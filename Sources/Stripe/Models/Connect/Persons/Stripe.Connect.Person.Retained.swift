@@ -37,30 +37,3 @@ extension Stripe.Connect.Person {
     }
 }
 
-extension Stripe.Connect.Person {
-    public enum Gender: String, Codable, Sendable {
-        case male
-        case female
-    }
-}
-
-extension Stripe.Connect.Person {
-    public struct List: Codable, Hashable, Sendable {
-        public var object: String
-        public var hasMore: Bool?
-        public var url: String?
-        public var data: [Stripe.Connect.Person]?
-
-        public init(
-            object: String,
-            hasMore: Bool? = nil,
-            url: String? = nil,
-            data: [Stripe.Connect.Person]? = nil
-        ) {
-            self.object = object
-            self.hasMore = hasMore
-            self.url = url
-            self.data = data
-        }
-    }
-}

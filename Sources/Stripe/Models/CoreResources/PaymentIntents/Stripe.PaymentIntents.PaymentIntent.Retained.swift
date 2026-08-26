@@ -74,9 +74,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Cancellation {
     }
 }
 
-extension Stripe.PaymentIntents.PaymentIntent {
-    public enum Capture {}
-}
 
 extension Stripe.PaymentIntents.PaymentIntent.Capture {
     public enum Method: String, Codable, Sendable {
@@ -291,9 +288,6 @@ extension Stripe.PaymentIntents.PaymentIntent.Payment.Method {
     }
 }
 
-extension Stripe.PaymentIntents.PaymentIntent {
-    public enum Search {}
-}
 
 extension Stripe.PaymentIntents.PaymentIntent.Search {
     public struct Result: Codable, Hashable, Sendable {

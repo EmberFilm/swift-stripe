@@ -19,14 +19,14 @@ import Testing
 struct CheckoutSubscriptionDataTests {
 
     private static func pairs(
-        _ subscriptionData: Stripe.Checkout.Sessions.Create.SubscriptionData?
+        _ subscriptionData: Stripe.Checkout.Session.Create.Request.SubscriptionData?
     ) throws -> [String: String] {
-        let request = Stripe.Checkout.Sessions.Create.Request(
-            successUrl: "https://example.com/ok",
+        let request = Stripe.Checkout.Session.Create.Request(
             customer: "cus_1",
             lineItems: [.init(price: "price_1", quantity: 1)],
             mode: .subscription,
-            subscriptionData: subscriptionData
+            subscriptionData: subscriptionData,
+            successUrl: "https://example.com/ok"
         )
         return Dictionary(uniqueKeysWithValues: try StripeFormEncoder().pairs(of: request))
     }
@@ -52,7 +52,7 @@ struct CheckoutSubscriptionDataTests {
                 metadata: ["order_id": "o_1"],
                 onBehalfOf: "acct_1",
                 prorationBehavior: .createProrations,
-                transferData: .init(destination: "acct_2", amountPercent: 80),
+                transferData: .init(amountPercent: 80, destination: "acct_2"),
                 trialEnd: Date(timeIntervalSince1970: 1_617_235_200),
                 trialSettings: .init(endBehavior: .init(missingPaymentMethod: .cancel))
             )
@@ -81,7 +81,7 @@ struct CheckoutSubscriptionDataTests {
         let pairs = try Self.pairs(
             .init(
                 applicationFeePercent: 2.75,
-                transferData: .init(destination: "acct_1", amountPercent: 87.5)
+                transferData: .init(amountPercent: 87.5, destination: "acct_1")
             )
         )
         #expect(pairs["subscription_data[application_fee_percent]"] == "2.75")
@@ -91,7 +91,7 @@ struct CheckoutSubscriptionDataTests {
     @Test("a whole percentage does not gain a decimal point")
     func wholePercentages() throws {
         let pairs = try Self.pairs(
-            .init(transferData: .init(destination: "acct_1", amountPercent: 80))
+            .init(transferData: .init(amountPercent: 80, destination: "acct_1"))
         )
         #expect(pairs["subscription_data[transfer_data][amount_percent]"] == "80")
     }

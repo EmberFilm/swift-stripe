@@ -34,14 +34,3 @@ extension Stripe.Setup.Attempt {
     }
 }
 
-extension Setup.Error {
-    /// Represents the root object containing the setup error
-    public struct Container: Codable {
-        /// The error encountered during the SetupIntent confirmation attempt
-        public let setupError: Setup.Error?
-
-        enum CodingKeys: String, CodingKey {
-            case setupError
-        }
-    }
-}

@@ -158,6 +158,7 @@ private func leaf(_ value: Any) -> String? {
     case let v as String: return v
     case let v as Bool: return v ? "true" : "false"
     case let v as Date: return String(Int(v.timeIntervalSince1970))
+    case let v as Decimal: return v.description
     case let v as any BinaryInteger: return String(describing: v)
     case let v as Double: return v == v.rounded() ? String(Int(v)) : String(v)
     case let v as Float: return leaf(Double(v))

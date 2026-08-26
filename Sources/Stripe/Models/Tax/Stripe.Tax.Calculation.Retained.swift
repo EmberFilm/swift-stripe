@@ -52,18 +52,6 @@ extension Stripe.Tax.Calculation {
         }
     }
 
-    public struct CustomerTaxID: Codable, Hashable, Sendable {
-        /// The type of the tax ID.
-        public var type: String
-        /// The value of the tax ID.
-        public var value: String
-
-        public init(type: String, value: String) {
-            self.type = type
-            self.value = value
-        }
-    }
-
     public struct LineItem: Codable, Hashable, Sendable, Identifiable {
         public typealias ID = String
 
@@ -123,74 +111,6 @@ extension Stripe.Tax.Calculation {
             self.reference = reference
             self.taxBehavior = taxBehavior
             self.taxCode = taxCode
-        }
-    }
-
-    public struct LineItemList: Codable, Hashable, Sendable {
-        /// String describing the object type returned.
-        public var object: String
-        /// Details about each object.
-        public var data: [LineItem]
-        /// True if this list has another page of items after this one that can be fetched.
-        public var hasMore: Bool
-        /// The URL where this list can be accessed.
-        public var url: String
-
-        private enum CodingKeys: String, CodingKey {
-            case object
-            case data
-            case hasMore
-            case url
-        }
-
-        public init(
-            object: String,
-            data: [LineItem],
-            hasMore: Bool,
-            url: String
-        ) {
-            self.object = object
-            self.data = data
-            self.hasMore = hasMore
-            self.url = url
-        }
-    }
-
-    public struct TaxJurisdiction: Codable, Hashable, Sendable {
-        /// Two-letter country code (ISO 3166-1 alpha-2).
-        public var country: String
-        /// A human-readable name for the jurisdiction.
-        public var displayName: String
-        /// Indicates the level of the jurisdiction.
-        public var level: Level?
-        /// ISO 3166-2 subdivision code, without country prefix.
-        public var state: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case country
-            case displayName
-            case level
-            case state
-        }
-
-        public init(
-            country: String,
-            displayName: String,
-            level: Level? = nil,
-            state: String? = nil
-        ) {
-            self.country = country
-            self.displayName = displayName
-            self.level = level
-            self.state = state
-        }
-
-        public enum Level: String, Codable, Sendable {
-            case city
-            case country
-            case county
-            case district
-            case state
         }
     }
 

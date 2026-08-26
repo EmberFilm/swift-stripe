@@ -13,13 +13,13 @@ import NIOHTTP1
 /// Operations on the `/v1/products` resource.
 public protocol ProductsAPI: Sendable {
     func create(
-        _ request: Stripe.Products.Products.Create.Request,
+        _ request: Stripe.Products.Product.Create.Request,
         idempotencyKey: String?
     ) async throws -> Stripe.Products.Product
     func retrieve(id: Stripe.Products.Product.ID) async throws -> Stripe.Products.Product
     func update(
         id: Stripe.Products.Product.ID,
-        _ request: Stripe.Products.Products.Update.Request,
+        _ request: Stripe.Products.Product.Update.Request,
         idempotencyKey: String?
     ) async throws -> Stripe.Products.Product
     func delete(
@@ -27,8 +27,8 @@ public protocol ProductsAPI: Sendable {
         idempotencyKey: String?
     ) async throws -> DeletedObject<Stripe.Products.Product>
     func list(
-        _ request: Stripe.Products.Products.List.Request
-    ) async throws -> Stripe.Products.Products.List.Response
+        _ request: Stripe.Products.Product.List.Request
+    ) async throws -> Stripe.Products.Product.List.Response
 }
 
 public struct ProductsClient: ProductsAPI {
@@ -37,7 +37,7 @@ public struct ProductsClient: ProductsAPI {
     public init(api: StripeAPI) { self.api = api }
 
     public func create(
-        _ request: Stripe.Products.Products.Create.Request,
+        _ request: Stripe.Products.Product.Create.Request,
         idempotencyKey: String?
     ) async throws -> Stripe.Products.Product {
         try await api.send(.POST, "v1/products", body: request, idempotencyKey: idempotencyKey)
@@ -49,7 +49,7 @@ public struct ProductsClient: ProductsAPI {
 
     public func update(
         id: Stripe.Products.Product.ID,
-        _ request: Stripe.Products.Products.Update.Request,
+        _ request: Stripe.Products.Product.Update.Request,
         idempotencyKey: String?
     ) async throws -> Stripe.Products.Product {
         try await api.send(
@@ -68,8 +68,8 @@ public struct ProductsClient: ProductsAPI {
     }
 
     public func list(
-        _ request: Stripe.Products.Products.List.Request
-    ) async throws -> Stripe.Products.Products.List.Response {
+        _ request: Stripe.Products.Product.List.Request
+    ) async throws -> Stripe.Products.Product.List.Response {
         try await api.list("v1/products", parameters: request)
     }
 }
@@ -78,14 +78,14 @@ public struct ProductsClient: ProductsAPI {
 // no retry. See ``StripeAPI/isSafeToRetry(_:)``.
 extension ProductsAPI {
     public func create(
-        _ request: Stripe.Products.Products.Create.Request
+        _ request: Stripe.Products.Product.Create.Request
     ) async throws -> Stripe.Products.Product {
         try await create(request, idempotencyKey: nil)
     }
 
     public func update(
         id: Stripe.Products.Product.ID,
-        _ request: Stripe.Products.Products.Update.Request
+        _ request: Stripe.Products.Product.Update.Request
     ) async throws -> Stripe.Products.Product {
         try await update(id: id, request, idempotencyKey: nil)
     }

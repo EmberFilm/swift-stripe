@@ -739,27 +739,3 @@ extension Stripe.PaymentLink.Transfer {
     }
 }
 
-extension Stripe.PaymentLink {
-    public struct List: Codable, Hashable, Sendable {
-        /// String representing the object’s type. Objects of the same type share the same value. Always has the value `list`.
-        public var object: String
-        /// Details about each object.
-        public var data: [Stripe.PaymentLink]?
-        /// True if this list has another page of items after this one that can be fetched.
-        public var hasMore: Bool?
-        /// The URL where this list can be accessed.
-        public var url: String?
-
-        public init(
-            object: String,
-            data: [Stripe.PaymentLink]? = nil,
-            hasMore: Bool? = nil,
-            url: String? = nil
-        ) {
-            self.object = object
-            self.data = data
-            self.hasMore = hasMore
-            self.url = url
-        }
-    }
-}

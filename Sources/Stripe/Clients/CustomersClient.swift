@@ -16,23 +16,23 @@ import NIOHTTP1
 /// implementation that talks to Stripe.
 public protocol CustomersAPI: Sendable {
     func create(
-        _ request: Stripe.Customers.Create.Request,
+        _ request: Stripe.Customers.Customer.Create.Request,
         idempotencyKey: String?
     ) async throws -> Stripe.Customers.Customer
     func retrieve(id: Stripe.Customers.Customer.ID) async throws -> Stripe.Customers.Customer
     func update(
         id: Stripe.Customers.Customer.ID,
-        _ request: Stripe.Customers.Update.Request,
+        _ request: Stripe.Customers.Customer.Update.Request,
         idempotencyKey: String?
     ) async throws -> Stripe.Customers.Customer
     func delete(
         id: Stripe.Customers.Customer.ID,
         idempotencyKey: String?
     ) async throws -> DeletedObject<Stripe.Customers.Customer>
-    func list(_ request: Stripe.Customers.List.Request) async throws -> Stripe.Customers.List.Response
+    func list(_ request: Stripe.Customers.Customer.List.Request) async throws -> Stripe.Customers.Customer.List.Response
     func search(
-        _ request: Stripe.Customers.Search.Request
-    ) async throws -> Stripe.Customers.Search.Response
+        _ request: Stripe.Customers.Customer.Search.Request
+    ) async throws -> Stripe.Customers.Customer.Search.Response
 }
 
 public struct CustomersClient: CustomersAPI {
@@ -41,7 +41,7 @@ public struct CustomersClient: CustomersAPI {
     public init(api: StripeAPI) { self.api = api }
 
     public func create(
-        _ request: Stripe.Customers.Create.Request,
+        _ request: Stripe.Customers.Customer.Create.Request,
         idempotencyKey: String?
     ) async throws -> Stripe.Customers.Customer {
         try await api.send(.POST, "v1/customers", body: request, idempotencyKey: idempotencyKey)
@@ -55,7 +55,7 @@ public struct CustomersClient: CustomersAPI {
 
     public func update(
         id: Stripe.Customers.Customer.ID,
-        _ request: Stripe.Customers.Update.Request,
+        _ request: Stripe.Customers.Customer.Update.Request,
         idempotencyKey: String?
     ) async throws -> Stripe.Customers.Customer {
         try await api.send(
@@ -74,14 +74,14 @@ public struct CustomersClient: CustomersAPI {
     }
 
     public func list(
-        _ request: Stripe.Customers.List.Request
-    ) async throws -> Stripe.Customers.List.Response {
+        _ request: Stripe.Customers.Customer.List.Request
+    ) async throws -> Stripe.Customers.Customer.List.Response {
         try await api.list("v1/customers", parameters: request)
     }
 
     public func search(
-        _ request: Stripe.Customers.Search.Request
-    ) async throws -> Stripe.Customers.Search.Response {
+        _ request: Stripe.Customers.Customer.Search.Request
+    ) async throws -> Stripe.Customers.Customer.Search.Response {
         try await api.list("v1/customers/search", parameters: request)
     }
 }
@@ -90,14 +90,14 @@ public struct CustomersClient: CustomersAPI {
 // no retry. See ``StripeAPI/isSafeToRetry(_:)``.
 extension CustomersAPI {
     public func create(
-        _ request: Stripe.Customers.Create.Request
+        _ request: Stripe.Customers.Customer.Create.Request
     ) async throws -> Stripe.Customers.Customer {
         try await create(request, idempotencyKey: nil)
     }
 
     public func update(
         id: Stripe.Customers.Customer.ID,
-        _ request: Stripe.Customers.Update.Request
+        _ request: Stripe.Customers.Customer.Update.Request
     ) async throws -> Stripe.Customers.Customer {
         try await update(id: id, request, idempotencyKey: nil)
     }

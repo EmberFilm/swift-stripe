@@ -18,12 +18,6 @@ import Foundation
 // The Transaction struct is generated (Models/Generated). These are the nested types the
 // request layer still names under `Stripe.Billing.Credit.Balance.Transaction` that the generator spells differently.
 
-extension Stripe.Billing.Credit.Balance.Transaction {
-
-    public enum DebitType: String, Codable, Sendable {
-        case creditsApplied = "credits_applied"
-    }
-}
 
 extension Stripe.Billing.Credit.Balance.Transaction {
     public struct Amount: Codable, Hashable, Sendable {
@@ -87,30 +81,3 @@ extension Stripe.Billing.Credit.Balance.Transaction {
     }
 }
 
-extension Stripe.Billing.Credit.Balance.Transaction {
-    public struct List: Codable, Hashable, Sendable {
-        public var object: String
-        public var data: [Stripe.Billing.Credit.Balance.Transaction]?
-        public var hasMore: Bool?
-        public var url: String?
-
-        public init(
-            object: String,
-            data: [Stripe.Billing.Credit.Balance.Transaction]? = nil,
-            hasMore: Bool? = nil,
-            url: String? = nil
-        ) {
-            self.object = object
-            self.data = data
-            self.hasMore = hasMore
-            self.url = url
-        }
-
-        private enum CodingKeys: String, CodingKey {
-            case object
-            case data
-            case hasMore
-            case url
-        }
-    }
-}

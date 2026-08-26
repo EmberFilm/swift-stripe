@@ -51,6 +51,10 @@ jobs:
         env:
           STRIPE_OPENAPI_COMMIT: a99d7764af677e1ddecf18dccb0cb8f99ceda9a4
       - run: Scripts/model-drift.py spec3.sdk.json
+      - name: Generated sources match the pinned spec
+        run: |
+          Scripts/generate-models.py spec3.sdk.json --check
+          Scripts/generate-requests.py spec3.sdk.json --check
 
   linux:
     name: Linux / Swift ${{ matrix.swift }}

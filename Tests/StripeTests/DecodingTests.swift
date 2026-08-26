@@ -93,7 +93,7 @@ struct DecodingTests {
         """#.utf8)
 
         let page = try StripeAPI.decoder.decode(
-            Stripe.Customers.List.Response.self,
+            Stripe.Customers.Customer.List.Response.self,
             from: json
         )
         #expect(page.hasMore == true)

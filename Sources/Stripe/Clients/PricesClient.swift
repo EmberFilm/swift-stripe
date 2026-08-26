@@ -13,18 +13,18 @@ import NIOHTTP1
 /// Operations on the `/v1/prices` resource.
 public protocol PricesAPI: Sendable {
     func create(
-        _ request: Stripe.Products.Prices.Create.Request,
+        _ request: Stripe.Products.Price.Create.Request,
         idempotencyKey: String?
     ) async throws -> Stripe.Products.Price
     func retrieve(id: Stripe.Products.Price.ID) async throws -> Stripe.Products.Price
     func update(
         id: Stripe.Products.Price.ID,
-        _ request: Stripe.Products.Prices.Update.Request,
+        _ request: Stripe.Products.Price.Update.Request,
         idempotencyKey: String?
     ) async throws -> Stripe.Products.Price
     func list(
-        _ request: Stripe.Products.Prices.List.Request
-    ) async throws -> Stripe.Products.Prices.List.Response
+        _ request: Stripe.Products.Price.List.Request
+    ) async throws -> Stripe.Products.Price.List.Response
 }
 
 public struct PricesClient: PricesAPI {
@@ -33,7 +33,7 @@ public struct PricesClient: PricesAPI {
     public init(api: StripeAPI) { self.api = api }
 
     public func create(
-        _ request: Stripe.Products.Prices.Create.Request,
+        _ request: Stripe.Products.Price.Create.Request,
         idempotencyKey: String?
     ) async throws -> Stripe.Products.Price {
         try await api.send(.POST, "v1/prices", body: request, idempotencyKey: idempotencyKey)
@@ -45,7 +45,7 @@ public struct PricesClient: PricesAPI {
 
     public func update(
         id: Stripe.Products.Price.ID,
-        _ request: Stripe.Products.Prices.Update.Request,
+        _ request: Stripe.Products.Price.Update.Request,
         idempotencyKey: String?
     ) async throws -> Stripe.Products.Price {
         try await api.send(
@@ -57,8 +57,8 @@ public struct PricesClient: PricesAPI {
     }
 
     public func list(
-        _ request: Stripe.Products.Prices.List.Request
-    ) async throws -> Stripe.Products.Prices.List.Response {
+        _ request: Stripe.Products.Price.List.Request
+    ) async throws -> Stripe.Products.Price.List.Response {
         try await api.list("v1/prices", parameters: request)
     }
 }
@@ -67,14 +67,14 @@ public struct PricesClient: PricesAPI {
 // no retry. See ``StripeAPI/isSafeToRetry(_:)``.
 extension PricesAPI {
     public func create(
-        _ request: Stripe.Products.Prices.Create.Request
+        _ request: Stripe.Products.Price.Create.Request
     ) async throws -> Stripe.Products.Price {
         try await create(request, idempotencyKey: nil)
     }
 
     public func update(
         id: Stripe.Products.Price.ID,
-        _ request: Stripe.Products.Prices.Update.Request
+        _ request: Stripe.Products.Price.Update.Request
     ) async throws -> Stripe.Products.Price {
         try await update(id: id, request, idempotencyKey: nil)
     }
