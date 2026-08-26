@@ -224,8 +224,25 @@ nested type the generator now declares, and fix the request layer's references t
 reports. `Scripts/batch-cutover.py spec --max-refs N` does all of that for every hand resource
 the request layer references at most N times. The collision set is computed, not listed.
 
-Still hand-written: `event` (lenient union decoding the generator does not express) and
-`payment_source` (a union). Everything else is generated.
+Unions are generated too, in three shapes:
+
+- A required `type` string beside object-valued properties named after its values
+  (`payment_method_details`, `payment_method`, `next_action`, `refund.destination_details`, 22
+  shapes in all) becomes a struct whose `details` is an `indirect enum Details` with one case per
+  payload, `unknown(type:)` for a type the package does not model, and an accessor per case
+  (`charge.paymentMethodDetails?.details.card?.brand`). The struct's `type` stays as it was; the
+  `Details` enum decodes from the struct's own container, so its coding keys are `fileprivate`.
+  An expandable-id payload keeps its `Expandable` wrapper so an expanded object is not lost.
+- An `anyOf` of resources told apart by `object` (`payment_source`, `external_account`,
+  `balance_transaction_source`, `deleted_external_account` — `UNION_RESOURCES`) is an
+  `indirect enum` under `Stripe` with `unknown(object:)`; a property whose alternatives are a
+  subset of one of them is typed as that union.
+- `Event.Object` and `Event.Type` are emitted from the spec's 265 `x-stripeEvent` schemas: one
+  `Object` case per resource any event carries, decoded by `object` in `@inline(never)` groups
+  of eight (the musl stack rule), and one `Type` case per event. `Event` itself stays
+  hand-written for its lenient `type`/`rawType` decoding.
+
+`Scripts/model-drift.py` counts a `Details` case as the property it replaced.
 
 ## Generated requests
 

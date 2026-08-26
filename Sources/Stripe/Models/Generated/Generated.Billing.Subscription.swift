@@ -26,11 +26,11 @@ extension Stripe.Billing {
         public var billingCycleAnchor: Date?
         /// The fixed values used to calculate the `billing_cycle_anchor`.
         public var billingCycleAnchorConfig: BillingCycleAnchorConfig?
-        public var billingMode: BillingMode?
+        public var billingMode: Stripe.Shared.BillingMode?
         /// Billing schedules for this subscription.
         public var billingSchedules: [BillingSchedules]?
         /// Define thresholds at which an invoice will be sent, and the subscription advanced to a new billing period
-        public var billingThresholds: BillingThresholds?
+        public var billingThresholds: Stripe.Shared.BillingThresholds?
         /// A date in the future at which the subscription will automatically get canceled
         public var cancelAt: Date?
         /// Whether this subscription will (if `status=active`) or did (if `status=canceled`) cancel at the end of the current bil…
@@ -54,7 +54,7 @@ extension Stripe.Billing {
         /// ID of the default payment method for the subscription.
         @Expandable<Stripe.PaymentMethods.PaymentMethod, String> public var defaultPaymentMethod: String?
         /// ID of the default payment source for the subscription.
-        @Expandable<StripePaymentSource, String> public var defaultSource: String?
+        @Expandable<Stripe.PaymentSource, String> public var defaultSource: String?
         /// The tax rates that will apply to any subscription item that does not have `tax_rates` set.
         public var defaultTaxRates: [Stripe.Tax.Rate]?
         /// The subscription's description, meant to be displayable to the customer.
@@ -71,7 +71,7 @@ extension Stripe.Billing {
         /// If the object exists in live mode, the value is `true`.
         public var livemode: Bool?
         /// Settings for Managed Payments for this Subscription and resulting Invoices and PaymentIntents.
-        public var managedPayments: Stripe.Shared.ManagedPayments?
+        public var managedPayments: Stripe.Shared.SmorResourceManagedPayments?
         /// Set of key-value pairs that you can attach to an object.
         public var metadata: [String: String]?
         /// Specifies the approximate timestamp on which any pending invoice items will be billed according to the schedule provid…
@@ -98,7 +98,7 @@ extension Stripe.Billing {
         /// ID of the test clock this subscription belongs to.
         @Expandable<Stripe.Billing.TestClocks.TestClock, String> public var testClock: String?
         /// The account (if any) the subscription's payments will be attributed to for tax reporting, and where funds from each pa…
-        public var transferData: TransferData?
+        public var transferData: Stripe.Shared.TransferData?
         /// If the subscription has a trial, the end of that trial.
         public var trialEnd: Date?
         /// Settings related to subscription trials.
@@ -165,9 +165,9 @@ extension Stripe.Billing {
             automaticTax: AutomaticTax? = nil,
             billingCycleAnchor: Date? = nil,
             billingCycleAnchorConfig: BillingCycleAnchorConfig? = nil,
-            billingMode: BillingMode? = nil,
+            billingMode: Stripe.Shared.BillingMode? = nil,
             billingSchedules: [BillingSchedules]? = nil,
-            billingThresholds: BillingThresholds? = nil,
+            billingThresholds: Stripe.Shared.BillingThresholds? = nil,
             cancelAt: Date? = nil,
             cancelAtPeriodEnd: Bool? = nil,
             canceledAt: Date? = nil,
@@ -188,7 +188,7 @@ extension Stripe.Billing {
             items: Items? = nil,
             latestInvoice: String? = nil,
             livemode: Bool? = nil,
-            managedPayments: Stripe.Shared.ManagedPayments? = nil,
+            managedPayments: Stripe.Shared.SmorResourceManagedPayments? = nil,
             metadata: [String: String]? = nil,
             nextPendingInvoiceItemInvoice: Date? = nil,
             onBehalfOf: String? = nil,
@@ -202,7 +202,7 @@ extension Stripe.Billing {
             startDate: Date? = nil,
             status: Status? = nil,
             testClock: String? = nil,
-            transferData: TransferData? = nil,
+            transferData: Stripe.Shared.TransferData? = nil,
             trialEnd: Date? = nil,
             trialSettings: TrialSettings? = nil,
             trialStart: Date? = nil
@@ -335,38 +335,6 @@ extension Stripe.Billing {
             }
         }
 
-        /// The billing mode of the subscription.
-        public struct BillingMode: Codable, Hashable, Sendable {
-            /// Configure behavior for flexible billing mode
-            public var flexible: Stripe.Shared.Flexible?
-            /// Controls how prorations and invoices for subscriptions are calculated and orchestrated.
-            public var `type`: Type?
-            /// Details on when the current billing_mode was adopted.
-            public var updatedAt: Date?
-
-            private enum CodingKeys: String, CodingKey {
-                case flexible
-                case `type`
-                case updatedAt
-            }
-
-            public init(
-                flexible: Stripe.Shared.Flexible? = nil,
-                `type`: Type? = nil,
-                updatedAt: Date? = nil
-            ) {
-                self.flexible = flexible
-                self.`type` = `type`
-                self.updatedAt = updatedAt
-            }
-
-            /// Controls how prorations and invoices for subscriptions are calculated and orchestrated.
-            public enum `Type`: String, Codable, Hashable, Sendable {
-                case classic
-                case flexible
-            }
-        }
-
         /// Sets the billing schedule for the subscription.
         public struct BillingSchedules: Codable, Hashable, Sendable {
             /// Specifies which subscription items the billing schedule applies to.
@@ -476,26 +444,6 @@ extension Stripe.Billing {
                         case year
                     }
                 }
-            }
-        }
-
-        public struct BillingThresholds: Codable, Hashable, Sendable {
-            /// Monetary threshold that triggers the subscription to create an invoice
-            public var amountGte: Int?
-            /// Indicates if the `billing_cycle_anchor` should be reset when a threshold is reached.
-            public var resetBillingCycleAnchor: Bool?
-
-            private enum CodingKeys: String, CodingKey {
-                case amountGte
-                case resetBillingCycleAnchor
-            }
-
-            public init(
-                amountGte: Int? = nil,
-                resetBillingCycleAnchor: Bool? = nil
-            ) {
-                self.amountGte = amountGte
-                self.resetBillingCycleAnchor = resetBillingCycleAnchor
             }
         }
 
@@ -1013,26 +961,6 @@ extension Stripe.Billing {
                 presentmentCurrency: String? = nil
             ) {
                 self.presentmentCurrency = presentmentCurrency
-            }
-        }
-
-        public struct TransferData: Codable, Hashable, Sendable {
-            /// A non-negative decimal between 0 and 100, with at most two decimal places.
-            public var amountPercent: Double?
-            /// The account where funds from the payment will be transferred to upon payment success.
-            @Expandable<Stripe.Connect.Account, String> public var destination: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case amountPercent
-                case destination
-            }
-
-            public init(
-                amountPercent: Double? = nil,
-                destination: String? = nil
-            ) {
-                self.amountPercent = amountPercent
-                self._destination = Expandable(id: destination)
             }
         }
 

@@ -40,6 +40,13 @@ def swift_fields(path: pathlib.Path, struct: str) -> set[str]:
     # `public var `type`: …` — a keyword used as a property name is back-ticked.
     names = set(re.findall(r"public (?:var|let) `?(\w+)`?\s*:", body))
     names |= set(re.findall(r"public (?:var|let) `?(\w+)`?\s*$", body, re.M))
+    # A type-discriminated resource carries its payload properties as the cases of `Details`.
+    # The root's own enum sits one level inside the struct; nested structs' are deeper.
+    m = re.search(r"^(?: {4}| {8})public indirect enum (?:Details|Kind): Hashable, Sendable \{\n(.*?)\n\s+fileprivate init\(type:", src[src.index(f"public struct {struct}"):], re.S | re.M)
+    if m:
+        names |= set(re.findall(r"case `?(\w+)`?\(", m.group(1)))
+        names.discard("unknown")
+    names.discard("details")
     return names
 
 # Properties this package adds on purpose, which will never appear in the spec.

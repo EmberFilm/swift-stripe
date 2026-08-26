@@ -81,7 +81,7 @@ extension Stripe.Checkout {
         /// The IETF language tag of the locale Checkout is displayed in.
         public var locale: Locale?
         /// Settings for Managed Payments for this Checkout Session and resulting PaymentIntents, Invoices, and Subscriptions.
-        public var managedPayments: ManagedPayments?
+        public var managedPayments: Stripe.Shared.ManagedPayments?
         /// Set of key-value pairs that you can attach to an object.
         public var metadata: [String: String]?
         /// The mode of the Checkout Session.
@@ -250,7 +250,7 @@ extension Stripe.Checkout {
             lineItems: LineItems? = nil,
             livemode: Bool? = nil,
             locale: Locale? = nil,
-            managedPayments: ManagedPayments? = nil,
+            managedPayments: Stripe.Shared.ManagedPayments? = nil,
             metadata: [String: String]? = nil,
             mode: Mode? = nil,
             nameCollection: NameCollection? = nil,
@@ -838,43 +838,56 @@ extension Stripe.Checkout {
         }
 
         public struct CustomFields: Codable, Hashable, Sendable {
-            public var dropdown: Dropdown?
             /// String of your choice that your integration can use to reconcile this field.
             public var key: String?
             public var label: Label?
-            public var numeric: Numeric?
             /// Whether the customer is required to complete the field before completing the Checkout Session.
             public var optional: Bool?
-            public var text: Text?
             /// The type of the field.
             public var `type`: Type?
+            /// The payload `type` selects.
+            public var details: Details
 
-            private enum CodingKeys: String, CodingKey {
-                case dropdown
+            fileprivate enum CodingKeys: String, CodingKey {
                 case key
                 case label
-                case numeric
                 case optional
-                case text
                 case `type`
+                case dropdown
+                case numeric
+                case text
             }
 
             public init(
-                dropdown: Dropdown? = nil,
                 key: String? = nil,
                 label: Label? = nil,
-                numeric: Numeric? = nil,
                 optional: Bool? = nil,
-                text: Text? = nil,
-                `type`: Type? = nil
+                `type`: Type? = nil,
+                details: Details
             ) {
-                self.dropdown = dropdown
                 self.key = key
                 self.label = label
-                self.numeric = numeric
                 self.optional = optional
-                self.text = text
                 self.`type` = `type`
+                self.details = details
+            }
+
+            public init(from decoder: any Decoder) throws {
+                let container = try decoder.container(keyedBy: CodingKeys.self)
+                self.key = try container.decodeIfPresent(String.self, forKey: .key)
+                self.label = try container.decodeIfPresent(Label.self, forKey: .label)
+                self.optional = try container.decodeIfPresent(Bool.self, forKey: .optional)
+                self.`type` = try container.decodeIfPresent(Type.self, forKey: .`type`)
+                self.details = try Details(type: try container.decodeIfPresent(String.self, forKey: .type) ?? "", from: container)
+            }
+
+            public func encode(to encoder: any Encoder) throws {
+                var container = encoder.container(keyedBy: CodingKeys.self)
+                try container.encodeIfPresent(key, forKey: .key)
+                try container.encodeIfPresent(label, forKey: .label)
+                try container.encodeIfPresent(optional, forKey: .optional)
+                try container.encodeIfPresent(`type`, forKey: .`type`)
+                try details.encode(into: &container)
             }
 
             /// The type of the field.
@@ -1006,6 +1019,39 @@ extension Stripe.Checkout {
                     self.maximumLength = maximumLength
                     self.minimumLength = minimumLength
                     self.value = value
+                }
+            }
+
+            /// The payload `type` selects; `unknown` carries a type this package does not model.
+            public indirect enum Details: Hashable, Sendable {
+                case dropdown(Dropdown)
+                case numeric(Numeric)
+                case text(Text)
+                case unknown(type: String)
+
+                public var dropdown: Dropdown? { if case .dropdown(let value) = self { return value }; return nil }
+                public var numeric: Numeric? { if case .numeric(let value) = self { return value }; return nil }
+                public var text: Text? { if case .text(let value) = self { return value }; return nil }
+
+                fileprivate init(type: String, from container: KeyedDecodingContainer<CodingKeys>) throws {
+                    switch type {
+                    case "dropdown":
+                        if let value = try container.decodeIfPresent(Dropdown.self, forKey: .dropdown) { self = .dropdown(value) } else { self = .unknown(type: type) }
+                    case "numeric":
+                        if let value = try container.decodeIfPresent(Numeric.self, forKey: .numeric) { self = .numeric(value) } else { self = .unknown(type: type) }
+                    case "text":
+                        if let value = try container.decodeIfPresent(Text.self, forKey: .text) { self = .text(value) } else { self = .unknown(type: type) }
+                    default: self = .unknown(type: type)
+                    }
+                }
+
+                fileprivate func encode(into container: inout KeyedEncodingContainer<CodingKeys>) throws {
+                    switch self {
+                    case .dropdown(let value): try container.encode(value, forKey: .dropdown)
+                    case .numeric(let value): try container.encode(value, forKey: .numeric)
+                    case .text(let value): try container.encode(value, forKey: .text)
+                    default: break
+                    }
                 }
             }
         }
@@ -1351,7 +1397,7 @@ extension Stripe.Checkout {
                 /// Set of key-value pairs that you can attach to an object.
                 public var metadata: [String: String]?
                 /// Options for invoice PDF rendering.
-                public var renderingOptions: RenderingOptions?
+                public var renderingOptions: Stripe.Shared.RenderingOptions?
 
                 private enum CodingKeys: String, CodingKey {
                     case accountTaxIds
@@ -1370,7 +1416,7 @@ extension Stripe.Checkout {
                     footer: String? = nil,
                     issuer: Stripe.Shared.ConnectAccountReference? = nil,
                     metadata: [String: String]? = nil,
-                    renderingOptions: RenderingOptions? = nil
+                    renderingOptions: Stripe.Shared.RenderingOptions? = nil
                 ) {
                     self._accountTaxIds = ExpandableCollection(ids: accountTaxIds)
                     self.customFields = customFields
@@ -1379,26 +1425,6 @@ extension Stripe.Checkout {
                     self.issuer = issuer
                     self.metadata = metadata
                     self.renderingOptions = renderingOptions
-                }
-
-                public struct RenderingOptions: Codable, Hashable, Sendable {
-                    /// How line-item prices and amounts will be displayed with respect to tax on invoice PDFs.
-                    public var amountTaxDisplay: String?
-                    /// ID of the invoice rendering template to be used for the generated invoice.
-                    public var template: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case amountTaxDisplay
-                        case template
-                    }
-
-                    public init(
-                        amountTaxDisplay: String? = nil,
-                        template: String? = nil
-                    ) {
-                        self.amountTaxDisplay = amountTaxDisplay
-                        self.template = template
-                    }
                 }
             }
         }
@@ -1431,21 +1457,6 @@ extension Stripe.Checkout {
                 self.data = data
                 self.hasMore = hasMore
                 self.url = url
-            }
-        }
-
-        public struct ManagedPayments: Codable, Hashable, Sendable {
-            /// Set to `true` to enable Managed Payments, Stripe's merchant of record solution, for this session.
-            public var enabled: Bool?
-
-            private enum CodingKeys: String, CodingKey {
-                case enabled
-            }
-
-            public init(
-                enabled: Bool? = nil
-            ) {
-                self.enabled = enabled
             }
         }
 

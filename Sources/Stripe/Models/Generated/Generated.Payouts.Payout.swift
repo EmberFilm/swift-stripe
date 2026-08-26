@@ -36,7 +36,7 @@ extension Stripe.Payouts {
         /// An arbitrary string attached to the object.
         public var description: String?
         /// ID of the bank account or card the payout is sent to.
-        public var destination: String?
+        @Expandable<Stripe.ExternalAccount, String> public var destination: String?
         /// If the payout fails or cancels, this is the ID of the balance transaction that reverses the initial balance transactio…
         @Expandable<Stripe.Balance.Transaction, String> public var failureBalanceTransaction: String?
         /// Error code that provides a reason for a payout failure, if available.
@@ -138,7 +138,7 @@ extension Stripe.Payouts {
             self.created = created
             self.currency = currency
             self.description = description
-            self.destination = destination
+            self._destination = Expandable(id: destination)
             self._failureBalanceTransaction = Expandable(id: failureBalanceTransaction)
             self.failureCode = failureCode
             self.failureMessage = failureMessage

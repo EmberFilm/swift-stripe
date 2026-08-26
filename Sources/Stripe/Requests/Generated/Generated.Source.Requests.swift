@@ -544,7 +544,7 @@ extension Source.Detach {
         }
     }
 
-    public typealias Response = StripePaymentSource
+    public typealias Response = Stripe.PaymentSource
 }
 
 // GET /v1/sources/{source}

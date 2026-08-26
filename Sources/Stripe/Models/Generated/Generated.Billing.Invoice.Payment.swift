@@ -80,32 +80,36 @@ extension Stripe.Billing.Invoice {
         }
 
         public struct Payment: Codable, Hashable, Sendable {
-            /// ID of the successful charge for this payment when `type` is `charge`.Note: charge is only surfaced if the charge objec…
-            @Expandable<Stripe.Charges.Charge, String> public var charge: String?
-            /// ID of the PaymentIntent associated with this payment when `type` is `payment_intent`.
-            @Expandable<Stripe.PaymentIntents.PaymentIntent, String> public var paymentIntent: String?
-            /// ID of the PaymentRecord associated with this payment when `type` is `payment_record`.
-            public var paymentRecord: String?
             /// Type of payment object associated with this invoice payment.
             public var `type`: Type?
+            /// The payload `type` selects.
+            public var details: Details
 
-            private enum CodingKeys: String, CodingKey {
+            fileprivate enum CodingKeys: String, CodingKey {
+                case `type`
                 case charge
                 case paymentIntent
                 case paymentRecord
-                case `type`
             }
 
             public init(
-                charge: String? = nil,
-                paymentIntent: String? = nil,
-                paymentRecord: String? = nil,
-                `type`: Type? = nil
+                `type`: Type? = nil,
+                details: Details
             ) {
-                self._charge = Expandable(id: charge)
-                self._paymentIntent = Expandable(id: paymentIntent)
-                self.paymentRecord = paymentRecord
                 self.`type` = `type`
+                self.details = details
+            }
+
+            public init(from decoder: any Decoder) throws {
+                let container = try decoder.container(keyedBy: CodingKeys.self)
+                self.`type` = try container.decodeIfPresent(Type.self, forKey: .`type`)
+                self.details = try Details(type: try container.decodeIfPresent(String.self, forKey: .type) ?? "", from: container)
+            }
+
+            public func encode(to encoder: any Encoder) throws {
+                var container = encoder.container(keyedBy: CodingKeys.self)
+                try container.encodeIfPresent(`type`, forKey: .`type`)
+                try details.encode(into: &container)
             }
 
             /// Type of payment object associated with this invoice payment.
@@ -113,6 +117,41 @@ extension Stripe.Billing.Invoice {
                 case charge
                 case paymentIntent = "payment_intent"
                 case paymentRecord = "payment_record"
+            }
+
+            /// The payload `type` selects; `unknown` carries a type this package does not model.
+            public indirect enum Details: Hashable, Sendable {
+                case charge(Expandable<Stripe.Charges.Charge, String>)
+                case paymentIntent(Expandable<Stripe.PaymentIntents.PaymentIntent, String>)
+                case paymentRecord(String)
+                case unknown(type: String)
+
+                public var charge: Expandable<Stripe.Charges.Charge, String>? { if case .charge(let value) = self { return value }; return nil }
+                public var paymentIntent: Expandable<Stripe.PaymentIntents.PaymentIntent, String>? { if case .paymentIntent(let value) = self { return value }; return nil }
+                public var paymentRecord: String? { if case .paymentRecord(let value) = self { return value }; return nil }
+
+                fileprivate init(type: String, from container: KeyedDecodingContainer<CodingKeys>) throws {
+                    switch type {
+                    case "charge":
+                        let value = try container.decode(Expandable<Stripe.Charges.Charge, String>.self, forKey: .charge)
+                        if value.wrappedValue != nil || value.projectedValue != nil { self = .charge(value) } else { self = .unknown(type: type) }
+                    case "payment_intent":
+                        let value = try container.decode(Expandable<Stripe.PaymentIntents.PaymentIntent, String>.self, forKey: .paymentIntent)
+                        if value.wrappedValue != nil || value.projectedValue != nil { self = .paymentIntent(value) } else { self = .unknown(type: type) }
+                    case "payment_record":
+                        if let value = try container.decodeIfPresent(String.self, forKey: .paymentRecord) { self = .paymentRecord(value) } else { self = .unknown(type: type) }
+                    default: self = .unknown(type: type)
+                    }
+                }
+
+                fileprivate func encode(into container: inout KeyedEncodingContainer<CodingKeys>) throws {
+                    switch self {
+                    case .charge(let value): try container.encode(value, forKey: .charge)
+                    case .paymentIntent(let value): try container.encode(value, forKey: .paymentIntent)
+                    case .paymentRecord(let value): try container.encode(value, forKey: .paymentRecord)
+                    default: break
+                    }
+                }
             }
         }
 

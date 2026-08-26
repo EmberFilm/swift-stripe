@@ -20,7 +20,7 @@ extension Stripe.Billing.Subscription {
         /// The time period the subscription item has been billed for.
         public var billedUntil: Date?
         /// Define thresholds at which an invoice will be sent, and the related subscription advanced to a new billing period
-        public var billingThresholds: BillingThresholds?
+        public var billingThresholds: Stripe.Shared.SubscriptionItemBillingThresholds?
         /// Time at which the object was created.
         public var created: Int?
         /// The end time of this subscription item's current billing period.
@@ -31,7 +31,7 @@ extension Stripe.Billing.Subscription {
         @ExpandableCollection<Stripe.Shared.Discount> public var discounts: [String]?
         /// Set of key-value pairs that you can attach to an object.
         public var metadata: [String: String]?
-        public var plan: Stripe.Billing.Plan?
+        @Boxed public var plan: Stripe.Billing.Plan?
         @Boxed public var price: Stripe.Products.Price?
         /// The quantity of the plan to which the customer should be subscribed.
         public var quantity: Int?
@@ -61,7 +61,7 @@ extension Stripe.Billing.Subscription {
             id: ID,
             object: String,
             billedUntil: Date? = nil,
-            billingThresholds: BillingThresholds? = nil,
+            billingThresholds: Stripe.Shared.SubscriptionItemBillingThresholds? = nil,
             created: Int? = nil,
             currentPeriodEnd: Date? = nil,
             currentPeriodStart: Date? = nil,
@@ -82,26 +82,11 @@ extension Stripe.Billing.Subscription {
             self.currentPeriodStart = currentPeriodStart
             self._discounts = ExpandableCollection(ids: discounts)
             self.metadata = metadata
-            self.plan = plan
+            self._plan = Boxed(wrappedValue: plan)
             self._price = Boxed(wrappedValue: price)
             self.quantity = quantity
             self.subscription = subscription
             self.taxRates = taxRates
-        }
-
-        public struct BillingThresholds: Codable, Hashable, Sendable {
-            /// Usage threshold that triggers the subscription to create an invoice
-            public var usageGte: Int?
-
-            private enum CodingKeys: String, CodingKey {
-                case usageGte
-            }
-
-            public init(
-                usageGte: Int? = nil
-            ) {
-                self.usageGte = usageGte
-            }
         }
     }
 }

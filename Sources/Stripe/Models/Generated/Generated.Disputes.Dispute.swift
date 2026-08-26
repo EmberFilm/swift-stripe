@@ -667,33 +667,37 @@ extension Stripe.Disputes {
         }
 
         public struct PaymentMethodDetails: Codable, Hashable, Sendable {
-            public var amazonPay: AmazonPay?
-            public var card: Card?
-            public var klarna: Klarna?
-            public var paypal: Paypal?
             /// Payment method type.
             public var `type`: Type?
+            /// The payload `type` selects.
+            public var details: Details
 
-            private enum CodingKeys: String, CodingKey {
+            fileprivate enum CodingKeys: String, CodingKey {
+                case `type`
                 case amazonPay
                 case card
                 case klarna
                 case paypal
-                case `type`
             }
 
             public init(
-                amazonPay: AmazonPay? = nil,
-                card: Card? = nil,
-                klarna: Klarna? = nil,
-                paypal: Paypal? = nil,
-                `type`: Type? = nil
+                `type`: Type? = nil,
+                details: Details
             ) {
-                self.amazonPay = amazonPay
-                self.card = card
-                self.klarna = klarna
-                self.paypal = paypal
                 self.`type` = `type`
+                self.details = details
+            }
+
+            public init(from decoder: any Decoder) throws {
+                let container = try decoder.container(keyedBy: CodingKeys.self)
+                self.`type` = try container.decodeIfPresent(Type.self, forKey: .`type`)
+                self.details = try Details(type: try container.decodeIfPresent(String.self, forKey: .type) ?? "", from: container)
+            }
+
+            public func encode(to encoder: any Encoder) throws {
+                var container = encoder.container(keyedBy: CodingKeys.self)
+                try container.encodeIfPresent(`type`, forKey: .`type`)
+                try details.encode(into: &container)
             }
 
             /// Payment method type.
@@ -801,6 +805,44 @@ extension Stripe.Disputes {
                 ) {
                     self.caseId = caseId
                     self.reasonCode = reasonCode
+                }
+            }
+
+            /// The payload `type` selects; `unknown` carries a type this package does not model.
+            public indirect enum Details: Hashable, Sendable {
+                case amazonPay(AmazonPay)
+                case card(Card)
+                case klarna(Klarna)
+                case paypal(Paypal)
+                case unknown(type: String)
+
+                public var amazonPay: AmazonPay? { if case .amazonPay(let value) = self { return value }; return nil }
+                public var card: Card? { if case .card(let value) = self { return value }; return nil }
+                public var klarna: Klarna? { if case .klarna(let value) = self { return value }; return nil }
+                public var paypal: Paypal? { if case .paypal(let value) = self { return value }; return nil }
+
+                fileprivate init(type: String, from container: KeyedDecodingContainer<CodingKeys>) throws {
+                    switch type {
+                    case "amazon_pay":
+                        if let value = try container.decodeIfPresent(AmazonPay.self, forKey: .amazonPay) { self = .amazonPay(value) } else { self = .unknown(type: type) }
+                    case "card":
+                        if let value = try container.decodeIfPresent(Card.self, forKey: .card) { self = .card(value) } else { self = .unknown(type: type) }
+                    case "klarna":
+                        if let value = try container.decodeIfPresent(Klarna.self, forKey: .klarna) { self = .klarna(value) } else { self = .unknown(type: type) }
+                    case "paypal":
+                        if let value = try container.decodeIfPresent(Paypal.self, forKey: .paypal) { self = .paypal(value) } else { self = .unknown(type: type) }
+                    default: self = .unknown(type: type)
+                    }
+                }
+
+                fileprivate func encode(into container: inout KeyedEncodingContainer<CodingKeys>) throws {
+                    switch self {
+                    case .amazonPay(let value): try container.encode(value, forKey: .amazonPay)
+                    case .card(let value): try container.encode(value, forKey: .card)
+                    case .klarna(let value): try container.encode(value, forKey: .klarna)
+                    case .paypal(let value): try container.encode(value, forKey: .paypal)
+                    default: break
+                    }
                 }
             }
         }

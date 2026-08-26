@@ -137,42 +137,45 @@ extension Stripe.Fraud {
 
         /// Event reported for this payment evaluation.
         public struct Events: Codable, Hashable, Sendable {
-            public var disputeOpened: DisputeOpened?
-            public var earlyFraudWarningReceived: EarlyFraudWarningReceived?
             /// Timestamp when the event occurred.
             public var occurredAt: Date?
-            public var refunded: Refunded?
             /// Indicates the type of event attached to the payment evaluation.
             public var `type`: Type?
-            public var userInterventionRaised: UserInterventionRaised?
-            public var userInterventionResolved: UserInterventionResolved?
+            /// The payload `type` selects.
+            public var details: Details
 
-            private enum CodingKeys: String, CodingKey {
+            fileprivate enum CodingKeys: String, CodingKey {
+                case occurredAt
+                case `type`
                 case disputeOpened
                 case earlyFraudWarningReceived
-                case occurredAt
                 case refunded
-                case `type`
                 case userInterventionRaised
                 case userInterventionResolved
             }
 
             public init(
-                disputeOpened: DisputeOpened? = nil,
-                earlyFraudWarningReceived: EarlyFraudWarningReceived? = nil,
                 occurredAt: Date? = nil,
-                refunded: Refunded? = nil,
                 `type`: Type? = nil,
-                userInterventionRaised: UserInterventionRaised? = nil,
-                userInterventionResolved: UserInterventionResolved? = nil
+                details: Details
             ) {
-                self.disputeOpened = disputeOpened
-                self.earlyFraudWarningReceived = earlyFraudWarningReceived
                 self.occurredAt = occurredAt
-                self.refunded = refunded
                 self.`type` = `type`
-                self.userInterventionRaised = userInterventionRaised
-                self.userInterventionResolved = userInterventionResolved
+                self.details = details
+            }
+
+            public init(from decoder: any Decoder) throws {
+                let container = try decoder.container(keyedBy: CodingKeys.self)
+                self.occurredAt = try container.decodeIfPresent(Date.self, forKey: .occurredAt)
+                self.`type` = try container.decodeIfPresent(Type.self, forKey: .`type`)
+                self.details = try Details(type: try container.decodeIfPresent(String.self, forKey: .type) ?? "", from: container)
+            }
+
+            public func encode(to encoder: any Encoder) throws {
+                var container = encoder.container(keyedBy: CodingKeys.self)
+                try container.encodeIfPresent(occurredAt, forKey: .occurredAt)
+                try container.encodeIfPresent(`type`, forKey: .`type`)
+                try details.encode(into: &container)
             }
 
             /// Indicates the type of event attached to the payment evaluation.
@@ -358,38 +361,90 @@ extension Stripe.Fraud {
                     case passed
                 }
             }
+
+            /// The payload `type` selects; `unknown` carries a type this package does not model.
+            public indirect enum Details: Hashable, Sendable {
+                case disputeOpened(DisputeOpened)
+                case earlyFraudWarningReceived(EarlyFraudWarningReceived)
+                case refunded(Refunded)
+                case userInterventionRaised(UserInterventionRaised)
+                case userInterventionResolved(UserInterventionResolved)
+                case unknown(type: String)
+
+                public var disputeOpened: DisputeOpened? { if case .disputeOpened(let value) = self { return value }; return nil }
+                public var earlyFraudWarningReceived: EarlyFraudWarningReceived? { if case .earlyFraudWarningReceived(let value) = self { return value }; return nil }
+                public var refunded: Refunded? { if case .refunded(let value) = self { return value }; return nil }
+                public var userInterventionRaised: UserInterventionRaised? { if case .userInterventionRaised(let value) = self { return value }; return nil }
+                public var userInterventionResolved: UserInterventionResolved? { if case .userInterventionResolved(let value) = self { return value }; return nil }
+
+                fileprivate init(type: String, from container: KeyedDecodingContainer<CodingKeys>) throws {
+                    switch type {
+                    case "dispute_opened":
+                        if let value = try container.decodeIfPresent(DisputeOpened.self, forKey: .disputeOpened) { self = .disputeOpened(value) } else { self = .unknown(type: type) }
+                    case "early_fraud_warning_received":
+                        if let value = try container.decodeIfPresent(EarlyFraudWarningReceived.self, forKey: .earlyFraudWarningReceived) { self = .earlyFraudWarningReceived(value) } else { self = .unknown(type: type) }
+                    case "refunded":
+                        if let value = try container.decodeIfPresent(Refunded.self, forKey: .refunded) { self = .refunded(value) } else { self = .unknown(type: type) }
+                    case "user_intervention_raised":
+                        if let value = try container.decodeIfPresent(UserInterventionRaised.self, forKey: .userInterventionRaised) { self = .userInterventionRaised(value) } else { self = .unknown(type: type) }
+                    case "user_intervention_resolved":
+                        if let value = try container.decodeIfPresent(UserInterventionResolved.self, forKey: .userInterventionResolved) { self = .userInterventionResolved(value) } else { self = .unknown(type: type) }
+                    default: self = .unknown(type: type)
+                    }
+                }
+
+                fileprivate func encode(into container: inout KeyedEncodingContainer<CodingKeys>) throws {
+                    switch self {
+                    case .disputeOpened(let value): try container.encode(value, forKey: .disputeOpened)
+                    case .earlyFraudWarningReceived(let value): try container.encode(value, forKey: .earlyFraudWarningReceived)
+                    case .refunded(let value): try container.encode(value, forKey: .refunded)
+                    case .userInterventionRaised(let value): try container.encode(value, forKey: .userInterventionRaised)
+                    case .userInterventionResolved(let value): try container.encode(value, forKey: .userInterventionResolved)
+                    default: break
+                    }
+                }
+            }
         }
 
         /// Outcome details for this payment evaluation.
         public struct Outcome: Codable, Hashable, Sendable {
-            public var merchantBlocked: MerchantBlocked?
             /// The PaymentIntent ID associated with the payment evaluation.
             public var paymentIntentId: String?
-            public var rejected: Rejected?
-            public var succeeded: Succeeded?
             /// Indicates the outcome of the payment evaluation.
             public var `type`: Type?
+            /// The payload `type` selects.
+            public var details: Details
 
-            private enum CodingKeys: String, CodingKey {
-                case merchantBlocked
+            fileprivate enum CodingKeys: String, CodingKey {
                 case paymentIntentId
+                case `type`
+                case merchantBlocked
                 case rejected
                 case succeeded
-                case `type`
             }
 
             public init(
-                merchantBlocked: MerchantBlocked? = nil,
                 paymentIntentId: String? = nil,
-                rejected: Rejected? = nil,
-                succeeded: Succeeded? = nil,
-                `type`: Type? = nil
+                `type`: Type? = nil,
+                details: Details
             ) {
-                self.merchantBlocked = merchantBlocked
                 self.paymentIntentId = paymentIntentId
-                self.rejected = rejected
-                self.succeeded = succeeded
                 self.`type` = `type`
+                self.details = details
+            }
+
+            public init(from decoder: any Decoder) throws {
+                let container = try decoder.container(keyedBy: CodingKeys.self)
+                self.paymentIntentId = try container.decodeIfPresent(String.self, forKey: .paymentIntentId)
+                self.`type` = try container.decodeIfPresent(Type.self, forKey: .`type`)
+                self.details = try Details(type: try container.decodeIfPresent(String.self, forKey: .type) ?? "", from: container)
+            }
+
+            public func encode(to encoder: any Encoder) throws {
+                var container = encoder.container(keyedBy: CodingKeys.self)
+                try container.encodeIfPresent(paymentIntentId, forKey: .paymentIntentId)
+                try container.encodeIfPresent(`type`, forKey: .`type`)
+                try details.encode(into: &container)
             }
 
             /// Indicates the outcome of the payment evaluation.
@@ -572,6 +627,41 @@ extension Stripe.Fraud {
                         case pass
                         case unavailable
                         case unchecked
+                    }
+                }
+            }
+
+            /// The payload `type` selects; `unknown` carries a type this package does not model.
+            public indirect enum Details: Hashable, Sendable {
+                case merchantBlocked(MerchantBlocked)
+                case rejected(Rejected)
+                case succeeded(Succeeded)
+                case failed
+                case unknown(type: String)
+
+                public var merchantBlocked: MerchantBlocked? { if case .merchantBlocked(let value) = self { return value }; return nil }
+                public var rejected: Rejected? { if case .rejected(let value) = self { return value }; return nil }
+                public var succeeded: Succeeded? { if case .succeeded(let value) = self { return value }; return nil }
+
+                fileprivate init(type: String, from container: KeyedDecodingContainer<CodingKeys>) throws {
+                    switch type {
+                    case "merchant_blocked":
+                        if let value = try container.decodeIfPresent(MerchantBlocked.self, forKey: .merchantBlocked) { self = .merchantBlocked(value) } else { self = .unknown(type: type) }
+                    case "rejected":
+                        if let value = try container.decodeIfPresent(Rejected.self, forKey: .rejected) { self = .rejected(value) } else { self = .unknown(type: type) }
+                    case "succeeded":
+                        if let value = try container.decodeIfPresent(Succeeded.self, forKey: .succeeded) { self = .succeeded(value) } else { self = .unknown(type: type) }
+                    case "failed": self = .failed
+                    default: self = .unknown(type: type)
+                    }
+                }
+
+                fileprivate func encode(into container: inout KeyedEncodingContainer<CodingKeys>) throws {
+                    switch self {
+                    case .merchantBlocked(let value): try container.encode(value, forKey: .merchantBlocked)
+                    case .rejected(let value): try container.encode(value, forKey: .rejected)
+                    case .succeeded(let value): try container.encode(value, forKey: .succeeded)
+                    default: break
                     }
                 }
             }

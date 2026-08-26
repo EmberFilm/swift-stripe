@@ -331,13 +331,23 @@ RESOURCE_TYPES: dict[str, str] = {
     # namespace `Stripe.Customers.CashBalance`. This is the type the hand Customer used.
     "discount": "Stripe.Products.Discount",
     "deleted_discount": "Stripe.Products.Discount",
-    "payment_source": "StripePaymentSource",
+    "payment_source": "Generated.PaymentSource",
+    "external_account": "Generated.ExternalAccount",
+    "balance_transaction_source": "Generated.BalanceTransactionSource",
+    "deleted_external_account": "Generated.DeletedExternalAccount",
 }
 
 # Resources with no Swift type at all. A reference to one is kept as its id, never expanded.
+# Schemas that are `anyOf` several resources, told apart by `object`: generated as enums.
+UNION_RESOURCES: dict[str, str] = {
+    "payment_source": "PaymentSource",
+    "external_account": "ExternalAccount",
+    "balance_transaction_source": "BalanceTransactionSource",
+    "deleted_external_account": "DeletedExternalAccount",
+}
+
 ID_ONLY_RESOURCES: set[str] = {
     "payment_record",
-    "external_account",   # bank account | card; a union, kept as the id until unions are modelled
     "issuing.token",      # no hand type, and a top-level placement the generator does not do yet
 }
 
@@ -525,7 +535,11 @@ class Generator:
         members = [m for m in node.get("anyOf", []) if "$ref" in m]
         if members:
             if len(members) > 1:
-                self.unions.append(f"{owner.path}.{prop}: {[self.ref_name(m) for m in members]}")
+                refs = {self.ref_name(m) for m in members}
+                for union, name in UNION_RESOURCES.items():
+                    if refs <= self.union_alternatives(union):
+                        return f"Generated.{name}"
+                self.unions.append(f"{owner.path}.{prop}: {sorted(refs)}")
             return self.type_for_ref(self.ref_name(members[0]), prop, owner)
 
         t = node.get("type")
@@ -568,6 +582,8 @@ class Generator:
     def type_for_ref(self, ref: str, prop: str, owner: "Struct") -> str:
         if ref in ID_ONLY_RESOURCES:
             return "String"
+        if ref in UNION_RESOURCES:
+            return f"Generated.{UNION_RESOURCES[ref]}"
         if self.is_resource(ref):
             if ref not in RESOURCE_TYPES:
                 self.unmapped.add(ref)
@@ -606,7 +622,133 @@ class Generator:
                 s.has_object = True
                 continue
             s.fields.append(self.resolve(node, prop, expandable, s))
+        self.detect_union(s, schema)
         return s
+
+    def union_alternatives(self, union: str) -> set[str]:
+        return {self.ref_name(a) for a in self.schemas[union].get("anyOf", []) if "$ref" in a}
+
+    def detect_union(self, s: "Struct", schema: dict) -> None:
+        """A required `type` string beside object-valued properties named after its values —
+        `payment_method_details`, `payment_method`, `next_action` — is one payload chosen by
+        `type`: those properties become the cases of a `Details` enum."""
+        props = schema.get("properties", {})
+        t = props.get("type")
+        if not isinstance(t, dict) or t.get("type") != "string" or "type" not in schema.get("required", []):
+            return
+        def is_object(v: dict) -> bool:
+            return "$ref" in v or v.get("type") == "object" or \
+                any("$ref" in a or a.get("type") == "object" for a in v.get("anyOf", []))
+        enum = t.get("enum")
+        wires = [p for p, v in props.items() if p != "type" and is_object(v) and (enum is None or p in enum)]
+        if len(wires) < 3:
+            return
+        by_wire = {f.wire: f for f in s.fields}
+        cases = [by_wire[w] for w in wires if w in by_wire]
+        s.fields = [f for f in s.fields if f.wire not in wires]
+        keywords = [v for v in (enum or []) if v not in wires]
+        taken = {e.name for e in s.enums} | {n.name for n in s.nested}
+        s.union = Union("Details" if "Details" not in taken else "Kind", cases, keywords, enum is None)
+
+    def render_union_resource(self, union: str, name: str) -> str:
+        alts = []
+        for alt in sorted(self.union_alternatives(union)):
+            deleted = alt.startswith("deleted_")
+            base = alt[len("deleted_"):] if deleted else alt
+            if base in RESOURCE_TYPES:
+                t = self.qualified(RESOURCE_TYPES[base])
+            elif base in RESOURCES:
+                t = f"Generated.{RESOURCES[base].lstrip('/')}"
+            else:
+                self.unions.append(f"{union}: alternative {alt} has no Swift type; decodes as .unknown")
+                continue
+            wire = self.schemas[alt]["properties"]["object"]["enum"][0]
+            alts.append((camel(base), wire, f"DeletedObject<{t}>" if deleted else t))
+        d = doc(self.schemas[union].get("description"))
+        out = HEADER.format(version=self.version, schema=union) + f"extension {self.ns} {{\n"
+        if d:
+            out += f"    /// {d}\n"
+        out += f"    public indirect enum {name}: Codable, Hashable, Sendable {{\n"
+        for case, _, t in alts:
+            out += f"        case {ident(case)}({t})\n"
+        out += "        case unknown(object: String)\n\n"
+        for case, _, t in alts:
+            out += f"        public var {ident(case)}: {t}? {{ if case .{ident(case)}(let value) = self {{ return value }}; return nil }}\n"
+        out += "\n        private enum CodingKeys: String, CodingKey {\n            case object\n        }\n\n"
+        out += "        public init(from decoder: any Decoder) throws {\n"
+        out += "            let object = try decoder.container(keyedBy: CodingKeys.self).decode(String.self, forKey: .object)\n"
+        out += "            switch object {\n"
+        for case, wire, t in alts:
+            out += f'            case "{wire}": self = .{ident(case)}(try {t}(from: decoder))\n'
+        out += "            default: self = .unknown(object: object)\n            }\n        }\n\n"
+        out += "        public func encode(to encoder: any Encoder) throws {\n            switch self {\n"
+        for case, _, _ in alts:
+            out += f"            case .{ident(case)}(let value): try value.encode(to: encoder)\n"
+        out += "            case .unknown(let object):\n                var container = encoder.container(keyedBy: CodingKeys.self)\n"
+        out += "                try container.encode(object, forKey: .object)\n            }\n        }\n    }\n}\n"
+        return out
+
+    def render_event_object(self) -> str:
+        """`Event.Object`: one case per resource any event carries, told apart by `object`."""
+        targets: dict[str, str] = {}   # resource -> object wire value
+        for name, schema in self.schemas.items():
+            if "x-stripeEvent" not in schema:
+                continue
+            node = schema["properties"].get("object", {})
+            refs = [self.ref_name(node)] if "$ref" in node else [self.ref_name(a) for a in node.get("anyOf", []) if "$ref" in a]
+            for ref in refs:
+                wire = self.schemas[ref].get("properties", {}).get("object", {}).get("enum", [None])[0]
+                if wire:
+                    targets[ref] = wire
+        cases = []
+        for ref, wire in sorted(targets.items(), key=lambda kv: kv[1]):
+            if ref in RESOURCE_TYPES:
+                t = self.qualified(RESOURCE_TYPES[ref])
+            elif ref in RESOURCES:
+                t = f"Generated.{RESOURCES[ref].lstrip('/')}"
+            else:
+                self.unions.append(f"event: {ref} has no Swift type; decodes as .unknown")
+                continue
+            cases.append((ident(camel(ref)), wire, t))
+        out = HEADER.format(version=self.version, schema="event (data.object across every event type)")
+        out += f"extension {self.ns}.Events.Event {{\n"
+        out += "    /// The object an event carries, told apart by its `object` value.\n"
+        out += "    ///\n    /// `indirect` keeps the payload off the stack: the largest resources are kilobytes wide, and\n"
+        out += "    /// musl gives a thread 128 KiB. The decoder is split into small groups for the same reason.\n"
+        out += "    public indirect enum Object: Codable, Hashable, Sendable {\n        case unknown(type: String)\n"
+        for case, _, t in cases:
+            out += f"        case {case}({t})\n"
+        out += "\n        private enum CodingKeys: String, CodingKey {\n            case object\n        }\n\n"
+        groups = [cases[i:i + 8] for i in range(0, len(cases), 8)]
+        out += "        public init(from decoder: any Decoder) throws {\n"
+        out += "            let object = try decoder.container(keyedBy: CodingKeys.self).decode(String.self, forKey: .object)\n"
+        for i in range(len(groups)):
+            out += f"            if let value = try Self.decodeGroup{i}(object, decoder) {{ self = value; return }}\n"
+        out += "            self = .unknown(type: object)\n        }\n"
+        for i, group in enumerate(groups):
+            out += f"\n        @inline(never)\n        private static func decodeGroup{i}(_ object: String, _ decoder: any Decoder) throws -> Object? {{\n"
+            out += "            switch object {\n"
+            for case, wire, t in group:
+                out += f'            case "{wire}": return .{case}(try {t}(from: decoder))\n'
+            out += "            default: return nil\n            }\n        }\n"
+        out += "\n        public func encode(to encoder: any Encoder) throws {\n            switch self {\n"
+        for case, _, _ in cases:
+            out += f"            case .{case}(let value): try value.encode(to: encoder)\n"
+        out += "            case .unknown(let type):\n                var container = encoder.container(keyedBy: CodingKeys.self)\n"
+        out += "                try container.encode(type, forKey: .object)\n            }\n        }\n    }\n}\n"
+        return out
+
+    def render_event_type(self) -> str:
+        names = sorted(n for n, sc in self.schemas.items() if "x-stripeEvent" in sc)
+        out = HEADER.format(version=self.version, schema="event (every event type)")
+        out += f"extension {self.ns}.Events.Event {{\n"
+        out += "    /// Every event type Stripe documents. An event of a newer type decodes with `type == nil`\n"
+        out += "    /// and its `rawType` set.\n"
+        out += "    public enum `Type`: String, Codable, Hashable, Sendable {\n"
+        for n in names:
+            out += f'        case {enum_case(n)} = "{n}"\n'
+        out += "    }\n}\n"
+        return out
 
     def run(self) -> dict[str, str]:
         self.shared_done: dict[str, "Struct | None"] = {}
@@ -630,6 +772,12 @@ class Generator:
             root = self.build_struct(path.split(".")[-1], self.schemas[name],
                                      path if swift_path.startswith("/") else f"{self.ns}.{path}", root=True)
             files[f"Generated.{path}.swift"] = self.render_resource(name, swift_path, root)
+        for union, name in UNION_RESOURCES.items():
+            if not self.only or union in self.only:
+                files[f"Generated.{name}.swift"] = self.render_union_resource(union, name)
+        if not self.only:
+            files["Generated.Events.Event.Object.swift"] = self.render_event_object()
+            files["Generated.Events.Event.Type.swift"] = self.render_event_type()
         files["Generated.Shared.swift"] = self.render_shared()
         if self.ns != "Stripe":
             files[f"{self.ns}.swift"] = self.render_namespace()
@@ -669,7 +817,7 @@ class Generator:
                          if "Generated" not in p.parts)
         wanted = sorted({p.split(".")[0] for p in RESOURCES.values() if "." in p and not p.startswith("/")})
         def exists(e):   # `Stripe.X` in use, or declared directly inside the root enum's extension
-            return re.search(rf"\bStripe\.{e}\b", hand) or re.search(rf"extension Stripe \{{[^}}]*\bpublic enum {e}\b", hand)
+            return re.search(rf"\bStripe\.{e}\b", hand) or re.search(rf"^    public enum {e}\b", hand, re.M)
         missing = [e for e in wanted if not exists(e)]
         out = HEADER.format(version=self.version, schema="(namespaces the hand sources do not declare)")
         out += "extension Stripe {\n" + "".join(f"    public enum {e} {{}}\n" for e in missing) + "}\n"
@@ -729,6 +877,11 @@ class Field:
         self.boxed = boxed
 
 
+class Union:
+    def __init__(self, name: str, cases: list, keywords: list[str], free: bool):
+        self.name, self.cases, self.keywords, self.free = name, cases, keywords, free
+
+
 class Struct:
     def __init__(self, name: str, path: str, description: str | None):
         self.name, self.path, self.description = name, path, description
@@ -738,6 +891,13 @@ class Struct:
         self.has_id = False
         self.id_optional = False
         self.has_object = False
+        self.union: Union | None = None
+
+    @staticmethod
+    def wrapper_type(f: "Field") -> str:
+        if f.boxed:
+            return f"Boxed<{f.swift_type}?>"
+        return f.wrapper.lstrip("@")
 
     def render(self, indent: str) -> str:
         i = indent
@@ -758,23 +918,32 @@ class Struct:
                 out += f"{i}    {f.wrapper} public var {ident(f.name)}: {f.swift_type}?\n"
             else:
                 out += f"{i}    public var {ident(f.name)}: {f.swift_type}?\n"
+            if self.union and f.wire == "type":
+                out += f"{i}    /// The payload `type` selects.\n{i}    public var details: {self.union.name}\n"
         # A spec object with no properties (`konbini: {}`) is a marker; it has nothing to key.
         if not self.fields and not self.has_id and not self.has_object:
             out += f"{i}    public init() {{}}\n{i}}}\n"
             return out
         # CodingKeys, from the same list as the properties
-        out += f"\n{i}    private enum CodingKeys: String, CodingKey {{\n"
+        # a union's `Details` decodes from this container, so the keys are visible to the file
+        out += f"\n{i}    {'fileprivate' if self.union else 'private'} enum CodingKeys: String, CodingKey {{\n"
         if self.has_id:
             out += f"{i}        case id\n"
         if self.has_object:
             out += f"{i}        case object\n"
         for f in self.fields:
             out += f"{i}        case {ident(f.name)}\n"
+        if self.union:
+            for f in self.union.cases:
+                out += f"{i}        case {ident(f.name)}\n"
         out += f"{i}    }}\n\n"
         # init
         params = ([("id: ID? = nil" if self.id_optional else "id: ID")] if self.has_id else []) + \
-                 (["object: String"] if self.has_object else []) + \
-                 [f"{ident(f.name)}: {f.swift_type}? = nil" for f in self.fields]
+                 (["object: String"] if self.has_object else [])
+        for f in self.fields:
+            params.append(f"{ident(f.name)}: {f.swift_type}? = nil")
+            if self.union and f.wire == "type":
+                params.append(f"details: {self.union.name}")
         out += f"{i}    public init(\n" + ",\n".join(f"{i}        {p}" for p in params) + f"\n{i}    ) {{\n"
         if self.has_id:
             out += f"{i}        self.id = id\n"
@@ -790,12 +959,85 @@ class Struct:
                 out += f"{i}        self._{f.name} = Boxed(wrappedValue: {n})\n"
             else:
                 out += f"{i}        self.{n} = {n}\n"
+            if self.union and f.wire == "type":
+                out += f"{i}        self.details = details\n"
         out += f"{i}    }}\n"
+        if self.union:
+            out += self.render_union_codable(i + "    ")
         for e in self.enums:
             out += "\n" + e.render(i + "    ")
         for n in self.nested:
             out += "\n" + n.render(i + "    ")
+        if self.union:
+            out += "\n" + self.render_union_enum(i + "    ")
         out += f"{i}}}\n"
+        return out
+
+    def render_union_codable(self, i: str) -> str:
+        u = self.union
+        out = f"\n{i}public init(from decoder: any Decoder) throws {{\n"
+        out += f"{i}    let container = try decoder.container(keyedBy: CodingKeys.self)\n"
+        if self.has_id:
+            out += f"{i}    self.id = try container.decode{'IfPresent' if self.id_optional else ''}(ID.self, forKey: .id)\n"
+        if self.has_object:
+            out += f"{i}    self.object = try container.decode(String.self, forKey: .object)\n"
+        for f in self.fields:
+            n = ident(f.name)
+            if f.wrapper:
+                out += f"{i}    self._{f.name} = try container.decode({self.wrapper_type(f)}.self, forKey: .{n})\n"
+            else:
+                out += f"{i}    self.{n} = try container.decodeIfPresent({f.swift_type}.self, forKey: .{n})\n"
+        out += f"{i}    self.details = try {u.name}(type: try container.decodeIfPresent(String.self, forKey: .type) ?? \"\", from: container)\n"
+        out += f"{i}}}\n\n"
+        out += f"{i}public func encode(to encoder: any Encoder) throws {{\n"
+        out += f"{i}    var container = encoder.container(keyedBy: CodingKeys.self)\n"
+        if self.has_id:
+            out += f"{i}    try container.encode{'IfPresent' if self.id_optional else ''}(id, forKey: .id)\n"
+        if self.has_object:
+            out += f"{i}    try container.encode(object, forKey: .object)\n"
+        for f in self.fields:
+            n = ident(f.name)
+            if f.wrapper:
+                out += f"{i}    try container.encode(_{f.name}, forKey: .{n})\n"
+            else:
+                out += f"{i}    try container.encodeIfPresent({n}, forKey: .{n})\n"
+        out += f"{i}    try details.encode(into: &container)\n{i}}}\n"
+        return out
+
+    def render_union_enum(self, i: str) -> str:
+        u = self.union
+        out = f"{i}/// The payload `type` selects; `unknown` carries a type this package does not model.\n"
+        out += f"{i}public indirect enum {u.name}: Hashable, Sendable {{\n"
+        def payload(f):   # an expandable id keeps its wrapper, so an expanded object is not lost
+            return self.wrapper_type(f) if f.id_wrapper else f.swift_type
+        for f in u.cases:
+            out += f"{i}    case {ident(f.name)}({payload(f)})\n"
+        for k in u.keywords:
+            out += f"{i}    case {enum_case(k)}\n"
+        out += f"{i}    case unknown(type: String)\n\n"
+        for f in u.cases:
+            n = ident(f.name)
+            out += f"{i}    public var {n}: {payload(f)}? {{ if case .{n}(let value) = self {{ return value }}; return nil }}\n"
+        out += "\n"
+        out += f"{i}    fileprivate init(type: String, from container: KeyedDecodingContainer<CodingKeys>) throws {{\n"
+        out += f"{i}        switch type {{\n"
+        for f in u.cases:
+            n = ident(f.name)
+            out += f'{i}        case "{f.wire}":\n'
+            if f.id_wrapper:
+                out += f"{i}            let value = try container.decode({payload(f)}.self, forKey: .{n})\n"
+                out += f"{i}            if value.wrappedValue != nil || value.projectedValue != nil {{ self = .{n}(value) }} else {{ self = .unknown(type: type) }}\n"
+            else:
+                out += f"{i}            if let value = try container.decodeIfPresent({f.swift_type}.self, forKey: .{n}) {{ self = .{n}(value) }} else {{ self = .unknown(type: type) }}\n"
+        for k in u.keywords:
+            out += f'{i}        case "{k}": self = .{enum_case(k)}\n'
+        out += f"{i}        default: self = .unknown(type: type)\n{i}        }}\n{i}    }}\n\n"
+        out += f"{i}    fileprivate func encode(into container: inout KeyedEncodingContainer<CodingKeys>) throws {{\n"
+        out += f"{i}        switch self {{\n"
+        for f in u.cases:
+            n = ident(f.name)
+            out += f"{i}        case .{n}(let value): try container.encode(value, forKey: .{n})\n"
+        out += f"{i}        default: break\n{i}        }}\n{i}    }}\n{i}}}\n"
         return out
 
 

@@ -906,29 +906,36 @@ public struct TerminalConfiguration: Codable, Hashable, Sendable, Identifiable {
     }
 
     public struct Wifi: Codable, Hashable, Sendable {
-        public var enterpriseEapPeap: EnterpriseEapPeap?
-        public var enterpriseEapTls: EnterpriseEapTls?
-        public var personalPsk: PersonalPsk?
         /// Security type of the WiFi network.
         public var `type`: Type?
+        /// The payload `type` selects.
+        public var details: Details
 
-        private enum CodingKeys: String, CodingKey {
+        fileprivate enum CodingKeys: String, CodingKey {
+            case `type`
             case enterpriseEapPeap
             case enterpriseEapTls
             case personalPsk
-            case `type`
         }
 
         public init(
-            enterpriseEapPeap: EnterpriseEapPeap? = nil,
-            enterpriseEapTls: EnterpriseEapTls? = nil,
-            personalPsk: PersonalPsk? = nil,
-            `type`: Type? = nil
+            `type`: Type? = nil,
+            details: Details
         ) {
-            self.enterpriseEapPeap = enterpriseEapPeap
-            self.enterpriseEapTls = enterpriseEapTls
-            self.personalPsk = personalPsk
             self.`type` = `type`
+            self.details = details
+        }
+
+        public init(from decoder: any Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            self.`type` = try container.decodeIfPresent(Type.self, forKey: .`type`)
+            self.details = try Details(type: try container.decodeIfPresent(String.self, forKey: .type) ?? "", from: container)
+        }
+
+        public func encode(to encoder: any Encoder) throws {
+            var container = encoder.container(keyedBy: CodingKeys.self)
+            try container.encodeIfPresent(`type`, forKey: .`type`)
+            try details.encode(into: &container)
         }
 
         /// Security type of the WiFi network.
@@ -1020,6 +1027,39 @@ public struct TerminalConfiguration: Codable, Hashable, Sendable, Identifiable {
             ) {
                 self.password = password
                 self.ssid = ssid
+            }
+        }
+
+        /// The payload `type` selects; `unknown` carries a type this package does not model.
+        public indirect enum Details: Hashable, Sendable {
+            case enterpriseEapPeap(EnterpriseEapPeap)
+            case enterpriseEapTls(EnterpriseEapTls)
+            case personalPsk(PersonalPsk)
+            case unknown(type: String)
+
+            public var enterpriseEapPeap: EnterpriseEapPeap? { if case .enterpriseEapPeap(let value) = self { return value }; return nil }
+            public var enterpriseEapTls: EnterpriseEapTls? { if case .enterpriseEapTls(let value) = self { return value }; return nil }
+            public var personalPsk: PersonalPsk? { if case .personalPsk(let value) = self { return value }; return nil }
+
+            fileprivate init(type: String, from container: KeyedDecodingContainer<CodingKeys>) throws {
+                switch type {
+                case "enterprise_eap_peap":
+                    if let value = try container.decodeIfPresent(EnterpriseEapPeap.self, forKey: .enterpriseEapPeap) { self = .enterpriseEapPeap(value) } else { self = .unknown(type: type) }
+                case "enterprise_eap_tls":
+                    if let value = try container.decodeIfPresent(EnterpriseEapTls.self, forKey: .enterpriseEapTls) { self = .enterpriseEapTls(value) } else { self = .unknown(type: type) }
+                case "personal_psk":
+                    if let value = try container.decodeIfPresent(PersonalPsk.self, forKey: .personalPsk) { self = .personalPsk(value) } else { self = .unknown(type: type) }
+                default: self = .unknown(type: type)
+                }
+            }
+
+            fileprivate func encode(into container: inout KeyedEncodingContainer<CodingKeys>) throws {
+                switch self {
+                case .enterpriseEapPeap(let value): try container.encode(value, forKey: .enterpriseEapPeap)
+                case .enterpriseEapTls(let value): try container.encode(value, forKey: .enterpriseEapTls)
+                case .personalPsk(let value): try container.encode(value, forKey: .personalPsk)
+                default: break
+                }
             }
         }
     }

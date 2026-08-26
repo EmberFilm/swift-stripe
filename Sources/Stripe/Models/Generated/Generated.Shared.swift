@@ -346,7 +346,7 @@ extension Stripe.Shared {
         /// A URL to the request log entry in your dashboard.
         public var requestLogUrl: String?
         @Boxed public var setupIntent: Stripe.Setup.Intent?
-        public var source: StripePaymentSource?
+        @Boxed public var source: Stripe.PaymentSource?
         /// The type of error returned.
         public var `type`: Type?
 
@@ -384,7 +384,7 @@ extension Stripe.Shared {
             paymentMethodType: String? = nil,
             requestLogUrl: String? = nil,
             setupIntent: Stripe.Setup.Intent? = nil,
-            source: StripePaymentSource? = nil,
+            source: Stripe.PaymentSource? = nil,
             `type`: Type? = nil
         ) {
             self.adviceCode = adviceCode
@@ -401,7 +401,7 @@ extension Stripe.Shared {
             self.paymentMethodType = paymentMethodType
             self.requestLogUrl = requestLogUrl
             self._setupIntent = Boxed(wrappedValue: setupIntent)
-            self.source = source
+            self._source = Boxed(wrappedValue: source)
             self.`type` = `type`
         }
 
@@ -1642,39 +1642,6 @@ extension Stripe.Shared {
     }
 }
 
-// deleted_application
-extension Stripe.Shared {
-    public struct DeletedApplication: Codable, Hashable, Sendable, Identifiable {
-        public typealias ID = String
-        public let id: ID
-        /// String representing the object's type.
-        public let object: String
-        /// Always true for a deleted object
-        public var deleted: Bool?
-        /// The name of the application.
-        public var name: String?
-
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case object
-            case deleted
-            case name
-        }
-
-        public init(
-            id: ID,
-            object: String,
-            deleted: Bool? = nil,
-            name: String? = nil
-        ) {
-            self.id = id
-            self.object = object
-            self.deleted = deleted
-            self.name = name
-        }
-    }
-}
-
 // discount
 extension Stripe.Shared {
     /// A discount represents the actual application of a coupon or promotion code.
@@ -2083,46 +2050,46 @@ extension Stripe.Shared {
 extension Stripe.Shared {
     /// FinancialAddresses contain identifying information that resolves to a FinancialAccount.
     public struct FinancialAddresses: Codable, Hashable, Sendable {
-        public var aba: Stripe.Shared.Aba?
-        public var iban: Stripe.Shared.Iban?
-        public var sortCode: Stripe.Shared.SortCode?
-        public var spei: Stripe.Shared.Spei?
         /// The payment networks supported by this FinancialAddress
         public var supportedNetworks: [SupportedNetworks]?
-        public var swift: Stripe.Shared.Swift?
         /// The type of financial address
         public var `type`: Type?
-        public var zengin: Stripe.Shared.Zengin?
+        /// The payload `type` selects.
+        public var details: Details
 
-        private enum CodingKeys: String, CodingKey {
+        fileprivate enum CodingKeys: String, CodingKey {
+            case supportedNetworks
+            case `type`
             case aba
             case iban
             case sortCode
             case spei
-            case supportedNetworks
             case swift
-            case `type`
             case zengin
         }
 
         public init(
-            aba: Stripe.Shared.Aba? = nil,
-            iban: Stripe.Shared.Iban? = nil,
-            sortCode: Stripe.Shared.SortCode? = nil,
-            spei: Stripe.Shared.Spei? = nil,
             supportedNetworks: [SupportedNetworks]? = nil,
-            swift: Stripe.Shared.Swift? = nil,
             `type`: Type? = nil,
-            zengin: Stripe.Shared.Zengin? = nil
+            details: Details
         ) {
-            self.aba = aba
-            self.iban = iban
-            self.sortCode = sortCode
-            self.spei = spei
             self.supportedNetworks = supportedNetworks
-            self.swift = swift
             self.`type` = `type`
-            self.zengin = zengin
+            self.details = details
+        }
+
+        public init(from decoder: any Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            self.supportedNetworks = try container.decodeIfPresent([SupportedNetworks].self, forKey: .supportedNetworks)
+            self.`type` = try container.decodeIfPresent(Type.self, forKey: .`type`)
+            self.details = try Details(type: try container.decodeIfPresent(String.self, forKey: .type) ?? "", from: container)
+        }
+
+        public func encode(to encoder: any Encoder) throws {
+            var container = encoder.container(keyedBy: CodingKeys.self)
+            try container.encodeIfPresent(supportedNetworks, forKey: .supportedNetworks)
+            try container.encodeIfPresent(`type`, forKey: .`type`)
+            try details.encode(into: &container)
         }
 
         public enum SupportedNetworks: String, Codable, Hashable, Sendable {
@@ -2145,6 +2112,54 @@ extension Stripe.Shared {
             case spei
             case swift
             case zengin
+        }
+
+        /// The payload `type` selects; `unknown` carries a type this package does not model.
+        public indirect enum Details: Hashable, Sendable {
+            case aba(Stripe.Shared.Aba)
+            case iban(Stripe.Shared.Iban)
+            case sortCode(Stripe.Shared.SortCode)
+            case spei(Stripe.Shared.Spei)
+            case swift(Stripe.Shared.Swift)
+            case zengin(Stripe.Shared.Zengin)
+            case unknown(type: String)
+
+            public var aba: Stripe.Shared.Aba? { if case .aba(let value) = self { return value }; return nil }
+            public var iban: Stripe.Shared.Iban? { if case .iban(let value) = self { return value }; return nil }
+            public var sortCode: Stripe.Shared.SortCode? { if case .sortCode(let value) = self { return value }; return nil }
+            public var spei: Stripe.Shared.Spei? { if case .spei(let value) = self { return value }; return nil }
+            public var swift: Stripe.Shared.Swift? { if case .swift(let value) = self { return value }; return nil }
+            public var zengin: Stripe.Shared.Zengin? { if case .zengin(let value) = self { return value }; return nil }
+
+            fileprivate init(type: String, from container: KeyedDecodingContainer<CodingKeys>) throws {
+                switch type {
+                case "aba":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.Aba.self, forKey: .aba) { self = .aba(value) } else { self = .unknown(type: type) }
+                case "iban":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.Iban.self, forKey: .iban) { self = .iban(value) } else { self = .unknown(type: type) }
+                case "sort_code":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.SortCode.self, forKey: .sortCode) { self = .sortCode(value) } else { self = .unknown(type: type) }
+                case "spei":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.Spei.self, forKey: .spei) { self = .spei(value) } else { self = .unknown(type: type) }
+                case "swift":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.Swift.self, forKey: .swift) { self = .swift(value) } else { self = .unknown(type: type) }
+                case "zengin":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.Zengin.self, forKey: .zengin) { self = .zengin(value) } else { self = .unknown(type: type) }
+                default: self = .unknown(type: type)
+                }
+            }
+
+            fileprivate func encode(into container: inout KeyedEncodingContainer<CodingKeys>) throws {
+                switch self {
+                case .aba(let value): try container.encode(value, forKey: .aba)
+                case .iban(let value): try container.encode(value, forKey: .iban)
+                case .sortCode(let value): try container.encode(value, forKey: .sortCode)
+                case .spei(let value): try container.encode(value, forKey: .spei)
+                case .swift(let value): try container.encode(value, forKey: .swift)
+                case .zengin(let value): try container.encode(value, forKey: .zengin)
+                default: break
+                }
+            }
         }
     }
 }
@@ -2245,18 +2260,13 @@ extension Stripe.Shared {
 // treasury_transactions_resource_flow_details
 extension Stripe.Shared {
     public struct FlowDetails: Codable, Hashable, Sendable {
-        @Boxed public var creditReversal: Stripe.Treasury.CreditReversal?
-        @Boxed public var debitReversal: Stripe.Treasury.DebitReversal?
-        @Boxed public var inboundTransfer: Stripe.Treasury.InboundTransfer?
-        public var issuingAuthorization: Authorization?
-        @Boxed public var outboundPayment: Stripe.Treasury.OutboundPayment?
-        @Boxed public var outboundTransfer: Stripe.Treasury.OutboundTransfer?
-        @Boxed public var receivedCredit: Stripe.Treasury.ReceivedCredit?
-        @Boxed public var receivedDebit: Stripe.Treasury.ReceivedDebit?
         /// Type of the flow that created the Transaction.
         public var `type`: Type?
+        /// The payload `type` selects.
+        public var details: Details
 
-        private enum CodingKeys: String, CodingKey {
+        fileprivate enum CodingKeys: String, CodingKey {
+            case `type`
             case creditReversal
             case debitReversal
             case inboundTransfer
@@ -2265,29 +2275,26 @@ extension Stripe.Shared {
             case outboundTransfer
             case receivedCredit
             case receivedDebit
-            case `type`
         }
 
         public init(
-            creditReversal: Stripe.Treasury.CreditReversal? = nil,
-            debitReversal: Stripe.Treasury.DebitReversal? = nil,
-            inboundTransfer: Stripe.Treasury.InboundTransfer? = nil,
-            issuingAuthorization: Authorization? = nil,
-            outboundPayment: Stripe.Treasury.OutboundPayment? = nil,
-            outboundTransfer: Stripe.Treasury.OutboundTransfer? = nil,
-            receivedCredit: Stripe.Treasury.ReceivedCredit? = nil,
-            receivedDebit: Stripe.Treasury.ReceivedDebit? = nil,
-            `type`: Type? = nil
+            `type`: Type? = nil,
+            details: Details
         ) {
-            self._creditReversal = Boxed(wrappedValue: creditReversal)
-            self._debitReversal = Boxed(wrappedValue: debitReversal)
-            self._inboundTransfer = Boxed(wrappedValue: inboundTransfer)
-            self.issuingAuthorization = issuingAuthorization
-            self._outboundPayment = Boxed(wrappedValue: outboundPayment)
-            self._outboundTransfer = Boxed(wrappedValue: outboundTransfer)
-            self._receivedCredit = Boxed(wrappedValue: receivedCredit)
-            self._receivedDebit = Boxed(wrappedValue: receivedDebit)
             self.`type` = `type`
+            self.details = details
+        }
+
+        public init(from decoder: any Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            self.`type` = try container.decodeIfPresent(Type.self, forKey: .`type`)
+            self.details = try Details(type: try container.decodeIfPresent(String.self, forKey: .type) ?? "", from: container)
+        }
+
+        public func encode(to encoder: any Encoder) throws {
+            var container = encoder.container(keyedBy: CodingKeys.self)
+            try container.encodeIfPresent(`type`, forKey: .`type`)
+            try details.encode(into: &container)
         }
 
         /// Type of the flow that created the Transaction.
@@ -2301,6 +2308,66 @@ extension Stripe.Shared {
             case outboundTransfer = "outbound_transfer"
             case receivedCredit = "received_credit"
             case receivedDebit = "received_debit"
+        }
+
+        /// The payload `type` selects; `unknown` carries a type this package does not model.
+        public indirect enum Details: Hashable, Sendable {
+            case creditReversal(Stripe.Treasury.CreditReversal)
+            case debitReversal(Stripe.Treasury.DebitReversal)
+            case inboundTransfer(Stripe.Treasury.InboundTransfer)
+            case issuingAuthorization(Authorization)
+            case outboundPayment(Stripe.Treasury.OutboundPayment)
+            case outboundTransfer(Stripe.Treasury.OutboundTransfer)
+            case receivedCredit(Stripe.Treasury.ReceivedCredit)
+            case receivedDebit(Stripe.Treasury.ReceivedDebit)
+            case other
+            case unknown(type: String)
+
+            public var creditReversal: Stripe.Treasury.CreditReversal? { if case .creditReversal(let value) = self { return value }; return nil }
+            public var debitReversal: Stripe.Treasury.DebitReversal? { if case .debitReversal(let value) = self { return value }; return nil }
+            public var inboundTransfer: Stripe.Treasury.InboundTransfer? { if case .inboundTransfer(let value) = self { return value }; return nil }
+            public var issuingAuthorization: Authorization? { if case .issuingAuthorization(let value) = self { return value }; return nil }
+            public var outboundPayment: Stripe.Treasury.OutboundPayment? { if case .outboundPayment(let value) = self { return value }; return nil }
+            public var outboundTransfer: Stripe.Treasury.OutboundTransfer? { if case .outboundTransfer(let value) = self { return value }; return nil }
+            public var receivedCredit: Stripe.Treasury.ReceivedCredit? { if case .receivedCredit(let value) = self { return value }; return nil }
+            public var receivedDebit: Stripe.Treasury.ReceivedDebit? { if case .receivedDebit(let value) = self { return value }; return nil }
+
+            fileprivate init(type: String, from container: KeyedDecodingContainer<CodingKeys>) throws {
+                switch type {
+                case "credit_reversal":
+                    if let value = try container.decodeIfPresent(Stripe.Treasury.CreditReversal.self, forKey: .creditReversal) { self = .creditReversal(value) } else { self = .unknown(type: type) }
+                case "debit_reversal":
+                    if let value = try container.decodeIfPresent(Stripe.Treasury.DebitReversal.self, forKey: .debitReversal) { self = .debitReversal(value) } else { self = .unknown(type: type) }
+                case "inbound_transfer":
+                    if let value = try container.decodeIfPresent(Stripe.Treasury.InboundTransfer.self, forKey: .inboundTransfer) { self = .inboundTransfer(value) } else { self = .unknown(type: type) }
+                case "issuing_authorization":
+                    if let value = try container.decodeIfPresent(Authorization.self, forKey: .issuingAuthorization) { self = .issuingAuthorization(value) } else { self = .unknown(type: type) }
+                case "outbound_payment":
+                    if let value = try container.decodeIfPresent(Stripe.Treasury.OutboundPayment.self, forKey: .outboundPayment) { self = .outboundPayment(value) } else { self = .unknown(type: type) }
+                case "outbound_transfer":
+                    if let value = try container.decodeIfPresent(Stripe.Treasury.OutboundTransfer.self, forKey: .outboundTransfer) { self = .outboundTransfer(value) } else { self = .unknown(type: type) }
+                case "received_credit":
+                    if let value = try container.decodeIfPresent(Stripe.Treasury.ReceivedCredit.self, forKey: .receivedCredit) { self = .receivedCredit(value) } else { self = .unknown(type: type) }
+                case "received_debit":
+                    if let value = try container.decodeIfPresent(Stripe.Treasury.ReceivedDebit.self, forKey: .receivedDebit) { self = .receivedDebit(value) } else { self = .unknown(type: type) }
+                case "other": self = .other
+                default: self = .unknown(type: type)
+                }
+            }
+
+            fileprivate func encode(into container: inout KeyedEncodingContainer<CodingKeys>) throws {
+                switch self {
+                case .creditReversal(let value): try container.encode(value, forKey: .creditReversal)
+                case .debitReversal(let value): try container.encode(value, forKey: .debitReversal)
+                case .inboundTransfer(let value): try container.encode(value, forKey: .inboundTransfer)
+                case .issuingAuthorization(let value): try container.encode(value, forKey: .issuingAuthorization)
+                case .outboundPayment(let value): try container.encode(value, forKey: .outboundPayment)
+                case .outboundTransfer(let value): try container.encode(value, forKey: .outboundTransfer)
+                case .receivedCredit(let value): try container.encode(value, forKey: .receivedCredit)
+                case .receivedDebit(let value): try container.encode(value, forKey: .receivedDebit)
+                default: break
+                }
+            }
         }
     }
 }
@@ -3777,50 +3844,47 @@ extension Stripe.Shared {
 // payment_method_card_wallet
 extension Stripe.Shared {
     public struct PaymentMethodCardWallet: Codable, Hashable, Sendable {
-        public var amexExpressCheckout: Stripe.Shared.AmexExpressCheckout?
-        public var applePay: Stripe.Shared.PaymentMethodCardWalletApplePay?
         /// (For tokenized numbers only.) The last four digits of the device account number.
         public var dynamicLast4: String?
-        public var googlePay: Stripe.Shared.PaymentMethodCardWalletGooglePay?
-        public var link: Stripe.Shared.Link?
-        public var masterpass: Stripe.Shared.Masterpass?
-        public var samsungPay: Stripe.Shared.SamsungPay?
         /// The type of the card wallet, one of `amex_express_checkout`, `apple_pay`, `google_pay`, `masterpass`, `samsung_pay`, `…
         public var `type`: Type?
-        public var visaCheckout: Stripe.Shared.VisaCheckout?
+        /// The payload `type` selects.
+        public var details: Details
 
-        private enum CodingKeys: String, CodingKey {
+        fileprivate enum CodingKeys: String, CodingKey {
+            case dynamicLast4
+            case `type`
             case amexExpressCheckout
             case applePay
-            case dynamicLast4
             case googlePay
             case link
             case masterpass
             case samsungPay
-            case `type`
             case visaCheckout
         }
 
         public init(
-            amexExpressCheckout: Stripe.Shared.AmexExpressCheckout? = nil,
-            applePay: Stripe.Shared.PaymentMethodCardWalletApplePay? = nil,
             dynamicLast4: String? = nil,
-            googlePay: Stripe.Shared.PaymentMethodCardWalletGooglePay? = nil,
-            link: Stripe.Shared.Link? = nil,
-            masterpass: Stripe.Shared.Masterpass? = nil,
-            samsungPay: Stripe.Shared.SamsungPay? = nil,
             `type`: Type? = nil,
-            visaCheckout: Stripe.Shared.VisaCheckout? = nil
+            details: Details
         ) {
-            self.amexExpressCheckout = amexExpressCheckout
-            self.applePay = applePay
             self.dynamicLast4 = dynamicLast4
-            self.googlePay = googlePay
-            self.link = link
-            self.masterpass = masterpass
-            self.samsungPay = samsungPay
             self.`type` = `type`
-            self.visaCheckout = visaCheckout
+            self.details = details
+        }
+
+        public init(from decoder: any Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            self.dynamicLast4 = try container.decodeIfPresent(String.self, forKey: .dynamicLast4)
+            self.`type` = try container.decodeIfPresent(Type.self, forKey: .`type`)
+            self.details = try Details(type: try container.decodeIfPresent(String.self, forKey: .type) ?? "", from: container)
+        }
+
+        public func encode(to encoder: any Encoder) throws {
+            var container = encoder.container(keyedBy: CodingKeys.self)
+            try container.encodeIfPresent(dynamicLast4, forKey: .dynamicLast4)
+            try container.encodeIfPresent(`type`, forKey: .`type`)
+            try details.encode(into: &container)
         }
 
         /// The type of the card wallet, one of `amex_express_checkout`, `apple_pay`, `google_pay`, `masterpass`, `samsung_pay`, `…
@@ -3832,6 +3896,59 @@ extension Stripe.Shared {
             case masterpass
             case samsungPay = "samsung_pay"
             case visaCheckout = "visa_checkout"
+        }
+
+        /// The payload `type` selects; `unknown` carries a type this package does not model.
+        public indirect enum Details: Hashable, Sendable {
+            case amexExpressCheckout(Stripe.Shared.AmexExpressCheckout)
+            case applePay(Stripe.Shared.PaymentMethodCardWalletApplePay)
+            case googlePay(Stripe.Shared.PaymentMethodCardWalletGooglePay)
+            case link(Stripe.Shared.Link)
+            case masterpass(Stripe.Shared.Masterpass)
+            case samsungPay(Stripe.Shared.SamsungPay)
+            case visaCheckout(Stripe.Shared.VisaCheckout)
+            case unknown(type: String)
+
+            public var amexExpressCheckout: Stripe.Shared.AmexExpressCheckout? { if case .amexExpressCheckout(let value) = self { return value }; return nil }
+            public var applePay: Stripe.Shared.PaymentMethodCardWalletApplePay? { if case .applePay(let value) = self { return value }; return nil }
+            public var googlePay: Stripe.Shared.PaymentMethodCardWalletGooglePay? { if case .googlePay(let value) = self { return value }; return nil }
+            public var link: Stripe.Shared.Link? { if case .link(let value) = self { return value }; return nil }
+            public var masterpass: Stripe.Shared.Masterpass? { if case .masterpass(let value) = self { return value }; return nil }
+            public var samsungPay: Stripe.Shared.SamsungPay? { if case .samsungPay(let value) = self { return value }; return nil }
+            public var visaCheckout: Stripe.Shared.VisaCheckout? { if case .visaCheckout(let value) = self { return value }; return nil }
+
+            fileprivate init(type: String, from container: KeyedDecodingContainer<CodingKeys>) throws {
+                switch type {
+                case "amex_express_checkout":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.AmexExpressCheckout.self, forKey: .amexExpressCheckout) { self = .amexExpressCheckout(value) } else { self = .unknown(type: type) }
+                case "apple_pay":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.PaymentMethodCardWalletApplePay.self, forKey: .applePay) { self = .applePay(value) } else { self = .unknown(type: type) }
+                case "google_pay":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.PaymentMethodCardWalletGooglePay.self, forKey: .googlePay) { self = .googlePay(value) } else { self = .unknown(type: type) }
+                case "link":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.Link.self, forKey: .link) { self = .link(value) } else { self = .unknown(type: type) }
+                case "masterpass":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.Masterpass.self, forKey: .masterpass) { self = .masterpass(value) } else { self = .unknown(type: type) }
+                case "samsung_pay":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.SamsungPay.self, forKey: .samsungPay) { self = .samsungPay(value) } else { self = .unknown(type: type) }
+                case "visa_checkout":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.VisaCheckout.self, forKey: .visaCheckout) { self = .visaCheckout(value) } else { self = .unknown(type: type) }
+                default: self = .unknown(type: type)
+                }
+            }
+
+            fileprivate func encode(into container: inout KeyedEncodingContainer<CodingKeys>) throws {
+                switch self {
+                case .amexExpressCheckout(let value): try container.encode(value, forKey: .amexExpressCheckout)
+                case .applePay(let value): try container.encode(value, forKey: .applePay)
+                case .googlePay(let value): try container.encode(value, forKey: .googlePay)
+                case .link(let value): try container.encode(value, forKey: .link)
+                case .masterpass(let value): try container.encode(value, forKey: .masterpass)
+                case .samsungPay(let value): try container.encode(value, forKey: .samsungPay)
+                case .visaCheckout(let value): try container.encode(value, forKey: .visaCheckout)
+                default: break
+                }
+            }
         }
     }
 }

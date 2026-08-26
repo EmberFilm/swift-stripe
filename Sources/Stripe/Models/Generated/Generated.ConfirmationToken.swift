@@ -206,84 +206,33 @@ public struct ConfirmationToken: Codable, Hashable, Sendable, Identifiable {
 
     /// Details of the PaymentMethod collected by Payment Element
     public struct PaymentMethodPreview: Codable, Hashable, Sendable {
-        public var acssDebit: AcssDebit?
-        public var affirm: Affirm?
-        public var afterpayClearpay: AfterpayClearpay?
-        public var alipay: Alipay?
         /// This field indicates whether this payment method can be shown again to its customer in a checkout flow.
         public var allowRedisplay: AllowRedisplay?
-        public var alma: Alma?
-        public var amazonPay: AmazonPay?
-        public var auBecsDebit: AuBecsDebit?
-        public var bacsDebit: BacsDebit?
-        public var bancontact: Bancontact?
-        public var billie: Billie?
         public var billingDetails: Stripe.Shared.BillingDetails?
-        public var bizum: Bizum?
-        public var blik: Blik?
-        public var boleto: Boleto?
-        public var card: Card?
-        public var cardPresent: CardPresent?
-        public var cashapp: Cashapp?
-        public var crypto: Crypto?
         /// The ID of the Customer to which this PaymentMethod is saved.
         @Expandable<Stripe.Customers.Customer, String> public var customer: String?
         public var customerAccount: String?
-        public var customerBalance: CustomerBalance?
-        public var eps: Eps?
-        public var fpx: Fpx?
-        public var giropay: Giropay?
-        public var grabpay: Grabpay?
-        public var ideal: Ideal?
-        public var interacPresent: InteracPresent?
-        public var kakaoPay: KakaoPay?
-        public var klarna: Klarna?
-        public var konbini: Konbini?
-        public var krCard: KrCard?
-        public var link: Link?
-        public var mbWay: MbWay?
-        public var mobilepay: Mobilepay?
-        public var multibanco: Multibanco?
-        public var naverPay: NaverPay?
-        public var nzBankAccount: NzBankAccount?
-        public var oxxo: Oxxo?
-        public var p24: P24?
-        public var payByBank: PayByBank?
-        public var payco: Payco?
-        public var paynow: Paynow?
-        public var paypal: Paypal?
-        public var payto: Payto?
-        public var pix: Pix?
-        public var promptpay: Promptpay?
-        public var revolutPay: RevolutPay?
-        public var samsungPay: SamsungPay?
-        public var satispay: Satispay?
-        public var scalapay: Scalapay?
-        public var sepaDebit: SepaDebit?
-        public var sofort: Sofort?
-        public var sunbit: Sunbit?
-        public var swish: Swish?
-        public var twint: Twint?
         /// The type of the PaymentMethod.
         public var `type`: Type?
-        public var upi: Upi?
-        public var usBankAccount: UsBankAccount?
-        public var wechatPay: WechatPay?
-        public var zip: Zip?
+        /// The payload `type` selects.
+        public var details: Details
 
-        private enum CodingKeys: String, CodingKey {
+        fileprivate enum CodingKeys: String, CodingKey {
+            case allowRedisplay
+            case billingDetails
+            case customer
+            case customerAccount
+            case `type`
             case acssDebit
             case affirm
             case afterpayClearpay
             case alipay
-            case allowRedisplay
             case alma
             case amazonPay
             case auBecsDebit
             case bacsDebit
             case bancontact
             case billie
-            case billingDetails
             case bizum
             case blik
             case boleto
@@ -291,8 +240,6 @@ public struct ConfirmationToken: Codable, Hashable, Sendable, Identifiable {
             case cardPresent
             case cashapp
             case crypto
-            case customer
-            case customerAccount
             case customerBalance
             case eps
             case fpx
@@ -328,7 +275,6 @@ public struct ConfirmationToken: Codable, Hashable, Sendable, Identifiable {
             case sunbit
             case swish
             case twint
-            case `type`
             case upi
             case usBankAccount
             case wechatPay
@@ -336,129 +282,39 @@ public struct ConfirmationToken: Codable, Hashable, Sendable, Identifiable {
         }
 
         public init(
-            acssDebit: AcssDebit? = nil,
-            affirm: Affirm? = nil,
-            afterpayClearpay: AfterpayClearpay? = nil,
-            alipay: Alipay? = nil,
             allowRedisplay: AllowRedisplay? = nil,
-            alma: Alma? = nil,
-            amazonPay: AmazonPay? = nil,
-            auBecsDebit: AuBecsDebit? = nil,
-            bacsDebit: BacsDebit? = nil,
-            bancontact: Bancontact? = nil,
-            billie: Billie? = nil,
             billingDetails: Stripe.Shared.BillingDetails? = nil,
-            bizum: Bizum? = nil,
-            blik: Blik? = nil,
-            boleto: Boleto? = nil,
-            card: Card? = nil,
-            cardPresent: CardPresent? = nil,
-            cashapp: Cashapp? = nil,
-            crypto: Crypto? = nil,
             customer: String? = nil,
             customerAccount: String? = nil,
-            customerBalance: CustomerBalance? = nil,
-            eps: Eps? = nil,
-            fpx: Fpx? = nil,
-            giropay: Giropay? = nil,
-            grabpay: Grabpay? = nil,
-            ideal: Ideal? = nil,
-            interacPresent: InteracPresent? = nil,
-            kakaoPay: KakaoPay? = nil,
-            klarna: Klarna? = nil,
-            konbini: Konbini? = nil,
-            krCard: KrCard? = nil,
-            link: Link? = nil,
-            mbWay: MbWay? = nil,
-            mobilepay: Mobilepay? = nil,
-            multibanco: Multibanco? = nil,
-            naverPay: NaverPay? = nil,
-            nzBankAccount: NzBankAccount? = nil,
-            oxxo: Oxxo? = nil,
-            p24: P24? = nil,
-            payByBank: PayByBank? = nil,
-            payco: Payco? = nil,
-            paynow: Paynow? = nil,
-            paypal: Paypal? = nil,
-            payto: Payto? = nil,
-            pix: Pix? = nil,
-            promptpay: Promptpay? = nil,
-            revolutPay: RevolutPay? = nil,
-            samsungPay: SamsungPay? = nil,
-            satispay: Satispay? = nil,
-            scalapay: Scalapay? = nil,
-            sepaDebit: SepaDebit? = nil,
-            sofort: Sofort? = nil,
-            sunbit: Sunbit? = nil,
-            swish: Swish? = nil,
-            twint: Twint? = nil,
             `type`: Type? = nil,
-            upi: Upi? = nil,
-            usBankAccount: UsBankAccount? = nil,
-            wechatPay: WechatPay? = nil,
-            zip: Zip? = nil
+            details: Details
         ) {
-            self.acssDebit = acssDebit
-            self.affirm = affirm
-            self.afterpayClearpay = afterpayClearpay
-            self.alipay = alipay
             self.allowRedisplay = allowRedisplay
-            self.alma = alma
-            self.amazonPay = amazonPay
-            self.auBecsDebit = auBecsDebit
-            self.bacsDebit = bacsDebit
-            self.bancontact = bancontact
-            self.billie = billie
             self.billingDetails = billingDetails
-            self.bizum = bizum
-            self.blik = blik
-            self.boleto = boleto
-            self.card = card
-            self.cardPresent = cardPresent
-            self.cashapp = cashapp
-            self.crypto = crypto
             self._customer = Expandable(id: customer)
             self.customerAccount = customerAccount
-            self.customerBalance = customerBalance
-            self.eps = eps
-            self.fpx = fpx
-            self.giropay = giropay
-            self.grabpay = grabpay
-            self.ideal = ideal
-            self.interacPresent = interacPresent
-            self.kakaoPay = kakaoPay
-            self.klarna = klarna
-            self.konbini = konbini
-            self.krCard = krCard
-            self.link = link
-            self.mbWay = mbWay
-            self.mobilepay = mobilepay
-            self.multibanco = multibanco
-            self.naverPay = naverPay
-            self.nzBankAccount = nzBankAccount
-            self.oxxo = oxxo
-            self.p24 = p24
-            self.payByBank = payByBank
-            self.payco = payco
-            self.paynow = paynow
-            self.paypal = paypal
-            self.payto = payto
-            self.pix = pix
-            self.promptpay = promptpay
-            self.revolutPay = revolutPay
-            self.samsungPay = samsungPay
-            self.satispay = satispay
-            self.scalapay = scalapay
-            self.sepaDebit = sepaDebit
-            self.sofort = sofort
-            self.sunbit = sunbit
-            self.swish = swish
-            self.twint = twint
             self.`type` = `type`
-            self.upi = upi
-            self.usBankAccount = usBankAccount
-            self.wechatPay = wechatPay
-            self.zip = zip
+            self.details = details
+        }
+
+        public init(from decoder: any Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            self.allowRedisplay = try container.decodeIfPresent(AllowRedisplay.self, forKey: .allowRedisplay)
+            self.billingDetails = try container.decodeIfPresent(Stripe.Shared.BillingDetails.self, forKey: .billingDetails)
+            self._customer = try container.decode(Expandable<Stripe.Customers.Customer, String>.self, forKey: .customer)
+            self.customerAccount = try container.decodeIfPresent(String.self, forKey: .customerAccount)
+            self.`type` = try container.decodeIfPresent(Type.self, forKey: .`type`)
+            self.details = try Details(type: try container.decodeIfPresent(String.self, forKey: .type) ?? "", from: container)
+        }
+
+        public func encode(to encoder: any Encoder) throws {
+            var container = encoder.container(keyedBy: CodingKeys.self)
+            try container.encodeIfPresent(allowRedisplay, forKey: .allowRedisplay)
+            try container.encodeIfPresent(billingDetails, forKey: .billingDetails)
+            try container.encode(_customer, forKey: .customer)
+            try container.encodeIfPresent(customerAccount, forKey: .customerAccount)
+            try container.encodeIfPresent(`type`, forKey: .`type`)
+            try details.encode(into: &container)
         }
 
         /// This field indicates whether this payment method can be shown again to its customer in a checkout flow.
@@ -529,1546 +385,304 @@ public struct ConfirmationToken: Codable, Hashable, Sendable, Identifiable {
             case zip
         }
 
-        public struct AcssDebit: Codable, Hashable, Sendable {
-            /// Name of the bank associated with the bank account.
-            public var bankName: String?
-            /// Uniquely identifies this particular bank account.
-            public var fingerprint: String?
-            /// Institution number of the bank account.
-            public var institutionNumber: String?
-            /// Last four digits of the bank account number.
-            public var last4: String?
-            /// Transit number of the bank account.
-            public var transitNumber: String?
+        /// The payload `type` selects; `unknown` carries a type this package does not model.
+        public indirect enum Details: Hashable, Sendable {
+            case acssDebit(Stripe.Shared.PaymentMethodAcssDebit)
+            case affirm(Stripe.Shared.Affirm)
+            case afterpayClearpay(Stripe.Shared.AfterpayClearpay)
+            case alipay(Stripe.Shared.Alipay)
+            case alma(Stripe.Shared.Alma)
+            case amazonPay(Stripe.Shared.AmazonPay)
+            case auBecsDebit(Stripe.Shared.AuBecsDebit)
+            case bacsDebit(Stripe.Shared.BacsDebit)
+            case bancontact(Stripe.Shared.PaymentMethodBancontact)
+            case billie(Stripe.Shared.Billie)
+            case bizum(Stripe.Shared.Bizum)
+            case blik(Stripe.Shared.Blik)
+            case boleto(Stripe.Shared.Boleto)
+            case card(Stripe.Shared.Card)
+            case cardPresent(Stripe.Shared.PaymentMethodCardPresent)
+            case cashapp(Stripe.Shared.Cashapp)
+            case crypto(Stripe.Shared.PaymentMethodCrypto)
+            case customerBalance(Stripe.Shared.PaymentMethodCustomerBalance)
+            case eps(Stripe.Shared.Eps)
+            case fpx(Stripe.Shared.PaymentMethodFpx)
+            case giropay(Stripe.Shared.Giropay)
+            case grabpay(Stripe.Shared.PaymentMethodGrabpay)
+            case ideal(Stripe.Shared.Ideal)
+            case interacPresent(Stripe.Shared.PaymentMethodInteracPresent)
+            case kakaoPay(Stripe.Shared.KakaoPay)
+            case klarna(Stripe.Shared.Klarna)
+            case konbini(Stripe.Shared.PaymentMethodKonbini)
+            case krCard(Stripe.Shared.PaymentMethodKrCard)
+            case link(Stripe.Shared.PaymentMethodLink)
+            case mbWay(Stripe.Shared.MbWay)
+            case mobilepay(Stripe.Shared.Mobilepay)
+            case multibanco(Stripe.Shared.Multibanco)
+            case naverPay(Stripe.Shared.NaverPay)
+            case nzBankAccount(Stripe.Shared.PaymentMethodNzBankAccount)
+            case oxxo(Stripe.Shared.Oxxo)
+            case p24(Stripe.Shared.P24)
+            case payByBank(Stripe.Shared.PayByBank)
+            case payco(Stripe.Shared.Payco)
+            case paynow(Stripe.Shared.Paynow)
+            case paypal(Stripe.Shared.PaymentMethodPaypal)
+            case payto(Stripe.Shared.PaymentMethodPayto)
+            case pix(Stripe.Shared.Pix)
+            case promptpay(Stripe.Shared.Promptpay)
+            case revolutPay(Stripe.Shared.RevolutPay)
+            case samsungPay(Stripe.Shared.PaymentMethodSamsungPay)
+            case satispay(Stripe.Shared.Satispay)
+            case scalapay(Stripe.Shared.Scalapay)
+            case sepaDebit(Stripe.Shared.PaymentMethodSepaDebit)
+            case sofort(Stripe.Shared.Sofort)
+            case sunbit(Stripe.Shared.Sunbit)
+            case swish(Stripe.Shared.Swish)
+            case twint(Stripe.Shared.Twint)
+            case upi(Stripe.Shared.PaymentMethodUpi)
+            case usBankAccount(Stripe.Shared.PaymentMethodUsBankAccount)
+            case wechatPay(Stripe.Shared.WechatPay)
+            case zip(Stripe.Shared.Zip)
+            case custom
+            case unknown(type: String)
 
-            private enum CodingKeys: String, CodingKey {
-                case bankName
-                case fingerprint
-                case institutionNumber
-                case last4
-                case transitNumber
-            }
+            public var acssDebit: Stripe.Shared.PaymentMethodAcssDebit? { if case .acssDebit(let value) = self { return value }; return nil }
+            public var affirm: Stripe.Shared.Affirm? { if case .affirm(let value) = self { return value }; return nil }
+            public var afterpayClearpay: Stripe.Shared.AfterpayClearpay? { if case .afterpayClearpay(let value) = self { return value }; return nil }
+            public var alipay: Stripe.Shared.Alipay? { if case .alipay(let value) = self { return value }; return nil }
+            public var alma: Stripe.Shared.Alma? { if case .alma(let value) = self { return value }; return nil }
+            public var amazonPay: Stripe.Shared.AmazonPay? { if case .amazonPay(let value) = self { return value }; return nil }
+            public var auBecsDebit: Stripe.Shared.AuBecsDebit? { if case .auBecsDebit(let value) = self { return value }; return nil }
+            public var bacsDebit: Stripe.Shared.BacsDebit? { if case .bacsDebit(let value) = self { return value }; return nil }
+            public var bancontact: Stripe.Shared.PaymentMethodBancontact? { if case .bancontact(let value) = self { return value }; return nil }
+            public var billie: Stripe.Shared.Billie? { if case .billie(let value) = self { return value }; return nil }
+            public var bizum: Stripe.Shared.Bizum? { if case .bizum(let value) = self { return value }; return nil }
+            public var blik: Stripe.Shared.Blik? { if case .blik(let value) = self { return value }; return nil }
+            public var boleto: Stripe.Shared.Boleto? { if case .boleto(let value) = self { return value }; return nil }
+            public var card: Stripe.Shared.Card? { if case .card(let value) = self { return value }; return nil }
+            public var cardPresent: Stripe.Shared.PaymentMethodCardPresent? { if case .cardPresent(let value) = self { return value }; return nil }
+            public var cashapp: Stripe.Shared.Cashapp? { if case .cashapp(let value) = self { return value }; return nil }
+            public var crypto: Stripe.Shared.PaymentMethodCrypto? { if case .crypto(let value) = self { return value }; return nil }
+            public var customerBalance: Stripe.Shared.PaymentMethodCustomerBalance? { if case .customerBalance(let value) = self { return value }; return nil }
+            public var eps: Stripe.Shared.Eps? { if case .eps(let value) = self { return value }; return nil }
+            public var fpx: Stripe.Shared.PaymentMethodFpx? { if case .fpx(let value) = self { return value }; return nil }
+            public var giropay: Stripe.Shared.Giropay? { if case .giropay(let value) = self { return value }; return nil }
+            public var grabpay: Stripe.Shared.PaymentMethodGrabpay? { if case .grabpay(let value) = self { return value }; return nil }
+            public var ideal: Stripe.Shared.Ideal? { if case .ideal(let value) = self { return value }; return nil }
+            public var interacPresent: Stripe.Shared.PaymentMethodInteracPresent? { if case .interacPresent(let value) = self { return value }; return nil }
+            public var kakaoPay: Stripe.Shared.KakaoPay? { if case .kakaoPay(let value) = self { return value }; return nil }
+            public var klarna: Stripe.Shared.Klarna? { if case .klarna(let value) = self { return value }; return nil }
+            public var konbini: Stripe.Shared.PaymentMethodKonbini? { if case .konbini(let value) = self { return value }; return nil }
+            public var krCard: Stripe.Shared.PaymentMethodKrCard? { if case .krCard(let value) = self { return value }; return nil }
+            public var link: Stripe.Shared.PaymentMethodLink? { if case .link(let value) = self { return value }; return nil }
+            public var mbWay: Stripe.Shared.MbWay? { if case .mbWay(let value) = self { return value }; return nil }
+            public var mobilepay: Stripe.Shared.Mobilepay? { if case .mobilepay(let value) = self { return value }; return nil }
+            public var multibanco: Stripe.Shared.Multibanco? { if case .multibanco(let value) = self { return value }; return nil }
+            public var naverPay: Stripe.Shared.NaverPay? { if case .naverPay(let value) = self { return value }; return nil }
+            public var nzBankAccount: Stripe.Shared.PaymentMethodNzBankAccount? { if case .nzBankAccount(let value) = self { return value }; return nil }
+            public var oxxo: Stripe.Shared.Oxxo? { if case .oxxo(let value) = self { return value }; return nil }
+            public var p24: Stripe.Shared.P24? { if case .p24(let value) = self { return value }; return nil }
+            public var payByBank: Stripe.Shared.PayByBank? { if case .payByBank(let value) = self { return value }; return nil }
+            public var payco: Stripe.Shared.Payco? { if case .payco(let value) = self { return value }; return nil }
+            public var paynow: Stripe.Shared.Paynow? { if case .paynow(let value) = self { return value }; return nil }
+            public var paypal: Stripe.Shared.PaymentMethodPaypal? { if case .paypal(let value) = self { return value }; return nil }
+            public var payto: Stripe.Shared.PaymentMethodPayto? { if case .payto(let value) = self { return value }; return nil }
+            public var pix: Stripe.Shared.Pix? { if case .pix(let value) = self { return value }; return nil }
+            public var promptpay: Stripe.Shared.Promptpay? { if case .promptpay(let value) = self { return value }; return nil }
+            public var revolutPay: Stripe.Shared.RevolutPay? { if case .revolutPay(let value) = self { return value }; return nil }
+            public var samsungPay: Stripe.Shared.PaymentMethodSamsungPay? { if case .samsungPay(let value) = self { return value }; return nil }
+            public var satispay: Stripe.Shared.Satispay? { if case .satispay(let value) = self { return value }; return nil }
+            public var scalapay: Stripe.Shared.Scalapay? { if case .scalapay(let value) = self { return value }; return nil }
+            public var sepaDebit: Stripe.Shared.PaymentMethodSepaDebit? { if case .sepaDebit(let value) = self { return value }; return nil }
+            public var sofort: Stripe.Shared.Sofort? { if case .sofort(let value) = self { return value }; return nil }
+            public var sunbit: Stripe.Shared.Sunbit? { if case .sunbit(let value) = self { return value }; return nil }
+            public var swish: Stripe.Shared.Swish? { if case .swish(let value) = self { return value }; return nil }
+            public var twint: Stripe.Shared.Twint? { if case .twint(let value) = self { return value }; return nil }
+            public var upi: Stripe.Shared.PaymentMethodUpi? { if case .upi(let value) = self { return value }; return nil }
+            public var usBankAccount: Stripe.Shared.PaymentMethodUsBankAccount? { if case .usBankAccount(let value) = self { return value }; return nil }
+            public var wechatPay: Stripe.Shared.WechatPay? { if case .wechatPay(let value) = self { return value }; return nil }
+            public var zip: Stripe.Shared.Zip? { if case .zip(let value) = self { return value }; return nil }
 
-            public init(
-                bankName: String? = nil,
-                fingerprint: String? = nil,
-                institutionNumber: String? = nil,
-                last4: String? = nil,
-                transitNumber: String? = nil
-            ) {
-                self.bankName = bankName
-                self.fingerprint = fingerprint
-                self.institutionNumber = institutionNumber
-                self.last4 = last4
-                self.transitNumber = transitNumber
-            }
-        }
-
-        public struct Affirm: Codable, Hashable, Sendable {
-            public init() {}
-        }
-
-        public struct AfterpayClearpay: Codable, Hashable, Sendable {
-            public init() {}
-        }
-
-        public struct Alipay: Codable, Hashable, Sendable {
-            public init() {}
-        }
-
-        public struct Alma: Codable, Hashable, Sendable {
-            public init() {}
-        }
-
-        public struct AmazonPay: Codable, Hashable, Sendable {
-            public init() {}
-        }
-
-        public struct AuBecsDebit: Codable, Hashable, Sendable {
-            /// Six-digit number identifying bank and branch associated with this bank account.
-            public var bsbNumber: String?
-            /// Uniquely identifies this particular bank account.
-            public var fingerprint: String?
-            /// Last four digits of the bank account number.
-            public var last4: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case bsbNumber
-                case fingerprint
-                case last4
-            }
-
-            public init(
-                bsbNumber: String? = nil,
-                fingerprint: String? = nil,
-                last4: String? = nil
-            ) {
-                self.bsbNumber = bsbNumber
-                self.fingerprint = fingerprint
-                self.last4 = last4
-            }
-        }
-
-        public struct BacsDebit: Codable, Hashable, Sendable {
-            /// Uniquely identifies this particular bank account.
-            public var fingerprint: String?
-            /// Last four digits of the bank account number.
-            public var last4: String?
-            /// Sort code of the bank account.
-            public var sortCode: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case fingerprint
-                case last4
-                case sortCode
-            }
-
-            public init(
-                fingerprint: String? = nil,
-                last4: String? = nil,
-                sortCode: String? = nil
-            ) {
-                self.fingerprint = fingerprint
-                self.last4 = last4
-                self.sortCode = sortCode
-            }
-        }
-
-        public struct Bancontact: Codable, Hashable, Sendable {
-            public init() {}
-        }
-
-        public struct Billie: Codable, Hashable, Sendable {
-            public init() {}
-        }
-
-        public struct Bizum: Codable, Hashable, Sendable {
-            /// A unique identifier for the buyer as determined by the local payment processor.
-            public var buyerId: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case buyerId
-            }
-
-            public init(
-                buyerId: String? = nil
-            ) {
-                self.buyerId = buyerId
-            }
-        }
-
-        public struct Blik: Codable, Hashable, Sendable {
-            /// A unique and immutable identifier assigned by BLIK to every buyer.
-            public var buyerId: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case buyerId
-            }
-
-            public init(
-                buyerId: String? = nil
-            ) {
-                self.buyerId = buyerId
-            }
-        }
-
-        public struct Boleto: Codable, Hashable, Sendable {
-            /// Uniquely identifies the customer tax id (CNPJ or CPF)
-            public var taxId: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case taxId
-            }
-
-            public init(
-                taxId: String? = nil
-            ) {
-                self.taxId = taxId
-            }
-        }
-
-        public struct Card: Codable, Hashable, Sendable {
-            /// Card brand.
-            public var brand: String?
-            /// Checks on Card address and CVC if provided.
-            public var checks: Checks?
-            /// Two-letter ISO code representing the country of the card.
-            public var country: String?
-            /// A high-level description of the type of cards issued in this range.
-            public var description: String?
-            /// The brand to use when displaying the card, this accounts for customer's brand choice on dual-branded cards.
-            public var displayBrand: String?
-            /// Two-digit number representing the card's expiration month.
-            public var expMonth: Int?
-            /// Four-digit number representing the card's expiration year.
-            public var expYear: Int?
-            /// Uniquely identifies this particular card number.
-            public var fingerprint: String?
-            /// Card funding type.
-            public var funding: String?
-            /// Details of the original PaymentMethod that created this object.
-            public var generatedFrom: GeneratedFrom?
-            /// Issuer identification number of the card.
-            public var iin: String?
-            /// The name of the card's issuing bank.
-            public var issuer: String?
-            /// The last four digits of the card.
-            public var last4: String?
-            /// Contains information about card networks that can be used to process the payment.
-            public var networks: Networks?
-            /// Status of a card based on the card issuer.
-            public var regulatedStatus: RegulatedStatus?
-            /// Contains details on how this Card may be used for 3D Secure authentication.
-            public var threeDSecureUsage: ThreeDSecureUsage?
-            /// If this Card is part of a card wallet, this contains the details of the card wallet.
-            public var wallet: Wallet?
-
-            private enum CodingKeys: String, CodingKey {
-                case brand
-                case checks
-                case country
-                case description
-                case displayBrand
-                case expMonth
-                case expYear
-                case fingerprint
-                case funding
-                case generatedFrom
-                case iin
-                case issuer
-                case last4
-                case networks
-                case regulatedStatus
-                case threeDSecureUsage
-                case wallet
-            }
-
-            public init(
-                brand: String? = nil,
-                checks: Checks? = nil,
-                country: String? = nil,
-                description: String? = nil,
-                displayBrand: String? = nil,
-                expMonth: Int? = nil,
-                expYear: Int? = nil,
-                fingerprint: String? = nil,
-                funding: String? = nil,
-                generatedFrom: GeneratedFrom? = nil,
-                iin: String? = nil,
-                issuer: String? = nil,
-                last4: String? = nil,
-                networks: Networks? = nil,
-                regulatedStatus: RegulatedStatus? = nil,
-                threeDSecureUsage: ThreeDSecureUsage? = nil,
-                wallet: Wallet? = nil
-            ) {
-                self.brand = brand
-                self.checks = checks
-                self.country = country
-                self.description = description
-                self.displayBrand = displayBrand
-                self.expMonth = expMonth
-                self.expYear = expYear
-                self.fingerprint = fingerprint
-                self.funding = funding
-                self.generatedFrom = generatedFrom
-                self.iin = iin
-                self.issuer = issuer
-                self.last4 = last4
-                self.networks = networks
-                self.regulatedStatus = regulatedStatus
-                self.threeDSecureUsage = threeDSecureUsage
-                self.wallet = wallet
-            }
-
-            /// Status of a card based on the card issuer.
-            public enum RegulatedStatus: String, Codable, Hashable, Sendable {
-                case regulated
-                case unregulated
-            }
-
-            public struct Checks: Codable, Hashable, Sendable {
-                /// If a address line1 was provided, results of the check, one of `pass`, `fail`, `unavailable`, or `unchecked`.
-                public var addressLine1Check: String?
-                /// If a address postal code was provided, results of the check, one of `pass`, `fail`, `unavailable`, or `unchecked`.
-                public var addressPostalCodeCheck: String?
-                /// If a CVC was provided, results of the check, one of `pass`, `fail`, `unavailable`, or `unchecked`.
-                public var cvcCheck: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case addressLine1Check
-                    case addressPostalCodeCheck
-                    case cvcCheck
-                }
-
-                public init(
-                    addressLine1Check: String? = nil,
-                    addressPostalCodeCheck: String? = nil,
-                    cvcCheck: String? = nil
-                ) {
-                    self.addressLine1Check = addressLine1Check
-                    self.addressPostalCodeCheck = addressPostalCodeCheck
-                    self.cvcCheck = cvcCheck
+            fileprivate init(type: String, from container: KeyedDecodingContainer<CodingKeys>) throws {
+                switch type {
+                case "acss_debit":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.PaymentMethodAcssDebit.self, forKey: .acssDebit) { self = .acssDebit(value) } else { self = .unknown(type: type) }
+                case "affirm":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.Affirm.self, forKey: .affirm) { self = .affirm(value) } else { self = .unknown(type: type) }
+                case "afterpay_clearpay":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.AfterpayClearpay.self, forKey: .afterpayClearpay) { self = .afterpayClearpay(value) } else { self = .unknown(type: type) }
+                case "alipay":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.Alipay.self, forKey: .alipay) { self = .alipay(value) } else { self = .unknown(type: type) }
+                case "alma":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.Alma.self, forKey: .alma) { self = .alma(value) } else { self = .unknown(type: type) }
+                case "amazon_pay":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.AmazonPay.self, forKey: .amazonPay) { self = .amazonPay(value) } else { self = .unknown(type: type) }
+                case "au_becs_debit":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.AuBecsDebit.self, forKey: .auBecsDebit) { self = .auBecsDebit(value) } else { self = .unknown(type: type) }
+                case "bacs_debit":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.BacsDebit.self, forKey: .bacsDebit) { self = .bacsDebit(value) } else { self = .unknown(type: type) }
+                case "bancontact":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.PaymentMethodBancontact.self, forKey: .bancontact) { self = .bancontact(value) } else { self = .unknown(type: type) }
+                case "billie":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.Billie.self, forKey: .billie) { self = .billie(value) } else { self = .unknown(type: type) }
+                case "bizum":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.Bizum.self, forKey: .bizum) { self = .bizum(value) } else { self = .unknown(type: type) }
+                case "blik":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.Blik.self, forKey: .blik) { self = .blik(value) } else { self = .unknown(type: type) }
+                case "boleto":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.Boleto.self, forKey: .boleto) { self = .boleto(value) } else { self = .unknown(type: type) }
+                case "card":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.Card.self, forKey: .card) { self = .card(value) } else { self = .unknown(type: type) }
+                case "card_present":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.PaymentMethodCardPresent.self, forKey: .cardPresent) { self = .cardPresent(value) } else { self = .unknown(type: type) }
+                case "cashapp":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.Cashapp.self, forKey: .cashapp) { self = .cashapp(value) } else { self = .unknown(type: type) }
+                case "crypto":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.PaymentMethodCrypto.self, forKey: .crypto) { self = .crypto(value) } else { self = .unknown(type: type) }
+                case "customer_balance":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.PaymentMethodCustomerBalance.self, forKey: .customerBalance) { self = .customerBalance(value) } else { self = .unknown(type: type) }
+                case "eps":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.Eps.self, forKey: .eps) { self = .eps(value) } else { self = .unknown(type: type) }
+                case "fpx":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.PaymentMethodFpx.self, forKey: .fpx) { self = .fpx(value) } else { self = .unknown(type: type) }
+                case "giropay":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.Giropay.self, forKey: .giropay) { self = .giropay(value) } else { self = .unknown(type: type) }
+                case "grabpay":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.PaymentMethodGrabpay.self, forKey: .grabpay) { self = .grabpay(value) } else { self = .unknown(type: type) }
+                case "ideal":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.Ideal.self, forKey: .ideal) { self = .ideal(value) } else { self = .unknown(type: type) }
+                case "interac_present":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.PaymentMethodInteracPresent.self, forKey: .interacPresent) { self = .interacPresent(value) } else { self = .unknown(type: type) }
+                case "kakao_pay":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.KakaoPay.self, forKey: .kakaoPay) { self = .kakaoPay(value) } else { self = .unknown(type: type) }
+                case "klarna":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.Klarna.self, forKey: .klarna) { self = .klarna(value) } else { self = .unknown(type: type) }
+                case "konbini":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.PaymentMethodKonbini.self, forKey: .konbini) { self = .konbini(value) } else { self = .unknown(type: type) }
+                case "kr_card":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.PaymentMethodKrCard.self, forKey: .krCard) { self = .krCard(value) } else { self = .unknown(type: type) }
+                case "link":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.PaymentMethodLink.self, forKey: .link) { self = .link(value) } else { self = .unknown(type: type) }
+                case "mb_way":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.MbWay.self, forKey: .mbWay) { self = .mbWay(value) } else { self = .unknown(type: type) }
+                case "mobilepay":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.Mobilepay.self, forKey: .mobilepay) { self = .mobilepay(value) } else { self = .unknown(type: type) }
+                case "multibanco":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.Multibanco.self, forKey: .multibanco) { self = .multibanco(value) } else { self = .unknown(type: type) }
+                case "naver_pay":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.NaverPay.self, forKey: .naverPay) { self = .naverPay(value) } else { self = .unknown(type: type) }
+                case "nz_bank_account":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.PaymentMethodNzBankAccount.self, forKey: .nzBankAccount) { self = .nzBankAccount(value) } else { self = .unknown(type: type) }
+                case "oxxo":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.Oxxo.self, forKey: .oxxo) { self = .oxxo(value) } else { self = .unknown(type: type) }
+                case "p24":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.P24.self, forKey: .p24) { self = .p24(value) } else { self = .unknown(type: type) }
+                case "pay_by_bank":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.PayByBank.self, forKey: .payByBank) { self = .payByBank(value) } else { self = .unknown(type: type) }
+                case "payco":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.Payco.self, forKey: .payco) { self = .payco(value) } else { self = .unknown(type: type) }
+                case "paynow":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.Paynow.self, forKey: .paynow) { self = .paynow(value) } else { self = .unknown(type: type) }
+                case "paypal":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.PaymentMethodPaypal.self, forKey: .paypal) { self = .paypal(value) } else { self = .unknown(type: type) }
+                case "payto":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.PaymentMethodPayto.self, forKey: .payto) { self = .payto(value) } else { self = .unknown(type: type) }
+                case "pix":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.Pix.self, forKey: .pix) { self = .pix(value) } else { self = .unknown(type: type) }
+                case "promptpay":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.Promptpay.self, forKey: .promptpay) { self = .promptpay(value) } else { self = .unknown(type: type) }
+                case "revolut_pay":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.RevolutPay.self, forKey: .revolutPay) { self = .revolutPay(value) } else { self = .unknown(type: type) }
+                case "samsung_pay":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.PaymentMethodSamsungPay.self, forKey: .samsungPay) { self = .samsungPay(value) } else { self = .unknown(type: type) }
+                case "satispay":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.Satispay.self, forKey: .satispay) { self = .satispay(value) } else { self = .unknown(type: type) }
+                case "scalapay":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.Scalapay.self, forKey: .scalapay) { self = .scalapay(value) } else { self = .unknown(type: type) }
+                case "sepa_debit":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.PaymentMethodSepaDebit.self, forKey: .sepaDebit) { self = .sepaDebit(value) } else { self = .unknown(type: type) }
+                case "sofort":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.Sofort.self, forKey: .sofort) { self = .sofort(value) } else { self = .unknown(type: type) }
+                case "sunbit":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.Sunbit.self, forKey: .sunbit) { self = .sunbit(value) } else { self = .unknown(type: type) }
+                case "swish":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.Swish.self, forKey: .swish) { self = .swish(value) } else { self = .unknown(type: type) }
+                case "twint":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.Twint.self, forKey: .twint) { self = .twint(value) } else { self = .unknown(type: type) }
+                case "upi":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.PaymentMethodUpi.self, forKey: .upi) { self = .upi(value) } else { self = .unknown(type: type) }
+                case "us_bank_account":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.PaymentMethodUsBankAccount.self, forKey: .usBankAccount) { self = .usBankAccount(value) } else { self = .unknown(type: type) }
+                case "wechat_pay":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.WechatPay.self, forKey: .wechatPay) { self = .wechatPay(value) } else { self = .unknown(type: type) }
+                case "zip":
+                    if let value = try container.decodeIfPresent(Stripe.Shared.Zip.self, forKey: .zip) { self = .zip(value) } else { self = .unknown(type: type) }
+                case "custom": self = .custom
+                default: self = .unknown(type: type)
                 }
             }
 
-            public struct GeneratedFrom: Codable, Hashable, Sendable {
-                /// The charge that created this object.
-                public var charge: String?
-                /// Transaction-specific details of the payment method used in the payment.
-                public var paymentMethodDetails: PaymentMethodDetails?
-                /// The ID of the SetupAttempt that generated this PaymentMethod, if any.
-                @Expandable<Stripe.Setup.Attempt, String> public var setupAttempt: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case charge
-                    case paymentMethodDetails
-                    case setupAttempt
-                }
-
-                public init(
-                    charge: String? = nil,
-                    paymentMethodDetails: PaymentMethodDetails? = nil,
-                    setupAttempt: String? = nil
-                ) {
-                    self.charge = charge
-                    self.paymentMethodDetails = paymentMethodDetails
-                    self._setupAttempt = Expandable(id: setupAttempt)
-                }
-
-                public struct PaymentMethodDetails: Codable, Hashable, Sendable {
-                    public var cardPresent: Stripe.Shared.CardPresent?
-                    /// The type of payment method transaction-specific details from the transaction that generated this `card` payment method…
-                    public var `type`: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case cardPresent
-                        case `type`
-                    }
-
-                    public init(
-                        cardPresent: Stripe.Shared.CardPresent? = nil,
-                        `type`: String? = nil
-                    ) {
-                        self.cardPresent = cardPresent
-                        self.`type` = `type`
-                    }
-                }
-            }
-
-            public struct Networks: Codable, Hashable, Sendable {
-                /// All networks available for selection via payment_method_options.card.network.
-                public var available: [String]?
-                /// The preferred network for co-branded cards.
-                public var preferred: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case available
-                    case preferred
-                }
-
-                public init(
-                    available: [String]? = nil,
-                    preferred: String? = nil
-                ) {
-                    self.available = available
-                    self.preferred = preferred
+            fileprivate func encode(into container: inout KeyedEncodingContainer<CodingKeys>) throws {
+                switch self {
+                case .acssDebit(let value): try container.encode(value, forKey: .acssDebit)
+                case .affirm(let value): try container.encode(value, forKey: .affirm)
+                case .afterpayClearpay(let value): try container.encode(value, forKey: .afterpayClearpay)
+                case .alipay(let value): try container.encode(value, forKey: .alipay)
+                case .alma(let value): try container.encode(value, forKey: .alma)
+                case .amazonPay(let value): try container.encode(value, forKey: .amazonPay)
+                case .auBecsDebit(let value): try container.encode(value, forKey: .auBecsDebit)
+                case .bacsDebit(let value): try container.encode(value, forKey: .bacsDebit)
+                case .bancontact(let value): try container.encode(value, forKey: .bancontact)
+                case .billie(let value): try container.encode(value, forKey: .billie)
+                case .bizum(let value): try container.encode(value, forKey: .bizum)
+                case .blik(let value): try container.encode(value, forKey: .blik)
+                case .boleto(let value): try container.encode(value, forKey: .boleto)
+                case .card(let value): try container.encode(value, forKey: .card)
+                case .cardPresent(let value): try container.encode(value, forKey: .cardPresent)
+                case .cashapp(let value): try container.encode(value, forKey: .cashapp)
+                case .crypto(let value): try container.encode(value, forKey: .crypto)
+                case .customerBalance(let value): try container.encode(value, forKey: .customerBalance)
+                case .eps(let value): try container.encode(value, forKey: .eps)
+                case .fpx(let value): try container.encode(value, forKey: .fpx)
+                case .giropay(let value): try container.encode(value, forKey: .giropay)
+                case .grabpay(let value): try container.encode(value, forKey: .grabpay)
+                case .ideal(let value): try container.encode(value, forKey: .ideal)
+                case .interacPresent(let value): try container.encode(value, forKey: .interacPresent)
+                case .kakaoPay(let value): try container.encode(value, forKey: .kakaoPay)
+                case .klarna(let value): try container.encode(value, forKey: .klarna)
+                case .konbini(let value): try container.encode(value, forKey: .konbini)
+                case .krCard(let value): try container.encode(value, forKey: .krCard)
+                case .link(let value): try container.encode(value, forKey: .link)
+                case .mbWay(let value): try container.encode(value, forKey: .mbWay)
+                case .mobilepay(let value): try container.encode(value, forKey: .mobilepay)
+                case .multibanco(let value): try container.encode(value, forKey: .multibanco)
+                case .naverPay(let value): try container.encode(value, forKey: .naverPay)
+                case .nzBankAccount(let value): try container.encode(value, forKey: .nzBankAccount)
+                case .oxxo(let value): try container.encode(value, forKey: .oxxo)
+                case .p24(let value): try container.encode(value, forKey: .p24)
+                case .payByBank(let value): try container.encode(value, forKey: .payByBank)
+                case .payco(let value): try container.encode(value, forKey: .payco)
+                case .paynow(let value): try container.encode(value, forKey: .paynow)
+                case .paypal(let value): try container.encode(value, forKey: .paypal)
+                case .payto(let value): try container.encode(value, forKey: .payto)
+                case .pix(let value): try container.encode(value, forKey: .pix)
+                case .promptpay(let value): try container.encode(value, forKey: .promptpay)
+                case .revolutPay(let value): try container.encode(value, forKey: .revolutPay)
+                case .samsungPay(let value): try container.encode(value, forKey: .samsungPay)
+                case .satispay(let value): try container.encode(value, forKey: .satispay)
+                case .scalapay(let value): try container.encode(value, forKey: .scalapay)
+                case .sepaDebit(let value): try container.encode(value, forKey: .sepaDebit)
+                case .sofort(let value): try container.encode(value, forKey: .sofort)
+                case .sunbit(let value): try container.encode(value, forKey: .sunbit)
+                case .swish(let value): try container.encode(value, forKey: .swish)
+                case .twint(let value): try container.encode(value, forKey: .twint)
+                case .upi(let value): try container.encode(value, forKey: .upi)
+                case .usBankAccount(let value): try container.encode(value, forKey: .usBankAccount)
+                case .wechatPay(let value): try container.encode(value, forKey: .wechatPay)
+                case .zip(let value): try container.encode(value, forKey: .zip)
+                default: break
                 }
             }
-
-            public struct ThreeDSecureUsage: Codable, Hashable, Sendable {
-                /// Whether 3D Secure is supported on this card.
-                public var supported: Bool?
-
-                private enum CodingKeys: String, CodingKey {
-                    case supported
-                }
-
-                public init(
-                    supported: Bool? = nil
-                ) {
-                    self.supported = supported
-                }
-            }
-
-            public struct Wallet: Codable, Hashable, Sendable {
-                public var amexExpressCheckout: AmexExpressCheckout?
-                public var applePay: ApplePay?
-                /// (For tokenized numbers only.) The last four digits of the device account number.
-                public var dynamicLast4: String?
-                public var googlePay: GooglePay?
-                public var link: Link?
-                public var masterpass: Masterpass?
-                public var samsungPay: SamsungPay?
-                /// The type of the card wallet, one of `amex_express_checkout`, `apple_pay`, `google_pay`, `masterpass`, `samsung_pay`, `…
-                public var `type`: Type?
-                public var visaCheckout: VisaCheckout?
-
-                private enum CodingKeys: String, CodingKey {
-                    case amexExpressCheckout
-                    case applePay
-                    case dynamicLast4
-                    case googlePay
-                    case link
-                    case masterpass
-                    case samsungPay
-                    case `type`
-                    case visaCheckout
-                }
-
-                public init(
-                    amexExpressCheckout: AmexExpressCheckout? = nil,
-                    applePay: ApplePay? = nil,
-                    dynamicLast4: String? = nil,
-                    googlePay: GooglePay? = nil,
-                    link: Link? = nil,
-                    masterpass: Masterpass? = nil,
-                    samsungPay: SamsungPay? = nil,
-                    `type`: Type? = nil,
-                    visaCheckout: VisaCheckout? = nil
-                ) {
-                    self.amexExpressCheckout = amexExpressCheckout
-                    self.applePay = applePay
-                    self.dynamicLast4 = dynamicLast4
-                    self.googlePay = googlePay
-                    self.link = link
-                    self.masterpass = masterpass
-                    self.samsungPay = samsungPay
-                    self.`type` = `type`
-                    self.visaCheckout = visaCheckout
-                }
-
-                /// The type of the card wallet, one of `amex_express_checkout`, `apple_pay`, `google_pay`, `masterpass`, `samsung_pay`, `…
-                public enum `Type`: String, Codable, Hashable, Sendable {
-                    case amexExpressCheckout = "amex_express_checkout"
-                    case applePay = "apple_pay"
-                    case googlePay = "google_pay"
-                    case link
-                    case masterpass
-                    case samsungPay = "samsung_pay"
-                    case visaCheckout = "visa_checkout"
-                }
-
-                public struct AmexExpressCheckout: Codable, Hashable, Sendable {
-                    public init() {}
-                }
-
-                public struct ApplePay: Codable, Hashable, Sendable {
-                    public init() {}
-                }
-
-                public struct GooglePay: Codable, Hashable, Sendable {
-                    public init() {}
-                }
-
-                public struct Link: Codable, Hashable, Sendable {
-                    public init() {}
-                }
-
-                public struct Masterpass: Codable, Hashable, Sendable {
-                    /// Owner's verified billing address.
-                    public var billingAddress: Address?
-                    /// Owner's verified email.
-                    public var email: String?
-                    /// Owner's verified full name.
-                    public var name: String?
-                    /// Owner's verified shipping address.
-                    public var shippingAddress: Address?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case billingAddress
-                        case email
-                        case name
-                        case shippingAddress
-                    }
-
-                    public init(
-                        billingAddress: Address? = nil,
-                        email: String? = nil,
-                        name: String? = nil,
-                        shippingAddress: Address? = nil
-                    ) {
-                        self.billingAddress = billingAddress
-                        self.email = email
-                        self.name = name
-                        self.shippingAddress = shippingAddress
-                    }
-                }
-
-                public struct SamsungPay: Codable, Hashable, Sendable {
-                    public init() {}
-                }
-
-                public struct VisaCheckout: Codable, Hashable, Sendable {
-                    /// Owner's verified billing address.
-                    public var billingAddress: Address?
-                    /// Owner's verified email.
-                    public var email: String?
-                    /// Owner's verified full name.
-                    public var name: String?
-                    /// Owner's verified shipping address.
-                    public var shippingAddress: Address?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case billingAddress
-                        case email
-                        case name
-                        case shippingAddress
-                    }
-
-                    public init(
-                        billingAddress: Address? = nil,
-                        email: String? = nil,
-                        name: String? = nil,
-                        shippingAddress: Address? = nil
-                    ) {
-                        self.billingAddress = billingAddress
-                        self.email = email
-                        self.name = name
-                        self.shippingAddress = shippingAddress
-                    }
-                }
-            }
-        }
-
-        public struct CardPresent: Codable, Hashable, Sendable {
-            /// Card brand.
-            public var brand: String?
-            /// The product code that identifies the specific program or product associated with a card.
-            public var brandProduct: String?
-            /// The cardholder name as read from the card, in ISO 7813 format.
-            public var cardholderName: String?
-            /// Two-letter ISO code representing the country of the card.
-            public var country: String?
-            /// A high-level description of the type of cards issued in this range.
-            public var description: String?
-            /// Two-digit number representing the card's expiration month.
-            public var expMonth: Int?
-            /// Four-digit number representing the card's expiration year.
-            public var expYear: Int?
-            /// Uniquely identifies this particular card number.
-            public var fingerprint: String?
-            /// Card funding type.
-            public var funding: String?
-            /// Issuer identification number of the card.
-            public var iin: String?
-            /// The name of the card's issuing bank.
-            public var issuer: String?
-            /// The last four digits of the card.
-            public var last4: String?
-            /// Contains information about card networks that can be used to process the payment.
-            public var networks: Networks?
-            /// Details about payment methods collected offline.
-            public var offline: Stripe.Shared.Offline?
-            /// The languages that the issuing bank recommends using for localizing any customer-facing text, as read from the card.
-            public var preferredLocales: [String]?
-            /// How card details were read in this transaction.
-            public var readMethod: ReadMethod?
-            public var wallet: Stripe.Shared.Wallet?
-
-            private enum CodingKeys: String, CodingKey {
-                case brand
-                case brandProduct
-                case cardholderName
-                case country
-                case description
-                case expMonth
-                case expYear
-                case fingerprint
-                case funding
-                case iin
-                case issuer
-                case last4
-                case networks
-                case offline
-                case preferredLocales
-                case readMethod
-                case wallet
-            }
-
-            public init(
-                brand: String? = nil,
-                brandProduct: String? = nil,
-                cardholderName: String? = nil,
-                country: String? = nil,
-                description: String? = nil,
-                expMonth: Int? = nil,
-                expYear: Int? = nil,
-                fingerprint: String? = nil,
-                funding: String? = nil,
-                iin: String? = nil,
-                issuer: String? = nil,
-                last4: String? = nil,
-                networks: Networks? = nil,
-                offline: Stripe.Shared.Offline? = nil,
-                preferredLocales: [String]? = nil,
-                readMethod: ReadMethod? = nil,
-                wallet: Stripe.Shared.Wallet? = nil
-            ) {
-                self.brand = brand
-                self.brandProduct = brandProduct
-                self.cardholderName = cardholderName
-                self.country = country
-                self.description = description
-                self.expMonth = expMonth
-                self.expYear = expYear
-                self.fingerprint = fingerprint
-                self.funding = funding
-                self.iin = iin
-                self.issuer = issuer
-                self.last4 = last4
-                self.networks = networks
-                self.offline = offline
-                self.preferredLocales = preferredLocales
-                self.readMethod = readMethod
-                self.wallet = wallet
-            }
-
-            /// How card details were read in this transaction.
-            public enum ReadMethod: String, Codable, Hashable, Sendable {
-                case contactEmv = "contact_emv"
-                case contactlessEmv = "contactless_emv"
-                case contactlessMagstripeMode = "contactless_magstripe_mode"
-                case magneticStripeFallback = "magnetic_stripe_fallback"
-                case magneticStripeTrack2 = "magnetic_stripe_track2"
-            }
-
-            public struct Networks: Codable, Hashable, Sendable {
-                /// All networks available for selection via payment_method_options.card.network.
-                public var available: [String]?
-                /// The preferred network for the card.
-                public var preferred: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case available
-                    case preferred
-                }
-
-                public init(
-                    available: [String]? = nil,
-                    preferred: String? = nil
-                ) {
-                    self.available = available
-                    self.preferred = preferred
-                }
-            }
-        }
-
-        public struct Cashapp: Codable, Hashable, Sendable {
-            /// A unique and immutable identifier assigned by Cash App to every buyer.
-            public var buyerId: String?
-            /// A public identifier for buyers using Cash App.
-            public var cashtag: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case buyerId
-                case cashtag
-            }
-
-            public init(
-                buyerId: String? = nil,
-                cashtag: String? = nil
-            ) {
-                self.buyerId = buyerId
-                self.cashtag = cashtag
-            }
-        }
-
-        public struct Crypto: Codable, Hashable, Sendable {
-            public init() {}
-        }
-
-        public struct CustomerBalance: Codable, Hashable, Sendable {
-            public init() {}
-        }
-
-        public struct Eps: Codable, Hashable, Sendable {
-            /// The customer's bank.
-            public var bank: Bank?
-
-            private enum CodingKeys: String, CodingKey {
-                case bank
-            }
-
-            public init(
-                bank: Bank? = nil
-            ) {
-                self.bank = bank
-            }
-
-            /// The customer's bank.
-            public enum Bank: String, Codable, Hashable, Sendable {
-                case arzteUndApothekerBank = "arzte_und_apotheker_bank"
-                case austrianAnadiBankAg = "austrian_anadi_bank_ag"
-                case bankAustria = "bank_austria"
-                case bankhausCarlSpangler = "bankhaus_carl_spangler"
-                case bankhausSchelhammerUndSchatteraAg = "bankhaus_schelhammer_und_schattera_ag"
-                case bawagPskAg = "bawag_psk_ag"
-                case bksBankAg = "bks_bank_ag"
-                case brullKallmusBankAg = "brull_kallmus_bank_ag"
-                case btvVierLanderBank = "btv_vier_lander_bank"
-                case capitalBankGraweGruppeAg = "capital_bank_grawe_gruppe_ag"
-                case deutscheBankAg = "deutsche_bank_ag"
-                case dolomitenbank
-                case easybankAg = "easybank_ag"
-                case ersteBankUndSparkassen = "erste_bank_und_sparkassen"
-                case hypoAlpeadriabankInternationalAg = "hypo_alpeadriabank_international_ag"
-                case hypoBankBurgenlandAktiengesellschaft = "hypo_bank_burgenland_aktiengesellschaft"
-                case hypoNoeLbFurNiederosterreichUWien = "hypo_noe_lb_fur_niederosterreich_u_wien"
-                case hypoOberosterreichSalzburgSteiermark = "hypo_oberosterreich_salzburg_steiermark"
-                case hypoTirolBankAg = "hypo_tirol_bank_ag"
-                case hypoVorarlbergBankAg = "hypo_vorarlberg_bank_ag"
-                case marchfelderBank = "marchfelder_bank"
-                case oberbankAg = "oberbank_ag"
-                case raiffeisenBankengruppeOsterreich = "raiffeisen_bankengruppe_osterreich"
-                case schoellerbankAg = "schoellerbank_ag"
-                case spardaBankWien = "sparda_bank_wien"
-                case volksbankGruppe = "volksbank_gruppe"
-                case volkskreditbankAg = "volkskreditbank_ag"
-                case vrBankBraunau = "vr_bank_braunau"
-            }
-        }
-
-        public struct Fpx: Codable, Hashable, Sendable {
-            /// Account holder type, if provided.
-            public var accountHolderType: AccountHolderType?
-            /// The customer's bank, if provided.
-            public var bank: Bank?
-
-            private enum CodingKeys: String, CodingKey {
-                case accountHolderType
-                case bank
-            }
-
-            public init(
-                accountHolderType: AccountHolderType? = nil,
-                bank: Bank? = nil
-            ) {
-                self.accountHolderType = accountHolderType
-                self.bank = bank
-            }
-
-            /// Account holder type, if provided.
-            public enum AccountHolderType: String, Codable, Hashable, Sendable {
-                case company
-                case individual
-            }
-
-            /// The customer's bank, if provided.
-            public enum Bank: String, Codable, Hashable, Sendable {
-                case affinBank = "affin_bank"
-                case agrobank
-                case allianceBank = "alliance_bank"
-                case ambank
-                case bankIslam = "bank_islam"
-                case bankMuamalat = "bank_muamalat"
-                case bankOfChina = "bank_of_china"
-                case bankRakyat = "bank_rakyat"
-                case bnpParibas = "bnp_paribas"
-                case bsn
-                case cimb
-                case citibank
-                case deutscheBank = "deutsche_bank"
-                case hongLeongBank = "hong_leong_bank"
-                case hsbc
-                case kfh
-                case maybank2e
-                case maybank2u
-                case mbsbBank = "mbsb_bank"
-                case ocbc
-                case pbEnterprise = "pb_enterprise"
-                case publicBank = "public_bank"
-                case rhb
-                case standardChartered = "standard_chartered"
-                case uob
-            }
-        }
-
-        public struct Giropay: Codable, Hashable, Sendable {
-            public init() {}
-        }
-
-        public struct Grabpay: Codable, Hashable, Sendable {
-            public init() {}
-        }
-
-        public struct Ideal: Codable, Hashable, Sendable {
-            /// The customer's bank, if provided.
-            public var bank: Bank?
-            /// The Bank Identifier Code of the customer's bank, if the bank was provided.
-            public var bic: Bic?
-
-            private enum CodingKeys: String, CodingKey {
-                case bank
-                case bic
-            }
-
-            public init(
-                bank: Bank? = nil,
-                bic: Bic? = nil
-            ) {
-                self.bank = bank
-                self.bic = bic
-            }
-
-            /// The customer's bank, if provided.
-            public enum Bank: String, Codable, Hashable, Sendable {
-                case abnAmro = "abn_amro"
-                case adyen
-                case asnBank = "asn_bank"
-                case bunq
-                case buut
-                case finom
-                case handelsbanken
-                case ing
-                case knab
-                case mollie
-                case moneyou
-                case n26
-                case nn
-                case rabobank
-                case regiobank
-                case revolut
-                case snsBank = "sns_bank"
-                case triodosBank = "triodos_bank"
-                case vanLanschot = "van_lanschot"
-                case yoursafe
-            }
-
-            /// The Bank Identifier Code of the customer's bank, if the bank was provided.
-            public enum Bic: String, Codable, Hashable, Sendable {
-                case ABNANL2A
-                case ADYBNL2A
-                case ASNBNL21
-                case BITSNL2A
-                case BUNQNL2A
-                case BUUTNL2A
-                case FNOMNL22
-                case FVLBNL22
-                case HANDNL2A
-                case INGBNL2A
-                case KNABNL2H
-                case MLLENL2A
-                case MOYONL21
-                case NNBANL2G
-                case NTSBDEB1
-                case RABONL2U
-                case RBRBNL21
-                case REVOIE23
-                case REVOLT21
-                case SNSBNL2A
-                case TRIONL2U
-            }
-        }
-
-        public struct InteracPresent: Codable, Hashable, Sendable {
-            /// Card brand.
-            public var brand: String?
-            /// The cardholder name as read from the card, in ISO 7813 format.
-            public var cardholderName: String?
-            /// Two-letter ISO code representing the country of the card.
-            public var country: String?
-            /// A high-level description of the type of cards issued in this range.
-            public var description: String?
-            /// Two-digit number representing the card's expiration month.
-            public var expMonth: Int?
-            /// Four-digit number representing the card's expiration year.
-            public var expYear: Int?
-            /// Uniquely identifies this particular card number.
-            public var fingerprint: String?
-            /// Card funding type.
-            public var funding: String?
-            /// Issuer identification number of the card.
-            public var iin: String?
-            /// The name of the card's issuing bank.
-            public var issuer: String?
-            /// The last four digits of the card.
-            public var last4: String?
-            /// Contains information about card networks that can be used to process the payment.
-            public var networks: Networks?
-            /// The languages that the issuing bank recommends using for localizing any customer-facing text, as read from the card.
-            public var preferredLocales: [String]?
-            /// How card details were read in this transaction.
-            public var readMethod: ReadMethod?
-
-            private enum CodingKeys: String, CodingKey {
-                case brand
-                case cardholderName
-                case country
-                case description
-                case expMonth
-                case expYear
-                case fingerprint
-                case funding
-                case iin
-                case issuer
-                case last4
-                case networks
-                case preferredLocales
-                case readMethod
-            }
-
-            public init(
-                brand: String? = nil,
-                cardholderName: String? = nil,
-                country: String? = nil,
-                description: String? = nil,
-                expMonth: Int? = nil,
-                expYear: Int? = nil,
-                fingerprint: String? = nil,
-                funding: String? = nil,
-                iin: String? = nil,
-                issuer: String? = nil,
-                last4: String? = nil,
-                networks: Networks? = nil,
-                preferredLocales: [String]? = nil,
-                readMethod: ReadMethod? = nil
-            ) {
-                self.brand = brand
-                self.cardholderName = cardholderName
-                self.country = country
-                self.description = description
-                self.expMonth = expMonth
-                self.expYear = expYear
-                self.fingerprint = fingerprint
-                self.funding = funding
-                self.iin = iin
-                self.issuer = issuer
-                self.last4 = last4
-                self.networks = networks
-                self.preferredLocales = preferredLocales
-                self.readMethod = readMethod
-            }
-
-            /// How card details were read in this transaction.
-            public enum ReadMethod: String, Codable, Hashable, Sendable {
-                case contactEmv = "contact_emv"
-                case contactlessEmv = "contactless_emv"
-                case contactlessMagstripeMode = "contactless_magstripe_mode"
-                case magneticStripeFallback = "magnetic_stripe_fallback"
-                case magneticStripeTrack2 = "magnetic_stripe_track2"
-            }
-
-            public struct Networks: Codable, Hashable, Sendable {
-                /// All networks available for selection via payment_method_options.card.network.
-                public var available: [String]?
-                /// The preferred network for the card.
-                public var preferred: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case available
-                    case preferred
-                }
-
-                public init(
-                    available: [String]? = nil,
-                    preferred: String? = nil
-                ) {
-                    self.available = available
-                    self.preferred = preferred
-                }
-            }
-        }
-
-        public struct KakaoPay: Codable, Hashable, Sendable {
-            public init() {}
-        }
-
-        public struct Klarna: Codable, Hashable, Sendable {
-            /// The customer's date of birth, if provided.
-            public var dob: Dob?
-
-            private enum CodingKeys: String, CodingKey {
-                case dob
-            }
-
-            public init(
-                dob: Dob? = nil
-            ) {
-                self.dob = dob
-            }
-
-            public struct Dob: Codable, Hashable, Sendable {
-                /// The day of birth, between 1 and 31.
-                public var day: Int?
-                /// The month of birth, between 1 and 12.
-                public var month: Int?
-                /// The four-digit year of birth.
-                public var year: Int?
-
-                private enum CodingKeys: String, CodingKey {
-                    case day
-                    case month
-                    case year
-                }
-
-                public init(
-                    day: Int? = nil,
-                    month: Int? = nil,
-                    year: Int? = nil
-                ) {
-                    self.day = day
-                    self.month = month
-                    self.year = year
-                }
-            }
-        }
-
-        public struct Konbini: Codable, Hashable, Sendable {
-            public init() {}
-        }
-
-        public struct KrCard: Codable, Hashable, Sendable {
-            /// The local credit or debit card brand.
-            public var brand: Brand?
-            /// The last four digits of the card.
-            public var last4: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case brand
-                case last4
-            }
-
-            public init(
-                brand: Brand? = nil,
-                last4: String? = nil
-            ) {
-                self.brand = brand
-                self.last4 = last4
-            }
-
-            /// The local credit or debit card brand.
-            public enum Brand: String, Codable, Hashable, Sendable {
-                case bc
-                case citi
-                case hana
-                case hyundai
-                case jeju
-                case jeonbuk
-                case kakaobank
-                case kbank
-                case kdbbank
-                case kookmin
-                case kwangju
-                case lotte
-                case mg
-                case nh
-                case post
-                case samsung
-                case savingsbank
-                case shinhan
-                case shinhyup
-                case suhyup
-                case tossbank
-                case woori
-            }
-        }
-
-        public struct Link: Codable, Hashable, Sendable {
-            /// Account owner's email address.
-            public var email: String?
-            /// [Deprecated] This is a legacy parameter that no longer has any function.
-            public var persistentToken: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case email
-                case persistentToken
-            }
-
-            public init(
-                email: String? = nil,
-                persistentToken: String? = nil
-            ) {
-                self.email = email
-                self.persistentToken = persistentToken
-            }
-        }
-
-        public struct MbWay: Codable, Hashable, Sendable {
-            public init() {}
-        }
-
-        public struct Mobilepay: Codable, Hashable, Sendable {
-            public init() {}
-        }
-
-        public struct Multibanco: Codable, Hashable, Sendable {
-            public init() {}
-        }
-
-        public struct NaverPay: Codable, Hashable, Sendable {
-            /// Uniquely identifies this particular Naver Pay account.
-            public var buyerId: String?
-            /// Whether to fund this transaction with Naver Pay points or a card.
-            public var funding: Funding?
-
-            private enum CodingKeys: String, CodingKey {
-                case buyerId
-                case funding
-            }
-
-            public init(
-                buyerId: String? = nil,
-                funding: Funding? = nil
-            ) {
-                self.buyerId = buyerId
-                self.funding = funding
-            }
-
-            /// Whether to fund this transaction with Naver Pay points or a card.
-            public enum Funding: String, Codable, Hashable, Sendable {
-                case card
-                case points
-            }
-        }
-
-        public struct NzBankAccount: Codable, Hashable, Sendable {
-            /// The name on the bank account.
-            public var accountHolderName: String?
-            /// The numeric code for the bank account's bank.
-            public var bankCode: String?
-            /// The name of the bank.
-            public var bankName: String?
-            /// The numeric code for the bank account's bank branch.
-            public var branchCode: String?
-            /// Last four digits of the bank account number.
-            public var last4: String?
-            /// The suffix of the bank account number.
-            public var suffix: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case accountHolderName
-                case bankCode
-                case bankName
-                case branchCode
-                case last4
-                case suffix
-            }
-
-            public init(
-                accountHolderName: String? = nil,
-                bankCode: String? = nil,
-                bankName: String? = nil,
-                branchCode: String? = nil,
-                last4: String? = nil,
-                suffix: String? = nil
-            ) {
-                self.accountHolderName = accountHolderName
-                self.bankCode = bankCode
-                self.bankName = bankName
-                self.branchCode = branchCode
-                self.last4 = last4
-                self.suffix = suffix
-            }
-        }
-
-        public struct Oxxo: Codable, Hashable, Sendable {
-            public init() {}
-        }
-
-        public struct P24: Codable, Hashable, Sendable {
-            /// The customer's bank, if provided.
-            public var bank: Bank?
-
-            private enum CodingKeys: String, CodingKey {
-                case bank
-            }
-
-            public init(
-                bank: Bank? = nil
-            ) {
-                self.bank = bank
-            }
-
-            /// The customer's bank, if provided.
-            public enum Bank: String, Codable, Hashable, Sendable {
-                case aliorBank = "alior_bank"
-                case bankMillennium = "bank_millennium"
-                case bankNowyBfgSa = "bank_nowy_bfg_sa"
-                case bankPekaoSa = "bank_pekao_sa"
-                case bankiSpbdzielcze = "banki_spbdzielcze"
-                case blik
-                case bnpParibas = "bnp_paribas"
-                case boz
-                case citiHandlowy = "citi_handlowy"
-                case creditAgricole = "credit_agricole"
-                case envelobank
-                case etransferPocztowy24 = "etransfer_pocztowy24"
-                case getinBank = "getin_bank"
-                case ideabank
-                case ing
-                case inteligo
-                case mbankMtransfer = "mbank_mtransfer"
-                case nestPrzelew = "nest_przelew"
-                case noblePay = "noble_pay"
-                case pbacZIpko = "pbac_z_ipko"
-                case plusBank = "plus_bank"
-                case santanderPrzelew24 = "santander_przelew24"
-                case tmobileUsbugiBankowe = "tmobile_usbugi_bankowe"
-                case toyotaBank = "toyota_bank"
-                case velobank
-                case volkswagenBank = "volkswagen_bank"
-            }
-        }
-
-        public struct PayByBank: Codable, Hashable, Sendable {
-            public init() {}
-        }
-
-        public struct Payco: Codable, Hashable, Sendable {
-            public init() {}
-        }
-
-        public struct Paynow: Codable, Hashable, Sendable {
-            public init() {}
-        }
-
-        public struct Paypal: Codable, Hashable, Sendable {
-            /// Two-letter ISO code representing the buyer's country.
-            public var country: String?
-            /// Owner's email.
-            public var payerEmail: String?
-            /// PayPal account PayerID.
-            public var payerId: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case country
-                case payerEmail
-                case payerId
-            }
-
-            public init(
-                country: String? = nil,
-                payerEmail: String? = nil,
-                payerId: String? = nil
-            ) {
-                self.country = country
-                self.payerEmail = payerEmail
-                self.payerId = payerId
-            }
-        }
-
-        public struct Payto: Codable, Hashable, Sendable {
-            /// Bank-State-Branch number of the bank account.
-            public var bsbNumber: String?
-            /// Last four digits of the bank account number.
-            public var last4: String?
-            /// The PayID alias for the bank account.
-            public var payId: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case bsbNumber
-                case last4
-                case payId
-            }
-
-            public init(
-                bsbNumber: String? = nil,
-                last4: String? = nil,
-                payId: String? = nil
-            ) {
-                self.bsbNumber = bsbNumber
-                self.last4 = last4
-                self.payId = payId
-            }
-        }
-
-        public struct Pix: Codable, Hashable, Sendable {
-            /// Uniquely identifies this particular Pix account.
-            public var fingerprint: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case fingerprint
-            }
-
-            public init(
-                fingerprint: String? = nil
-            ) {
-                self.fingerprint = fingerprint
-            }
-        }
-
-        public struct Promptpay: Codable, Hashable, Sendable {
-            public init() {}
-        }
-
-        public struct RevolutPay: Codable, Hashable, Sendable {
-            public init() {}
-        }
-
-        public struct SamsungPay: Codable, Hashable, Sendable {
-            public init() {}
-        }
-
-        public struct Satispay: Codable, Hashable, Sendable {
-            public init() {}
-        }
-
-        public struct Scalapay: Codable, Hashable, Sendable {
-            public init() {}
-        }
-
-        public struct SepaDebit: Codable, Hashable, Sendable {
-            /// Bank code of bank associated with the bank account.
-            public var bankCode: String?
-            /// Branch code of bank associated with the bank account.
-            public var branchCode: String?
-            /// Two-letter ISO code representing the country the bank account is located in.
-            public var country: String?
-            /// Uniquely identifies this particular bank account.
-            public var fingerprint: String?
-            /// Information about the object that generated this PaymentMethod.
-            public var generatedFrom: GeneratedFrom?
-            /// Last four characters of the IBAN.
-            public var last4: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case bankCode
-                case branchCode
-                case country
-                case fingerprint
-                case generatedFrom
-                case last4
-            }
-
-            public init(
-                bankCode: String? = nil,
-                branchCode: String? = nil,
-                country: String? = nil,
-                fingerprint: String? = nil,
-                generatedFrom: GeneratedFrom? = nil,
-                last4: String? = nil
-            ) {
-                self.bankCode = bankCode
-                self.branchCode = branchCode
-                self.country = country
-                self.fingerprint = fingerprint
-                self.generatedFrom = generatedFrom
-                self.last4 = last4
-            }
-
-            public struct GeneratedFrom: Codable, Hashable, Sendable {
-                /// The ID of the Charge that generated this PaymentMethod, if any.
-                @Expandable<Stripe.Charges.Charge, String> public var charge: String?
-                /// The ID of the SetupAttempt that generated this PaymentMethod, if any.
-                @Expandable<Stripe.Setup.Attempt, String> public var setupAttempt: String?
-
-                private enum CodingKeys: String, CodingKey {
-                    case charge
-                    case setupAttempt
-                }
-
-                public init(
-                    charge: String? = nil,
-                    setupAttempt: String? = nil
-                ) {
-                    self._charge = Expandable(id: charge)
-                    self._setupAttempt = Expandable(id: setupAttempt)
-                }
-            }
-        }
-
-        public struct Sofort: Codable, Hashable, Sendable {
-            /// Two-letter ISO code representing the country the bank account is located in.
-            public var country: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case country
-            }
-
-            public init(
-                country: String? = nil
-            ) {
-                self.country = country
-            }
-        }
-
-        public struct Sunbit: Codable, Hashable, Sendable {
-            public init() {}
-        }
-
-        public struct Swish: Codable, Hashable, Sendable {
-            public init() {}
-        }
-
-        public struct Twint: Codable, Hashable, Sendable {
-            public init() {}
-        }
-
-        public struct Upi: Codable, Hashable, Sendable {
-            /// Customer's unique Virtual Payment Address
-            public var vpa: String?
-
-            private enum CodingKeys: String, CodingKey {
-                case vpa
-            }
-
-            public init(
-                vpa: String? = nil
-            ) {
-                self.vpa = vpa
-            }
-        }
-
-        public struct UsBankAccount: Codable, Hashable, Sendable {
-            /// Account holder type: individual or company.
-            public var accountHolderType: AccountHolderType?
-            /// Account type: checkings or savings.
-            public var accountType: AccountType?
-            /// The name of the bank.
-            public var bankName: String?
-            /// The ID of the Financial Connections Account used to create the payment method.
-            public var financialConnectionsAccount: String?
-            /// Uniquely identifies this particular bank account.
-            public var fingerprint: String?
-            /// Last four digits of the bank account number.
-            public var last4: String?
-            /// Contains information about US bank account networks that can be used.
-            public var networks: Networks?
-            /// Routing number of the bank account.
-            public var routingNumber: String?
-            /// Contains information about the future reusability of this PaymentMethod.
-            public var statusDetails: StatusDetails?
-
-            private enum CodingKeys: String, CodingKey {
-                case accountHolderType
-                case accountType
-                case bankName
-                case financialConnectionsAccount
-                case fingerprint
-                case last4
-                case networks
-                case routingNumber
-                case statusDetails
-            }
-
-            public init(
-                accountHolderType: AccountHolderType? = nil,
-                accountType: AccountType? = nil,
-                bankName: String? = nil,
-                financialConnectionsAccount: String? = nil,
-                fingerprint: String? = nil,
-                last4: String? = nil,
-                networks: Networks? = nil,
-                routingNumber: String? = nil,
-                statusDetails: StatusDetails? = nil
-            ) {
-                self.accountHolderType = accountHolderType
-                self.accountType = accountType
-                self.bankName = bankName
-                self.financialConnectionsAccount = financialConnectionsAccount
-                self.fingerprint = fingerprint
-                self.last4 = last4
-                self.networks = networks
-                self.routingNumber = routingNumber
-                self.statusDetails = statusDetails
-            }
-
-            /// Account holder type: individual or company.
-            public enum AccountHolderType: String, Codable, Hashable, Sendable {
-                case company
-                case individual
-            }
-
-            /// Account type: checkings or savings.
-            public enum AccountType: String, Codable, Hashable, Sendable {
-                case checking
-                case savings
-            }
-
-            public struct Networks: Codable, Hashable, Sendable {
-                /// The preferred network.
-                public var preferred: String?
-                /// All supported networks.
-                public var supported: [Supported]?
-
-                private enum CodingKeys: String, CodingKey {
-                    case preferred
-                    case supported
-                }
-
-                public init(
-                    preferred: String? = nil,
-                    supported: [Supported]? = nil
-                ) {
-                    self.preferred = preferred
-                    self.supported = supported
-                }
-
-                public enum Supported: String, Codable, Hashable, Sendable {
-                    case ach
-                    case usDomesticWire = "us_domestic_wire"
-                }
-            }
-
-            public struct StatusDetails: Codable, Hashable, Sendable {
-                public var blocked: Blocked?
-
-                private enum CodingKeys: String, CodingKey {
-                    case blocked
-                }
-
-                public init(
-                    blocked: Blocked? = nil
-                ) {
-                    self.blocked = blocked
-                }
-
-                public struct Blocked: Codable, Hashable, Sendable {
-                    /// The ACH network code that resulted in this block.
-                    public var networkCode: NetworkCode?
-                    /// The reason why this PaymentMethod's fingerprint has been blocked
-                    public var reason: Reason?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case networkCode
-                        case reason
-                    }
-
-                    public init(
-                        networkCode: NetworkCode? = nil,
-                        reason: Reason? = nil
-                    ) {
-                        self.networkCode = networkCode
-                        self.reason = reason
-                    }
-
-                    /// The ACH network code that resulted in this block.
-                    public enum NetworkCode: String, Codable, Hashable, Sendable {
-                        case R02
-                        case R03
-                        case R04
-                        case R05
-                        case R07
-                        case R08
-                        case R10
-                        case R11
-                        case R16
-                        case R20
-                        case R29
-                        case R31
-                    }
-
-                    /// The reason why this PaymentMethod's fingerprint has been blocked
-                    public enum Reason: String, Codable, Hashable, Sendable {
-                        case bankAccountClosed = "bank_account_closed"
-                        case bankAccountFrozen = "bank_account_frozen"
-                        case bankAccountInvalidDetails = "bank_account_invalid_details"
-                        case bankAccountRestricted = "bank_account_restricted"
-                        case bankAccountUnusable = "bank_account_unusable"
-                        case debitNotAuthorized = "debit_not_authorized"
-                        case tokenizedAccountNumberDeactivated = "tokenized_account_number_deactivated"
-                    }
-                }
-            }
-        }
-
-        public struct WechatPay: Codable, Hashable, Sendable {
-            public init() {}
-        }
-
-        public struct Zip: Codable, Hashable, Sendable {
-            public init() {}
         }
     }
 

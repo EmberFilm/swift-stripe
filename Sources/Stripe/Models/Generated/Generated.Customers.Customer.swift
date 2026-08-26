@@ -32,7 +32,7 @@ extension Stripe.Customers {
         /// The ID of an Account representing a customer.
         public var customerAccount: String?
         /// ID of the default payment source for the customer.
-        @Expandable<StripePaymentSource, String> public var defaultSource: String?
+        @Expandable<Stripe.PaymentSource, String> public var defaultSource: String?
         /// Tracks the most recent state change on any invoice belonging to the customer.
         public var delinquent: Bool?
         /// An arbitrary string attached to the object.
@@ -236,7 +236,7 @@ extension Stripe.Customers {
             /// String representing the object's type.
             public let object: String
             /// Details about each object.
-            public var data: [StripePaymentSource]?
+            public var data: [Stripe.PaymentSource]?
             /// True if this list has another page of items after this one that can be fetched.
             public var hasMore: Bool?
             /// The URL where this list can be accessed.
@@ -251,7 +251,7 @@ extension Stripe.Customers {
 
             public init(
                 object: String,
-                data: [StripePaymentSource]? = nil,
+                data: [Stripe.PaymentSource]? = nil,
                 hasMore: Bool? = nil,
                 url: String? = nil
             ) {

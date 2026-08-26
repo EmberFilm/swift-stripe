@@ -475,9 +475,11 @@ and webhook verification are complete and covered by tests.
 are emitted by `Scripts/generate-models.py` into `Sources/Stripe/Models/Generated/` from
 `spec3.sdk.json`, pinned by commit in CI. Every field the spec describes is present, every enum
 carries the spec's cases, and each struct's `CodingKeys` is emitted from the same list as its
-properties. `Event` stays hand-written: it decodes an unknown event type without rejecting the
-delivery and models `data.object` as a discriminated union, neither of which the generator
-expresses yet. The remaining six are unions or ID-only references (`payment_source`, `external_account`,
+properties. `Event` and the unions are typed too:
+`charge.paymentMethodDetails?.details` is an enum with a case per payment method,
+`customer.sources` holds `PaymentSource` values told apart by `object`, and `Event.Object` and
+`Event.Type` are generated from the spec's event catalogue — a type the package does not know
+decodes as `.unknown` rather than failing the delivery. The remaining six are unions or ID-only references (`payment_source`, `external_account`,
 `issuing.token`, `payment_record`) the generator does not express yet.
 
 `Scripts/model-drift.py` measures every generated resource against the spec, and

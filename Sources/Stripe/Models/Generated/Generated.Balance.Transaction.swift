@@ -40,7 +40,7 @@ extension Stripe.Balance {
         /// Learn more about how reporting categories can help you understand balance transactions from an accounting perspective.
         public var reportingCategory: String?
         /// This transaction relates to the Stripe object.
-        @Expandable<Source, String> public var source: String?
+        @Expandable<Stripe.BalanceTransactionSource, String> public var source: String?
         /// The transaction's net funds status in the Stripe balance, which are either `available` or `pending`.
         public var status: String?
         /// Transaction type: `tax_fund`, `adjustment`, `advance`, `advance_funding`, `anticipation_repayment`, `application_fee`,…
@@ -196,10 +196,6 @@ extension Stripe.Balance {
                 self.description = description
                 self.`type` = `type`
             }
-        }
-
-        public struct Source: Codable, Hashable, Sendable {
-            public init() {}
         }
     }
 }

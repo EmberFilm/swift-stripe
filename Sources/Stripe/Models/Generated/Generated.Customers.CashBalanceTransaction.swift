@@ -17,8 +17,6 @@ extension Stripe.Customers {
         public let id: ID
         /// String representing the object's type.
         public let object: String
-        public var adjustedForOverdraft: AdjustedForOverdraft?
-        public var appliedToPayment: AppliedToPayment?
         /// Time at which the object was created.
         public var created: Date?
         /// Three-letter ISO currency code, in lowercase.
@@ -29,70 +27,88 @@ extension Stripe.Customers {
         public var customerAccount: String?
         /// The total available cash balance for the specified currency after this transaction was applied.
         public var endingBalance: Int?
-        public var funded: Funded?
         /// If the object exists in live mode, the value is `true`.
         public var livemode: Bool?
         /// The amount by which the cash balance changed, represented in the smallest currency unit.
         public var netAmount: Int?
-        public var refundedFromPayment: RefundedFromPayment?
-        public var transferredToBalance: TransferredToBalance?
         /// The type of the cash balance transaction.
         public var `type`: Type?
-        public var unappliedFromPayment: UnappliedFromPayment?
+        /// The payload `type` selects.
+        public var details: Details
 
-        private enum CodingKeys: String, CodingKey {
+        fileprivate enum CodingKeys: String, CodingKey {
             case id
             case object
-            case adjustedForOverdraft
-            case appliedToPayment
             case created
             case currency
             case customer
             case customerAccount
             case endingBalance
-            case funded
             case livemode
             case netAmount
+            case `type`
+            case adjustedForOverdraft
+            case appliedToPayment
+            case funded
             case refundedFromPayment
             case transferredToBalance
-            case `type`
             case unappliedFromPayment
         }
 
         public init(
             id: ID,
             object: String,
-            adjustedForOverdraft: AdjustedForOverdraft? = nil,
-            appliedToPayment: AppliedToPayment? = nil,
             created: Date? = nil,
             currency: String? = nil,
             customer: String? = nil,
             customerAccount: String? = nil,
             endingBalance: Int? = nil,
-            funded: Funded? = nil,
             livemode: Bool? = nil,
             netAmount: Int? = nil,
-            refundedFromPayment: RefundedFromPayment? = nil,
-            transferredToBalance: TransferredToBalance? = nil,
             `type`: Type? = nil,
-            unappliedFromPayment: UnappliedFromPayment? = nil
+            details: Details
         ) {
             self.id = id
             self.object = object
-            self.adjustedForOverdraft = adjustedForOverdraft
-            self.appliedToPayment = appliedToPayment
             self.created = created
             self.currency = currency
             self._customer = Expandable(id: customer)
             self.customerAccount = customerAccount
             self.endingBalance = endingBalance
-            self.funded = funded
             self.livemode = livemode
             self.netAmount = netAmount
-            self.refundedFromPayment = refundedFromPayment
-            self.transferredToBalance = transferredToBalance
             self.`type` = `type`
-            self.unappliedFromPayment = unappliedFromPayment
+            self.details = details
+        }
+
+        public init(from decoder: any Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            self.id = try container.decode(ID.self, forKey: .id)
+            self.object = try container.decode(String.self, forKey: .object)
+            self.created = try container.decodeIfPresent(Date.self, forKey: .created)
+            self.currency = try container.decodeIfPresent(String.self, forKey: .currency)
+            self._customer = try container.decode(Expandable<Stripe.Customers.Customer, String>.self, forKey: .customer)
+            self.customerAccount = try container.decodeIfPresent(String.self, forKey: .customerAccount)
+            self.endingBalance = try container.decodeIfPresent(Int.self, forKey: .endingBalance)
+            self.livemode = try container.decodeIfPresent(Bool.self, forKey: .livemode)
+            self.netAmount = try container.decodeIfPresent(Int.self, forKey: .netAmount)
+            self.`type` = try container.decodeIfPresent(Type.self, forKey: .`type`)
+            self.details = try Details(type: try container.decodeIfPresent(String.self, forKey: .type) ?? "", from: container)
+        }
+
+        public func encode(to encoder: any Encoder) throws {
+            var container = encoder.container(keyedBy: CodingKeys.self)
+            try container.encode(id, forKey: .id)
+            try container.encode(object, forKey: .object)
+            try container.encodeIfPresent(created, forKey: .created)
+            try container.encodeIfPresent(currency, forKey: .currency)
+            try container.encode(_customer, forKey: .customer)
+            try container.encodeIfPresent(customerAccount, forKey: .customerAccount)
+            try container.encodeIfPresent(endingBalance, forKey: .endingBalance)
+            try container.encodeIfPresent(livemode, forKey: .livemode)
+            try container.encodeIfPresent(netAmount, forKey: .netAmount)
+            try container.encodeIfPresent(`type`, forKey: .`type`)
+            try details.encode(into: &container)
         }
 
         /// The type of the cash balance transaction.
@@ -157,38 +173,44 @@ extension Stripe.Customers {
             }
 
             public struct BankTransfer: Codable, Hashable, Sendable {
-                public var euBankTransfer: EuBankTransfer?
-                public var gbBankTransfer: GbBankTransfer?
-                public var jpBankTransfer: JpBankTransfer?
                 /// The user-supplied reference field on the bank transfer.
                 public var reference: String?
                 /// The funding method type used to fund the customer balance.
                 public var `type`: Type?
-                public var usBankTransfer: UsBankTransfer?
+                /// The payload `type` selects.
+                public var details: Details
 
-                private enum CodingKeys: String, CodingKey {
+                fileprivate enum CodingKeys: String, CodingKey {
+                    case reference
+                    case `type`
                     case euBankTransfer
                     case gbBankTransfer
                     case jpBankTransfer
-                    case reference
-                    case `type`
                     case usBankTransfer
                 }
 
                 public init(
-                    euBankTransfer: EuBankTransfer? = nil,
-                    gbBankTransfer: GbBankTransfer? = nil,
-                    jpBankTransfer: JpBankTransfer? = nil,
                     reference: String? = nil,
                     `type`: Type? = nil,
-                    usBankTransfer: UsBankTransfer? = nil
+                    details: Details
                 ) {
-                    self.euBankTransfer = euBankTransfer
-                    self.gbBankTransfer = gbBankTransfer
-                    self.jpBankTransfer = jpBankTransfer
                     self.reference = reference
                     self.`type` = `type`
-                    self.usBankTransfer = usBankTransfer
+                    self.details = details
+                }
+
+                public init(from decoder: any Decoder) throws {
+                    let container = try decoder.container(keyedBy: CodingKeys.self)
+                    self.reference = try container.decodeIfPresent(String.self, forKey: .reference)
+                    self.`type` = try container.decodeIfPresent(Type.self, forKey: .`type`)
+                    self.details = try Details(type: try container.decodeIfPresent(String.self, forKey: .type) ?? "", from: container)
+                }
+
+                public func encode(to encoder: any Encoder) throws {
+                    var container = encoder.container(keyedBy: CodingKeys.self)
+                    try container.encodeIfPresent(reference, forKey: .reference)
+                    try container.encodeIfPresent(`type`, forKey: .`type`)
+                    try details.encode(into: &container)
                 }
 
                 /// The funding method type used to fund the customer balance.
@@ -301,6 +323,46 @@ extension Stripe.Customers {
                         case swift
                     }
                 }
+
+                /// The payload `type` selects; `unknown` carries a type this package does not model.
+                public indirect enum Details: Hashable, Sendable {
+                    case euBankTransfer(EuBankTransfer)
+                    case gbBankTransfer(GbBankTransfer)
+                    case jpBankTransfer(JpBankTransfer)
+                    case usBankTransfer(UsBankTransfer)
+                    case mxBankTransfer
+                    case unknown(type: String)
+
+                    public var euBankTransfer: EuBankTransfer? { if case .euBankTransfer(let value) = self { return value }; return nil }
+                    public var gbBankTransfer: GbBankTransfer? { if case .gbBankTransfer(let value) = self { return value }; return nil }
+                    public var jpBankTransfer: JpBankTransfer? { if case .jpBankTransfer(let value) = self { return value }; return nil }
+                    public var usBankTransfer: UsBankTransfer? { if case .usBankTransfer(let value) = self { return value }; return nil }
+
+                    fileprivate init(type: String, from container: KeyedDecodingContainer<CodingKeys>) throws {
+                        switch type {
+                        case "eu_bank_transfer":
+                            if let value = try container.decodeIfPresent(EuBankTransfer.self, forKey: .euBankTransfer) { self = .euBankTransfer(value) } else { self = .unknown(type: type) }
+                        case "gb_bank_transfer":
+                            if let value = try container.decodeIfPresent(GbBankTransfer.self, forKey: .gbBankTransfer) { self = .gbBankTransfer(value) } else { self = .unknown(type: type) }
+                        case "jp_bank_transfer":
+                            if let value = try container.decodeIfPresent(JpBankTransfer.self, forKey: .jpBankTransfer) { self = .jpBankTransfer(value) } else { self = .unknown(type: type) }
+                        case "us_bank_transfer":
+                            if let value = try container.decodeIfPresent(UsBankTransfer.self, forKey: .usBankTransfer) { self = .usBankTransfer(value) } else { self = .unknown(type: type) }
+                        case "mx_bank_transfer": self = .mxBankTransfer
+                        default: self = .unknown(type: type)
+                        }
+                    }
+
+                    fileprivate func encode(into container: inout KeyedEncodingContainer<CodingKeys>) throws {
+                        switch self {
+                        case .euBankTransfer(let value): try container.encode(value, forKey: .euBankTransfer)
+                        case .gbBankTransfer(let value): try container.encode(value, forKey: .gbBankTransfer)
+                        case .jpBankTransfer(let value): try container.encode(value, forKey: .jpBankTransfer)
+                        case .usBankTransfer(let value): try container.encode(value, forKey: .usBankTransfer)
+                        default: break
+                        }
+                    }
+                }
             }
         }
 
@@ -346,6 +408,60 @@ extension Stripe.Customers {
                 paymentIntent: String? = nil
             ) {
                 self._paymentIntent = Expandable(id: paymentIntent)
+            }
+        }
+
+        /// The payload `type` selects; `unknown` carries a type this package does not model.
+        public indirect enum Details: Hashable, Sendable {
+            case adjustedForOverdraft(AdjustedForOverdraft)
+            case appliedToPayment(AppliedToPayment)
+            case funded(Funded)
+            case refundedFromPayment(RefundedFromPayment)
+            case transferredToBalance(TransferredToBalance)
+            case unappliedFromPayment(UnappliedFromPayment)
+            case fundingReversed
+            case returnCanceled
+            case returnInitiated
+            case unknown(type: String)
+
+            public var adjustedForOverdraft: AdjustedForOverdraft? { if case .adjustedForOverdraft(let value) = self { return value }; return nil }
+            public var appliedToPayment: AppliedToPayment? { if case .appliedToPayment(let value) = self { return value }; return nil }
+            public var funded: Funded? { if case .funded(let value) = self { return value }; return nil }
+            public var refundedFromPayment: RefundedFromPayment? { if case .refundedFromPayment(let value) = self { return value }; return nil }
+            public var transferredToBalance: TransferredToBalance? { if case .transferredToBalance(let value) = self { return value }; return nil }
+            public var unappliedFromPayment: UnappliedFromPayment? { if case .unappliedFromPayment(let value) = self { return value }; return nil }
+
+            fileprivate init(type: String, from container: KeyedDecodingContainer<CodingKeys>) throws {
+                switch type {
+                case "adjusted_for_overdraft":
+                    if let value = try container.decodeIfPresent(AdjustedForOverdraft.self, forKey: .adjustedForOverdraft) { self = .adjustedForOverdraft(value) } else { self = .unknown(type: type) }
+                case "applied_to_payment":
+                    if let value = try container.decodeIfPresent(AppliedToPayment.self, forKey: .appliedToPayment) { self = .appliedToPayment(value) } else { self = .unknown(type: type) }
+                case "funded":
+                    if let value = try container.decodeIfPresent(Funded.self, forKey: .funded) { self = .funded(value) } else { self = .unknown(type: type) }
+                case "refunded_from_payment":
+                    if let value = try container.decodeIfPresent(RefundedFromPayment.self, forKey: .refundedFromPayment) { self = .refundedFromPayment(value) } else { self = .unknown(type: type) }
+                case "transferred_to_balance":
+                    if let value = try container.decodeIfPresent(TransferredToBalance.self, forKey: .transferredToBalance) { self = .transferredToBalance(value) } else { self = .unknown(type: type) }
+                case "unapplied_from_payment":
+                    if let value = try container.decodeIfPresent(UnappliedFromPayment.self, forKey: .unappliedFromPayment) { self = .unappliedFromPayment(value) } else { self = .unknown(type: type) }
+                case "funding_reversed": self = .fundingReversed
+                case "return_canceled": self = .returnCanceled
+                case "return_initiated": self = .returnInitiated
+                default: self = .unknown(type: type)
+                }
+            }
+
+            fileprivate func encode(into container: inout KeyedEncodingContainer<CodingKeys>) throws {
+                switch self {
+                case .adjustedForOverdraft(let value): try container.encode(value, forKey: .adjustedForOverdraft)
+                case .appliedToPayment(let value): try container.encode(value, forKey: .appliedToPayment)
+                case .funded(let value): try container.encode(value, forKey: .funded)
+                case .refundedFromPayment(let value): try container.encode(value, forKey: .refundedFromPayment)
+                case .transferredToBalance(let value): try container.encode(value, forKey: .transferredToBalance)
+                case .unappliedFromPayment(let value): try container.encode(value, forKey: .unappliedFromPayment)
+                default: break
+                }
             }
         }
     }

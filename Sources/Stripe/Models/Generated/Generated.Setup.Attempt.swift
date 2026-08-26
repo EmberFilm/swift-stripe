@@ -106,36 +106,13 @@ extension Stripe.Setup {
         }
 
         public struct PaymentMethodDetails: Codable, Hashable, Sendable {
-            public var acssDebit: AcssDebit?
-            public var amazonPay: AmazonPay?
-            public var auBecsDebit: AuBecsDebit?
-            public var bacsDebit: BacsDebit?
-            public var bancontact: Bancontact?
-            public var boleto: Boleto?
-            public var card: Card?
-            public var cardPresent: CardPresent?
-            public var cashapp: Cashapp?
-            public var ideal: Ideal?
-            public var kakaoPay: KakaoPay?
-            public var klarna: Klarna?
-            public var krCard: KrCard?
-            public var link: Link?
-            public var naverPay: NaverPay?
-            public var nzBankAccount: NzBankAccount?
-            public var paypal: Paypal?
-            public var payto: Payto?
-            public var pix: Pix?
-            public var revolutPay: RevolutPay?
-            public var satispay: Satispay?
-            public var sepaDebit: SepaDebit?
-            public var sofort: Sofort?
-            public var twint: Twint?
             /// The type of the payment method used in the SetupIntent (e.g., `card`).
             public var `type`: String?
-            public var upi: Upi?
-            public var usBankAccount: UsBankAccount?
+            /// The payload `type` selects.
+            public var details: Details
 
-            private enum CodingKeys: String, CodingKey {
+            fileprivate enum CodingKeys: String, CodingKey {
+                case `type`
                 case acssDebit
                 case amazonPay
                 case auBecsDebit
@@ -160,67 +137,28 @@ extension Stripe.Setup {
                 case sepaDebit
                 case sofort
                 case twint
-                case `type`
                 case upi
                 case usBankAccount
             }
 
             public init(
-                acssDebit: AcssDebit? = nil,
-                amazonPay: AmazonPay? = nil,
-                auBecsDebit: AuBecsDebit? = nil,
-                bacsDebit: BacsDebit? = nil,
-                bancontact: Bancontact? = nil,
-                boleto: Boleto? = nil,
-                card: Card? = nil,
-                cardPresent: CardPresent? = nil,
-                cashapp: Cashapp? = nil,
-                ideal: Ideal? = nil,
-                kakaoPay: KakaoPay? = nil,
-                klarna: Klarna? = nil,
-                krCard: KrCard? = nil,
-                link: Link? = nil,
-                naverPay: NaverPay? = nil,
-                nzBankAccount: NzBankAccount? = nil,
-                paypal: Paypal? = nil,
-                payto: Payto? = nil,
-                pix: Pix? = nil,
-                revolutPay: RevolutPay? = nil,
-                satispay: Satispay? = nil,
-                sepaDebit: SepaDebit? = nil,
-                sofort: Sofort? = nil,
-                twint: Twint? = nil,
                 `type`: String? = nil,
-                upi: Upi? = nil,
-                usBankAccount: UsBankAccount? = nil
+                details: Details
             ) {
-                self.acssDebit = acssDebit
-                self.amazonPay = amazonPay
-                self.auBecsDebit = auBecsDebit
-                self.bacsDebit = bacsDebit
-                self.bancontact = bancontact
-                self.boleto = boleto
-                self.card = card
-                self.cardPresent = cardPresent
-                self.cashapp = cashapp
-                self.ideal = ideal
-                self.kakaoPay = kakaoPay
-                self.klarna = klarna
-                self.krCard = krCard
-                self.link = link
-                self.naverPay = naverPay
-                self.nzBankAccount = nzBankAccount
-                self.paypal = paypal
-                self.payto = payto
-                self.pix = pix
-                self.revolutPay = revolutPay
-                self.satispay = satispay
-                self.sepaDebit = sepaDebit
-                self.sofort = sofort
-                self.twint = twint
                 self.`type` = `type`
-                self.upi = upi
-                self.usBankAccount = usBankAccount
+                self.details = details
+            }
+
+            public init(from decoder: any Decoder) throws {
+                let container = try decoder.container(keyedBy: CodingKeys.self)
+                self.`type` = try container.decodeIfPresent(String.self, forKey: .`type`)
+                self.details = try Details(type: try container.decodeIfPresent(String.self, forKey: .type) ?? "", from: container)
+            }
+
+            public func encode(to encoder: any Encoder) throws {
+                var container = encoder.container(keyedBy: CodingKeys.self)
+                try container.encodeIfPresent(`type`, forKey: .`type`)
+                try details.encode(into: &container)
             }
 
             public struct AcssDebit: Codable, Hashable, Sendable {
@@ -778,6 +716,154 @@ extension Stripe.Setup {
 
             public struct UsBankAccount: Codable, Hashable, Sendable {
                 public init() {}
+            }
+
+            /// The payload `type` selects; `unknown` carries a type this package does not model.
+            public indirect enum Details: Hashable, Sendable {
+                case acssDebit(AcssDebit)
+                case amazonPay(AmazonPay)
+                case auBecsDebit(AuBecsDebit)
+                case bacsDebit(BacsDebit)
+                case bancontact(Bancontact)
+                case boleto(Boleto)
+                case card(Card)
+                case cardPresent(CardPresent)
+                case cashapp(Cashapp)
+                case ideal(Ideal)
+                case kakaoPay(KakaoPay)
+                case klarna(Klarna)
+                case krCard(KrCard)
+                case link(Link)
+                case naverPay(NaverPay)
+                case nzBankAccount(NzBankAccount)
+                case paypal(Paypal)
+                case payto(Payto)
+                case pix(Pix)
+                case revolutPay(RevolutPay)
+                case satispay(Satispay)
+                case sepaDebit(SepaDebit)
+                case sofort(Sofort)
+                case twint(Twint)
+                case upi(Upi)
+                case usBankAccount(UsBankAccount)
+                case unknown(type: String)
+
+                public var acssDebit: AcssDebit? { if case .acssDebit(let value) = self { return value }; return nil }
+                public var amazonPay: AmazonPay? { if case .amazonPay(let value) = self { return value }; return nil }
+                public var auBecsDebit: AuBecsDebit? { if case .auBecsDebit(let value) = self { return value }; return nil }
+                public var bacsDebit: BacsDebit? { if case .bacsDebit(let value) = self { return value }; return nil }
+                public var bancontact: Bancontact? { if case .bancontact(let value) = self { return value }; return nil }
+                public var boleto: Boleto? { if case .boleto(let value) = self { return value }; return nil }
+                public var card: Card? { if case .card(let value) = self { return value }; return nil }
+                public var cardPresent: CardPresent? { if case .cardPresent(let value) = self { return value }; return nil }
+                public var cashapp: Cashapp? { if case .cashapp(let value) = self { return value }; return nil }
+                public var ideal: Ideal? { if case .ideal(let value) = self { return value }; return nil }
+                public var kakaoPay: KakaoPay? { if case .kakaoPay(let value) = self { return value }; return nil }
+                public var klarna: Klarna? { if case .klarna(let value) = self { return value }; return nil }
+                public var krCard: KrCard? { if case .krCard(let value) = self { return value }; return nil }
+                public var link: Link? { if case .link(let value) = self { return value }; return nil }
+                public var naverPay: NaverPay? { if case .naverPay(let value) = self { return value }; return nil }
+                public var nzBankAccount: NzBankAccount? { if case .nzBankAccount(let value) = self { return value }; return nil }
+                public var paypal: Paypal? { if case .paypal(let value) = self { return value }; return nil }
+                public var payto: Payto? { if case .payto(let value) = self { return value }; return nil }
+                public var pix: Pix? { if case .pix(let value) = self { return value }; return nil }
+                public var revolutPay: RevolutPay? { if case .revolutPay(let value) = self { return value }; return nil }
+                public var satispay: Satispay? { if case .satispay(let value) = self { return value }; return nil }
+                public var sepaDebit: SepaDebit? { if case .sepaDebit(let value) = self { return value }; return nil }
+                public var sofort: Sofort? { if case .sofort(let value) = self { return value }; return nil }
+                public var twint: Twint? { if case .twint(let value) = self { return value }; return nil }
+                public var upi: Upi? { if case .upi(let value) = self { return value }; return nil }
+                public var usBankAccount: UsBankAccount? { if case .usBankAccount(let value) = self { return value }; return nil }
+
+                fileprivate init(type: String, from container: KeyedDecodingContainer<CodingKeys>) throws {
+                    switch type {
+                    case "acss_debit":
+                        if let value = try container.decodeIfPresent(AcssDebit.self, forKey: .acssDebit) { self = .acssDebit(value) } else { self = .unknown(type: type) }
+                    case "amazon_pay":
+                        if let value = try container.decodeIfPresent(AmazonPay.self, forKey: .amazonPay) { self = .amazonPay(value) } else { self = .unknown(type: type) }
+                    case "au_becs_debit":
+                        if let value = try container.decodeIfPresent(AuBecsDebit.self, forKey: .auBecsDebit) { self = .auBecsDebit(value) } else { self = .unknown(type: type) }
+                    case "bacs_debit":
+                        if let value = try container.decodeIfPresent(BacsDebit.self, forKey: .bacsDebit) { self = .bacsDebit(value) } else { self = .unknown(type: type) }
+                    case "bancontact":
+                        if let value = try container.decodeIfPresent(Bancontact.self, forKey: .bancontact) { self = .bancontact(value) } else { self = .unknown(type: type) }
+                    case "boleto":
+                        if let value = try container.decodeIfPresent(Boleto.self, forKey: .boleto) { self = .boleto(value) } else { self = .unknown(type: type) }
+                    case "card":
+                        if let value = try container.decodeIfPresent(Card.self, forKey: .card) { self = .card(value) } else { self = .unknown(type: type) }
+                    case "card_present":
+                        if let value = try container.decodeIfPresent(CardPresent.self, forKey: .cardPresent) { self = .cardPresent(value) } else { self = .unknown(type: type) }
+                    case "cashapp":
+                        if let value = try container.decodeIfPresent(Cashapp.self, forKey: .cashapp) { self = .cashapp(value) } else { self = .unknown(type: type) }
+                    case "ideal":
+                        if let value = try container.decodeIfPresent(Ideal.self, forKey: .ideal) { self = .ideal(value) } else { self = .unknown(type: type) }
+                    case "kakao_pay":
+                        if let value = try container.decodeIfPresent(KakaoPay.self, forKey: .kakaoPay) { self = .kakaoPay(value) } else { self = .unknown(type: type) }
+                    case "klarna":
+                        if let value = try container.decodeIfPresent(Klarna.self, forKey: .klarna) { self = .klarna(value) } else { self = .unknown(type: type) }
+                    case "kr_card":
+                        if let value = try container.decodeIfPresent(KrCard.self, forKey: .krCard) { self = .krCard(value) } else { self = .unknown(type: type) }
+                    case "link":
+                        if let value = try container.decodeIfPresent(Link.self, forKey: .link) { self = .link(value) } else { self = .unknown(type: type) }
+                    case "naver_pay":
+                        if let value = try container.decodeIfPresent(NaverPay.self, forKey: .naverPay) { self = .naverPay(value) } else { self = .unknown(type: type) }
+                    case "nz_bank_account":
+                        if let value = try container.decodeIfPresent(NzBankAccount.self, forKey: .nzBankAccount) { self = .nzBankAccount(value) } else { self = .unknown(type: type) }
+                    case "paypal":
+                        if let value = try container.decodeIfPresent(Paypal.self, forKey: .paypal) { self = .paypal(value) } else { self = .unknown(type: type) }
+                    case "payto":
+                        if let value = try container.decodeIfPresent(Payto.self, forKey: .payto) { self = .payto(value) } else { self = .unknown(type: type) }
+                    case "pix":
+                        if let value = try container.decodeIfPresent(Pix.self, forKey: .pix) { self = .pix(value) } else { self = .unknown(type: type) }
+                    case "revolut_pay":
+                        if let value = try container.decodeIfPresent(RevolutPay.self, forKey: .revolutPay) { self = .revolutPay(value) } else { self = .unknown(type: type) }
+                    case "satispay":
+                        if let value = try container.decodeIfPresent(Satispay.self, forKey: .satispay) { self = .satispay(value) } else { self = .unknown(type: type) }
+                    case "sepa_debit":
+                        if let value = try container.decodeIfPresent(SepaDebit.self, forKey: .sepaDebit) { self = .sepaDebit(value) } else { self = .unknown(type: type) }
+                    case "sofort":
+                        if let value = try container.decodeIfPresent(Sofort.self, forKey: .sofort) { self = .sofort(value) } else { self = .unknown(type: type) }
+                    case "twint":
+                        if let value = try container.decodeIfPresent(Twint.self, forKey: .twint) { self = .twint(value) } else { self = .unknown(type: type) }
+                    case "upi":
+                        if let value = try container.decodeIfPresent(Upi.self, forKey: .upi) { self = .upi(value) } else { self = .unknown(type: type) }
+                    case "us_bank_account":
+                        if let value = try container.decodeIfPresent(UsBankAccount.self, forKey: .usBankAccount) { self = .usBankAccount(value) } else { self = .unknown(type: type) }
+                    default: self = .unknown(type: type)
+                    }
+                }
+
+                fileprivate func encode(into container: inout KeyedEncodingContainer<CodingKeys>) throws {
+                    switch self {
+                    case .acssDebit(let value): try container.encode(value, forKey: .acssDebit)
+                    case .amazonPay(let value): try container.encode(value, forKey: .amazonPay)
+                    case .auBecsDebit(let value): try container.encode(value, forKey: .auBecsDebit)
+                    case .bacsDebit(let value): try container.encode(value, forKey: .bacsDebit)
+                    case .bancontact(let value): try container.encode(value, forKey: .bancontact)
+                    case .boleto(let value): try container.encode(value, forKey: .boleto)
+                    case .card(let value): try container.encode(value, forKey: .card)
+                    case .cardPresent(let value): try container.encode(value, forKey: .cardPresent)
+                    case .cashapp(let value): try container.encode(value, forKey: .cashapp)
+                    case .ideal(let value): try container.encode(value, forKey: .ideal)
+                    case .kakaoPay(let value): try container.encode(value, forKey: .kakaoPay)
+                    case .klarna(let value): try container.encode(value, forKey: .klarna)
+                    case .krCard(let value): try container.encode(value, forKey: .krCard)
+                    case .link(let value): try container.encode(value, forKey: .link)
+                    case .naverPay(let value): try container.encode(value, forKey: .naverPay)
+                    case .nzBankAccount(let value): try container.encode(value, forKey: .nzBankAccount)
+                    case .paypal(let value): try container.encode(value, forKey: .paypal)
+                    case .payto(let value): try container.encode(value, forKey: .payto)
+                    case .pix(let value): try container.encode(value, forKey: .pix)
+                    case .revolutPay(let value): try container.encode(value, forKey: .revolutPay)
+                    case .satispay(let value): try container.encode(value, forKey: .satispay)
+                    case .sepaDebit(let value): try container.encode(value, forKey: .sepaDebit)
+                    case .sofort(let value): try container.encode(value, forKey: .sofort)
+                    case .twint(let value): try container.encode(value, forKey: .twint)
+                    case .upi(let value): try container.encode(value, forKey: .upi)
+                    case .usBankAccount(let value): try container.encode(value, forKey: .usBankAccount)
+                    default: break
+                    }
+                }
             }
         }
     }

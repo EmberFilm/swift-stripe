@@ -161,33 +161,37 @@ extension Stripe.Treasury {
             }
 
             public struct SourceFlowDetails: Codable, Hashable, Sendable {
-                @Boxed public var creditReversal: Stripe.Treasury.CreditReversal?
-                @Boxed public var outboundPayment: Stripe.Treasury.OutboundPayment?
-                @Boxed public var outboundTransfer: Stripe.Treasury.OutboundTransfer?
-                public var payout: Stripe.Payouts.Payout?
                 /// The type of the source flow that originated the ReceivedCredit.
                 public var `type`: Type?
+                /// The payload `type` selects.
+                public var details: Details
 
-                private enum CodingKeys: String, CodingKey {
+                fileprivate enum CodingKeys: String, CodingKey {
+                    case `type`
                     case creditReversal
                     case outboundPayment
                     case outboundTransfer
                     case payout
-                    case `type`
                 }
 
                 public init(
-                    creditReversal: Stripe.Treasury.CreditReversal? = nil,
-                    outboundPayment: Stripe.Treasury.OutboundPayment? = nil,
-                    outboundTransfer: Stripe.Treasury.OutboundTransfer? = nil,
-                    payout: Stripe.Payouts.Payout? = nil,
-                    `type`: Type? = nil
+                    `type`: Type? = nil,
+                    details: Details
                 ) {
-                    self._creditReversal = Boxed(wrappedValue: creditReversal)
-                    self._outboundPayment = Boxed(wrappedValue: outboundPayment)
-                    self._outboundTransfer = Boxed(wrappedValue: outboundTransfer)
-                    self.payout = payout
                     self.`type` = `type`
+                    self.details = details
+                }
+
+                public init(from decoder: any Decoder) throws {
+                    let container = try decoder.container(keyedBy: CodingKeys.self)
+                    self.`type` = try container.decodeIfPresent(Type.self, forKey: .`type`)
+                    self.details = try Details(type: try container.decodeIfPresent(String.self, forKey: .type) ?? "", from: container)
+                }
+
+                public func encode(to encoder: any Encoder) throws {
+                    var container = encoder.container(keyedBy: CodingKeys.self)
+                    try container.encodeIfPresent(`type`, forKey: .`type`)
+                    try details.encode(into: &container)
                 }
 
                 /// The type of the source flow that originated the ReceivedCredit.
@@ -197,6 +201,46 @@ extension Stripe.Treasury {
                     case outboundPayment = "outbound_payment"
                     case outboundTransfer = "outbound_transfer"
                     case payout
+                }
+
+                /// The payload `type` selects; `unknown` carries a type this package does not model.
+                public indirect enum Details: Hashable, Sendable {
+                    case creditReversal(Stripe.Treasury.CreditReversal)
+                    case outboundPayment(Stripe.Treasury.OutboundPayment)
+                    case outboundTransfer(Stripe.Treasury.OutboundTransfer)
+                    case payout(Stripe.Payouts.Payout)
+                    case other
+                    case unknown(type: String)
+
+                    public var creditReversal: Stripe.Treasury.CreditReversal? { if case .creditReversal(let value) = self { return value }; return nil }
+                    public var outboundPayment: Stripe.Treasury.OutboundPayment? { if case .outboundPayment(let value) = self { return value }; return nil }
+                    public var outboundTransfer: Stripe.Treasury.OutboundTransfer? { if case .outboundTransfer(let value) = self { return value }; return nil }
+                    public var payout: Stripe.Payouts.Payout? { if case .payout(let value) = self { return value }; return nil }
+
+                    fileprivate init(type: String, from container: KeyedDecodingContainer<CodingKeys>) throws {
+                        switch type {
+                        case "credit_reversal":
+                            if let value = try container.decodeIfPresent(Stripe.Treasury.CreditReversal.self, forKey: .creditReversal) { self = .creditReversal(value) } else { self = .unknown(type: type) }
+                        case "outbound_payment":
+                            if let value = try container.decodeIfPresent(Stripe.Treasury.OutboundPayment.self, forKey: .outboundPayment) { self = .outboundPayment(value) } else { self = .unknown(type: type) }
+                        case "outbound_transfer":
+                            if let value = try container.decodeIfPresent(Stripe.Treasury.OutboundTransfer.self, forKey: .outboundTransfer) { self = .outboundTransfer(value) } else { self = .unknown(type: type) }
+                        case "payout":
+                            if let value = try container.decodeIfPresent(Stripe.Payouts.Payout.self, forKey: .payout) { self = .payout(value) } else { self = .unknown(type: type) }
+                        case "other": self = .other
+                        default: self = .unknown(type: type)
+                        }
+                    }
+
+                    fileprivate func encode(into container: inout KeyedEncodingContainer<CodingKeys>) throws {
+                        switch self {
+                        case .creditReversal(let value): try container.encode(value, forKey: .creditReversal)
+                        case .outboundPayment(let value): try container.encode(value, forKey: .outboundPayment)
+                        case .outboundTransfer(let value): try container.encode(value, forKey: .outboundTransfer)
+                        case .payout(let value): try container.encode(value, forKey: .payout)
+                        default: break
+                        }
+                    }
                 }
             }
         }

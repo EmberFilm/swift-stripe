@@ -266,7 +266,7 @@ struct AddedFieldDecodingTests {
         #expect(payment.status == "paid")
         #expect(payment.isDefault == true)
         #expect(payment.payment?.type == .paymentIntent)
-        #expect(payment.payment?.paymentIntent == "pi_1")
+        #expect(payment.payment?.details.paymentIntent?.wrappedValue == "pi_1")
         #expect(payment.statusTransitions?.paidAt == Date(timeIntervalSince1970: 1_700_002_000))
     }
 

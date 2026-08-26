@@ -134,35 +134,41 @@ extension Stripe.Billing.Customer.Portal {
 
         public struct Flow: Codable, Hashable, Sendable {
             public var afterCompletion: AfterCompletion?
-            /// Configuration when `flow.type=subscription_cancel`.
-            public var subscriptionCancel: SubscriptionCancel?
-            /// Configuration when `flow.type=subscription_update`.
-            public var subscriptionUpdate: SubscriptionUpdate?
-            /// Configuration when `flow.type=subscription_update_confirm`.
-            public var subscriptionUpdateConfirm: SubscriptionUpdateConfirm?
             /// Type of flow that the customer will go through.
             public var `type`: Type?
+            /// The payload `type` selects.
+            public var details: Details
 
-            private enum CodingKeys: String, CodingKey {
+            fileprivate enum CodingKeys: String, CodingKey {
                 case afterCompletion
+                case `type`
                 case subscriptionCancel
                 case subscriptionUpdate
                 case subscriptionUpdateConfirm
-                case `type`
             }
 
             public init(
                 afterCompletion: AfterCompletion? = nil,
-                subscriptionCancel: SubscriptionCancel? = nil,
-                subscriptionUpdate: SubscriptionUpdate? = nil,
-                subscriptionUpdateConfirm: SubscriptionUpdateConfirm? = nil,
-                `type`: Type? = nil
+                `type`: Type? = nil,
+                details: Details
             ) {
                 self.afterCompletion = afterCompletion
-                self.subscriptionCancel = subscriptionCancel
-                self.subscriptionUpdate = subscriptionUpdate
-                self.subscriptionUpdateConfirm = subscriptionUpdateConfirm
                 self.`type` = `type`
+                self.details = details
+            }
+
+            public init(from decoder: any Decoder) throws {
+                let container = try decoder.container(keyedBy: CodingKeys.self)
+                self.afterCompletion = try container.decodeIfPresent(AfterCompletion.self, forKey: .afterCompletion)
+                self.`type` = try container.decodeIfPresent(Type.self, forKey: .`type`)
+                self.details = try Details(type: try container.decodeIfPresent(String.self, forKey: .type) ?? "", from: container)
+            }
+
+            public func encode(to encoder: any Encoder) throws {
+                var container = encoder.container(keyedBy: CodingKeys.self)
+                try container.encodeIfPresent(afterCompletion, forKey: .afterCompletion)
+                try container.encodeIfPresent(`type`, forKey: .`type`)
+                try details.encode(into: &container)
             }
 
             /// Type of flow that the customer will go through.
@@ -371,6 +377,41 @@ extension Stripe.Billing.Customer.Portal {
                         self.id = id
                         self.price = price
                         self.quantity = quantity
+                    }
+                }
+            }
+
+            /// The payload `type` selects; `unknown` carries a type this package does not model.
+            public indirect enum Details: Hashable, Sendable {
+                case subscriptionCancel(SubscriptionCancel)
+                case subscriptionUpdate(SubscriptionUpdate)
+                case subscriptionUpdateConfirm(SubscriptionUpdateConfirm)
+                case paymentMethodUpdate
+                case unknown(type: String)
+
+                public var subscriptionCancel: SubscriptionCancel? { if case .subscriptionCancel(let value) = self { return value }; return nil }
+                public var subscriptionUpdate: SubscriptionUpdate? { if case .subscriptionUpdate(let value) = self { return value }; return nil }
+                public var subscriptionUpdateConfirm: SubscriptionUpdateConfirm? { if case .subscriptionUpdateConfirm(let value) = self { return value }; return nil }
+
+                fileprivate init(type: String, from container: KeyedDecodingContainer<CodingKeys>) throws {
+                    switch type {
+                    case "subscription_cancel":
+                        if let value = try container.decodeIfPresent(SubscriptionCancel.self, forKey: .subscriptionCancel) { self = .subscriptionCancel(value) } else { self = .unknown(type: type) }
+                    case "subscription_update":
+                        if let value = try container.decodeIfPresent(SubscriptionUpdate.self, forKey: .subscriptionUpdate) { self = .subscriptionUpdate(value) } else { self = .unknown(type: type) }
+                    case "subscription_update_confirm":
+                        if let value = try container.decodeIfPresent(SubscriptionUpdateConfirm.self, forKey: .subscriptionUpdateConfirm) { self = .subscriptionUpdateConfirm(value) } else { self = .unknown(type: type) }
+                    case "payment_method_update": self = .paymentMethodUpdate
+                    default: self = .unknown(type: type)
+                    }
+                }
+
+                fileprivate func encode(into container: inout KeyedEncodingContainer<CodingKeys>) throws {
+                    switch self {
+                    case .subscriptionCancel(let value): try container.encode(value, forKey: .subscriptionCancel)
+                    case .subscriptionUpdate(let value): try container.encode(value, forKey: .subscriptionUpdate)
+                    case .subscriptionUpdateConfirm(let value): try container.encode(value, forKey: .subscriptionUpdateConfirm)
+                    default: break
                     }
                 }
             }

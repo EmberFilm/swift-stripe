@@ -119,67 +119,67 @@ extension Stripe.Terminal.Readers {
         public struct Action: Codable, Hashable, Sendable {
             /// The reader action failed due to an API error.
             public var apiError: Stripe.Shared.ApiErrors?
-            public var collectInputs: CollectInputs?
-            public var collectPaymentMethod: CollectPaymentMethod?
-            public var confirmPaymentIntent: ConfirmPaymentIntent?
             /// Failure code, only set if status is `failed`.
             public var failureCode: String?
             /// Detailed failure message, only set if status is `failed`.
             public var failureMessage: String?
-            public var printContent: PrintContent?
-            public var processPaymentIntent: ProcessPaymentIntent?
-            public var processSetupIntent: ProcessSetupIntent?
-            public var refundPayment: RefundPayment?
-            public var setReaderDisplay: SetReaderDisplay?
             /// Status of the action performed by the reader.
             public var status: Status?
             /// Type of action performed by the reader.
             public var `type`: Type?
+            /// The payload `type` selects.
+            public var details: Details
 
-            private enum CodingKeys: String, CodingKey {
+            fileprivate enum CodingKeys: String, CodingKey {
                 case apiError
+                case failureCode
+                case failureMessage
+                case status
+                case `type`
                 case collectInputs
                 case collectPaymentMethod
                 case confirmPaymentIntent
-                case failureCode
-                case failureMessage
                 case printContent
                 case processPaymentIntent
                 case processSetupIntent
                 case refundPayment
                 case setReaderDisplay
-                case status
-                case `type`
             }
 
             public init(
                 apiError: Stripe.Shared.ApiErrors? = nil,
-                collectInputs: CollectInputs? = nil,
-                collectPaymentMethod: CollectPaymentMethod? = nil,
-                confirmPaymentIntent: ConfirmPaymentIntent? = nil,
                 failureCode: String? = nil,
                 failureMessage: String? = nil,
-                printContent: PrintContent? = nil,
-                processPaymentIntent: ProcessPaymentIntent? = nil,
-                processSetupIntent: ProcessSetupIntent? = nil,
-                refundPayment: RefundPayment? = nil,
-                setReaderDisplay: SetReaderDisplay? = nil,
                 status: Status? = nil,
-                `type`: Type? = nil
+                `type`: Type? = nil,
+                details: Details
             ) {
                 self.apiError = apiError
-                self.collectInputs = collectInputs
-                self.collectPaymentMethod = collectPaymentMethod
-                self.confirmPaymentIntent = confirmPaymentIntent
                 self.failureCode = failureCode
                 self.failureMessage = failureMessage
-                self.printContent = printContent
-                self.processPaymentIntent = processPaymentIntent
-                self.processSetupIntent = processSetupIntent
-                self.refundPayment = refundPayment
-                self.setReaderDisplay = setReaderDisplay
                 self.status = status
                 self.`type` = `type`
+                self.details = details
+            }
+
+            public init(from decoder: any Decoder) throws {
+                let container = try decoder.container(keyedBy: CodingKeys.self)
+                self.apiError = try container.decodeIfPresent(Stripe.Shared.ApiErrors.self, forKey: .apiError)
+                self.failureCode = try container.decodeIfPresent(String.self, forKey: .failureCode)
+                self.failureMessage = try container.decodeIfPresent(String.self, forKey: .failureMessage)
+                self.status = try container.decodeIfPresent(Status.self, forKey: .status)
+                self.`type` = try container.decodeIfPresent(Type.self, forKey: .`type`)
+                self.details = try Details(type: try container.decodeIfPresent(String.self, forKey: .type) ?? "", from: container)
+            }
+
+            public func encode(to encoder: any Encoder) throws {
+                var container = encoder.container(keyedBy: CodingKeys.self)
+                try container.encodeIfPresent(apiError, forKey: .apiError)
+                try container.encodeIfPresent(failureCode, forKey: .failureCode)
+                try container.encodeIfPresent(failureMessage, forKey: .failureMessage)
+                try container.encodeIfPresent(status, forKey: .status)
+                try container.encodeIfPresent(`type`, forKey: .`type`)
+                try details.encode(into: &container)
             }
 
             /// Status of the action performed by the reader.
@@ -225,59 +225,65 @@ extension Stripe.Terminal.Readers {
                 public struct Inputs: Codable, Hashable, Sendable {
                     /// Default text of input being collected.
                     public var customText: CustomText?
-                    public var email: Email?
-                    public var numeric: Numeric?
-                    public var phone: Phone?
                     /// Indicate that this input is required, disabling the skip button.
                     public var required: Bool?
-                    public var selection: Selection?
-                    public var signature: Signature?
                     /// Indicate that this input was skipped by the user.
                     public var skipped: Bool?
-                    public var text: Text?
                     /// List of toggles being collected.
                     public var toggles: [Toggles]?
                     /// Type of input being collected.
                     public var `type`: Type?
+                    /// The payload `type` selects.
+                    public var details: Details
 
-                    private enum CodingKeys: String, CodingKey {
+                    fileprivate enum CodingKeys: String, CodingKey {
                         case customText
+                        case required
+                        case skipped
+                        case toggles
+                        case `type`
                         case email
                         case numeric
                         case phone
-                        case required
                         case selection
                         case signature
-                        case skipped
                         case text
-                        case toggles
-                        case `type`
                     }
 
                     public init(
                         customText: CustomText? = nil,
-                        email: Email? = nil,
-                        numeric: Numeric? = nil,
-                        phone: Phone? = nil,
                         required: Bool? = nil,
-                        selection: Selection? = nil,
-                        signature: Signature? = nil,
                         skipped: Bool? = nil,
-                        text: Text? = nil,
                         toggles: [Toggles]? = nil,
-                        `type`: Type? = nil
+                        `type`: Type? = nil,
+                        details: Details
                     ) {
                         self.customText = customText
-                        self.email = email
-                        self.numeric = numeric
-                        self.phone = phone
                         self.required = required
-                        self.selection = selection
-                        self.signature = signature
                         self.skipped = skipped
-                        self.text = text
                         self.toggles = toggles
                         self.`type` = `type`
+                        self.details = details
+                    }
+
+                    public init(from decoder: any Decoder) throws {
+                        let container = try decoder.container(keyedBy: CodingKeys.self)
+                        self.customText = try container.decodeIfPresent(CustomText.self, forKey: .customText)
+                        self.required = try container.decodeIfPresent(Bool.self, forKey: .required)
+                        self.skipped = try container.decodeIfPresent(Bool.self, forKey: .skipped)
+                        self.toggles = try container.decodeIfPresent([Toggles].self, forKey: .toggles)
+                        self.`type` = try container.decodeIfPresent(Type.self, forKey: .`type`)
+                        self.details = try Details(type: try container.decodeIfPresent(String.self, forKey: .type) ?? "", from: container)
+                    }
+
+                    public func encode(to encoder: any Encoder) throws {
+                        var container = encoder.container(keyedBy: CodingKeys.self)
+                        try container.encodeIfPresent(customText, forKey: .customText)
+                        try container.encodeIfPresent(required, forKey: .required)
+                        try container.encodeIfPresent(skipped, forKey: .skipped)
+                        try container.encodeIfPresent(toggles, forKey: .toggles)
+                        try container.encodeIfPresent(`type`, forKey: .`type`)
+                        try details.encode(into: &container)
                     }
 
                     /// Type of input being collected.
@@ -501,6 +507,54 @@ extension Stripe.Terminal.Readers {
                             case enabled
                         }
                     }
+
+                    /// The payload `type` selects; `unknown` carries a type this package does not model.
+                    public indirect enum Details: Hashable, Sendable {
+                        case email(Email)
+                        case numeric(Numeric)
+                        case phone(Phone)
+                        case selection(Selection)
+                        case signature(Signature)
+                        case text(Text)
+                        case unknown(type: String)
+
+                        public var email: Email? { if case .email(let value) = self { return value }; return nil }
+                        public var numeric: Numeric? { if case .numeric(let value) = self { return value }; return nil }
+                        public var phone: Phone? { if case .phone(let value) = self { return value }; return nil }
+                        public var selection: Selection? { if case .selection(let value) = self { return value }; return nil }
+                        public var signature: Signature? { if case .signature(let value) = self { return value }; return nil }
+                        public var text: Text? { if case .text(let value) = self { return value }; return nil }
+
+                        fileprivate init(type: String, from container: KeyedDecodingContainer<CodingKeys>) throws {
+                            switch type {
+                            case "email":
+                                if let value = try container.decodeIfPresent(Email.self, forKey: .email) { self = .email(value) } else { self = .unknown(type: type) }
+                            case "numeric":
+                                if let value = try container.decodeIfPresent(Numeric.self, forKey: .numeric) { self = .numeric(value) } else { self = .unknown(type: type) }
+                            case "phone":
+                                if let value = try container.decodeIfPresent(Phone.self, forKey: .phone) { self = .phone(value) } else { self = .unknown(type: type) }
+                            case "selection":
+                                if let value = try container.decodeIfPresent(Selection.self, forKey: .selection) { self = .selection(value) } else { self = .unknown(type: type) }
+                            case "signature":
+                                if let value = try container.decodeIfPresent(Signature.self, forKey: .signature) { self = .signature(value) } else { self = .unknown(type: type) }
+                            case "text":
+                                if let value = try container.decodeIfPresent(Text.self, forKey: .text) { self = .text(value) } else { self = .unknown(type: type) }
+                            default: self = .unknown(type: type)
+                            }
+                        }
+
+                        fileprivate func encode(into container: inout KeyedEncodingContainer<CodingKeys>) throws {
+                            switch self {
+                            case .email(let value): try container.encode(value, forKey: .email)
+                            case .numeric(let value): try container.encode(value, forKey: .numeric)
+                            case .phone(let value): try container.encode(value, forKey: .phone)
+                            case .selection(let value): try container.encode(value, forKey: .selection)
+                            case .signature(let value): try container.encode(value, forKey: .signature)
+                            case .text(let value): try container.encode(value, forKey: .text)
+                            default: break
+                            }
+                        }
+                    }
                 }
             }
 
@@ -509,7 +563,7 @@ extension Stripe.Terminal.Readers {
                 public var collectConfig: CollectConfig?
                 /// Most recent PaymentIntent processed by the reader.
                 @Expandable<Stripe.PaymentIntents.PaymentIntent, String> public var paymentIntent: String?
-                public var paymentMethod: Stripe.PaymentMethods.PaymentMethod?
+                @Boxed public var paymentMethod: Stripe.PaymentMethods.PaymentMethod?
 
                 private enum CodingKeys: String, CodingKey {
                     case collectConfig
@@ -524,7 +578,7 @@ extension Stripe.Terminal.Readers {
                 ) {
                     self.collectConfig = collectConfig
                     self._paymentIntent = Expandable(id: paymentIntent)
-                    self.paymentMethod = paymentMethod
+                    self._paymentMethod = Boxed(wrappedValue: paymentMethod)
                 }
 
                 /// Represents a per-transaction override of a reader configuration
@@ -915,6 +969,64 @@ extension Stripe.Terminal.Readers {
                             self.description = description
                             self.quantity = quantity
                         }
+                    }
+                }
+            }
+
+            /// The payload `type` selects; `unknown` carries a type this package does not model.
+            public indirect enum Details: Hashable, Sendable {
+                case collectInputs(CollectInputs)
+                case collectPaymentMethod(CollectPaymentMethod)
+                case confirmPaymentIntent(ConfirmPaymentIntent)
+                case printContent(PrintContent)
+                case processPaymentIntent(ProcessPaymentIntent)
+                case processSetupIntent(ProcessSetupIntent)
+                case refundPayment(RefundPayment)
+                case setReaderDisplay(SetReaderDisplay)
+                case unknown(type: String)
+
+                public var collectInputs: CollectInputs? { if case .collectInputs(let value) = self { return value }; return nil }
+                public var collectPaymentMethod: CollectPaymentMethod? { if case .collectPaymentMethod(let value) = self { return value }; return nil }
+                public var confirmPaymentIntent: ConfirmPaymentIntent? { if case .confirmPaymentIntent(let value) = self { return value }; return nil }
+                public var printContent: PrintContent? { if case .printContent(let value) = self { return value }; return nil }
+                public var processPaymentIntent: ProcessPaymentIntent? { if case .processPaymentIntent(let value) = self { return value }; return nil }
+                public var processSetupIntent: ProcessSetupIntent? { if case .processSetupIntent(let value) = self { return value }; return nil }
+                public var refundPayment: RefundPayment? { if case .refundPayment(let value) = self { return value }; return nil }
+                public var setReaderDisplay: SetReaderDisplay? { if case .setReaderDisplay(let value) = self { return value }; return nil }
+
+                fileprivate init(type: String, from container: KeyedDecodingContainer<CodingKeys>) throws {
+                    switch type {
+                    case "collect_inputs":
+                        if let value = try container.decodeIfPresent(CollectInputs.self, forKey: .collectInputs) { self = .collectInputs(value) } else { self = .unknown(type: type) }
+                    case "collect_payment_method":
+                        if let value = try container.decodeIfPresent(CollectPaymentMethod.self, forKey: .collectPaymentMethod) { self = .collectPaymentMethod(value) } else { self = .unknown(type: type) }
+                    case "confirm_payment_intent":
+                        if let value = try container.decodeIfPresent(ConfirmPaymentIntent.self, forKey: .confirmPaymentIntent) { self = .confirmPaymentIntent(value) } else { self = .unknown(type: type) }
+                    case "print_content":
+                        if let value = try container.decodeIfPresent(PrintContent.self, forKey: .printContent) { self = .printContent(value) } else { self = .unknown(type: type) }
+                    case "process_payment_intent":
+                        if let value = try container.decodeIfPresent(ProcessPaymentIntent.self, forKey: .processPaymentIntent) { self = .processPaymentIntent(value) } else { self = .unknown(type: type) }
+                    case "process_setup_intent":
+                        if let value = try container.decodeIfPresent(ProcessSetupIntent.self, forKey: .processSetupIntent) { self = .processSetupIntent(value) } else { self = .unknown(type: type) }
+                    case "refund_payment":
+                        if let value = try container.decodeIfPresent(RefundPayment.self, forKey: .refundPayment) { self = .refundPayment(value) } else { self = .unknown(type: type) }
+                    case "set_reader_display":
+                        if let value = try container.decodeIfPresent(SetReaderDisplay.self, forKey: .setReaderDisplay) { self = .setReaderDisplay(value) } else { self = .unknown(type: type) }
+                    default: self = .unknown(type: type)
+                    }
+                }
+
+                fileprivate func encode(into container: inout KeyedEncodingContainer<CodingKeys>) throws {
+                    switch self {
+                    case .collectInputs(let value): try container.encode(value, forKey: .collectInputs)
+                    case .collectPaymentMethod(let value): try container.encode(value, forKey: .collectPaymentMethod)
+                    case .confirmPaymentIntent(let value): try container.encode(value, forKey: .confirmPaymentIntent)
+                    case .printContent(let value): try container.encode(value, forKey: .printContent)
+                    case .processPaymentIntent(let value): try container.encode(value, forKey: .processPaymentIntent)
+                    case .processSetupIntent(let value): try container.encode(value, forKey: .processSetupIntent)
+                    case .refundPayment(let value): try container.encode(value, forKey: .refundPayment)
+                    case .setReaderDisplay(let value): try container.encode(value, forKey: .setReaderDisplay)
+                    default: break
                     }
                 }
             }

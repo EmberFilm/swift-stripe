@@ -62,7 +62,7 @@ extension Stripe.PaymentIntents {
         /// If the object exists in live mode, the value is `true`.
         public var livemode: Bool?
         /// Settings for Managed Payments.
-        public var managedPayments: Stripe.Shared.ManagedPayments?
+        public var managedPayments: Stripe.Shared.SmorResourceManagedPayments?
         /// Set of key-value pairs that you can attach to an object.
         public var metadata: [String: String]?
         /// If present, this property tells you what actions you need to take in order for your customer to fulfill a payment usin…
@@ -90,7 +90,7 @@ extension Stripe.PaymentIntents {
         /// Shipping information for this PaymentIntent.
         public var shipping: ShippingLabel?
         /// This is a legacy field that will be removed in the future.
-        @Expandable<StripePaymentSource, String> public var source: String?
+        @Expandable<Stripe.PaymentSource, String> public var source: String?
         /// Text that appears on the customer's statement as the statement descriptor for a non-card charge.
         public var statementDescriptor: String?
         /// Provides information about a card charge.
@@ -177,7 +177,7 @@ extension Stripe.PaymentIntents {
             lastPaymentError: Stripe.Shared.ApiErrors? = nil,
             latestCharge: String? = nil,
             livemode: Bool? = nil,
-            managedPayments: Stripe.Shared.ManagedPayments? = nil,
+            managedPayments: Stripe.Shared.SmorResourceManagedPayments? = nil,
             metadata: [String: String]? = nil,
             nextAction: NextAction? = nil,
             onBehalfOf: String? = nil,
@@ -849,32 +849,13 @@ extension Stripe.PaymentIntents {
         }
 
         public struct NextAction: Codable, Hashable, Sendable {
-            public var alipayHandleRedirect: AlipayHandleRedirect?
-            public var blikAuthorize: BlikAuthorize?
-            public var boletoDisplayDetails: BoletoDisplayDetails?
-            public var cardAwaitNotification: CardAwaitNotification?
-            public var cashappHandleRedirectOrDisplayQrCode: CashappHandleRedirectOrDisplayQrCode?
-            public var displayBankTransferInstructions: DisplayBankTransferInstructions?
-            public var klarnaDisplayQrCode: KlarnaDisplayQrCode?
-            public var konbiniDisplayDetails: KonbiniDisplayDetails?
-            public var multibancoDisplayDetails: MultibancoDisplayDetails?
-            public var oxxoDisplayDetails: OxxoDisplayDetails?
-            public var paynowDisplayQrCode: PaynowDisplayQrCode?
-            public var pixDisplayQrCode: PixDisplayQrCode?
-            public var promptpayDisplayQrCode: PromptpayDisplayQrCode?
-            public var redirectToUrl: RedirectToUrl?
-            public var swishHandleRedirectOrDisplayQrCode: SwishHandleRedirectOrDisplayQrCode?
             /// Type of the next action to perform.
             public var `type`: String?
-            public var upiHandleRedirectOrDisplayQrCode: UpiHandleRedirectOrDisplayQrCode?
-            /// When confirming a PaymentIntent with Stripe.js, Stripe.js depends on the contents of this dictionary to invoke authent…
-            public var useStripeSdk: [String: String]?
-            public var verifyWithMicrodeposits: VerifyWithMicrodeposits?
-            public var wechatPayDisplayQrCode: WechatPayDisplayQrCode?
-            public var wechatPayRedirectToAndroidApp: WechatPayRedirectToAndroidApp?
-            public var wechatPayRedirectToIosApp: WechatPayRedirectToIosApp?
+            /// The payload `type` selects.
+            public var details: Details
 
-            private enum CodingKeys: String, CodingKey {
+            fileprivate enum CodingKeys: String, CodingKey {
+                case `type`
                 case alipayHandleRedirect
                 case blikAuthorize
                 case boletoDisplayDetails
@@ -890,7 +871,6 @@ extension Stripe.PaymentIntents {
                 case promptpayDisplayQrCode
                 case redirectToUrl
                 case swishHandleRedirectOrDisplayQrCode
-                case `type`
                 case upiHandleRedirectOrDisplayQrCode
                 case useStripeSdk
                 case verifyWithMicrodeposits
@@ -900,51 +880,23 @@ extension Stripe.PaymentIntents {
             }
 
             public init(
-                alipayHandleRedirect: AlipayHandleRedirect? = nil,
-                blikAuthorize: BlikAuthorize? = nil,
-                boletoDisplayDetails: BoletoDisplayDetails? = nil,
-                cardAwaitNotification: CardAwaitNotification? = nil,
-                cashappHandleRedirectOrDisplayQrCode: CashappHandleRedirectOrDisplayQrCode? = nil,
-                displayBankTransferInstructions: DisplayBankTransferInstructions? = nil,
-                klarnaDisplayQrCode: KlarnaDisplayQrCode? = nil,
-                konbiniDisplayDetails: KonbiniDisplayDetails? = nil,
-                multibancoDisplayDetails: MultibancoDisplayDetails? = nil,
-                oxxoDisplayDetails: OxxoDisplayDetails? = nil,
-                paynowDisplayQrCode: PaynowDisplayQrCode? = nil,
-                pixDisplayQrCode: PixDisplayQrCode? = nil,
-                promptpayDisplayQrCode: PromptpayDisplayQrCode? = nil,
-                redirectToUrl: RedirectToUrl? = nil,
-                swishHandleRedirectOrDisplayQrCode: SwishHandleRedirectOrDisplayQrCode? = nil,
                 `type`: String? = nil,
-                upiHandleRedirectOrDisplayQrCode: UpiHandleRedirectOrDisplayQrCode? = nil,
-                useStripeSdk: [String: String]? = nil,
-                verifyWithMicrodeposits: VerifyWithMicrodeposits? = nil,
-                wechatPayDisplayQrCode: WechatPayDisplayQrCode? = nil,
-                wechatPayRedirectToAndroidApp: WechatPayRedirectToAndroidApp? = nil,
-                wechatPayRedirectToIosApp: WechatPayRedirectToIosApp? = nil
+                details: Details
             ) {
-                self.alipayHandleRedirect = alipayHandleRedirect
-                self.blikAuthorize = blikAuthorize
-                self.boletoDisplayDetails = boletoDisplayDetails
-                self.cardAwaitNotification = cardAwaitNotification
-                self.cashappHandleRedirectOrDisplayQrCode = cashappHandleRedirectOrDisplayQrCode
-                self.displayBankTransferInstructions = displayBankTransferInstructions
-                self.klarnaDisplayQrCode = klarnaDisplayQrCode
-                self.konbiniDisplayDetails = konbiniDisplayDetails
-                self.multibancoDisplayDetails = multibancoDisplayDetails
-                self.oxxoDisplayDetails = oxxoDisplayDetails
-                self.paynowDisplayQrCode = paynowDisplayQrCode
-                self.pixDisplayQrCode = pixDisplayQrCode
-                self.promptpayDisplayQrCode = promptpayDisplayQrCode
-                self.redirectToUrl = redirectToUrl
-                self.swishHandleRedirectOrDisplayQrCode = swishHandleRedirectOrDisplayQrCode
                 self.`type` = `type`
-                self.upiHandleRedirectOrDisplayQrCode = upiHandleRedirectOrDisplayQrCode
-                self.useStripeSdk = useStripeSdk
-                self.verifyWithMicrodeposits = verifyWithMicrodeposits
-                self.wechatPayDisplayQrCode = wechatPayDisplayQrCode
-                self.wechatPayRedirectToAndroidApp = wechatPayRedirectToAndroidApp
-                self.wechatPayRedirectToIosApp = wechatPayRedirectToIosApp
+                self.details = details
+            }
+
+            public init(from decoder: any Decoder) throws {
+                let container = try decoder.container(keyedBy: CodingKeys.self)
+                self.`type` = try container.decodeIfPresent(String.self, forKey: .`type`)
+                self.details = try Details(type: try container.decodeIfPresent(String.self, forKey: .type) ?? "", from: container)
+            }
+
+            public func encode(to encoder: any Encoder) throws {
+                var container = encoder.container(keyedBy: CodingKeys.self)
+                try container.encodeIfPresent(`type`, forKey: .`type`)
+                try details.encode(into: &container)
             }
 
             public struct AlipayHandleRedirect: Codable, Hashable, Sendable {
@@ -975,10 +927,6 @@ extension Stripe.PaymentIntents {
                     self.returnUrl = returnUrl
                     self.url = url
                 }
-            }
-
-            public struct BlikAuthorize: Codable, Hashable, Sendable {
-                public init() {}
             }
 
             public struct BoletoDisplayDetails: Codable, Hashable, Sendable {
@@ -1028,55 +976,6 @@ extension Stripe.PaymentIntents {
                 ) {
                     self.chargeAttemptAt = chargeAttemptAt
                     self.customerApprovalRequired = customerApprovalRequired
-                }
-            }
-
-            public struct CashappHandleRedirectOrDisplayQrCode: Codable, Hashable, Sendable {
-                /// The URL to the hosted Cash App Pay instructions page, which allows customers to view the QR code, and supports QR code…
-                public var hostedInstructionsUrl: String?
-                /// The url for mobile redirect based auth
-                public var mobileAuthUrl: String?
-                public var qrCode: QrCode?
-
-                private enum CodingKeys: String, CodingKey {
-                    case hostedInstructionsUrl
-                    case mobileAuthUrl
-                    case qrCode
-                }
-
-                public init(
-                    hostedInstructionsUrl: String? = nil,
-                    mobileAuthUrl: String? = nil,
-                    qrCode: QrCode? = nil
-                ) {
-                    self.hostedInstructionsUrl = hostedInstructionsUrl
-                    self.mobileAuthUrl = mobileAuthUrl
-                    self.qrCode = qrCode
-                }
-
-                public struct QrCode: Codable, Hashable, Sendable {
-                    /// The date (unix timestamp) when the QR code expires.
-                    public var expiresAt: Date?
-                    /// The image_url_png string used to render QR code
-                    public var imageUrlPng: String?
-                    /// The image_url_svg string used to render QR code
-                    public var imageUrlSvg: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case expiresAt
-                        case imageUrlPng
-                        case imageUrlSvg
-                    }
-
-                    public init(
-                        expiresAt: Date? = nil,
-                        imageUrlPng: String? = nil,
-                        imageUrlSvg: String? = nil
-                    ) {
-                        self.expiresAt = expiresAt
-                        self.imageUrlPng = imageUrlPng
-                        self.imageUrlSvg = imageUrlSvg
-                    }
                 }
             }
 
@@ -1512,50 +1411,6 @@ extension Stripe.PaymentIntents {
                 }
             }
 
-            public struct UpiHandleRedirectOrDisplayQrCode: Codable, Hashable, Sendable {
-                /// The URL to the hosted UPI instructions page, which allows customers to view the QR code.
-                public var hostedInstructionsUrl: String?
-                public var qrCode: QrCode?
-
-                private enum CodingKeys: String, CodingKey {
-                    case hostedInstructionsUrl
-                    case qrCode
-                }
-
-                public init(
-                    hostedInstructionsUrl: String? = nil,
-                    qrCode: QrCode? = nil
-                ) {
-                    self.hostedInstructionsUrl = hostedInstructionsUrl
-                    self.qrCode = qrCode
-                }
-
-                public struct QrCode: Codable, Hashable, Sendable {
-                    /// The date (unix timestamp) when the QR code expires.
-                    public var expiresAt: Date?
-                    /// The image_url_png string used to render QR code
-                    public var imageUrlPng: String?
-                    /// The image_url_svg string used to render QR code
-                    public var imageUrlSvg: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case expiresAt
-                        case imageUrlPng
-                        case imageUrlSvg
-                    }
-
-                    public init(
-                        expiresAt: Date? = nil,
-                        imageUrlPng: String? = nil,
-                        imageUrlSvg: String? = nil
-                    ) {
-                        self.expiresAt = expiresAt
-                        self.imageUrlPng = imageUrlPng
-                        self.imageUrlSvg = imageUrlSvg
-                    }
-                }
-            }
-
             public struct VerifyWithMicrodeposits: Codable, Hashable, Sendable {
                 /// The timestamp when the microdeposits are expected to land.
                 public var arrivalDate: Date?
@@ -1679,6 +1534,129 @@ extension Stripe.PaymentIntents {
                     nativeUrl: String? = nil
                 ) {
                     self.nativeUrl = nativeUrl
+                }
+            }
+
+            /// The payload `type` selects; `unknown` carries a type this package does not model.
+            public indirect enum Details: Hashable, Sendable {
+                case alipayHandleRedirect(AlipayHandleRedirect)
+                case blikAuthorize(Stripe.Shared.BlikAuthorize)
+                case boletoDisplayDetails(BoletoDisplayDetails)
+                case cardAwaitNotification(CardAwaitNotification)
+                case cashappHandleRedirectOrDisplayQrCode(Stripe.Shared.CashappHandleRedirectOrDisplayQrCode)
+                case displayBankTransferInstructions(DisplayBankTransferInstructions)
+                case klarnaDisplayQrCode(KlarnaDisplayQrCode)
+                case konbiniDisplayDetails(KonbiniDisplayDetails)
+                case multibancoDisplayDetails(MultibancoDisplayDetails)
+                case oxxoDisplayDetails(OxxoDisplayDetails)
+                case paynowDisplayQrCode(PaynowDisplayQrCode)
+                case pixDisplayQrCode(PixDisplayQrCode)
+                case promptpayDisplayQrCode(PromptpayDisplayQrCode)
+                case redirectToUrl(RedirectToUrl)
+                case swishHandleRedirectOrDisplayQrCode(SwishHandleRedirectOrDisplayQrCode)
+                case upiHandleRedirectOrDisplayQrCode(Stripe.Shared.UpiHandleRedirectOrDisplayQrCode)
+                case useStripeSdk([String: String])
+                case verifyWithMicrodeposits(VerifyWithMicrodeposits)
+                case wechatPayDisplayQrCode(WechatPayDisplayQrCode)
+                case wechatPayRedirectToAndroidApp(WechatPayRedirectToAndroidApp)
+                case wechatPayRedirectToIosApp(WechatPayRedirectToIosApp)
+                case unknown(type: String)
+
+                public var alipayHandleRedirect: AlipayHandleRedirect? { if case .alipayHandleRedirect(let value) = self { return value }; return nil }
+                public var blikAuthorize: Stripe.Shared.BlikAuthorize? { if case .blikAuthorize(let value) = self { return value }; return nil }
+                public var boletoDisplayDetails: BoletoDisplayDetails? { if case .boletoDisplayDetails(let value) = self { return value }; return nil }
+                public var cardAwaitNotification: CardAwaitNotification? { if case .cardAwaitNotification(let value) = self { return value }; return nil }
+                public var cashappHandleRedirectOrDisplayQrCode: Stripe.Shared.CashappHandleRedirectOrDisplayQrCode? { if case .cashappHandleRedirectOrDisplayQrCode(let value) = self { return value }; return nil }
+                public var displayBankTransferInstructions: DisplayBankTransferInstructions? { if case .displayBankTransferInstructions(let value) = self { return value }; return nil }
+                public var klarnaDisplayQrCode: KlarnaDisplayQrCode? { if case .klarnaDisplayQrCode(let value) = self { return value }; return nil }
+                public var konbiniDisplayDetails: KonbiniDisplayDetails? { if case .konbiniDisplayDetails(let value) = self { return value }; return nil }
+                public var multibancoDisplayDetails: MultibancoDisplayDetails? { if case .multibancoDisplayDetails(let value) = self { return value }; return nil }
+                public var oxxoDisplayDetails: OxxoDisplayDetails? { if case .oxxoDisplayDetails(let value) = self { return value }; return nil }
+                public var paynowDisplayQrCode: PaynowDisplayQrCode? { if case .paynowDisplayQrCode(let value) = self { return value }; return nil }
+                public var pixDisplayQrCode: PixDisplayQrCode? { if case .pixDisplayQrCode(let value) = self { return value }; return nil }
+                public var promptpayDisplayQrCode: PromptpayDisplayQrCode? { if case .promptpayDisplayQrCode(let value) = self { return value }; return nil }
+                public var redirectToUrl: RedirectToUrl? { if case .redirectToUrl(let value) = self { return value }; return nil }
+                public var swishHandleRedirectOrDisplayQrCode: SwishHandleRedirectOrDisplayQrCode? { if case .swishHandleRedirectOrDisplayQrCode(let value) = self { return value }; return nil }
+                public var upiHandleRedirectOrDisplayQrCode: Stripe.Shared.UpiHandleRedirectOrDisplayQrCode? { if case .upiHandleRedirectOrDisplayQrCode(let value) = self { return value }; return nil }
+                public var useStripeSdk: [String: String]? { if case .useStripeSdk(let value) = self { return value }; return nil }
+                public var verifyWithMicrodeposits: VerifyWithMicrodeposits? { if case .verifyWithMicrodeposits(let value) = self { return value }; return nil }
+                public var wechatPayDisplayQrCode: WechatPayDisplayQrCode? { if case .wechatPayDisplayQrCode(let value) = self { return value }; return nil }
+                public var wechatPayRedirectToAndroidApp: WechatPayRedirectToAndroidApp? { if case .wechatPayRedirectToAndroidApp(let value) = self { return value }; return nil }
+                public var wechatPayRedirectToIosApp: WechatPayRedirectToIosApp? { if case .wechatPayRedirectToIosApp(let value) = self { return value }; return nil }
+
+                fileprivate init(type: String, from container: KeyedDecodingContainer<CodingKeys>) throws {
+                    switch type {
+                    case "alipay_handle_redirect":
+                        if let value = try container.decodeIfPresent(AlipayHandleRedirect.self, forKey: .alipayHandleRedirect) { self = .alipayHandleRedirect(value) } else { self = .unknown(type: type) }
+                    case "blik_authorize":
+                        if let value = try container.decodeIfPresent(Stripe.Shared.BlikAuthorize.self, forKey: .blikAuthorize) { self = .blikAuthorize(value) } else { self = .unknown(type: type) }
+                    case "boleto_display_details":
+                        if let value = try container.decodeIfPresent(BoletoDisplayDetails.self, forKey: .boletoDisplayDetails) { self = .boletoDisplayDetails(value) } else { self = .unknown(type: type) }
+                    case "card_await_notification":
+                        if let value = try container.decodeIfPresent(CardAwaitNotification.self, forKey: .cardAwaitNotification) { self = .cardAwaitNotification(value) } else { self = .unknown(type: type) }
+                    case "cashapp_handle_redirect_or_display_qr_code":
+                        if let value = try container.decodeIfPresent(Stripe.Shared.CashappHandleRedirectOrDisplayQrCode.self, forKey: .cashappHandleRedirectOrDisplayQrCode) { self = .cashappHandleRedirectOrDisplayQrCode(value) } else { self = .unknown(type: type) }
+                    case "display_bank_transfer_instructions":
+                        if let value = try container.decodeIfPresent(DisplayBankTransferInstructions.self, forKey: .displayBankTransferInstructions) { self = .displayBankTransferInstructions(value) } else { self = .unknown(type: type) }
+                    case "klarna_display_qr_code":
+                        if let value = try container.decodeIfPresent(KlarnaDisplayQrCode.self, forKey: .klarnaDisplayQrCode) { self = .klarnaDisplayQrCode(value) } else { self = .unknown(type: type) }
+                    case "konbini_display_details":
+                        if let value = try container.decodeIfPresent(KonbiniDisplayDetails.self, forKey: .konbiniDisplayDetails) { self = .konbiniDisplayDetails(value) } else { self = .unknown(type: type) }
+                    case "multibanco_display_details":
+                        if let value = try container.decodeIfPresent(MultibancoDisplayDetails.self, forKey: .multibancoDisplayDetails) { self = .multibancoDisplayDetails(value) } else { self = .unknown(type: type) }
+                    case "oxxo_display_details":
+                        if let value = try container.decodeIfPresent(OxxoDisplayDetails.self, forKey: .oxxoDisplayDetails) { self = .oxxoDisplayDetails(value) } else { self = .unknown(type: type) }
+                    case "paynow_display_qr_code":
+                        if let value = try container.decodeIfPresent(PaynowDisplayQrCode.self, forKey: .paynowDisplayQrCode) { self = .paynowDisplayQrCode(value) } else { self = .unknown(type: type) }
+                    case "pix_display_qr_code":
+                        if let value = try container.decodeIfPresent(PixDisplayQrCode.self, forKey: .pixDisplayQrCode) { self = .pixDisplayQrCode(value) } else { self = .unknown(type: type) }
+                    case "promptpay_display_qr_code":
+                        if let value = try container.decodeIfPresent(PromptpayDisplayQrCode.self, forKey: .promptpayDisplayQrCode) { self = .promptpayDisplayQrCode(value) } else { self = .unknown(type: type) }
+                    case "redirect_to_url":
+                        if let value = try container.decodeIfPresent(RedirectToUrl.self, forKey: .redirectToUrl) { self = .redirectToUrl(value) } else { self = .unknown(type: type) }
+                    case "swish_handle_redirect_or_display_qr_code":
+                        if let value = try container.decodeIfPresent(SwishHandleRedirectOrDisplayQrCode.self, forKey: .swishHandleRedirectOrDisplayQrCode) { self = .swishHandleRedirectOrDisplayQrCode(value) } else { self = .unknown(type: type) }
+                    case "upi_handle_redirect_or_display_qr_code":
+                        if let value = try container.decodeIfPresent(Stripe.Shared.UpiHandleRedirectOrDisplayQrCode.self, forKey: .upiHandleRedirectOrDisplayQrCode) { self = .upiHandleRedirectOrDisplayQrCode(value) } else { self = .unknown(type: type) }
+                    case "use_stripe_sdk":
+                        if let value = try container.decodeIfPresent([String: String].self, forKey: .useStripeSdk) { self = .useStripeSdk(value) } else { self = .unknown(type: type) }
+                    case "verify_with_microdeposits":
+                        if let value = try container.decodeIfPresent(VerifyWithMicrodeposits.self, forKey: .verifyWithMicrodeposits) { self = .verifyWithMicrodeposits(value) } else { self = .unknown(type: type) }
+                    case "wechat_pay_display_qr_code":
+                        if let value = try container.decodeIfPresent(WechatPayDisplayQrCode.self, forKey: .wechatPayDisplayQrCode) { self = .wechatPayDisplayQrCode(value) } else { self = .unknown(type: type) }
+                    case "wechat_pay_redirect_to_android_app":
+                        if let value = try container.decodeIfPresent(WechatPayRedirectToAndroidApp.self, forKey: .wechatPayRedirectToAndroidApp) { self = .wechatPayRedirectToAndroidApp(value) } else { self = .unknown(type: type) }
+                    case "wechat_pay_redirect_to_ios_app":
+                        if let value = try container.decodeIfPresent(WechatPayRedirectToIosApp.self, forKey: .wechatPayRedirectToIosApp) { self = .wechatPayRedirectToIosApp(value) } else { self = .unknown(type: type) }
+                    default: self = .unknown(type: type)
+                    }
+                }
+
+                fileprivate func encode(into container: inout KeyedEncodingContainer<CodingKeys>) throws {
+                    switch self {
+                    case .alipayHandleRedirect(let value): try container.encode(value, forKey: .alipayHandleRedirect)
+                    case .blikAuthorize(let value): try container.encode(value, forKey: .blikAuthorize)
+                    case .boletoDisplayDetails(let value): try container.encode(value, forKey: .boletoDisplayDetails)
+                    case .cardAwaitNotification(let value): try container.encode(value, forKey: .cardAwaitNotification)
+                    case .cashappHandleRedirectOrDisplayQrCode(let value): try container.encode(value, forKey: .cashappHandleRedirectOrDisplayQrCode)
+                    case .displayBankTransferInstructions(let value): try container.encode(value, forKey: .displayBankTransferInstructions)
+                    case .klarnaDisplayQrCode(let value): try container.encode(value, forKey: .klarnaDisplayQrCode)
+                    case .konbiniDisplayDetails(let value): try container.encode(value, forKey: .konbiniDisplayDetails)
+                    case .multibancoDisplayDetails(let value): try container.encode(value, forKey: .multibancoDisplayDetails)
+                    case .oxxoDisplayDetails(let value): try container.encode(value, forKey: .oxxoDisplayDetails)
+                    case .paynowDisplayQrCode(let value): try container.encode(value, forKey: .paynowDisplayQrCode)
+                    case .pixDisplayQrCode(let value): try container.encode(value, forKey: .pixDisplayQrCode)
+                    case .promptpayDisplayQrCode(let value): try container.encode(value, forKey: .promptpayDisplayQrCode)
+                    case .redirectToUrl(let value): try container.encode(value, forKey: .redirectToUrl)
+                    case .swishHandleRedirectOrDisplayQrCode(let value): try container.encode(value, forKey: .swishHandleRedirectOrDisplayQrCode)
+                    case .upiHandleRedirectOrDisplayQrCode(let value): try container.encode(value, forKey: .upiHandleRedirectOrDisplayQrCode)
+                    case .useStripeSdk(let value): try container.encode(value, forKey: .useStripeSdk)
+                    case .verifyWithMicrodeposits(let value): try container.encode(value, forKey: .verifyWithMicrodeposits)
+                    case .wechatPayDisplayQrCode(let value): try container.encode(value, forKey: .wechatPayDisplayQrCode)
+                    case .wechatPayRedirectToAndroidApp(let value): try container.encode(value, forKey: .wechatPayRedirectToAndroidApp)
+                    case .wechatPayRedirectToIosApp(let value): try container.encode(value, forKey: .wechatPayRedirectToIosApp)
+                    default: break
+                    }
                 }
             }
         }
@@ -3554,7 +3532,7 @@ extension Stripe.PaymentIntents {
 
             public struct UsBankAccount: Codable, Hashable, Sendable {
                 public var financialConnections: Stripe.Shared.FinancialConnections?
-                public var mandateOptions: MandateOptions?
+                public var mandateOptions: Stripe.Shared.PaymentMethodOptionsUsBankAccountMandateOptions?
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: SetupFutureUsage?
                 /// Controls when Stripe will attempt to debit the funds from the customer's account.
@@ -3575,7 +3553,7 @@ extension Stripe.PaymentIntents {
 
                 public init(
                     financialConnections: Stripe.Shared.FinancialConnections? = nil,
-                    mandateOptions: MandateOptions? = nil,
+                    mandateOptions: Stripe.Shared.PaymentMethodOptionsUsBankAccountMandateOptions? = nil,
                     setupFutureUsage: SetupFutureUsage? = nil,
                     targetDate: String? = nil,
                     transactionPurpose: TransactionPurpose? = nil,
@@ -3609,21 +3587,6 @@ extension Stripe.PaymentIntents {
                     case automatic
                     case instant
                     case microdeposits
-                }
-
-                public struct MandateOptions: Codable, Hashable, Sendable {
-                    /// Mandate collection method
-                    public var collectionMethod: String?
-
-                    private enum CodingKeys: String, CodingKey {
-                        case collectionMethod
-                    }
-
-                    public init(
-                        collectionMethod: String? = nil
-                    ) {
-                        self.collectionMethod = collectionMethod
-                    }
                 }
             }
 

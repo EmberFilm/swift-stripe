@@ -3040,42 +3040,45 @@ extension Stripe.Tax {
             }
 
             public struct Us: Codable, Hashable, Sendable {
-                public var localAmusementTax: LocalAmusementTax?
-                public var localLeaseTax: LocalLeaseTax?
-                public var massTransitParkingTax: MassTransitParkingTax?
-                public var parkingTax: ParkingTax?
                 /// Two-letter US state code (ISO 3166-2).
                 public var state: String?
-                public var stateSalesTax: StateSalesTax?
                 /// Type of registration in the US.
                 public var `type`: Type?
+                /// The payload `type` selects.
+                public var details: Details
 
-                private enum CodingKeys: String, CodingKey {
+                fileprivate enum CodingKeys: String, CodingKey {
+                    case state
+                    case `type`
                     case localAmusementTax
                     case localLeaseTax
                     case massTransitParkingTax
                     case parkingTax
-                    case state
                     case stateSalesTax
-                    case `type`
                 }
 
                 public init(
-                    localAmusementTax: LocalAmusementTax? = nil,
-                    localLeaseTax: LocalLeaseTax? = nil,
-                    massTransitParkingTax: MassTransitParkingTax? = nil,
-                    parkingTax: ParkingTax? = nil,
                     state: String? = nil,
-                    stateSalesTax: StateSalesTax? = nil,
-                    `type`: Type? = nil
+                    `type`: Type? = nil,
+                    details: Details
                 ) {
-                    self.localAmusementTax = localAmusementTax
-                    self.localLeaseTax = localLeaseTax
-                    self.massTransitParkingTax = massTransitParkingTax
-                    self.parkingTax = parkingTax
                     self.state = state
-                    self.stateSalesTax = stateSalesTax
                     self.`type` = `type`
+                    self.details = details
+                }
+
+                public init(from decoder: any Decoder) throws {
+                    let container = try decoder.container(keyedBy: CodingKeys.self)
+                    self.state = try container.decodeIfPresent(String.self, forKey: .state)
+                    self.`type` = try container.decodeIfPresent(Type.self, forKey: .`type`)
+                    self.details = try Details(type: try container.decodeIfPresent(String.self, forKey: .type) ?? "", from: container)
+                }
+
+                public func encode(to encoder: any Encoder) throws {
+                    var container = encoder.container(keyedBy: CodingKeys.self)
+                    try container.encodeIfPresent(state, forKey: .state)
+                    try container.encodeIfPresent(`type`, forKey: .`type`)
+                    try details.encode(into: &container)
                 }
 
                 /// Type of registration in the US.
@@ -3187,6 +3190,53 @@ extension Stripe.Tax {
                             case localUseTax = "local_use_tax"
                             case simplifiedSellersUseTax = "simplified_sellers_use_tax"
                             case singleLocalUseTax = "single_local_use_tax"
+                        }
+                    }
+                }
+
+                /// The payload `type` selects; `unknown` carries a type this package does not model.
+                public indirect enum Details: Hashable, Sendable {
+                    case localAmusementTax(LocalAmusementTax)
+                    case localLeaseTax(LocalLeaseTax)
+                    case massTransitParkingTax(MassTransitParkingTax)
+                    case parkingTax(ParkingTax)
+                    case stateSalesTax(StateSalesTax)
+                    case stateCommunicationsTax
+                    case stateRetailDeliveryFee
+                    case unknown(type: String)
+
+                    public var localAmusementTax: LocalAmusementTax? { if case .localAmusementTax(let value) = self { return value }; return nil }
+                    public var localLeaseTax: LocalLeaseTax? { if case .localLeaseTax(let value) = self { return value }; return nil }
+                    public var massTransitParkingTax: MassTransitParkingTax? { if case .massTransitParkingTax(let value) = self { return value }; return nil }
+                    public var parkingTax: ParkingTax? { if case .parkingTax(let value) = self { return value }; return nil }
+                    public var stateSalesTax: StateSalesTax? { if case .stateSalesTax(let value) = self { return value }; return nil }
+
+                    fileprivate init(type: String, from container: KeyedDecodingContainer<CodingKeys>) throws {
+                        switch type {
+                        case "local_amusement_tax":
+                            if let value = try container.decodeIfPresent(LocalAmusementTax.self, forKey: .localAmusementTax) { self = .localAmusementTax(value) } else { self = .unknown(type: type) }
+                        case "local_lease_tax":
+                            if let value = try container.decodeIfPresent(LocalLeaseTax.self, forKey: .localLeaseTax) { self = .localLeaseTax(value) } else { self = .unknown(type: type) }
+                        case "mass_transit_parking_tax":
+                            if let value = try container.decodeIfPresent(MassTransitParkingTax.self, forKey: .massTransitParkingTax) { self = .massTransitParkingTax(value) } else { self = .unknown(type: type) }
+                        case "parking_tax":
+                            if let value = try container.decodeIfPresent(ParkingTax.self, forKey: .parkingTax) { self = .parkingTax(value) } else { self = .unknown(type: type) }
+                        case "state_sales_tax":
+                            if let value = try container.decodeIfPresent(StateSalesTax.self, forKey: .stateSalesTax) { self = .stateSalesTax(value) } else { self = .unknown(type: type) }
+                        case "state_communications_tax": self = .stateCommunicationsTax
+                        case "state_retail_delivery_fee": self = .stateRetailDeliveryFee
+                        default: self = .unknown(type: type)
+                        }
+                    }
+
+                    fileprivate func encode(into container: inout KeyedEncodingContainer<CodingKeys>) throws {
+                        switch self {
+                        case .localAmusementTax(let value): try container.encode(value, forKey: .localAmusementTax)
+                        case .localLeaseTax(let value): try container.encode(value, forKey: .localLeaseTax)
+                        case .massTransitParkingTax(let value): try container.encode(value, forKey: .massTransitParkingTax)
+                        case .parkingTax(let value): try container.encode(value, forKey: .parkingTax)
+                        case .stateSalesTax(let value): try container.encode(value, forKey: .stateSalesTax)
+                        default: break
                         }
                     }
                 }

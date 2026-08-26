@@ -199,37 +199,43 @@ extension Stripe.Tax {
         }
 
         public struct Owner: Codable, Hashable, Sendable {
-            /// The account being referenced when `type` is `account`.
-            @Expandable<Stripe.Connect.Account, String> public var account: String?
-            /// The Connect Application being referenced when `type` is `application`.
-            @Expandable<Stripe.Shared.Application, String> public var application: String?
-            /// The customer being referenced when `type` is `customer`.
-            @Expandable<Stripe.Customers.Customer, String> public var customer: String?
             /// The Account representing the customer being referenced when `type` is `customer`.
             public var customerAccount: String?
             /// Type of owner referenced.
             public var `type`: Type?
+            /// The payload `type` selects.
+            public var details: Details
 
-            private enum CodingKeys: String, CodingKey {
+            fileprivate enum CodingKeys: String, CodingKey {
+                case customerAccount
+                case `type`
                 case account
                 case application
                 case customer
-                case customerAccount
-                case `type`
             }
 
             public init(
-                account: String? = nil,
-                application: String? = nil,
-                customer: String? = nil,
                 customerAccount: String? = nil,
-                `type`: Type? = nil
+                `type`: Type? = nil,
+                details: Details
             ) {
-                self._account = Expandable(id: account)
-                self._application = Expandable(id: application)
-                self._customer = Expandable(id: customer)
                 self.customerAccount = customerAccount
                 self.`type` = `type`
+                self.details = details
+            }
+
+            public init(from decoder: any Decoder) throws {
+                let container = try decoder.container(keyedBy: CodingKeys.self)
+                self.customerAccount = try container.decodeIfPresent(String.self, forKey: .customerAccount)
+                self.`type` = try container.decodeIfPresent(Type.self, forKey: .`type`)
+                self.details = try Details(type: try container.decodeIfPresent(String.self, forKey: .type) ?? "", from: container)
+            }
+
+            public func encode(to encoder: any Encoder) throws {
+                var container = encoder.container(keyedBy: CodingKeys.self)
+                try container.encodeIfPresent(customerAccount, forKey: .customerAccount)
+                try container.encodeIfPresent(`type`, forKey: .`type`)
+                try details.encode(into: &container)
             }
 
             /// Type of owner referenced.
@@ -238,6 +244,44 @@ extension Stripe.Tax {
                 case application
                 case customer
                 case `self`
+            }
+
+            /// The payload `type` selects; `unknown` carries a type this package does not model.
+            public indirect enum Details: Hashable, Sendable {
+                case account(Expandable<Stripe.Connect.Account, String>)
+                case application(Expandable<Stripe.Shared.Application, String>)
+                case customer(Expandable<Stripe.Customers.Customer, String>)
+                case `self`
+                case unknown(type: String)
+
+                public var account: Expandable<Stripe.Connect.Account, String>? { if case .account(let value) = self { return value }; return nil }
+                public var application: Expandable<Stripe.Shared.Application, String>? { if case .application(let value) = self { return value }; return nil }
+                public var customer: Expandable<Stripe.Customers.Customer, String>? { if case .customer(let value) = self { return value }; return nil }
+
+                fileprivate init(type: String, from container: KeyedDecodingContainer<CodingKeys>) throws {
+                    switch type {
+                    case "account":
+                        let value = try container.decode(Expandable<Stripe.Connect.Account, String>.self, forKey: .account)
+                        if value.wrappedValue != nil || value.projectedValue != nil { self = .account(value) } else { self = .unknown(type: type) }
+                    case "application":
+                        let value = try container.decode(Expandable<Stripe.Shared.Application, String>.self, forKey: .application)
+                        if value.wrappedValue != nil || value.projectedValue != nil { self = .application(value) } else { self = .unknown(type: type) }
+                    case "customer":
+                        let value = try container.decode(Expandable<Stripe.Customers.Customer, String>.self, forKey: .customer)
+                        if value.wrappedValue != nil || value.projectedValue != nil { self = .customer(value) } else { self = .unknown(type: type) }
+                    case "self": self = .`self`
+                    default: self = .unknown(type: type)
+                    }
+                }
+
+                fileprivate func encode(into container: inout KeyedEncodingContainer<CodingKeys>) throws {
+                    switch self {
+                    case .account(let value): try container.encode(value, forKey: .account)
+                    case .application(let value): try container.encode(value, forKey: .application)
+                    case .customer(let value): try container.encode(value, forKey: .customer)
+                    default: break
+                    }
+                }
             }
         }
 

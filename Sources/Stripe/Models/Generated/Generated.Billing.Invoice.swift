@@ -79,7 +79,7 @@ extension Stripe.Billing {
         /// ID of the default payment method for the invoice.
         @Expandable<Stripe.PaymentMethods.PaymentMethod, String> public var defaultPaymentMethod: String?
         /// ID of the default payment source for the invoice.
-        @Expandable<StripePaymentSource, String> public var defaultSource: String?
+        @Expandable<Stripe.PaymentSource, String> public var defaultSource: String?
         /// The tax rates applied to this invoice, if any.
         public var defaultTaxRates: [Stripe.Tax.Rate]?
         /// An arbitrary string attached to the object.

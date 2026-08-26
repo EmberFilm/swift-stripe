@@ -55,6 +55,7 @@ extension StripeClient {
     public var ephemeralKeys: EphemeralKeysClient { EphemeralKeysClient(api: api) }
     public var events: EventsClient { EventsClient(api: api) }
     public var exchangeRates: ExchangeRatesClient { ExchangeRatesClient(api: api) }
+    public var externalAccounts: ExternalAccountsClient { ExternalAccountsClient(api: api) }
     public var feeRefunds: FeeRefundsClient { FeeRefundsClient(api: api) }
     public var fileLinks: FileLinksClient { FileLinksClient(api: api) }
     public var files: FilesClient { FilesClient(api: api) }

@@ -1492,7 +1492,7 @@ extension Stripe.Connect {
             /// String representing the object's type.
             public let object: String
             /// The list contains all external accounts that have been attached to the Stripe account.
-            public var data: [String]?
+            public var data: [Stripe.ExternalAccount]?
             /// True if this list has another page of items after this one that can be fetched.
             public var hasMore: Bool?
             /// The URL where this list can be accessed.
@@ -1507,7 +1507,7 @@ extension Stripe.Connect {
 
             public init(
                 object: String,
-                data: [String]? = nil,
+                data: [Stripe.ExternalAccount]? = nil,
                 hasMore: Bool? = nil,
                 url: String? = nil
             ) {

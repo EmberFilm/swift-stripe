@@ -16,18 +16,10 @@ public struct Source: Codable, Hashable, Sendable, Identifiable {
     public let id: ID
     /// String representing the object's type.
     public let object: String
-    public var achCreditTransfer: AchCreditTransfer?
-    public var achDebit: AchDebit?
-    public var acssDebit: AcssDebit?
-    public var alipay: Alipay?
     /// This field indicates whether this payment method can be shown again to its customer in a checkout flow.
     public var allowRedisplay: AllowRedisplay?
     /// A positive integer in the smallest currency unit (that is, 100 cents for $1.00, or 1 for ¥1, Japanese Yen being a zero…
     public var amount: Int?
-    public var auBecsDebit: AuBecsDebit?
-    public var bancontact: Bancontact?
-    public var card: Card?
-    public var cardPresent: CardPresent?
     /// The client secret of the source.
     public var clientSecret: String?
     public var codeVerification: CodeVerification?
@@ -37,159 +29,164 @@ public struct Source: Codable, Hashable, Sendable, Identifiable {
     public var currency: Stripe.Currency?
     /// The ID of the customer to which this source is attached.
     public var customer: String?
-    public var eps: Eps?
     /// The authentication `flow` of the source.
     public var flow: String?
-    public var giropay: Giropay?
-    public var ideal: Ideal?
-    public var klarna: Klarna?
     /// If the object exists in live mode, the value is `true`.
     public var livemode: Bool?
     /// Set of key-value pairs that you can attach to an object.
     public var metadata: [String: String]?
-    public var multibanco: Multibanco?
     /// Information about the owner of the payment instrument that may be used or required by particular source types.
     public var owner: Owner?
-    public var p24: P24?
     public var receiver: Receiver?
     public var redirect: Redirect?
-    public var sepaCreditTransfer: SepaCreditTransfer?
-    public var sepaDebit: SepaDebit?
-    public var sofort: Sofort?
     public var sourceOrder: SourceOrder?
     /// Extra information about a source.
     public var statementDescriptor: String?
     /// The status of the source, one of `canceled`, `chargeable`, `consumed`, `failed`, or `pending`.
     public var status: String?
-    public var threeDSecure: ThreeDSecure?
     /// The `type` of the source.
     public var `type`: Type?
+    /// The payload `type` selects.
+    public var details: Details
     /// Either `reusable` or `single_use`.
     public var usage: String?
-    public var wechat: Wechat?
 
-    private enum CodingKeys: String, CodingKey {
+    fileprivate enum CodingKeys: String, CodingKey {
         case id
         case object
-        case achCreditTransfer
-        case achDebit
-        case acssDebit
-        case alipay
         case allowRedisplay
         case amount
-        case auBecsDebit
-        case bancontact
-        case card
-        case cardPresent
         case clientSecret
         case codeVerification
         case created
         case currency
         case customer
-        case eps
         case flow
-        case giropay
-        case ideal
-        case klarna
         case livemode
         case metadata
-        case multibanco
         case owner
-        case p24
         case receiver
         case redirect
-        case sepaCreditTransfer
-        case sepaDebit
-        case sofort
         case sourceOrder
         case statementDescriptor
         case status
-        case threeDSecure
         case `type`
         case usage
+        case achCreditTransfer
+        case achDebit
+        case acssDebit
+        case alipay
+        case auBecsDebit
+        case bancontact
+        case card
+        case cardPresent
+        case eps
+        case giropay
+        case ideal
+        case klarna
+        case multibanco
+        case p24
+        case sepaCreditTransfer
+        case sepaDebit
+        case sofort
+        case threeDSecure
         case wechat
     }
 
     public init(
         id: ID,
         object: String,
-        achCreditTransfer: AchCreditTransfer? = nil,
-        achDebit: AchDebit? = nil,
-        acssDebit: AcssDebit? = nil,
-        alipay: Alipay? = nil,
         allowRedisplay: AllowRedisplay? = nil,
         amount: Int? = nil,
-        auBecsDebit: AuBecsDebit? = nil,
-        bancontact: Bancontact? = nil,
-        card: Card? = nil,
-        cardPresent: CardPresent? = nil,
         clientSecret: String? = nil,
         codeVerification: CodeVerification? = nil,
         created: Date? = nil,
         currency: Stripe.Currency? = nil,
         customer: String? = nil,
-        eps: Eps? = nil,
         flow: String? = nil,
-        giropay: Giropay? = nil,
-        ideal: Ideal? = nil,
-        klarna: Klarna? = nil,
         livemode: Bool? = nil,
         metadata: [String: String]? = nil,
-        multibanco: Multibanco? = nil,
         owner: Owner? = nil,
-        p24: P24? = nil,
         receiver: Receiver? = nil,
         redirect: Redirect? = nil,
-        sepaCreditTransfer: SepaCreditTransfer? = nil,
-        sepaDebit: SepaDebit? = nil,
-        sofort: Sofort? = nil,
         sourceOrder: SourceOrder? = nil,
         statementDescriptor: String? = nil,
         status: String? = nil,
-        threeDSecure: ThreeDSecure? = nil,
         `type`: Type? = nil,
-        usage: String? = nil,
-        wechat: Wechat? = nil
+        details: Details,
+        usage: String? = nil
     ) {
         self.id = id
         self.object = object
-        self.achCreditTransfer = achCreditTransfer
-        self.achDebit = achDebit
-        self.acssDebit = acssDebit
-        self.alipay = alipay
         self.allowRedisplay = allowRedisplay
         self.amount = amount
-        self.auBecsDebit = auBecsDebit
-        self.bancontact = bancontact
-        self.card = card
-        self.cardPresent = cardPresent
         self.clientSecret = clientSecret
         self.codeVerification = codeVerification
         self.created = created
         self.currency = currency
         self.customer = customer
-        self.eps = eps
         self.flow = flow
-        self.giropay = giropay
-        self.ideal = ideal
-        self.klarna = klarna
         self.livemode = livemode
         self.metadata = metadata
-        self.multibanco = multibanco
         self.owner = owner
-        self.p24 = p24
         self.receiver = receiver
         self.redirect = redirect
-        self.sepaCreditTransfer = sepaCreditTransfer
-        self.sepaDebit = sepaDebit
-        self.sofort = sofort
         self.sourceOrder = sourceOrder
         self.statementDescriptor = statementDescriptor
         self.status = status
-        self.threeDSecure = threeDSecure
         self.`type` = `type`
+        self.details = details
         self.usage = usage
-        self.wechat = wechat
+    }
+
+    public init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.id = try container.decode(ID.self, forKey: .id)
+        self.object = try container.decode(String.self, forKey: .object)
+        self.allowRedisplay = try container.decodeIfPresent(AllowRedisplay.self, forKey: .allowRedisplay)
+        self.amount = try container.decodeIfPresent(Int.self, forKey: .amount)
+        self.clientSecret = try container.decodeIfPresent(String.self, forKey: .clientSecret)
+        self.codeVerification = try container.decodeIfPresent(CodeVerification.self, forKey: .codeVerification)
+        self.created = try container.decodeIfPresent(Date.self, forKey: .created)
+        self.currency = try container.decodeIfPresent(Stripe.Currency.self, forKey: .currency)
+        self.customer = try container.decodeIfPresent(String.self, forKey: .customer)
+        self.flow = try container.decodeIfPresent(String.self, forKey: .flow)
+        self.livemode = try container.decodeIfPresent(Bool.self, forKey: .livemode)
+        self.metadata = try container.decodeIfPresent([String: String].self, forKey: .metadata)
+        self.owner = try container.decodeIfPresent(Owner.self, forKey: .owner)
+        self.receiver = try container.decodeIfPresent(Receiver.self, forKey: .receiver)
+        self.redirect = try container.decodeIfPresent(Redirect.self, forKey: .redirect)
+        self.sourceOrder = try container.decodeIfPresent(SourceOrder.self, forKey: .sourceOrder)
+        self.statementDescriptor = try container.decodeIfPresent(String.self, forKey: .statementDescriptor)
+        self.status = try container.decodeIfPresent(String.self, forKey: .status)
+        self.`type` = try container.decodeIfPresent(Type.self, forKey: .`type`)
+        self.usage = try container.decodeIfPresent(String.self, forKey: .usage)
+        self.details = try Details(type: try container.decodeIfPresent(String.self, forKey: .type) ?? "", from: container)
+    }
+
+    public func encode(to encoder: any Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(id, forKey: .id)
+        try container.encode(object, forKey: .object)
+        try container.encodeIfPresent(allowRedisplay, forKey: .allowRedisplay)
+        try container.encodeIfPresent(amount, forKey: .amount)
+        try container.encodeIfPresent(clientSecret, forKey: .clientSecret)
+        try container.encodeIfPresent(codeVerification, forKey: .codeVerification)
+        try container.encodeIfPresent(created, forKey: .created)
+        try container.encodeIfPresent(currency, forKey: .currency)
+        try container.encodeIfPresent(customer, forKey: .customer)
+        try container.encodeIfPresent(flow, forKey: .flow)
+        try container.encodeIfPresent(livemode, forKey: .livemode)
+        try container.encodeIfPresent(metadata, forKey: .metadata)
+        try container.encodeIfPresent(owner, forKey: .owner)
+        try container.encodeIfPresent(receiver, forKey: .receiver)
+        try container.encodeIfPresent(redirect, forKey: .redirect)
+        try container.encodeIfPresent(sourceOrder, forKey: .sourceOrder)
+        try container.encodeIfPresent(statementDescriptor, forKey: .statementDescriptor)
+        try container.encodeIfPresent(status, forKey: .status)
+        try container.encodeIfPresent(`type`, forKey: .`type`)
+        try container.encodeIfPresent(usage, forKey: .usage)
+        try details.encode(into: &container)
     }
 
     /// This field indicates whether this payment method can be shown again to its customer in a checkout flow.
@@ -1319,6 +1316,119 @@ public struct Source: Codable, Hashable, Sendable, Identifiable {
             self.prepayId = prepayId
             self.qrCodeUrl = qrCodeUrl
             self.statementDescriptor = statementDescriptor
+        }
+    }
+
+    /// The payload `type` selects; `unknown` carries a type this package does not model.
+    public indirect enum Details: Hashable, Sendable {
+        case achCreditTransfer(AchCreditTransfer)
+        case achDebit(AchDebit)
+        case acssDebit(AcssDebit)
+        case alipay(Alipay)
+        case auBecsDebit(AuBecsDebit)
+        case bancontact(Bancontact)
+        case card(Card)
+        case cardPresent(CardPresent)
+        case eps(Eps)
+        case giropay(Giropay)
+        case ideal(Ideal)
+        case klarna(Klarna)
+        case multibanco(Multibanco)
+        case p24(P24)
+        case sepaCreditTransfer(SepaCreditTransfer)
+        case sepaDebit(SepaDebit)
+        case sofort(Sofort)
+        case threeDSecure(ThreeDSecure)
+        case wechat(Wechat)
+        case unknown(type: String)
+
+        public var achCreditTransfer: AchCreditTransfer? { if case .achCreditTransfer(let value) = self { return value }; return nil }
+        public var achDebit: AchDebit? { if case .achDebit(let value) = self { return value }; return nil }
+        public var acssDebit: AcssDebit? { if case .acssDebit(let value) = self { return value }; return nil }
+        public var alipay: Alipay? { if case .alipay(let value) = self { return value }; return nil }
+        public var auBecsDebit: AuBecsDebit? { if case .auBecsDebit(let value) = self { return value }; return nil }
+        public var bancontact: Bancontact? { if case .bancontact(let value) = self { return value }; return nil }
+        public var card: Card? { if case .card(let value) = self { return value }; return nil }
+        public var cardPresent: CardPresent? { if case .cardPresent(let value) = self { return value }; return nil }
+        public var eps: Eps? { if case .eps(let value) = self { return value }; return nil }
+        public var giropay: Giropay? { if case .giropay(let value) = self { return value }; return nil }
+        public var ideal: Ideal? { if case .ideal(let value) = self { return value }; return nil }
+        public var klarna: Klarna? { if case .klarna(let value) = self { return value }; return nil }
+        public var multibanco: Multibanco? { if case .multibanco(let value) = self { return value }; return nil }
+        public var p24: P24? { if case .p24(let value) = self { return value }; return nil }
+        public var sepaCreditTransfer: SepaCreditTransfer? { if case .sepaCreditTransfer(let value) = self { return value }; return nil }
+        public var sepaDebit: SepaDebit? { if case .sepaDebit(let value) = self { return value }; return nil }
+        public var sofort: Sofort? { if case .sofort(let value) = self { return value }; return nil }
+        public var threeDSecure: ThreeDSecure? { if case .threeDSecure(let value) = self { return value }; return nil }
+        public var wechat: Wechat? { if case .wechat(let value) = self { return value }; return nil }
+
+        fileprivate init(type: String, from container: KeyedDecodingContainer<CodingKeys>) throws {
+            switch type {
+            case "ach_credit_transfer":
+                if let value = try container.decodeIfPresent(AchCreditTransfer.self, forKey: .achCreditTransfer) { self = .achCreditTransfer(value) } else { self = .unknown(type: type) }
+            case "ach_debit":
+                if let value = try container.decodeIfPresent(AchDebit.self, forKey: .achDebit) { self = .achDebit(value) } else { self = .unknown(type: type) }
+            case "acss_debit":
+                if let value = try container.decodeIfPresent(AcssDebit.self, forKey: .acssDebit) { self = .acssDebit(value) } else { self = .unknown(type: type) }
+            case "alipay":
+                if let value = try container.decodeIfPresent(Alipay.self, forKey: .alipay) { self = .alipay(value) } else { self = .unknown(type: type) }
+            case "au_becs_debit":
+                if let value = try container.decodeIfPresent(AuBecsDebit.self, forKey: .auBecsDebit) { self = .auBecsDebit(value) } else { self = .unknown(type: type) }
+            case "bancontact":
+                if let value = try container.decodeIfPresent(Bancontact.self, forKey: .bancontact) { self = .bancontact(value) } else { self = .unknown(type: type) }
+            case "card":
+                if let value = try container.decodeIfPresent(Card.self, forKey: .card) { self = .card(value) } else { self = .unknown(type: type) }
+            case "card_present":
+                if let value = try container.decodeIfPresent(CardPresent.self, forKey: .cardPresent) { self = .cardPresent(value) } else { self = .unknown(type: type) }
+            case "eps":
+                if let value = try container.decodeIfPresent(Eps.self, forKey: .eps) { self = .eps(value) } else { self = .unknown(type: type) }
+            case "giropay":
+                if let value = try container.decodeIfPresent(Giropay.self, forKey: .giropay) { self = .giropay(value) } else { self = .unknown(type: type) }
+            case "ideal":
+                if let value = try container.decodeIfPresent(Ideal.self, forKey: .ideal) { self = .ideal(value) } else { self = .unknown(type: type) }
+            case "klarna":
+                if let value = try container.decodeIfPresent(Klarna.self, forKey: .klarna) { self = .klarna(value) } else { self = .unknown(type: type) }
+            case "multibanco":
+                if let value = try container.decodeIfPresent(Multibanco.self, forKey: .multibanco) { self = .multibanco(value) } else { self = .unknown(type: type) }
+            case "p24":
+                if let value = try container.decodeIfPresent(P24.self, forKey: .p24) { self = .p24(value) } else { self = .unknown(type: type) }
+            case "sepa_credit_transfer":
+                if let value = try container.decodeIfPresent(SepaCreditTransfer.self, forKey: .sepaCreditTransfer) { self = .sepaCreditTransfer(value) } else { self = .unknown(type: type) }
+            case "sepa_debit":
+                if let value = try container.decodeIfPresent(SepaDebit.self, forKey: .sepaDebit) { self = .sepaDebit(value) } else { self = .unknown(type: type) }
+            case "sofort":
+                if let value = try container.decodeIfPresent(Sofort.self, forKey: .sofort) { self = .sofort(value) } else { self = .unknown(type: type) }
+            case "three_d_secure":
+                if let value = try container.decodeIfPresent(ThreeDSecure.self, forKey: .threeDSecure) { self = .threeDSecure(value) } else { self = .unknown(type: type) }
+            case "wechat":
+                if let value = try container.decodeIfPresent(Wechat.self, forKey: .wechat) { self = .wechat(value) } else { self = .unknown(type: type) }
+            default: self = .unknown(type: type)
+            }
+        }
+
+        fileprivate func encode(into container: inout KeyedEncodingContainer<CodingKeys>) throws {
+            switch self {
+            case .achCreditTransfer(let value): try container.encode(value, forKey: .achCreditTransfer)
+            case .achDebit(let value): try container.encode(value, forKey: .achDebit)
+            case .acssDebit(let value): try container.encode(value, forKey: .acssDebit)
+            case .alipay(let value): try container.encode(value, forKey: .alipay)
+            case .auBecsDebit(let value): try container.encode(value, forKey: .auBecsDebit)
+            case .bancontact(let value): try container.encode(value, forKey: .bancontact)
+            case .card(let value): try container.encode(value, forKey: .card)
+            case .cardPresent(let value): try container.encode(value, forKey: .cardPresent)
+            case .eps(let value): try container.encode(value, forKey: .eps)
+            case .giropay(let value): try container.encode(value, forKey: .giropay)
+            case .ideal(let value): try container.encode(value, forKey: .ideal)
+            case .klarna(let value): try container.encode(value, forKey: .klarna)
+            case .multibanco(let value): try container.encode(value, forKey: .multibanco)
+            case .p24(let value): try container.encode(value, forKey: .p24)
+            case .sepaCreditTransfer(let value): try container.encode(value, forKey: .sepaCreditTransfer)
+            case .sepaDebit(let value): try container.encode(value, forKey: .sepaDebit)
+            case .sofort(let value): try container.encode(value, forKey: .sofort)
+            case .threeDSecure(let value): try container.encode(value, forKey: .threeDSecure)
+            case .wechat(let value): try container.encode(value, forKey: .wechat)
+            default: break
+            }
         }
     }
 }
