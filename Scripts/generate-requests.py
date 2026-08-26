@@ -378,8 +378,95 @@ class Generator:
             out += "}\n"
         return out
 
-    def run(self) -> dict[str, str]:
+    # ---- clients -----------------------------------------------------------------------
+
+    @staticmethod
+    def client_name(resource: str, ops: list[Operation]) -> str:
+        """`customer` -> Customers, `checkout.session` -> CheckoutSessions, `balance` -> Balance."""
+        base = pascal(resource.replace(".", "_"))
+        singleton = not any("{" in op.path or op.method_name in ("create", "list") for op in ops)
+        if singleton:
+            return base
+        words = re.findall(r"[A-Z][a-z0-9]*", base)
+        return "".join(words[:-1]) + pascal(plural(words[-1].lower()))
+
+    def render_client(self, resource: str, swift_type: str, ops: list[Operation]) -> tuple[str, str]:
+        name = self.client_name(resource, ops)
+        short = resource.split(".")[-1]
+        has_id = "id" in self.schemas[resource].get("properties", {})
+        own_id = f"{swift_type}.ID" if resource in gm.RESOURCES and has_id else "String"
+
+        def param_label(param: str, alone: bool) -> tuple[str, str]:
+            """`{customer}` on a customer op is `id: Customer.ID`; on a cash-balance op it is
+            `customer: String`; `{intent}` on a payment intent is `id`."""
+            if alone and (param == short or (param not in self.schemas and param != "id")):
+                return "id", own_id
+            if param == "id":
+                return "id", own_id if alone else "String"
+            return camel(param), own_id if param == short else "String"
+
+        requirements, bodies, conveniences = [], [], []
+        for op in sorted(ops, key=lambda o: o.name):
+            if op.response is None:
+                self.notes.append(f"{op.http} {op.path}: no response type; not on the client")
+                continue
+            if "multipart/form-data" in op.op.get("requestBody", {}).get("content", {}):
+                self.notes.append(f"{op.http} {op.path}: multipart upload; not on the client")
+                continue
+            params = re.findall(r"\{(\w+)\}", op.path)
+            labels = [param_label(p, len(params) == 1) for p in params]
+            path = op.path.lstrip("/")
+            for p, (label, _) in zip(params, labels):
+                path = path.replace("{" + p + "}", f"\\({ident(label)})")
+            method = ident(camel(op.method_name))
+            ns = f"{swift_type}.{ident(op.name)}"
+            param_decl = [f"{ident(l)}: {t}" for l, t in labels]
+            param_pass = [f"{ident(l)}: {ident(l)}" for l, _ in labels]
+            has_request = op.request is not None
+            all_optional = has_request and not any(f.required for f in op.request.fields)
+            writes = op.http != "get"
+            decl = param_decl + ([f"_ request: {ns}.Request"] if has_request else []) + (["idempotencyKey: String?"] if writes else [])
+            sig = f"func {method}({', '.join(decl)}) async throws -> {ns}.Response"
+            requirements.append(f"    {sig}")
+            if op.http == "get":
+                call = f'api.list("{path}", parameters: request)' if has_request else f'api.send(.GET, "{path}")'
+            else:
+                verb = op.http.upper()
+                call = (f'api.send(.{verb}, "{path}", body: request, idempotencyKey: idempotencyKey)' if has_request
+                        else f'api.send(.{verb}, "{path}", idempotencyKey: idempotencyKey)')
+            bodies.append(f"    public {sig} {{\n        try await {call}\n    }}")
+            # conveniences: no key, and no request when every parameter is optional
+            if writes:
+                if has_request:
+                    conveniences.append(
+                        f"    public func {method}({', '.join(param_decl + [f'_ request: {ns}.Request'])}) async throws -> {ns}.Response {{\n"
+                        f"        try await {method}({', '.join(param_pass + ['request', 'idempotencyKey: nil'])})\n    }}")
+                    if all_optional:
+                        conveniences.append(
+                            f"    public func {method}({', '.join(param_decl + ['idempotencyKey: String? = nil'])}) async throws -> {ns}.Response {{\n"
+                            f"        try await {method}({', '.join(param_pass + ['.init()', 'idempotencyKey: idempotencyKey'])})\n    }}")
+                else:
+                    conveniences.append(
+                        f"    public func {method}({', '.join(param_decl)}) async throws -> {ns}.Response {{\n"
+                        f"        try await {method}({', '.join(param_pass + ['idempotencyKey: nil'])})\n    }}")
+            elif has_request and all_optional:
+                conveniences.append(
+                    f"    public func {method}({', '.join(param_decl)}) async throws -> {ns}.Response {{\n"
+                    f"        try await {method}({', '.join(param_pass + ['.init()'])})\n    }}")
+        if not requirements:
+            return name, ""
+        out = f"/// Operations on {swift_type}.\n///\n/// A protocol so tests can substitute a double; ``{name}Client`` is the implementation that\n/// talks to Stripe.\n"
+        out += f"public protocol {name}API: Sendable {{\n" + "\n".join(requirements) + "\n}\n\n"
+        out += f"public struct {name}Client: {name}API {{\n    private let api: StripeAPI\n\n    public init(api: StripeAPI) {{ self.api = api }}\n\n"
+        out += "\n\n".join(bodies) + "\n}\n"
+        if conveniences:
+            out += f"\n// A write with no explicit key behaves as it did before idempotency keys existed: no header,\n// and no retry. See ``StripeAPI/isSafeToRetry(_:)``.\nextension {name}API {{\n" + "\n\n".join(conveniences) + "\n}\n"
+        return name, out
+
+    def run(self) -> tuple[dict[str, str], dict[str, str]]:
         files: dict[str, str] = {}
+        clients: dict[str, str] = {}
+        properties: list[tuple[str, str]] = []
         version = self.spec["info"]["version"]
         for resource, ops in sorted(self.operations().items()):
             swift_type = swift_type_for_resource(resource)
@@ -395,35 +482,50 @@ class Generator:
             path = swift_type[len("Stripe."):] if swift_type.startswith("Stripe.") else swift_type
             name = f"Generated.{path}.Requests.swift"
             files[name] = HEADER.format(file=name, version=version) + "\n" + self.render_resource(swift_type, ops)
-        return files
+            client_name, body = self.render_client(resource, swift_type, ops)
+            if body:
+                fname = f"Generated.{client_name}Client.swift"
+                clients[fname] = HEADER.format(file=fname, version=version).replace("import Foundation\n#endif\n", "import Foundation\n#endif\nimport NIOHTTP1\n") + "\n" + body
+                properties.append((client_name[0].lower() + client_name[1:], client_name))
+        if properties:
+            fname = "Generated.StripeClient+Resources.swift"
+            body = "extension StripeClient {\n" + "".join(
+                f"    public var {ident(p)}: {c}Client {{ {c}Client(api: api) }}\n" for p, c in sorted(properties)) + "}\n"
+            clients[fname] = HEADER.format(file=fname, version=version) + "\n" + body
+        return files, clients
 
 
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("spec")
     ap.add_argument("--out", default="Sources/Stripe/Requests/Generated")
+    ap.add_argument("--clients-out", default="Sources/Stripe/Clients/Generated")
     ap.add_argument("--check", action="store_true", help="exit 1 if the output differs from what is on disk")
     args = ap.parse_args()
     spec = json.load(open(args.spec))
     gen = Generator(spec)
-    files = gen.run()
-    out = pathlib.Path(args.out)
+    requests, clients = gen.run()
+    outputs = [(pathlib.Path(args.out), requests), (pathlib.Path(args.clients_out), clients)]
     if args.check:
-        stale = [n for n, body in files.items() if not (out / n).exists() or (out / n).read_text() != body]
-        extra = [p.name for p in out.glob("Generated.*.swift") if p.name not in files]
-        for n in stale:
-            print(f"out of date: {n}")
-        for n in extra:
-            print(f"unexpected: {n}")
-        return 1 if stale or extra else 0
-    out.mkdir(parents=True, exist_ok=True)
-    for stale in out.glob("Generated.*.swift"):
-        stale.unlink()
-    for n, body in files.items():
-        (out / n).write_text(body)
+        bad = False
+        for out, files in outputs:
+            stale = [n for n, body in files.items() if not (out / n).exists() or (out / n).read_text() != body]
+            extra = [p.name for p in out.glob("Generated.*.swift") if p.name not in files]
+            for n in stale:
+                print(f"out of date: {out / n}")
+            for n in extra:
+                print(f"unexpected: {out / n}")
+            bad = bad or bool(stale or extra)
+        return 1 if bad else 0
+    for out, files in outputs:
+        out.mkdir(parents=True, exist_ok=True)
+        for stale in out.glob("Generated.*.swift"):
+            stale.unlink()
+        for n, body in files.items():
+            (out / n).write_text(body)
     for note in sorted(set(gen.notes)):
         print("note:", note, file=sys.stderr)
-    print(f"wrote {len(files)} files to {out}/ ({spec['info']['version']})")
+    print(f"wrote {len(requests)} request files and {len(clients)} client files ({spec['info']['version']})")
     return 0
 
 

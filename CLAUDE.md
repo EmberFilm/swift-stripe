@@ -252,6 +252,25 @@ runs is a `String`, not a 600-case enum.
 There is no hand-written request layer left except `Requests/WebElements/`, which describes
 Stripe.js element options rather than an API surface.
 
+## Generated clients
+
+The same generator emits one client per resource into `Sources/Stripe/Clients/Generated/`:
+a `<Resources>API` protocol (so tests can substitute a double) and a `<Resources>Client`
+struct over the shared `StripeAPI`, reachable from `StripeClient` as a computed property —
+`stripe.customers`, `stripe.checkoutSessions`, `stripe.billingPortalSessions`, `stripe.balance`.
+Method names come from `x-stripeOperations` (`create`, `retrieve`, `listTaxIds`,
+`finalizeInvoice`); path parameters are arguments — `id:` when there is one,
+`(customer:id:)` when nested; a write takes `idempotencyKey:` with a no-key convenience, and an
+operation whose request has no required parameter has a request-less convenience
+(`stripe.balance.retrieve()`, `stripe.checkoutSessions.expire(id:)`). Three operations are
+not on any client: the quote PDF (binary), the file upload (multipart), and
+`POST /v1/customers/{customer}/sources/{id}` (a union response).
+
+The client name is the resource name pluralised (`CheckoutSessions`, `TaxIds`); a resource with
+neither `create` nor `list` nor a path parameter stays singular (`Balance`, `TaxSettings`).
+`StripeClient` itself is hand-written and holds only the `api`; `portalSessions` is a deprecated
+alias of `billingPortalSessions`.
+
 Rules the generator enforces, and why:
 
 - `format: currency` is `Stripe.Currency`; callers rely on the enum.

@@ -491,10 +491,9 @@ enums for enumerated ones, and a `Response` typealias (`Stripe.Page<Customer>` f
 generator tracks the pinned spec in CI, so a parameter Stripe adds shows up here as a build
 failure of the `--check` step rather than as a silent `nil`.
 
-Typed resource clients currently
-cover Customers, PaymentIntents, Checkout Sessions, Products, Prices,
-Subscriptions, and Billing Portal Sessions; every other endpoint is reachable
-through `stripe.api` with the modelled request and response types.
+Every resource has a typed client — `stripe.customers`, `stripe.invoices`,
+`stripe.checkoutSessions`, `stripe.billingPortalSessions`, … — generated from the same spec,
+with one method per operation; `stripe.api` remains for anything unusual.
 
 Not yet implemented:
 

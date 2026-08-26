@@ -182,4 +182,26 @@ struct IntegrationTests {
         let sent = try #require(server.received.first)
         #expect(sent.headers.first(name: "Stripe-Account") == "acct_123")
     }
+
+    @Test("generated clients route nested, singleton and custom operations")
+    func generatedClientPaths() async throws {
+        try await Self.withServer(responses: [
+            ScriptedResponse(body: #"{"id":"txi_1","object":"tax_id","type":"eu_vat","value":"DE1"}"#),
+            ScriptedResponse(body: #"{"object":"balance","available":[],"pending":[],"livemode":false}"#),
+            ScriptedResponse(body: #"{"id":"cs_1","object":"checkout.session","status":"expired"}"#),
+        ]) { stripe, server in
+            let taxId = try await stripe.customers.retrieveTaxId(customer: "cus_1", id: "txi_1")
+            #expect(taxId.value == "DE1")
+            _ = try await stripe.balance.retrieve()
+            let session = try await stripe.checkoutSessions.expire(id: "cs_1", idempotencyKey: "k_1")
+            #expect(session.status == .expired)
+
+            let sent = server.received
+            #expect(sent.map(\.method) == [.GET, .GET, .POST])
+            #expect(sent.map(\.uri) == [
+                "/v1/customers/cus_1/tax_ids/txi_1", "/v1/balance", "/v1/checkout/sessions/cs_1/expire",
+            ])
+            #expect(sent[2].headers.first(name: "Idempotency-Key") == "k_1")
+        }
+    }
 }
