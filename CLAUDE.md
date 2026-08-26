@@ -150,7 +150,13 @@ compiles on macOS and fails there. Already hit once each:
   NIOCore and takes `Data` directly. Prefer it.
 
 CI runs Vapor's `check-foundation-linking` workflow, which builds a Linux executable against
-the library and fails if Foundation, FoundationInternationalization or ICU get linked. The
+the library and fails if Foundation, FoundationInternationalization or ICU get linked.
+Two things keep it green: no `CharacterSet` (it lives in Foundation proper — trim with the
+standard library), and the swift-configuration dependency declared with `traits: []`, because
+its default `JSON` trait pulls `JSONSerialization`. To attribute a future failure, build with
+the static SDK and count module-mangled symbols per target:
+`nm -u .build/aarch64-swift-linux-musl/debug/<Module>.build/*.o | grep -c '\$s10Foundation'`
+(`$s20FoundationEssentials` is fine; `$s29FoundationInternationalization` is ICU). The
 static-SDK build itself is not a CI job any more; before a release that touches decoding of
 large types, build locally with `swift build --swift-sdk aarch64-swift-linux-musl`.
 
