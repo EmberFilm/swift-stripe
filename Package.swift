@@ -13,7 +13,10 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/swift-server/async-http-client.git", from: "1.36.0"),
         .package(url: "https://github.com/apple/swift-crypto.git", from: "4.0.0"),
-        .package(url: "https://github.com/apple/swift-configuration.git", from: "1.2.0"),
+        // No traits: the default `JSON` file provider needs Foundation proper (JSONSerialization),
+        // and this package links only FoundationEssentials. A dependent that wants JSON config
+        // files enables the trait itself; traits unify across the graph.
+        .package(url: "https://github.com/apple/swift-configuration.git", from: "1.2.0", traits: []),
     ],
     targets: [
         .target(

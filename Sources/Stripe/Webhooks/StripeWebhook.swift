@@ -118,8 +118,10 @@ public enum StripeWebhook {
             for element in raw.split(separator: ",") {
                 let pair = element.split(separator: "=", maxSplits: 1)
                 guard pair.count == 2 else { continue }
-                let key = pair[0].trimmingCharacters(in: .whitespaces)
-                let value = pair[1].trimmingCharacters(in: .whitespaces)
+                // Trimmed with the standard library: `CharacterSet` lives in Foundation proper,
+                // and this is the one place the package would otherwise link it.
+                let key = String(pair[0].drop(while: \.isWhitespace).reversed().drop(while: \.isWhitespace).reversed())
+                let value = String(pair[1].drop(while: \.isWhitespace).reversed().drop(while: \.isWhitespace).reversed())
                 switch key {
                 case "t": timestamp = TimeInterval(value)
                 case "v1": signatures.append(value)
