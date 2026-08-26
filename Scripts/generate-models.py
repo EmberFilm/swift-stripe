@@ -13,7 +13,7 @@ Mapping rules, in the order they apply to a property:
   expandable   listed in the parent's x-expandableFields          @Expandable<T, String>
                array of such                                       @ExpandableCollection<T>
   resource     $ref to a schema with x-resourceId                  RESOURCE_TYPES[name], or an error
-  shared       $ref reached from more than one parent              Generated.Shared.<Name>
+  shared       $ref reached from more than one parent              Stripe.Shared.<Name>
   nested       $ref reached from one parent, or an inline object   nested struct named for the property
   enum         string with an enum of more than one value          nested enum with raw values
   union        anyOf of several $refs, not expandable              first member, marked for stage 3
@@ -38,7 +38,7 @@ from collections import Counter, defaultdict
 # Configuration
 # --------------------------------------------------------------------------------------------
 
-# The resources generated, and where they sit under `Generated`. Mirrors the hand-written
+# The resources generated, and where they sit under `Stripe`. Mirrors the hand-written
 # nesting so that cutover is a namespace rename and a file move.
 RESOURCES: dict[str, str] = {
     "checkout.session": "Checkout.Session",
@@ -201,79 +201,79 @@ INLINE_RESOURCES: set[str] = {
 # A $ref to any of these resolves to the existing hand-written type. Anything with an
 # x-resourceId that is not here is an error, never a guess.
 RESOURCE_TYPES: dict[str, str] = {
-    # the generated set refers to itself through Generated
-    "checkout.session": "Generated.Checkout.Session",
-    "subscription": "Generated.Billing.Subscription",
-    "subscription_item": "Generated.Billing.Subscription.Item",
-    "customer": "Generated.Customers.Customer",
-    "invoice": "Generated.Billing.Invoice",
-    "price": "Generated.Products.Price",
-    "product": "Generated.Products.Product",
+    # the generated set refers to itself through Stripe
+    "checkout.session": "Stripe.Checkout.Session",
+    "subscription": "Stripe.Billing.Subscription",
+    "subscription_item": "Stripe.Billing.Subscription.Item",
+    "customer": "Stripe.Customers.Customer",
+    "invoice": "Stripe.Billing.Invoice",
+    "price": "Stripe.Products.Price",
+    "product": "Stripe.Products.Product",
     "event": "Stripe.Events.Event",
-    "payment_intent": "Generated.PaymentIntents.PaymentIntent",
-    "charge": "Generated.Charges.Charge",
-    "invoice_payment": "Generated.Billing.Invoice.Payment",
-    "treasury.credit_reversal": "Generated.Treasury.CreditReversal",
-    "treasury.debit_reversal": "Generated.Treasury.DebitReversal",
-    "treasury.financial_account": "Generated.Treasury.FinancialAccount",
-    "treasury.financial_account_features": "Generated.Treasury.FinancialAccountFeatures",
-    "treasury.inbound_transfer": "Generated.Treasury.InboundTransfer",
-    "treasury.outbound_payment": "Generated.Treasury.OutboundPayment",
-    "treasury.outbound_transfer": "Generated.Treasury.OutboundTransfer",
-    "treasury.received_credit": "Generated.Treasury.ReceivedCredit",
-    "treasury.received_debit": "Generated.Treasury.ReceivedDebit",
-    "treasury.transaction_entry": "Generated.Treasury.TransactionEntry",
-    "billing.alert": "Generated.Billing.Alert",
-    "billing.meter": "Generated.Billing.Meter",
-    "billing.meter_event": "Generated.Billing.MeterEvent",
-    "billing.meter_event_adjustment": "Generated.Billing.MeterEventAdjustment",
-    "billing.meter_event_summary": "Generated.Billing.MeterEventSummary",
-    "invoice_rendering_template": "Generated.Billing.InvoiceRenderingTemplate",
-    "credit_note_line_item": "Generated.Billing.CreditNoteLineItem",
-    "tax.association": "Generated.Tax.Association",
-    "tax.calculation_line_item": "Generated.Tax.CalculationLineItem",
-    "tax.registration": "Generated.Tax.Registration",
-    "tax.transaction_line_item": "Generated.Tax.TransactionLineItem",
-    "issuing.personalization_design": "Generated.Issuing.PersonalizationDesign",
-    "issuing.physical_bundle": "Generated.Issuing.PhysicalBundle",
-    "climate.supplier": "Generated.Climate.Supplier",
-    "entitlements.active_entitlement": "Generated.Entitlements.ActiveEntitlement",
-    "radar.payment_evaluation": "Generated.Fraud.PaymentEvaluation",
-    "terminal.onboarding_link": "Generated.Terminal.OnboardingLink",
+    "payment_intent": "Stripe.PaymentIntents.PaymentIntent",
+    "charge": "Stripe.Charges.Charge",
+    "invoice_payment": "Stripe.Billing.Invoice.Payment",
+    "treasury.credit_reversal": "Stripe.Treasury.CreditReversal",
+    "treasury.debit_reversal": "Stripe.Treasury.DebitReversal",
+    "treasury.financial_account": "Stripe.Treasury.FinancialAccount",
+    "treasury.financial_account_features": "Stripe.Treasury.FinancialAccountFeatures",
+    "treasury.inbound_transfer": "Stripe.Treasury.InboundTransfer",
+    "treasury.outbound_payment": "Stripe.Treasury.OutboundPayment",
+    "treasury.outbound_transfer": "Stripe.Treasury.OutboundTransfer",
+    "treasury.received_credit": "Stripe.Treasury.ReceivedCredit",
+    "treasury.received_debit": "Stripe.Treasury.ReceivedDebit",
+    "treasury.transaction_entry": "Stripe.Treasury.TransactionEntry",
+    "billing.alert": "Stripe.Billing.Alert",
+    "billing.meter": "Stripe.Billing.Meter",
+    "billing.meter_event": "Stripe.Billing.MeterEvent",
+    "billing.meter_event_adjustment": "Stripe.Billing.MeterEventAdjustment",
+    "billing.meter_event_summary": "Stripe.Billing.MeterEventSummary",
+    "invoice_rendering_template": "Stripe.Billing.InvoiceRenderingTemplate",
+    "credit_note_line_item": "Stripe.Billing.CreditNoteLineItem",
+    "tax.association": "Stripe.Tax.Association",
+    "tax.calculation_line_item": "Stripe.Tax.CalculationLineItem",
+    "tax.registration": "Stripe.Tax.Registration",
+    "tax.transaction_line_item": "Stripe.Tax.TransactionLineItem",
+    "issuing.personalization_design": "Stripe.Issuing.PersonalizationDesign",
+    "issuing.physical_bundle": "Stripe.Issuing.PhysicalBundle",
+    "climate.supplier": "Stripe.Climate.Supplier",
+    "entitlements.active_entitlement": "Stripe.Entitlements.ActiveEntitlement",
+    "radar.payment_evaluation": "Stripe.Fraud.PaymentEvaluation",
+    "terminal.onboarding_link": "Stripe.Terminal.OnboardingLink",
     "financial_connections.account_owner": "FinancialConnections.AccountOwner",
-    "account_link": "Generated.Connect.AccountLink",
-    "apple_pay_domain": "Generated.ApplePayDomain",
-    "balance_settings": "Generated.BalanceSettings",
-    "exchange_rate": "Generated.ExchangeRate",
-    "payment_attempt_record": "Generated.PaymentAttemptRecord",
-    "product_feature": "Generated.Products.ProductFeature",
-    "source_transaction": "Generated.SourceTransaction",
-    "customer_cash_balance_transaction": "Generated.Customers.CashBalanceTransaction",
-    "entitlements.feature": "Generated.Entitlements.Feature",
-    "treasury.transaction": "Generated.Treasury.Transaction",
-    "application_fee": "Generated.Connect.Application.Fee",
-    "apps.secret": "Generated.Connect.Secret",
-    "balance_transaction": "Generated.Balance.Transaction",
-    "billing.credit_balance_transaction": "Generated.Billing.Credit.Balance.Transaction",
-    "cash_balance": "Generated.Customers.CustomerCashBalance",
-    "customer_balance_transaction": "Generated.Billing.Customer.Balance.Transaction",
-    "dispute": "Generated.Disputes.Dispute",
-    "invoiceitem": "Generated.Billing.Invoice.Item",
-    "item": "Generated.Checkout.Session.LineItem",
-    "person": "Generated.Connect.Person",
-    "review": "Generated.Fraud.Reviews.Review",
-    "tax_code": "Generated.Tax.Code",
-    "test_helpers.test_clock": "Generated.Billing.TestClocks.TestClock",
-    "token": "Generated.Tokens.Token",
-    "topup": "Generated.Connect.TopUp",
+    "account_link": "Stripe.Connect.AccountLink",
+    "apple_pay_domain": "Stripe.ApplePayDomain",
+    "balance_settings": "Stripe.BalanceSettings",
+    "exchange_rate": "Stripe.ExchangeRate",
+    "payment_attempt_record": "Stripe.PaymentAttemptRecord",
+    "product_feature": "Stripe.Products.ProductFeature",
+    "source_transaction": "Stripe.SourceTransaction",
+    "customer_cash_balance_transaction": "Stripe.Customers.CashBalanceTransaction",
+    "entitlements.feature": "Stripe.Entitlements.Feature",
+    "treasury.transaction": "Stripe.Treasury.Transaction",
+    "application_fee": "Stripe.Connect.Application.Fee",
+    "apps.secret": "Stripe.Connect.Secret",
+    "balance_transaction": "Stripe.Balance.Transaction",
+    "billing.credit_balance_transaction": "Stripe.Billing.Credit.Balance.Transaction",
+    "cash_balance": "Stripe.Customers.CustomerCashBalance",
+    "customer_balance_transaction": "Stripe.Billing.Customer.Balance.Transaction",
+    "dispute": "Stripe.Disputes.Dispute",
+    "invoiceitem": "Stripe.Billing.Invoice.Item",
+    "item": "Stripe.Checkout.Session.LineItem",
+    "person": "Stripe.Connect.Person",
+    "review": "Stripe.Fraud.Reviews.Review",
+    "tax_code": "Stripe.Tax.Code",
+    "test_helpers.test_clock": "Stripe.Billing.TestClocks.TestClock",
+    "token": "Stripe.Tokens.Token",
+    "topup": "Stripe.Connect.TopUp",
     "bank_account": "BankAccount",
-    "capability": "Generated.Connect.Capability",
+    "capability": "Stripe.Connect.Capability",
     "card": "Card",
-    "country_spec": "Generated.Connect.CountrySpec",
-    "customer_session": "Generated.Customers.Customer.Session",
+    "country_spec": "Stripe.Connect.CountrySpec",
+    "customer_session": "Stripe.Customers.Customer.Session",
     "ephemeral_key": "Stripe.EphemeralKey",
-    "fee_refund": "Generated.Connect.Application.Fee.Refund",
-    "file_link": "Generated.FileLinks.FileLink",
+    "fee_refund": "Stripe.Connect.Application.Fee.Refund",
+    "file_link": "Stripe.FileLinks.FileLink",
     "financial_connections.account": "FinancialConnections.Account",
     "funding_instructions": "FundingInstructions",
     "identity.verification_report": "VerificationReport",
@@ -284,56 +284,56 @@ RESOURCE_TYPES: dict[str, str] = {
     "issuing.dispute": "IssuingDispute",
     "issuing.transaction": "Transaction",
     "payment_method_domain": "Stripe.PaymentMethodDomain",
-    "radar.early_fraud_warning": "Generated.Fraud.EarlyFraudWarnings.EarlyFraudWarning",
-    "radar.value_list_item": "Generated.Fraud.ValueListItems.ValueListItem",
+    "radar.early_fraud_warning": "Stripe.Fraud.EarlyFraudWarnings.EarlyFraudWarning",
+    "radar.value_list_item": "Stripe.Fraud.ValueListItems.ValueListItem",
     "reporting.report_run": "ReportRun",
     "reporting.report_type": "ReportType",
     "scheduled_query_run": "ScheduledQueryRun",
-    "setup_attempt": "Generated.Setup.Attempt",
+    "setup_attempt": "Stripe.Setup.Attempt",
     "source": "Source",
     "terminal.configuration": "TerminalConfiguration",
     "terminal.connection_token": "TerminalConnectionToken",
-    "terminal.reader": "Generated.Terminal.Readers.Reader",
+    "terminal.reader": "Stripe.Terminal.Readers.Reader",
     "webhook_endpoint": "Webhook",
-    "climate.order": "Generated.Climate.Order",
-    "climate.product": "Generated.Climate.Product",
-    "tax.settings": "Generated.Tax.Settings",
-    "tax.transaction": "Generated.Tax.Transaction",
+    "climate.order": "Stripe.Climate.Order",
+    "climate.product": "Stripe.Climate.Product",
+    "tax.settings": "Stripe.Tax.Settings",
+    "tax.transaction": "Stripe.Tax.Transaction",
     "financial_connections.session": "FinancialConnections.Session",
     "financial_connections.transaction": "FinancialConnections.Transaction",
-    "account_session": "Generated.Connect.Account.Session",
+    "account_session": "Stripe.Connect.Account.Session",
     "balance": "Stripe.Balance",
-    "billing.credit_balance_summary": "Generated.Billing.Credit.Balance.Summary",
-    "billing_portal.session": "Generated.Billing.Customer.Portal.Session",
+    "billing.credit_balance_summary": "Stripe.Billing.Credit.Balance.Summary",
+    "billing_portal.session": "Stripe.Billing.Customer.Portal.Session",
     "confirmation_token": "ConfirmationToken",
-    "credit_note": "Generated.Billing.Credit.Note",
-    "file": "Generated.Files.File",
-    "line_item": "Generated.Billing.Invoice.LineItem",
-    "login_link": "Generated.Connect.Account.LoginLink",
-    "mandate": "Generated.Mandates.Mandate",
-    "payment_method_configuration": "Generated.PaymentMethodConfigurations.Configuration",
-    "quote": "Generated.Billing.Quote",
-    "radar.value_list": "Generated.Fraud.ValueLists.ValueList",
-    "refund": "Generated.Refunds.Refund",
-    "tax.calculation": "Generated.Tax.Calculation",
-    "tax_id": "Generated.Tax.ID",
-    "tax_rate": "Generated.Tax.Rate",
-    "terminal.location": "Generated.Terminal.Locations.Location",
-    "transfer_reversal": "Generated.Connect.Transfer.Reversal",
-    "account": "Generated.Connect.Account",
-    "billing.credit_grant": "Generated.Billing.Credit.Grant",
-    "billing_portal.configuration": "Generated.Billing.Customer.Portal.Configuration",
-    "coupon": "Generated.Products.Coupon",
-    "forwarding.request": "Generated.Forwarding.Request",
-    "payment_method": "Generated.PaymentMethods.PaymentMethod",
-    "payout": "Generated.Payouts.Payout",
-    "plan": "Generated.Billing.Plan",
+    "credit_note": "Stripe.Billing.Credit.Note",
+    "file": "Stripe.Files.File",
+    "line_item": "Stripe.Billing.Invoice.LineItem",
+    "login_link": "Stripe.Connect.Account.LoginLink",
+    "mandate": "Stripe.Mandates.Mandate",
+    "payment_method_configuration": "Stripe.PaymentMethodConfigurations.Configuration",
+    "quote": "Stripe.Billing.Quote",
+    "radar.value_list": "Stripe.Fraud.ValueLists.ValueList",
+    "refund": "Stripe.Refunds.Refund",
+    "tax.calculation": "Stripe.Tax.Calculation",
+    "tax_id": "Stripe.Tax.ID",
+    "tax_rate": "Stripe.Tax.Rate",
+    "terminal.location": "Stripe.Terminal.Locations.Location",
+    "transfer_reversal": "Stripe.Connect.Transfer.Reversal",
+    "account": "Stripe.Connect.Account",
+    "billing.credit_grant": "Stripe.Billing.Credit.Grant",
+    "billing_portal.configuration": "Stripe.Billing.Customer.Portal.Configuration",
+    "coupon": "Stripe.Products.Coupon",
+    "forwarding.request": "Stripe.Forwarding.Request",
+    "payment_method": "Stripe.PaymentMethods.PaymentMethod",
+    "payout": "Stripe.Payouts.Payout",
+    "plan": "Stripe.Billing.Plan",
     "promotion_code": "Promotion.Code",
-    "setup_intent": "Generated.Setup.Intent",
-    "shipping_rate": "Generated.Products.Shipping.Rate",
-    "transfer": "Generated.Connect.Transfer",
+    "setup_intent": "Stripe.Setup.Intent",
+    "shipping_rate": "Stripe.Products.Shipping.Rate",
+    "transfer": "Stripe.Connect.Transfer",
     "payment_link": "Stripe.PaymentLink",
-    "subscription_schedule": "Generated.Billing.Subscription.Schedule",
+    "subscription_schedule": "Stripe.Billing.Subscription.Schedule",
     # everything else is the hand-written Stripe type
     "billing_portal.configuration": "Stripe.Billing.Customer.Portal.Configuration",
     "tax_id": "Stripe.Tax.ID",
@@ -343,12 +343,12 @@ RESOURCE_TYPES: dict[str, str] = {
     # namespace `Stripe.Customers.CashBalance`. This is the type the hand Customer used.
     "discount": "Stripe.Products.Discount",
     "deleted_discount": "Stripe.Products.Discount",
-    "issuing.token": "Generated.Issuing.Token",
-    "payment_record": "Generated.PaymentRecord",
-    "payment_source": "Generated.PaymentSource",
-    "external_account": "Generated.ExternalAccount",
-    "balance_transaction_source": "Generated.BalanceTransactionSource",
-    "deleted_external_account": "Generated.DeletedExternalAccount",
+    "issuing.token": "Stripe.Issuing.Token",
+    "payment_record": "Stripe.PaymentRecord",
+    "payment_source": "Stripe.PaymentSource",
+    "external_account": "Stripe.ExternalAccount",
+    "balance_transaction_source": "Stripe.BalanceTransactionSource",
+    "deleted_external_account": "Stripe.DeletedExternalAccount",
 }
 
 # Resources with no Swift type at all. A reference to one is kept as its id, never expanded.
@@ -363,6 +363,9 @@ UNION_RESOURCES: dict[str, str] = {
 ID_ONLY_RESOURCES: set[str] = {
       # no hand type, and a top-level placement the generator does not do yet
 }
+
+# Types the generator emits; a resource embedded by value in another is boxed to break cycles.
+GENERATED_TYPES: set[str] = {RESOURCE_TYPES[n] for n in list(RESOURCES) + list(UNION_RESOURCES) if n in RESOURCE_TYPES}
 
 # Non-resource schemas that already have a hand-written shared type worth reusing.
 SHARED_TYPES: dict[str, str] = {
@@ -424,8 +427,8 @@ def doc(description: str | None) -> str | None:
 # --------------------------------------------------------------------------------------------
 
 class Generator:
-    def __init__(self, spec: dict, namespace: str = "Stripe", only: set[str] | None = None):
-        self.ns = namespace
+    def __init__(self, spec: dict, only: set[str] | None = None):
+        self.ns = "Stripe"
         self.only = only
         self.schemas: dict = spec["components"]["schemas"]
         self.version: str = spec["info"]["version"]
@@ -532,7 +535,7 @@ class Generator:
         # A full resource embedded by value in another resource: box it, since these are the
         # references that form cycles (PaymentIntent -> ApiErrors -> PaymentIntent).
         boxed = node.get("type") != "array" and swift_type in RESOURCE_TYPES.values() \
-            and swift_type.startswith("Generated.")
+            and swift_type in GENERATED_TYPES
         return Field(name, prop, swift_type, description,
                      wrapper="@Boxed" if boxed else None, boxed=boxed)
 
@@ -551,7 +554,7 @@ class Generator:
                 refs = {self.ref_name(m) for m in members}
                 for union, name in UNION_RESOURCES.items():
                     if refs <= self.union_alternatives(union):
-                        return f"Generated.{name}"
+                        return f"Stripe.{name}"
                 self.unions.append(f"{owner.path}.{prop}: {sorted(refs)}")
             return self.type_for_ref(self.ref_name(members[0]), prop, owner)
 
@@ -596,7 +599,7 @@ class Generator:
         if ref in ID_ONLY_RESOURCES:
             return "String"
         if ref in UNION_RESOURCES:
-            return f"Generated.{UNION_RESOURCES[ref]}"
+            return f"Stripe.{UNION_RESOURCES[ref]}"
         if self.is_resource(ref):
             if ref not in RESOURCE_TYPES:
                 self.unmapped.add(ref)
@@ -607,7 +610,7 @@ class Generator:
         if self.is_shared(ref):
             name = self.shared_type_name(ref)
             self.emit_shared(ref, name)
-            return f"Generated.Shared.{name}"
+            return f"Stripe.Shared.{name}"
         nested = self.build_struct(pascal(prop), self.schemas[ref], f"{owner.path}.{pascal(prop)}")
         owner.nested.append(nested)
         return pascal(prop)
@@ -616,7 +619,7 @@ class Generator:
         if ref in self.shared_done:
             return
         self.shared_done[ref] = None   # reserve first: shared types can reference each other
-        self.shared_done[ref] = self.build_struct(name, self.schemas[ref], f"Generated.Shared.{name}")
+        self.shared_done[ref] = self.build_struct(name, self.schemas[ref], f"Stripe.Shared.{name}")
 
     def build_struct(self, name: str, schema: dict, path: str, root: bool = False) -> "Struct":
         s = Struct(name, path, doc(schema.get("description")))
@@ -671,7 +674,7 @@ class Generator:
             if base in RESOURCE_TYPES:
                 t = self.qualified(RESOURCE_TYPES[base])
             elif base in RESOURCES:
-                t = RESOURCES[base].lstrip("/") if RESOURCES[base].startswith("/") else f"Generated.{RESOURCES[base]}"
+                t = RESOURCES[base].lstrip("/") if RESOURCES[base].startswith("/") else f"Stripe.{RESOURCES[base]}"
             else:
                 self.unions.append(f"{union}: alternative {alt} has no Swift type; decodes as .unknown")
                 continue
@@ -718,7 +721,7 @@ class Generator:
             if ref in RESOURCE_TYPES:
                 t = self.qualified(RESOURCE_TYPES[ref])
             elif ref in RESOURCES:
-                t = RESOURCES[ref].lstrip("/") if RESOURCES[ref].startswith("/") else f"Generated.{RESOURCES[ref]}"
+                t = RESOURCES[ref].lstrip("/") if RESOURCES[ref].startswith("/") else f"Stripe.{RESOURCES[ref]}"
             else:
                 self.unions.append(f"event: {ref} has no Swift type; decodes as .unknown")
                 continue
@@ -784,24 +787,19 @@ class Generator:
             path = swift_path.lstrip("/")
             root = self.build_struct(path.split(".")[-1], self.schemas[name],
                                      path if swift_path.startswith("/") else f"{self.ns}.{path}", root=True)
-            files[f"Generated.{path}.swift"] = self.render_resource(name, swift_path, root)
+            files[f"{path}.swift"] = self.render_resource(name, swift_path, root)
         for union, name in UNION_RESOURCES.items():
             if not self.only or union in self.only:
-                files[f"Generated.{name}.swift"] = self.render_union_resource(union, name)
+                files[f"{name}.swift"] = self.render_union_resource(union, name)
         if not self.only:
-            files["Generated.Events.Event.Object.swift"] = self.render_event_object()
-            files["Generated.Events.Event.Type.swift"] = self.render_event_type()
-            files["Generated.APIVersion.swift"] = HEADER.format(version=self.version, schema="(the spec's API version)") + \
+            files["Events.Event.Object.swift"] = self.render_event_object()
+            files["Events.Event.Type.swift"] = self.render_event_type()
+            files["APIVersion.swift"] = HEADER.format(version=self.version, schema="(the spec's API version)") + \
                 f"extension {self.ns} {{\n    /// The Stripe API version the generated models describe; ``StripeConfiguration`` sends\n" \
                 f"    /// it as `Stripe-Version` unless told otherwise.\n    public static let generatedAPIVersion = \"{self.version}\"\n}}\n"
-        files["Generated.Shared.swift"] = self.render_shared()
-        if self.ns != "Stripe":
-            files[f"{self.ns}.swift"] = self.render_namespace()
-        else:
-            files["Generated.Namespaces.swift"] = self.render_missing_namespaces()
-        files = {k: v.replace("Generated.", f"{self.ns}.") for k, v in files.items()}
-        if self.ns == "Stripe":
-            files = {k: v.replace("#endif\nimport Stripe\n", "#endif\n") for k, v in files.items()}
+        files["Shared.swift"] = self.render_shared()
+        if True:
+            files["Namespaces.swift"] = self.render_missing_namespaces()
         return files
 
     # ---- rendering ------------------------------------------------------------------------
@@ -839,17 +837,6 @@ class Generator:
         out += "extension Stripe {\n" + "".join(f"    public enum {e} {{}}\n" for e in missing) + "}\n"
         return out
 
-    def render_namespace(self) -> str:
-        enums = sorted({p.split(".")[0] for p in RESOURCES.values()})
-        out = HEADER.format(version=self.version, schema="(namespace)")
-        out += "/// Generated models live here until they are cut over into `Stripe`.\n"
-        out += "public enum Generated {\n"
-        for e in enums:
-            out += f"    public enum {e} {{}}\n"
-        out += "}\n\n"
-        # second-level containers, e.g. Billing.Subscription is itself a struct that holds Item —
-        # nothing to declare; Swift nests through the struct.
-        return out
 
 
 HEADER = """//
@@ -863,7 +850,6 @@ import FoundationEssentials
 #else
 import Foundation
 #endif
-import Stripe
 
 """
 
@@ -1063,14 +1049,12 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("spec")
     ap.add_argument("--out", default="Sources/Stripe/Models/Generated")
-    ap.add_argument("--namespace", default="Stripe",
-                    help="root namespace for the emitted types (Stripe, or Generated for side-by-side)")
     ap.add_argument("--check", action="store_true", help="report unmapped refs and unions; write nothing")
     ap.add_argument("--only", nargs="*", help="emit only these schemas (Shared is always emitted)")
     ap.add_argument("--keep", action="store_true", help="do not delete other generated files in --out")
     args = ap.parse_args()
 
-    gen = Generator(json.load(open(args.spec)), namespace=args.namespace, only=set(args.only or []) or None)
+    gen = Generator(json.load(open(args.spec)), only=set(args.only or []) or None)
     files = gen.run()
 
     print(f"spec {gen.version}: {len(RESOURCES)} resources, {len(gen.shared_done)} shared types")
@@ -1089,7 +1073,7 @@ def main() -> int:
     out = pathlib.Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
     if not args.keep:
-        for stale in list(out.glob("Generated.*.swift")) + list(out.glob("Stripe.*.swift")):
+        for stale in out.glob("*.swift"):
             stale.unlink()
     for name, content in files.items():
         (out / name).write_text(content)

@@ -70,8 +70,7 @@ def swift_type_for_resource(name: str) -> str | None:
         path = gm.RESOURCES[name]
         return path.lstrip("/") if path.startswith("/") else f"Stripe.{path}"
     if name in gm.RESOURCE_TYPES:
-        t = gm.RESOURCE_TYPES[name]
-        return t.replace("Generated.", "Stripe.") if t.startswith("Generated.") else t
+        return gm.RESOURCE_TYPES[name]
     return None
 
 
@@ -517,15 +516,15 @@ class Generator:
                 op.response = self.response_type(op)
                 self.notes.extend(f"{op.http} {op.path}: {n}" for n in op.notes)
             path = swift_type[len("Stripe."):] if swift_type.startswith("Stripe.") else swift_type
-            name = f"Generated.{path}.Requests.swift"
+            name = f"{path}.Requests.swift"
             files[name] = HEADER.format(file=name, version=version) + "\n" + self.render_resource(swift_type, ops)
             client_name, body = self.render_client(resource, swift_type, ops)
             if body:
-                fname = f"Generated.{client_name}Client.swift"
+                fname = f"{client_name}Client.swift"
                 clients[fname] = HEADER.format(file=fname, version=version).replace("import Foundation\n#endif\n", "import Foundation\n#endif\nimport NIOHTTP1\n") + "\n" + body
                 properties.append((client_name[0].lower() + client_name[1:], client_name))
         if properties:
-            fname = "Generated.StripeClient+Resources.swift"
+            fname = "StripeClient+Resources.swift"
             body = "extension StripeClient {\n" + "".join(
                 f"    public var {ident(p)}: {c}Client {{ {c}Client(api: api) }}\n" for p, c in sorted(properties)) + "}\n"
             clients[fname] = HEADER.format(file=fname, version=version) + "\n" + body
@@ -547,7 +546,7 @@ def main() -> int:
         bad = False
         for out, files in outputs:
             stale = [n for n, body in files.items() if not (out / n).exists() or (out / n).read_text() != body]
-            extra = [p.name for p in out.glob("Generated.*.swift") if p.name not in files]
+            extra = [p.name for p in out.glob("*.swift") if p.name not in files]
             for n in stale:
                 print(f"out of date: {out / n}")
             for n in extra:
@@ -556,7 +555,7 @@ def main() -> int:
         return 1 if bad else 0
     for out, files in outputs:
         out.mkdir(parents=True, exist_ok=True)
-        for stale in out.glob("Generated.*.swift"):
+        for stale in out.glob("*.swift"):
             stale.unlink()
         for n, body in files.items():
             (out / n).write_text(body)

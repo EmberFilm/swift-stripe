@@ -202,9 +202,9 @@ let the decode path regress to match it.
 ## Generated models
 
 131 of the spec's 137 root resources are generated from Stripe's OpenAPI spec; do not edit the
-files under `Sources/Stripe/Models/Generated/` by hand — regenerate them. Generated files carry a
-`Generated.` prefix because SwiftPM requires unique basenames per target and a request file
-(`Stripe.ConfirmationToken.swift`) can share a model's name:
+files under `Sources/Stripe/Models/Generated/` by hand — regenerate them. A generated file is
+named by its type's path under `Stripe` (`Customers.Customer.swift`, `CustomersClient.swift`);
+SwiftPM requires unique basenames per target, and the `--check` step catches a clash:
 
 ```bash
 curl -sSLO https://raw.githubusercontent.com/stripe/openapi/<pinned commit>/openapi/spec3.sdk.json

@@ -74,7 +74,7 @@ def locate(name):
     """-> (file, namespace, struct) for the hand type, or None if not uniquely found."""
     t = IRREGULAR.get(name) or gen.RESOURCE_TYPES.get(name)
     candidates = []
-    if t and not t.startswith("Generated."):
+    if t and name not in gen.RESOURCES:
         parts = t.split("."); ns, struct = ".".join(parts[:-1]), parts[-1]
         for p, s in hand_files.items():
             if (ns and re.search(rf"^extension {re.escape(ns)} \{{\s*\n(?:\s*///[^\n]*\n)*\s*public struct {struct}\b", s, re.M)) or \
@@ -121,14 +121,14 @@ s = GEN.read_text()
 marker = "    # stage 4a: resources that had no model at all\n"
 s = s.replace(marker, marker.replace("resources that had no model at all", "cut over from hand models (batch-cutover.py)") + "".join(f'    "{n}": "{p}",\n' for n, p, *_ in todo) + marker, 1)
 tmarker = "    # everything else is the hand-written Stripe type\n"
-s = s.replace(tmarker, "".join(f'    "{n}": "{p.lstrip("/") if p.startswith("/") else "Generated." + p}",\n' for n, p, *_ in todo) + tmarker, 1)
+s = s.replace(tmarker, "".join(f'    "{n}": "{p.lstrip("/") if p.startswith("/") else "Stripe." + p}",\n' for n, p, *_ in todo) + tmarker, 1)
 # drop the old hand mapping for these — only in RESOURCE_TYPES, after the hand-type marker
 head, tail = s.split(tmarker, 1)
 for n, *_ in todo:
-    tail = re.sub(rf'\n    "{re.escape(n)}": "(?!Generated\.)[^"]+",', "", tail)
+    tail = re.sub(rf'\n    "{re.escape(n)}": "[^"]+",', "", tail)
 GEN.write_text(head + tmarker + tail)
 subprocess.run([sys.executable, str(GEN), args.spec, "--only", *[n for n, *_ in todo], "--keep"], check=True)
 for n, p, f, struct, full in todo:
     ns = ".".join(full.split(".")[:-1])
-    r = subprocess.run([sys.executable, "Scripts/cutover.py", str(f), struct, full, f"Sources/Stripe/Models/Generated/Generated.{p.lstrip('/')}.swift"], capture_output=True, text=True)
+    r = subprocess.run([sys.executable, "Scripts/cutover.py", str(f), struct, full, f"Sources/Stripe/Models/Generated/{p.lstrip('/')}.swift"], capture_output=True, text=True)
     print(("   ok   " if r.returncode == 0 else "   FAIL ") + f"{n:<36} {r.stdout.splitlines()[0] if r.stdout else r.stderr.strip().splitlines()[-1]}")
