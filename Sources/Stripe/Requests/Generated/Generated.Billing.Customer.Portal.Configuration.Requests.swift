@@ -129,7 +129,7 @@ extension Stripe.Billing.Customer.Portal.Configuration.Create {
             /// Information about updating the customer details in the portal.
             public struct CustomerUpdate: Codable, Hashable, Sendable {
                 /// The types of customer updates that are supported.
-                public var allowedUpdates: [AllowedUpdates]?
+                public var allowedUpdates: Stripe.Clearable<[AllowedUpdates]>?
                 /// Whether the feature is enabled.
                 public var enabled: Bool
 
@@ -139,7 +139,7 @@ extension Stripe.Billing.Customer.Portal.Configuration.Create {
                 }
 
                 public init(
-                    allowedUpdates: [AllowedUpdates]? = nil,
+                    allowedUpdates: Stripe.Clearable<[AllowedUpdates]>? = nil,
                     enabled: Bool
                 ) {
                     self.allowedUpdates = allowedUpdates
@@ -239,7 +239,7 @@ extension Stripe.Billing.Customer.Portal.Configuration.Create {
                     /// Whether the feature is enabled.
                     public var enabled: Bool
                     /// Which cancellation reasons will be given as options to the customer.
-                    public var options: [Options]
+                    public var options: Stripe.Clearable<[Options]>
 
                     private enum CodingKeys: String, CodingKey {
                         case enabled
@@ -248,7 +248,7 @@ extension Stripe.Billing.Customer.Portal.Configuration.Create {
 
                     public init(
                         enabled: Bool,
-                        options: [Options]
+                        options: Stripe.Clearable<[Options]>
                     ) {
                         self.enabled = enabled
                         self.options = options
@@ -272,11 +272,11 @@ extension Stripe.Billing.Customer.Portal.Configuration.Create {
                 /// Determines the value to use for the billing cycle anchor on subscription updates.
                 public var billingCycleAnchor: BillingCycleAnchor?
                 /// The types of subscription updates that are supported.
-                public var defaultAllowedUpdates: [DefaultAllowedUpdates]?
+                public var defaultAllowedUpdates: Stripe.Clearable<[DefaultAllowedUpdates]>?
                 /// Whether the feature is enabled.
                 public var enabled: Bool
                 /// The list of up to 10 products that support subscription updates.
-                public var products: [Products]?
+                public var products: Stripe.Clearable<[Products]>?
                 /// Determines how to handle prorations resulting from subscription updates.
                 public var prorationBehavior: ProrationBehavior?
                 /// Setting to control when an update should be scheduled at the end of the period instead of applying immediately.
@@ -296,9 +296,9 @@ extension Stripe.Billing.Customer.Portal.Configuration.Create {
 
                 public init(
                     billingCycleAnchor: BillingCycleAnchor? = nil,
-                    defaultAllowedUpdates: [DefaultAllowedUpdates]? = nil,
+                    defaultAllowedUpdates: Stripe.Clearable<[DefaultAllowedUpdates]>? = nil,
                     enabled: Bool,
-                    products: [Products]? = nil,
+                    products: Stripe.Clearable<[Products]>? = nil,
                     prorationBehavior: ProrationBehavior? = nil,
                     scheduleAtPeriodEnd: ScheduleAtPeriodEnd? = nil,
                     trialUpdateBehavior: TrialUpdateBehavior? = nil
@@ -524,7 +524,7 @@ extension Stripe.Billing.Customer.Portal.Configuration.Update {
         /// The hosted login page for this configuration.
         public var loginPage: LoginPage?
         /// Set of key-value pairs that you can attach to an object.
-        public var metadata: [String: String]?
+        public var metadata: Stripe.Clearable<[String: String]>?
         /// The name of the configuration.
         public var name: String?
 
@@ -546,7 +546,7 @@ extension Stripe.Billing.Customer.Portal.Configuration.Update {
             expand: [String]? = nil,
             features: Features? = nil,
             loginPage: LoginPage? = nil,
-            metadata: [String: String]? = nil,
+            metadata: Stripe.Clearable<[String: String]>? = nil,
             name: String? = nil
         ) {
             self.active = active
@@ -623,7 +623,7 @@ extension Stripe.Billing.Customer.Portal.Configuration.Update {
             /// Information about updating the customer details in the portal.
             public struct CustomerUpdate: Codable, Hashable, Sendable {
                 /// The types of customer updates that are supported.
-                public var allowedUpdates: [AllowedUpdates]?
+                public var allowedUpdates: Stripe.Clearable<[AllowedUpdates]>?
                 /// Whether the feature is enabled.
                 public var enabled: Bool?
 
@@ -633,7 +633,7 @@ extension Stripe.Billing.Customer.Portal.Configuration.Update {
                 }
 
                 public init(
-                    allowedUpdates: [AllowedUpdates]? = nil,
+                    allowedUpdates: Stripe.Clearable<[AllowedUpdates]>? = nil,
                     enabled: Bool? = nil
                 ) {
                     self.allowedUpdates = allowedUpdates
@@ -733,7 +733,7 @@ extension Stripe.Billing.Customer.Portal.Configuration.Update {
                     /// Whether the feature is enabled.
                     public var enabled: Bool
                     /// Which cancellation reasons will be given as options to the customer.
-                    public var options: [Options]?
+                    public var options: Stripe.Clearable<[Options]>?
 
                     private enum CodingKeys: String, CodingKey {
                         case enabled
@@ -742,7 +742,7 @@ extension Stripe.Billing.Customer.Portal.Configuration.Update {
 
                     public init(
                         enabled: Bool,
-                        options: [Options]? = nil
+                        options: Stripe.Clearable<[Options]>? = nil
                     ) {
                         self.enabled = enabled
                         self.options = options
@@ -766,11 +766,11 @@ extension Stripe.Billing.Customer.Portal.Configuration.Update {
                 /// Determines the value to use for the billing cycle anchor on subscription updates.
                 public var billingCycleAnchor: BillingCycleAnchor?
                 /// The types of subscription updates that are supported.
-                public var defaultAllowedUpdates: [DefaultAllowedUpdates]?
+                public var defaultAllowedUpdates: Stripe.Clearable<[DefaultAllowedUpdates]>?
                 /// Whether the feature is enabled.
                 public var enabled: Bool?
                 /// The list of up to 10 products that support subscription updates.
-                public var products: [Products]?
+                public var products: Stripe.Clearable<[Products]>?
                 /// Determines how to handle prorations resulting from subscription updates.
                 public var prorationBehavior: ProrationBehavior?
                 /// Setting to control when an update should be scheduled at the end of the period instead of applying immediately.
@@ -790,9 +790,9 @@ extension Stripe.Billing.Customer.Portal.Configuration.Update {
 
                 public init(
                     billingCycleAnchor: BillingCycleAnchor? = nil,
-                    defaultAllowedUpdates: [DefaultAllowedUpdates]? = nil,
+                    defaultAllowedUpdates: Stripe.Clearable<[DefaultAllowedUpdates]>? = nil,
                     enabled: Bool? = nil,
-                    products: [Products]? = nil,
+                    products: Stripe.Clearable<[Products]>? = nil,
                     prorationBehavior: ProrationBehavior? = nil,
                     scheduleAtPeriodEnd: ScheduleAtPeriodEnd? = nil,
                     trialUpdateBehavior: TrialUpdateBehavior? = nil
@@ -882,14 +882,14 @@ extension Stripe.Billing.Customer.Portal.Configuration.Update {
                 /// Setting to control when an update should be scheduled at the end of the period instead of applying immediately.
                 public struct ScheduleAtPeriodEnd: Codable, Hashable, Sendable {
                     /// List of conditions.
-                    public var conditions: [Conditions]?
+                    public var conditions: Stripe.Clearable<[Conditions]>?
 
                     private enum CodingKeys: String, CodingKey {
                         case conditions
                     }
 
                     public init(
-                        conditions: [Conditions]? = nil
+                        conditions: Stripe.Clearable<[Conditions]>? = nil
                     ) {
                         self.conditions = conditions
                     }

@@ -163,7 +163,7 @@ extension Stripe.Connect.Transfer.Update {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
         /// Set of key-value pairs that you can attach to an object.
-        public var metadata: [String: String]?
+        public var metadata: Stripe.Clearable<[String: String]>?
 
         private enum CodingKeys: String, CodingKey {
             case description
@@ -174,7 +174,7 @@ extension Stripe.Connect.Transfer.Update {
         public init(
             description: String? = nil,
             expand: [String]? = nil,
-            metadata: [String: String]? = nil
+            metadata: Stripe.Clearable<[String: String]>? = nil
         ) {
             self.description = description
             self.expand = expand

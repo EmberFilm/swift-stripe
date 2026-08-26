@@ -123,12 +123,12 @@ extension Stripe.Billing.Invoice {
             public indirect enum Details: Hashable, Sendable {
                 case charge(Expandable<Stripe.Charges.Charge, String>)
                 case paymentIntent(Expandable<Stripe.PaymentIntents.PaymentIntent, String>)
-                case paymentRecord(String)
+                case paymentRecord(Expandable<Stripe.PaymentRecord, String>)
                 case unknown(type: String)
 
                 public var charge: Expandable<Stripe.Charges.Charge, String>? { if case .charge(let value) = self { return value }; return nil }
                 public var paymentIntent: Expandable<Stripe.PaymentIntents.PaymentIntent, String>? { if case .paymentIntent(let value) = self { return value }; return nil }
-                public var paymentRecord: String? { if case .paymentRecord(let value) = self { return value }; return nil }
+                public var paymentRecord: Expandable<Stripe.PaymentRecord, String>? { if case .paymentRecord(let value) = self { return value }; return nil }
 
                 fileprivate init(type: String, from container: KeyedDecodingContainer<CodingKeys>) throws {
                     switch type {
@@ -139,7 +139,8 @@ extension Stripe.Billing.Invoice {
                         let value = try container.decode(Expandable<Stripe.PaymentIntents.PaymentIntent, String>.self, forKey: .paymentIntent)
                         if value.wrappedValue != nil || value.projectedValue != nil { self = .paymentIntent(value) } else { self = .unknown(type: type) }
                     case "payment_record":
-                        if let value = try container.decodeIfPresent(String.self, forKey: .paymentRecord) { self = .paymentRecord(value) } else { self = .unknown(type: type) }
+                        let value = try container.decode(Expandable<Stripe.PaymentRecord, String>.self, forKey: .paymentRecord)
+                        if value.wrappedValue != nil || value.projectedValue != nil { self = .paymentRecord(value) } else { self = .unknown(type: type) }
                     default: self = .unknown(type: type)
                     }
                 }

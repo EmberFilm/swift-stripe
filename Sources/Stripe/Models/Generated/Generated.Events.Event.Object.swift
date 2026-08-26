@@ -23,6 +23,7 @@ extension Stripe.Events.Event {
         case balance(Stripe.Balance)
         case balanceSettings(Stripe.BalanceSettings)
         case bankAccount(BankAccount)
+        case billingAlertTriggered(Stripe.Billing.AlertTriggered)
         case billingCreditBalanceTransaction(Stripe.Billing.Credit.Balance.Transaction)
         case billingCreditGrant(Stripe.Billing.Credit.Grant)
         case billingMeter(Stripe.Billing.Meter)
@@ -41,9 +42,11 @@ extension Stripe.Events.Event {
         case customerCashBalanceTransaction(Stripe.Customers.CashBalanceTransaction)
         case discount(Stripe.Products.Discount)
         case dispute(Stripe.Disputes.Dispute)
+        case entitlementsActiveEntitlementSummary(Stripe.Entitlements.ActiveEntitlementSummary)
         case feeRefund(Stripe.Connect.Application.Fee.Refund)
         case file(Stripe.Files.File)
         case financialConnectionsAccount(FinancialConnections.Account)
+        case financialConnectionsAuthorization(FinancialConnections.Authorization)
         case identityVerificationSession(VerificationSession)
         case invoice(Stripe.Billing.Invoice)
         case invoicePayment(Stripe.Billing.Invoice.Payment)
@@ -53,6 +56,7 @@ extension Stripe.Events.Event {
         case issuingCardholder(Cardholder)
         case issuingDispute(IssuingDispute)
         case issuingPersonalizationDesign(Stripe.Issuing.PersonalizationDesign)
+        case issuingToken(Stripe.Issuing.Token)
         case issuingTransaction(Transaction)
         case mandate(Stripe.Mandates.Mandate)
         case paymentIntent(Stripe.PaymentIntents.PaymentIntent)
@@ -69,10 +73,14 @@ extension Stripe.Events.Event {
         case refund(Stripe.Refunds.Refund)
         case reportingReportRun(ReportRun)
         case reportingReportType(ReportType)
+        case reserveHold(Stripe.Reserve.Hold)
+        case reservePlan(Stripe.Reserve.Plan)
+        case reserveRelease(Stripe.Reserve.Release)
         case review(Stripe.Fraud.Reviews.Review)
         case scheduledQueryRun(ScheduledQueryRun)
         case setupIntent(Stripe.Setup.Intent)
         case source(Source)
+        case sourceMandateNotification(SourceMandateNotification)
         case sourceTransaction(Stripe.SourceTransaction)
         case subscription(Stripe.Billing.Subscription)
         case subscriptionSchedule(Stripe.Billing.Subscription.Schedule)
@@ -108,6 +116,7 @@ extension Stripe.Events.Event {
             if let value = try Self.decodeGroup7(object, decoder) { self = value; return }
             if let value = try Self.decodeGroup8(object, decoder) { self = value; return }
             if let value = try Self.decodeGroup9(object, decoder) { self = value; return }
+            if let value = try Self.decodeGroup10(object, decoder) { self = value; return }
             self = .unknown(type: object)
         }
 
@@ -120,8 +129,8 @@ extension Stripe.Events.Event {
             case "balance": return .balance(try Stripe.Balance(from: decoder))
             case "balance_settings": return .balanceSettings(try Stripe.BalanceSettings(from: decoder))
             case "bank_account": return .bankAccount(try BankAccount(from: decoder))
+            case "billing.alert_triggered": return .billingAlertTriggered(try Stripe.Billing.AlertTriggered(from: decoder))
             case "billing.credit_balance_transaction": return .billingCreditBalanceTransaction(try Stripe.Billing.Credit.Balance.Transaction(from: decoder))
-            case "billing.credit_grant": return .billingCreditGrant(try Stripe.Billing.Credit.Grant(from: decoder))
             default: return nil
             }
         }
@@ -129,6 +138,7 @@ extension Stripe.Events.Event {
         @inline(never)
         private static func decodeGroup1(_ object: String, _ decoder: any Decoder) throws -> Object? {
             switch object {
+            case "billing.credit_grant": return .billingCreditGrant(try Stripe.Billing.Credit.Grant(from: decoder))
             case "billing.meter": return .billingMeter(try Stripe.Billing.Meter(from: decoder))
             case "billing_portal.configuration": return .billingPortalConfiguration(try Stripe.Billing.Customer.Portal.Configuration(from: decoder))
             case "billing_portal.session": return .billingPortalSession(try Stripe.Billing.Customer.Portal.Session(from: decoder))
@@ -136,7 +146,6 @@ extension Stripe.Events.Event {
             case "card": return .card(try Card(from: decoder))
             case "cash_balance": return .cashBalance(try Stripe.Customers.CustomerCashBalance(from: decoder))
             case "charge": return .charge(try Stripe.Charges.Charge(from: decoder))
-            case "checkout.session": return .checkoutSession(try Stripe.Checkout.Session(from: decoder))
             default: return nil
             }
         }
@@ -144,6 +153,7 @@ extension Stripe.Events.Event {
         @inline(never)
         private static func decodeGroup2(_ object: String, _ decoder: any Decoder) throws -> Object? {
             switch object {
+            case "checkout.session": return .checkoutSession(try Stripe.Checkout.Session(from: decoder))
             case "climate.order": return .climateOrder(try Stripe.Climate.Order(from: decoder))
             case "climate.product": return .climateProduct(try Stripe.Climate.Product(from: decoder))
             case "coupon": return .coupon(try Stripe.Products.Coupon(from: decoder))
@@ -151,7 +161,6 @@ extension Stripe.Events.Event {
             case "customer": return .customer(try Stripe.Customers.Customer(from: decoder))
             case "customer_cash_balance_transaction": return .customerCashBalanceTransaction(try Stripe.Customers.CashBalanceTransaction(from: decoder))
             case "discount": return .discount(try Stripe.Products.Discount(from: decoder))
-            case "dispute": return .dispute(try Stripe.Disputes.Dispute(from: decoder))
             default: return nil
             }
         }
@@ -159,14 +168,14 @@ extension Stripe.Events.Event {
         @inline(never)
         private static func decodeGroup3(_ object: String, _ decoder: any Decoder) throws -> Object? {
             switch object {
+            case "dispute": return .dispute(try Stripe.Disputes.Dispute(from: decoder))
+            case "entitlements.active_entitlement_summary": return .entitlementsActiveEntitlementSummary(try Stripe.Entitlements.ActiveEntitlementSummary(from: decoder))
             case "fee_refund": return .feeRefund(try Stripe.Connect.Application.Fee.Refund(from: decoder))
             case "file": return .file(try Stripe.Files.File(from: decoder))
             case "financial_connections.account": return .financialConnectionsAccount(try FinancialConnections.Account(from: decoder))
+            case "financial_connections.authorization": return .financialConnectionsAuthorization(try FinancialConnections.Authorization(from: decoder))
             case "identity.verification_session": return .identityVerificationSession(try VerificationSession(from: decoder))
             case "invoice": return .invoice(try Stripe.Billing.Invoice(from: decoder))
-            case "invoice_payment": return .invoicePayment(try Stripe.Billing.Invoice.Payment(from: decoder))
-            case "invoiceitem": return .invoiceitem(try Stripe.Billing.Invoice.Item(from: decoder))
-            case "issuing.authorization": return .issuingAuthorization(try Authorization(from: decoder))
             default: return nil
             }
         }
@@ -174,14 +183,14 @@ extension Stripe.Events.Event {
         @inline(never)
         private static func decodeGroup4(_ object: String, _ decoder: any Decoder) throws -> Object? {
             switch object {
+            case "invoice_payment": return .invoicePayment(try Stripe.Billing.Invoice.Payment(from: decoder))
+            case "invoiceitem": return .invoiceitem(try Stripe.Billing.Invoice.Item(from: decoder))
+            case "issuing.authorization": return .issuingAuthorization(try Authorization(from: decoder))
             case "issuing.card": return .issuingCard(try IssuingCard(from: decoder))
             case "issuing.cardholder": return .issuingCardholder(try Cardholder(from: decoder))
             case "issuing.dispute": return .issuingDispute(try IssuingDispute(from: decoder))
             case "issuing.personalization_design": return .issuingPersonalizationDesign(try Stripe.Issuing.PersonalizationDesign(from: decoder))
-            case "issuing.transaction": return .issuingTransaction(try Transaction(from: decoder))
-            case "mandate": return .mandate(try Stripe.Mandates.Mandate(from: decoder))
-            case "payment_intent": return .paymentIntent(try Stripe.PaymentIntents.PaymentIntent(from: decoder))
-            case "payment_link": return .paymentLink(try Stripe.PaymentLink(from: decoder))
+            case "issuing.token": return .issuingToken(try Stripe.Issuing.Token(from: decoder))
             default: return nil
             }
         }
@@ -189,14 +198,14 @@ extension Stripe.Events.Event {
         @inline(never)
         private static func decodeGroup5(_ object: String, _ decoder: any Decoder) throws -> Object? {
             switch object {
+            case "issuing.transaction": return .issuingTransaction(try Transaction(from: decoder))
+            case "mandate": return .mandate(try Stripe.Mandates.Mandate(from: decoder))
+            case "payment_intent": return .paymentIntent(try Stripe.PaymentIntents.PaymentIntent(from: decoder))
+            case "payment_link": return .paymentLink(try Stripe.PaymentLink(from: decoder))
             case "payment_method": return .paymentMethod(try Stripe.PaymentMethods.PaymentMethod(from: decoder))
             case "payout": return .payout(try Stripe.Payouts.Payout(from: decoder))
             case "person": return .person(try Stripe.Connect.Person(from: decoder))
             case "plan": return .plan(try Stripe.Billing.Plan(from: decoder))
-            case "price": return .price(try Stripe.Products.Price(from: decoder))
-            case "product": return .product(try Stripe.Products.Product(from: decoder))
-            case "promotion_code": return .promotionCode(try Promotion.Code(from: decoder))
-            case "quote": return .quote(try Stripe.Billing.Quote(from: decoder))
             default: return nil
             }
         }
@@ -204,20 +213,35 @@ extension Stripe.Events.Event {
         @inline(never)
         private static func decodeGroup6(_ object: String, _ decoder: any Decoder) throws -> Object? {
             switch object {
+            case "price": return .price(try Stripe.Products.Price(from: decoder))
+            case "product": return .product(try Stripe.Products.Product(from: decoder))
+            case "promotion_code": return .promotionCode(try Promotion.Code(from: decoder))
+            case "quote": return .quote(try Stripe.Billing.Quote(from: decoder))
             case "radar.early_fraud_warning": return .radarEarlyFraudWarning(try Stripe.Fraud.EarlyFraudWarnings.EarlyFraudWarning(from: decoder))
             case "refund": return .refund(try Stripe.Refunds.Refund(from: decoder))
             case "reporting.report_run": return .reportingReportRun(try ReportRun(from: decoder))
             case "reporting.report_type": return .reportingReportType(try ReportType(from: decoder))
-            case "review": return .review(try Stripe.Fraud.Reviews.Review(from: decoder))
-            case "scheduled_query_run": return .scheduledQueryRun(try ScheduledQueryRun(from: decoder))
-            case "setup_intent": return .setupIntent(try Stripe.Setup.Intent(from: decoder))
-            case "source": return .source(try Source(from: decoder))
             default: return nil
             }
         }
 
         @inline(never)
         private static func decodeGroup7(_ object: String, _ decoder: any Decoder) throws -> Object? {
+            switch object {
+            case "reserve.hold": return .reserveHold(try Stripe.Reserve.Hold(from: decoder))
+            case "reserve.plan": return .reservePlan(try Stripe.Reserve.Plan(from: decoder))
+            case "reserve.release": return .reserveRelease(try Stripe.Reserve.Release(from: decoder))
+            case "review": return .review(try Stripe.Fraud.Reviews.Review(from: decoder))
+            case "scheduled_query_run": return .scheduledQueryRun(try ScheduledQueryRun(from: decoder))
+            case "setup_intent": return .setupIntent(try Stripe.Setup.Intent(from: decoder))
+            case "source": return .source(try Source(from: decoder))
+            case "source_mandate_notification": return .sourceMandateNotification(try SourceMandateNotification(from: decoder))
+            default: return nil
+            }
+        }
+
+        @inline(never)
+        private static func decodeGroup8(_ object: String, _ decoder: any Decoder) throws -> Object? {
             switch object {
             case "source_transaction": return .sourceTransaction(try Stripe.SourceTransaction(from: decoder))
             case "subscription": return .subscription(try Stripe.Billing.Subscription(from: decoder))
@@ -232,7 +256,7 @@ extension Stripe.Events.Event {
         }
 
         @inline(never)
-        private static func decodeGroup8(_ object: String, _ decoder: any Decoder) throws -> Object? {
+        private static func decodeGroup9(_ object: String, _ decoder: any Decoder) throws -> Object? {
             switch object {
             case "topup": return .topup(try Stripe.Connect.TopUp(from: decoder))
             case "transfer": return .transfer(try Stripe.Connect.Transfer(from: decoder))
@@ -247,7 +271,7 @@ extension Stripe.Events.Event {
         }
 
         @inline(never)
-        private static func decodeGroup9(_ object: String, _ decoder: any Decoder) throws -> Object? {
+        private static func decodeGroup10(_ object: String, _ decoder: any Decoder) throws -> Object? {
             switch object {
             case "treasury.received_credit": return .treasuryReceivedCredit(try Stripe.Treasury.ReceivedCredit(from: decoder))
             case "treasury.received_debit": return .treasuryReceivedDebit(try Stripe.Treasury.ReceivedDebit(from: decoder))
@@ -263,6 +287,7 @@ extension Stripe.Events.Event {
             case .balance(let value): try value.encode(to: encoder)
             case .balanceSettings(let value): try value.encode(to: encoder)
             case .bankAccount(let value): try value.encode(to: encoder)
+            case .billingAlertTriggered(let value): try value.encode(to: encoder)
             case .billingCreditBalanceTransaction(let value): try value.encode(to: encoder)
             case .billingCreditGrant(let value): try value.encode(to: encoder)
             case .billingMeter(let value): try value.encode(to: encoder)
@@ -281,9 +306,11 @@ extension Stripe.Events.Event {
             case .customerCashBalanceTransaction(let value): try value.encode(to: encoder)
             case .discount(let value): try value.encode(to: encoder)
             case .dispute(let value): try value.encode(to: encoder)
+            case .entitlementsActiveEntitlementSummary(let value): try value.encode(to: encoder)
             case .feeRefund(let value): try value.encode(to: encoder)
             case .file(let value): try value.encode(to: encoder)
             case .financialConnectionsAccount(let value): try value.encode(to: encoder)
+            case .financialConnectionsAuthorization(let value): try value.encode(to: encoder)
             case .identityVerificationSession(let value): try value.encode(to: encoder)
             case .invoice(let value): try value.encode(to: encoder)
             case .invoicePayment(let value): try value.encode(to: encoder)
@@ -293,6 +320,7 @@ extension Stripe.Events.Event {
             case .issuingCardholder(let value): try value.encode(to: encoder)
             case .issuingDispute(let value): try value.encode(to: encoder)
             case .issuingPersonalizationDesign(let value): try value.encode(to: encoder)
+            case .issuingToken(let value): try value.encode(to: encoder)
             case .issuingTransaction(let value): try value.encode(to: encoder)
             case .mandate(let value): try value.encode(to: encoder)
             case .paymentIntent(let value): try value.encode(to: encoder)
@@ -309,10 +337,14 @@ extension Stripe.Events.Event {
             case .refund(let value): try value.encode(to: encoder)
             case .reportingReportRun(let value): try value.encode(to: encoder)
             case .reportingReportType(let value): try value.encode(to: encoder)
+            case .reserveHold(let value): try value.encode(to: encoder)
+            case .reservePlan(let value): try value.encode(to: encoder)
+            case .reserveRelease(let value): try value.encode(to: encoder)
             case .review(let value): try value.encode(to: encoder)
             case .scheduledQueryRun(let value): try value.encode(to: encoder)
             case .setupIntent(let value): try value.encode(to: encoder)
             case .source(let value): try value.encode(to: encoder)
+            case .sourceMandateNotification(let value): try value.encode(to: encoder)
             case .sourceTransaction(let value): try value.encode(to: encoder)
             case .subscription(let value): try value.encode(to: encoder)
             case .subscriptionSchedule(let value): try value.encode(to: encoder)

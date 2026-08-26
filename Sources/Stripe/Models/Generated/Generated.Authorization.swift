@@ -59,7 +59,7 @@ public struct Authorization: Codable, Hashable, Sendable, Identifiable {
     /// The current status of the authorization in its lifecycle.
     public var status: Status?
     /// Token object used for this authorization.
-    public var token: String?
+    @Expandable<Stripe.Issuing.Token, String> public var token: String?
     /// List of transactions associated with this authorization.
     public var transactions: [Transaction]?
     /// Treasury details related to this authorization if it was created on a FinancialAccount.
@@ -159,7 +159,7 @@ public struct Authorization: Codable, Hashable, Sendable, Identifiable {
         self.pendingRequest = pendingRequest
         self.requestHistory = requestHistory
         self.status = status
-        self.token = token
+        self._token = Expandable(id: token)
         self.transactions = transactions
         self.treasury = treasury
         self.verificationData = verificationData

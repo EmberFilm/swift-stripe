@@ -42,7 +42,7 @@ extension Stripe.Products.Coupon.Create {
         /// A positive integer specifying the number of times the coupon can be redeemed before it's no longer valid.
         public var maxRedemptions: Int?
         /// Set of key-value pairs that you can attach to an object.
-        public var metadata: [String: String]?
+        public var metadata: Stripe.Clearable<[String: String]>?
         /// Name of the coupon displayed to customers on, for instance invoices, or receipts.
         public var name: String?
         /// A positive float larger than 0, and smaller or equal to 100, that represents the discount the coupon will apply (requi…
@@ -76,7 +76,7 @@ extension Stripe.Products.Coupon.Create {
             expand: [String]? = nil,
             id: String? = nil,
             maxRedemptions: Int? = nil,
-            metadata: [String: String]? = nil,
+            metadata: Stripe.Clearable<[String: String]>? = nil,
             name: String? = nil,
             percentOff: Decimal? = nil,
             redeemBy: Date? = nil
@@ -210,7 +210,7 @@ extension Stripe.Products.Coupon.Update {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
         /// Set of key-value pairs that you can attach to an object.
-        public var metadata: [String: String]?
+        public var metadata: Stripe.Clearable<[String: String]>?
         /// Name of the coupon displayed to customers on, for instance invoices, or receipts.
         public var name: String?
 
@@ -224,7 +224,7 @@ extension Stripe.Products.Coupon.Update {
         public init(
             currencyOptions: [String: CurrencyOptions]? = nil,
             expand: [String]? = nil,
-            metadata: [String: String]? = nil,
+            metadata: Stripe.Clearable<[String: String]>? = nil,
             name: String? = nil
         ) {
             self.currencyOptions = currencyOptions

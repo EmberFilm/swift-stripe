@@ -39,6 +39,7 @@ struct IntegrationTests {
                 secretKey: "sk_test_123",
                 baseURL: URL(string: "http://127.0.0.1:\(server.port)")!,
                 apiVersion: "2024-06-20",
+                filesBaseURL: URL(string: "http://127.0.0.1:\(server.port)")!,
                 maxRetries: maxRetries
             ),
             httpClient: httpClient
@@ -173,6 +174,7 @@ struct IntegrationTests {
             configuration: StripeConfiguration(
                 secretKey: "sk_test_123",
                 baseURL: URL(string: "http://127.0.0.1:\(server.port)")!,
+                filesBaseURL: URL(string: "http://127.0.0.1:\(server.port)")!,
                 connectedAccount: "acct_123"
             ),
             httpClient: httpClient
@@ -202,6 +204,31 @@ struct IntegrationTests {
                 "/v1/customers/cus_1/tax_ids/txi_1", "/v1/balance", "/v1/checkout/sessions/cs_1/expire",
             ])
             #expect(sent[2].headers.first(name: "Idempotency-Key") == "k_1")
+        }
+    }
+
+    @Test("an upload is multipart to the files host; a PDF comes back as bytes")
+    func filesHost() async throws {
+        try await Self.withServer(responses: [
+            ScriptedResponse(body: #"{"id":"file_1","object":"file","purpose":"dispute_evidence","size":5}"#),
+            ScriptedResponse(body: "%PDF-1.7 fake"),
+        ]) { stripe, server in
+            let file = try await stripe.files.create(
+                .init(purpose: .disputeEvidence),
+                file: .init(data: Data("hello".utf8), filename: "receipt.txt", contentType: "text/plain")
+            )
+            #expect(file.id == "file_1")
+            let pdf = try await stripe.quotes.pdf(id: "qt_1")
+            #expect(String(decoding: pdf, as: UTF8.self).hasPrefix("%PDF"))
+
+            let upload = try #require(server.received.first)
+            #expect(upload.method == .POST)
+            #expect(upload.uri == "/v1/files")
+            let contentType = try #require(upload.headers.first(name: "Content-Type"))
+            #expect(contentType.hasPrefix("multipart/form-data; boundary="))
+            #expect(upload.body.contains("name=\"purpose\"\r\n\r\ndispute_evidence"))
+            #expect(upload.body.contains("name=\"file\"; filename=\"receipt.txt\"\r\nContent-Type: text/plain\r\n\r\nhello"))
+            #expect(server.received[1].uri == "/v1/quotes/qt_1/pdf")
         }
     }
 }

@@ -1,0 +1,21 @@
+{
+ "amount": 1,
+ "created": 1700000000,
+ "created_by": "application",
+ "currency": "usd",
+ "id": "reserve.release_1",
+ "livemode": true,
+ "metadata": {
+  "key": "metadata_1"
+ },
+ "object": "reserve.release",
+ "reason": "bulk_hold_expiry",
+ "released_at": 1700000000,
+ "reserve_hold": "reserve.hold_1",
+ "reserve_plan": "reserve.plan_1",
+ "source_transaction": {
+  "dispute": "dispute_1",
+  "refund": "refund_1",
+  "type": "dispute"
+ }
+}

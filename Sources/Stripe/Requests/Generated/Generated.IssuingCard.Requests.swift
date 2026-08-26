@@ -1532,7 +1532,7 @@ extension IssuingCard.Update {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
         /// Set of key-value pairs that you can attach to an object.
-        public var metadata: [String: String]?
+        public var metadata: Stripe.Clearable<[String: String]>?
         public var personalizationDesign: String?
         /// The desired new PIN for this card.
         public var pin: Pin?
@@ -1557,7 +1557,7 @@ extension IssuingCard.Update {
         public init(
             cancellationReason: CancellationReason? = nil,
             expand: [String]? = nil,
-            metadata: [String: String]? = nil,
+            metadata: Stripe.Clearable<[String: String]>? = nil,
             personalizationDesign: String? = nil,
             pin: Pin? = nil,
             shipping: Shipping? = nil,

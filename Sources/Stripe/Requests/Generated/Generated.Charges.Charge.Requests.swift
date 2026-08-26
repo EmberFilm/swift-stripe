@@ -117,7 +117,7 @@ extension Stripe.Charges.Charge.Create {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
         /// Set of key-value pairs that you can attach to an object.
-        public var metadata: [String: String]?
+        public var metadata: Stripe.Clearable<[String: String]>?
         /// The Stripe account ID for which these funds are intended.
         public var onBehalfOf: String?
         /// Options to configure Radar.
@@ -169,7 +169,7 @@ extension Stripe.Charges.Charge.Create {
             description: String? = nil,
             destination: Destination? = nil,
             expand: [String]? = nil,
-            metadata: [String: String]? = nil,
+            metadata: Stripe.Clearable<[String: String]>? = nil,
             onBehalfOf: String? = nil,
             radarOptions: RadarOptions? = nil,
             receiptEmail: String? = nil,
@@ -466,7 +466,7 @@ extension Stripe.Charges.Charge.Update {
         /// A set of key-value pairs you can attach to a charge giving information about its riskiness.
         public var fraudDetails: FraudDetails?
         /// Set of key-value pairs that you can attach to an object.
-        public var metadata: [String: String]?
+        public var metadata: Stripe.Clearable<[String: String]>?
         /// This is the email address that the receipt for this charge will be sent to.
         public var receiptEmail: String?
         /// Shipping information for the charge.
@@ -490,7 +490,7 @@ extension Stripe.Charges.Charge.Update {
             description: String? = nil,
             expand: [String]? = nil,
             fraudDetails: FraudDetails? = nil,
-            metadata: [String: String]? = nil,
+            metadata: Stripe.Clearable<[String: String]>? = nil,
             receiptEmail: String? = nil,
             shipping: Shipping? = nil,
             transferGroup: String? = nil

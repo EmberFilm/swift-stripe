@@ -86,9 +86,9 @@ extension Stripe.BalanceSettings.Update {
             /// Settings specific to the account's payouts.
             public struct Payouts: Codable, Hashable, Sendable {
                 /// Configures per-currency rules for automatically transferring funds from the payments balance to a FinancialAccount.
-                public var automaticTransferRulesByCurrency: [String: [AutomaticTransferRulesByCurrency]]?
+                public var automaticTransferRulesByCurrency: Stripe.Clearable<[String: Stripe.Clearable<[AutomaticTransferRulesByCurrency]>]>?
                 /// The minimum balance amount to retain per currency after automatic payouts.
-                public var minimumBalanceByCurrency: [String: Int]?
+                public var minimumBalanceByCurrency: Stripe.Clearable<[String: Stripe.Clearable<Int>]>?
                 /// Details on when funds from charges are available, and when they are paid out to an external account.
                 public var schedule: Schedule?
                 /// The text that appears on the bank account statement for payouts.
@@ -102,8 +102,8 @@ extension Stripe.BalanceSettings.Update {
                 }
 
                 public init(
-                    automaticTransferRulesByCurrency: [String: [AutomaticTransferRulesByCurrency]]? = nil,
-                    minimumBalanceByCurrency: [String: Int]? = nil,
+                    automaticTransferRulesByCurrency: Stripe.Clearable<[String: Stripe.Clearable<[AutomaticTransferRulesByCurrency]>]>? = nil,
+                    minimumBalanceByCurrency: Stripe.Clearable<[String: Stripe.Clearable<Int>]>? = nil,
                     schedule: Schedule? = nil,
                     statementDescriptor: String? = nil
                 ) {
@@ -188,9 +188,9 @@ extension Stripe.BalanceSettings.Update {
             /// Settings related to the account's balance settlement timing.
             public struct SettlementTiming: Codable, Hashable, Sendable {
                 /// Change `delay_days` for this account, which determines the number of days charge funds are held before becoming availa…
-                public var delayDaysOverride: Int?
+                public var delayDaysOverride: Stripe.Clearable<Int>?
                 /// Customized start of day configuration for automatic payouts to group and send payments in local timezones with a custo…
-                public var startOfDay: StartOfDay?
+                public var startOfDay: Stripe.Clearable<StartOfDay>?
 
                 private enum CodingKeys: String, CodingKey {
                     case delayDaysOverride
@@ -198,8 +198,8 @@ extension Stripe.BalanceSettings.Update {
                 }
 
                 public init(
-                    delayDaysOverride: Int? = nil,
-                    startOfDay: StartOfDay? = nil
+                    delayDaysOverride: Stripe.Clearable<Int>? = nil,
+                    startOfDay: Stripe.Clearable<StartOfDay>? = nil
                 ) {
                     self.delayDaysOverride = delayDaysOverride
                     self.startOfDay = startOfDay

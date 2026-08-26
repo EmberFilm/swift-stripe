@@ -4205,12 +4205,15 @@ extension Stripe.Tax.Registration.Update {
         public enum ExpiresAt: Codable, Hashable, Sendable {
             case value(Date)
             case now
+            /// Unsets the field.
+            case clear
 
             public init(from decoder: any Decoder) throws {
                 let container = try decoder.singleValueContainer()
                 if let value = try? container.decode(Date.self) { self = .value(value); return }
                 switch try container.decode(String.self) {
                 case "now": self = .now
+                case "": self = .clear
                 case let other: throw DecodingError.dataCorruptedError(in: container, debugDescription: "unknown keyword \(other)")
                 }
             }
@@ -4220,6 +4223,7 @@ extension Stripe.Tax.Registration.Update {
                 switch self {
                 case .value(let value): try container.encode(value)
                 case .now: try container.encode("now")
+                case .clear: try container.encode("")
                 }
             }
         }

@@ -37,7 +37,7 @@ extension Stripe.Billing.Invoice.AddLines {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
         /// Set of key-value pairs that you can attach to an object.
-        public var invoiceMetadata: [String: String]?
+        public var invoiceMetadata: Stripe.Clearable<[String: String]>?
         /// The line items to add.
         public var lines: [Lines]
 
@@ -49,7 +49,7 @@ extension Stripe.Billing.Invoice.AddLines {
 
         public init(
             expand: [String]? = nil,
-            invoiceMetadata: [String: String]? = nil,
+            invoiceMetadata: Stripe.Clearable<[String: String]>? = nil,
             lines: [Lines]
         ) {
             self.expand = expand
@@ -65,11 +65,11 @@ extension Stripe.Billing.Invoice.AddLines {
             /// Controls whether discounts apply to this line item.
             public var discountable: Bool?
             /// The coupons, promotion codes & existing discounts which apply to the line item.
-            public var discounts: [Discounts]?
+            public var discounts: Stripe.Clearable<[Discounts]>?
             /// ID of an unassigned invoice item to assign to this invoice.
             public var invoiceItem: String?
             /// Set of key-value pairs that you can attach to an object.
-            public var metadata: [String: String]?
+            public var metadata: Stripe.Clearable<[String: String]>?
             /// The period associated with this invoice item.
             public var period: Period?
             /// Data used to generate a new Price object inline.
@@ -81,9 +81,9 @@ extension Stripe.Billing.Invoice.AddLines {
             /// Non-negative decimal with at most 12 decimal places.
             public var quantityDecimal: String?
             /// A list of up to 20 tax amounts for this line item.
-            public var taxAmounts: [TaxAmounts]?
+            public var taxAmounts: Stripe.Clearable<[TaxAmounts]>?
             /// The tax rates which apply to the line item.
-            public var taxRates: [String]?
+            public var taxRates: Stripe.Clearable<[String]>?
 
             private enum CodingKeys: String, CodingKey {
                 case amount
@@ -105,16 +105,16 @@ extension Stripe.Billing.Invoice.AddLines {
                 amount: Int? = nil,
                 description: String? = nil,
                 discountable: Bool? = nil,
-                discounts: [Discounts]? = nil,
+                discounts: Stripe.Clearable<[Discounts]>? = nil,
                 invoiceItem: String? = nil,
-                metadata: [String: String]? = nil,
+                metadata: Stripe.Clearable<[String: String]>? = nil,
                 period: Period? = nil,
                 priceData: PriceData? = nil,
                 pricing: Pricing? = nil,
                 quantity: Int? = nil,
                 quantityDecimal: String? = nil,
-                taxAmounts: [TaxAmounts]? = nil,
-                taxRates: [String]? = nil
+                taxAmounts: Stripe.Clearable<[TaxAmounts]>? = nil,
+                taxRates: Stripe.Clearable<[String]>? = nil
             ) {
                 self.amount = amount
                 self.description = description
@@ -452,7 +452,7 @@ extension Stripe.Billing.Invoice.AttachPayment {
 extension Stripe.Billing.Invoice.Create {
     public struct Request: Codable, Hashable, Sendable {
         /// The account tax IDs associated with the invoice.
-        public var accountTaxIds: [String]?
+        public var accountTaxIds: Stripe.Clearable<[String]>?
         /// A fee in cents (or local equivalent) that will be applied to the invoice and transferred to the application owner's St…
         public var applicationFeeAmount: Int?
         /// Controls whether Stripe performs automatic collection of the invoice.
@@ -466,7 +466,7 @@ extension Stripe.Billing.Invoice.Create {
         /// The currency to create this invoice in.
         public var currency: Stripe.Currency?
         /// A list of up to 4 custom fields to be displayed on the invoice.
-        public var customFields: [CustomFields]?
+        public var customFields: Stripe.Clearable<[CustomFields]>?
         /// The ID of the customer to bill.
         public var customer: String?
         /// The ID of the account to bill.
@@ -482,7 +482,7 @@ extension Stripe.Billing.Invoice.Create {
         /// An arbitrary string attached to the object.
         public var description: String?
         /// The coupons and promotion codes to redeem into discounts for the invoice.
-        public var discounts: [Discounts]?
+        public var discounts: Stripe.Clearable<[Discounts]>?
         /// The date on which payment for this invoice is due.
         public var dueDate: Date?
         /// The date when this invoice is in effect.
@@ -496,7 +496,7 @@ extension Stripe.Billing.Invoice.Create {
         /// The connected account that issues the invoice.
         public var issuer: Issuer?
         /// Set of key-value pairs that you can attach to an object.
-        public var metadata: [String: String]?
+        public var metadata: Stripe.Clearable<[String: String]>?
         /// Set the number for this invoice.
         public var number: String?
         /// The account (if any) for which the funds of the invoice payment are intended.
@@ -555,14 +555,14 @@ extension Stripe.Billing.Invoice.Create {
         }
 
         public init(
-            accountTaxIds: [String]? = nil,
+            accountTaxIds: Stripe.Clearable<[String]>? = nil,
             applicationFeeAmount: Int? = nil,
             autoAdvance: Bool? = nil,
             automaticTax: AutomaticTax? = nil,
             automaticallyFinalizesAt: Date? = nil,
             collectionMethod: CollectionMethod? = nil,
             currency: Stripe.Currency? = nil,
-            customFields: [CustomFields]? = nil,
+            customFields: Stripe.Clearable<[CustomFields]>? = nil,
             customer: String? = nil,
             customerAccount: String? = nil,
             daysUntilDue: Int? = nil,
@@ -570,14 +570,14 @@ extension Stripe.Billing.Invoice.Create {
             defaultSource: String? = nil,
             defaultTaxRates: [String]? = nil,
             description: String? = nil,
-            discounts: [Discounts]? = nil,
+            discounts: Stripe.Clearable<[Discounts]>? = nil,
             dueDate: Date? = nil,
             effectiveAt: Date? = nil,
             expand: [String]? = nil,
             footer: String? = nil,
             fromInvoice: FromInvoice? = nil,
             issuer: Issuer? = nil,
-            metadata: [String: String]? = nil,
+            metadata: Stripe.Clearable<[String: String]>? = nil,
             number: String? = nil,
             onBehalfOf: String? = nil,
             paymentSettings: PaymentSettings? = nil,
@@ -780,7 +780,7 @@ extension Stripe.Billing.Invoice.Create {
             /// Payment-method-specific configuration to provide to the invoice’s PaymentIntent.
             public var paymentMethodOptions: PaymentMethodOptions?
             /// The list of payment method types (e.g.
-            public var paymentMethodTypes: [PaymentMethodTypes]?
+            public var paymentMethodTypes: Stripe.Clearable<[PaymentMethodTypes]>?
 
             private enum CodingKeys: String, CodingKey {
                 case defaultMandate
@@ -791,7 +791,7 @@ extension Stripe.Billing.Invoice.Create {
             public init(
                 defaultMandate: String? = nil,
                 paymentMethodOptions: PaymentMethodOptions? = nil,
-                paymentMethodTypes: [PaymentMethodTypes]? = nil
+                paymentMethodTypes: Stripe.Clearable<[PaymentMethodTypes]>? = nil
             ) {
                 self.defaultMandate = defaultMandate
                 self.paymentMethodOptions = paymentMethodOptions
@@ -852,25 +852,25 @@ extension Stripe.Billing.Invoice.Create {
             /// Payment-method-specific configuration to provide to the invoice’s PaymentIntent.
             public struct PaymentMethodOptions: Codable, Hashable, Sendable {
                 /// If paying by `acss_debit`, this sub-hash contains details about the Canadian pre-authorized debit payment method optio…
-                public var acssDebit: AcssDebit?
+                public var acssDebit: Stripe.Clearable<AcssDebit>?
                 /// If paying by `bancontact`, this sub-hash contains details about the Bancontact payment method options to pass to the i…
-                public var bancontact: Bancontact?
+                public var bancontact: Stripe.Clearable<Bancontact>?
                 /// If paying by `card`, this sub-hash contains details about the Card payment method options to pass to the invoice’s Pay…
-                public var card: Card?
+                public var card: Stripe.Clearable<Card>?
                 /// If paying by `customer_balance`, this sub-hash contains details about the Bank transfer payment method options to pass…
-                public var customerBalance: CustomerBalance?
+                public var customerBalance: Stripe.Clearable<CustomerBalance>?
                 /// If paying by `konbini`, this sub-hash contains details about the Konbini payment method options to pass to the invoice…
-                public var konbini: Konbini?
+                public var konbini: Stripe.Clearable<Konbini>?
                 /// If paying by `payto`, this sub-hash contains details about the PayTo payment method options to pass to the invoice’s P…
-                public var payto: Payto?
+                public var payto: Stripe.Clearable<Payto>?
                 /// If paying by `pix`, this sub-hash contains details about the Pix payment method options to pass to the invoice’s Payme…
-                public var pix: Pix?
+                public var pix: Stripe.Clearable<Pix>?
                 /// If paying by `sepa_debit`, this sub-hash contains details about the SEPA Direct Debit payment method options to pass t…
-                public var sepaDebit: SepaDebit?
+                public var sepaDebit: Stripe.Clearable<SepaDebit>?
                 /// If paying by `upi`, this sub-hash contains details about the UPI payment method options to pass to the invoice’s Payme…
-                public var upi: Upi?
+                public var upi: Stripe.Clearable<Upi>?
                 /// If paying by `us_bank_account`, this sub-hash contains details about the ACH direct debit payment method options to pa…
-                public var usBankAccount: UsBankAccount?
+                public var usBankAccount: Stripe.Clearable<UsBankAccount>?
 
                 private enum CodingKeys: String, CodingKey {
                     case acssDebit
@@ -886,16 +886,16 @@ extension Stripe.Billing.Invoice.Create {
                 }
 
                 public init(
-                    acssDebit: AcssDebit? = nil,
-                    bancontact: Bancontact? = nil,
-                    card: Card? = nil,
-                    customerBalance: CustomerBalance? = nil,
-                    konbini: Konbini? = nil,
-                    payto: Payto? = nil,
-                    pix: Pix? = nil,
-                    sepaDebit: SepaDebit? = nil,
-                    upi: Upi? = nil,
-                    usBankAccount: UsBankAccount? = nil
+                    acssDebit: Stripe.Clearable<AcssDebit>? = nil,
+                    bancontact: Stripe.Clearable<Bancontact>? = nil,
+                    card: Stripe.Clearable<Card>? = nil,
+                    customerBalance: Stripe.Clearable<CustomerBalance>? = nil,
+                    konbini: Stripe.Clearable<Konbini>? = nil,
+                    payto: Stripe.Clearable<Payto>? = nil,
+                    pix: Stripe.Clearable<Pix>? = nil,
+                    sepaDebit: Stripe.Clearable<SepaDebit>? = nil,
+                    upi: Stripe.Clearable<Upi>? = nil,
+                    usBankAccount: Stripe.Clearable<UsBankAccount>? = nil
                 ) {
                     self.acssDebit = acssDebit
                     self.bancontact = bancontact
@@ -1008,7 +1008,7 @@ extension Stripe.Billing.Invoice.Create {
                         /// Setting to true enables installments for this invoice.
                         public var enabled: Bool?
                         /// The selected installment plan to use for this invoice.
-                        public var plan: Plan?
+                        public var plan: Stripe.Clearable<Plan>?
 
                         private enum CodingKeys: String, CodingKey {
                             case enabled
@@ -1017,7 +1017,7 @@ extension Stripe.Billing.Invoice.Create {
 
                         public init(
                             enabled: Bool? = nil,
-                            plan: Plan? = nil
+                            plan: Stripe.Clearable<Plan>? = nil
                         ) {
                             self.enabled = enabled
                             self.plan = plan
@@ -1344,7 +1344,7 @@ extension Stripe.Billing.Invoice.Create {
             /// ID of the invoice rendering template to use for this invoice.
             public var template: String?
             /// The specific version of invoice rendering template to use for this invoice.
-            public var templateVersion: Int?
+            public var templateVersion: Stripe.Clearable<Int>?
 
             private enum CodingKeys: String, CodingKey {
                 case amountTaxDisplay
@@ -1357,7 +1357,7 @@ extension Stripe.Billing.Invoice.Create {
                 amountTaxDisplay: AmountTaxDisplay? = nil,
                 pdf: Pdf? = nil,
                 template: String? = nil,
-                templateVersion: Int? = nil
+                templateVersion: Stripe.Clearable<Int>? = nil
             ) {
                 self.amountTaxDisplay = amountTaxDisplay
                 self.pdf = pdf
@@ -1704,7 +1704,7 @@ extension Stripe.Billing.Invoice.CreatePreview {
         /// Details about the customer you want to invoice or overrides for an existing customer.
         public var customerDetails: CustomerDetails?
         /// The coupons to redeem into discounts for the invoice preview.
-        public var discounts: [Discounts]?
+        public var discounts: Stripe.Clearable<[Discounts]>?
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
         /// List of invoice items to add or update in the upcoming invoice preview (up to 250).
@@ -1748,7 +1748,7 @@ extension Stripe.Billing.Invoice.CreatePreview {
             customer: String? = nil,
             customerAccount: String? = nil,
             customerDetails: CustomerDetails? = nil,
-            discounts: [Discounts]? = nil,
+            discounts: Stripe.Clearable<[Discounts]>? = nil,
             expand: [String]? = nil,
             invoiceItems: [InvoiceItems]? = nil,
             issuer: Issuer? = nil,
@@ -1831,9 +1831,9 @@ extension Stripe.Billing.Invoice.CreatePreview {
         /// Details about the customer you want to invoice or overrides for an existing customer.
         public struct CustomerDetails: Codable, Hashable, Sendable {
             /// The customer's address.
-            public var address: Address?
+            public var address: Stripe.Clearable<Address>?
             /// The customer's shipping information.
-            public var shipping: Shipping?
+            public var shipping: Stripe.Clearable<Shipping>?
             /// Tax details about the customer.
             public var tax: Tax?
             /// The customer's tax exemption.
@@ -1850,8 +1850,8 @@ extension Stripe.Billing.Invoice.CreatePreview {
             }
 
             public init(
-                address: Address? = nil,
-                shipping: Shipping? = nil,
+                address: Stripe.Clearable<Address>? = nil,
+                shipping: Stripe.Clearable<Shipping>? = nil,
                 tax: Tax? = nil,
                 taxExempt: TaxExempt? = nil,
                 taxIds: [TaxIds]? = nil
@@ -2168,11 +2168,11 @@ extension Stripe.Billing.Invoice.CreatePreview {
             /// Explicitly controls whether discounts apply to this invoice item.
             public var discountable: Bool?
             /// The coupons to redeem into discounts for the invoice item in the preview.
-            public var discounts: [Discounts]?
+            public var discounts: Stripe.Clearable<[Discounts]>?
             /// The ID of the invoice item to update in preview.
             public var invoiceitem: String?
             /// Set of key-value pairs that you can attach to an object.
-            public var metadata: [String: String]?
+            public var metadata: Stripe.Clearable<[String: String]>?
             /// The period associated with this invoice item.
             public var period: Period?
             /// The ID of the price object.
@@ -2188,7 +2188,7 @@ extension Stripe.Billing.Invoice.CreatePreview {
             /// A tax code ID.
             public var taxCode: String?
             /// The tax rates that apply to the item.
-            public var taxRates: [String]?
+            public var taxRates: Stripe.Clearable<[String]>?
             /// The integer unit amount in cents (or local equivalent) of the charge to be applied to the upcoming invoice.
             public var unitAmount: Int?
             /// Same as `unit_amount`, but accepts a decimal value in cents (or local equivalent) with at most 12 decimal places.
@@ -2219,9 +2219,9 @@ extension Stripe.Billing.Invoice.CreatePreview {
                 currency: Stripe.Currency? = nil,
                 description: String? = nil,
                 discountable: Bool? = nil,
-                discounts: [Discounts]? = nil,
+                discounts: Stripe.Clearable<[Discounts]>? = nil,
                 invoiceitem: String? = nil,
-                metadata: [String: String]? = nil,
+                metadata: Stripe.Clearable<[String: String]>? = nil,
                 period: Period? = nil,
                 price: String? = nil,
                 priceData: PriceData? = nil,
@@ -2229,7 +2229,7 @@ extension Stripe.Billing.Invoice.CreatePreview {
                 quantityDecimal: String? = nil,
                 taxBehavior: TaxBehavior? = nil,
                 taxCode: String? = nil,
-                taxRates: [String]? = nil,
+                taxRates: Stripe.Clearable<[String]>? = nil,
                 unitAmount: Int? = nil,
                 unitAmountDecimal: String? = nil
             ) {
@@ -2471,7 +2471,7 @@ extension Stripe.Billing.Invoice.CreatePreview {
                 /// Can be set to `phase_start` to set the anchor to the start of the phase or `automatic` to automatically change it if n…
                 public var billingCycleAnchor: BillingCycleAnchor?
                 /// Define thresholds at which an invoice will be sent, and the subscription advanced to a new billing period.
-                public var billingThresholds: BillingThresholds?
+                public var billingThresholds: Stripe.Clearable<BillingThresholds>?
                 /// Either `charge_automatically`, or `send_invoice`.
                 public var collectionMethod: CollectionMethod?
                 /// Three-letter ISO currency code, in lowercase.
@@ -2479,11 +2479,11 @@ extension Stripe.Billing.Invoice.CreatePreview {
                 /// ID of the default payment method for the subscription schedule.
                 public var defaultPaymentMethod: String?
                 /// A list of Tax Rate ids.
-                public var defaultTaxRates: [String]?
+                public var defaultTaxRates: Stripe.Clearable<[String]>?
                 /// Subscription description, meant to be displayable to the customer.
                 public var description: String?
                 /// The coupons to redeem into discounts for the schedule phase.
-                public var discounts: [Discounts]?
+                public var discounts: Stripe.Clearable<[Discounts]>?
                 /// The number of intervals the phase should last.
                 public var duration: Duration?
                 /// The date at which this phase of the subscription schedule ends.
@@ -2537,13 +2537,13 @@ extension Stripe.Billing.Invoice.CreatePreview {
                     applicationFeePercent: Decimal? = nil,
                     automaticTax: AutomaticTax? = nil,
                     billingCycleAnchor: BillingCycleAnchor? = nil,
-                    billingThresholds: BillingThresholds? = nil,
+                    billingThresholds: Stripe.Clearable<BillingThresholds>? = nil,
                     collectionMethod: CollectionMethod? = nil,
                     currency: Stripe.Currency? = nil,
                     defaultPaymentMethod: String? = nil,
-                    defaultTaxRates: [String]? = nil,
+                    defaultTaxRates: Stripe.Clearable<[String]>? = nil,
                     description: String? = nil,
-                    discounts: [Discounts]? = nil,
+                    discounts: Stripe.Clearable<[Discounts]>? = nil,
                     duration: Duration? = nil,
                     endDate: EndDate? = nil,
                     invoiceSettings: InvoiceSettings? = nil,
@@ -2612,7 +2612,7 @@ extension Stripe.Billing.Invoice.CreatePreview {
                     /// Quantity for this item.
                     public var quantity: Int?
                     /// The tax rates which apply to the item.
-                    public var taxRates: [String]?
+                    public var taxRates: Stripe.Clearable<[String]>?
 
                     private enum CodingKeys: String, CodingKey {
                         case discountable
@@ -2633,7 +2633,7 @@ extension Stripe.Billing.Invoice.CreatePreview {
                         price: String? = nil,
                         priceData: PriceData? = nil,
                         quantity: Int? = nil,
-                        taxRates: [String]? = nil
+                        taxRates: Stripe.Clearable<[String]>? = nil
                     ) {
                         self.discountable = discountable
                         self.discounts = discounts
@@ -2934,7 +2934,7 @@ extension Stripe.Billing.Invoice.CreatePreview {
                 /// All invoices will be billed using the specified settings.
                 public struct InvoiceSettings: Codable, Hashable, Sendable {
                     /// The account tax IDs associated with this phase of the subscription schedule.
-                    public var accountTaxIds: [String]?
+                    public var accountTaxIds: Stripe.Clearable<[String]>?
                     /// Number of days within which a customer must pay invoices generated by this subscription schedule.
                     public var daysUntilDue: Int?
                     /// The connected account that issues the invoice.
@@ -2947,7 +2947,7 @@ extension Stripe.Billing.Invoice.CreatePreview {
                     }
 
                     public init(
-                        accountTaxIds: [String]? = nil,
+                        accountTaxIds: Stripe.Clearable<[String]>? = nil,
                         daysUntilDue: Int? = nil,
                         issuer: Issuer? = nil
                     ) {
@@ -2985,9 +2985,9 @@ extension Stripe.Billing.Invoice.CreatePreview {
 
                 public struct Items: Codable, Hashable, Sendable {
                     /// Define thresholds at which an invoice will be sent, and the subscription advanced to a new billing period.
-                    public var billingThresholds: BillingThresholds?
+                    public var billingThresholds: Stripe.Clearable<BillingThresholds>?
                     /// The coupons to redeem into discounts for the subscription item.
-                    public var discounts: [Discounts]?
+                    public var discounts: Stripe.Clearable<[Discounts]>?
                     /// Set of key-value pairs that you can attach to a configuration item.
                     public var metadata: [String: String]?
                     /// The plan ID to subscribe to.
@@ -2999,7 +2999,7 @@ extension Stripe.Billing.Invoice.CreatePreview {
                     /// Quantity for the given price.
                     public var quantity: Int?
                     /// A list of Tax Rate ids.
-                    public var taxRates: [String]?
+                    public var taxRates: Stripe.Clearable<[String]>?
 
                     private enum CodingKeys: String, CodingKey {
                         case billingThresholds
@@ -3013,14 +3013,14 @@ extension Stripe.Billing.Invoice.CreatePreview {
                     }
 
                     public init(
-                        billingThresholds: BillingThresholds? = nil,
-                        discounts: [Discounts]? = nil,
+                        billingThresholds: Stripe.Clearable<BillingThresholds>? = nil,
+                        discounts: Stripe.Clearable<[Discounts]>? = nil,
                         metadata: [String: String]? = nil,
                         plan: String? = nil,
                         price: String? = nil,
                         priceData: PriceData? = nil,
                         quantity: Int? = nil,
-                        taxRates: [String]? = nil
+                        taxRates: Stripe.Clearable<[String]>? = nil
                     ) {
                         self.billingThresholds = billingThresholds
                         self.discounts = discounts
@@ -3224,7 +3224,7 @@ extension Stripe.Billing.Invoice.CreatePreview {
             /// Controls how prorations and invoices for subscriptions are calculated and orchestrated.
             public var billingMode: BillingMode?
             /// Sets the billing schedules for the subscription.
-            public var billingSchedules: [BillingSchedules]?
+            public var billingSchedules: Stripe.Clearable<[BillingSchedules]>?
             /// A timestamp at which the subscription should cancel.
             public var cancelAt: CancelAt?
             /// Indicate whether this subscription should cancel at the end of the current period (`current_period_end`).
@@ -3232,11 +3232,11 @@ extension Stripe.Billing.Invoice.CreatePreview {
             /// This simulates the subscription being canceled or expired immediately.
             public var cancelNow: Bool?
             /// If provided, the invoice returned will preview updating or creating a subscription with these default tax rates.
-            public var defaultTaxRates: [String]?
+            public var defaultTaxRates: Stripe.Clearable<[String]>?
             /// A list of up to 20 subscription items, each with an attached price.
             public var items: [Items]?
             /// Set of key-value pairs that you can attach to an object.
-            public var metadata: [String: String]?
+            public var metadata: Stripe.Clearable<[String: String]>?
             /// Determines how to handle prorations when the billing cycle changes (e.g., when switching plans, resetting `billing_cyc…
             public var prorationBehavior: ProrationBehavior?
             /// If previewing an update to a subscription, and doing proration, `subscription_details.proration_date` forces the prora…
@@ -3268,13 +3268,13 @@ extension Stripe.Billing.Invoice.CreatePreview {
             public init(
                 billingCycleAnchor: BillingCycleAnchor? = nil,
                 billingMode: BillingMode? = nil,
-                billingSchedules: [BillingSchedules]? = nil,
+                billingSchedules: Stripe.Clearable<[BillingSchedules]>? = nil,
                 cancelAt: CancelAt? = nil,
                 cancelAtPeriodEnd: Bool? = nil,
                 cancelNow: Bool? = nil,
-                defaultTaxRates: [String]? = nil,
+                defaultTaxRates: Stripe.Clearable<[String]>? = nil,
                 items: [Items]? = nil,
-                metadata: [String: String]? = nil,
+                metadata: Stripe.Clearable<[String: String]>? = nil,
                 prorationBehavior: ProrationBehavior? = nil,
                 prorationDate: Date? = nil,
                 resumeAt: String? = nil,
@@ -3486,6 +3486,8 @@ extension Stripe.Billing.Invoice.CreatePreview {
                 case maxBilledUntil
                 case maxPeriodEnd
                 case minPeriodEnd
+                /// Unsets the field.
+                case clear
 
                 public init(from decoder: any Decoder) throws {
                     let container = try decoder.singleValueContainer()
@@ -3494,6 +3496,7 @@ extension Stripe.Billing.Invoice.CreatePreview {
                     case "max_billed_until": self = .maxBilledUntil
                     case "max_period_end": self = .maxPeriodEnd
                     case "min_period_end": self = .minPeriodEnd
+                    case "": self = .clear
                     case let other: throw DecodingError.dataCorruptedError(in: container, debugDescription: "unknown keyword \(other)")
                     }
                 }
@@ -3505,23 +3508,24 @@ extension Stripe.Billing.Invoice.CreatePreview {
                     case .maxBilledUntil: try container.encode("max_billed_until")
                     case .maxPeriodEnd: try container.encode("max_period_end")
                     case .minPeriodEnd: try container.encode("min_period_end")
+                    case .clear: try container.encode("")
                     }
                 }
             }
 
             public struct Items: Codable, Hashable, Sendable {
                 /// Define thresholds at which an invoice will be sent, and the subscription advanced to a new billing period.
-                public var billingThresholds: BillingThresholds?
+                public var billingThresholds: Stripe.Clearable<BillingThresholds>?
                 /// Delete all usage for a given subscription item.
                 public var clearUsage: Bool?
                 /// A flag that, if set to `true`, will delete the specified item.
                 public var deleted: Bool?
                 /// The coupons to redeem into discounts for the subscription item.
-                public var discounts: [Discounts]?
+                public var discounts: Stripe.Clearable<[Discounts]>?
                 /// Subscription item to update.
                 public var id: String?
                 /// Set of key-value pairs that you can attach to an object.
-                public var metadata: [String: String]?
+                public var metadata: Stripe.Clearable<[String: String]>?
                 /// Plan ID for this item, as a string.
                 public var plan: String?
                 /// The ID of the price object.
@@ -3531,7 +3535,7 @@ extension Stripe.Billing.Invoice.CreatePreview {
                 /// Quantity for this item.
                 public var quantity: Int?
                 /// A list of Tax Rate ids.
-                public var taxRates: [String]?
+                public var taxRates: Stripe.Clearable<[String]>?
 
                 private enum CodingKeys: String, CodingKey {
                     case billingThresholds
@@ -3548,17 +3552,17 @@ extension Stripe.Billing.Invoice.CreatePreview {
                 }
 
                 public init(
-                    billingThresholds: BillingThresholds? = nil,
+                    billingThresholds: Stripe.Clearable<BillingThresholds>? = nil,
                     clearUsage: Bool? = nil,
                     deleted: Bool? = nil,
-                    discounts: [Discounts]? = nil,
+                    discounts: Stripe.Clearable<[Discounts]>? = nil,
                     id: String? = nil,
-                    metadata: [String: String]? = nil,
+                    metadata: Stripe.Clearable<[String: String]>? = nil,
                     plan: String? = nil,
                     price: String? = nil,
                     priceData: PriceData? = nil,
                     quantity: Int? = nil,
-                    taxRates: [String]? = nil
+                    taxRates: Stripe.Clearable<[String]>? = nil
                 ) {
                     self.billingThresholds = billingThresholds
                     self.clearUsage = clearUsage
@@ -3905,7 +3909,7 @@ extension Stripe.Billing.Invoice.RemoveLines {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
         /// Set of key-value pairs that you can attach to an object.
-        public var invoiceMetadata: [String: String]?
+        public var invoiceMetadata: Stripe.Clearable<[String: String]>?
         /// The line items to remove.
         public var lines: [Lines]
 
@@ -3917,7 +3921,7 @@ extension Stripe.Billing.Invoice.RemoveLines {
 
         public init(
             expand: [String]? = nil,
-            invoiceMetadata: [String: String]? = nil,
+            invoiceMetadata: Stripe.Clearable<[String: String]>? = nil,
             lines: [Lines]
         ) {
             self.expand = expand
@@ -4033,7 +4037,7 @@ extension Stripe.Billing.Invoice.SendInvoice {
 extension Stripe.Billing.Invoice.Update {
     public struct Request: Codable, Hashable, Sendable {
         /// The account tax IDs associated with the invoice.
-        public var accountTaxIds: [String]?
+        public var accountTaxIds: Stripe.Clearable<[String]>?
         /// A fee in cents (or local equivalent) that will be applied to the invoice and transferred to the application owner's St…
         public var applicationFeeAmount: Int?
         /// Controls whether Stripe performs automatic collection of the invoice.
@@ -4045,7 +4049,7 @@ extension Stripe.Billing.Invoice.Update {
         /// Either `charge_automatically` or `send_invoice`.
         public var collectionMethod: CollectionMethod?
         /// A list of up to 4 custom fields to be displayed on the invoice.
-        public var customFields: [CustomFields]?
+        public var customFields: Stripe.Clearable<[CustomFields]>?
         /// The number of days from which the invoice is created until it is due.
         public var daysUntilDue: Int?
         /// ID of the default payment method for the invoice.
@@ -4053,15 +4057,15 @@ extension Stripe.Billing.Invoice.Update {
         /// ID of the default payment source for the invoice.
         public var defaultSource: String?
         /// The tax rates that will apply to any line item that does not have `tax_rates` set.
-        public var defaultTaxRates: [String]?
+        public var defaultTaxRates: Stripe.Clearable<[String]>?
         /// An arbitrary string attached to the object.
         public var description: String?
         /// The discounts that will apply to the invoice.
-        public var discounts: [Discounts]?
+        public var discounts: Stripe.Clearable<[Discounts]>?
         /// The date on which payment for this invoice is due.
         public var dueDate: Date?
         /// The date when this invoice is in effect.
-        public var effectiveAt: Date?
+        public var effectiveAt: Stripe.Clearable<Date>?
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
         /// Footer to be displayed on the invoice.
@@ -4069,7 +4073,7 @@ extension Stripe.Billing.Invoice.Update {
         /// The connected account that issues the invoice.
         public var issuer: Issuer?
         /// Set of key-value pairs that you can attach to an object.
-        public var metadata: [String: String]?
+        public var metadata: Stripe.Clearable<[String: String]>?
         /// Set the number for this invoice.
         public var number: String?
         /// The account (if any) for which the funds of the invoice payment are intended.
@@ -4079,13 +4083,13 @@ extension Stripe.Billing.Invoice.Update {
         /// The rendering-related settings that control how the invoice is displayed on customer-facing surfaces such as PDF and H…
         public var rendering: Rendering?
         /// Settings for the cost of shipping for this invoice.
-        public var shippingCost: ShippingCost?
+        public var shippingCost: Stripe.Clearable<ShippingCost>?
         /// Shipping details for the invoice.
-        public var shippingDetails: ShippingDetails?
+        public var shippingDetails: Stripe.Clearable<ShippingDetails>?
         /// Extra information about a charge for the customer's credit card statement.
         public var statementDescriptor: String?
         /// If specified, the funds from the invoice will be transferred to the destination and the ID of the resulting transfer w…
-        public var transferData: TransferData?
+        public var transferData: Stripe.Clearable<TransferData>?
 
         private enum CodingKeys: String, CodingKey {
             case accountTaxIds
@@ -4118,33 +4122,33 @@ extension Stripe.Billing.Invoice.Update {
         }
 
         public init(
-            accountTaxIds: [String]? = nil,
+            accountTaxIds: Stripe.Clearable<[String]>? = nil,
             applicationFeeAmount: Int? = nil,
             autoAdvance: Bool? = nil,
             automaticTax: AutomaticTax? = nil,
             automaticallyFinalizesAt: Date? = nil,
             collectionMethod: CollectionMethod? = nil,
-            customFields: [CustomFields]? = nil,
+            customFields: Stripe.Clearable<[CustomFields]>? = nil,
             daysUntilDue: Int? = nil,
             defaultPaymentMethod: String? = nil,
             defaultSource: String? = nil,
-            defaultTaxRates: [String]? = nil,
+            defaultTaxRates: Stripe.Clearable<[String]>? = nil,
             description: String? = nil,
-            discounts: [Discounts]? = nil,
+            discounts: Stripe.Clearable<[Discounts]>? = nil,
             dueDate: Date? = nil,
-            effectiveAt: Date? = nil,
+            effectiveAt: Stripe.Clearable<Date>? = nil,
             expand: [String]? = nil,
             footer: String? = nil,
             issuer: Issuer? = nil,
-            metadata: [String: String]? = nil,
+            metadata: Stripe.Clearable<[String: String]>? = nil,
             number: String? = nil,
             onBehalfOf: String? = nil,
             paymentSettings: PaymentSettings? = nil,
             rendering: Rendering? = nil,
-            shippingCost: ShippingCost? = nil,
-            shippingDetails: ShippingDetails? = nil,
+            shippingCost: Stripe.Clearable<ShippingCost>? = nil,
+            shippingDetails: Stripe.Clearable<ShippingDetails>? = nil,
             statementDescriptor: String? = nil,
-            transferData: TransferData? = nil
+            transferData: Stripe.Clearable<TransferData>? = nil
         ) {
             self.accountTaxIds = accountTaxIds
             self.applicationFeeAmount = applicationFeeAmount
@@ -4305,7 +4309,7 @@ extension Stripe.Billing.Invoice.Update {
             /// Payment-method-specific configuration to provide to the invoice’s PaymentIntent.
             public var paymentMethodOptions: PaymentMethodOptions?
             /// The list of payment method types (e.g.
-            public var paymentMethodTypes: [PaymentMethodTypes]?
+            public var paymentMethodTypes: Stripe.Clearable<[PaymentMethodTypes]>?
 
             private enum CodingKeys: String, CodingKey {
                 case defaultMandate
@@ -4316,7 +4320,7 @@ extension Stripe.Billing.Invoice.Update {
             public init(
                 defaultMandate: String? = nil,
                 paymentMethodOptions: PaymentMethodOptions? = nil,
-                paymentMethodTypes: [PaymentMethodTypes]? = nil
+                paymentMethodTypes: Stripe.Clearable<[PaymentMethodTypes]>? = nil
             ) {
                 self.defaultMandate = defaultMandate
                 self.paymentMethodOptions = paymentMethodOptions
@@ -4377,25 +4381,25 @@ extension Stripe.Billing.Invoice.Update {
             /// Payment-method-specific configuration to provide to the invoice’s PaymentIntent.
             public struct PaymentMethodOptions: Codable, Hashable, Sendable {
                 /// If paying by `acss_debit`, this sub-hash contains details about the Canadian pre-authorized debit payment method optio…
-                public var acssDebit: AcssDebit?
+                public var acssDebit: Stripe.Clearable<AcssDebit>?
                 /// If paying by `bancontact`, this sub-hash contains details about the Bancontact payment method options to pass to the i…
-                public var bancontact: Bancontact?
+                public var bancontact: Stripe.Clearable<Bancontact>?
                 /// If paying by `card`, this sub-hash contains details about the Card payment method options to pass to the invoice’s Pay…
-                public var card: Card?
+                public var card: Stripe.Clearable<Card>?
                 /// If paying by `customer_balance`, this sub-hash contains details about the Bank transfer payment method options to pass…
-                public var customerBalance: CustomerBalance?
+                public var customerBalance: Stripe.Clearable<CustomerBalance>?
                 /// If paying by `konbini`, this sub-hash contains details about the Konbini payment method options to pass to the invoice…
-                public var konbini: Konbini?
+                public var konbini: Stripe.Clearable<Konbini>?
                 /// If paying by `payto`, this sub-hash contains details about the PayTo payment method options to pass to the invoice’s P…
-                public var payto: Payto?
+                public var payto: Stripe.Clearable<Payto>?
                 /// If paying by `pix`, this sub-hash contains details about the Pix payment method options to pass to the invoice’s Payme…
-                public var pix: Pix?
+                public var pix: Stripe.Clearable<Pix>?
                 /// If paying by `sepa_debit`, this sub-hash contains details about the SEPA Direct Debit payment method options to pass t…
-                public var sepaDebit: SepaDebit?
+                public var sepaDebit: Stripe.Clearable<SepaDebit>?
                 /// If paying by `upi`, this sub-hash contains details about the UPI payment method options to pass to the invoice’s Payme…
-                public var upi: Upi?
+                public var upi: Stripe.Clearable<Upi>?
                 /// If paying by `us_bank_account`, this sub-hash contains details about the ACH direct debit payment method options to pa…
-                public var usBankAccount: UsBankAccount?
+                public var usBankAccount: Stripe.Clearable<UsBankAccount>?
 
                 private enum CodingKeys: String, CodingKey {
                     case acssDebit
@@ -4411,16 +4415,16 @@ extension Stripe.Billing.Invoice.Update {
                 }
 
                 public init(
-                    acssDebit: AcssDebit? = nil,
-                    bancontact: Bancontact? = nil,
-                    card: Card? = nil,
-                    customerBalance: CustomerBalance? = nil,
-                    konbini: Konbini? = nil,
-                    payto: Payto? = nil,
-                    pix: Pix? = nil,
-                    sepaDebit: SepaDebit? = nil,
-                    upi: Upi? = nil,
-                    usBankAccount: UsBankAccount? = nil
+                    acssDebit: Stripe.Clearable<AcssDebit>? = nil,
+                    bancontact: Stripe.Clearable<Bancontact>? = nil,
+                    card: Stripe.Clearable<Card>? = nil,
+                    customerBalance: Stripe.Clearable<CustomerBalance>? = nil,
+                    konbini: Stripe.Clearable<Konbini>? = nil,
+                    payto: Stripe.Clearable<Payto>? = nil,
+                    pix: Stripe.Clearable<Pix>? = nil,
+                    sepaDebit: Stripe.Clearable<SepaDebit>? = nil,
+                    upi: Stripe.Clearable<Upi>? = nil,
+                    usBankAccount: Stripe.Clearable<UsBankAccount>? = nil
                 ) {
                     self.acssDebit = acssDebit
                     self.bancontact = bancontact
@@ -4533,7 +4537,7 @@ extension Stripe.Billing.Invoice.Update {
                         /// Setting to true enables installments for this invoice.
                         public var enabled: Bool?
                         /// The selected installment plan to use for this invoice.
-                        public var plan: Plan?
+                        public var plan: Stripe.Clearable<Plan>?
 
                         private enum CodingKeys: String, CodingKey {
                             case enabled
@@ -4542,7 +4546,7 @@ extension Stripe.Billing.Invoice.Update {
 
                         public init(
                             enabled: Bool? = nil,
-                            plan: Plan? = nil
+                            plan: Stripe.Clearable<Plan>? = nil
                         ) {
                             self.enabled = enabled
                             self.plan = plan
@@ -4869,7 +4873,7 @@ extension Stripe.Billing.Invoice.Update {
             /// ID of the invoice rendering template to use for this invoice.
             public var template: String?
             /// The specific version of invoice rendering template to use for this invoice.
-            public var templateVersion: Int?
+            public var templateVersion: Stripe.Clearable<Int>?
 
             private enum CodingKeys: String, CodingKey {
                 case amountTaxDisplay
@@ -4882,7 +4886,7 @@ extension Stripe.Billing.Invoice.Update {
                 amountTaxDisplay: AmountTaxDisplay? = nil,
                 pdf: Pdf? = nil,
                 template: String? = nil,
-                templateVersion: Int? = nil
+                templateVersion: Stripe.Clearable<Int>? = nil
             ) {
                 self.amountTaxDisplay = amountTaxDisplay
                 self.pdf = pdf
@@ -5218,7 +5222,7 @@ extension Stripe.Billing.Invoice.UpdateLines {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
         /// Set of key-value pairs that you can attach to an object.
-        public var invoiceMetadata: [String: String]?
+        public var invoiceMetadata: Stripe.Clearable<[String: String]>?
         /// The line items to update.
         public var lines: [Lines]
 
@@ -5230,7 +5234,7 @@ extension Stripe.Billing.Invoice.UpdateLines {
 
         public init(
             expand: [String]? = nil,
-            invoiceMetadata: [String: String]? = nil,
+            invoiceMetadata: Stripe.Clearable<[String: String]>? = nil,
             lines: [Lines]
         ) {
             self.expand = expand
@@ -5246,11 +5250,11 @@ extension Stripe.Billing.Invoice.UpdateLines {
             /// Controls whether discounts apply to this line item.
             public var discountable: Bool?
             /// The coupons, promotion codes & existing discounts which apply to the line item.
-            public var discounts: [Discounts]?
+            public var discounts: Stripe.Clearable<[Discounts]>?
             /// ID of an existing line item on the invoice.
             public var id: String
             /// Set of key-value pairs that you can attach to an object.
-            public var metadata: [String: String]?
+            public var metadata: Stripe.Clearable<[String: String]>?
             /// The period associated with this invoice item.
             public var period: Period?
             /// Data used to generate a new Price object inline.
@@ -5262,9 +5266,9 @@ extension Stripe.Billing.Invoice.UpdateLines {
             /// Non-negative decimal with at most 12 decimal places.
             public var quantityDecimal: String?
             /// A list of up to 20 tax amounts for this line item.
-            public var taxAmounts: [TaxAmounts]?
+            public var taxAmounts: Stripe.Clearable<[TaxAmounts]>?
             /// The tax rates which apply to the line item.
-            public var taxRates: [String]?
+            public var taxRates: Stripe.Clearable<[String]>?
 
             private enum CodingKeys: String, CodingKey {
                 case amount
@@ -5286,16 +5290,16 @@ extension Stripe.Billing.Invoice.UpdateLines {
                 amount: Int? = nil,
                 description: String? = nil,
                 discountable: Bool? = nil,
-                discounts: [Discounts]? = nil,
+                discounts: Stripe.Clearable<[Discounts]>? = nil,
                 id: String,
-                metadata: [String: String]? = nil,
+                metadata: Stripe.Clearable<[String: String]>? = nil,
                 period: Period? = nil,
                 priceData: PriceData? = nil,
                 pricing: Pricing? = nil,
                 quantity: Int? = nil,
                 quantityDecimal: String? = nil,
-                taxAmounts: [TaxAmounts]? = nil,
-                taxRates: [String]? = nil
+                taxAmounts: Stripe.Clearable<[TaxAmounts]>? = nil,
+                taxRates: Stripe.Clearable<[String]>? = nil
             ) {
                 self.amount = amount
                 self.description = description

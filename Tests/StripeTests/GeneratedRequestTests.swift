@@ -88,4 +88,24 @@ struct GeneratedRequestTests {
         #expect(page.totalCount == 7)
         #expect(page.data.first?.id == "cus_1")
     }
+
+    @Test("a clearable parameter is left alone, set, or cleared with an empty value")
+    func clearable() throws {
+        let untouched = try Self.pairs(Stripe.Customers.Customer.Update.Request(name: "Ada"))
+        #expect(untouched["metadata"] == nil)
+
+        let set = try Self.pairs(Stripe.Customers.Customer.Update.Request(metadata: ["plan": "pro"]))
+        #expect(set["metadata[plan]"] == "pro")
+
+        let cleared = try Self.pairs(Stripe.Customers.Customer.Update.Request(
+            balance: 0, description: "", metadata: .clear, shipping: .clear
+        ))
+        #expect(cleared["metadata"] == "")
+        #expect(cleared["shipping"] == "")
+        #expect(cleared["description"] == "", "a plain string clears itself")
+        #expect(cleared["balance"] == "0")
+
+        let keyword = try Self.pairs(Stripe.FileLinks.FileLink.Update.Request(expiresAt: .clear))
+        #expect(keyword["expires_at"] == "")
+    }
 }

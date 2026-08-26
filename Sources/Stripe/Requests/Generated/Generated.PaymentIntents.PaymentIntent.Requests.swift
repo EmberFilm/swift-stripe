@@ -104,9 +104,9 @@ extension Stripe.PaymentIntents.PaymentIntent.Capture {
         /// Automations to be run during the PaymentIntent lifecycle
         public var hooks: Hooks?
         /// Set of key-value pairs that you can attach to an object.
-        public var metadata: [String: String]?
+        public var metadata: Stripe.Clearable<[String: String]>?
         /// Provides industry-specific information about the charge.
-        public var paymentDetails: PaymentDetails?
+        public var paymentDetails: Stripe.Clearable<PaymentDetails>?
         /// Text that appears on the customer's statement as the statement descriptor for a non-card charge.
         public var statementDescriptor: String?
         /// Provides information about a card charge.
@@ -135,8 +135,8 @@ extension Stripe.PaymentIntents.PaymentIntent.Capture {
             expand: [String]? = nil,
             finalCapture: Bool? = nil,
             hooks: Hooks? = nil,
-            metadata: [String: String]? = nil,
-            paymentDetails: PaymentDetails? = nil,
+            metadata: Stripe.Clearable<[String: String]>? = nil,
+            paymentDetails: Stripe.Clearable<PaymentDetails>? = nil,
             statementDescriptor: String? = nil,
             statementDescriptorSuffix: String? = nil,
             transferData: TransferData? = nil
@@ -157,15 +157,15 @@ extension Stripe.PaymentIntents.PaymentIntent.Capture {
         /// Provides industry-specific information about the amount.
         public struct AmountDetails: Codable, Hashable, Sendable {
             /// The total discount applied on the transaction represented in the smallest currency unit.
-            public var discountAmount: Int?
+            public var discountAmount: Stripe.Clearable<Int>?
             /// Set to `false` to return arithmetic validation errors in the response without failing the request.
             public var enforceArithmeticValidation: Bool?
             /// A list of line items, each containing information about a product in the PaymentIntent.
-            public var lineItems: [LineItems]?
+            public var lineItems: Stripe.Clearable<[LineItems]>?
             /// Contains information about the shipping portion of the amount.
-            public var shipping: Shipping?
+            public var shipping: Stripe.Clearable<Shipping>?
             /// Contains information about the tax portion of the amount.
-            public var tax: Tax?
+            public var tax: Stripe.Clearable<Tax>?
 
             private enum CodingKeys: String, CodingKey {
                 case discountAmount
@@ -176,11 +176,11 @@ extension Stripe.PaymentIntents.PaymentIntent.Capture {
             }
 
             public init(
-                discountAmount: Int? = nil,
+                discountAmount: Stripe.Clearable<Int>? = nil,
                 enforceArithmeticValidation: Bool? = nil,
-                lineItems: [LineItems]? = nil,
-                shipping: Shipping? = nil,
-                tax: Tax? = nil
+                lineItems: Stripe.Clearable<[LineItems]>? = nil,
+                shipping: Stripe.Clearable<Shipping>? = nil,
+                tax: Stripe.Clearable<Tax>? = nil
             ) {
                 self.discountAmount = discountAmount
                 self.enforceArithmeticValidation = enforceArithmeticValidation
@@ -383,7 +383,7 @@ extension Stripe.PaymentIntents.PaymentIntent.Capture {
 
             public struct Shipping: Codable, Hashable, Sendable {
                 /// If a physical good is being shipped, the cost of shipping represented in the smallest currency unit.
-                public var amount: Int?
+                public var amount: Stripe.Clearable<Int>?
                 /// If a physical good is being shipped, the postal code of where it is being shipped from.
                 public var fromPostalCode: String?
                 /// If a physical good is being shipped, the postal code of where it is being shipped to.
@@ -396,7 +396,7 @@ extension Stripe.PaymentIntents.PaymentIntent.Capture {
                 }
 
                 public init(
-                    amount: Int? = nil,
+                    amount: Stripe.Clearable<Int>? = nil,
                     fromPostalCode: String? = nil,
                     toPostalCode: String? = nil
                 ) {
@@ -516,7 +516,7 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
         /// The list of payment method types allowed for use with this payment.
         public var allowedPaymentMethodTypes: [AllowedPaymentMethodTypes]?
         /// Provides industry-specific information about the amount.
-        public var amountDetails: AmountDetails?
+        public var amountDetails: Stripe.Clearable<AmountDetails>?
         /// Amount to confirm on the PaymentIntent.
         public var amountToConfirm: Int?
         /// Controls when the funds will be captured from the customer's account.
@@ -526,18 +526,18 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
         /// Set to `true` to fail the payment attempt if the PaymentIntent transitions into `requires_action`.
         public var errorOnRequiresAction: Bool?
         /// The list of payment method types to exclude from use with this payment.
-        public var excludedPaymentMethodTypes: [ExcludedPaymentMethodTypes]?
+        public var excludedPaymentMethodTypes: Stripe.Clearable<[ExcludedPaymentMethodTypes]>?
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
         /// Automations to be run during the PaymentIntent lifecycle
         public var hooks: Hooks?
         /// ID of the mandate that's used for this payment.
         public var mandate: String?
-        public var mandateData: MandateData?
+        public var mandateData: Stripe.Clearable<MandateData>?
         /// Set to `true` to indicate that the customer isn't in your checkout flow during this payment attempt and can't authenti…
         public var offSession: OffSession?
         /// Provides industry-specific information about the charge.
-        public var paymentDetails: PaymentDetails?
+        public var paymentDetails: Stripe.Clearable<PaymentDetails>?
         /// ID of the payment method (a PaymentMethod, Card, or compatible Source object) to attach to this PaymentIntent.
         public var paymentMethod: String?
         /// If provided, this hash will be used to create a PaymentMethod.
@@ -555,7 +555,7 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
         /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
         public var setupFutureUsage: SetupFutureUsage?
         /// Shipping information for this PaymentIntent.
-        public var shipping: Shipping?
+        public var shipping: Stripe.Clearable<Shipping>?
         /// Set to `true` when confirming server-side and using Stripe.js, iOS, or Android client-side SDKs to handle the next act…
         public var useStripeSdk: Bool?
 
@@ -587,18 +587,18 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
 
         public init(
             allowedPaymentMethodTypes: [AllowedPaymentMethodTypes]? = nil,
-            amountDetails: AmountDetails? = nil,
+            amountDetails: Stripe.Clearable<AmountDetails>? = nil,
             amountToConfirm: Int? = nil,
             captureMethod: CaptureMethod? = nil,
             confirmationToken: String? = nil,
             errorOnRequiresAction: Bool? = nil,
-            excludedPaymentMethodTypes: [ExcludedPaymentMethodTypes]? = nil,
+            excludedPaymentMethodTypes: Stripe.Clearable<[ExcludedPaymentMethodTypes]>? = nil,
             expand: [String]? = nil,
             hooks: Hooks? = nil,
             mandate: String? = nil,
-            mandateData: MandateData? = nil,
+            mandateData: Stripe.Clearable<MandateData>? = nil,
             offSession: OffSession? = nil,
-            paymentDetails: PaymentDetails? = nil,
+            paymentDetails: Stripe.Clearable<PaymentDetails>? = nil,
             paymentMethod: String? = nil,
             paymentMethodData: PaymentMethodData? = nil,
             paymentMethodOptions: PaymentMethodOptions? = nil,
@@ -607,7 +607,7 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
             receiptEmail: String? = nil,
             returnUrl: String? = nil,
             setupFutureUsage: SetupFutureUsage? = nil,
-            shipping: Shipping? = nil,
+            shipping: Stripe.Clearable<Shipping>? = nil,
             useStripeSdk: Bool? = nil
         ) {
             self.allowedPaymentMethodTypes = allowedPaymentMethodTypes
@@ -804,15 +804,15 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
 
         public struct AmountDetails: Codable, Hashable, Sendable {
             /// The total discount applied on the transaction represented in the smallest currency unit.
-            public var discountAmount: Int?
+            public var discountAmount: Stripe.Clearable<Int>?
             /// Set to `false` to return arithmetic validation errors in the response without failing the request.
             public var enforceArithmeticValidation: Bool?
             /// A list of line items, each containing information about a product in the PaymentIntent.
-            public var lineItems: [LineItems]?
+            public var lineItems: Stripe.Clearable<[LineItems]>?
             /// Contains information about the shipping portion of the amount.
-            public var shipping: Shipping?
+            public var shipping: Stripe.Clearable<Shipping>?
             /// Contains information about the tax portion of the amount.
-            public var tax: Tax?
+            public var tax: Stripe.Clearable<Tax>?
 
             private enum CodingKeys: String, CodingKey {
                 case discountAmount
@@ -823,11 +823,11 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
             }
 
             public init(
-                discountAmount: Int? = nil,
+                discountAmount: Stripe.Clearable<Int>? = nil,
                 enforceArithmeticValidation: Bool? = nil,
-                lineItems: [LineItems]? = nil,
-                shipping: Shipping? = nil,
-                tax: Tax? = nil
+                lineItems: Stripe.Clearable<[LineItems]>? = nil,
+                shipping: Stripe.Clearable<Shipping>? = nil,
+                tax: Stripe.Clearable<Tax>? = nil
             ) {
                 self.discountAmount = discountAmount
                 self.enforceArithmeticValidation = enforceArithmeticValidation
@@ -1030,7 +1030,7 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
 
             public struct Shipping: Codable, Hashable, Sendable {
                 /// If a physical good is being shipped, the cost of shipping represented in the smallest currency unit.
-                public var amount: Int?
+                public var amount: Stripe.Clearable<Int>?
                 /// If a physical good is being shipped, the postal code of where it is being shipped from.
                 public var fromPostalCode: String?
                 /// If a physical good is being shipped, the postal code of where it is being shipped to.
@@ -1043,7 +1043,7 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 }
 
                 public init(
-                    amount: Int? = nil,
+                    amount: Stripe.Clearable<Int>? = nil,
                     fromPostalCode: String? = nil,
                     toPostalCode: String? = nil
                 ) {
@@ -1713,7 +1713,7 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
             /// Billing information associated with the PaymentMethod that may be used or required by particular types of payment meth…
             public struct BillingDetails: Codable, Hashable, Sendable {
                 /// Billing address.
-                public var address: Address?
+                public var address: Stripe.Clearable<Address>?
                 /// Email address.
                 public var email: String?
                 /// Full name.
@@ -1732,7 +1732,7 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 }
 
                 public init(
-                    address: Address? = nil,
+                    address: Stripe.Clearable<Address>? = nil,
                     email: String? = nil,
                     name: String? = nil,
                     phone: String? = nil,
@@ -2430,117 +2430,117 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
         /// Payment method-specific configuration for this PaymentIntent.
         public struct PaymentMethodOptions: Codable, Hashable, Sendable {
             /// If this is a `acss_debit` PaymentMethod, this sub-hash contains details about the ACSS Debit payment method options.
-            public var acssDebit: AcssDebit?
+            public var acssDebit: Stripe.Clearable<AcssDebit>?
             /// If this is an `affirm` PaymentMethod, this sub-hash contains details about the Affirm payment method options.
-            public var affirm: Affirm?
+            public var affirm: Stripe.Clearable<Affirm>?
             /// If this is a `afterpay_clearpay` PaymentMethod, this sub-hash contains details about the Afterpay Clearpay payment met…
-            public var afterpayClearpay: AfterpayClearpay?
+            public var afterpayClearpay: Stripe.Clearable<AfterpayClearpay>?
             /// If this is a `alipay` PaymentMethod, this sub-hash contains details about the Alipay payment method options.
-            public var alipay: Alipay?
+            public var alipay: Stripe.Clearable<Alipay>?
             /// If this is a `alma` PaymentMethod, this sub-hash contains details about the Alma payment method options.
-            public var alma: Alma?
+            public var alma: Stripe.Clearable<Alma>?
             /// If this is a `amazon_pay` PaymentMethod, this sub-hash contains details about the Amazon Pay payment method options.
-            public var amazonPay: AmazonPay?
+            public var amazonPay: Stripe.Clearable<AmazonPay>?
             /// If this is a `au_becs_debit` PaymentMethod, this sub-hash contains details about the AU BECS Direct Debit payment meth…
-            public var auBecsDebit: AuBecsDebit?
+            public var auBecsDebit: Stripe.Clearable<AuBecsDebit>?
             /// If this is a `bacs_debit` PaymentMethod, this sub-hash contains details about the BACS Debit payment method options.
-            public var bacsDebit: BacsDebit?
+            public var bacsDebit: Stripe.Clearable<BacsDebit>?
             /// If this is a `bancontact` PaymentMethod, this sub-hash contains details about the Bancontact payment method options.
-            public var bancontact: Bancontact?
+            public var bancontact: Stripe.Clearable<Bancontact>?
             /// If this is a `billie` PaymentMethod, this sub-hash contains details about the Billie payment method options.
-            public var billie: Billie?
+            public var billie: Stripe.Clearable<Billie>?
             /// If this is a `bizum` PaymentMethod, this sub-hash contains details about the Bizum payment method options.
-            public var bizum: Bizum?
+            public var bizum: Stripe.Clearable<Bizum>?
             /// If this is a `blik` PaymentMethod, this sub-hash contains details about the BLIK payment method options.
-            public var blik: Blik?
+            public var blik: Stripe.Clearable<Blik>?
             /// If this is a `boleto` PaymentMethod, this sub-hash contains details about the Boleto payment method options.
-            public var boleto: Boleto?
+            public var boleto: Stripe.Clearable<Boleto>?
             /// Configuration for any card payments attempted on this PaymentIntent.
-            public var card: Card?
+            public var card: Stripe.Clearable<Card>?
             /// If this is a `card_present` PaymentMethod, this sub-hash contains details about the Card Present payment method option…
-            public var cardPresent: CardPresent?
+            public var cardPresent: Stripe.Clearable<CardPresent>?
             /// If this is a `cashapp` PaymentMethod, this sub-hash contains details about the Cash App Pay payment method options.
-            public var cashapp: Cashapp?
+            public var cashapp: Stripe.Clearable<Cashapp>?
             /// If this is a `crypto` PaymentMethod, this sub-hash contains details about the Crypto payment method options.
-            public var crypto: Crypto?
+            public var crypto: Stripe.Clearable<Crypto>?
             /// If this is a `customer balance` PaymentMethod, this sub-hash contains details about the customer balance payment metho…
-            public var customerBalance: CustomerBalance?
+            public var customerBalance: Stripe.Clearable<CustomerBalance>?
             /// If this is a `eps` PaymentMethod, this sub-hash contains details about the EPS payment method options.
-            public var eps: Eps?
+            public var eps: Stripe.Clearable<Eps>?
             /// If this is a `fpx` PaymentMethod, this sub-hash contains details about the FPX payment method options.
-            public var fpx: Fpx?
+            public var fpx: Stripe.Clearable<Fpx>?
             /// If this is a `giropay` PaymentMethod, this sub-hash contains details about the Giropay payment method options.
-            public var giropay: Giropay?
+            public var giropay: Stripe.Clearable<Giropay>?
             /// If this is a `grabpay` PaymentMethod, this sub-hash contains details about the Grabpay payment method options.
-            public var grabpay: Grabpay?
+            public var grabpay: Stripe.Clearable<Grabpay>?
             /// If this is a `ideal` PaymentMethod, this sub-hash contains details about the Ideal payment method options.
-            public var ideal: Ideal?
+            public var ideal: Stripe.Clearable<Ideal>?
             /// If this is a `interac_present` PaymentMethod, this sub-hash contains details about the Card Present payment method opt…
-            public var interacPresent: InteracPresent?
+            public var interacPresent: Stripe.Clearable<InteracPresent>?
             /// If this is a `kakao_pay` PaymentMethod, this sub-hash contains details about the Kakao Pay payment method options.
-            public var kakaoPay: KakaoPay?
+            public var kakaoPay: Stripe.Clearable<KakaoPay>?
             /// If this is a `klarna` PaymentMethod, this sub-hash contains details about the Klarna payment method options.
-            public var klarna: Klarna?
+            public var klarna: Stripe.Clearable<Klarna>?
             /// If this is a `konbini` PaymentMethod, this sub-hash contains details about the Konbini payment method options.
-            public var konbini: Konbini?
+            public var konbini: Stripe.Clearable<Konbini>?
             /// If this is a `kr_card` PaymentMethod, this sub-hash contains details about the KR Card payment method options.
-            public var krCard: KrCard?
+            public var krCard: Stripe.Clearable<KrCard>?
             /// If this is a `link` PaymentMethod, this sub-hash contains details about the Link payment method options (Link is also …
-            public var link: Link?
+            public var link: Stripe.Clearable<Link>?
             /// If this is a `mb_way` PaymentMethod, this sub-hash contains details about the MB WAY payment method options.
-            public var mbWay: MbWay?
+            public var mbWay: Stripe.Clearable<MbWay>?
             /// If this is a `MobilePay` PaymentMethod, this sub-hash contains details about the MobilePay payment method options.
-            public var mobilepay: Mobilepay?
+            public var mobilepay: Stripe.Clearable<Mobilepay>?
             /// If this is a `multibanco` PaymentMethod, this sub-hash contains details about the Multibanco payment method options.
-            public var multibanco: Multibanco?
+            public var multibanco: Stripe.Clearable<Multibanco>?
             /// If this is a `naver_pay` PaymentMethod, this sub-hash contains details about the Naver Pay payment method options.
-            public var naverPay: NaverPay?
+            public var naverPay: Stripe.Clearable<NaverPay>?
             /// If this is a `nz_bank_account` PaymentMethod, this sub-hash contains details about the NZ BECS Direct Debit payment me…
-            public var nzBankAccount: NzBankAccount?
+            public var nzBankAccount: Stripe.Clearable<NzBankAccount>?
             /// If this is a `oxxo` PaymentMethod, this sub-hash contains details about the OXXO payment method options.
-            public var oxxo: Oxxo?
+            public var oxxo: Stripe.Clearable<Oxxo>?
             /// If this is a `p24` PaymentMethod, this sub-hash contains details about the Przelewy24 payment method options.
-            public var p24: P24?
+            public var p24: Stripe.Clearable<P24>?
             /// If this is a `pay_by_bank` PaymentMethod, this sub-hash contains details about the PayByBank payment method options.
-            public var payByBank: PayByBank?
+            public var payByBank: Stripe.Clearable<PayByBank>?
             /// If this is a `payco` PaymentMethod, this sub-hash contains details about the PAYCO payment method options.
-            public var payco: Payco?
+            public var payco: Stripe.Clearable<Payco>?
             /// If this is a `paynow` PaymentMethod, this sub-hash contains details about the PayNow payment method options.
-            public var paynow: Paynow?
+            public var paynow: Stripe.Clearable<Paynow>?
             /// If this is a `paypal` PaymentMethod, this sub-hash contains details about the PayPal payment method options.
-            public var paypal: Paypal?
+            public var paypal: Stripe.Clearable<Paypal>?
             /// If this is a `payto` PaymentMethod, this sub-hash contains details about the PayTo payment method options.
-            public var payto: Payto?
+            public var payto: Stripe.Clearable<Payto>?
             /// If this is a `pix` PaymentMethod, this sub-hash contains details about the Pix payment method options.
-            public var pix: Pix?
+            public var pix: Stripe.Clearable<Pix>?
             /// If this is a `promptpay` PaymentMethod, this sub-hash contains details about the PromptPay payment method options.
-            public var promptpay: Promptpay?
+            public var promptpay: Stripe.Clearable<Promptpay>?
             /// If this is a `revolut_pay` PaymentMethod, this sub-hash contains details about the Revolut Pay payment method options.
-            public var revolutPay: RevolutPay?
+            public var revolutPay: Stripe.Clearable<RevolutPay>?
             /// If this is a `samsung_pay` PaymentMethod, this sub-hash contains details about the Samsung Pay payment method options.
-            public var samsungPay: SamsungPay?
+            public var samsungPay: Stripe.Clearable<SamsungPay>?
             /// If this is a `satispay` PaymentMethod, this sub-hash contains details about the Satispay payment method options.
-            public var satispay: Satispay?
+            public var satispay: Stripe.Clearable<Satispay>?
             /// If this is a `scalapay` PaymentMethod, this sub-hash contains details about the ScalaPay payment method options.
-            public var scalapay: Scalapay?
+            public var scalapay: Stripe.Clearable<Scalapay>?
             /// If this is a `sepa_debit` PaymentIntent, this sub-hash contains details about the SEPA Debit payment method options.
-            public var sepaDebit: SepaDebit?
+            public var sepaDebit: Stripe.Clearable<SepaDebit>?
             /// If this is a `sofort` PaymentMethod, this sub-hash contains details about the SOFORT payment method options.
-            public var sofort: Sofort?
+            public var sofort: Stripe.Clearable<Sofort>?
             /// If this is a `sunbit` PaymentMethod, this sub-hash contains details about the Sunbit payment method options.
-            public var sunbit: Sunbit?
+            public var sunbit: Stripe.Clearable<Sunbit>?
             /// If this is a `Swish` PaymentMethod, this sub-hash contains details about the Swish payment method options.
-            public var swish: Swish?
+            public var swish: Stripe.Clearable<Swish>?
             /// If this is a `twint` PaymentMethod, this sub-hash contains details about the TWINT payment method options.
-            public var twint: Twint?
+            public var twint: Stripe.Clearable<Twint>?
             /// If this is a `upi` PaymentIntent, this sub-hash contains details about the UPI payment method options.
-            public var upi: Upi?
+            public var upi: Stripe.Clearable<Upi>?
             /// If this is a `us_bank_account` PaymentMethod, this sub-hash contains details about the US bank account payment method …
-            public var usBankAccount: UsBankAccount?
+            public var usBankAccount: Stripe.Clearable<UsBankAccount>?
             /// If this is a `wechat_pay` PaymentMethod, this sub-hash contains details about the WeChat Pay payment method options.
-            public var wechatPay: WechatPay?
+            public var wechatPay: Stripe.Clearable<WechatPay>?
             /// If this is a `zip` PaymentMethod, this sub-hash contains details about the Zip payment method options.
-            public var zip: Zip?
+            public var zip: Stripe.Clearable<Zip>?
 
             private enum CodingKeys: String, CodingKey {
                 case acssDebit
@@ -2602,62 +2602,62 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
             }
 
             public init(
-                acssDebit: AcssDebit? = nil,
-                affirm: Affirm? = nil,
-                afterpayClearpay: AfterpayClearpay? = nil,
-                alipay: Alipay? = nil,
-                alma: Alma? = nil,
-                amazonPay: AmazonPay? = nil,
-                auBecsDebit: AuBecsDebit? = nil,
-                bacsDebit: BacsDebit? = nil,
-                bancontact: Bancontact? = nil,
-                billie: Billie? = nil,
-                bizum: Bizum? = nil,
-                blik: Blik? = nil,
-                boleto: Boleto? = nil,
-                card: Card? = nil,
-                cardPresent: CardPresent? = nil,
-                cashapp: Cashapp? = nil,
-                crypto: Crypto? = nil,
-                customerBalance: CustomerBalance? = nil,
-                eps: Eps? = nil,
-                fpx: Fpx? = nil,
-                giropay: Giropay? = nil,
-                grabpay: Grabpay? = nil,
-                ideal: Ideal? = nil,
-                interacPresent: InteracPresent? = nil,
-                kakaoPay: KakaoPay? = nil,
-                klarna: Klarna? = nil,
-                konbini: Konbini? = nil,
-                krCard: KrCard? = nil,
-                link: Link? = nil,
-                mbWay: MbWay? = nil,
-                mobilepay: Mobilepay? = nil,
-                multibanco: Multibanco? = nil,
-                naverPay: NaverPay? = nil,
-                nzBankAccount: NzBankAccount? = nil,
-                oxxo: Oxxo? = nil,
-                p24: P24? = nil,
-                payByBank: PayByBank? = nil,
-                payco: Payco? = nil,
-                paynow: Paynow? = nil,
-                paypal: Paypal? = nil,
-                payto: Payto? = nil,
-                pix: Pix? = nil,
-                promptpay: Promptpay? = nil,
-                revolutPay: RevolutPay? = nil,
-                samsungPay: SamsungPay? = nil,
-                satispay: Satispay? = nil,
-                scalapay: Scalapay? = nil,
-                sepaDebit: SepaDebit? = nil,
-                sofort: Sofort? = nil,
-                sunbit: Sunbit? = nil,
-                swish: Swish? = nil,
-                twint: Twint? = nil,
-                upi: Upi? = nil,
-                usBankAccount: UsBankAccount? = nil,
-                wechatPay: WechatPay? = nil,
-                zip: Zip? = nil
+                acssDebit: Stripe.Clearable<AcssDebit>? = nil,
+                affirm: Stripe.Clearable<Affirm>? = nil,
+                afterpayClearpay: Stripe.Clearable<AfterpayClearpay>? = nil,
+                alipay: Stripe.Clearable<Alipay>? = nil,
+                alma: Stripe.Clearable<Alma>? = nil,
+                amazonPay: Stripe.Clearable<AmazonPay>? = nil,
+                auBecsDebit: Stripe.Clearable<AuBecsDebit>? = nil,
+                bacsDebit: Stripe.Clearable<BacsDebit>? = nil,
+                bancontact: Stripe.Clearable<Bancontact>? = nil,
+                billie: Stripe.Clearable<Billie>? = nil,
+                bizum: Stripe.Clearable<Bizum>? = nil,
+                blik: Stripe.Clearable<Blik>? = nil,
+                boleto: Stripe.Clearable<Boleto>? = nil,
+                card: Stripe.Clearable<Card>? = nil,
+                cardPresent: Stripe.Clearable<CardPresent>? = nil,
+                cashapp: Stripe.Clearable<Cashapp>? = nil,
+                crypto: Stripe.Clearable<Crypto>? = nil,
+                customerBalance: Stripe.Clearable<CustomerBalance>? = nil,
+                eps: Stripe.Clearable<Eps>? = nil,
+                fpx: Stripe.Clearable<Fpx>? = nil,
+                giropay: Stripe.Clearable<Giropay>? = nil,
+                grabpay: Stripe.Clearable<Grabpay>? = nil,
+                ideal: Stripe.Clearable<Ideal>? = nil,
+                interacPresent: Stripe.Clearable<InteracPresent>? = nil,
+                kakaoPay: Stripe.Clearable<KakaoPay>? = nil,
+                klarna: Stripe.Clearable<Klarna>? = nil,
+                konbini: Stripe.Clearable<Konbini>? = nil,
+                krCard: Stripe.Clearable<KrCard>? = nil,
+                link: Stripe.Clearable<Link>? = nil,
+                mbWay: Stripe.Clearable<MbWay>? = nil,
+                mobilepay: Stripe.Clearable<Mobilepay>? = nil,
+                multibanco: Stripe.Clearable<Multibanco>? = nil,
+                naverPay: Stripe.Clearable<NaverPay>? = nil,
+                nzBankAccount: Stripe.Clearable<NzBankAccount>? = nil,
+                oxxo: Stripe.Clearable<Oxxo>? = nil,
+                p24: Stripe.Clearable<P24>? = nil,
+                payByBank: Stripe.Clearable<PayByBank>? = nil,
+                payco: Stripe.Clearable<Payco>? = nil,
+                paynow: Stripe.Clearable<Paynow>? = nil,
+                paypal: Stripe.Clearable<Paypal>? = nil,
+                payto: Stripe.Clearable<Payto>? = nil,
+                pix: Stripe.Clearable<Pix>? = nil,
+                promptpay: Stripe.Clearable<Promptpay>? = nil,
+                revolutPay: Stripe.Clearable<RevolutPay>? = nil,
+                samsungPay: Stripe.Clearable<SamsungPay>? = nil,
+                satispay: Stripe.Clearable<Satispay>? = nil,
+                scalapay: Stripe.Clearable<Scalapay>? = nil,
+                sepaDebit: Stripe.Clearable<SepaDebit>? = nil,
+                sofort: Stripe.Clearable<Sofort>? = nil,
+                sunbit: Stripe.Clearable<Sunbit>? = nil,
+                swish: Stripe.Clearable<Swish>? = nil,
+                twint: Stripe.Clearable<Twint>? = nil,
+                upi: Stripe.Clearable<Upi>? = nil,
+                usBankAccount: Stripe.Clearable<UsBankAccount>? = nil,
+                wechatPay: Stripe.Clearable<WechatPay>? = nil,
+                zip: Stripe.Clearable<Zip>? = nil
             ) {
                 self.acssDebit = acssDebit
                 self.affirm = affirm
@@ -3266,7 +3266,7 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                     /// Setting to true enables installments for this PaymentIntent.
                     public var enabled: Bool?
                     /// The selected installment plan to use for this payment attempt.
-                    public var plan: Plan?
+                    public var plan: Stripe.Clearable<Plan>?
 
                     private enum CodingKeys: String, CodingKey {
                         case enabled
@@ -3275,7 +3275,7 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
 
                     public init(
                         enabled: Bool? = nil,
-                        plan: Plan? = nil
+                        plan: Stripe.Clearable<Plan>? = nil
                     ) {
                         self.enabled = enabled
                         self.plan = plan
@@ -3830,7 +3830,7 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: SetupFutureUsage?
                 /// Subscription details if setting up or charging a subscription.
-                public var subscriptions: [Subscriptions]?
+                public var subscriptions: Stripe.Clearable<[Subscriptions]>?
 
                 private enum CodingKeys: String, CodingKey {
                     case captureMethod
@@ -3845,7 +3845,7 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                     onDemand: OnDemand? = nil,
                     preferredLocale: PreferredLocale? = nil,
                     setupFutureUsage: SetupFutureUsage? = nil,
-                    subscriptions: [Subscriptions]? = nil
+                    subscriptions: Stripe.Clearable<[Subscriptions]>? = nil
                 ) {
                     self.captureMethod = captureMethod
                     self.onDemand = onDemand
@@ -4025,9 +4025,9 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 /// An optional 10 to 11 digit numeric-only string determining the confirmation code at applicable convenience stores.
                 public var confirmationNumber: String?
                 /// The number of calendar days (between 1 and 60) after which Konbini payment instructions will expire.
-                public var expiresAfterDays: Int?
+                public var expiresAfterDays: Stripe.Clearable<Int>?
                 /// The timestamp at which the Konbini payment instructions will expire.
-                public var expiresAt: Date?
+                public var expiresAt: Stripe.Clearable<Date>?
                 /// A product descriptor of up to 22 characters, which will appear to customers at the convenience store.
                 public var productDescription: String?
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
@@ -4043,8 +4043,8 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
 
                 public init(
                     confirmationNumber: String? = nil,
-                    expiresAfterDays: Int? = nil,
-                    expiresAt: Date? = nil,
+                    expiresAfterDays: Stripe.Clearable<Int>? = nil,
+                    expiresAt: Stripe.Clearable<Date>? = nil,
                     productDescription: String? = nil,
                     setupFutureUsage: String? = nil
                 ) {
@@ -4418,7 +4418,7 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                 /// Additional fields for Mandate creation.
                 public struct MandateOptions: Codable, Hashable, Sendable {
                     /// Amount that will be collected.
-                    public var amount: Int?
+                    public var amount: Stripe.Clearable<Int>?
                     /// The type of amount that will be collected.
                     public var amountType: AmountType?
                     /// Date, in YYYY-MM-DD format, after which payments will not be collected.
@@ -4426,7 +4426,7 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                     /// The periodicity at which payments will be collected.
                     public var paymentSchedule: PaymentSchedule?
                     /// The number of payments that will be made during a payment period.
-                    public var paymentsPerPeriod: Int?
+                    public var paymentsPerPeriod: Stripe.Clearable<Int>?
                     /// The purpose for which payments are made.
                     public var purpose: Purpose?
 
@@ -4440,11 +4440,11 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
                     }
 
                     public init(
-                        amount: Int? = nil,
+                        amount: Stripe.Clearable<Int>? = nil,
                         amountType: AmountType? = nil,
                         endDate: String? = nil,
                         paymentSchedule: PaymentSchedule? = nil,
-                        paymentsPerPeriod: Int? = nil,
+                        paymentsPerPeriod: Stripe.Clearable<Int>? = nil,
                         purpose: Purpose? = nil
                     ) {
                         self.amount = amount
@@ -5300,7 +5300,7 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
         /// ID of the mandate that's used for this payment.
         public var mandate: String?
         /// This hash contains details about the Mandate to create.
-        public var mandateData: MandateData?
+        public var mandateData: Stripe.Clearable<MandateData>?
         /// Set of key-value pairs that you can attach to an object.
         public var metadata: [String: String]?
         /// Set to `true` to indicate that the customer isn't in your checkout flow during this payment attempt and can't authenti…
@@ -5400,7 +5400,7 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
             expand: [String]? = nil,
             hooks: Hooks? = nil,
             mandate: String? = nil,
-            mandateData: MandateData? = nil,
+            mandateData: Stripe.Clearable<MandateData>? = nil,
             metadata: [String: String]? = nil,
             offSession: OffSession? = nil,
             onBehalfOf: String? = nil,
@@ -5635,15 +5635,15 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
         /// Provides industry-specific information about the amount.
         public struct AmountDetails: Codable, Hashable, Sendable {
             /// The total discount applied on the transaction represented in the smallest currency unit.
-            public var discountAmount: Int?
+            public var discountAmount: Stripe.Clearable<Int>?
             /// Set to `false` to return arithmetic validation errors in the response without failing the request.
             public var enforceArithmeticValidation: Bool?
             /// A list of line items, each containing information about a product in the PaymentIntent.
-            public var lineItems: [LineItems]?
+            public var lineItems: Stripe.Clearable<[LineItems]>?
             /// Contains information about the shipping portion of the amount.
-            public var shipping: Shipping?
+            public var shipping: Stripe.Clearable<Shipping>?
             /// Contains information about the tax portion of the amount.
-            public var tax: Tax?
+            public var tax: Stripe.Clearable<Tax>?
 
             private enum CodingKeys: String, CodingKey {
                 case discountAmount
@@ -5654,11 +5654,11 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
             }
 
             public init(
-                discountAmount: Int? = nil,
+                discountAmount: Stripe.Clearable<Int>? = nil,
                 enforceArithmeticValidation: Bool? = nil,
-                lineItems: [LineItems]? = nil,
-                shipping: Shipping? = nil,
-                tax: Tax? = nil
+                lineItems: Stripe.Clearable<[LineItems]>? = nil,
+                shipping: Stripe.Clearable<Shipping>? = nil,
+                tax: Stripe.Clearable<Tax>? = nil
             ) {
                 self.discountAmount = discountAmount
                 self.enforceArithmeticValidation = enforceArithmeticValidation
@@ -5861,7 +5861,7 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
 
             public struct Shipping: Codable, Hashable, Sendable {
                 /// If a physical good is being shipped, the cost of shipping represented in the smallest currency unit.
-                public var amount: Int?
+                public var amount: Stripe.Clearable<Int>?
                 /// If a physical good is being shipped, the postal code of where it is being shipped from.
                 public var fromPostalCode: String?
                 /// If a physical good is being shipped, the postal code of where it is being shipped to.
@@ -5874,7 +5874,7 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 }
 
                 public init(
-                    amount: Int? = nil,
+                    amount: Stripe.Clearable<Int>? = nil,
                     fromPostalCode: String? = nil,
                     toPostalCode: String? = nil
                 ) {
@@ -6571,7 +6571,7 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
             /// Billing information associated with the PaymentMethod that may be used or required by particular types of payment meth…
             public struct BillingDetails: Codable, Hashable, Sendable {
                 /// Billing address.
-                public var address: Address?
+                public var address: Stripe.Clearable<Address>?
                 /// Email address.
                 public var email: String?
                 /// Full name.
@@ -6590,7 +6590,7 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 }
 
                 public init(
-                    address: Address? = nil,
+                    address: Stripe.Clearable<Address>? = nil,
                     email: String? = nil,
                     name: String? = nil,
                     phone: String? = nil,
@@ -7288,117 +7288,117 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
         /// Payment method-specific configuration for this PaymentIntent.
         public struct PaymentMethodOptions: Codable, Hashable, Sendable {
             /// If this is a `acss_debit` PaymentMethod, this sub-hash contains details about the ACSS Debit payment method options.
-            public var acssDebit: AcssDebit?
+            public var acssDebit: Stripe.Clearable<AcssDebit>?
             /// If this is an `affirm` PaymentMethod, this sub-hash contains details about the Affirm payment method options.
-            public var affirm: Affirm?
+            public var affirm: Stripe.Clearable<Affirm>?
             /// If this is a `afterpay_clearpay` PaymentMethod, this sub-hash contains details about the Afterpay Clearpay payment met…
-            public var afterpayClearpay: AfterpayClearpay?
+            public var afterpayClearpay: Stripe.Clearable<AfterpayClearpay>?
             /// If this is a `alipay` PaymentMethod, this sub-hash contains details about the Alipay payment method options.
-            public var alipay: Alipay?
+            public var alipay: Stripe.Clearable<Alipay>?
             /// If this is a `alma` PaymentMethod, this sub-hash contains details about the Alma payment method options.
-            public var alma: Alma?
+            public var alma: Stripe.Clearable<Alma>?
             /// If this is a `amazon_pay` PaymentMethod, this sub-hash contains details about the Amazon Pay payment method options.
-            public var amazonPay: AmazonPay?
+            public var amazonPay: Stripe.Clearable<AmazonPay>?
             /// If this is a `au_becs_debit` PaymentMethod, this sub-hash contains details about the AU BECS Direct Debit payment meth…
-            public var auBecsDebit: AuBecsDebit?
+            public var auBecsDebit: Stripe.Clearable<AuBecsDebit>?
             /// If this is a `bacs_debit` PaymentMethod, this sub-hash contains details about the BACS Debit payment method options.
-            public var bacsDebit: BacsDebit?
+            public var bacsDebit: Stripe.Clearable<BacsDebit>?
             /// If this is a `bancontact` PaymentMethod, this sub-hash contains details about the Bancontact payment method options.
-            public var bancontact: Bancontact?
+            public var bancontact: Stripe.Clearable<Bancontact>?
             /// If this is a `billie` PaymentMethod, this sub-hash contains details about the Billie payment method options.
-            public var billie: Billie?
+            public var billie: Stripe.Clearable<Billie>?
             /// If this is a `bizum` PaymentMethod, this sub-hash contains details about the Bizum payment method options.
-            public var bizum: Bizum?
+            public var bizum: Stripe.Clearable<Bizum>?
             /// If this is a `blik` PaymentMethod, this sub-hash contains details about the BLIK payment method options.
-            public var blik: Blik?
+            public var blik: Stripe.Clearable<Blik>?
             /// If this is a `boleto` PaymentMethod, this sub-hash contains details about the Boleto payment method options.
-            public var boleto: Boleto?
+            public var boleto: Stripe.Clearable<Boleto>?
             /// Configuration for any card payments attempted on this PaymentIntent.
-            public var card: Card?
+            public var card: Stripe.Clearable<Card>?
             /// If this is a `card_present` PaymentMethod, this sub-hash contains details about the Card Present payment method option…
-            public var cardPresent: CardPresent?
+            public var cardPresent: Stripe.Clearable<CardPresent>?
             /// If this is a `cashapp` PaymentMethod, this sub-hash contains details about the Cash App Pay payment method options.
-            public var cashapp: Cashapp?
+            public var cashapp: Stripe.Clearable<Cashapp>?
             /// If this is a `crypto` PaymentMethod, this sub-hash contains details about the Crypto payment method options.
-            public var crypto: Crypto?
+            public var crypto: Stripe.Clearable<Crypto>?
             /// If this is a `customer balance` PaymentMethod, this sub-hash contains details about the customer balance payment metho…
-            public var customerBalance: CustomerBalance?
+            public var customerBalance: Stripe.Clearable<CustomerBalance>?
             /// If this is a `eps` PaymentMethod, this sub-hash contains details about the EPS payment method options.
-            public var eps: Eps?
+            public var eps: Stripe.Clearable<Eps>?
             /// If this is a `fpx` PaymentMethod, this sub-hash contains details about the FPX payment method options.
-            public var fpx: Fpx?
+            public var fpx: Stripe.Clearable<Fpx>?
             /// If this is a `giropay` PaymentMethod, this sub-hash contains details about the Giropay payment method options.
-            public var giropay: Giropay?
+            public var giropay: Stripe.Clearable<Giropay>?
             /// If this is a `grabpay` PaymentMethod, this sub-hash contains details about the Grabpay payment method options.
-            public var grabpay: Grabpay?
+            public var grabpay: Stripe.Clearable<Grabpay>?
             /// If this is a `ideal` PaymentMethod, this sub-hash contains details about the Ideal payment method options.
-            public var ideal: Ideal?
+            public var ideal: Stripe.Clearable<Ideal>?
             /// If this is a `interac_present` PaymentMethod, this sub-hash contains details about the Card Present payment method opt…
-            public var interacPresent: InteracPresent?
+            public var interacPresent: Stripe.Clearable<InteracPresent>?
             /// If this is a `kakao_pay` PaymentMethod, this sub-hash contains details about the Kakao Pay payment method options.
-            public var kakaoPay: KakaoPay?
+            public var kakaoPay: Stripe.Clearable<KakaoPay>?
             /// If this is a `klarna` PaymentMethod, this sub-hash contains details about the Klarna payment method options.
-            public var klarna: Klarna?
+            public var klarna: Stripe.Clearable<Klarna>?
             /// If this is a `konbini` PaymentMethod, this sub-hash contains details about the Konbini payment method options.
-            public var konbini: Konbini?
+            public var konbini: Stripe.Clearable<Konbini>?
             /// If this is a `kr_card` PaymentMethod, this sub-hash contains details about the KR Card payment method options.
-            public var krCard: KrCard?
+            public var krCard: Stripe.Clearable<KrCard>?
             /// If this is a `link` PaymentMethod, this sub-hash contains details about the Link payment method options (Link is also …
-            public var link: Link?
+            public var link: Stripe.Clearable<Link>?
             /// If this is a `mb_way` PaymentMethod, this sub-hash contains details about the MB WAY payment method options.
-            public var mbWay: MbWay?
+            public var mbWay: Stripe.Clearable<MbWay>?
             /// If this is a `MobilePay` PaymentMethod, this sub-hash contains details about the MobilePay payment method options.
-            public var mobilepay: Mobilepay?
+            public var mobilepay: Stripe.Clearable<Mobilepay>?
             /// If this is a `multibanco` PaymentMethod, this sub-hash contains details about the Multibanco payment method options.
-            public var multibanco: Multibanco?
+            public var multibanco: Stripe.Clearable<Multibanco>?
             /// If this is a `naver_pay` PaymentMethod, this sub-hash contains details about the Naver Pay payment method options.
-            public var naverPay: NaverPay?
+            public var naverPay: Stripe.Clearable<NaverPay>?
             /// If this is a `nz_bank_account` PaymentMethod, this sub-hash contains details about the NZ BECS Direct Debit payment me…
-            public var nzBankAccount: NzBankAccount?
+            public var nzBankAccount: Stripe.Clearable<NzBankAccount>?
             /// If this is a `oxxo` PaymentMethod, this sub-hash contains details about the OXXO payment method options.
-            public var oxxo: Oxxo?
+            public var oxxo: Stripe.Clearable<Oxxo>?
             /// If this is a `p24` PaymentMethod, this sub-hash contains details about the Przelewy24 payment method options.
-            public var p24: P24?
+            public var p24: Stripe.Clearable<P24>?
             /// If this is a `pay_by_bank` PaymentMethod, this sub-hash contains details about the PayByBank payment method options.
-            public var payByBank: PayByBank?
+            public var payByBank: Stripe.Clearable<PayByBank>?
             /// If this is a `payco` PaymentMethod, this sub-hash contains details about the PAYCO payment method options.
-            public var payco: Payco?
+            public var payco: Stripe.Clearable<Payco>?
             /// If this is a `paynow` PaymentMethod, this sub-hash contains details about the PayNow payment method options.
-            public var paynow: Paynow?
+            public var paynow: Stripe.Clearable<Paynow>?
             /// If this is a `paypal` PaymentMethod, this sub-hash contains details about the PayPal payment method options.
-            public var paypal: Paypal?
+            public var paypal: Stripe.Clearable<Paypal>?
             /// If this is a `payto` PaymentMethod, this sub-hash contains details about the PayTo payment method options.
-            public var payto: Payto?
+            public var payto: Stripe.Clearable<Payto>?
             /// If this is a `pix` PaymentMethod, this sub-hash contains details about the Pix payment method options.
-            public var pix: Pix?
+            public var pix: Stripe.Clearable<Pix>?
             /// If this is a `promptpay` PaymentMethod, this sub-hash contains details about the PromptPay payment method options.
-            public var promptpay: Promptpay?
+            public var promptpay: Stripe.Clearable<Promptpay>?
             /// If this is a `revolut_pay` PaymentMethod, this sub-hash contains details about the Revolut Pay payment method options.
-            public var revolutPay: RevolutPay?
+            public var revolutPay: Stripe.Clearable<RevolutPay>?
             /// If this is a `samsung_pay` PaymentMethod, this sub-hash contains details about the Samsung Pay payment method options.
-            public var samsungPay: SamsungPay?
+            public var samsungPay: Stripe.Clearable<SamsungPay>?
             /// If this is a `satispay` PaymentMethod, this sub-hash contains details about the Satispay payment method options.
-            public var satispay: Satispay?
+            public var satispay: Stripe.Clearable<Satispay>?
             /// If this is a `scalapay` PaymentMethod, this sub-hash contains details about the ScalaPay payment method options.
-            public var scalapay: Scalapay?
+            public var scalapay: Stripe.Clearable<Scalapay>?
             /// If this is a `sepa_debit` PaymentIntent, this sub-hash contains details about the SEPA Debit payment method options.
-            public var sepaDebit: SepaDebit?
+            public var sepaDebit: Stripe.Clearable<SepaDebit>?
             /// If this is a `sofort` PaymentMethod, this sub-hash contains details about the SOFORT payment method options.
-            public var sofort: Sofort?
+            public var sofort: Stripe.Clearable<Sofort>?
             /// If this is a `sunbit` PaymentMethod, this sub-hash contains details about the Sunbit payment method options.
-            public var sunbit: Sunbit?
+            public var sunbit: Stripe.Clearable<Sunbit>?
             /// If this is a `Swish` PaymentMethod, this sub-hash contains details about the Swish payment method options.
-            public var swish: Swish?
+            public var swish: Stripe.Clearable<Swish>?
             /// If this is a `twint` PaymentMethod, this sub-hash contains details about the TWINT payment method options.
-            public var twint: Twint?
+            public var twint: Stripe.Clearable<Twint>?
             /// If this is a `upi` PaymentIntent, this sub-hash contains details about the UPI payment method options.
-            public var upi: Upi?
+            public var upi: Stripe.Clearable<Upi>?
             /// If this is a `us_bank_account` PaymentMethod, this sub-hash contains details about the US bank account payment method …
-            public var usBankAccount: UsBankAccount?
+            public var usBankAccount: Stripe.Clearable<UsBankAccount>?
             /// If this is a `wechat_pay` PaymentMethod, this sub-hash contains details about the WeChat Pay payment method options.
-            public var wechatPay: WechatPay?
+            public var wechatPay: Stripe.Clearable<WechatPay>?
             /// If this is a `zip` PaymentMethod, this sub-hash contains details about the Zip payment method options.
-            public var zip: Zip?
+            public var zip: Stripe.Clearable<Zip>?
 
             private enum CodingKeys: String, CodingKey {
                 case acssDebit
@@ -7460,62 +7460,62 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
             }
 
             public init(
-                acssDebit: AcssDebit? = nil,
-                affirm: Affirm? = nil,
-                afterpayClearpay: AfterpayClearpay? = nil,
-                alipay: Alipay? = nil,
-                alma: Alma? = nil,
-                amazonPay: AmazonPay? = nil,
-                auBecsDebit: AuBecsDebit? = nil,
-                bacsDebit: BacsDebit? = nil,
-                bancontact: Bancontact? = nil,
-                billie: Billie? = nil,
-                bizum: Bizum? = nil,
-                blik: Blik? = nil,
-                boleto: Boleto? = nil,
-                card: Card? = nil,
-                cardPresent: CardPresent? = nil,
-                cashapp: Cashapp? = nil,
-                crypto: Crypto? = nil,
-                customerBalance: CustomerBalance? = nil,
-                eps: Eps? = nil,
-                fpx: Fpx? = nil,
-                giropay: Giropay? = nil,
-                grabpay: Grabpay? = nil,
-                ideal: Ideal? = nil,
-                interacPresent: InteracPresent? = nil,
-                kakaoPay: KakaoPay? = nil,
-                klarna: Klarna? = nil,
-                konbini: Konbini? = nil,
-                krCard: KrCard? = nil,
-                link: Link? = nil,
-                mbWay: MbWay? = nil,
-                mobilepay: Mobilepay? = nil,
-                multibanco: Multibanco? = nil,
-                naverPay: NaverPay? = nil,
-                nzBankAccount: NzBankAccount? = nil,
-                oxxo: Oxxo? = nil,
-                p24: P24? = nil,
-                payByBank: PayByBank? = nil,
-                payco: Payco? = nil,
-                paynow: Paynow? = nil,
-                paypal: Paypal? = nil,
-                payto: Payto? = nil,
-                pix: Pix? = nil,
-                promptpay: Promptpay? = nil,
-                revolutPay: RevolutPay? = nil,
-                samsungPay: SamsungPay? = nil,
-                satispay: Satispay? = nil,
-                scalapay: Scalapay? = nil,
-                sepaDebit: SepaDebit? = nil,
-                sofort: Sofort? = nil,
-                sunbit: Sunbit? = nil,
-                swish: Swish? = nil,
-                twint: Twint? = nil,
-                upi: Upi? = nil,
-                usBankAccount: UsBankAccount? = nil,
-                wechatPay: WechatPay? = nil,
-                zip: Zip? = nil
+                acssDebit: Stripe.Clearable<AcssDebit>? = nil,
+                affirm: Stripe.Clearable<Affirm>? = nil,
+                afterpayClearpay: Stripe.Clearable<AfterpayClearpay>? = nil,
+                alipay: Stripe.Clearable<Alipay>? = nil,
+                alma: Stripe.Clearable<Alma>? = nil,
+                amazonPay: Stripe.Clearable<AmazonPay>? = nil,
+                auBecsDebit: Stripe.Clearable<AuBecsDebit>? = nil,
+                bacsDebit: Stripe.Clearable<BacsDebit>? = nil,
+                bancontact: Stripe.Clearable<Bancontact>? = nil,
+                billie: Stripe.Clearable<Billie>? = nil,
+                bizum: Stripe.Clearable<Bizum>? = nil,
+                blik: Stripe.Clearable<Blik>? = nil,
+                boleto: Stripe.Clearable<Boleto>? = nil,
+                card: Stripe.Clearable<Card>? = nil,
+                cardPresent: Stripe.Clearable<CardPresent>? = nil,
+                cashapp: Stripe.Clearable<Cashapp>? = nil,
+                crypto: Stripe.Clearable<Crypto>? = nil,
+                customerBalance: Stripe.Clearable<CustomerBalance>? = nil,
+                eps: Stripe.Clearable<Eps>? = nil,
+                fpx: Stripe.Clearable<Fpx>? = nil,
+                giropay: Stripe.Clearable<Giropay>? = nil,
+                grabpay: Stripe.Clearable<Grabpay>? = nil,
+                ideal: Stripe.Clearable<Ideal>? = nil,
+                interacPresent: Stripe.Clearable<InteracPresent>? = nil,
+                kakaoPay: Stripe.Clearable<KakaoPay>? = nil,
+                klarna: Stripe.Clearable<Klarna>? = nil,
+                konbini: Stripe.Clearable<Konbini>? = nil,
+                krCard: Stripe.Clearable<KrCard>? = nil,
+                link: Stripe.Clearable<Link>? = nil,
+                mbWay: Stripe.Clearable<MbWay>? = nil,
+                mobilepay: Stripe.Clearable<Mobilepay>? = nil,
+                multibanco: Stripe.Clearable<Multibanco>? = nil,
+                naverPay: Stripe.Clearable<NaverPay>? = nil,
+                nzBankAccount: Stripe.Clearable<NzBankAccount>? = nil,
+                oxxo: Stripe.Clearable<Oxxo>? = nil,
+                p24: Stripe.Clearable<P24>? = nil,
+                payByBank: Stripe.Clearable<PayByBank>? = nil,
+                payco: Stripe.Clearable<Payco>? = nil,
+                paynow: Stripe.Clearable<Paynow>? = nil,
+                paypal: Stripe.Clearable<Paypal>? = nil,
+                payto: Stripe.Clearable<Payto>? = nil,
+                pix: Stripe.Clearable<Pix>? = nil,
+                promptpay: Stripe.Clearable<Promptpay>? = nil,
+                revolutPay: Stripe.Clearable<RevolutPay>? = nil,
+                samsungPay: Stripe.Clearable<SamsungPay>? = nil,
+                satispay: Stripe.Clearable<Satispay>? = nil,
+                scalapay: Stripe.Clearable<Scalapay>? = nil,
+                sepaDebit: Stripe.Clearable<SepaDebit>? = nil,
+                sofort: Stripe.Clearable<Sofort>? = nil,
+                sunbit: Stripe.Clearable<Sunbit>? = nil,
+                swish: Stripe.Clearable<Swish>? = nil,
+                twint: Stripe.Clearable<Twint>? = nil,
+                upi: Stripe.Clearable<Upi>? = nil,
+                usBankAccount: Stripe.Clearable<UsBankAccount>? = nil,
+                wechatPay: Stripe.Clearable<WechatPay>? = nil,
+                zip: Stripe.Clearable<Zip>? = nil
             ) {
                 self.acssDebit = acssDebit
                 self.affirm = affirm
@@ -8124,7 +8124,7 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                     /// Setting to true enables installments for this PaymentIntent.
                     public var enabled: Bool?
                     /// The selected installment plan to use for this payment attempt.
-                    public var plan: Plan?
+                    public var plan: Stripe.Clearable<Plan>?
 
                     private enum CodingKeys: String, CodingKey {
                         case enabled
@@ -8133,7 +8133,7 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
 
                     public init(
                         enabled: Bool? = nil,
-                        plan: Plan? = nil
+                        plan: Stripe.Clearable<Plan>? = nil
                     ) {
                         self.enabled = enabled
                         self.plan = plan
@@ -8688,7 +8688,7 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: SetupFutureUsage?
                 /// Subscription details if setting up or charging a subscription.
-                public var subscriptions: [Subscriptions]?
+                public var subscriptions: Stripe.Clearable<[Subscriptions]>?
 
                 private enum CodingKeys: String, CodingKey {
                     case captureMethod
@@ -8703,7 +8703,7 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                     onDemand: OnDemand? = nil,
                     preferredLocale: PreferredLocale? = nil,
                     setupFutureUsage: SetupFutureUsage? = nil,
-                    subscriptions: [Subscriptions]? = nil
+                    subscriptions: Stripe.Clearable<[Subscriptions]>? = nil
                 ) {
                     self.captureMethod = captureMethod
                     self.onDemand = onDemand
@@ -8883,9 +8883,9 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 /// An optional 10 to 11 digit numeric-only string determining the confirmation code at applicable convenience stores.
                 public var confirmationNumber: String?
                 /// The number of calendar days (between 1 and 60) after which Konbini payment instructions will expire.
-                public var expiresAfterDays: Int?
+                public var expiresAfterDays: Stripe.Clearable<Int>?
                 /// The timestamp at which the Konbini payment instructions will expire.
-                public var expiresAt: Date?
+                public var expiresAt: Stripe.Clearable<Date>?
                 /// A product descriptor of up to 22 characters, which will appear to customers at the convenience store.
                 public var productDescription: String?
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
@@ -8901,8 +8901,8 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
 
                 public init(
                     confirmationNumber: String? = nil,
-                    expiresAfterDays: Int? = nil,
-                    expiresAt: Date? = nil,
+                    expiresAfterDays: Stripe.Clearable<Int>? = nil,
+                    expiresAt: Stripe.Clearable<Date>? = nil,
                     productDescription: String? = nil,
                     setupFutureUsage: String? = nil
                 ) {
@@ -9276,7 +9276,7 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 /// Additional fields for Mandate creation.
                 public struct MandateOptions: Codable, Hashable, Sendable {
                     /// Amount that will be collected.
-                    public var amount: Int?
+                    public var amount: Stripe.Clearable<Int>?
                     /// The type of amount that will be collected.
                     public var amountType: AmountType?
                     /// Date, in YYYY-MM-DD format, after which payments will not be collected.
@@ -9284,7 +9284,7 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                     /// The periodicity at which payments will be collected.
                     public var paymentSchedule: PaymentSchedule?
                     /// The number of payments that will be made during a payment period.
-                    public var paymentsPerPeriod: Int?
+                    public var paymentsPerPeriod: Stripe.Clearable<Int>?
                     /// The purpose for which payments are made.
                     public var purpose: Purpose?
 
@@ -9298,11 +9298,11 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                     }
 
                     public init(
-                        amount: Int? = nil,
+                        amount: Stripe.Clearable<Int>? = nil,
                         amountType: AmountType? = nil,
                         endDate: String? = nil,
                         paymentSchedule: PaymentSchedule? = nil,
-                        paymentsPerPeriod: Int? = nil,
+                        paymentsPerPeriod: Stripe.Clearable<Int>? = nil,
                         purpose: Purpose? = nil
                     ) {
                         self.amount = amount
@@ -10124,7 +10124,7 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
             /// If specified, successful charges will be attributed to the destination account for tax reporting, and the funds from c…
             public var destination: String
             /// Set of key-value pairs that you can attach to an object.
-            public var metadata: [String: String]?
+            public var metadata: Stripe.Clearable<[String: String]>?
             /// The data with which to populate the destination payment.
             public var paymentData: PaymentData?
 
@@ -10140,7 +10140,7 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 amount: Int? = nil,
                 description: String? = nil,
                 destination: String,
-                metadata: [String: String]? = nil,
+                metadata: Stripe.Clearable<[String: String]>? = nil,
                 paymentData: PaymentData? = nil
             ) {
                 self.amount = amount
@@ -10155,7 +10155,7 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
                 /// An arbitrary string attached to the destination payment.
                 public var description: String?
                 /// Set of key-value pairs that you can attach to an object.
-                public var metadata: [String: String]?
+                public var metadata: Stripe.Clearable<[String: String]>?
 
                 private enum CodingKeys: String, CodingKey {
                     case description
@@ -10164,7 +10164,7 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
 
                 public init(
                     description: String? = nil,
-                    metadata: [String: String]? = nil
+                    metadata: Stripe.Clearable<[String: String]>? = nil
                 ) {
                     self.description = description
                     self.metadata = metadata
@@ -10240,15 +10240,15 @@ extension Stripe.PaymentIntents.PaymentIntent.IncrementAuthorization {
         /// Provides industry-specific information about the amount.
         public struct AmountDetails: Codable, Hashable, Sendable {
             /// The total discount applied on the transaction represented in the smallest currency unit.
-            public var discountAmount: Int?
+            public var discountAmount: Stripe.Clearable<Int>?
             /// Set to `false` to return arithmetic validation errors in the response without failing the request.
             public var enforceArithmeticValidation: Bool?
             /// A list of line items, each containing information about a product in the PaymentIntent.
-            public var lineItems: [LineItems]?
+            public var lineItems: Stripe.Clearable<[LineItems]>?
             /// Contains information about the shipping portion of the amount.
-            public var shipping: Shipping?
+            public var shipping: Stripe.Clearable<Shipping>?
             /// Contains information about the tax portion of the amount.
-            public var tax: Tax?
+            public var tax: Stripe.Clearable<Tax>?
 
             private enum CodingKeys: String, CodingKey {
                 case discountAmount
@@ -10259,11 +10259,11 @@ extension Stripe.PaymentIntents.PaymentIntent.IncrementAuthorization {
             }
 
             public init(
-                discountAmount: Int? = nil,
+                discountAmount: Stripe.Clearable<Int>? = nil,
                 enforceArithmeticValidation: Bool? = nil,
-                lineItems: [LineItems]? = nil,
-                shipping: Shipping? = nil,
-                tax: Tax? = nil
+                lineItems: Stripe.Clearable<[LineItems]>? = nil,
+                shipping: Stripe.Clearable<Shipping>? = nil,
+                tax: Stripe.Clearable<Tax>? = nil
             ) {
                 self.discountAmount = discountAmount
                 self.enforceArithmeticValidation = enforceArithmeticValidation
@@ -10466,7 +10466,7 @@ extension Stripe.PaymentIntents.PaymentIntent.IncrementAuthorization {
 
             public struct Shipping: Codable, Hashable, Sendable {
                 /// If a physical good is being shipped, the cost of shipping represented in the smallest currency unit.
-                public var amount: Int?
+                public var amount: Stripe.Clearable<Int>?
                 /// If a physical good is being shipped, the postal code of where it is being shipped from.
                 public var fromPostalCode: String?
                 /// If a physical good is being shipped, the postal code of where it is being shipped to.
@@ -10479,7 +10479,7 @@ extension Stripe.PaymentIntents.PaymentIntent.IncrementAuthorization {
                 }
 
                 public init(
-                    amount: Int? = nil,
+                    amount: Stripe.Clearable<Int>? = nil,
                     fromPostalCode: String? = nil,
                     toPostalCode: String? = nil
                 ) {
@@ -10712,9 +10712,9 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
         /// Amount intended to be collected by this PaymentIntent.
         public var amount: Int?
         /// Provides industry-specific information about the amount.
-        public var amountDetails: AmountDetails?
+        public var amountDetails: Stripe.Clearable<AmountDetails>?
         /// The amount of the application fee (if any) that will be requested to be applied to the payment and transferred to the …
-        public var applicationFeeAmount: Int?
+        public var applicationFeeAmount: Stripe.Clearable<Int>?
         /// Controls when the funds will be captured from the customer's account.
         public var captureMethod: CaptureMethod?
         /// Three-letter ISO currency code, in lowercase.
@@ -10726,15 +10726,15 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
         /// An arbitrary string attached to the object.
         public var description: String?
         /// The list of payment method types to exclude from use with this payment.
-        public var excludedPaymentMethodTypes: [ExcludedPaymentMethodTypes]?
+        public var excludedPaymentMethodTypes: Stripe.Clearable<[ExcludedPaymentMethodTypes]>?
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
         /// Automations to be run during the PaymentIntent lifecycle
         public var hooks: Hooks?
         /// Set of key-value pairs that you can attach to an object.
-        public var metadata: [String: String]?
+        public var metadata: Stripe.Clearable<[String: String]>?
         /// Provides industry-specific information about the charge.
-        public var paymentDetails: PaymentDetails?
+        public var paymentDetails: Stripe.Clearable<PaymentDetails>?
         /// ID of the payment method (a PaymentMethod, Card, or compatible Source object) to attach to this PaymentIntent.
         public var paymentMethod: String?
         /// The ID of the payment method configuration to use with this PaymentIntent.
@@ -10750,7 +10750,7 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
         /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
         public var setupFutureUsage: SetupFutureUsage?
         /// Shipping information for this PaymentIntent.
-        public var shipping: Shipping?
+        public var shipping: Stripe.Clearable<Shipping>?
         /// Text that appears on the customer's statement as the statement descriptor for a non-card charge.
         public var statementDescriptor: String?
         /// Provides information about a card charge.
@@ -10792,18 +10792,18 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
         public init(
             allowedPaymentMethodTypes: [AllowedPaymentMethodTypes]? = nil,
             amount: Int? = nil,
-            amountDetails: AmountDetails? = nil,
-            applicationFeeAmount: Int? = nil,
+            amountDetails: Stripe.Clearable<AmountDetails>? = nil,
+            applicationFeeAmount: Stripe.Clearable<Int>? = nil,
             captureMethod: CaptureMethod? = nil,
             currency: Stripe.Currency? = nil,
             customer: String? = nil,
             customerAccount: String? = nil,
             description: String? = nil,
-            excludedPaymentMethodTypes: [ExcludedPaymentMethodTypes]? = nil,
+            excludedPaymentMethodTypes: Stripe.Clearable<[ExcludedPaymentMethodTypes]>? = nil,
             expand: [String]? = nil,
             hooks: Hooks? = nil,
-            metadata: [String: String]? = nil,
-            paymentDetails: PaymentDetails? = nil,
+            metadata: Stripe.Clearable<[String: String]>? = nil,
+            paymentDetails: Stripe.Clearable<PaymentDetails>? = nil,
             paymentMethod: String? = nil,
             paymentMethodConfiguration: String? = nil,
             paymentMethodData: PaymentMethodData? = nil,
@@ -10811,7 +10811,7 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
             paymentMethodTypes: [String]? = nil,
             receiptEmail: String? = nil,
             setupFutureUsage: SetupFutureUsage? = nil,
-            shipping: Shipping? = nil,
+            shipping: Stripe.Clearable<Shipping>? = nil,
             statementDescriptor: String? = nil,
             statementDescriptorSuffix: String? = nil,
             transferData: TransferData? = nil,
@@ -11014,15 +11014,15 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
 
         public struct AmountDetails: Codable, Hashable, Sendable {
             /// The total discount applied on the transaction represented in the smallest currency unit.
-            public var discountAmount: Int?
+            public var discountAmount: Stripe.Clearable<Int>?
             /// Set to `false` to return arithmetic validation errors in the response without failing the request.
             public var enforceArithmeticValidation: Bool?
             /// A list of line items, each containing information about a product in the PaymentIntent.
-            public var lineItems: [LineItems]?
+            public var lineItems: Stripe.Clearable<[LineItems]>?
             /// Contains information about the shipping portion of the amount.
-            public var shipping: Shipping?
+            public var shipping: Stripe.Clearable<Shipping>?
             /// Contains information about the tax portion of the amount.
-            public var tax: Tax?
+            public var tax: Stripe.Clearable<Tax>?
 
             private enum CodingKeys: String, CodingKey {
                 case discountAmount
@@ -11033,11 +11033,11 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
             }
 
             public init(
-                discountAmount: Int? = nil,
+                discountAmount: Stripe.Clearable<Int>? = nil,
                 enforceArithmeticValidation: Bool? = nil,
-                lineItems: [LineItems]? = nil,
-                shipping: Shipping? = nil,
-                tax: Tax? = nil
+                lineItems: Stripe.Clearable<[LineItems]>? = nil,
+                shipping: Stripe.Clearable<Shipping>? = nil,
+                tax: Stripe.Clearable<Tax>? = nil
             ) {
                 self.discountAmount = discountAmount
                 self.enforceArithmeticValidation = enforceArithmeticValidation
@@ -11240,7 +11240,7 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
 
             public struct Shipping: Codable, Hashable, Sendable {
                 /// If a physical good is being shipped, the cost of shipping represented in the smallest currency unit.
-                public var amount: Int?
+                public var amount: Stripe.Clearable<Int>?
                 /// If a physical good is being shipped, the postal code of where it is being shipped from.
                 public var fromPostalCode: String?
                 /// If a physical good is being shipped, the postal code of where it is being shipped to.
@@ -11253,7 +11253,7 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 }
 
                 public init(
-                    amount: Int? = nil,
+                    amount: Stripe.Clearable<Int>? = nil,
                     fromPostalCode: String? = nil,
                     toPostalCode: String? = nil
                 ) {
@@ -11820,7 +11820,7 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
             /// Billing information associated with the PaymentMethod that may be used or required by particular types of payment meth…
             public struct BillingDetails: Codable, Hashable, Sendable {
                 /// Billing address.
-                public var address: Address?
+                public var address: Stripe.Clearable<Address>?
                 /// Email address.
                 public var email: String?
                 /// Full name.
@@ -11839,7 +11839,7 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 }
 
                 public init(
-                    address: Address? = nil,
+                    address: Stripe.Clearable<Address>? = nil,
                     email: String? = nil,
                     name: String? = nil,
                     phone: String? = nil,
@@ -12537,117 +12537,117 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
         /// Payment-method-specific configuration for this PaymentIntent.
         public struct PaymentMethodOptions: Codable, Hashable, Sendable {
             /// If this is a `acss_debit` PaymentMethod, this sub-hash contains details about the ACSS Debit payment method options.
-            public var acssDebit: AcssDebit?
+            public var acssDebit: Stripe.Clearable<AcssDebit>?
             /// If this is an `affirm` PaymentMethod, this sub-hash contains details about the Affirm payment method options.
-            public var affirm: Affirm?
+            public var affirm: Stripe.Clearable<Affirm>?
             /// If this is a `afterpay_clearpay` PaymentMethod, this sub-hash contains details about the Afterpay Clearpay payment met…
-            public var afterpayClearpay: AfterpayClearpay?
+            public var afterpayClearpay: Stripe.Clearable<AfterpayClearpay>?
             /// If this is a `alipay` PaymentMethod, this sub-hash contains details about the Alipay payment method options.
-            public var alipay: Alipay?
+            public var alipay: Stripe.Clearable<Alipay>?
             /// If this is a `alma` PaymentMethod, this sub-hash contains details about the Alma payment method options.
-            public var alma: Alma?
+            public var alma: Stripe.Clearable<Alma>?
             /// If this is a `amazon_pay` PaymentMethod, this sub-hash contains details about the Amazon Pay payment method options.
-            public var amazonPay: AmazonPay?
+            public var amazonPay: Stripe.Clearable<AmazonPay>?
             /// If this is a `au_becs_debit` PaymentMethod, this sub-hash contains details about the AU BECS Direct Debit payment meth…
-            public var auBecsDebit: AuBecsDebit?
+            public var auBecsDebit: Stripe.Clearable<AuBecsDebit>?
             /// If this is a `bacs_debit` PaymentMethod, this sub-hash contains details about the BACS Debit payment method options.
-            public var bacsDebit: BacsDebit?
+            public var bacsDebit: Stripe.Clearable<BacsDebit>?
             /// If this is a `bancontact` PaymentMethod, this sub-hash contains details about the Bancontact payment method options.
-            public var bancontact: Bancontact?
+            public var bancontact: Stripe.Clearable<Bancontact>?
             /// If this is a `billie` PaymentMethod, this sub-hash contains details about the Billie payment method options.
-            public var billie: Billie?
+            public var billie: Stripe.Clearable<Billie>?
             /// If this is a `bizum` PaymentMethod, this sub-hash contains details about the Bizum payment method options.
-            public var bizum: Bizum?
+            public var bizum: Stripe.Clearable<Bizum>?
             /// If this is a `blik` PaymentMethod, this sub-hash contains details about the BLIK payment method options.
-            public var blik: Blik?
+            public var blik: Stripe.Clearable<Blik>?
             /// If this is a `boleto` PaymentMethod, this sub-hash contains details about the Boleto payment method options.
-            public var boleto: Boleto?
+            public var boleto: Stripe.Clearable<Boleto>?
             /// Configuration for any card payments attempted on this PaymentIntent.
-            public var card: Card?
+            public var card: Stripe.Clearable<Card>?
             /// If this is a `card_present` PaymentMethod, this sub-hash contains details about the Card Present payment method option…
-            public var cardPresent: CardPresent?
+            public var cardPresent: Stripe.Clearable<CardPresent>?
             /// If this is a `cashapp` PaymentMethod, this sub-hash contains details about the Cash App Pay payment method options.
-            public var cashapp: Cashapp?
+            public var cashapp: Stripe.Clearable<Cashapp>?
             /// If this is a `crypto` PaymentMethod, this sub-hash contains details about the Crypto payment method options.
-            public var crypto: Crypto?
+            public var crypto: Stripe.Clearable<Crypto>?
             /// If this is a `customer balance` PaymentMethod, this sub-hash contains details about the customer balance payment metho…
-            public var customerBalance: CustomerBalance?
+            public var customerBalance: Stripe.Clearable<CustomerBalance>?
             /// If this is a `eps` PaymentMethod, this sub-hash contains details about the EPS payment method options.
-            public var eps: Eps?
+            public var eps: Stripe.Clearable<Eps>?
             /// If this is a `fpx` PaymentMethod, this sub-hash contains details about the FPX payment method options.
-            public var fpx: Fpx?
+            public var fpx: Stripe.Clearable<Fpx>?
             /// If this is a `giropay` PaymentMethod, this sub-hash contains details about the Giropay payment method options.
-            public var giropay: Giropay?
+            public var giropay: Stripe.Clearable<Giropay>?
             /// If this is a `grabpay` PaymentMethod, this sub-hash contains details about the Grabpay payment method options.
-            public var grabpay: Grabpay?
+            public var grabpay: Stripe.Clearable<Grabpay>?
             /// If this is a `ideal` PaymentMethod, this sub-hash contains details about the Ideal payment method options.
-            public var ideal: Ideal?
+            public var ideal: Stripe.Clearable<Ideal>?
             /// If this is a `interac_present` PaymentMethod, this sub-hash contains details about the Card Present payment method opt…
-            public var interacPresent: InteracPresent?
+            public var interacPresent: Stripe.Clearable<InteracPresent>?
             /// If this is a `kakao_pay` PaymentMethod, this sub-hash contains details about the Kakao Pay payment method options.
-            public var kakaoPay: KakaoPay?
+            public var kakaoPay: Stripe.Clearable<KakaoPay>?
             /// If this is a `klarna` PaymentMethod, this sub-hash contains details about the Klarna payment method options.
-            public var klarna: Klarna?
+            public var klarna: Stripe.Clearable<Klarna>?
             /// If this is a `konbini` PaymentMethod, this sub-hash contains details about the Konbini payment method options.
-            public var konbini: Konbini?
+            public var konbini: Stripe.Clearable<Konbini>?
             /// If this is a `kr_card` PaymentMethod, this sub-hash contains details about the KR Card payment method options.
-            public var krCard: KrCard?
+            public var krCard: Stripe.Clearable<KrCard>?
             /// If this is a `link` PaymentMethod, this sub-hash contains details about the Link payment method options (Link is also …
-            public var link: Link?
+            public var link: Stripe.Clearable<Link>?
             /// If this is a `mb_way` PaymentMethod, this sub-hash contains details about the MB WAY payment method options.
-            public var mbWay: MbWay?
+            public var mbWay: Stripe.Clearable<MbWay>?
             /// If this is a `MobilePay` PaymentMethod, this sub-hash contains details about the MobilePay payment method options.
-            public var mobilepay: Mobilepay?
+            public var mobilepay: Stripe.Clearable<Mobilepay>?
             /// If this is a `multibanco` PaymentMethod, this sub-hash contains details about the Multibanco payment method options.
-            public var multibanco: Multibanco?
+            public var multibanco: Stripe.Clearable<Multibanco>?
             /// If this is a `naver_pay` PaymentMethod, this sub-hash contains details about the Naver Pay payment method options.
-            public var naverPay: NaverPay?
+            public var naverPay: Stripe.Clearable<NaverPay>?
             /// If this is a `nz_bank_account` PaymentMethod, this sub-hash contains details about the NZ BECS Direct Debit payment me…
-            public var nzBankAccount: NzBankAccount?
+            public var nzBankAccount: Stripe.Clearable<NzBankAccount>?
             /// If this is a `oxxo` PaymentMethod, this sub-hash contains details about the OXXO payment method options.
-            public var oxxo: Oxxo?
+            public var oxxo: Stripe.Clearable<Oxxo>?
             /// If this is a `p24` PaymentMethod, this sub-hash contains details about the Przelewy24 payment method options.
-            public var p24: P24?
+            public var p24: Stripe.Clearable<P24>?
             /// If this is a `pay_by_bank` PaymentMethod, this sub-hash contains details about the PayByBank payment method options.
-            public var payByBank: PayByBank?
+            public var payByBank: Stripe.Clearable<PayByBank>?
             /// If this is a `payco` PaymentMethod, this sub-hash contains details about the PAYCO payment method options.
-            public var payco: Payco?
+            public var payco: Stripe.Clearable<Payco>?
             /// If this is a `paynow` PaymentMethod, this sub-hash contains details about the PayNow payment method options.
-            public var paynow: Paynow?
+            public var paynow: Stripe.Clearable<Paynow>?
             /// If this is a `paypal` PaymentMethod, this sub-hash contains details about the PayPal payment method options.
-            public var paypal: Paypal?
+            public var paypal: Stripe.Clearable<Paypal>?
             /// If this is a `payto` PaymentMethod, this sub-hash contains details about the PayTo payment method options.
-            public var payto: Payto?
+            public var payto: Stripe.Clearable<Payto>?
             /// If this is a `pix` PaymentMethod, this sub-hash contains details about the Pix payment method options.
-            public var pix: Pix?
+            public var pix: Stripe.Clearable<Pix>?
             /// If this is a `promptpay` PaymentMethod, this sub-hash contains details about the PromptPay payment method options.
-            public var promptpay: Promptpay?
+            public var promptpay: Stripe.Clearable<Promptpay>?
             /// If this is a `revolut_pay` PaymentMethod, this sub-hash contains details about the Revolut Pay payment method options.
-            public var revolutPay: RevolutPay?
+            public var revolutPay: Stripe.Clearable<RevolutPay>?
             /// If this is a `samsung_pay` PaymentMethod, this sub-hash contains details about the Samsung Pay payment method options.
-            public var samsungPay: SamsungPay?
+            public var samsungPay: Stripe.Clearable<SamsungPay>?
             /// If this is a `satispay` PaymentMethod, this sub-hash contains details about the Satispay payment method options.
-            public var satispay: Satispay?
+            public var satispay: Stripe.Clearable<Satispay>?
             /// If this is a `scalapay` PaymentMethod, this sub-hash contains details about the ScalaPay payment method options.
-            public var scalapay: Scalapay?
+            public var scalapay: Stripe.Clearable<Scalapay>?
             /// If this is a `sepa_debit` PaymentIntent, this sub-hash contains details about the SEPA Debit payment method options.
-            public var sepaDebit: SepaDebit?
+            public var sepaDebit: Stripe.Clearable<SepaDebit>?
             /// If this is a `sofort` PaymentMethod, this sub-hash contains details about the SOFORT payment method options.
-            public var sofort: Sofort?
+            public var sofort: Stripe.Clearable<Sofort>?
             /// If this is a `sunbit` PaymentMethod, this sub-hash contains details about the Sunbit payment method options.
-            public var sunbit: Sunbit?
+            public var sunbit: Stripe.Clearable<Sunbit>?
             /// If this is a `Swish` PaymentMethod, this sub-hash contains details about the Swish payment method options.
-            public var swish: Swish?
+            public var swish: Stripe.Clearable<Swish>?
             /// If this is a `twint` PaymentMethod, this sub-hash contains details about the TWINT payment method options.
-            public var twint: Twint?
+            public var twint: Stripe.Clearable<Twint>?
             /// If this is a `upi` PaymentIntent, this sub-hash contains details about the UPI payment method options.
-            public var upi: Upi?
+            public var upi: Stripe.Clearable<Upi>?
             /// If this is a `us_bank_account` PaymentMethod, this sub-hash contains details about the US bank account payment method …
-            public var usBankAccount: UsBankAccount?
+            public var usBankAccount: Stripe.Clearable<UsBankAccount>?
             /// If this is a `wechat_pay` PaymentMethod, this sub-hash contains details about the WeChat Pay payment method options.
-            public var wechatPay: WechatPay?
+            public var wechatPay: Stripe.Clearable<WechatPay>?
             /// If this is a `zip` PaymentMethod, this sub-hash contains details about the Zip payment method options.
-            public var zip: Zip?
+            public var zip: Stripe.Clearable<Zip>?
 
             private enum CodingKeys: String, CodingKey {
                 case acssDebit
@@ -12709,62 +12709,62 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
             }
 
             public init(
-                acssDebit: AcssDebit? = nil,
-                affirm: Affirm? = nil,
-                afterpayClearpay: AfterpayClearpay? = nil,
-                alipay: Alipay? = nil,
-                alma: Alma? = nil,
-                amazonPay: AmazonPay? = nil,
-                auBecsDebit: AuBecsDebit? = nil,
-                bacsDebit: BacsDebit? = nil,
-                bancontact: Bancontact? = nil,
-                billie: Billie? = nil,
-                bizum: Bizum? = nil,
-                blik: Blik? = nil,
-                boleto: Boleto? = nil,
-                card: Card? = nil,
-                cardPresent: CardPresent? = nil,
-                cashapp: Cashapp? = nil,
-                crypto: Crypto? = nil,
-                customerBalance: CustomerBalance? = nil,
-                eps: Eps? = nil,
-                fpx: Fpx? = nil,
-                giropay: Giropay? = nil,
-                grabpay: Grabpay? = nil,
-                ideal: Ideal? = nil,
-                interacPresent: InteracPresent? = nil,
-                kakaoPay: KakaoPay? = nil,
-                klarna: Klarna? = nil,
-                konbini: Konbini? = nil,
-                krCard: KrCard? = nil,
-                link: Link? = nil,
-                mbWay: MbWay? = nil,
-                mobilepay: Mobilepay? = nil,
-                multibanco: Multibanco? = nil,
-                naverPay: NaverPay? = nil,
-                nzBankAccount: NzBankAccount? = nil,
-                oxxo: Oxxo? = nil,
-                p24: P24? = nil,
-                payByBank: PayByBank? = nil,
-                payco: Payco? = nil,
-                paynow: Paynow? = nil,
-                paypal: Paypal? = nil,
-                payto: Payto? = nil,
-                pix: Pix? = nil,
-                promptpay: Promptpay? = nil,
-                revolutPay: RevolutPay? = nil,
-                samsungPay: SamsungPay? = nil,
-                satispay: Satispay? = nil,
-                scalapay: Scalapay? = nil,
-                sepaDebit: SepaDebit? = nil,
-                sofort: Sofort? = nil,
-                sunbit: Sunbit? = nil,
-                swish: Swish? = nil,
-                twint: Twint? = nil,
-                upi: Upi? = nil,
-                usBankAccount: UsBankAccount? = nil,
-                wechatPay: WechatPay? = nil,
-                zip: Zip? = nil
+                acssDebit: Stripe.Clearable<AcssDebit>? = nil,
+                affirm: Stripe.Clearable<Affirm>? = nil,
+                afterpayClearpay: Stripe.Clearable<AfterpayClearpay>? = nil,
+                alipay: Stripe.Clearable<Alipay>? = nil,
+                alma: Stripe.Clearable<Alma>? = nil,
+                amazonPay: Stripe.Clearable<AmazonPay>? = nil,
+                auBecsDebit: Stripe.Clearable<AuBecsDebit>? = nil,
+                bacsDebit: Stripe.Clearable<BacsDebit>? = nil,
+                bancontact: Stripe.Clearable<Bancontact>? = nil,
+                billie: Stripe.Clearable<Billie>? = nil,
+                bizum: Stripe.Clearable<Bizum>? = nil,
+                blik: Stripe.Clearable<Blik>? = nil,
+                boleto: Stripe.Clearable<Boleto>? = nil,
+                card: Stripe.Clearable<Card>? = nil,
+                cardPresent: Stripe.Clearable<CardPresent>? = nil,
+                cashapp: Stripe.Clearable<Cashapp>? = nil,
+                crypto: Stripe.Clearable<Crypto>? = nil,
+                customerBalance: Stripe.Clearable<CustomerBalance>? = nil,
+                eps: Stripe.Clearable<Eps>? = nil,
+                fpx: Stripe.Clearable<Fpx>? = nil,
+                giropay: Stripe.Clearable<Giropay>? = nil,
+                grabpay: Stripe.Clearable<Grabpay>? = nil,
+                ideal: Stripe.Clearable<Ideal>? = nil,
+                interacPresent: Stripe.Clearable<InteracPresent>? = nil,
+                kakaoPay: Stripe.Clearable<KakaoPay>? = nil,
+                klarna: Stripe.Clearable<Klarna>? = nil,
+                konbini: Stripe.Clearable<Konbini>? = nil,
+                krCard: Stripe.Clearable<KrCard>? = nil,
+                link: Stripe.Clearable<Link>? = nil,
+                mbWay: Stripe.Clearable<MbWay>? = nil,
+                mobilepay: Stripe.Clearable<Mobilepay>? = nil,
+                multibanco: Stripe.Clearable<Multibanco>? = nil,
+                naverPay: Stripe.Clearable<NaverPay>? = nil,
+                nzBankAccount: Stripe.Clearable<NzBankAccount>? = nil,
+                oxxo: Stripe.Clearable<Oxxo>? = nil,
+                p24: Stripe.Clearable<P24>? = nil,
+                payByBank: Stripe.Clearable<PayByBank>? = nil,
+                payco: Stripe.Clearable<Payco>? = nil,
+                paynow: Stripe.Clearable<Paynow>? = nil,
+                paypal: Stripe.Clearable<Paypal>? = nil,
+                payto: Stripe.Clearable<Payto>? = nil,
+                pix: Stripe.Clearable<Pix>? = nil,
+                promptpay: Stripe.Clearable<Promptpay>? = nil,
+                revolutPay: Stripe.Clearable<RevolutPay>? = nil,
+                samsungPay: Stripe.Clearable<SamsungPay>? = nil,
+                satispay: Stripe.Clearable<Satispay>? = nil,
+                scalapay: Stripe.Clearable<Scalapay>? = nil,
+                sepaDebit: Stripe.Clearable<SepaDebit>? = nil,
+                sofort: Stripe.Clearable<Sofort>? = nil,
+                sunbit: Stripe.Clearable<Sunbit>? = nil,
+                swish: Stripe.Clearable<Swish>? = nil,
+                twint: Stripe.Clearable<Twint>? = nil,
+                upi: Stripe.Clearable<Upi>? = nil,
+                usBankAccount: Stripe.Clearable<UsBankAccount>? = nil,
+                wechatPay: Stripe.Clearable<WechatPay>? = nil,
+                zip: Stripe.Clearable<Zip>? = nil
             ) {
                 self.acssDebit = acssDebit
                 self.affirm = affirm
@@ -13373,7 +13373,7 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                     /// Setting to true enables installments for this PaymentIntent.
                     public var enabled: Bool?
                     /// The selected installment plan to use for this payment attempt.
-                    public var plan: Plan?
+                    public var plan: Stripe.Clearable<Plan>?
 
                     private enum CodingKeys: String, CodingKey {
                         case enabled
@@ -13382,7 +13382,7 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
 
                     public init(
                         enabled: Bool? = nil,
-                        plan: Plan? = nil
+                        plan: Stripe.Clearable<Plan>? = nil
                     ) {
                         self.enabled = enabled
                         self.plan = plan
@@ -13937,7 +13937,7 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: SetupFutureUsage?
                 /// Subscription details if setting up or charging a subscription.
-                public var subscriptions: [Subscriptions]?
+                public var subscriptions: Stripe.Clearable<[Subscriptions]>?
 
                 private enum CodingKeys: String, CodingKey {
                     case captureMethod
@@ -13952,7 +13952,7 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                     onDemand: OnDemand? = nil,
                     preferredLocale: PreferredLocale? = nil,
                     setupFutureUsage: SetupFutureUsage? = nil,
-                    subscriptions: [Subscriptions]? = nil
+                    subscriptions: Stripe.Clearable<[Subscriptions]>? = nil
                 ) {
                     self.captureMethod = captureMethod
                     self.onDemand = onDemand
@@ -14132,9 +14132,9 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 /// An optional 10 to 11 digit numeric-only string determining the confirmation code at applicable convenience stores.
                 public var confirmationNumber: String?
                 /// The number of calendar days (between 1 and 60) after which Konbini payment instructions will expire.
-                public var expiresAfterDays: Int?
+                public var expiresAfterDays: Stripe.Clearable<Int>?
                 /// The timestamp at which the Konbini payment instructions will expire.
-                public var expiresAt: Date?
+                public var expiresAt: Stripe.Clearable<Date>?
                 /// A product descriptor of up to 22 characters, which will appear to customers at the convenience store.
                 public var productDescription: String?
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
@@ -14150,8 +14150,8 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
 
                 public init(
                     confirmationNumber: String? = nil,
-                    expiresAfterDays: Int? = nil,
-                    expiresAt: Date? = nil,
+                    expiresAfterDays: Stripe.Clearable<Int>? = nil,
+                    expiresAt: Stripe.Clearable<Date>? = nil,
                     productDescription: String? = nil,
                     setupFutureUsage: String? = nil
                 ) {
@@ -14525,7 +14525,7 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 /// Additional fields for Mandate creation.
                 public struct MandateOptions: Codable, Hashable, Sendable {
                     /// Amount that will be collected.
-                    public var amount: Int?
+                    public var amount: Stripe.Clearable<Int>?
                     /// The type of amount that will be collected.
                     public var amountType: AmountType?
                     /// Date, in YYYY-MM-DD format, after which payments will not be collected.
@@ -14533,7 +14533,7 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                     /// The periodicity at which payments will be collected.
                     public var paymentSchedule: PaymentSchedule?
                     /// The number of payments that will be made during a payment period.
-                    public var paymentsPerPeriod: Int?
+                    public var paymentsPerPeriod: Stripe.Clearable<Int>?
                     /// The purpose for which payments are made.
                     public var purpose: Purpose?
 
@@ -14547,11 +14547,11 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                     }
 
                     public init(
-                        amount: Int? = nil,
+                        amount: Stripe.Clearable<Int>? = nil,
                         amountType: AmountType? = nil,
                         endDate: String? = nil,
                         paymentSchedule: PaymentSchedule? = nil,
-                        paymentsPerPeriod: Int? = nil,
+                        paymentsPerPeriod: Stripe.Clearable<Int>? = nil,
                         purpose: Purpose? = nil
                     ) {
                         self.amount = amount
@@ -15349,7 +15349,7 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
             /// An arbitrary string attached to the transfer.
             public var description: String?
             /// Set of key-value pairs that you can attach to an object.
-            public var metadata: [String: String]?
+            public var metadata: Stripe.Clearable<[String: String]>?
             /// The data with which to populate the destination payment.
             public var paymentData: PaymentData?
 
@@ -15363,7 +15363,7 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
             public init(
                 amount: Int? = nil,
                 description: String? = nil,
-                metadata: [String: String]? = nil,
+                metadata: Stripe.Clearable<[String: String]>? = nil,
                 paymentData: PaymentData? = nil
             ) {
                 self.amount = amount
@@ -15377,7 +15377,7 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
                 /// An arbitrary string attached to the destination payment.
                 public var description: String?
                 /// Set of key-value pairs that you can attach to an object.
-                public var metadata: [String: String]?
+                public var metadata: Stripe.Clearable<[String: String]>?
 
                 private enum CodingKeys: String, CodingKey {
                     case description
@@ -15386,7 +15386,7 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
 
                 public init(
                     description: String? = nil,
-                    metadata: [String: String]? = nil
+                    metadata: Stripe.Clearable<[String: String]>? = nil
                 ) {
                     self.description = description
                     self.metadata = metadata

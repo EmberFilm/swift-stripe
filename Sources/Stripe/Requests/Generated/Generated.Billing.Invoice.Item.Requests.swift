@@ -36,13 +36,13 @@ extension Stripe.Billing.Invoice.Item.Create {
         /// Controls whether discounts apply to this invoice item.
         public var discountable: Bool?
         /// The coupons and promotion codes to redeem into discounts for the invoice item or invoice line item.
-        public var discounts: [Discounts]?
+        public var discounts: Stripe.Clearable<[Discounts]>?
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
         /// The ID of an existing invoice to add this invoice item to.
         public var invoice: String?
         /// Set of key-value pairs that you can attach to an object.
-        public var metadata: [String: String]?
+        public var metadata: Stripe.Clearable<[String: String]>?
         /// The period associated with this invoice item.
         public var period: Period?
         /// Data used to generate a new Price object inline.
@@ -94,10 +94,10 @@ extension Stripe.Billing.Invoice.Item.Create {
             customerAccount: String? = nil,
             description: String? = nil,
             discountable: Bool? = nil,
-            discounts: [Discounts]? = nil,
+            discounts: Stripe.Clearable<[Discounts]>? = nil,
             expand: [String]? = nil,
             invoice: String? = nil,
-            metadata: [String: String]? = nil,
+            metadata: Stripe.Clearable<[String: String]>? = nil,
             period: Period? = nil,
             priceData: PriceData? = nil,
             pricing: Pricing? = nil,
@@ -340,11 +340,11 @@ extension Stripe.Billing.Invoice.Item.Update {
         /// Controls whether discounts apply to this invoice item.
         public var discountable: Bool?
         /// The coupons, promotion codes & existing discounts which apply to the invoice item or invoice line item.
-        public var discounts: [Discounts]?
+        public var discounts: Stripe.Clearable<[Discounts]>?
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
         /// Set of key-value pairs that you can attach to an object.
-        public var metadata: [String: String]?
+        public var metadata: Stripe.Clearable<[String: String]>?
         /// The period associated with this invoice item.
         public var period: Period?
         /// Data used to generate a new Price object inline.
@@ -360,7 +360,7 @@ extension Stripe.Billing.Invoice.Item.Update {
         /// A tax code ID.
         public var taxCode: String?
         /// The tax rates which apply to the invoice item.
-        public var taxRates: [String]?
+        public var taxRates: Stripe.Clearable<[String]>?
         /// The decimal unit amount in cents (or local equivalent) of the charge to be applied to the upcoming invoice.
         public var unitAmountDecimal: String?
 
@@ -386,9 +386,9 @@ extension Stripe.Billing.Invoice.Item.Update {
             amount: Int? = nil,
             description: String? = nil,
             discountable: Bool? = nil,
-            discounts: [Discounts]? = nil,
+            discounts: Stripe.Clearable<[Discounts]>? = nil,
             expand: [String]? = nil,
-            metadata: [String: String]? = nil,
+            metadata: Stripe.Clearable<[String: String]>? = nil,
             period: Period? = nil,
             priceData: PriceData? = nil,
             pricing: Pricing? = nil,
@@ -396,7 +396,7 @@ extension Stripe.Billing.Invoice.Item.Update {
             quantityDecimal: String? = nil,
             taxBehavior: TaxBehavior? = nil,
             taxCode: String? = nil,
-            taxRates: [String]? = nil,
+            taxRates: Stripe.Clearable<[String]>? = nil,
             unitAmountDecimal: String? = nil
         ) {
             self.amount = amount

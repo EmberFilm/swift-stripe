@@ -127,7 +127,7 @@ extension Source.Create {
             /// The parameters required to notify Stripe of a mandate acceptance or refusal by the customer.
             public var acceptance: Acceptance?
             /// The amount specified by the mandate.
-            public var amount: Int?
+            public var amount: Stripe.Clearable<Int>?
             /// The currency specified by the mandate.
             public var currency: Stripe.Currency?
             /// The interval of debits permitted by the mandate.
@@ -145,7 +145,7 @@ extension Source.Create {
 
             public init(
                 acceptance: Acceptance? = nil,
-                amount: Int? = nil,
+                amount: Stripe.Clearable<Int>? = nil,
                 currency: Stripe.Currency? = nil,
                 interval: Interval? = nil,
                 notificationMethod: NotificationMethod? = nil
@@ -617,7 +617,7 @@ extension Source.Update {
         /// Information about a mandate possibility attached to a source object (generally for bank debits) as well as its accepta…
         public var mandate: Mandate?
         /// Set of key-value pairs that you can attach to an object.
-        public var metadata: [String: String]?
+        public var metadata: Stripe.Clearable<[String: String]>?
         /// Information about the owner of the payment instrument that may be used or required by particular source types.
         public var owner: Owner?
         /// Information about the items and shipping associated with the source.
@@ -636,7 +636,7 @@ extension Source.Update {
             amount: Int? = nil,
             expand: [String]? = nil,
             mandate: Mandate? = nil,
-            metadata: [String: String]? = nil,
+            metadata: Stripe.Clearable<[String: String]>? = nil,
             owner: Owner? = nil,
             sourceOrder: SourceOrder? = nil
         ) {
@@ -653,7 +653,7 @@ extension Source.Update {
             /// The parameters required to notify Stripe of a mandate acceptance or refusal by the customer.
             public var acceptance: Acceptance?
             /// The amount specified by the mandate.
-            public var amount: Int?
+            public var amount: Stripe.Clearable<Int>?
             /// The currency specified by the mandate.
             public var currency: Stripe.Currency?
             /// The interval of debits permitted by the mandate.
@@ -671,7 +671,7 @@ extension Source.Update {
 
             public init(
                 acceptance: Acceptance? = nil,
-                amount: Int? = nil,
+                amount: Stripe.Clearable<Int>? = nil,
                 currency: Stripe.Currency? = nil,
                 interval: Interval? = nil,
                 notificationMethod: NotificationMethod? = nil

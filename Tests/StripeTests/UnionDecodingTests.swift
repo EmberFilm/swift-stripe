@@ -102,10 +102,10 @@ struct UnionDecodingTests {
 
         let other = try Self.decode(Stripe.Events.Event.self, """
         {"id": "evt_2", "object": "event", "type": "emberfilm.made_up.event",
-         "data": {"object": {"id": "rh_1", "object": "reserve.hold"}}}
+         "data": {"object": {"id": "wd_1", "object": "emberfilm.widget"}}}
         """)
         #expect(other.type == nil, "a type the enum lacks decodes as nil")
         #expect(other.rawType == "emberfilm.made_up.event")
-        #expect(other.data?.object == .unknown(type: "reserve.hold"))
+        #expect(other.data?.object == .unknown(type: "emberfilm.widget"))
     }
 }

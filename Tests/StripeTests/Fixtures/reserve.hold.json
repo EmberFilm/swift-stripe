@@ -1,0 +1,28 @@
+{
+ "amount": 1,
+ "amount_releasable": 1,
+ "created": 1700000000,
+ "created_by": "application",
+ "currency": "usd",
+ "id": "reserve.hold_1",
+ "is_releasable": true,
+ "livemode": true,
+ "metadata": {
+  "key": "metadata_1"
+ },
+ "object": "reserve.hold",
+ "reason": "charge",
+ "release_details": [
+  {
+   "amount": 1,
+   "reserve_release": "reserve_release_1"
+  }
+ ],
+ "release_schedule": {
+  "release_after": 1700000000,
+  "scheduled_release": 1700000000
+ },
+ "reserve_plan": "reserve.plan_1",
+ "source_charge": "charge_1",
+ "source_type": "bank_account"
+}

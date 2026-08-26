@@ -1,0 +1,20 @@
+{
+ "customer": "customer_1",
+ "entitlements": {
+  "data": [
+   {
+    "feature": "entitlements.feature_1",
+    "id": "id_1",
+    "livemode": true,
+    "lookup_key": "lookup_key_1",
+    "object": "entitlements.active_entitlement"
+   }
+  ],
+  "has_more": true,
+  "object": "list",
+  "url": "url_1"
+ },
+ "id": "entitlements.active_entitlement_summary_1",
+ "livemode": true,
+ "object": "entitlements.active_entitlement_summary"
+}

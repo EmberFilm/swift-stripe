@@ -128,14 +128,14 @@ extension Stripe.Treasury.OutboundTransfer.Create {
         /// Hash describing payment method configuration details.
         public struct DestinationPaymentMethodOptions: Codable, Hashable, Sendable {
             /// Optional fields for `us_bank_account`.
-            public var usBankAccount: UsBankAccount?
+            public var usBankAccount: Stripe.Clearable<UsBankAccount>?
 
             private enum CodingKeys: String, CodingKey {
                 case usBankAccount
             }
 
             public init(
-                usBankAccount: UsBankAccount? = nil
+                usBankAccount: Stripe.Clearable<UsBankAccount>? = nil
             ) {
                 self.usBankAccount = usBankAccount
             }

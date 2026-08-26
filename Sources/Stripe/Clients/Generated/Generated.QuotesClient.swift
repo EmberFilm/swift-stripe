@@ -25,6 +25,7 @@ public protocol QuotesAPI: Sendable {
     func list(_ request: Stripe.Billing.Quote.List.Request) async throws -> Stripe.Billing.Quote.List.Response
     func listComputedUpfrontLineItems(id: Stripe.Billing.Quote.ID, _ request: Stripe.Billing.Quote.ListComputedUpfrontLineItems.Request) async throws -> Stripe.Billing.Quote.ListComputedUpfrontLineItems.Response
     func listLineItems(id: Stripe.Billing.Quote.ID, _ request: Stripe.Billing.Quote.ListLineItems.Request) async throws -> Stripe.Billing.Quote.ListLineItems.Response
+    func pdf(id: Stripe.Billing.Quote.ID, _ request: Stripe.Billing.Quote.Pdf.Request) async throws -> Stripe.Billing.Quote.Pdf.Response
     func retrieve(id: Stripe.Billing.Quote.ID, _ request: Stripe.Billing.Quote.Retrieve.Request) async throws -> Stripe.Billing.Quote.Retrieve.Response
     func update(id: Stripe.Billing.Quote.ID, _ request: Stripe.Billing.Quote.Update.Request, idempotencyKey: String?) async throws -> Stripe.Billing.Quote.Update.Response
 }
@@ -60,6 +61,10 @@ public struct QuotesClient: QuotesAPI {
 
     public func listLineItems(id: Stripe.Billing.Quote.ID, _ request: Stripe.Billing.Quote.ListLineItems.Request) async throws -> Stripe.Billing.Quote.ListLineItems.Response {
         try await api.list("v1/quotes/\(id)/line_items", parameters: request)
+    }
+
+    public func pdf(id: Stripe.Billing.Quote.ID, _ request: Stripe.Billing.Quote.Pdf.Request) async throws -> Stripe.Billing.Quote.Pdf.Response {
+        try await api.download("v1/quotes/\(id)/pdf", parameters: request)
     }
 
     public func retrieve(id: Stripe.Billing.Quote.ID, _ request: Stripe.Billing.Quote.Retrieve.Request) async throws -> Stripe.Billing.Quote.Retrieve.Response {
@@ -116,6 +121,10 @@ extension QuotesAPI {
 
     public func listLineItems(id: Stripe.Billing.Quote.ID) async throws -> Stripe.Billing.Quote.ListLineItems.Response {
         try await listLineItems(id: id, .init())
+    }
+
+    public func pdf(id: Stripe.Billing.Quote.ID) async throws -> Stripe.Billing.Quote.Pdf.Response {
+        try await pdf(id: id, .init())
     }
 
     public func retrieve(id: Stripe.Billing.Quote.ID) async throws -> Stripe.Billing.Quote.Retrieve.Response {

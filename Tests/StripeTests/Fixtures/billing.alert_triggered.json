@@ -1,0 +1,27 @@
+{
+ "alert": {
+  "alert_type": "usage_threshold",
+  "id": "id_1",
+  "livemode": true,
+  "object": "billing.alert",
+  "status": "active",
+  "title": "title_1",
+  "usage_threshold": {
+   "filters": [
+    {
+     "customer": "customer_1",
+     "type": "customer"
+    }
+   ],
+   "gte": 1,
+   "meter": "billing.meter_1",
+   "recurrence": "one_time"
+  }
+ },
+ "created": 1700000000,
+ "customer": "customer_1",
+ "id": "billing.alert_triggered_1",
+ "livemode": true,
+ "object": "billing.alert_triggered",
+ "value": 1
+}

@@ -194,7 +194,7 @@ extension Stripe.Tax.Rate.Update {
         /// The jurisdiction for the tax rate.
         public var jurisdiction: String?
         /// Set of key-value pairs that you can attach to an object.
-        public var metadata: [String: String]?
+        public var metadata: Stripe.Clearable<[String: String]>?
         /// ISO 3166-2 subdivision code, without country prefix.
         public var state: String?
         /// The high-level tax type, such as `vat` or `sales_tax`.
@@ -219,7 +219,7 @@ extension Stripe.Tax.Rate.Update {
             displayName: String? = nil,
             expand: [String]? = nil,
             jurisdiction: String? = nil,
-            metadata: [String: String]? = nil,
+            metadata: Stripe.Clearable<[String: String]>? = nil,
             state: String? = nil,
             taxType: TaxType? = nil
         ) {

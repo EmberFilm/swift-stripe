@@ -42,7 +42,7 @@ extension Stripe.Billing.Plan.Create {
         /// The number of intervals between subscription billings.
         public var intervalCount: Int?
         /// Set of key-value pairs that you can attach to an object.
-        public var metadata: [String: String]?
+        public var metadata: Stripe.Clearable<[String: String]>?
         /// The meter tracking the usage of a metered price
         public var meter: String?
         /// A brief description of the plan, hidden from customers.
@@ -90,7 +90,7 @@ extension Stripe.Billing.Plan.Create {
             id: String? = nil,
             interval: Interval,
             intervalCount: Int? = nil,
-            metadata: [String: String]? = nil,
+            metadata: Stripe.Clearable<[String: String]>? = nil,
             meter: String? = nil,
             nickname: String? = nil,
             product: String? = nil,
@@ -313,7 +313,7 @@ extension Stripe.Billing.Plan.Update {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
         /// Set of key-value pairs that you can attach to an object.
-        public var metadata: [String: String]?
+        public var metadata: Stripe.Clearable<[String: String]>?
         /// A brief description of the plan, hidden from customers.
         public var nickname: String?
         /// The product the plan belongs to.
@@ -333,7 +333,7 @@ extension Stripe.Billing.Plan.Update {
         public init(
             active: Bool? = nil,
             expand: [String]? = nil,
-            metadata: [String: String]? = nil,
+            metadata: Stripe.Clearable<[String: String]>? = nil,
             nickname: String? = nil,
             product: String? = nil,
             trialPeriodDays: Int? = nil

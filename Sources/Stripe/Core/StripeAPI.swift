@@ -92,6 +92,43 @@ public struct StripeAPI: Sendable {
         return try await perform(makeRequest(.GET, path, query: query))
     }
 
+    /// Uploads a file: the request fields and the file as `multipart/form-data`, to the files host.
+    public func upload<Fields: Encodable, Response: Decodable>(
+        _ path: String,
+        fields: Fields,
+        file: Stripe.Upload,
+        as: Response.Type = Response.self,
+        idempotencyKey: String? = nil
+    ) async throws -> Response {
+        let boundary = "swift-stripe-" + UUID().uuidString
+        var body = Data()
+        func part(_ header: String, _ bytes: Data) {
+            body.append(Data("--\(boundary)\r\n\(header)\r\n\r\n".utf8))
+            body.append(bytes)
+            body.append(Data("\r\n".utf8))
+        }
+        for (key, value) in try formEncoder.pairs(of: fields) {
+            part("Content-Disposition: form-data; name=\"\(key)\"", Data(value.utf8))
+        }
+        part("Content-Disposition: form-data; name=\"file\"; filename=\"\(file.filename)\"\r\nContent-Type: \(file.contentType)",
+             file.data)
+        body.append(Data("--\(boundary)--\r\n".utf8))
+        return try await perform(makeRequest(
+            .POST, path, body: body, idempotencyKey: idempotencyKey,
+            baseURL: configuration.filesBaseURL, contentType: "multipart/form-data; boundary=\(boundary)"
+        ))
+    }
+
+    /// Fetches a binary document (a quote PDF) from the files host.
+    public func download<Parameters: Encodable>(_ path: String, parameters: Parameters) async throws -> Data {
+        let query = try formEncoder.pairs(of: parameters)
+        return try await performRaw(makeRequest(.GET, path, query: query, baseURL: configuration.filesBaseURL))
+    }
+
+    public func download(_ path: String) async throws -> Data {
+        try await performRaw(makeRequest(.GET, path, baseURL: configuration.filesBaseURL))
+    }
+
     // MARK: - Building
 
     /// Builds the `HTTPClientRequest` for a Stripe call.
@@ -103,10 +140,12 @@ public struct StripeAPI: Sendable {
         _ path: String,
         query: [(key: String, value: String)] = [],
         body: Data? = nil,
-        idempotencyKey: String? = nil
+        idempotencyKey: String? = nil,
+        baseURL: URL? = nil,
+        contentType: String = "application/x-www-form-urlencoded"
     ) throws -> HTTPClientRequest {
         guard var components = URLComponents(
-            url: configuration.baseURL.appendingPathComponent(path),
+            url: (baseURL ?? configuration.baseURL).appendingPathComponent(path),
             resolvingAgainstBaseURL: false
         ) else {
             throw StripeClientError.invalidURL(path)
@@ -134,7 +173,7 @@ public struct StripeAPI: Sendable {
             request.headers.add(name: Self.idempotencyKeyHeader, value: idempotencyKey)
         }
         if let body {
-            request.headers.add(name: "Content-Type", value: "application/x-www-form-urlencoded")
+            request.headers.add(name: "Content-Type", value: contentType)
             request.body = .bytes(ByteBuffer(bytes: body))
         }
         return request
@@ -159,6 +198,26 @@ public struct StripeAPI: Sendable {
     private func perform<Response: Decodable>(
         _ request: HTTPClientRequest
     ) async throws -> Response {
+        try await execute(request) { status, requestID, body in
+            try Self.decode(status: status, requestID: requestID, body: body)
+        }
+    }
+
+    private func performRaw(_ request: HTTPClientRequest) async throws -> Data {
+        try await execute(request) { status, requestID, body in
+            guard (200..<300).contains(status) else {
+                // the files host answers errors with the same JSON envelope
+                let _: Data = try Self.decode(status: status, requestID: requestID, body: body)
+                throw StripeClientError.unexpectedStatus(status: status, body: String(decoding: body, as: UTF8.self), requestID: requestID)
+            }
+            return body
+        }
+    }
+
+    private func execute<Result>(
+        _ request: HTTPClientRequest,
+        _ finish: (Int, String?, Data) throws -> Result
+    ) async throws -> Result {
         var lastError: any Swift.Error = StripeClientError.unexpectedStatus(
             status: 0, body: "", requestID: nil
         )
@@ -174,10 +233,10 @@ public struct StripeAPI: Sendable {
                 // be large, so allow a generous ceiling rather than the default.
                 let buffer = try await response.body.collect(upTo: 32 * 1024 * 1024)
 
-                return try Self.decode(
-                    status: Int(response.status.code),
-                    requestID: response.headers.first(name: "Request-Id"),
-                    body: Data(buffer.readableBytesView)
+                return try finish(
+                    Int(response.status.code),
+                    response.headers.first(name: "Request-Id"),
+                    Data(buffer.readableBytesView)
                 )
             } catch let error as StripeClientError where error.isRetryable {
                 lastError = error

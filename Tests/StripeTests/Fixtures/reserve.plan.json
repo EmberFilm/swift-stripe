@@ -1,0 +1,23 @@
+{
+ "created": 1700000000,
+ "created_by": "application",
+ "currency": "usd",
+ "disabled_at": 1700000000,
+ "fixed_release": {
+  "release_after": 1,
+  "scheduled_release": 1700000000
+ },
+ "id": "reserve.plan_1",
+ "livemode": true,
+ "metadata": {
+  "key": "metadata_1"
+ },
+ "object": "reserve.plan",
+ "percent": 1,
+ "rolling_release": {
+  "days_after_charge": 1,
+  "expires_on": 1
+ },
+ "status": "active",
+ "type": "fixed_release"
+}

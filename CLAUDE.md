@@ -244,6 +244,11 @@ Unions are generated too, in three shapes:
 
 `Scripts/model-drift.py` counts a `Details` case as the property it replaced.
 
+The generator also emits `Stripe.generatedAPIVersion` (the spec's version), which
+`StripeConfiguration` sends as `Stripe-Version` by default — the models only match that
+version. Bumping the pinned spec therefore changes what every request asks for; that is the
+point, and the drift and fixture gates are what make it safe.
+
 ## Generated requests
 
 Every API operation's request type is generated too, by `Scripts/generate-requests.py`, into
@@ -261,10 +266,11 @@ account-level one `RetrieveCurrent` (`/v1/account`).
 
 Parameter rules that are not obvious from the types: `integer | "now"`-style unions become a
 nested enum with `.value(_:)` and the keyword cases; `created`-style filters are
-`Stripe.RangeQuery` (`.exactly(_:)` or `.range(gt:gte:lt:lte:)`); the empty-string "unset"
-alternative Stripe accepts is not modelled; an object-or-ID parameter is the ID; a `number`
-is `Decimal`, which `StripeFormEncoder` renders as decimal text. The timezone list on report
-runs is a `String`, not a 600-case enum.
+`Stripe.RangeQuery` (`.exactly(_:)` or `.range(gt:gte:lt:lte:)`); a parameter Stripe clears
+with an empty string is `Stripe.Clearable<T>` (`.clear`, or a literal / `.value(_:)` to set —
+a plain `String` needs no wrapper, and a keyword union gets a `.clear` case instead); an
+object-or-ID parameter is the ID; a `number` is `Decimal`, which `StripeFormEncoder` renders
+as decimal text. The timezone list on report runs is a `String`, not a 600-case enum.
 
 There is no hand-written request layer left except `Requests/WebElements/`, which describes
 Stripe.js element options rather than an API surface.
@@ -279,9 +285,10 @@ Method names come from `x-stripeOperations` (`create`, `retrieve`, `listTaxIds`,
 `finalizeInvoice`); path parameters are arguments — `id:` when there is one,
 `(customer:id:)` when nested; a write takes `idempotencyKey:` with a no-key convenience, and an
 operation whose request has no required parameter has a request-less convenience
-(`stripe.balance.retrieve()`, `stripe.checkoutSessions.expire(id:)`). Three operations are
-not on any client: the quote PDF (binary), the file upload (multipart), and
-`POST /v1/customers/{customer}/sources/{id}` (a union response).
+(`stripe.balance.retrieve()`, `stripe.checkoutSessions.expire(id:)`). The file upload takes
+`file: Stripe.Upload` and posts multipart to `StripeConfiguration.filesBaseURL`; the quote PDF
+returns `Data` from the same host. The one operation not on any client lists a payment
+intent's amount-details line items, whose element is an inline type.
 
 The client name is the resource name pluralised (`CheckoutSessions`, `TaxIds`); a resource with
 neither `create` nor `list` nor a path parameter stays singular (`Balance`, `TaxSettings`).

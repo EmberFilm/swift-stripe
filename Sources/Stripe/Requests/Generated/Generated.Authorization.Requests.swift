@@ -35,7 +35,7 @@ extension Authorization.Approve {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
         /// Set of key-value pairs that you can attach to an object.
-        public var metadata: [String: String]?
+        public var metadata: Stripe.Clearable<[String: String]>?
 
         private enum CodingKeys: String, CodingKey {
             case amount
@@ -46,7 +46,7 @@ extension Authorization.Approve {
         public init(
             amount: Int? = nil,
             expand: [String]? = nil,
-            metadata: [String: String]? = nil
+            metadata: Stripe.Clearable<[String: String]>? = nil
         ) {
             self.amount = amount
             self.expand = expand
@@ -1440,7 +1440,7 @@ extension Authorization.Decline {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
         /// Set of key-value pairs that you can attach to an object.
-        public var metadata: [String: String]?
+        public var metadata: Stripe.Clearable<[String: String]>?
 
         private enum CodingKeys: String, CodingKey {
             case expand
@@ -1449,7 +1449,7 @@ extension Authorization.Decline {
 
         public init(
             expand: [String]? = nil,
-            metadata: [String: String]? = nil
+            metadata: Stripe.Clearable<[String: String]>? = nil
         ) {
             self.expand = expand
             self.metadata = metadata
@@ -1895,7 +1895,7 @@ extension Authorization.Update {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
         /// Set of key-value pairs that you can attach to an object.
-        public var metadata: [String: String]?
+        public var metadata: Stripe.Clearable<[String: String]>?
 
         private enum CodingKeys: String, CodingKey {
             case expand
@@ -1904,7 +1904,7 @@ extension Authorization.Update {
 
         public init(
             expand: [String]? = nil,
-            metadata: [String: String]? = nil
+            metadata: Stripe.Clearable<[String: String]>? = nil
         ) {
             self.expand = expand
             self.metadata = metadata

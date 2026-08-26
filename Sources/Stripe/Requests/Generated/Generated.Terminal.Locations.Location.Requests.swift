@@ -40,7 +40,7 @@ extension Stripe.Terminal.Locations.Location.Create {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
         /// Set of key-value pairs that you can attach to an object.
-        public var metadata: [String: String]?
+        public var metadata: Stripe.Clearable<[String: String]>?
         /// The phone number for the location.
         public var phone: String?
 
@@ -66,7 +66,7 @@ extension Stripe.Terminal.Locations.Location.Create {
             displayNameKana: String? = nil,
             displayNameKanji: String? = nil,
             expand: [String]? = nil,
-            metadata: [String: String]? = nil,
+            metadata: Stripe.Clearable<[String: String]>? = nil,
             phone: String? = nil
         ) {
             self.address = address
@@ -298,7 +298,7 @@ extension Stripe.Terminal.Locations.Location.Update {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
         /// Set of key-value pairs that you can attach to an object.
-        public var metadata: [String: String]?
+        public var metadata: Stripe.Clearable<[String: String]>?
         /// The phone number for the location.
         public var phone: String?
 
@@ -324,7 +324,7 @@ extension Stripe.Terminal.Locations.Location.Update {
             displayNameKana: String? = nil,
             displayNameKanji: String? = nil,
             expand: [String]? = nil,
-            metadata: [String: String]? = nil,
+            metadata: Stripe.Clearable<[String: String]>? = nil,
             phone: String? = nil
         ) {
             self.address = address

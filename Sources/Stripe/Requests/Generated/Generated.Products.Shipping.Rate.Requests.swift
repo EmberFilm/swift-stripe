@@ -291,7 +291,7 @@ extension Stripe.Products.Shipping.Rate.Update {
         /// Describes a fixed amount to charge for shipping.
         public var fixedAmount: FixedAmount?
         /// Set of key-value pairs that you can attach to an object.
-        public var metadata: [String: String]?
+        public var metadata: Stripe.Clearable<[String: String]>?
         /// Specifies whether the rate is considered inclusive of taxes or exclusive of taxes.
         public var taxBehavior: TaxBehavior?
 
@@ -307,7 +307,7 @@ extension Stripe.Products.Shipping.Rate.Update {
             active: Bool? = nil,
             expand: [String]? = nil,
             fixedAmount: FixedAmount? = nil,
-            metadata: [String: String]? = nil,
+            metadata: Stripe.Clearable<[String: String]>? = nil,
             taxBehavior: TaxBehavior? = nil
         ) {
             self.active = active

@@ -134,6 +134,18 @@ RESOURCES: dict[str, str] = {
     "payment_link": "/Stripe.PaymentLink",
     "subscription_schedule": "Billing.Subscription.Schedule",
     # stage 4a: resources that had no model at all
+    "reserve.hold": "Reserve.Hold",
+    "reserve.plan": "Reserve.Plan",
+    "reserve.release": "Reserve.Release",
+    "reserve_transaction": "Reserve.Transaction",
+    "billing.alert_triggered": "Billing.AlertTriggered",
+    "financial_connections.authorization": "/FinancialConnections.Authorization",
+    "issuing.token": "Issuing.Token",
+    "payment_record": "PaymentRecord",
+    "source_mandate_notification": "/SourceMandateNotification",
+    "entitlements.active_entitlement_summary": "Entitlements.ActiveEntitlementSummary",
+    "tax_deducted_at_source": "/TaxDeductedAtSource",
+    "connect_collection_transfer": "Connect.CollectionTransfer",
     "climate.order": "Climate.Order",
     "climate.product": "Climate.Product",
     "tax.settings": "Tax.Settings",
@@ -331,6 +343,8 @@ RESOURCE_TYPES: dict[str, str] = {
     # namespace `Stripe.Customers.CashBalance`. This is the type the hand Customer used.
     "discount": "Stripe.Products.Discount",
     "deleted_discount": "Stripe.Products.Discount",
+    "issuing.token": "Generated.Issuing.Token",
+    "payment_record": "Generated.PaymentRecord",
     "payment_source": "Generated.PaymentSource",
     "external_account": "Generated.ExternalAccount",
     "balance_transaction_source": "Generated.BalanceTransactionSource",
@@ -347,8 +361,7 @@ UNION_RESOURCES: dict[str, str] = {
 }
 
 ID_ONLY_RESOURCES: set[str] = {
-    "payment_record",
-    "issuing.token",      # no hand type, and a top-level placement the generator does not do yet
+      # no hand type, and a top-level placement the generator does not do yet
 }
 
 # Non-resource schemas that already have a hand-written shared type worth reusing.
@@ -658,7 +671,7 @@ class Generator:
             if base in RESOURCE_TYPES:
                 t = self.qualified(RESOURCE_TYPES[base])
             elif base in RESOURCES:
-                t = f"Generated.{RESOURCES[base].lstrip('/')}"
+                t = RESOURCES[base].lstrip("/") if RESOURCES[base].startswith("/") else f"Generated.{RESOURCES[base]}"
             else:
                 self.unions.append(f"{union}: alternative {alt} has no Swift type; decodes as .unknown")
                 continue
@@ -705,7 +718,7 @@ class Generator:
             if ref in RESOURCE_TYPES:
                 t = self.qualified(RESOURCE_TYPES[ref])
             elif ref in RESOURCES:
-                t = f"Generated.{RESOURCES[ref].lstrip('/')}"
+                t = RESOURCES[ref].lstrip("/") if RESOURCES[ref].startswith("/") else f"Generated.{RESOURCES[ref]}"
             else:
                 self.unions.append(f"event: {ref} has no Swift type; decodes as .unknown")
                 continue
@@ -778,6 +791,9 @@ class Generator:
         if not self.only:
             files["Generated.Events.Event.Object.swift"] = self.render_event_object()
             files["Generated.Events.Event.Type.swift"] = self.render_event_type()
+            files["Generated.APIVersion.swift"] = HEADER.format(version=self.version, schema="(the spec's API version)") + \
+                f"extension {self.ns} {{\n    /// The Stripe API version the generated models describe; ``StripeConfiguration`` sends\n" \
+                f"    /// it as `Stripe-Version` unless told otherwise.\n    public static let generatedAPIVersion = \"{self.version}\"\n}}\n"
         files["Generated.Shared.swift"] = self.render_shared()
         if self.ns != "Stripe":
             files[f"{self.ns}.swift"] = self.render_namespace()

@@ -555,15 +555,15 @@ extension Stripe.Products.Product.Update {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
         /// A list of up to 8 URLs of images for this product, meant to be displayable to the customer.
-        public var images: [String]?
+        public var images: Stripe.Clearable<[String]>?
         /// A list of up to 15 marketing features for this product.
-        public var marketingFeatures: [MarketingFeatures]?
+        public var marketingFeatures: Stripe.Clearable<[MarketingFeatures]>?
         /// Set of key-value pairs that you can attach to an object.
-        public var metadata: [String: String]?
+        public var metadata: Stripe.Clearable<[String: String]>?
         /// The product's name, meant to be displayable to the customer.
         public var name: String?
         /// The dimensions of this product for shipping purposes.
-        public var packageDimensions: PackageDimensions?
+        public var packageDimensions: Stripe.Clearable<PackageDimensions>?
         /// Whether this product is shipped (i.e., physical goods).
         public var shippable: Bool?
         /// An arbitrary string to be displayed on your customer's credit card or bank statement.
@@ -597,11 +597,11 @@ extension Stripe.Products.Product.Update {
             defaultPrice: String? = nil,
             description: String? = nil,
             expand: [String]? = nil,
-            images: [String]? = nil,
-            marketingFeatures: [MarketingFeatures]? = nil,
-            metadata: [String: String]? = nil,
+            images: Stripe.Clearable<[String]>? = nil,
+            marketingFeatures: Stripe.Clearable<[MarketingFeatures]>? = nil,
+            metadata: Stripe.Clearable<[String: String]>? = nil,
             name: String? = nil,
-            packageDimensions: PackageDimensions? = nil,
+            packageDimensions: Stripe.Clearable<PackageDimensions>? = nil,
             shippable: Bool? = nil,
             statementDescriptor: String? = nil,
             taxCode: String? = nil,

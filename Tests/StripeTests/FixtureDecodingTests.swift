@@ -178,6 +178,18 @@ struct FixtureDecodingTests {
     @Test("transfer") func transfer() throws { try Self.decodes("transfer", as: Stripe.Connect.Transfer.self) }
     @Test("payment_link") func paymentLink() throws { try Self.decodes("payment_link", as: Stripe.PaymentLink.self) }
     @Test("subscription_schedule") func subscriptionSchedule() throws { try Self.decodes("subscription_schedule", as: Stripe.Billing.Subscription.Schedule.self) }
+    @Test("reserve.hold") func reserveHold() throws { try Self.decodes("reserve.hold", as: Stripe.Reserve.Hold.self) }
+    @Test("reserve.plan") func reservePlan() throws { try Self.decodes("reserve.plan", as: Stripe.Reserve.Plan.self) }
+    @Test("reserve.release") func reserveRelease() throws { try Self.decodes("reserve.release", as: Stripe.Reserve.Release.self) }
+    @Test("reserve_transaction") func reserveTransaction() throws { try Self.decodes("reserve_transaction", as: Stripe.Reserve.Transaction.self) }
+    @Test("billing.alert_triggered") func billingAlertTriggered() throws { try Self.decodes("billing.alert_triggered", as: Stripe.Billing.AlertTriggered.self) }
+    @Test("financial_connections.authorization") func financialConnectionsAuthorization() throws { try Self.decodes("financial_connections.authorization", as: FinancialConnections.Authorization.self) }
+    @Test("issuing.token") func issuingToken() throws { try Self.decodes("issuing.token", as: Stripe.Issuing.Token.self) }
+    @Test("payment_record") func paymentRecord() throws { try Self.decodes("payment_record", as: Stripe.PaymentRecord.self) }
+    @Test("source_mandate_notification") func sourceMandateNotification() throws { try Self.decodes("source_mandate_notification", as: SourceMandateNotification.self) }
+    @Test("entitlements.active_entitlement_summary") func entitlementsActiveEntitlementSummary() throws { try Self.decodes("entitlements.active_entitlement_summary", as: Stripe.Entitlements.ActiveEntitlementSummary.self) }
+    @Test("tax_deducted_at_source") func taxDeductedAtSource() throws { try Self.decodes("tax_deducted_at_source", as: TaxDeductedAtSource.self) }
+    @Test("connect_collection_transfer") func connectCollectionTransfer() throws { try Self.decodes("connect_collection_transfer", as: Stripe.Connect.CollectionTransfer.self) }
     @Test("climate.order") func climateOrder() throws { try Self.decodes("climate.order", as: Stripe.Climate.Order.self) }
     @Test("climate.product") func climateProduct() throws { try Self.decodes("climate.product", as: Stripe.Climate.Product.self) }
     @Test("tax.settings") func taxSettings() throws { try Self.decodes("tax.settings", as: Stripe.Tax.Settings.self) }

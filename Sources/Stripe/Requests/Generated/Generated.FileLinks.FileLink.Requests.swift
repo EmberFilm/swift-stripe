@@ -29,7 +29,7 @@ extension Stripe.FileLinks.FileLink.Create {
         /// The ID of the file.
         public var file: String
         /// Set of key-value pairs that you can attach to an object.
-        public var metadata: [String: String]?
+        public var metadata: Stripe.Clearable<[String: String]>?
 
         private enum CodingKeys: String, CodingKey {
             case expand
@@ -42,7 +42,7 @@ extension Stripe.FileLinks.FileLink.Create {
             expand: [String]? = nil,
             expiresAt: Date? = nil,
             file: String,
-            metadata: [String: String]? = nil
+            metadata: Stripe.Clearable<[String: String]>? = nil
         ) {
             self.expand = expand
             self.expiresAt = expiresAt
@@ -132,7 +132,7 @@ extension Stripe.FileLinks.FileLink.Update {
         /// A future timestamp after which the link will no longer be usable, or `now` to expire the link immediately.
         public var expiresAt: ExpiresAt?
         /// Set of key-value pairs that you can attach to an object.
-        public var metadata: [String: String]?
+        public var metadata: Stripe.Clearable<[String: String]>?
 
         private enum CodingKeys: String, CodingKey {
             case expand
@@ -143,7 +143,7 @@ extension Stripe.FileLinks.FileLink.Update {
         public init(
             expand: [String]? = nil,
             expiresAt: ExpiresAt? = nil,
-            metadata: [String: String]? = nil
+            metadata: Stripe.Clearable<[String: String]>? = nil
         ) {
             self.expand = expand
             self.expiresAt = expiresAt
@@ -154,12 +154,15 @@ extension Stripe.FileLinks.FileLink.Update {
         public enum ExpiresAt: Codable, Hashable, Sendable {
             case value(Date)
             case now
+            /// Unsets the field.
+            case clear
 
             public init(from decoder: any Decoder) throws {
                 let container = try decoder.singleValueContainer()
                 if let value = try? container.decode(Date.self) { self = .value(value); return }
                 switch try container.decode(String.self) {
                 case "now": self = .now
+                case "": self = .clear
                 case let other: throw DecodingError.dataCorruptedError(in: container, debugDescription: "unknown keyword \(other)")
                 }
             }
@@ -169,6 +172,7 @@ extension Stripe.FileLinks.FileLink.Update {
                 switch self {
                 case .value(let value): try container.encode(value)
                 case .now: try container.encode("now")
+                case .clear: try container.encode("")
                 }
             }
         }

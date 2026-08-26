@@ -244,7 +244,7 @@ extension Promotion.Code.Update {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
         /// Set of key-value pairs that you can attach to an object.
-        public var metadata: [String: String]?
+        public var metadata: Stripe.Clearable<[String: String]>?
         /// Settings that restrict the redemption of the promotion code.
         public var restrictions: Restrictions?
 
@@ -258,7 +258,7 @@ extension Promotion.Code.Update {
         public init(
             active: Bool? = nil,
             expand: [String]? = nil,
-            metadata: [String: String]? = nil,
+            metadata: Stripe.Clearable<[String: String]>? = nil,
             restrictions: Restrictions? = nil
         ) {
             self.active = active

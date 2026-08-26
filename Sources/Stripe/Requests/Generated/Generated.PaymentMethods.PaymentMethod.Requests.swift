@@ -552,7 +552,7 @@ extension Stripe.PaymentMethods.PaymentMethod.Create {
         /// Billing information associated with the PaymentMethod that may be used or required by particular types of payment meth…
         public struct BillingDetails: Codable, Hashable, Sendable {
             /// Billing address.
-            public var address: Address?
+            public var address: Stripe.Clearable<Address>?
             /// Email address.
             public var email: String?
             /// Full name.
@@ -571,7 +571,7 @@ extension Stripe.PaymentMethods.PaymentMethod.Create {
             }
 
             public init(
-                address: Address? = nil,
+                address: Stripe.Clearable<Address>? = nil,
                 email: String? = nil,
                 name: String? = nil,
                 phone: String? = nil,
@@ -1513,7 +1513,7 @@ extension Stripe.PaymentMethods.PaymentMethod.Update {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
         /// Set of key-value pairs that you can attach to an object.
-        public var metadata: [String: String]?
+        public var metadata: Stripe.Clearable<[String: String]>?
         /// If this is a `payto` PaymentMethod, this hash contains details about the PayTo payment method.
         public var payto: Payto?
         /// If this is an `us_bank_account` PaymentMethod, this hash contains details about the US bank account payment method.
@@ -1534,7 +1534,7 @@ extension Stripe.PaymentMethods.PaymentMethod.Update {
             billingDetails: BillingDetails? = nil,
             card: Card? = nil,
             expand: [String]? = nil,
-            metadata: [String: String]? = nil,
+            metadata: Stripe.Clearable<[String: String]>? = nil,
             payto: Payto? = nil,
             usBankAccount: UsBankAccount? = nil
         ) {
@@ -1556,7 +1556,7 @@ extension Stripe.PaymentMethods.PaymentMethod.Update {
         /// Billing information associated with the PaymentMethod that may be used or required by particular types of payment meth…
         public struct BillingDetails: Codable, Hashable, Sendable {
             /// Billing address.
-            public var address: Address?
+            public var address: Stripe.Clearable<Address>?
             /// Email address.
             public var email: String?
             /// Full name.
@@ -1575,7 +1575,7 @@ extension Stripe.PaymentMethods.PaymentMethod.Update {
             }
 
             public init(
-                address: Address? = nil,
+                address: Stripe.Clearable<Address>? = nil,
                 email: String? = nil,
                 name: String? = nil,
                 phone: String? = nil,

@@ -110,7 +110,7 @@ extension Stripe.Connect.Application.Fee.Refund.Update {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
         /// Set of key-value pairs that you can attach to an object.
-        public var metadata: [String: String]?
+        public var metadata: Stripe.Clearable<[String: String]>?
 
         private enum CodingKeys: String, CodingKey {
             case expand
@@ -119,7 +119,7 @@ extension Stripe.Connect.Application.Fee.Refund.Update {
 
         public init(
             expand: [String]? = nil,
-            metadata: [String: String]? = nil
+            metadata: Stripe.Clearable<[String: String]>? = nil
         ) {
             self.expand = expand
             self.metadata = metadata

@@ -659,13 +659,13 @@ extension Stripe.Products.Price.Update {
         /// Whether the price can be used for new purchases.
         public var active: Bool?
         /// Prices defined in each available currency option.
-        public var currencyOptions: [String: CurrencyOptions]?
+        public var currencyOptions: Stripe.Clearable<[String: CurrencyOptions]>?
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
         /// A lookup key used to retrieve prices dynamically from a static string.
         public var lookupKey: String?
         /// Set of key-value pairs that you can attach to an object.
-        public var metadata: [String: String]?
+        public var metadata: Stripe.Clearable<[String: String]>?
         /// A brief description of the price, hidden from customers.
         public var nickname: String?
         /// Only required if a default tax behavior) was not provided in the Stripe Tax settings.
@@ -686,10 +686,10 @@ extension Stripe.Products.Price.Update {
 
         public init(
             active: Bool? = nil,
-            currencyOptions: [String: CurrencyOptions]? = nil,
+            currencyOptions: Stripe.Clearable<[String: CurrencyOptions]>? = nil,
             expand: [String]? = nil,
             lookupKey: String? = nil,
-            metadata: [String: String]? = nil,
+            metadata: Stripe.Clearable<[String: String]>? = nil,
             nickname: String? = nil,
             taxBehavior: TaxBehavior? = nil,
             transferLookupKey: Bool? = nil

@@ -497,11 +497,17 @@ Every resource has a typed client — `stripe.customers`, `stripe.invoices`,
 `stripe.checkoutSessions`, `stripe.billingPortalSessions`, … — generated from the same spec,
 with one method per operation; `stripe.api` remains for anything unusual.
 
+Requests send the API version the models were generated from as `Stripe-Version`
+(`Stripe.generatedAPIVersion`), so a field Stripe has moved between versions decodes where the
+model expects it whatever the account's default; pass `apiVersion:` to override. A parameter
+Stripe clears with an empty value is `Stripe.Clearable` — `metadata: .clear` unsets it, a
+literal sets it. File uploads (`stripe.files.create(_:file:)`) and the quote PDF
+(`stripe.quotes.pdf(id:)`) go to `files.stripe.com`.
+
 Not yet implemented:
 
 - `swift-log` / `swift-distributed-tracing` instrumentation;
-- automatic pagination helpers (`AsyncSequence` over list endpoints);
-- file uploads (`files.stripe.com` multipart).
+- automatic pagination helpers (`AsyncSequence` over list endpoints).
 
 ## License
 

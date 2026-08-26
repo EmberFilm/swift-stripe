@@ -594,13 +594,13 @@ extension Stripe.PaymentLink.Create {
         /// Display additional text for your customers using custom text.
         public struct CustomText: Codable, Hashable, Sendable {
             /// Custom text that should be displayed after the payment confirmation button.
-            public var afterSubmit: AfterSubmit?
+            public var afterSubmit: Stripe.Clearable<AfterSubmit>?
             /// Custom text that should be displayed alongside shipping address collection.
-            public var shippingAddress: ShippingAddress?
+            public var shippingAddress: Stripe.Clearable<ShippingAddress>?
             /// Custom text that should be displayed alongside the payment confirmation button.
-            public var submit: Submit?
+            public var submit: Stripe.Clearable<Submit>?
             /// Custom text that should be displayed in place of the default terms of service agreement text.
-            public var termsOfServiceAcceptance: TermsOfServiceAcceptance?
+            public var termsOfServiceAcceptance: Stripe.Clearable<TermsOfServiceAcceptance>?
 
             private enum CodingKeys: String, CodingKey {
                 case afterSubmit
@@ -610,10 +610,10 @@ extension Stripe.PaymentLink.Create {
             }
 
             public init(
-                afterSubmit: AfterSubmit? = nil,
-                shippingAddress: ShippingAddress? = nil,
-                submit: Submit? = nil,
-                termsOfServiceAcceptance: TermsOfServiceAcceptance? = nil
+                afterSubmit: Stripe.Clearable<AfterSubmit>? = nil,
+                shippingAddress: Stripe.Clearable<ShippingAddress>? = nil,
+                submit: Stripe.Clearable<Submit>? = nil,
+                termsOfServiceAcceptance: Stripe.Clearable<TermsOfServiceAcceptance>? = nil
             ) {
                 self.afterSubmit = afterSubmit
                 self.shippingAddress = shippingAddress
@@ -705,9 +705,9 @@ extension Stripe.PaymentLink.Create {
             /// Invoice PDF configuration.
             public struct InvoiceData: Codable, Hashable, Sendable {
                 /// The account tax IDs associated with the invoice.
-                public var accountTaxIds: [String]?
+                public var accountTaxIds: Stripe.Clearable<[String]>?
                 /// Default custom fields to be displayed on invoices for this customer.
-                public var customFields: [CustomFields]?
+                public var customFields: Stripe.Clearable<[CustomFields]>?
                 /// An arbitrary string attached to the object.
                 public var description: String?
                 /// Default footer to be displayed on invoices for this customer.
@@ -715,9 +715,9 @@ extension Stripe.PaymentLink.Create {
                 /// The connected account that issues the invoice.
                 public var issuer: Issuer?
                 /// Set of key-value pairs that you can attach to an object.
-                public var metadata: [String: String]?
+                public var metadata: Stripe.Clearable<[String: String]>?
                 /// Default options for invoice PDF rendering for this customer.
-                public var renderingOptions: RenderingOptions?
+                public var renderingOptions: Stripe.Clearable<RenderingOptions>?
 
                 private enum CodingKeys: String, CodingKey {
                     case accountTaxIds
@@ -730,13 +730,13 @@ extension Stripe.PaymentLink.Create {
                 }
 
                 public init(
-                    accountTaxIds: [String]? = nil,
-                    customFields: [CustomFields]? = nil,
+                    accountTaxIds: Stripe.Clearable<[String]>? = nil,
+                    customFields: Stripe.Clearable<[CustomFields]>? = nil,
                     description: String? = nil,
                     footer: String? = nil,
                     issuer: Issuer? = nil,
-                    metadata: [String: String]? = nil,
-                    renderingOptions: RenderingOptions? = nil
+                    metadata: Stripe.Clearable<[String: String]>? = nil,
+                    renderingOptions: Stripe.Clearable<RenderingOptions>? = nil
                 ) {
                     self.accountTaxIds = accountTaxIds
                     self.customFields = customFields
@@ -1838,7 +1838,7 @@ extension Stripe.PaymentLink.Update {
         /// Configure fields to gather active consent from customers.
         public var consentCollection: ConsentCollection?
         /// Collect additional information from your customer using custom fields.
-        public var customFields: [CustomFields]?
+        public var customFields: Stripe.Clearable<[CustomFields]>?
         /// Display additional text for your customers using custom text.
         public var customText: CustomText?
         /// Configures whether checkout sessions created by this payment link create a Customer.
@@ -1854,25 +1854,25 @@ extension Stripe.PaymentLink.Update {
         /// Set of key-value pairs that you can attach to an object.
         public var metadata: [String: String]?
         /// Controls settings applied for collecting the customer's name.
-        public var nameCollection: NameCollection?
+        public var nameCollection: Stripe.Clearable<NameCollection>?
         /// A list of optional items the customer can add to their order at checkout.
-        public var optionalItems: [OptionalItems]?
+        public var optionalItems: Stripe.Clearable<[OptionalItems]>?
         /// A subset of parameters to be passed to PaymentIntent creation for Checkout Sessions in `payment` mode.
         public var paymentIntentData: PaymentIntentData?
         /// Specify whether Checkout should collect a payment method.
         public var paymentMethodCollection: PaymentMethodCollection?
         /// Payment-method-specific configuration.
-        public var paymentMethodOptions: PaymentMethodOptions?
+        public var paymentMethodOptions: Stripe.Clearable<PaymentMethodOptions>?
         /// The list of payment method types that customers can use.
-        public var paymentMethodTypes: [PaymentMethodTypes]?
+        public var paymentMethodTypes: Stripe.Clearable<[PaymentMethodTypes]>?
         /// Controls phone number collection settings during checkout.
         public var phoneNumberCollection: PhoneNumberCollection?
         /// Settings that restrict the usage of a payment link.
-        public var restrictions: Restrictions?
+        public var restrictions: Stripe.Clearable<Restrictions>?
         /// Configuration for collecting the customer's shipping address.
-        public var shippingAddressCollection: ShippingAddressCollection?
+        public var shippingAddressCollection: Stripe.Clearable<ShippingAddressCollection>?
         /// The shipping rate options to apply to checkout sessions created by this payment link.
-        public var shippingOptions: [ShippingOptions]?
+        public var shippingOptions: Stripe.Clearable<[ShippingOptions]>?
         /// Describes the type of transaction being performed in order to customize relevant text on the page, such as the submit …
         public var submitType: SubmitType?
         /// When creating a subscription, the specified configuration data will be used.
@@ -1917,7 +1917,7 @@ extension Stripe.PaymentLink.Update {
             automaticTax: AutomaticTax? = nil,
             billingAddressCollection: BillingAddressCollection? = nil,
             consentCollection: ConsentCollection? = nil,
-            customFields: [CustomFields]? = nil,
+            customFields: Stripe.Clearable<[CustomFields]>? = nil,
             customText: CustomText? = nil,
             customerCreation: CustomerCreation? = nil,
             expand: [String]? = nil,
@@ -1925,16 +1925,16 @@ extension Stripe.PaymentLink.Update {
             invoiceCreation: InvoiceCreation? = nil,
             lineItems: [LineItems]? = nil,
             metadata: [String: String]? = nil,
-            nameCollection: NameCollection? = nil,
-            optionalItems: [OptionalItems]? = nil,
+            nameCollection: Stripe.Clearable<NameCollection>? = nil,
+            optionalItems: Stripe.Clearable<[OptionalItems]>? = nil,
             paymentIntentData: PaymentIntentData? = nil,
             paymentMethodCollection: PaymentMethodCollection? = nil,
-            paymentMethodOptions: PaymentMethodOptions? = nil,
-            paymentMethodTypes: [PaymentMethodTypes]? = nil,
+            paymentMethodOptions: Stripe.Clearable<PaymentMethodOptions>? = nil,
+            paymentMethodTypes: Stripe.Clearable<[PaymentMethodTypes]>? = nil,
             phoneNumberCollection: PhoneNumberCollection? = nil,
-            restrictions: Restrictions? = nil,
-            shippingAddressCollection: ShippingAddressCollection? = nil,
-            shippingOptions: [ShippingOptions]? = nil,
+            restrictions: Stripe.Clearable<Restrictions>? = nil,
+            shippingAddressCollection: Stripe.Clearable<ShippingAddressCollection>? = nil,
+            shippingOptions: Stripe.Clearable<[ShippingOptions]>? = nil,
             submitType: SubmitType? = nil,
             subscriptionData: SubscriptionData? = nil,
             taxIdCollection: TaxIdCollection? = nil
@@ -2371,13 +2371,13 @@ extension Stripe.PaymentLink.Update {
         /// Display additional text for your customers using custom text.
         public struct CustomText: Codable, Hashable, Sendable {
             /// Custom text that should be displayed after the payment confirmation button.
-            public var afterSubmit: AfterSubmit?
+            public var afterSubmit: Stripe.Clearable<AfterSubmit>?
             /// Custom text that should be displayed alongside shipping address collection.
-            public var shippingAddress: ShippingAddress?
+            public var shippingAddress: Stripe.Clearable<ShippingAddress>?
             /// Custom text that should be displayed alongside the payment confirmation button.
-            public var submit: Submit?
+            public var submit: Stripe.Clearable<Submit>?
             /// Custom text that should be displayed in place of the default terms of service agreement text.
-            public var termsOfServiceAcceptance: TermsOfServiceAcceptance?
+            public var termsOfServiceAcceptance: Stripe.Clearable<TermsOfServiceAcceptance>?
 
             private enum CodingKeys: String, CodingKey {
                 case afterSubmit
@@ -2387,10 +2387,10 @@ extension Stripe.PaymentLink.Update {
             }
 
             public init(
-                afterSubmit: AfterSubmit? = nil,
-                shippingAddress: ShippingAddress? = nil,
-                submit: Submit? = nil,
-                termsOfServiceAcceptance: TermsOfServiceAcceptance? = nil
+                afterSubmit: Stripe.Clearable<AfterSubmit>? = nil,
+                shippingAddress: Stripe.Clearable<ShippingAddress>? = nil,
+                submit: Stripe.Clearable<Submit>? = nil,
+                termsOfServiceAcceptance: Stripe.Clearable<TermsOfServiceAcceptance>? = nil
             ) {
                 self.afterSubmit = afterSubmit
                 self.shippingAddress = shippingAddress
@@ -2482,9 +2482,9 @@ extension Stripe.PaymentLink.Update {
             /// Invoice PDF configuration.
             public struct InvoiceData: Codable, Hashable, Sendable {
                 /// The account tax IDs associated with the invoice.
-                public var accountTaxIds: [String]?
+                public var accountTaxIds: Stripe.Clearable<[String]>?
                 /// Default custom fields to be displayed on invoices for this customer.
-                public var customFields: [CustomFields]?
+                public var customFields: Stripe.Clearable<[CustomFields]>?
                 /// An arbitrary string attached to the object.
                 public var description: String?
                 /// Default footer to be displayed on invoices for this customer.
@@ -2492,9 +2492,9 @@ extension Stripe.PaymentLink.Update {
                 /// The connected account that issues the invoice.
                 public var issuer: Issuer?
                 /// Set of key-value pairs that you can attach to an object.
-                public var metadata: [String: String]?
+                public var metadata: Stripe.Clearable<[String: String]>?
                 /// Default options for invoice PDF rendering for this customer.
-                public var renderingOptions: RenderingOptions?
+                public var renderingOptions: Stripe.Clearable<RenderingOptions>?
 
                 private enum CodingKeys: String, CodingKey {
                     case accountTaxIds
@@ -2507,13 +2507,13 @@ extension Stripe.PaymentLink.Update {
                 }
 
                 public init(
-                    accountTaxIds: [String]? = nil,
-                    customFields: [CustomFields]? = nil,
+                    accountTaxIds: Stripe.Clearable<[String]>? = nil,
+                    customFields: Stripe.Clearable<[CustomFields]>? = nil,
                     description: String? = nil,
                     footer: String? = nil,
                     issuer: Issuer? = nil,
-                    metadata: [String: String]? = nil,
-                    renderingOptions: RenderingOptions? = nil
+                    metadata: Stripe.Clearable<[String: String]>? = nil,
+                    renderingOptions: Stripe.Clearable<RenderingOptions>? = nil
                 ) {
                     self.accountTaxIds = accountTaxIds
                     self.customFields = customFields
@@ -2767,7 +2767,7 @@ extension Stripe.PaymentLink.Update {
             /// An arbitrary string attached to the object.
             public var description: String?
             /// Set of key-value pairs that will declaratively set metadata on Payment Intents generated from this payment link.
-            public var metadata: [String: String]?
+            public var metadata: Stripe.Clearable<[String: String]>?
             /// Indicates that you intend to make future payments with the payment method collected by this Checkout Session.
             public var setupFutureUsage: SetupFutureUsage?
             /// Text that appears on the customer's statement as the statement descriptor for a non-card charge.
@@ -2788,7 +2788,7 @@ extension Stripe.PaymentLink.Update {
 
             public init(
                 description: String? = nil,
-                metadata: [String: String]? = nil,
+                metadata: Stripe.Clearable<[String: String]>? = nil,
                 setupFutureUsage: SetupFutureUsage? = nil,
                 statementDescriptor: String? = nil,
                 statementDescriptorSuffix: String? = nil,
@@ -2811,42 +2811,42 @@ extension Stripe.PaymentLink.Update {
 
         public struct PaymentMethodOptions: Codable, Hashable, Sendable {
             /// Configuration for `card` payment methods.
-            public var card: Card?
+            public var card: Stripe.Clearable<Card>?
 
             private enum CodingKeys: String, CodingKey {
                 case card
             }
 
             public init(
-                card: Card? = nil
+                card: Stripe.Clearable<Card>? = nil
             ) {
                 self.card = card
             }
 
             public struct Card: Codable, Hashable, Sendable {
                 /// Restrictions to apply to the card payment method.
-                public var restrictions: Restrictions?
+                public var restrictions: Stripe.Clearable<Restrictions>?
 
                 private enum CodingKeys: String, CodingKey {
                     case restrictions
                 }
 
                 public init(
-                    restrictions: Restrictions? = nil
+                    restrictions: Stripe.Clearable<Restrictions>? = nil
                 ) {
                     self.restrictions = restrictions
                 }
 
                 public struct Restrictions: Codable, Hashable, Sendable {
                     /// The card brands to block.
-                    public var brandsBlocked: [BrandsBlocked]?
+                    public var brandsBlocked: Stripe.Clearable<[BrandsBlocked]>?
 
                     private enum CodingKeys: String, CodingKey {
                         case brandsBlocked
                     }
 
                     public init(
-                        brandsBlocked: [BrandsBlocked]? = nil
+                        brandsBlocked: Stripe.Clearable<[BrandsBlocked]>? = nil
                     ) {
                         self.brandsBlocked = brandsBlocked
                     }
@@ -3184,11 +3184,11 @@ extension Stripe.PaymentLink.Update {
             /// All invoices will be billed using the specified settings.
             public var invoiceSettings: InvoiceSettings?
             /// Set of key-value pairs that will declaratively set metadata on Subscriptions generated from this payment link.
-            public var metadata: [String: String]?
+            public var metadata: Stripe.Clearable<[String: String]>?
             /// Integer representing the number of trial period days before the customer is charged for the first time.
-            public var trialPeriodDays: Int?
+            public var trialPeriodDays: Stripe.Clearable<Int>?
             /// Settings related to subscription trials.
-            public var trialSettings: TrialSettings?
+            public var trialSettings: Stripe.Clearable<TrialSettings>?
 
             private enum CodingKeys: String, CodingKey {
                 case invoiceSettings
@@ -3199,9 +3199,9 @@ extension Stripe.PaymentLink.Update {
 
             public init(
                 invoiceSettings: InvoiceSettings? = nil,
-                metadata: [String: String]? = nil,
-                trialPeriodDays: Int? = nil,
-                trialSettings: TrialSettings? = nil
+                metadata: Stripe.Clearable<[String: String]>? = nil,
+                trialPeriodDays: Stripe.Clearable<Int>? = nil,
+                trialSettings: Stripe.Clearable<TrialSettings>? = nil
             ) {
                 self.invoiceSettings = invoiceSettings
                 self.metadata = metadata

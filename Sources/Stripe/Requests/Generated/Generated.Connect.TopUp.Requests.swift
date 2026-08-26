@@ -52,7 +52,7 @@ extension Stripe.Connect.TopUp.Create {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
         /// Set of key-value pairs that you can attach to an object.
-        public var metadata: [String: String]?
+        public var metadata: Stripe.Clearable<[String: String]>?
         /// The ID of a PaymentMethod representing the payment method to be used for the top-up.
         public var paymentMethod: String?
         /// Payment method-specific configuration for this top-up.
@@ -82,7 +82,7 @@ extension Stripe.Connect.TopUp.Create {
             currency: String,
             description: String? = nil,
             expand: [String]? = nil,
-            metadata: [String: String]? = nil,
+            metadata: Stripe.Clearable<[String: String]>? = nil,
             paymentMethod: String? = nil,
             paymentMethodOptions: PaymentMethodOptions? = nil,
             source: String? = nil,
@@ -219,7 +219,7 @@ extension Stripe.Connect.TopUp.Update {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
         /// Set of key-value pairs that you can attach to an object.
-        public var metadata: [String: String]?
+        public var metadata: Stripe.Clearable<[String: String]>?
 
         private enum CodingKeys: String, CodingKey {
             case description
@@ -230,7 +230,7 @@ extension Stripe.Connect.TopUp.Update {
         public init(
             description: String? = nil,
             expand: [String]? = nil,
-            metadata: [String: String]? = nil
+            metadata: Stripe.Clearable<[String: String]>? = nil
         ) {
             self.description = description
             self.expand = expand

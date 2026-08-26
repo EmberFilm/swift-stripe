@@ -142,7 +142,7 @@ extension Stripe.Tokens.Token.Create {
                 public var phone: String?
                 public var principalPlaceOfBusiness: PrincipalPlaceOfBusiness?
                 /// When the business was incorporated or registered.
-                public var registrationDate: RegistrationDate?
+                public var registrationDate: Stripe.Clearable<RegistrationDate>?
                 /// The identification number given to a company when it is registered or incorporated, if distinct from the identificatio…
                 public var registrationNumber: String?
                 /// This hash is used to attest that the representative is authorized to act as the representative of their legal entity.
@@ -206,7 +206,7 @@ extension Stripe.Tokens.Token.Create {
                     ownershipExemptionReason: OwnershipExemptionReason? = nil,
                     phone: String? = nil,
                     principalPlaceOfBusiness: PrincipalPlaceOfBusiness? = nil,
-                    registrationDate: RegistrationDate? = nil,
+                    registrationDate: Stripe.Clearable<RegistrationDate>? = nil,
                     registrationNumber: String? = nil,
                     representativeDeclaration: RepresentativeDeclaration? = nil,
                     structure: Structure? = nil,
@@ -639,7 +639,7 @@ extension Stripe.Tokens.Token.Create {
                 /// The Kanji variation of the individual's primary address (Japan only).
                 public var addressKanji: AddressKanji?
                 /// The individual's date of birth.
-                public var dob: Dob?
+                public var dob: Stripe.Clearable<Dob>?
                 /// The individual's email address.
                 public var email: String?
                 /// The individual's first name.
@@ -649,7 +649,7 @@ extension Stripe.Tokens.Token.Create {
                 /// The Kanji variation of the individual's first name (Japan only).
                 public var firstNameKanji: String?
                 /// A list of alternate names or aliases that the individual is known by.
-                public var fullNameAliases: [String]?
+                public var fullNameAliases: Stripe.Clearable<[String]>?
                 /// The individual's gender
                 public var gender: String?
                 /// The government-issued ID number of the individual, as appropriate for the representative's country.
@@ -665,7 +665,7 @@ extension Stripe.Tokens.Token.Create {
                 /// The individual's maiden name.
                 public var maidenName: String?
                 /// Set of key-value pairs that you can attach to an object.
-                public var metadata: [String: String]?
+                public var metadata: Stripe.Clearable<[String: String]>?
                 /// The individual's phone number.
                 public var phone: String?
                 /// Indicates if the person or any of their representatives, family members, or other closely related persons, declares th…
@@ -709,12 +709,12 @@ extension Stripe.Tokens.Token.Create {
                     address: Address? = nil,
                     addressKana: AddressKana? = nil,
                     addressKanji: AddressKanji? = nil,
-                    dob: Dob? = nil,
+                    dob: Stripe.Clearable<Dob>? = nil,
                     email: String? = nil,
                     firstName: String? = nil,
                     firstNameKana: String? = nil,
                     firstNameKanji: String? = nil,
-                    fullNameAliases: [String]? = nil,
+                    fullNameAliases: Stripe.Clearable<[String]>? = nil,
                     gender: String? = nil,
                     idNumber: String? = nil,
                     idNumberSecondary: String? = nil,
@@ -722,7 +722,7 @@ extension Stripe.Tokens.Token.Create {
                     lastNameKana: String? = nil,
                     lastNameKanji: String? = nil,
                     maidenName: String? = nil,
-                    metadata: [String: String]? = nil,
+                    metadata: Stripe.Clearable<[String: String]>? = nil,
                     phone: String? = nil,
                     politicalExposure: PoliticalExposure? = nil,
                     registeredAddress: RegisteredAddress? = nil,
@@ -968,7 +968,7 @@ extension Stripe.Tokens.Token.Create {
                     /// Whether the person is an owner of the account’s legal entity.
                     public var owner: Bool?
                     /// The percent owned by the person of the account's legal entity.
-                    public var percentOwnership: Decimal?
+                    public var percentOwnership: Stripe.Clearable<Decimal>?
                     /// The person's title (e.g., CEO, Support Engineer).
                     public var title: String?
 
@@ -984,7 +984,7 @@ extension Stripe.Tokens.Token.Create {
                         director: Bool? = nil,
                         executive: Bool? = nil,
                         owner: Bool? = nil,
-                        percentOwnership: Decimal? = nil,
+                        percentOwnership: Stripe.Clearable<Decimal>? = nil,
                         title: String? = nil
                     ) {
                         self.director = director
@@ -1150,7 +1150,7 @@ extension Stripe.Tokens.Token.Create {
             /// The Kanji variation of the person's address (Japan only).
             public var addressKanji: AddressKanji?
             /// The person's date of birth.
-            public var dob: Dob?
+            public var dob: Stripe.Clearable<Dob>?
             /// Documents that may be submitted to satisfy various informational requests.
             public var documents: Documents?
             /// The person's email address.
@@ -1162,7 +1162,7 @@ extension Stripe.Tokens.Token.Create {
             /// The Kanji variation of the person's first name (Japan only).
             public var firstNameKanji: String?
             /// A list of alternate names or aliases that the person is known by.
-            public var fullNameAliases: [String]?
+            public var fullNameAliases: Stripe.Clearable<[String]>?
             /// The person's gender (International regulations require either "male" or "female").
             public var gender: String?
             /// The person's ID number, as appropriate for their country.
@@ -1178,7 +1178,7 @@ extension Stripe.Tokens.Token.Create {
             /// The person's maiden name.
             public var maidenName: String?
             /// Set of key-value pairs that you can attach to an object.
-            public var metadata: [String: String]?
+            public var metadata: Stripe.Clearable<[String: String]>?
             /// The country where the person is a national.
             public var nationality: String?
             /// The person's phone number.
@@ -1231,13 +1231,13 @@ extension Stripe.Tokens.Token.Create {
                 address: Address? = nil,
                 addressKana: AddressKana? = nil,
                 addressKanji: AddressKanji? = nil,
-                dob: Dob? = nil,
+                dob: Stripe.Clearable<Dob>? = nil,
                 documents: Documents? = nil,
                 email: String? = nil,
                 firstName: String? = nil,
                 firstNameKana: String? = nil,
                 firstNameKanji: String? = nil,
-                fullNameAliases: [String]? = nil,
+                fullNameAliases: Stripe.Clearable<[String]>? = nil,
                 gender: String? = nil,
                 idNumber: String? = nil,
                 idNumberSecondary: String? = nil,
@@ -1245,7 +1245,7 @@ extension Stripe.Tokens.Token.Create {
                 lastNameKana: String? = nil,
                 lastNameKanji: String? = nil,
                 maidenName: String? = nil,
-                metadata: [String: String]? = nil,
+                metadata: Stripe.Clearable<[String: String]>? = nil,
                 nationality: String? = nil,
                 phone: String? = nil,
                 politicalExposure: PoliticalExposure? = nil,
@@ -1617,7 +1617,7 @@ extension Stripe.Tokens.Token.Create {
                 /// Whether the person is an owner of the account’s legal entity.
                 public var owner: Bool?
                 /// The percent owned by the person of the account's legal entity.
-                public var percentOwnership: Decimal?
+                public var percentOwnership: Stripe.Clearable<Decimal>?
                 /// Whether the person is authorized as the primary representative of the account.
                 public var representative: Bool?
                 /// The person's title (e.g., CEO, Support Engineer).
@@ -1640,7 +1640,7 @@ extension Stripe.Tokens.Token.Create {
                     executive: Bool? = nil,
                     legalGuardian: Bool? = nil,
                     owner: Bool? = nil,
-                    percentOwnership: Decimal? = nil,
+                    percentOwnership: Stripe.Clearable<Decimal>? = nil,
                     representative: Bool? = nil,
                     title: String? = nil
                 ) {

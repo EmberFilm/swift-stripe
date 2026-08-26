@@ -1,0 +1,8 @@
+{
+ "amount": 1,
+ "currency": "usd",
+ "destination": "account_1",
+ "id": "connect_collection_transfer_1",
+ "livemode": true,
+ "object": "connect_collection_transfer"
+}

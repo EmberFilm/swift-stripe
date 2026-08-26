@@ -127,9 +127,9 @@ extension Stripe.Billing.Credit.Note.Create {
             /// The line item quantity to credit.
             public var quantity: Int?
             /// A list of up to 20 tax amounts for the credit note line item.
-            public var taxAmounts: [TaxAmounts]?
+            public var taxAmounts: Stripe.Clearable<[TaxAmounts]>?
             /// The tax rates which apply to the credit note line item.
-            public var taxRates: [String]?
+            public var taxRates: Stripe.Clearable<[String]>?
             /// Type of the credit note line item, one of `invoice_line_item` or `custom_line_item`.
             public var `type`: Type
             /// The integer unit amount in cents (or local equivalent) of the credit note line item.
@@ -156,8 +156,8 @@ extension Stripe.Billing.Credit.Note.Create {
                 invoiceLineItem: String? = nil,
                 metadata: [String: String]? = nil,
                 quantity: Int? = nil,
-                taxAmounts: [TaxAmounts]? = nil,
-                taxRates: [String]? = nil,
+                taxAmounts: Stripe.Clearable<[TaxAmounts]>? = nil,
+                taxRates: Stripe.Clearable<[String]>? = nil,
                 `type`: Type,
                 unitAmount: Int? = nil,
                 unitAmountDecimal: String? = nil
@@ -441,9 +441,9 @@ extension Stripe.Billing.Credit.Note.Preview {
             /// The line item quantity to credit.
             public var quantity: Int?
             /// A list of up to 20 tax amounts for the credit note line item.
-            public var taxAmounts: [TaxAmounts]?
+            public var taxAmounts: Stripe.Clearable<[TaxAmounts]>?
             /// The tax rates which apply to the credit note line item.
-            public var taxRates: [String]?
+            public var taxRates: Stripe.Clearable<[String]>?
             /// Type of the credit note line item, one of `invoice_line_item` or `custom_line_item`.
             public var `type`: Type
             /// The integer unit amount in cents (or local equivalent) of the credit note line item.
@@ -470,8 +470,8 @@ extension Stripe.Billing.Credit.Note.Preview {
                 invoiceLineItem: String? = nil,
                 metadata: [String: String]? = nil,
                 quantity: Int? = nil,
-                taxAmounts: [TaxAmounts]? = nil,
-                taxRates: [String]? = nil,
+                taxAmounts: Stripe.Clearable<[TaxAmounts]>? = nil,
+                taxRates: Stripe.Clearable<[String]>? = nil,
                 `type`: Type,
                 unitAmount: Int? = nil,
                 unitAmountDecimal: String? = nil
@@ -715,9 +715,9 @@ extension Stripe.Billing.Credit.Note.PreviewLines {
             /// The line item quantity to credit.
             public var quantity: Int?
             /// A list of up to 20 tax amounts for the credit note line item.
-            public var taxAmounts: [TaxAmounts]?
+            public var taxAmounts: Stripe.Clearable<[TaxAmounts]>?
             /// The tax rates which apply to the credit note line item.
-            public var taxRates: [String]?
+            public var taxRates: Stripe.Clearable<[String]>?
             /// Type of the credit note line item, one of `invoice_line_item` or `custom_line_item`.
             public var `type`: Type
             /// The integer unit amount in cents (or local equivalent) of the credit note line item.
@@ -744,8 +744,8 @@ extension Stripe.Billing.Credit.Note.PreviewLines {
                 invoiceLineItem: String? = nil,
                 metadata: [String: String]? = nil,
                 quantity: Int? = nil,
-                taxAmounts: [TaxAmounts]? = nil,
-                taxRates: [String]? = nil,
+                taxAmounts: Stripe.Clearable<[TaxAmounts]>? = nil,
+                taxRates: Stripe.Clearable<[String]>? = nil,
                 `type`: Type,
                 unitAmount: Int? = nil,
                 unitAmountDecimal: String? = nil

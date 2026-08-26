@@ -55,7 +55,7 @@ extension Stripe.Connect.Account.Create {
         /// Information about the person represented by the account.
         public var individual: Individual?
         /// Set of key-value pairs that you can attach to an object.
-        public var metadata: [String: String]?
+        public var metadata: Stripe.Clearable<[String: String]>?
         /// Options for customizing how the account functions within Stripe.
         public var settings: Settings?
         /// Details on the account's acceptance of the Stripe Services Agreement.
@@ -99,7 +99,7 @@ extension Stripe.Connect.Account.Create {
             externalAccount: String? = nil,
             groups: Groups? = nil,
             individual: Individual? = nil,
-            metadata: [String: String]? = nil,
+            metadata: Stripe.Clearable<[String: String]>? = nil,
             settings: Settings? = nil,
             tosAcceptance: TosAcceptance? = nil,
             `type`: Type? = nil
@@ -1736,7 +1736,7 @@ extension Stripe.Connect.Account.Create {
             public var phone: String?
             public var principalPlaceOfBusiness: PrincipalPlaceOfBusiness?
             /// When the business was incorporated or registered.
-            public var registrationDate: RegistrationDate?
+            public var registrationDate: Stripe.Clearable<RegistrationDate>?
             /// The identification number given to a company when it is registered or incorporated, if distinct from the identificatio…
             public var registrationNumber: String?
             /// This hash is used to attest that the representative is authorized to act as the representative of their legal entity.
@@ -1798,7 +1798,7 @@ extension Stripe.Connect.Account.Create {
                 ownershipExemptionReason: OwnershipExemptionReason? = nil,
                 phone: String? = nil,
                 principalPlaceOfBusiness: PrincipalPlaceOfBusiness? = nil,
-                registrationDate: RegistrationDate? = nil,
+                registrationDate: Stripe.Clearable<RegistrationDate>? = nil,
                 registrationNumber: String? = nil,
                 representativeDeclaration: RepresentativeDeclaration? = nil,
                 structure: Structure? = nil,
@@ -2546,7 +2546,7 @@ extension Stripe.Connect.Account.Create {
             /// The Kanji variation of the individual's primary address (Japan only).
             public var addressKanji: AddressKanji?
             /// The individual's date of birth.
-            public var dob: Dob?
+            public var dob: Stripe.Clearable<Dob>?
             /// The individual's email address.
             public var email: String?
             /// The individual's first name.
@@ -2556,7 +2556,7 @@ extension Stripe.Connect.Account.Create {
             /// The Kanji variation of the individual's first name (Japan only).
             public var firstNameKanji: String?
             /// A list of alternate names or aliases that the individual is known by.
-            public var fullNameAliases: [String]?
+            public var fullNameAliases: Stripe.Clearable<[String]>?
             /// The individual's gender
             public var gender: String?
             /// The government-issued ID number of the individual, as appropriate for the representative's country.
@@ -2572,7 +2572,7 @@ extension Stripe.Connect.Account.Create {
             /// The individual's maiden name.
             public var maidenName: String?
             /// Set of key-value pairs that you can attach to an object.
-            public var metadata: [String: String]?
+            public var metadata: Stripe.Clearable<[String: String]>?
             /// The individual's phone number.
             public var phone: String?
             /// Indicates if the person or any of their representatives, family members, or other closely related persons, declares th…
@@ -2616,12 +2616,12 @@ extension Stripe.Connect.Account.Create {
                 address: Address? = nil,
                 addressKana: AddressKana? = nil,
                 addressKanji: AddressKanji? = nil,
-                dob: Dob? = nil,
+                dob: Stripe.Clearable<Dob>? = nil,
                 email: String? = nil,
                 firstName: String? = nil,
                 firstNameKana: String? = nil,
                 firstNameKanji: String? = nil,
-                fullNameAliases: [String]? = nil,
+                fullNameAliases: Stripe.Clearable<[String]>? = nil,
                 gender: String? = nil,
                 idNumber: String? = nil,
                 idNumberSecondary: String? = nil,
@@ -2629,7 +2629,7 @@ extension Stripe.Connect.Account.Create {
                 lastNameKana: String? = nil,
                 lastNameKanji: String? = nil,
                 maidenName: String? = nil,
-                metadata: [String: String]? = nil,
+                metadata: Stripe.Clearable<[String: String]>? = nil,
                 phone: String? = nil,
                 politicalExposure: PoliticalExposure? = nil,
                 registeredAddress: RegisteredAddress? = nil,
@@ -2875,7 +2875,7 @@ extension Stripe.Connect.Account.Create {
                 /// Whether the person is an owner of the account’s legal entity.
                 public var owner: Bool?
                 /// The percent owned by the person of the account's legal entity.
-                public var percentOwnership: Decimal?
+                public var percentOwnership: Stripe.Clearable<Decimal>?
                 /// The person's title (e.g., CEO, Support Engineer).
                 public var title: String?
 
@@ -2891,7 +2891,7 @@ extension Stripe.Connect.Account.Create {
                     director: Bool? = nil,
                     executive: Bool? = nil,
                     owner: Bool? = nil,
-                    percentOwnership: Decimal? = nil,
+                    percentOwnership: Stripe.Clearable<Decimal>? = nil,
                     title: String? = nil
                 ) {
                     self.director = director
@@ -3566,7 +3566,7 @@ extension Stripe.Connect.Account.Update {
         /// Information about the person represented by the account.
         public var individual: Individual?
         /// Set of key-value pairs that you can attach to an object.
-        public var metadata: [String: String]?
+        public var metadata: Stripe.Clearable<[String: String]>?
         /// Options for customizing how the account functions within Stripe.
         public var settings: Settings?
         /// Details on the account's acceptance of the Stripe Services Agreement.
@@ -3603,7 +3603,7 @@ extension Stripe.Connect.Account.Update {
             externalAccount: String? = nil,
             groups: Groups? = nil,
             individual: Individual? = nil,
-            metadata: [String: String]? = nil,
+            metadata: Stripe.Clearable<[String: String]>? = nil,
             settings: Settings? = nil,
             tosAcceptance: TosAcceptance? = nil
         ) {
@@ -5229,7 +5229,7 @@ extension Stripe.Connect.Account.Update {
             /// The company's phone number (used for verification).
             public var phone: String?
             public var principalPlaceOfBusiness: PrincipalPlaceOfBusiness?
-            public var registrationDate: RegistrationDate?
+            public var registrationDate: Stripe.Clearable<RegistrationDate>?
             /// The identification number given to a company when it is registered or incorporated, if distinct from the identificatio…
             public var registrationNumber: String?
             /// This hash is used to attest that the representative is authorized to act as the representative of their legal entity.
@@ -5291,7 +5291,7 @@ extension Stripe.Connect.Account.Update {
                 ownershipExemptionReason: OwnershipExemptionReason? = nil,
                 phone: String? = nil,
                 principalPlaceOfBusiness: PrincipalPlaceOfBusiness? = nil,
-                registrationDate: RegistrationDate? = nil,
+                registrationDate: Stripe.Clearable<RegistrationDate>? = nil,
                 registrationNumber: String? = nil,
                 representativeDeclaration: RepresentativeDeclaration? = nil,
                 structure: Structure? = nil,
@@ -5981,7 +5981,7 @@ extension Stripe.Connect.Account.Update {
             /// The Kanji variation of the individual's primary address (Japan only).
             public var addressKanji: AddressKanji?
             /// The individual's date of birth.
-            public var dob: Dob?
+            public var dob: Stripe.Clearable<Dob>?
             /// The individual's email address.
             public var email: String?
             /// The individual's first name.
@@ -5991,7 +5991,7 @@ extension Stripe.Connect.Account.Update {
             /// The Kanji variation of the individual's first name (Japan only).
             public var firstNameKanji: String?
             /// A list of alternate names or aliases that the individual is known by.
-            public var fullNameAliases: [String]?
+            public var fullNameAliases: Stripe.Clearable<[String]>?
             /// The individual's gender
             public var gender: String?
             /// The government-issued ID number of the individual, as appropriate for the representative's country.
@@ -6007,7 +6007,7 @@ extension Stripe.Connect.Account.Update {
             /// The individual's maiden name.
             public var maidenName: String?
             /// Set of key-value pairs that you can attach to an object.
-            public var metadata: [String: String]?
+            public var metadata: Stripe.Clearable<[String: String]>?
             /// The individual's phone number.
             public var phone: String?
             /// Indicates if the person or any of their representatives, family members, or other closely related persons, declares th…
@@ -6051,12 +6051,12 @@ extension Stripe.Connect.Account.Update {
                 address: Address? = nil,
                 addressKana: AddressKana? = nil,
                 addressKanji: AddressKanji? = nil,
-                dob: Dob? = nil,
+                dob: Stripe.Clearable<Dob>? = nil,
                 email: String? = nil,
                 firstName: String? = nil,
                 firstNameKana: String? = nil,
                 firstNameKanji: String? = nil,
-                fullNameAliases: [String]? = nil,
+                fullNameAliases: Stripe.Clearable<[String]>? = nil,
                 gender: String? = nil,
                 idNumber: String? = nil,
                 idNumberSecondary: String? = nil,
@@ -6064,7 +6064,7 @@ extension Stripe.Connect.Account.Update {
                 lastNameKana: String? = nil,
                 lastNameKanji: String? = nil,
                 maidenName: String? = nil,
-                metadata: [String: String]? = nil,
+                metadata: Stripe.Clearable<[String: String]>? = nil,
                 phone: String? = nil,
                 politicalExposure: PoliticalExposure? = nil,
                 registeredAddress: RegisteredAddress? = nil,
@@ -6310,7 +6310,7 @@ extension Stripe.Connect.Account.Update {
                 /// Whether the person is an owner of the account’s legal entity.
                 public var owner: Bool?
                 /// The percent owned by the person of the account's legal entity.
-                public var percentOwnership: Decimal?
+                public var percentOwnership: Stripe.Clearable<Decimal>?
                 /// The person's title (e.g., CEO, Support Engineer).
                 public var title: String?
 
@@ -6326,7 +6326,7 @@ extension Stripe.Connect.Account.Update {
                     director: Bool? = nil,
                     executive: Bool? = nil,
                     owner: Bool? = nil,
-                    percentOwnership: Decimal? = nil,
+                    percentOwnership: Stripe.Clearable<Decimal>? = nil,
                     title: String? = nil
                 ) {
                     self.director = director
@@ -6600,7 +6600,7 @@ extension Stripe.Connect.Account.Update {
             /// Settings specific to the account's use of Invoices.
             public struct Invoices: Codable, Hashable, Sendable {
                 /// The list of default Account Tax IDs to automatically include on invoices.
-                public var defaultAccountTaxIds: [String]?
+                public var defaultAccountTaxIds: Stripe.Clearable<[String]>?
                 /// Whether to save the payment method after a payment is completed for a one-time invoice or a subscription invoice when …
                 public var hostedPaymentMethodSave: HostedPaymentMethodSave?
 
@@ -6610,7 +6610,7 @@ extension Stripe.Connect.Account.Update {
                 }
 
                 public init(
-                    defaultAccountTaxIds: [String]? = nil,
+                    defaultAccountTaxIds: Stripe.Clearable<[String]>? = nil,
                     hostedPaymentMethodSave: HostedPaymentMethodSave? = nil
                 ) {
                     self.defaultAccountTaxIds = defaultAccountTaxIds

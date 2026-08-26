@@ -14,5 +14,6 @@ extension Stripe {
     public enum Climate {}
     public enum Entitlements {}
     public enum Issuing {}
+    public enum Reserve {}
     public enum Treasury {}
 }

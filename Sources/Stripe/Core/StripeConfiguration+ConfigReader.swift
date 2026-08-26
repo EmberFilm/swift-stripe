@@ -72,7 +72,12 @@ extension StripeConfiguration {
         self.init(
             secretKey: secretKey,
             baseURL: baseURL,
-            apiVersion: config.string(forKey: "apiVersion"),
+            apiVersion: config.string(forKey: "apiVersion", default: Stripe.generatedAPIVersion),
+            filesBaseURL: config.string(
+                forKey: "filesBaseURL",
+                as: URL.self,
+                default: URL(string: "https://files.stripe.com")!,
+            ),
             connectedAccount: config.string(forKey: "connectedAccount"),
             maxRetries: maxRetries,
             timeout: .seconds(timeoutSeconds)

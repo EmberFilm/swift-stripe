@@ -22,6 +22,8 @@ public struct StripeConfiguration: Sendable {
     /// Leaving this `nil` uses whichever version the account defaults to, which
     /// means Stripe can change response shapes under you. Pin it in production.
     public var apiVersion: String?
+    /// Where uploads and downloads go: `files.stripe.com` rather than `api.stripe.com`.
+    public var filesBaseURL: URL
 
     /// Connected account to act on behalf of, sent as `Stripe-Account`.
     public var connectedAccount: String?
@@ -35,7 +37,8 @@ public struct StripeConfiguration: Sendable {
     public init(
         secretKey: String,
         baseURL: URL = URL(string: "https://api.stripe.com")!,
-        apiVersion: String? = nil,
+        apiVersion: String? = Stripe.generatedAPIVersion,
+        filesBaseURL: URL = URL(string: "https://files.stripe.com")!,
         connectedAccount: String? = nil,
         maxRetries: Int = 2,
         timeout: Duration = .seconds(60)
@@ -43,6 +46,7 @@ public struct StripeConfiguration: Sendable {
         self.secretKey = secretKey
         self.baseURL = baseURL
         self.apiVersion = apiVersion
+        self.filesBaseURL = filesBaseURL
         self.connectedAccount = connectedAccount
         self.maxRetries = maxRetries
         self.timeout = timeout

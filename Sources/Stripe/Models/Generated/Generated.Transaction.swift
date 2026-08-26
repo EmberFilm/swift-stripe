@@ -48,7 +48,7 @@ public struct Transaction: Codable, Hashable, Sendable, Identifiable {
     /// Additional purchase information that is optionally provided by the merchant.
     public var purchaseDetails: PurchaseDetails?
     /// Token object used for this transaction.
-    public var token: String?
+    @Expandable<Stripe.Issuing.Token, String> public var token: String?
     /// Treasury details related to this transaction if it was created on a [FinancialAccount](/docs/api/treasury/financial_ac…
     public var treasury: Treasury?
     /// The nature of the transaction.
@@ -123,7 +123,7 @@ public struct Transaction: Codable, Hashable, Sendable, Identifiable {
         self.metadata = metadata
         self.networkData = networkData
         self.purchaseDetails = purchaseDetails
-        self.token = token
+        self._token = Expandable(id: token)
         self.treasury = treasury
         self.`type` = `type`
         self.wallet = wallet

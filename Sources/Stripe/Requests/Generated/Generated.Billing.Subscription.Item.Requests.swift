@@ -24,9 +24,9 @@ extension Stripe.Billing.Subscription.Item {
 extension Stripe.Billing.Subscription.Item.Create {
     public struct Request: Codable, Hashable, Sendable {
         /// Define thresholds at which an invoice will be sent, and the subscription advanced to a new billing period.
-        public var billingThresholds: BillingThresholds?
+        public var billingThresholds: Stripe.Clearable<BillingThresholds>?
         /// The coupons to redeem into discounts for the subscription item.
-        public var discounts: [Discounts]?
+        public var discounts: Stripe.Clearable<[Discounts]>?
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
         /// Set of key-value pairs that you can attach to an object.
@@ -48,7 +48,7 @@ extension Stripe.Billing.Subscription.Item.Create {
         /// The identifier of the subscription to modify.
         public var subscription: String
         /// A list of Tax Rate ids.
-        public var taxRates: [String]?
+        public var taxRates: Stripe.Clearable<[String]>?
 
         private enum CodingKeys: String, CodingKey {
             case billingThresholds
@@ -67,8 +67,8 @@ extension Stripe.Billing.Subscription.Item.Create {
         }
 
         public init(
-            billingThresholds: BillingThresholds? = nil,
-            discounts: [Discounts]? = nil,
+            billingThresholds: Stripe.Clearable<BillingThresholds>? = nil,
+            discounts: Stripe.Clearable<[Discounts]>? = nil,
             expand: [String]? = nil,
             metadata: [String: String]? = nil,
             paymentBehavior: PaymentBehavior? = nil,
@@ -79,7 +79,7 @@ extension Stripe.Billing.Subscription.Item.Create {
             prorationDate: Date? = nil,
             quantity: Int? = nil,
             subscription: String,
-            taxRates: [String]? = nil
+            taxRates: Stripe.Clearable<[String]>? = nil
         ) {
             self.billingThresholds = billingThresholds
             self.discounts = discounts
@@ -340,13 +340,13 @@ extension Stripe.Billing.Subscription.Item.Retrieve {
 extension Stripe.Billing.Subscription.Item.Update {
     public struct Request: Codable, Hashable, Sendable {
         /// Define thresholds at which an invoice will be sent, and the subscription advanced to a new billing period.
-        public var billingThresholds: BillingThresholds?
+        public var billingThresholds: Stripe.Clearable<BillingThresholds>?
         /// The coupons to redeem into discounts for the subscription item.
-        public var discounts: [Discounts]?
+        public var discounts: Stripe.Clearable<[Discounts]>?
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
         /// Set of key-value pairs that you can attach to an object.
-        public var metadata: [String: String]?
+        public var metadata: Stripe.Clearable<[String: String]>?
         /// Indicates if a customer is on or off-session while an invoice payment is attempted.
         public var offSession: Bool?
         /// Controls how Stripe handles payment when a subscription update requires payment and `collection_method=charge_automati…
@@ -364,7 +364,7 @@ extension Stripe.Billing.Subscription.Item.Update {
         /// The quantity you'd like to apply to the subscription item you're creating.
         public var quantity: Int?
         /// A list of Tax Rate ids.
-        public var taxRates: [String]?
+        public var taxRates: Stripe.Clearable<[String]>?
 
         private enum CodingKeys: String, CodingKey {
             case billingThresholds
@@ -383,10 +383,10 @@ extension Stripe.Billing.Subscription.Item.Update {
         }
 
         public init(
-            billingThresholds: BillingThresholds? = nil,
-            discounts: [Discounts]? = nil,
+            billingThresholds: Stripe.Clearable<BillingThresholds>? = nil,
+            discounts: Stripe.Clearable<[Discounts]>? = nil,
             expand: [String]? = nil,
-            metadata: [String: String]? = nil,
+            metadata: Stripe.Clearable<[String: String]>? = nil,
             offSession: Bool? = nil,
             paymentBehavior: PaymentBehavior? = nil,
             plan: String? = nil,
@@ -395,7 +395,7 @@ extension Stripe.Billing.Subscription.Item.Update {
             prorationBehavior: ProrationBehavior? = nil,
             prorationDate: Date? = nil,
             quantity: Int? = nil,
-            taxRates: [String]? = nil
+            taxRates: Stripe.Clearable<[String]>? = nil
         ) {
             self.billingThresholds = billingThresholds
             self.discounts = discounts

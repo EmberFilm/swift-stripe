@@ -123,6 +123,7 @@ class UnionEnum:
 
     def __init__(self, name: str, value_type: str, keywords: list[str], description: str | None):
         self.name, self.value_type, self.keywords, self.description = name, value_type, keywords, description
+        self.clearable = False
 
     def render(self, indent: str) -> str:
         i = indent
@@ -133,12 +134,16 @@ class UnionEnum:
         out += f"{i}    case value({self.value_type})\n"
         for k in self.keywords:
             out += f"{i}    case {enum_case(k)}\n"
+        if self.clearable:
+            out += f"{i}    /// Unsets the field.\n{i}    case clear\n"
         out += f"\n{i}    public init(from decoder: any Decoder) throws {{\n"
         out += f"{i}        let container = try decoder.singleValueContainer()\n"
         out += f"{i}        if let value = try? container.decode({self.value_type}.self) {{ self = .value(value); return }}\n"
         out += f"{i}        switch try container.decode(String.self) {{\n"
         for k in self.keywords:
             out += f'{i}        case "{k}": self = .{enum_case(k)}\n'
+        if self.clearable:
+            out += f'{i}        case "": self = .clear\n'
         out += f"{i}        case let other: throw DecodingError.dataCorruptedError(in: container, debugDescription: \"unknown keyword \\(other)\")\n"
         out += f"{i}        }}\n{i}    }}\n\n"
         out += f"{i}    public func encode(to encoder: any Encoder) throws {{\n"
@@ -147,6 +152,8 @@ class UnionEnum:
         out += f"{i}        case .value(let value): try container.encode(value)\n"
         for k in self.keywords:
             out += f'{i}        case .{enum_case(k)}: try container.encode("{k}")\n'
+        if self.clearable:
+            out += f'{i}        case .clear: try container.encode("")\n'
         out += f"{i}        }}\n{i}    }}\n{i}}}\n"
         return out
 
@@ -253,9 +260,10 @@ class Generator:
                 if prm.get("required"):
                     required.append(prm["name"])
         else:
-            body = op.op.get("requestBody", {}).get("content", {}).get("application/x-www-form-urlencoded", {}).get("schema", {})
-            props = body.get("properties", {})
-            required = body.get("required", [])
+            content = op.op.get("requestBody", {}).get("content", {})
+            body = (content.get("application/x-www-form-urlencoded") or content.get("multipart/form-data") or {}).get("schema", {})
+            props = {k: v for k, v in body.get("properties", {}).items() if v.get("format") != "binary"}
+            required = [r for r in body.get("required", []) if r in props]
         return props, required, list(props)
 
     # ---- types -------------------------------------------------------------------------
@@ -264,6 +272,14 @@ class Generator:
         """The Swift type for a parameter schema, adding nested declarations to `owner`."""
         if "anyOf" in node:
             alts = [a for a in node["anyOf"] if not (a.get("type") == "string" and a.get("enum") == [""])]
+            clearable = len(alts) < len(node["anyOf"])
+            if clearable:
+                # a plain string already clears itself with ""; anything else needs the wrapper
+                inner = self.resolve({**node, "anyOf": alts} if len(alts) > 1 else alts[0], prop, owner, path)
+                if owner.nested and isinstance(owner.nested[-1], UnionEnum) and owner.nested[-1].name == inner:
+                    owner.nested[-1].clearable = True     # `integer | "now" | ""`: one enum, with .clear
+                    return inner
+                return inner if inner == "String" else f"Stripe.Clearable<{inner}>"
             if len(alts) == 1:
                 return self.resolve(alts[0], prop, owner, path)
             types = sorted(a.get("type", "object") for a in alts)
@@ -335,8 +351,15 @@ class Generator:
         if "$ref" in schema:
             return self.ref_type(schema["$ref"], op)
         if "anyOf" in schema:
-            live = [a for a in schema["anyOf"] if "$ref" in a and not a["$ref"].split("/")[-1].startswith("deleted_")]
-            return self.ref_type(live[0]["$ref"], op) if len(live) == 1 else None
+            live = [a["$ref"].split("/")[-1] for a in schema["anyOf"] if "$ref" in a and not a["$ref"].split("/")[-1].startswith("deleted_")]
+            if len(live) == 1:
+                return self.ref_type(f"#/{live[0]}", op)
+            for union, name in gm.UNION_RESOURCES.items():
+                if set(live) <= {a["$ref"].split("/")[-1] for a in self.schemas[union].get("anyOf", [])}:
+                    return f"Stripe.{name}"
+            return None
+        if schema.get("format") == "binary":
+            return "Data"
         props = schema.get("properties", {})
         if "data" in props and "has_more" in props:
             items = props["data"]["items"]
@@ -410,9 +433,8 @@ class Generator:
             if op.response is None:
                 self.notes.append(f"{op.http} {op.path}: no response type; not on the client")
                 continue
-            if "multipart/form-data" in op.op.get("requestBody", {}).get("content", {}):
-                self.notes.append(f"{op.http} {op.path}: multipart upload; not on the client")
-                continue
+            multipart = "multipart/form-data" in op.op.get("requestBody", {}).get("content", {})
+            binary = op.response == "Data"
             params = re.findall(r"\{(\w+)\}", op.path)
             labels = [param_label(p, len(params) == 1) for p in params]
             path = op.path.lstrip("/")
@@ -425,9 +447,24 @@ class Generator:
             has_request = op.request is not None
             all_optional = has_request and not any(f.required for f in op.request.fields)
             writes = op.http != "get"
-            decl = param_decl + ([f"_ request: {ns}.Request"] if has_request else []) + (["idempotencyKey: String?"] if writes else [])
+            decl = param_decl + ([f"_ request: {ns}.Request"] if has_request else []) + (["file: Stripe.Upload"] if multipart else []) + (["idempotencyKey: String?"] if writes else [])
             sig = f"func {method}({', '.join(decl)}) async throws -> {ns}.Response"
             requirements.append(f"    {sig}")
+            if multipart:
+                call = f'api.upload("{path}", fields: request, file: file, idempotencyKey: idempotencyKey)'
+                bodies.append(f"    public {sig} {{\n        try await {call}\n    }}")
+                conveniences.append(
+                    f"    public func {method}({', '.join(param_decl + [f'_ request: {ns}.Request', 'file: Stripe.Upload'])}) async throws -> {ns}.Response {{\n"
+                    f"        try await {method}({', '.join(param_pass + ['request', 'file: file', 'idempotencyKey: nil'])})\n    }}")
+                continue
+            if binary:
+                call = f'api.download("{path}", parameters: request)' if has_request else f'api.download("{path}")'
+                bodies.append(f"    public {sig} {{\n        try await {call}\n    }}")
+                if has_request and all_optional:
+                    conveniences.append(
+                        f"    public func {method}({', '.join(param_decl)}) async throws -> {ns}.Response {{\n"
+                        f"        try await {method}({', '.join(param_pass + ['.init()'])})\n    }}")
+                continue
             if op.http == "get":
                 call = f'api.list("{path}", parameters: request)' if has_request else f'api.send(.GET, "{path}")'
             else:

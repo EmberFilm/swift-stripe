@@ -64,23 +64,23 @@ extension IssuingDispute.Create {
         /// Evidence provided for the dispute.
         public struct Evidence: Codable, Hashable, Sendable {
             /// Evidence provided when `reason` is 'canceled'.
-            public var canceled: Canceled?
+            public var canceled: Stripe.Clearable<Canceled>?
             /// Evidence provided when `reason` is 'duplicate'.
-            public var duplicate: Duplicate?
+            public var duplicate: Stripe.Clearable<Duplicate>?
             /// Evidence provided when `reason` is 'fraudulent'.
-            public var fraudulent: Fraudulent?
+            public var fraudulent: Stripe.Clearable<Fraudulent>?
             /// Evidence provided when `reason` is 'merchandise_not_as_described'.
-            public var merchandiseNotAsDescribed: MerchandiseNotAsDescribed?
+            public var merchandiseNotAsDescribed: Stripe.Clearable<MerchandiseNotAsDescribed>?
             /// Evidence provided when `reason` is 'no_valid_authorization'.
-            public var noValidAuthorization: NoValidAuthorization?
+            public var noValidAuthorization: Stripe.Clearable<NoValidAuthorization>?
             /// Evidence provided when `reason` is 'not_received'.
-            public var notReceived: NotReceived?
+            public var notReceived: Stripe.Clearable<NotReceived>?
             /// Evidence provided when `reason` is 'other'.
-            public var other: Other?
+            public var other: Stripe.Clearable<Other>?
             /// The reason for filing the dispute.
             public var reason: Reason?
             /// Evidence provided when `reason` is 'service_not_as_described'.
-            public var serviceNotAsDescribed: ServiceNotAsDescribed?
+            public var serviceNotAsDescribed: Stripe.Clearable<ServiceNotAsDescribed>?
 
             private enum CodingKeys: String, CodingKey {
                 case canceled
@@ -95,15 +95,15 @@ extension IssuingDispute.Create {
             }
 
             public init(
-                canceled: Canceled? = nil,
-                duplicate: Duplicate? = nil,
-                fraudulent: Fraudulent? = nil,
-                merchandiseNotAsDescribed: MerchandiseNotAsDescribed? = nil,
-                noValidAuthorization: NoValidAuthorization? = nil,
-                notReceived: NotReceived? = nil,
-                other: Other? = nil,
+                canceled: Stripe.Clearable<Canceled>? = nil,
+                duplicate: Stripe.Clearable<Duplicate>? = nil,
+                fraudulent: Stripe.Clearable<Fraudulent>? = nil,
+                merchandiseNotAsDescribed: Stripe.Clearable<MerchandiseNotAsDescribed>? = nil,
+                noValidAuthorization: Stripe.Clearable<NoValidAuthorization>? = nil,
+                notReceived: Stripe.Clearable<NotReceived>? = nil,
+                other: Stripe.Clearable<Other>? = nil,
                 reason: Reason? = nil,
-                serviceNotAsDescribed: ServiceNotAsDescribed? = nil
+                serviceNotAsDescribed: Stripe.Clearable<ServiceNotAsDescribed>? = nil
             ) {
                 self.canceled = canceled
                 self.duplicate = duplicate
@@ -131,13 +131,13 @@ extension IssuingDispute.Create {
                 /// (ID of a file upload) Additional documentation supporting the dispute.
                 public var additionalDocumentation: String?
                 /// Date when order was canceled.
-                public var canceledAt: Date?
+                public var canceledAt: Stripe.Clearable<Date>?
                 /// Whether the cardholder was provided with a cancellation policy.
-                public var cancellationPolicyProvided: Bool?
+                public var cancellationPolicyProvided: Stripe.Clearable<Bool>?
                 /// Reason for canceling the order.
                 public var cancellationReason: String?
                 /// Date when the cardholder expected to receive the product.
-                public var expectedAt: Date?
+                public var expectedAt: Stripe.Clearable<Date>?
                 /// Explanation of why the cardholder is disputing this transaction.
                 public var explanation: String?
                 /// Description of the merchandise or service that was purchased.
@@ -147,7 +147,7 @@ extension IssuingDispute.Create {
                 /// Result of cardholder's attempt to return the product.
                 public var returnStatus: ReturnStatus?
                 /// Date when the product was returned or attempted to be returned.
-                public var returnedAt: Date?
+                public var returnedAt: Stripe.Clearable<Date>?
 
                 private enum CodingKeys: String, CodingKey {
                     case additionalDocumentation
@@ -164,15 +164,15 @@ extension IssuingDispute.Create {
 
                 public init(
                     additionalDocumentation: String? = nil,
-                    canceledAt: Date? = nil,
-                    cancellationPolicyProvided: Bool? = nil,
+                    canceledAt: Stripe.Clearable<Date>? = nil,
+                    cancellationPolicyProvided: Stripe.Clearable<Bool>? = nil,
                     cancellationReason: String? = nil,
-                    expectedAt: Date? = nil,
+                    expectedAt: Stripe.Clearable<Date>? = nil,
                     explanation: String? = nil,
                     productDescription: String? = nil,
                     productType: ProductType? = nil,
                     returnStatus: ReturnStatus? = nil,
-                    returnedAt: Date? = nil
+                    returnedAt: Stripe.Clearable<Date>? = nil
                 ) {
                     self.additionalDocumentation = additionalDocumentation
                     self.canceledAt = canceledAt
@@ -265,13 +265,13 @@ extension IssuingDispute.Create {
                 /// Explanation of why the cardholder is disputing this transaction.
                 public var explanation: String?
                 /// Date when the product was received.
-                public var receivedAt: Date?
+                public var receivedAt: Stripe.Clearable<Date>?
                 /// Description of the cardholder's attempt to return the product.
                 public var returnDescription: String?
                 /// Result of cardholder's attempt to return the product.
                 public var returnStatus: ReturnStatus?
                 /// Date when the product was returned or attempted to be returned.
-                public var returnedAt: Date?
+                public var returnedAt: Stripe.Clearable<Date>?
 
                 private enum CodingKeys: String, CodingKey {
                     case additionalDocumentation
@@ -285,10 +285,10 @@ extension IssuingDispute.Create {
                 public init(
                     additionalDocumentation: String? = nil,
                     explanation: String? = nil,
-                    receivedAt: Date? = nil,
+                    receivedAt: Stripe.Clearable<Date>? = nil,
                     returnDescription: String? = nil,
                     returnStatus: ReturnStatus? = nil,
-                    returnedAt: Date? = nil
+                    returnedAt: Stripe.Clearable<Date>? = nil
                 ) {
                     self.additionalDocumentation = additionalDocumentation
                     self.explanation = explanation
@@ -329,7 +329,7 @@ extension IssuingDispute.Create {
                 /// (ID of a file upload) Additional documentation supporting the dispute.
                 public var additionalDocumentation: String?
                 /// Date when the cardholder expected to receive the product.
-                public var expectedAt: Date?
+                public var expectedAt: Stripe.Clearable<Date>?
                 /// Explanation of why the cardholder is disputing this transaction.
                 public var explanation: String?
                 /// Description of the merchandise or service that was purchased.
@@ -347,7 +347,7 @@ extension IssuingDispute.Create {
 
                 public init(
                     additionalDocumentation: String? = nil,
-                    expectedAt: Date? = nil,
+                    expectedAt: Stripe.Clearable<Date>? = nil,
                     explanation: String? = nil,
                     productDescription: String? = nil,
                     productType: ProductType? = nil
@@ -406,13 +406,13 @@ extension IssuingDispute.Create {
                 /// (ID of a file upload) Additional documentation supporting the dispute.
                 public var additionalDocumentation: String?
                 /// Date when order was canceled.
-                public var canceledAt: Date?
+                public var canceledAt: Stripe.Clearable<Date>?
                 /// Reason for canceling the order.
                 public var cancellationReason: String?
                 /// Explanation of why the cardholder is disputing this transaction.
                 public var explanation: String?
                 /// Date when the product was received.
-                public var receivedAt: Date?
+                public var receivedAt: Stripe.Clearable<Date>?
 
                 private enum CodingKeys: String, CodingKey {
                     case additionalDocumentation
@@ -424,10 +424,10 @@ extension IssuingDispute.Create {
 
                 public init(
                     additionalDocumentation: String? = nil,
-                    canceledAt: Date? = nil,
+                    canceledAt: Stripe.Clearable<Date>? = nil,
                     cancellationReason: String? = nil,
                     explanation: String? = nil,
-                    receivedAt: Date? = nil
+                    receivedAt: Stripe.Clearable<Date>? = nil
                 ) {
                     self.additionalDocumentation = additionalDocumentation
                     self.canceledAt = canceledAt
@@ -542,7 +542,7 @@ extension IssuingDispute.Submit {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
         /// Set of key-value pairs that you can attach to an object.
-        public var metadata: [String: String]?
+        public var metadata: Stripe.Clearable<[String: String]>?
 
         private enum CodingKeys: String, CodingKey {
             case expand
@@ -551,7 +551,7 @@ extension IssuingDispute.Submit {
 
         public init(
             expand: [String]? = nil,
-            metadata: [String: String]? = nil
+            metadata: Stripe.Clearable<[String: String]>? = nil
         ) {
             self.expand = expand
             self.metadata = metadata
@@ -571,7 +571,7 @@ extension IssuingDispute.Update {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
         /// Set of key-value pairs that you can attach to an object.
-        public var metadata: [String: String]?
+        public var metadata: Stripe.Clearable<[String: String]>?
 
         private enum CodingKeys: String, CodingKey {
             case amount
@@ -584,7 +584,7 @@ extension IssuingDispute.Update {
             amount: Int? = nil,
             evidence: Evidence? = nil,
             expand: [String]? = nil,
-            metadata: [String: String]? = nil
+            metadata: Stripe.Clearable<[String: String]>? = nil
         ) {
             self.amount = amount
             self.evidence = evidence
@@ -595,23 +595,23 @@ extension IssuingDispute.Update {
         /// Evidence provided for the dispute.
         public struct Evidence: Codable, Hashable, Sendable {
             /// Evidence provided when `reason` is 'canceled'.
-            public var canceled: Canceled?
+            public var canceled: Stripe.Clearable<Canceled>?
             /// Evidence provided when `reason` is 'duplicate'.
-            public var duplicate: Duplicate?
+            public var duplicate: Stripe.Clearable<Duplicate>?
             /// Evidence provided when `reason` is 'fraudulent'.
-            public var fraudulent: Fraudulent?
+            public var fraudulent: Stripe.Clearable<Fraudulent>?
             /// Evidence provided when `reason` is 'merchandise_not_as_described'.
-            public var merchandiseNotAsDescribed: MerchandiseNotAsDescribed?
+            public var merchandiseNotAsDescribed: Stripe.Clearable<MerchandiseNotAsDescribed>?
             /// Evidence provided when `reason` is 'no_valid_authorization'.
-            public var noValidAuthorization: NoValidAuthorization?
+            public var noValidAuthorization: Stripe.Clearable<NoValidAuthorization>?
             /// Evidence provided when `reason` is 'not_received'.
-            public var notReceived: NotReceived?
+            public var notReceived: Stripe.Clearable<NotReceived>?
             /// Evidence provided when `reason` is 'other'.
-            public var other: Other?
+            public var other: Stripe.Clearable<Other>?
             /// The reason for filing the dispute.
             public var reason: Reason?
             /// Evidence provided when `reason` is 'service_not_as_described'.
-            public var serviceNotAsDescribed: ServiceNotAsDescribed?
+            public var serviceNotAsDescribed: Stripe.Clearable<ServiceNotAsDescribed>?
 
             private enum CodingKeys: String, CodingKey {
                 case canceled
@@ -626,15 +626,15 @@ extension IssuingDispute.Update {
             }
 
             public init(
-                canceled: Canceled? = nil,
-                duplicate: Duplicate? = nil,
-                fraudulent: Fraudulent? = nil,
-                merchandiseNotAsDescribed: MerchandiseNotAsDescribed? = nil,
-                noValidAuthorization: NoValidAuthorization? = nil,
-                notReceived: NotReceived? = nil,
-                other: Other? = nil,
+                canceled: Stripe.Clearable<Canceled>? = nil,
+                duplicate: Stripe.Clearable<Duplicate>? = nil,
+                fraudulent: Stripe.Clearable<Fraudulent>? = nil,
+                merchandiseNotAsDescribed: Stripe.Clearable<MerchandiseNotAsDescribed>? = nil,
+                noValidAuthorization: Stripe.Clearable<NoValidAuthorization>? = nil,
+                notReceived: Stripe.Clearable<NotReceived>? = nil,
+                other: Stripe.Clearable<Other>? = nil,
                 reason: Reason? = nil,
-                serviceNotAsDescribed: ServiceNotAsDescribed? = nil
+                serviceNotAsDescribed: Stripe.Clearable<ServiceNotAsDescribed>? = nil
             ) {
                 self.canceled = canceled
                 self.duplicate = duplicate
@@ -662,13 +662,13 @@ extension IssuingDispute.Update {
                 /// (ID of a file upload) Additional documentation supporting the dispute.
                 public var additionalDocumentation: String?
                 /// Date when order was canceled.
-                public var canceledAt: Date?
+                public var canceledAt: Stripe.Clearable<Date>?
                 /// Whether the cardholder was provided with a cancellation policy.
-                public var cancellationPolicyProvided: Bool?
+                public var cancellationPolicyProvided: Stripe.Clearable<Bool>?
                 /// Reason for canceling the order.
                 public var cancellationReason: String?
                 /// Date when the cardholder expected to receive the product.
-                public var expectedAt: Date?
+                public var expectedAt: Stripe.Clearable<Date>?
                 /// Explanation of why the cardholder is disputing this transaction.
                 public var explanation: String?
                 /// Description of the merchandise or service that was purchased.
@@ -678,7 +678,7 @@ extension IssuingDispute.Update {
                 /// Result of cardholder's attempt to return the product.
                 public var returnStatus: ReturnStatus?
                 /// Date when the product was returned or attempted to be returned.
-                public var returnedAt: Date?
+                public var returnedAt: Stripe.Clearable<Date>?
 
                 private enum CodingKeys: String, CodingKey {
                     case additionalDocumentation
@@ -695,15 +695,15 @@ extension IssuingDispute.Update {
 
                 public init(
                     additionalDocumentation: String? = nil,
-                    canceledAt: Date? = nil,
-                    cancellationPolicyProvided: Bool? = nil,
+                    canceledAt: Stripe.Clearable<Date>? = nil,
+                    cancellationPolicyProvided: Stripe.Clearable<Bool>? = nil,
                     cancellationReason: String? = nil,
-                    expectedAt: Date? = nil,
+                    expectedAt: Stripe.Clearable<Date>? = nil,
                     explanation: String? = nil,
                     productDescription: String? = nil,
                     productType: ProductType? = nil,
                     returnStatus: ReturnStatus? = nil,
-                    returnedAt: Date? = nil
+                    returnedAt: Stripe.Clearable<Date>? = nil
                 ) {
                     self.additionalDocumentation = additionalDocumentation
                     self.canceledAt = canceledAt
@@ -796,13 +796,13 @@ extension IssuingDispute.Update {
                 /// Explanation of why the cardholder is disputing this transaction.
                 public var explanation: String?
                 /// Date when the product was received.
-                public var receivedAt: Date?
+                public var receivedAt: Stripe.Clearable<Date>?
                 /// Description of the cardholder's attempt to return the product.
                 public var returnDescription: String?
                 /// Result of cardholder's attempt to return the product.
                 public var returnStatus: ReturnStatus?
                 /// Date when the product was returned or attempted to be returned.
-                public var returnedAt: Date?
+                public var returnedAt: Stripe.Clearable<Date>?
 
                 private enum CodingKeys: String, CodingKey {
                     case additionalDocumentation
@@ -816,10 +816,10 @@ extension IssuingDispute.Update {
                 public init(
                     additionalDocumentation: String? = nil,
                     explanation: String? = nil,
-                    receivedAt: Date? = nil,
+                    receivedAt: Stripe.Clearable<Date>? = nil,
                     returnDescription: String? = nil,
                     returnStatus: ReturnStatus? = nil,
-                    returnedAt: Date? = nil
+                    returnedAt: Stripe.Clearable<Date>? = nil
                 ) {
                     self.additionalDocumentation = additionalDocumentation
                     self.explanation = explanation
@@ -860,7 +860,7 @@ extension IssuingDispute.Update {
                 /// (ID of a file upload) Additional documentation supporting the dispute.
                 public var additionalDocumentation: String?
                 /// Date when the cardholder expected to receive the product.
-                public var expectedAt: Date?
+                public var expectedAt: Stripe.Clearable<Date>?
                 /// Explanation of why the cardholder is disputing this transaction.
                 public var explanation: String?
                 /// Description of the merchandise or service that was purchased.
@@ -878,7 +878,7 @@ extension IssuingDispute.Update {
 
                 public init(
                     additionalDocumentation: String? = nil,
-                    expectedAt: Date? = nil,
+                    expectedAt: Stripe.Clearable<Date>? = nil,
                     explanation: String? = nil,
                     productDescription: String? = nil,
                     productType: ProductType? = nil
@@ -937,13 +937,13 @@ extension IssuingDispute.Update {
                 /// (ID of a file upload) Additional documentation supporting the dispute.
                 public var additionalDocumentation: String?
                 /// Date when order was canceled.
-                public var canceledAt: Date?
+                public var canceledAt: Stripe.Clearable<Date>?
                 /// Reason for canceling the order.
                 public var cancellationReason: String?
                 /// Explanation of why the cardholder is disputing this transaction.
                 public var explanation: String?
                 /// Date when the product was received.
-                public var receivedAt: Date?
+                public var receivedAt: Stripe.Clearable<Date>?
 
                 private enum CodingKeys: String, CodingKey {
                     case additionalDocumentation
@@ -955,10 +955,10 @@ extension IssuingDispute.Update {
 
                 public init(
                     additionalDocumentation: String? = nil,
-                    canceledAt: Date? = nil,
+                    canceledAt: Stripe.Clearable<Date>? = nil,
                     cancellationReason: String? = nil,
                     explanation: String? = nil,
-                    receivedAt: Date? = nil
+                    receivedAt: Stripe.Clearable<Date>? = nil
                 ) {
                     self.additionalDocumentation = additionalDocumentation
                     self.canceledAt = canceledAt

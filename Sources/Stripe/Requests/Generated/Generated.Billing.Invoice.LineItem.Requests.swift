@@ -62,11 +62,11 @@ extension Stripe.Billing.Invoice.LineItem.Update {
         /// Controls whether discounts apply to this line item.
         public var discountable: Bool?
         /// The coupons, promotion codes & existing discounts which apply to the line item.
-        public var discounts: [Discounts]?
+        public var discounts: Stripe.Clearable<[Discounts]>?
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
         /// Set of key-value pairs that you can attach to an object.
-        public var metadata: [String: String]?
+        public var metadata: Stripe.Clearable<[String: String]>?
         /// The period associated with this invoice item.
         public var period: Period?
         /// Data used to generate a new Price object inline.
@@ -78,9 +78,9 @@ extension Stripe.Billing.Invoice.LineItem.Update {
         /// Non-negative decimal with at most 12 decimal places.
         public var quantityDecimal: String?
         /// A list of up to 20 tax amounts for this line item.
-        public var taxAmounts: [TaxAmounts]?
+        public var taxAmounts: Stripe.Clearable<[TaxAmounts]>?
         /// The tax rates which apply to the line item.
-        public var taxRates: [String]?
+        public var taxRates: Stripe.Clearable<[String]>?
 
         private enum CodingKeys: String, CodingKey {
             case amount
@@ -102,16 +102,16 @@ extension Stripe.Billing.Invoice.LineItem.Update {
             amount: Int? = nil,
             description: String? = nil,
             discountable: Bool? = nil,
-            discounts: [Discounts]? = nil,
+            discounts: Stripe.Clearable<[Discounts]>? = nil,
             expand: [String]? = nil,
-            metadata: [String: String]? = nil,
+            metadata: Stripe.Clearable<[String: String]>? = nil,
             period: Period? = nil,
             priceData: PriceData? = nil,
             pricing: Pricing? = nil,
             quantity: Int? = nil,
             quantityDecimal: String? = nil,
-            taxAmounts: [TaxAmounts]? = nil,
-            taxRates: [String]? = nil
+            taxAmounts: Stripe.Clearable<[TaxAmounts]>? = nil,
+            taxRates: Stripe.Clearable<[String]>? = nil
         ) {
             self.amount = amount
             self.description = description

@@ -165,7 +165,7 @@ extension Stripe.Climate.Order.Retrieve {
 extension Stripe.Climate.Order.Update {
     public struct Request: Codable, Hashable, Sendable {
         /// Publicly sharable reference for the end beneficiary of carbon removal.
-        public var beneficiary: Beneficiary?
+        public var beneficiary: Stripe.Clearable<Beneficiary>?
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
         /// Set of key-value pairs that you can attach to an object.
@@ -178,7 +178,7 @@ extension Stripe.Climate.Order.Update {
         }
 
         public init(
-            beneficiary: Beneficiary? = nil,
+            beneficiary: Stripe.Clearable<Beneficiary>? = nil,
             expand: [String]? = nil,
             metadata: [String: String]? = nil
         ) {

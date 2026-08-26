@@ -160,14 +160,14 @@ extension FinancialConnections.Session.Create {
         /// Settings for configuring Session-specific limits.
         public struct Limits: Codable, Hashable, Sendable {
             /// The number of accounts that can be linked in this Session.
-            public var accounts: Int
+            public var accounts: Stripe.Clearable<Int>
 
             private enum CodingKeys: String, CodingKey {
                 case accounts
             }
 
             public init(
-                accounts: Int
+                accounts: Stripe.Clearable<Int>
             ) {
                 self.accounts = accounts
             }

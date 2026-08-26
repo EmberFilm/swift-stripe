@@ -117,7 +117,7 @@ extension Stripe.Disputes.Dispute.Update {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
         /// Set of key-value pairs that you can attach to an object.
-        public var metadata: [String: String]?
+        public var metadata: Stripe.Clearable<[String: String]>?
         /// Whether to immediately submit evidence to the bank.
         public var submit: Bool?
 
@@ -131,7 +131,7 @@ extension Stripe.Disputes.Dispute.Update {
         public init(
             evidence: Evidence? = nil,
             expand: [String]? = nil,
-            metadata: [String: String]? = nil,
+            metadata: Stripe.Clearable<[String: String]>? = nil,
             submit: Bool? = nil
         ) {
             self.evidence = evidence
@@ -169,7 +169,7 @@ extension Stripe.Disputes.Dispute.Update {
             /// The Stripe ID for the prior charge which appears to be a duplicate of the disputed charge.
             public var duplicateChargeId: String?
             /// Additional evidence for qualifying evidence programs.
-            public var enhancedEvidence: EnhancedEvidence?
+            public var enhancedEvidence: Stripe.Clearable<EnhancedEvidence>?
             /// A description of the product or service that was sold.
             public var productDescription: String?
             /// (ID of a file upload) Any receipt or message sent to the customer notifying them of the charge.
@@ -244,7 +244,7 @@ extension Stripe.Disputes.Dispute.Update {
                 duplicateChargeDocumentation: String? = nil,
                 duplicateChargeExplanation: String? = nil,
                 duplicateChargeId: String? = nil,
-                enhancedEvidence: EnhancedEvidence? = nil,
+                enhancedEvidence: Stripe.Clearable<EnhancedEvidence>? = nil,
                 productDescription: String? = nil,
                 receipt: String? = nil,
                 refundPolicy: String? = nil,

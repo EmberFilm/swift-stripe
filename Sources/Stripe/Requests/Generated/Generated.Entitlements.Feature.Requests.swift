@@ -127,7 +127,7 @@ extension Stripe.Entitlements.Feature.Update {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
         /// Set of key-value pairs that you can attach to an object.
-        public var metadata: [String: String]?
+        public var metadata: Stripe.Clearable<[String: String]>?
         /// The feature's name, for your own purpose, not meant to be displayable to the customer.
         public var name: String?
 
@@ -141,7 +141,7 @@ extension Stripe.Entitlements.Feature.Update {
         public init(
             active: Bool? = nil,
             expand: [String]? = nil,
-            metadata: [String: String]? = nil,
+            metadata: Stripe.Clearable<[String: String]>? = nil,
             name: String? = nil
         ) {
             self.active = active

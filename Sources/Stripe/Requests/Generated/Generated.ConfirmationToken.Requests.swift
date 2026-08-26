@@ -541,7 +541,7 @@ extension ConfirmationToken.Create {
             /// Billing information associated with the PaymentMethod that may be used or required by particular types of payment meth…
             public struct BillingDetails: Codable, Hashable, Sendable {
                 /// Billing address.
-                public var address: Address?
+                public var address: Stripe.Clearable<Address>?
                 /// Email address.
                 public var email: String?
                 /// Full name.
@@ -560,7 +560,7 @@ extension ConfirmationToken.Create {
                 }
 
                 public init(
-                    address: Address? = nil,
+                    address: Stripe.Clearable<Address>? = nil,
                     email: String? = nil,
                     name: String? = nil,
                     phone: String? = nil,

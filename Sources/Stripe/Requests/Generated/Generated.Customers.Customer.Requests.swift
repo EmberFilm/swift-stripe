@@ -34,7 +34,7 @@ extension Stripe.Customers.Customer {
 extension Stripe.Customers.Customer.Create {
     public struct Request: Codable, Hashable, Sendable {
         /// The customer's address.
-        public var address: Address?
+        public var address: Stripe.Clearable<Address>?
         /// An integer amount in cents (or local equivalent) that represents the customer's current balance, which affect the cust…
         public var balance: Int?
         /// The customer's business name.
@@ -54,7 +54,7 @@ extension Stripe.Customers.Customer.Create {
         /// Default invoice settings for this customer.
         public var invoiceSettings: InvoiceSettings?
         /// Set of key-value pairs that you can attach to an object.
-        public var metadata: [String: String]?
+        public var metadata: Stripe.Clearable<[String: String]>?
         /// The customer's full name or business name.
         public var name: String?
         /// The sequence to be used on the customer's next invoice.
@@ -65,7 +65,7 @@ extension Stripe.Customers.Customer.Create {
         /// Customer's preferred languages, ordered by preference.
         public var preferredLocales: [String]?
         /// The customer's shipping information.
-        public var shipping: Shipping?
+        public var shipping: Stripe.Clearable<Shipping>?
         public var source: String?
         /// Tax details about the customer.
         public var tax: Tax?
@@ -104,7 +104,7 @@ extension Stripe.Customers.Customer.Create {
         }
 
         public init(
-            address: Address? = nil,
+            address: Stripe.Clearable<Address>? = nil,
             balance: Int? = nil,
             businessName: String? = nil,
             cashBalance: CashBalance? = nil,
@@ -114,13 +114,13 @@ extension Stripe.Customers.Customer.Create {
             individualName: String? = nil,
             invoicePrefix: String? = nil,
             invoiceSettings: InvoiceSettings? = nil,
-            metadata: [String: String]? = nil,
+            metadata: Stripe.Clearable<[String: String]>? = nil,
             name: String? = nil,
             nextInvoiceSequence: Int? = nil,
             paymentMethod: String? = nil,
             phone: String? = nil,
             preferredLocales: [String]? = nil,
-            shipping: Shipping? = nil,
+            shipping: Stripe.Clearable<Shipping>? = nil,
             source: String? = nil,
             tax: Tax? = nil,
             taxExempt: TaxExempt? = nil,
@@ -241,13 +241,13 @@ extension Stripe.Customers.Customer.Create {
         /// Default invoice settings for this customer.
         public struct InvoiceSettings: Codable, Hashable, Sendable {
             /// The list of up to 4 default custom fields to be displayed on invoices for this customer.
-            public var customFields: [CustomFields]?
+            public var customFields: Stripe.Clearable<[CustomFields]>?
             /// ID of a payment method that's attached to the customer, to be used as the customer's default payment method for subscr…
             public var defaultPaymentMethod: String?
             /// Default footer to be displayed on invoices for this customer.
             public var footer: String?
             /// Default options for invoice PDF rendering for this customer.
-            public var renderingOptions: RenderingOptions?
+            public var renderingOptions: Stripe.Clearable<RenderingOptions>?
 
             private enum CodingKeys: String, CodingKey {
                 case customFields
@@ -257,10 +257,10 @@ extension Stripe.Customers.Customer.Create {
             }
 
             public init(
-                customFields: [CustomFields]? = nil,
+                customFields: Stripe.Clearable<[CustomFields]>? = nil,
                 defaultPaymentMethod: String? = nil,
                 footer: String? = nil,
-                renderingOptions: RenderingOptions? = nil
+                renderingOptions: Stripe.Clearable<RenderingOptions>? = nil
             ) {
                 self.customFields = customFields
                 self.defaultPaymentMethod = defaultPaymentMethod
@@ -1136,7 +1136,7 @@ extension Stripe.Customers.Customer.Search {
 extension Stripe.Customers.Customer.Update {
     public struct Request: Codable, Hashable, Sendable {
         /// The customer's address.
-        public var address: Address?
+        public var address: Stripe.Clearable<Address>?
         /// An integer amount in cents (or local equivalent) that represents the customer's current balance, which affect the cust…
         public var balance: Int?
         /// The customer's business name.
@@ -1158,7 +1158,7 @@ extension Stripe.Customers.Customer.Update {
         /// Default invoice settings for this customer.
         public var invoiceSettings: InvoiceSettings?
         /// Set of key-value pairs that you can attach to an object.
-        public var metadata: [String: String]?
+        public var metadata: Stripe.Clearable<[String: String]>?
         /// The customer's full name or business name.
         public var name: String?
         /// The sequence to be used on the customer's next invoice.
@@ -1168,7 +1168,7 @@ extension Stripe.Customers.Customer.Update {
         /// Customer's preferred languages, ordered by preference.
         public var preferredLocales: [String]?
         /// The customer's shipping information.
-        public var shipping: Shipping?
+        public var shipping: Stripe.Clearable<Shipping>?
         public var source: String?
         /// Tax details about the customer.
         public var tax: Tax?
@@ -1201,7 +1201,7 @@ extension Stripe.Customers.Customer.Update {
         }
 
         public init(
-            address: Address? = nil,
+            address: Stripe.Clearable<Address>? = nil,
             balance: Int? = nil,
             businessName: String? = nil,
             cashBalance: CashBalance? = nil,
@@ -1212,12 +1212,12 @@ extension Stripe.Customers.Customer.Update {
             individualName: String? = nil,
             invoicePrefix: String? = nil,
             invoiceSettings: InvoiceSettings? = nil,
-            metadata: [String: String]? = nil,
+            metadata: Stripe.Clearable<[String: String]>? = nil,
             name: String? = nil,
             nextInvoiceSequence: Int? = nil,
             phone: String? = nil,
             preferredLocales: [String]? = nil,
-            shipping: Shipping? = nil,
+            shipping: Stripe.Clearable<Shipping>? = nil,
             source: String? = nil,
             tax: Tax? = nil,
             taxExempt: TaxExempt? = nil,
@@ -1334,13 +1334,13 @@ extension Stripe.Customers.Customer.Update {
         /// Default invoice settings for this customer.
         public struct InvoiceSettings: Codable, Hashable, Sendable {
             /// The list of up to 4 default custom fields to be displayed on invoices for this customer.
-            public var customFields: [CustomFields]?
+            public var customFields: Stripe.Clearable<[CustomFields]>?
             /// ID of a payment method that's attached to the customer, to be used as the customer's default payment method for subscr…
             public var defaultPaymentMethod: String?
             /// Default footer to be displayed on invoices for this customer.
             public var footer: String?
             /// Default options for invoice PDF rendering for this customer.
-            public var renderingOptions: RenderingOptions?
+            public var renderingOptions: Stripe.Clearable<RenderingOptions>?
 
             private enum CodingKeys: String, CodingKey {
                 case customFields
@@ -1350,10 +1350,10 @@ extension Stripe.Customers.Customer.Update {
             }
 
             public init(
-                customFields: [CustomFields]? = nil,
+                customFields: Stripe.Clearable<[CustomFields]>? = nil,
                 defaultPaymentMethod: String? = nil,
                 footer: String? = nil,
-                renderingOptions: RenderingOptions? = nil
+                renderingOptions: Stripe.Clearable<RenderingOptions>? = nil
             ) {
                 self.customFields = customFields
                 self.defaultPaymentMethod = defaultPaymentMethod

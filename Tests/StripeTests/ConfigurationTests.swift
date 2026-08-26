@@ -27,7 +27,7 @@ struct ConfigurationTests {
 
         #expect(config.secretKey == "sk_test_123")
         #expect(config.baseURL.absoluteString == "https://api.stripe.com")
-        #expect(config.apiVersion == nil)
+        #expect(config.apiVersion == Stripe.generatedAPIVersion)
         #expect(config.connectedAccount == nil)
         #expect(config.maxRetries == 2)
         #expect(config.timeout == .seconds(60))

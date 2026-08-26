@@ -42,7 +42,7 @@ extension Card.Update {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
         /// Set of key-value pairs that you can attach to an object.
-        public var metadata: [String: String]?
+        public var metadata: Stripe.Clearable<[String: String]>?
         /// Cardholder name.
         public var name: String?
         public var owner: Owner?
@@ -76,7 +76,7 @@ extension Card.Update {
             expMonth: String? = nil,
             expYear: String? = nil,
             expand: [String]? = nil,
-            metadata: [String: String]? = nil,
+            metadata: Stripe.Clearable<[String: String]>? = nil,
             name: String? = nil,
             owner: Owner? = nil
         ) {
@@ -172,4 +172,6 @@ extension Card.Update {
             }
         }
     }
+
+    public typealias Response = Stripe.PaymentSource
 }

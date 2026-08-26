@@ -32,7 +32,7 @@ extension Stripe.Connect.Person.Create {
         /// The Kanji variation of the person's address (Japan only).
         public var addressKanji: AddressKanji?
         /// The person's date of birth.
-        public var dob: Dob?
+        public var dob: Stripe.Clearable<Dob>?
         /// Documents that may be submitted to satisfy various informational requests.
         public var documents: Documents?
         /// The person's email address.
@@ -46,7 +46,7 @@ extension Stripe.Connect.Person.Create {
         /// The Kanji variation of the person's first name (Japan only).
         public var firstNameKanji: String?
         /// A list of alternate names or aliases that the person is known by.
-        public var fullNameAliases: [String]?
+        public var fullNameAliases: Stripe.Clearable<[String]>?
         /// The person's gender (International regulations require either "male" or "female").
         public var gender: String?
         /// The person's ID number, as appropriate for their country.
@@ -62,7 +62,7 @@ extension Stripe.Connect.Person.Create {
         /// The person's maiden name.
         public var maidenName: String?
         /// Set of key-value pairs that you can attach to an object.
-        public var metadata: [String: String]?
+        public var metadata: Stripe.Clearable<[String: String]>?
         /// The country where the person is a national.
         public var nationality: String?
         /// A person token, used to securely provide details to the person.
@@ -119,14 +119,14 @@ extension Stripe.Connect.Person.Create {
             address: Address? = nil,
             addressKana: AddressKana? = nil,
             addressKanji: AddressKanji? = nil,
-            dob: Dob? = nil,
+            dob: Stripe.Clearable<Dob>? = nil,
             documents: Documents? = nil,
             email: String? = nil,
             expand: [String]? = nil,
             firstName: String? = nil,
             firstNameKana: String? = nil,
             firstNameKanji: String? = nil,
-            fullNameAliases: [String]? = nil,
+            fullNameAliases: Stripe.Clearable<[String]>? = nil,
             gender: String? = nil,
             idNumber: String? = nil,
             idNumberSecondary: String? = nil,
@@ -134,7 +134,7 @@ extension Stripe.Connect.Person.Create {
             lastNameKana: String? = nil,
             lastNameKanji: String? = nil,
             maidenName: String? = nil,
-            metadata: [String: String]? = nil,
+            metadata: Stripe.Clearable<[String: String]>? = nil,
             nationality: String? = nil,
             personToken: String? = nil,
             phone: String? = nil,
@@ -509,7 +509,7 @@ extension Stripe.Connect.Person.Create {
             /// Whether the person is an owner of the account’s legal entity.
             public var owner: Bool?
             /// The percent owned by the person of the account's legal entity.
-            public var percentOwnership: Decimal?
+            public var percentOwnership: Stripe.Clearable<Decimal>?
             /// Whether the person is authorized as the primary representative of the account.
             public var representative: Bool?
             /// The person's title (e.g., CEO, Support Engineer).
@@ -532,7 +532,7 @@ extension Stripe.Connect.Person.Create {
                 executive: Bool? = nil,
                 legalGuardian: Bool? = nil,
                 owner: Bool? = nil,
-                percentOwnership: Decimal? = nil,
+                percentOwnership: Stripe.Clearable<Decimal>? = nil,
                 representative: Bool? = nil,
                 title: String? = nil
             ) {
@@ -837,7 +837,7 @@ extension Stripe.Connect.Person.Update {
         /// The Kanji variation of the person's address (Japan only).
         public var addressKanji: AddressKanji?
         /// The person's date of birth.
-        public var dob: Dob?
+        public var dob: Stripe.Clearable<Dob>?
         /// Documents that may be submitted to satisfy various informational requests.
         public var documents: Documents?
         /// The person's email address.
@@ -851,7 +851,7 @@ extension Stripe.Connect.Person.Update {
         /// The Kanji variation of the person's first name (Japan only).
         public var firstNameKanji: String?
         /// A list of alternate names or aliases that the person is known by.
-        public var fullNameAliases: [String]?
+        public var fullNameAliases: Stripe.Clearable<[String]>?
         /// The person's gender (International regulations require either "male" or "female").
         public var gender: String?
         /// The person's ID number, as appropriate for their country.
@@ -867,7 +867,7 @@ extension Stripe.Connect.Person.Update {
         /// The person's maiden name.
         public var maidenName: String?
         /// Set of key-value pairs that you can attach to an object.
-        public var metadata: [String: String]?
+        public var metadata: Stripe.Clearable<[String: String]>?
         /// The country where the person is a national.
         public var nationality: String?
         /// A person token, used to securely provide details to the person.
@@ -924,14 +924,14 @@ extension Stripe.Connect.Person.Update {
             address: Address? = nil,
             addressKana: AddressKana? = nil,
             addressKanji: AddressKanji? = nil,
-            dob: Dob? = nil,
+            dob: Stripe.Clearable<Dob>? = nil,
             documents: Documents? = nil,
             email: String? = nil,
             expand: [String]? = nil,
             firstName: String? = nil,
             firstNameKana: String? = nil,
             firstNameKanji: String? = nil,
-            fullNameAliases: [String]? = nil,
+            fullNameAliases: Stripe.Clearable<[String]>? = nil,
             gender: String? = nil,
             idNumber: String? = nil,
             idNumberSecondary: String? = nil,
@@ -939,7 +939,7 @@ extension Stripe.Connect.Person.Update {
             lastNameKana: String? = nil,
             lastNameKanji: String? = nil,
             maidenName: String? = nil,
-            metadata: [String: String]? = nil,
+            metadata: Stripe.Clearable<[String: String]>? = nil,
             nationality: String? = nil,
             personToken: String? = nil,
             phone: String? = nil,
@@ -1314,7 +1314,7 @@ extension Stripe.Connect.Person.Update {
             /// Whether the person is an owner of the account’s legal entity.
             public var owner: Bool?
             /// The percent owned by the person of the account's legal entity.
-            public var percentOwnership: Decimal?
+            public var percentOwnership: Stripe.Clearable<Decimal>?
             /// Whether the person is authorized as the primary representative of the account.
             public var representative: Bool?
             /// The person's title (e.g., CEO, Support Engineer).
@@ -1337,7 +1337,7 @@ extension Stripe.Connect.Person.Update {
                 executive: Bool? = nil,
                 legalGuardian: Bool? = nil,
                 owner: Bool? = nil,
-                percentOwnership: Decimal? = nil,
+                percentOwnership: Stripe.Clearable<Decimal>? = nil,
                 representative: Bool? = nil,
                 title: String? = nil
             ) {

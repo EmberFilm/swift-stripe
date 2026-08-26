@@ -62,7 +62,7 @@ extension Stripe.Setup.Intent.Confirm {
         public var confirmationToken: String?
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
-        public var mandateData: MandateData?
+        public var mandateData: Stripe.Clearable<MandateData>?
         /// ID of the payment method (a PaymentMethod, Card, or saved Source object) to attach to this SetupIntent.
         public var paymentMethod: String?
         /// When included, this hash creates a PaymentMethod that is set as the `payment_method` value in the SetupIntent.
@@ -90,7 +90,7 @@ extension Stripe.Setup.Intent.Confirm {
             allowedPaymentMethodTypes: [AllowedPaymentMethodTypes]? = nil,
             confirmationToken: String? = nil,
             expand: [String]? = nil,
-            mandateData: MandateData? = nil,
+            mandateData: Stripe.Clearable<MandateData>? = nil,
             paymentMethod: String? = nil,
             paymentMethodData: PaymentMethodData? = nil,
             paymentMethodOptions: PaymentMethodOptions? = nil,
@@ -757,7 +757,7 @@ extension Stripe.Setup.Intent.Confirm {
             /// Billing information associated with the PaymentMethod that may be used or required by particular types of payment meth…
             public struct BillingDetails: Codable, Hashable, Sendable {
                 /// Billing address.
-                public var address: Address?
+                public var address: Stripe.Clearable<Address>?
                 /// Email address.
                 public var email: String?
                 /// Full name.
@@ -776,7 +776,7 @@ extension Stripe.Setup.Intent.Confirm {
                 }
 
                 public init(
-                    address: Address? = nil,
+                    address: Stripe.Clearable<Address>? = nil,
                     email: String? = nil,
                     name: String? = nil,
                     phone: String? = nil,
@@ -1951,7 +1951,7 @@ extension Stripe.Setup.Intent.Confirm {
                 /// Preferred language of the Klarna authorization page that the customer is redirected to
                 public var preferredLocale: PreferredLocale?
                 /// Subscription details if setting up or charging a subscription
-                public var subscriptions: [Subscriptions]?
+                public var subscriptions: Stripe.Clearable<[Subscriptions]>?
 
                 private enum CodingKeys: String, CodingKey {
                     case currency
@@ -1964,7 +1964,7 @@ extension Stripe.Setup.Intent.Confirm {
                     currency: Stripe.Currency? = nil,
                     onDemand: OnDemand? = nil,
                     preferredLocale: PreferredLocale? = nil,
-                    subscriptions: [Subscriptions]? = nil
+                    subscriptions: Stripe.Clearable<[Subscriptions]>? = nil
                 ) {
                     self.currency = currency
                     self.onDemand = onDemand
@@ -2178,7 +2178,7 @@ extension Stripe.Setup.Intent.Confirm {
                 /// Additional fields for Mandate creation.
                 public struct MandateOptions: Codable, Hashable, Sendable {
                     /// Amount that will be collected.
-                    public var amount: Int?
+                    public var amount: Stripe.Clearable<Int>?
                     /// The type of amount that will be collected.
                     public var amountType: AmountType?
                     /// Date, in YYYY-MM-DD format, after which payments will not be collected.
@@ -2186,7 +2186,7 @@ extension Stripe.Setup.Intent.Confirm {
                     /// The periodicity at which payments will be collected.
                     public var paymentSchedule: PaymentSchedule?
                     /// The number of payments that will be made during a payment period.
-                    public var paymentsPerPeriod: Int?
+                    public var paymentsPerPeriod: Stripe.Clearable<Int>?
                     /// The purpose for which payments are made.
                     public var purpose: Purpose?
                     /// Date, in YYYY-MM-DD format, from which payments will be collected.
@@ -2203,11 +2203,11 @@ extension Stripe.Setup.Intent.Confirm {
                     }
 
                     public init(
-                        amount: Int? = nil,
+                        amount: Stripe.Clearable<Int>? = nil,
                         amountType: AmountType? = nil,
                         endDate: String? = nil,
                         paymentSchedule: PaymentSchedule? = nil,
-                        paymentsPerPeriod: Int? = nil,
+                        paymentsPerPeriod: Stripe.Clearable<Int>? = nil,
                         purpose: Purpose? = nil,
                         startDate: String? = nil
                     ) {
@@ -2610,7 +2610,7 @@ extension Stripe.Setup.Intent.Create {
         /// Indicates the directions of money movement for which this payment method is intended to be used.
         public var flowDirections: [FlowDirections]?
         /// This hash contains details about the mandate to create.
-        public var mandateData: MandateData?
+        public var mandateData: Stripe.Clearable<MandateData>?
         /// Set of key-value pairs that you can attach to an object.
         public var metadata: [String: String]?
         /// The Stripe account ID created for this SetupIntent.
@@ -2672,7 +2672,7 @@ extension Stripe.Setup.Intent.Create {
             excludedPaymentMethodTypes: [ExcludedPaymentMethodTypes]? = nil,
             expand: [String]? = nil,
             flowDirections: [FlowDirections]? = nil,
-            mandateData: MandateData? = nil,
+            mandateData: Stripe.Clearable<MandateData>? = nil,
             metadata: [String: String]? = nil,
             onBehalfOf: String? = nil,
             paymentMethod: String? = nil,
@@ -3451,7 +3451,7 @@ extension Stripe.Setup.Intent.Create {
             /// Billing information associated with the PaymentMethod that may be used or required by particular types of payment meth…
             public struct BillingDetails: Codable, Hashable, Sendable {
                 /// Billing address.
-                public var address: Address?
+                public var address: Stripe.Clearable<Address>?
                 /// Email address.
                 public var email: String?
                 /// Full name.
@@ -3470,7 +3470,7 @@ extension Stripe.Setup.Intent.Create {
                 }
 
                 public init(
-                    address: Address? = nil,
+                    address: Stripe.Clearable<Address>? = nil,
                     email: String? = nil,
                     name: String? = nil,
                     phone: String? = nil,
@@ -4645,7 +4645,7 @@ extension Stripe.Setup.Intent.Create {
                 /// Preferred language of the Klarna authorization page that the customer is redirected to
                 public var preferredLocale: PreferredLocale?
                 /// Subscription details if setting up or charging a subscription
-                public var subscriptions: [Subscriptions]?
+                public var subscriptions: Stripe.Clearable<[Subscriptions]>?
 
                 private enum CodingKeys: String, CodingKey {
                     case currency
@@ -4658,7 +4658,7 @@ extension Stripe.Setup.Intent.Create {
                     currency: Stripe.Currency? = nil,
                     onDemand: OnDemand? = nil,
                     preferredLocale: PreferredLocale? = nil,
-                    subscriptions: [Subscriptions]? = nil
+                    subscriptions: Stripe.Clearable<[Subscriptions]>? = nil
                 ) {
                     self.currency = currency
                     self.onDemand = onDemand
@@ -4872,7 +4872,7 @@ extension Stripe.Setup.Intent.Create {
                 /// Additional fields for Mandate creation.
                 public struct MandateOptions: Codable, Hashable, Sendable {
                     /// Amount that will be collected.
-                    public var amount: Int?
+                    public var amount: Stripe.Clearable<Int>?
                     /// The type of amount that will be collected.
                     public var amountType: AmountType?
                     /// Date, in YYYY-MM-DD format, after which payments will not be collected.
@@ -4880,7 +4880,7 @@ extension Stripe.Setup.Intent.Create {
                     /// The periodicity at which payments will be collected.
                     public var paymentSchedule: PaymentSchedule?
                     /// The number of payments that will be made during a payment period.
-                    public var paymentsPerPeriod: Int?
+                    public var paymentsPerPeriod: Stripe.Clearable<Int>?
                     /// The purpose for which payments are made.
                     public var purpose: Purpose?
                     /// Date, in YYYY-MM-DD format, from which payments will be collected.
@@ -4897,11 +4897,11 @@ extension Stripe.Setup.Intent.Create {
                     }
 
                     public init(
-                        amount: Int? = nil,
+                        amount: Stripe.Clearable<Int>? = nil,
                         amountType: AmountType? = nil,
                         endDate: String? = nil,
                         paymentSchedule: PaymentSchedule? = nil,
-                        paymentsPerPeriod: Int? = nil,
+                        paymentsPerPeriod: Stripe.Clearable<Int>? = nil,
                         purpose: Purpose? = nil,
                         startDate: String? = nil
                     ) {
@@ -5388,7 +5388,7 @@ extension Stripe.Setup.Intent.Retrieve {
 extension Stripe.Setup.Intent.Update {
     public struct Request: Codable, Hashable, Sendable {
         /// The list of payment method types to allow for this SetupIntent.
-        public var allowedPaymentMethodTypes: [AllowedPaymentMethodTypes]?
+        public var allowedPaymentMethodTypes: Stripe.Clearable<[AllowedPaymentMethodTypes]>?
         /// If present, the SetupIntent's payment method will be attached to the in-context Stripe Account.
         public var attachToSelf: Bool?
         /// ID of the Customer this SetupIntent belongs to, if one exists.
@@ -5398,13 +5398,13 @@ extension Stripe.Setup.Intent.Update {
         /// An arbitrary string attached to the object.
         public var description: String?
         /// The list of payment method types to exclude from use with this SetupIntent.
-        public var excludedPaymentMethodTypes: [ExcludedPaymentMethodTypes]?
+        public var excludedPaymentMethodTypes: Stripe.Clearable<[ExcludedPaymentMethodTypes]>?
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
         /// Indicates the directions of money movement for which this payment method is intended to be used.
         public var flowDirections: [FlowDirections]?
         /// Set of key-value pairs that you can attach to an object.
-        public var metadata: [String: String]?
+        public var metadata: Stripe.Clearable<[String: String]>?
         /// ID of the payment method (a PaymentMethod, Card, or saved Source object) to attach to this SetupIntent.
         public var paymentMethod: String?
         /// The ID of the payment method configuration to use with this SetupIntent.
@@ -5434,15 +5434,15 @@ extension Stripe.Setup.Intent.Update {
         }
 
         public init(
-            allowedPaymentMethodTypes: [AllowedPaymentMethodTypes]? = nil,
+            allowedPaymentMethodTypes: Stripe.Clearable<[AllowedPaymentMethodTypes]>? = nil,
             attachToSelf: Bool? = nil,
             customer: String? = nil,
             customerAccount: String? = nil,
             description: String? = nil,
-            excludedPaymentMethodTypes: [ExcludedPaymentMethodTypes]? = nil,
+            excludedPaymentMethodTypes: Stripe.Clearable<[ExcludedPaymentMethodTypes]>? = nil,
             expand: [String]? = nil,
             flowDirections: [FlowDirections]? = nil,
-            metadata: [String: String]? = nil,
+            metadata: Stripe.Clearable<[String: String]>? = nil,
             paymentMethod: String? = nil,
             paymentMethodConfiguration: String? = nil,
             paymentMethodData: PaymentMethodData? = nil,
@@ -6098,7 +6098,7 @@ extension Stripe.Setup.Intent.Update {
             /// Billing information associated with the PaymentMethod that may be used or required by particular types of payment meth…
             public struct BillingDetails: Codable, Hashable, Sendable {
                 /// Billing address.
-                public var address: Address?
+                public var address: Stripe.Clearable<Address>?
                 /// Email address.
                 public var email: String?
                 /// Full name.
@@ -6117,7 +6117,7 @@ extension Stripe.Setup.Intent.Update {
                 }
 
                 public init(
-                    address: Address? = nil,
+                    address: Stripe.Clearable<Address>? = nil,
                     email: String? = nil,
                     name: String? = nil,
                     phone: String? = nil,
@@ -7292,7 +7292,7 @@ extension Stripe.Setup.Intent.Update {
                 /// Preferred language of the Klarna authorization page that the customer is redirected to
                 public var preferredLocale: PreferredLocale?
                 /// Subscription details if setting up or charging a subscription
-                public var subscriptions: [Subscriptions]?
+                public var subscriptions: Stripe.Clearable<[Subscriptions]>?
 
                 private enum CodingKeys: String, CodingKey {
                     case currency
@@ -7305,7 +7305,7 @@ extension Stripe.Setup.Intent.Update {
                     currency: Stripe.Currency? = nil,
                     onDemand: OnDemand? = nil,
                     preferredLocale: PreferredLocale? = nil,
-                    subscriptions: [Subscriptions]? = nil
+                    subscriptions: Stripe.Clearable<[Subscriptions]>? = nil
                 ) {
                     self.currency = currency
                     self.onDemand = onDemand
@@ -7519,7 +7519,7 @@ extension Stripe.Setup.Intent.Update {
                 /// Additional fields for Mandate creation.
                 public struct MandateOptions: Codable, Hashable, Sendable {
                     /// Amount that will be collected.
-                    public var amount: Int?
+                    public var amount: Stripe.Clearable<Int>?
                     /// The type of amount that will be collected.
                     public var amountType: AmountType?
                     /// Date, in YYYY-MM-DD format, after which payments will not be collected.
@@ -7527,7 +7527,7 @@ extension Stripe.Setup.Intent.Update {
                     /// The periodicity at which payments will be collected.
                     public var paymentSchedule: PaymentSchedule?
                     /// The number of payments that will be made during a payment period.
-                    public var paymentsPerPeriod: Int?
+                    public var paymentsPerPeriod: Stripe.Clearable<Int>?
                     /// The purpose for which payments are made.
                     public var purpose: Purpose?
                     /// Date, in YYYY-MM-DD format, from which payments will be collected.
@@ -7544,11 +7544,11 @@ extension Stripe.Setup.Intent.Update {
                     }
 
                     public init(
-                        amount: Int? = nil,
+                        amount: Stripe.Clearable<Int>? = nil,
                         amountType: AmountType? = nil,
                         endDate: String? = nil,
                         paymentSchedule: PaymentSchedule? = nil,
-                        paymentsPerPeriod: Int? = nil,
+                        paymentsPerPeriod: Stripe.Clearable<Int>? = nil,
                         purpose: Purpose? = nil,
                         startDate: String? = nil
                     ) {

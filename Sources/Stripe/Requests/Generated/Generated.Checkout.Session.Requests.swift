@@ -961,13 +961,13 @@ extension Stripe.Checkout.Session.Create {
         /// Display additional text for your customers using custom text.
         public struct CustomText: Codable, Hashable, Sendable {
             /// Custom text that should be displayed after the payment confirmation button.
-            public var afterSubmit: AfterSubmit?
+            public var afterSubmit: Stripe.Clearable<AfterSubmit>?
             /// Custom text that should be displayed alongside shipping address collection.
-            public var shippingAddress: ShippingAddress?
+            public var shippingAddress: Stripe.Clearable<ShippingAddress>?
             /// Custom text that should be displayed alongside the payment confirmation button.
-            public var submit: Submit?
+            public var submit: Stripe.Clearable<Submit>?
             /// Custom text that should be displayed in place of the default terms of service agreement text.
-            public var termsOfServiceAcceptance: TermsOfServiceAcceptance?
+            public var termsOfServiceAcceptance: Stripe.Clearable<TermsOfServiceAcceptance>?
 
             private enum CodingKeys: String, CodingKey {
                 case afterSubmit
@@ -977,10 +977,10 @@ extension Stripe.Checkout.Session.Create {
             }
 
             public init(
-                afterSubmit: AfterSubmit? = nil,
-                shippingAddress: ShippingAddress? = nil,
-                submit: Submit? = nil,
-                termsOfServiceAcceptance: TermsOfServiceAcceptance? = nil
+                afterSubmit: Stripe.Clearable<AfterSubmit>? = nil,
+                shippingAddress: Stripe.Clearable<ShippingAddress>? = nil,
+                submit: Stripe.Clearable<Submit>? = nil,
+                termsOfServiceAcceptance: Stripe.Clearable<TermsOfServiceAcceptance>? = nil
             ) {
                 self.afterSubmit = afterSubmit
                 self.shippingAddress = shippingAddress
@@ -1133,9 +1133,9 @@ extension Stripe.Checkout.Session.Create {
             /// Parameters passed when creating invoices for payment-mode Checkout Sessions.
             public struct InvoiceData: Codable, Hashable, Sendable {
                 /// The account tax IDs associated with the invoice.
-                public var accountTaxIds: [String]?
+                public var accountTaxIds: Stripe.Clearable<[String]>?
                 /// Default custom fields to be displayed on invoices for this customer.
-                public var customFields: [CustomFields]?
+                public var customFields: Stripe.Clearable<[CustomFields]>?
                 /// An arbitrary string attached to the object.
                 public var description: String?
                 /// Default footer to be displayed on invoices for this customer.
@@ -1145,7 +1145,7 @@ extension Stripe.Checkout.Session.Create {
                 /// Set of key-value pairs that you can attach to an object.
                 public var metadata: [String: String]?
                 /// Default options for invoice PDF rendering for this customer.
-                public var renderingOptions: RenderingOptions?
+                public var renderingOptions: Stripe.Clearable<RenderingOptions>?
 
                 private enum CodingKeys: String, CodingKey {
                     case accountTaxIds
@@ -1158,13 +1158,13 @@ extension Stripe.Checkout.Session.Create {
                 }
 
                 public init(
-                    accountTaxIds: [String]? = nil,
-                    customFields: [CustomFields]? = nil,
+                    accountTaxIds: Stripe.Clearable<[String]>? = nil,
+                    customFields: Stripe.Clearable<[CustomFields]>? = nil,
                     description: String? = nil,
                     footer: String? = nil,
                     issuer: Issuer? = nil,
                     metadata: [String: String]? = nil,
-                    renderingOptions: RenderingOptions? = nil
+                    renderingOptions: Stripe.Clearable<RenderingOptions>? = nil
                 ) {
                     self.accountTaxIds = accountTaxIds
                     self.customFields = customFields
@@ -2755,7 +2755,7 @@ extension Stripe.Checkout.Session.Create {
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: String?
                 /// Subscription details if the Checkout Session sets up a future subscription.
-                public var subscriptions: [Subscriptions]?
+                public var subscriptions: Stripe.Clearable<[Subscriptions]>?
 
                 private enum CodingKeys: String, CodingKey {
                     case captureMethod
@@ -2766,7 +2766,7 @@ extension Stripe.Checkout.Session.Create {
                 public init(
                     captureMethod: String? = nil,
                     setupFutureUsage: String? = nil,
-                    subscriptions: [Subscriptions]? = nil
+                    subscriptions: Stripe.Clearable<[Subscriptions]>? = nil
                 ) {
                     self.captureMethod = captureMethod
                     self.setupFutureUsage = setupFutureUsage
@@ -3156,7 +3156,7 @@ extension Stripe.Checkout.Session.Create {
                 /// Additional fields for Mandate creation
                 public struct MandateOptions: Codable, Hashable, Sendable {
                     /// Amount that will be collected.
-                    public var amount: Int?
+                    public var amount: Stripe.Clearable<Int>?
                     /// The type of amount that will be collected.
                     public var amountType: AmountType?
                     /// Date, in YYYY-MM-DD format, after which payments will not be collected.
@@ -3164,7 +3164,7 @@ extension Stripe.Checkout.Session.Create {
                     /// The periodicity at which payments will be collected.
                     public var paymentSchedule: PaymentSchedule?
                     /// The number of payments that will be made during a payment period.
-                    public var paymentsPerPeriod: Int?
+                    public var paymentsPerPeriod: Stripe.Clearable<Int>?
                     /// The purpose for which payments are made.
                     public var purpose: Purpose?
                     /// Date, in YYYY-MM-DD format, from which payments will be collected.
@@ -3181,11 +3181,11 @@ extension Stripe.Checkout.Session.Create {
                     }
 
                     public init(
-                        amount: Int? = nil,
+                        amount: Stripe.Clearable<Int>? = nil,
                         amountType: AmountType? = nil,
                         endDate: String? = nil,
                         paymentSchedule: PaymentSchedule? = nil,
-                        paymentsPerPeriod: Int? = nil,
+                        paymentsPerPeriod: Stripe.Clearable<Int>? = nil,
                         purpose: Purpose? = nil,
                         startDate: String? = nil
                     ) {
@@ -4833,9 +4833,9 @@ extension Stripe.Checkout.Session.Update {
         /// A list of items the customer is purchasing.
         public var lineItems: [LineItems]?
         /// Set of key-value pairs that you can attach to an object.
-        public var metadata: [String: String]?
+        public var metadata: Stripe.Clearable<[String: String]>?
         /// The shipping rate options to apply to this Session.
-        public var shippingOptions: [ShippingOptions]?
+        public var shippingOptions: Stripe.Clearable<[ShippingOptions]>?
 
         private enum CodingKeys: String, CodingKey {
             case collectedInformation
@@ -4849,8 +4849,8 @@ extension Stripe.Checkout.Session.Update {
             collectedInformation: CollectedInformation? = nil,
             expand: [String]? = nil,
             lineItems: [LineItems]? = nil,
-            metadata: [String: String]? = nil,
-            shippingOptions: [ShippingOptions]? = nil
+            metadata: Stripe.Clearable<[String: String]>? = nil,
+            shippingOptions: Stripe.Clearable<[ShippingOptions]>? = nil
         ) {
             self.collectedInformation = collectedInformation
             self.expand = expand
@@ -4943,7 +4943,7 @@ extension Stripe.Checkout.Session.Update {
             /// ID of an existing line item.
             public var id: String?
             /// Set of key-value pairs that you can attach to an object.
-            public var metadata: [String: String]?
+            public var metadata: Stripe.Clearable<[String: String]>?
             /// The ID of the Price.
             public var price: String?
             /// Data used to generate a new Price object inline.
@@ -4951,7 +4951,7 @@ extension Stripe.Checkout.Session.Update {
             /// The quantity of the line item being purchased.
             public var quantity: Int?
             /// The tax rates which apply to this line item.
-            public var taxRates: [String]?
+            public var taxRates: Stripe.Clearable<[String]>?
 
             private enum CodingKeys: String, CodingKey {
                 case adjustableQuantity
@@ -4966,11 +4966,11 @@ extension Stripe.Checkout.Session.Update {
             public init(
                 adjustableQuantity: AdjustableQuantity? = nil,
                 id: String? = nil,
-                metadata: [String: String]? = nil,
+                metadata: Stripe.Clearable<[String: String]>? = nil,
                 price: String? = nil,
                 priceData: PriceData? = nil,
                 quantity: Int? = nil,
-                taxRates: [String]? = nil
+                taxRates: Stripe.Clearable<[String]>? = nil
             ) {
                 self.adjustableQuantity = adjustableQuantity
                 self.id = id

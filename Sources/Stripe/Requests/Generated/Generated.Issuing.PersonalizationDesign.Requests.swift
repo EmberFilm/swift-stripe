@@ -340,7 +340,7 @@ extension Stripe.Issuing.PersonalizationDesign.Update {
         /// The file for the card logo, for use with physical bundles that support card logos.
         public var cardLogo: String?
         /// Hash containing carrier text, for use with physical bundles that support carrier text.
-        public var carrierText: CarrierText?
+        public var carrierText: Stripe.Clearable<CarrierText>?
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
         /// A lookup key used to retrieve personalization designs dynamically from a static string.
@@ -370,7 +370,7 @@ extension Stripe.Issuing.PersonalizationDesign.Update {
 
         public init(
             cardLogo: String? = nil,
-            carrierText: CarrierText? = nil,
+            carrierText: Stripe.Clearable<CarrierText>? = nil,
             expand: [String]? = nil,
             lookupKey: String? = nil,
             metadata: [String: String]? = nil,

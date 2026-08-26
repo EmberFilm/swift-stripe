@@ -281,7 +281,7 @@ extension Stripe.Billing.Credit.Grant.Update {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
         /// The time when the billing credits created by this credit grant expire.
-        public var expiresAt: Date?
+        public var expiresAt: Stripe.Clearable<Date>?
         /// Set of key-value pairs you can attach to an object.
         public var metadata: [String: String]?
 
@@ -293,7 +293,7 @@ extension Stripe.Billing.Credit.Grant.Update {
 
         public init(
             expand: [String]? = nil,
-            expiresAt: Date? = nil,
+            expiresAt: Stripe.Clearable<Date>? = nil,
             metadata: [String: String]? = nil
         ) {
             self.expand = expand

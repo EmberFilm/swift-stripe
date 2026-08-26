@@ -1,0 +1,7 @@
+{
+ "amount": 1,
+ "currency": "usd",
+ "description": "description_1",
+ "id": "reserve_transaction_1",
+ "object": "reserve_transaction"
+}

@@ -20,6 +20,75 @@ extension Stripe.Files.File {
 
 // POST /v1/files
 extension Stripe.Files.File.Create {
+    public struct Request: Codable, Hashable, Sendable {
+        /// Specifies which fields in the response should be expanded.
+        public var expand: [String]?
+        /// Optional parameters that automatically create a file link for the newly created file.
+        public var fileLinkData: FileLinkData?
+        /// The purpose of the uploaded file.
+        public var purpose: Purpose
+
+        private enum CodingKeys: String, CodingKey {
+            case expand
+            case fileLinkData
+            case purpose
+        }
+
+        public init(
+            expand: [String]? = nil,
+            fileLinkData: FileLinkData? = nil,
+            purpose: Purpose
+        ) {
+            self.expand = expand
+            self.fileLinkData = fileLinkData
+            self.purpose = purpose
+        }
+
+        public enum Purpose: String, Codable, Hashable, Sendable {
+            case accountRequirement = "account_requirement"
+            case additionalVerification = "additional_verification"
+            case businessIcon = "business_icon"
+            case businessLogo = "business_logo"
+            case customerSignature = "customer_signature"
+            case disputeEvidence = "dispute_evidence"
+            case identityDocument = "identity_document"
+            case issuingRegulatoryReporting = "issuing_regulatory_reporting"
+            case pciDocument = "pci_document"
+            case platformTermsOfService = "platform_terms_of_service"
+            case taxDocumentUserUpload = "tax_document_user_upload"
+            case terminalAndroidApk = "terminal_android_apk"
+            case terminalReaderSplashscreen = "terminal_reader_splashscreen"
+            case terminalWifiCertificate = "terminal_wifi_certificate"
+            case terminalWifiPrivateKey = "terminal_wifi_private_key"
+        }
+
+        /// Optional parameters that automatically create a file link for the newly created file.
+        public struct FileLinkData: Codable, Hashable, Sendable {
+            /// Set this to `true` to create a file link for the newly created file.
+            public var create: Bool
+            /// The link isn't available after this future timestamp.
+            public var expiresAt: Date?
+            /// Set of key-value pairs that you can attach to an object.
+            public var metadata: Stripe.Clearable<[String: String]>?
+
+            private enum CodingKeys: String, CodingKey {
+                case create
+                case expiresAt
+                case metadata
+            }
+
+            public init(
+                create: Bool,
+                expiresAt: Date? = nil,
+                metadata: Stripe.Clearable<[String: String]>? = nil
+            ) {
+                self.create = create
+                self.expiresAt = expiresAt
+                self.metadata = metadata
+            }
+        }
+    }
+
     public typealias Response = Stripe.Files.File
 }
 

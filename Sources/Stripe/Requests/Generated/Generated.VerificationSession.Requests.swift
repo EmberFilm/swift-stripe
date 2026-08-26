@@ -115,14 +115,14 @@ extension VerificationSession.Create {
         /// A set of options for the session’s verification checks.
         public struct Options: Codable, Hashable, Sendable {
             /// Options that apply to the document check.
-            public var document: Document?
+            public var document: Stripe.Clearable<Document>?
 
             private enum CodingKeys: String, CodingKey {
                 case document
             }
 
             public init(
-                document: Document? = nil
+                document: Stripe.Clearable<Document>? = nil
             ) {
                 self.document = document
             }
@@ -361,14 +361,14 @@ extension VerificationSession.Update {
         /// A set of options for the session’s verification checks.
         public struct Options: Codable, Hashable, Sendable {
             /// Options that apply to the document check.
-            public var document: Document?
+            public var document: Stripe.Clearable<Document>?
 
             private enum CodingKeys: String, CodingKey {
                 case document
             }
 
             public init(
-                document: Document? = nil
+                document: Stripe.Clearable<Document>? = nil
             ) {
                 self.document = document
             }

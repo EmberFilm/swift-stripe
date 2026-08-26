@@ -1,0 +1,7 @@
+{
+ "id": "tax_deducted_at_source_1",
+ "object": "tax_deducted_at_source",
+ "period_end": 1700000000,
+ "period_start": 1700000000,
+ "tax_deduction_account_number": "tax_deduction_account_number_1"
+}

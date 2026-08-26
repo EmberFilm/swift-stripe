@@ -34,6 +34,7 @@ extension StripeClient {
     public var billingPortalConfigurations: BillingPortalConfigurationsClient { BillingPortalConfigurationsClient(api: api) }
     public var billingPortalSessions: BillingPortalSessionsClient { BillingPortalSessionsClient(api: api) }
     public var capabilities: CapabilitiesClient { CapabilitiesClient(api: api) }
+    public var cards: CardsClient { CardsClient(api: api) }
     public var cashBalances: CashBalancesClient { CashBalancesClient(api: api) }
     public var charges: ChargesClient { ChargesClient(api: api) }
     public var checkoutSessions: CheckoutSessionsClient { CheckoutSessionsClient(api: api) }
@@ -75,6 +76,7 @@ extension StripeClient {
     public var issuingDisputes: IssuingDisputesClient { IssuingDisputesClient(api: api) }
     public var issuingPersonalizationDesigns: IssuingPersonalizationDesignsClient { IssuingPersonalizationDesignsClient(api: api) }
     public var issuingPhysicalBundles: IssuingPhysicalBundlesClient { IssuingPhysicalBundlesClient(api: api) }
+    public var issuingTokens: IssuingTokensClient { IssuingTokensClient(api: api) }
     public var issuingTransactions: IssuingTransactionsClient { IssuingTransactionsClient(api: api) }
     public var lineItems: LineItemsClient { LineItemsClient(api: api) }
     public var loginLinks: LoginLinksClient { LoginLinksClient(api: api) }
@@ -85,6 +87,7 @@ extension StripeClient {
     public var paymentMethodConfigurations: PaymentMethodConfigurationsClient { PaymentMethodConfigurationsClient(api: api) }
     public var paymentMethodDomains: PaymentMethodDomainsClient { PaymentMethodDomainsClient(api: api) }
     public var paymentMethods: PaymentMethodsClient { PaymentMethodsClient(api: api) }
+    public var paymentRecords: PaymentRecordsClient { PaymentRecordsClient(api: api) }
     public var paymentSources: PaymentSourcesClient { PaymentSourcesClient(api: api) }
     public var payouts: PayoutsClient { PayoutsClient(api: api) }
     public var persons: PersonsClient { PersonsClient(api: api) }

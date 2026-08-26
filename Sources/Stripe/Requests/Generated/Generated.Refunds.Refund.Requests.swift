@@ -58,7 +58,7 @@ extension Stripe.Refunds.Refund.Create {
         /// For payment methods without native refund support (e.g., Konbini, PromptPay), use this email from the customer to rece…
         public var instructionsEmail: String?
         /// Set of key-value pairs that you can attach to an object.
-        public var metadata: [String: String]?
+        public var metadata: Stripe.Clearable<[String: String]>?
         /// Origin of the refund
         public var origin: String?
         /// The identifier of the PaymentIntent to refund.
@@ -92,7 +92,7 @@ extension Stripe.Refunds.Refund.Create {
             customer: String? = nil,
             expand: [String]? = nil,
             instructionsEmail: String? = nil,
-            metadata: [String: String]? = nil,
+            metadata: Stripe.Clearable<[String: String]>? = nil,
             origin: String? = nil,
             paymentIntent: String? = nil,
             reason: Reason? = nil,
@@ -274,7 +274,7 @@ extension Stripe.Refunds.Refund.Update {
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
         /// Set of key-value pairs that you can attach to an object.
-        public var metadata: [String: String]?
+        public var metadata: Stripe.Clearable<[String: String]>?
 
         private enum CodingKeys: String, CodingKey {
             case expand
@@ -283,7 +283,7 @@ extension Stripe.Refunds.Refund.Update {
 
         public init(
             expand: [String]? = nil,
-            metadata: [String: String]? = nil
+            metadata: Stripe.Clearable<[String: String]>? = nil
         ) {
             self.expand = expand
             self.metadata = metadata

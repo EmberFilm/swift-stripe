@@ -28,13 +28,13 @@ extension TerminalConfiguration.Create {
         /// An object containing device type specific settings for BBPOS WisePOS E readers.
         public var bbposWiseposE: BbposWiseposE?
         /// Configuration for cellular connectivity.
-        public var cellular: Cellular?
+        public var cellular: Stripe.Clearable<Cellular>?
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
         /// Name of the configuration
         public var name: String?
         /// Configurations for collecting transactions offline.
-        public var offline: Offline?
+        public var offline: Stripe.Clearable<Offline>?
         /// Reboot time settings for readers.
         public var rebootWindow: RebootWindow?
         /// An object containing device type specific settings for Stripe S700 readers.
@@ -42,7 +42,7 @@ extension TerminalConfiguration.Create {
         /// An object containing device type specific settings for Stripe S710 readers.
         public var stripeS710: StripeS710?
         /// Tipping configurations for readers that support on-reader tips.
-        public var tipping: Tipping?
+        public var tipping: Stripe.Clearable<Tipping>?
         /// An object containing device type specific settings for Verifone M425 readers.
         public var verifoneM425: VerifoneM425?
         /// An object containing device type specific settings for Verifone P400 readers.
@@ -54,7 +54,7 @@ extension TerminalConfiguration.Create {
         /// An object containing device type specific settings for Verifone V660p readers.
         public var verifoneV660p: VerifoneV660p?
         /// Configurations for connecting to a WiFi network.
-        public var wifi: Wifi?
+        public var wifi: Stripe.Clearable<Wifi>?
 
         private enum CodingKeys: String, CodingKey {
             case bbposWisepad3
@@ -78,20 +78,20 @@ extension TerminalConfiguration.Create {
         public init(
             bbposWisepad3: BbposWisepad3? = nil,
             bbposWiseposE: BbposWiseposE? = nil,
-            cellular: Cellular? = nil,
+            cellular: Stripe.Clearable<Cellular>? = nil,
             expand: [String]? = nil,
             name: String? = nil,
-            offline: Offline? = nil,
+            offline: Stripe.Clearable<Offline>? = nil,
             rebootWindow: RebootWindow? = nil,
             stripeS700: StripeS700? = nil,
             stripeS710: StripeS710? = nil,
-            tipping: Tipping? = nil,
+            tipping: Stripe.Clearable<Tipping>? = nil,
             verifoneM425: VerifoneM425? = nil,
             verifoneP400: VerifoneP400? = nil,
             verifoneP630: VerifoneP630? = nil,
             verifoneUx700: VerifoneUx700? = nil,
             verifoneV660p: VerifoneV660p? = nil,
-            wifi: Wifi? = nil
+            wifi: Stripe.Clearable<Wifi>? = nil
         ) {
             self.bbposWisepad3 = bbposWisepad3
             self.bbposWiseposE = bbposWiseposE
@@ -1164,37 +1164,37 @@ extension TerminalConfiguration.Retrieve {
 extension TerminalConfiguration.Update {
     public struct Request: Codable, Hashable, Sendable {
         /// An object containing device type specific settings for BBPOS WisePad 3 readers.
-        public var bbposWisepad3: BbposWisepad3?
+        public var bbposWisepad3: Stripe.Clearable<BbposWisepad3>?
         /// An object containing device type specific settings for BBPOS WisePOS E readers.
-        public var bbposWiseposE: BbposWiseposE?
+        public var bbposWiseposE: Stripe.Clearable<BbposWiseposE>?
         /// Configuration for cellular connectivity.
-        public var cellular: Cellular?
+        public var cellular: Stripe.Clearable<Cellular>?
         /// Specifies which fields in the response should be expanded.
         public var expand: [String]?
         /// Name of the configuration
         public var name: String?
         /// Configurations for collecting transactions offline.
-        public var offline: Offline?
+        public var offline: Stripe.Clearable<Offline>?
         /// Reboot time settings for readers.
-        public var rebootWindow: RebootWindow?
+        public var rebootWindow: Stripe.Clearable<RebootWindow>?
         /// An object containing device type specific settings for Stripe S700 readers.
-        public var stripeS700: StripeS700?
+        public var stripeS700: Stripe.Clearable<StripeS700>?
         /// An object containing device type specific settings for Stripe S710 readers.
-        public var stripeS710: StripeS710?
+        public var stripeS710: Stripe.Clearable<StripeS710>?
         /// Tipping configurations for readers that support on-reader tips.
-        public var tipping: Tipping?
+        public var tipping: Stripe.Clearable<Tipping>?
         /// An object containing device type specific settings for Verifone M425 readers.
-        public var verifoneM425: VerifoneM425?
+        public var verifoneM425: Stripe.Clearable<VerifoneM425>?
         /// An object containing device type specific settings for Verifone P400 readers.
-        public var verifoneP400: VerifoneP400?
+        public var verifoneP400: Stripe.Clearable<VerifoneP400>?
         /// An object containing device type specific settings for Verifone P630 readers.
-        public var verifoneP630: VerifoneP630?
+        public var verifoneP630: Stripe.Clearable<VerifoneP630>?
         /// An object containing device type specific settings for Verifone UX700 readers.
-        public var verifoneUx700: VerifoneUx700?
+        public var verifoneUx700: Stripe.Clearable<VerifoneUx700>?
         /// An object containing device type specific settings for Verifone V660p readers.
-        public var verifoneV660p: VerifoneV660p?
+        public var verifoneV660p: Stripe.Clearable<VerifoneV660p>?
         /// Configurations for connecting to a WiFi network.
-        public var wifi: Wifi?
+        public var wifi: Stripe.Clearable<Wifi>?
 
         private enum CodingKeys: String, CodingKey {
             case bbposWisepad3
@@ -1216,22 +1216,22 @@ extension TerminalConfiguration.Update {
         }
 
         public init(
-            bbposWisepad3: BbposWisepad3? = nil,
-            bbposWiseposE: BbposWiseposE? = nil,
-            cellular: Cellular? = nil,
+            bbposWisepad3: Stripe.Clearable<BbposWisepad3>? = nil,
+            bbposWiseposE: Stripe.Clearable<BbposWiseposE>? = nil,
+            cellular: Stripe.Clearable<Cellular>? = nil,
             expand: [String]? = nil,
             name: String? = nil,
-            offline: Offline? = nil,
-            rebootWindow: RebootWindow? = nil,
-            stripeS700: StripeS700? = nil,
-            stripeS710: StripeS710? = nil,
-            tipping: Tipping? = nil,
-            verifoneM425: VerifoneM425? = nil,
-            verifoneP400: VerifoneP400? = nil,
-            verifoneP630: VerifoneP630? = nil,
-            verifoneUx700: VerifoneUx700? = nil,
-            verifoneV660p: VerifoneV660p? = nil,
-            wifi: Wifi? = nil
+            offline: Stripe.Clearable<Offline>? = nil,
+            rebootWindow: Stripe.Clearable<RebootWindow>? = nil,
+            stripeS700: Stripe.Clearable<StripeS700>? = nil,
+            stripeS710: Stripe.Clearable<StripeS710>? = nil,
+            tipping: Stripe.Clearable<Tipping>? = nil,
+            verifoneM425: Stripe.Clearable<VerifoneM425>? = nil,
+            verifoneP400: Stripe.Clearable<VerifoneP400>? = nil,
+            verifoneP630: Stripe.Clearable<VerifoneP630>? = nil,
+            verifoneUx700: Stripe.Clearable<VerifoneUx700>? = nil,
+            verifoneV660p: Stripe.Clearable<VerifoneV660p>? = nil,
+            wifi: Stripe.Clearable<Wifi>? = nil
         ) {
             self.bbposWisepad3 = bbposWisepad3
             self.bbposWiseposE = bbposWiseposE

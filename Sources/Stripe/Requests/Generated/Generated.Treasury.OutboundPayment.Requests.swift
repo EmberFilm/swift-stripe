@@ -157,7 +157,7 @@ extension Stripe.Treasury.OutboundPayment.Create {
             /// Billing information associated with the PaymentMethod that may be used or required by particular types of payment meth…
             public struct BillingDetails: Codable, Hashable, Sendable {
                 /// Billing address.
-                public var address: Address?
+                public var address: Stripe.Clearable<Address>?
                 /// Email address.
                 public var email: String?
                 /// Full name.
@@ -173,7 +173,7 @@ extension Stripe.Treasury.OutboundPayment.Create {
                 }
 
                 public init(
-                    address: Address? = nil,
+                    address: Stripe.Clearable<Address>? = nil,
                     email: String? = nil,
                     name: String? = nil,
                     phone: String? = nil
@@ -275,14 +275,14 @@ extension Stripe.Treasury.OutboundPayment.Create {
         /// Payment method-specific configuration for this OutboundPayment.
         public struct DestinationPaymentMethodOptions: Codable, Hashable, Sendable {
             /// Optional fields for `us_bank_account`.
-            public var usBankAccount: UsBankAccount?
+            public var usBankAccount: Stripe.Clearable<UsBankAccount>?
 
             private enum CodingKeys: String, CodingKey {
                 case usBankAccount
             }
 
             public init(
-                usBankAccount: UsBankAccount? = nil
+                usBankAccount: Stripe.Clearable<UsBankAccount>? = nil
             ) {
                 self.usBankAccount = usBankAccount
             }
