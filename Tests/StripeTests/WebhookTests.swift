@@ -159,4 +159,15 @@ struct WebhookTests {
         #expect(event.id == "evt_1")
         #expect(event.apiVersion == "2024-06-20")
     }
+
+    @Test("a timestamp ahead of our clock is skew, not a replay, and verifies")
+    func futureTimestamp() throws {
+        let ahead = Self.timestamp.addingTimeInterval(20 * 60)
+        try StripeWebhook.verify(
+            payload: Self.payload,
+            signatureHeader: Self.sign(at: ahead),
+            secret: Self.secret,
+            now: Self.timestamp
+        )
+    }
 }

@@ -79,9 +79,11 @@ public enum StripeWebhook {
     ) throws {
         let header = try SignatureHeader(signatureHeader)
 
+        // A stale signature is a replay; a timestamp ahead of our clock is only skew, which
+        // Stripe's own libraries accept. Same rule here.
         if tolerance > 0 {
             let age = now.timeIntervalSince1970 - header.timestamp
-            guard abs(age) <= tolerance else {
+            guard age <= tolerance else {
                 throw Error.timestampOutsideTolerance(age: age)
             }
         }
@@ -89,18 +91,12 @@ public enum StripeWebhook {
         var signedPayload = Data("\(Int(header.timestamp)).".utf8)
         signedPayload.append(payload)
 
-        let expected = Data(
-            HMAC<SHA256>.authenticationCode(
-                for: signedPayload,
-                using: SymmetricKey(data: Data(secret.utf8))
-            )
-        )
-
-        // Stripe may send several v1 signatures during a secret rotation; any
-        // match is sufficient. Compared in constant time.
+        let key = SymmetricKey(data: Data(secret.utf8))
+        // Stripe may send several v1 signatures during a secret rotation; any match is
+        // sufficient. swift-crypto compares in constant time.
         let matched = header.signatures.contains { candidate in
             guard let bytes = Data(hexEncoded: candidate) else { return false }
-            return constantTimeEquals(bytes, expected)
+            return HMAC<SHA256>.isValidAuthenticationCode(bytes, authenticating: signedPayload, using: key)
         }
         guard matched else { throw Error.signatureMismatch }
     }
@@ -136,19 +132,6 @@ public enum StripeWebhook {
             self.signatures = signatures
         }
     }
-}
-
-// MARK: - Constant-time comparison
-
-/// Compares two byte sequences without early exit, so timing does not leak how
-/// much of a forged signature was correct.
-private func constantTimeEquals(_ lhs: Data, _ rhs: Data) -> Bool {
-    guard lhs.count == rhs.count else { return false }
-    var difference: UInt8 = 0
-    for (a, b) in zip(lhs, rhs) {
-        difference |= a ^ b
-    }
-    return difference == 0
 }
 
 extension Data {
