@@ -12,6 +12,9 @@
    "type": "type_1"
   }
  },
+ "metadata": {
+  "key": "metadata_1"
+ },
  "object": "confirmation_token",
  "payment_intent": "payment_intent_1",
  "payment_method_options": {

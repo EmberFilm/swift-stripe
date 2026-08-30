@@ -312,7 +312,7 @@ extension Stripe.PaymentMethods {
             case mobilepay(Stripe.Shared.Mobilepay)
             case multibanco(Stripe.Shared.Multibanco)
             case naverPay(Stripe.Shared.NaverPay)
-            case nzBankAccount(Stripe.Shared.PaymentMethodNzBankAccount)
+            case nzBankAccount(Stripe.Shared.NzBankAccount)
             case oxxo(Stripe.Shared.Oxxo)
             case p24(Stripe.Shared.P24)
             case payByBank(Stripe.Shared.PayByBank)
@@ -473,7 +473,7 @@ extension Stripe.PaymentMethods {
                 if case .naverPay(let value) = self { return value }
                 return nil
             }
-            public var nzBankAccount: Stripe.Shared.PaymentMethodNzBankAccount? {
+            public var nzBankAccount: Stripe.Shared.NzBankAccount? {
                 if case .nzBankAccount(let value) = self { return value }
                 return nil
             }
@@ -773,7 +773,7 @@ extension Stripe.PaymentMethods {
                         self = .unknown(type: type)
                     }
                 case "nz_bank_account":
-                    if let value = try container.decodeIfPresent(Stripe.Shared.PaymentMethodNzBankAccount.self, forKey: .nzBankAccount) {
+                    if let value = try container.decodeIfPresent(Stripe.Shared.NzBankAccount.self, forKey: .nzBankAccount) {
                         self = .nzBankAccount(value)
                     } else {
                         self = .unknown(type: type)

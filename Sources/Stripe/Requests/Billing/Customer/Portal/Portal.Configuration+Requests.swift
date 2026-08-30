@@ -199,14 +199,18 @@ extension Stripe.Billing.Customer.Portal.Configuration.Create {
                 public struct CancellationReason: Codable, Hashable, Sendable {
                     /// Whether the feature is enabled.
                     public var enabled: Bool
+                    /// The IDs of custom feedback options to use for this cancellation reason.
+                    public var feedbackOptions: Stripe.Clearable<[String]>?
                     /// Which cancellation reasons will be given as options to the customer.
                     public var options: Stripe.Clearable<[Options]>
 
                     public init(
                         enabled: Bool,
+                        feedbackOptions: Stripe.Clearable<[String]>? = nil,
                         options: Stripe.Clearable<[Options]>
                     ) {
                         self.enabled = enabled
+                        self.feedbackOptions = feedbackOptions
                         self.options = options
                     }
 
@@ -595,14 +599,18 @@ extension Stripe.Billing.Customer.Portal.Configuration.Update {
                 public struct CancellationReason: Codable, Hashable, Sendable {
                     /// Whether the feature is enabled.
                     public var enabled: Bool
+                    /// The IDs of custom feedback options to use for this cancellation reason.
+                    public var feedbackOptions: Stripe.Clearable<[String]>?
                     /// Which cancellation reasons will be given as options to the customer.
                     public var options: Stripe.Clearable<[Options]>?
 
                     public init(
                         enabled: Bool,
+                        feedbackOptions: Stripe.Clearable<[String]>? = nil,
                         options: Stripe.Clearable<[Options]>? = nil
                     ) {
                         self.enabled = enabled
+                        self.feedbackOptions = feedbackOptions
                         self.options = options
                     }
 

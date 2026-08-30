@@ -64,6 +64,7 @@ extension Stripe.Connect.Account {
             public var notificationBanner: NotificationBanner?
             public var paymentDetails: PaymentDetails?
             public var paymentDisputes: PaymentDisputes?
+            public var paymentMethodSettings: PaymentMethodSettings?
             public var payments: Payments?
             public var payoutDetails: PayoutDetails?
             public var payoutReconciliationReport: PayoutReconciliationReport?
@@ -87,6 +88,7 @@ extension Stripe.Connect.Account {
                 notificationBanner: NotificationBanner? = nil,
                 paymentDetails: PaymentDetails? = nil,
                 paymentDisputes: PaymentDisputes? = nil,
+                paymentMethodSettings: PaymentMethodSettings? = nil,
                 payments: Payments? = nil,
                 payoutDetails: PayoutDetails? = nil,
                 payoutReconciliationReport: PayoutReconciliationReport? = nil,
@@ -109,6 +111,7 @@ extension Stripe.Connect.Account {
                 self.notificationBanner = notificationBanner
                 self.paymentDetails = paymentDetails
                 self.paymentDisputes = paymentDisputes
+                self.paymentMethodSettings = paymentMethodSettings
                 self.payments = payments
                 self.payoutDetails = payoutDetails
                 self.payoutReconciliationReport = payoutReconciliationReport
@@ -570,6 +573,31 @@ extension Stripe.Connect.Account {
                         self.disputeManagement = disputeManagement
                         self.refundManagement = refundManagement
                         self.smartDisputesManagement = smartDisputesManagement
+                    }
+                }
+            }
+
+            public struct PaymentMethodSettings: Codable, Hashable, Sendable {
+                /// Whether the embedded component is enabled.
+                public var enabled: Bool?
+                public var features: Features?
+
+                public init(
+                    enabled: Bool? = nil,
+                    features: Features? = nil
+                ) {
+                    self.enabled = enabled
+                    self.features = features
+                }
+
+                public struct Features: Codable, Hashable, Sendable {
+                    /// Whether Stripe user authentication is disabled.
+                    public var disableStripeUserAuthentication: Bool?
+
+                    public init(
+                        disableStripeUserAuthentication: Bool? = nil
+                    ) {
+                        self.disableStripeUserAuthentication = disableStripeUserAuthentication
                     }
                 }
             }

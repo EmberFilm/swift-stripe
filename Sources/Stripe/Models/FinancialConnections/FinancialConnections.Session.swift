@@ -116,16 +116,20 @@ extension FinancialConnections {
             public var accountSubcategories: [AccountSubcategories]?
             /// List of countries from which to filter accounts.
             public var countries: [String]?
+            /// Country from which to filter accounts.
+            public var country: String?
             /// Whether the Session should require that linked accounts support payments and retrieve account numbers before.
             public var requirePaymentMethodSupport: RequirePaymentMethodSupport?
 
             public init(
                 accountSubcategories: [AccountSubcategories]? = nil,
                 countries: [String]? = nil,
+                country: String? = nil,
                 requirePaymentMethodSupport: RequirePaymentMethodSupport? = nil
             ) {
                 self.accountSubcategories = accountSubcategories
                 self.countries = countries
+                self.country = country
                 self.requirePaymentMethodSupport = requirePaymentMethodSupport
             }
 

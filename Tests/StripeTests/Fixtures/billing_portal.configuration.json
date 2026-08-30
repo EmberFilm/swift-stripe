@@ -25,6 +25,9 @@
   "subscription_cancel": {
    "cancellation_reason": {
     "enabled": true,
+    "feedback_options": [
+     "billing.feedback_option_1"
+    ],
     "options": [
      "customer_service"
     ]

@@ -70,5 +70,36 @@ extension Stripe.Terminal.Locations {
             self.metadata = metadata
             self.phone = phone
         }
+
+        public struct Address: Codable, Hashable, Sendable {
+            /// City, district, suburb, town, or village.
+            public var city: String?
+            /// Two-letter country code (ISO 3166-1 alpha-2).
+            public var country: String?
+            /// Address line 1, such as the street, PO Box, or company name.
+            public var line1: String?
+            /// Address line 2, such as the apartment, suite, unit, or building.
+            public var line2: String?
+            /// ZIP or postal code.
+            public var postalCode: String?
+            /// State, county, province, or region (ISO 3166-2).
+            public var state: String?
+
+            public init(
+                city: String? = nil,
+                country: String? = nil,
+                line1: String? = nil,
+                line2: String? = nil,
+                postalCode: String? = nil,
+                state: String? = nil
+            ) {
+                self.city = city
+                self.country = country
+                self.line1 = line1
+                self.line2 = line2
+                self.postalCode = postalCode
+                self.state = state
+            }
+        }
     }
 }

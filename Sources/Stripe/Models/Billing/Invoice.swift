@@ -685,6 +685,7 @@ extension Stripe.Billing {
                 case auBecsDebit = "au_becs_debit"
                 case bacsDebit = "bacs_debit"
                 case bancontact
+                case billie
                 case boleto
                 case card
                 case cashapp
@@ -731,6 +732,8 @@ extension Stripe.Billing {
                 public var acssDebit: Stripe.Shared.AcssDebit?
                 /// If paying by `bancontact`, this sub-hash contains details about the Bancontact payment method options to pass to the.
                 public var bancontact: Stripe.Shared.Bancontact?
+                /// If paying by `billie`, this sub-hash contains details about the Billie payment method options to pass to the.
+                public var billie: Billie?
                 /// If paying by `card`, this sub-hash contains details about the Card payment method options to pass to the invoice’s.
                 @Boxed public var card: Card?
                 /// If paying by `customer_balance`, this sub-hash contains details about the Bank transfer payment method options to.
@@ -751,6 +754,7 @@ extension Stripe.Billing {
                 public init(
                     acssDebit: Stripe.Shared.AcssDebit? = nil,
                     bancontact: Stripe.Shared.Bancontact? = nil,
+                    billie: Billie? = nil,
                     card: Card? = nil,
                     customerBalance: Stripe.Shared.CustomerBalance? = nil,
                     konbini: Stripe.Shared.Konbini? = nil,
@@ -762,6 +766,7 @@ extension Stripe.Billing {
                 ) {
                     self.acssDebit = acssDebit
                     self.bancontact = bancontact
+                    self.billie = billie
                     self._card = Boxed(wrappedValue: card)
                     self.customerBalance = customerBalance
                     self.konbini = konbini
@@ -770,6 +775,10 @@ extension Stripe.Billing {
                     self.sepaDebit = sepaDebit
                     self.upi = upi
                     self.usBankAccount = usBankAccount
+                }
+
+                public struct Billie: Codable, Hashable, Sendable {
+                    public init() {}
                 }
 
                 public struct Card: Codable, Hashable, Sendable {

@@ -112,6 +112,12 @@
     "smart_disputes_management": true
    }
   },
+  "payment_method_settings": {
+   "enabled": true,
+   "features": {
+    "disable_stripe_user_authentication": true
+   }
+  },
   "payments": {
    "enabled": true,
    "features": {

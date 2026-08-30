@@ -15,7 +15,7 @@ language mode 6, macOS 26+ / Linux.
 ```bash
 swift build                          # build the library
 swift build --build-tests            # build library + tests (fastest full check)
-swift test                           # run everything (241 tests, 15 suites)
+swift test                           # run everything (242 tests, 15 suites)
 swift test --filter "Stripe webhook signatures"   # one suite, by its @Suite name
 swift format lint --strict --recursive Sources Tests   # what the soundness job runs
 swift format format --in-place --recursive Sources Tests
@@ -237,7 +237,8 @@ let the decode path regress to match it.
 
 ## Generated models
 
-131 of the spec's 137 root resources are generated from Stripe's OpenAPI spec; do not edit the
+Every root resource in Stripe's OpenAPI spec is generated (144 at `2026-08-26.dahlia`; the `deleted_*`
+shapes are `DeletedObject`, not resources of their own); do not edit the
 files under `Sources/Stripe/Models/` by hand — regenerate them. Generated files sit
 beside the hand-written ones, in a folder tree that mirrors the type's namespace:
 `Models/Customers/Customer.swift`, `Models/Billing/Customer/Portal/Portal.Session.swift`,
@@ -378,10 +379,13 @@ encodes by hand), `x-stripeResource`/`x-stripeOperations`, and expresses union f
 Run it before adding a field by hand — the answer is often that several neighbouring fields are
 missing too.
 
-CI runs it as a gate against a spec pinned by commit (`STRIPE_OPENAPI_COMMIT` in
-`.github/workflows/ci.yml`). To take a newer spec: bump the pin, run the tool, model or
-acknowledge every gap it reports, and land all of that in one change. Adding a field is not
-done until it is decoded in `Tests/StripeTests/AddedFieldDecodingTests.swift` — see the
+There is no CI pin: the version the models were generated from is `Stripe.generatedAPIVersion`,
+and the drift, `--check` and fixture gates are run locally before committing. To take a newer
+spec: download the current `spec3.sdk.json`, add any resource `generate-models.py --check`
+reports as missing from `RESOURCES`/`RESOURCE_TYPES`, run both generators and
+`Scripts/spec-fixture.py`, model or acknowledge every gap the drift tool reports, update the
+README's version badge and intro, and land all of that in one change. Adding a field by hand is
+not done until it is decoded in `Tests/StripeTests/AddedFieldDecodingTests.swift` — see the
 blind spot noted in the script.
 
 ## Documentation

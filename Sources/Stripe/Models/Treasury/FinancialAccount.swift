@@ -19,7 +19,7 @@ import Foundation
 #endif
 
 extension Stripe.Treasury {
-    /// Stripe Treasury provides users with a container for money called a FinancialAccount that is separate from their.
+    /// Stripe Treasury for Platforms provides users with a container for money called a FinancialAccount that is separate.
     public struct FinancialAccount: Codable, Hashable, Sendable, Identifiable {
         public typealias ID = String
         public let id: ID

@@ -135,6 +135,7 @@ extension Stripe.Billing.Customer.Portal {
             fileprivate enum CodingKeys: String, CodingKey {
                 case afterCompletion
                 case `type`
+                case customerUpdate
                 case subscriptionCancel
                 case subscriptionUpdate
                 case subscriptionUpdateConfirm
@@ -166,6 +167,7 @@ extension Stripe.Billing.Customer.Portal {
 
             /// Type of flow that the customer will go through.
             public enum `Type`: String, Codable, Hashable, Sendable {
+                case customerUpdate = "customer_update"
                 case paymentMethodUpdate = "payment_method_update"
                 case subscriptionCancel = "subscription_cancel"
                 case subscriptionUpdate = "subscription_update"
@@ -218,6 +220,10 @@ extension Stripe.Billing.Customer.Portal {
                         self.returnUrl = returnUrl
                     }
                 }
+            }
+
+            public struct CustomerUpdate: Codable, Hashable, Sendable {
+                public init() {}
             }
 
             public struct SubscriptionCancel: Codable, Hashable, Sendable {
@@ -327,12 +333,17 @@ extension Stripe.Billing.Customer.Portal {
 
             /// The payload `type` selects; `unknown` carries a type this package does not model.
             public indirect enum Details: Hashable, Sendable {
+                case customerUpdate(CustomerUpdate)
                 case subscriptionCancel(SubscriptionCancel)
                 case subscriptionUpdate(SubscriptionUpdate)
                 case subscriptionUpdateConfirm(SubscriptionUpdateConfirm)
                 case paymentMethodUpdate
                 case unknown(type: String)
 
+                public var customerUpdate: CustomerUpdate? {
+                    if case .customerUpdate(let value) = self { return value }
+                    return nil
+                }
                 public var subscriptionCancel: SubscriptionCancel? {
                     if case .subscriptionCancel(let value) = self { return value }
                     return nil
@@ -348,6 +359,12 @@ extension Stripe.Billing.Customer.Portal {
 
                 fileprivate init(type: String, from container: KeyedDecodingContainer<CodingKeys>) throws {
                     switch type {
+                    case "customer_update":
+                        if let value = try container.decodeIfPresent(CustomerUpdate.self, forKey: .customerUpdate) {
+                            self = .customerUpdate(value)
+                        } else {
+                            self = .unknown(type: type)
+                        }
                     case "subscription_cancel":
                         if let value = try container.decodeIfPresent(SubscriptionCancel.self, forKey: .subscriptionCancel) {
                             self = .subscriptionCancel(value)
@@ -373,6 +390,7 @@ extension Stripe.Billing.Customer.Portal {
 
                 fileprivate func encode(into container: inout KeyedEncodingContainer<CodingKeys>) throws {
                     switch self {
+                    case .customerUpdate(let value): try container.encode(value, forKey: .customerUpdate)
                     case .subscriptionCancel(let value): try container.encode(value, forKey: .subscriptionCancel)
                     case .subscriptionUpdate(let value): try container.encode(value, forKey: .subscriptionUpdate)
                     case .subscriptionUpdateConfirm(let value): try container.encode(value, forKey: .subscriptionUpdateConfirm)

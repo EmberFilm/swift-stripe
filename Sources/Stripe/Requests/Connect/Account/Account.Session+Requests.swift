@@ -72,6 +72,8 @@ extension Stripe.Connect.Account.Session.Create {
             public var paymentDetails: PaymentDetails?
             /// Configuration for the payment disputes embedded component.
             public var paymentDisputes: PaymentDisputes?
+            /// Configuration for the payment method settings embedded component.
+            public var paymentMethodSettings: PaymentMethodSettings?
             /// Configuration for the payments embedded component.
             public var payments: Payments?
             /// Configuration for the payout details embedded component.
@@ -102,6 +104,7 @@ extension Stripe.Connect.Account.Session.Create {
                 notificationBanner: NotificationBanner? = nil,
                 paymentDetails: PaymentDetails? = nil,
                 paymentDisputes: PaymentDisputes? = nil,
+                paymentMethodSettings: PaymentMethodSettings? = nil,
                 payments: Payments? = nil,
                 payoutDetails: PayoutDetails? = nil,
                 payoutReconciliationReport: PayoutReconciliationReport? = nil,
@@ -124,6 +127,7 @@ extension Stripe.Connect.Account.Session.Create {
                 self.notificationBanner = notificationBanner
                 self.paymentDetails = paymentDetails
                 self.paymentDisputes = paymentDisputes
+                self.paymentMethodSettings = paymentMethodSettings
                 self.payments = payments
                 self.payoutDetails = payoutDetails
                 self.payoutReconciliationReport = payoutReconciliationReport
@@ -627,6 +631,34 @@ extension Stripe.Connect.Account.Session.Create {
                         self.disputeManagement = disputeManagement
                         self.refundManagement = refundManagement
                         self.smartDisputesManagement = smartDisputesManagement
+                    }
+                }
+            }
+
+            /// Configuration for the payment method settings embedded component.
+            public struct PaymentMethodSettings: Codable, Hashable, Sendable {
+                /// Whether the embedded component is enabled.
+                public var enabled: Bool
+                /// The list of features enabled in the embedded component.
+                public var features: Features?
+
+                public init(
+                    enabled: Bool,
+                    features: Features? = nil
+                ) {
+                    self.enabled = enabled
+                    self.features = features
+                }
+
+                /// The list of features enabled in the embedded component.
+                public struct Features: Codable, Hashable, Sendable {
+                    /// Whether Stripe user authentication is disabled.
+                    public var disableStripeUserAuthentication: Bool?
+
+                    public init(
+                        disableStripeUserAuthentication: Bool? = nil
+                    ) {
+                        self.disableStripeUserAuthentication = disableStripeUserAuthentication
                     }
                 }
             }

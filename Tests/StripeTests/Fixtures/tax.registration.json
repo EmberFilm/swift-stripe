@@ -18,6 +18,9 @@
    "type": "standard"
   },
   "at": {
+   "igic": {
+    "place_of_supply_scheme": "inbound_goods"
+   },
    "standard": {
     "place_of_supply_scheme": "inbound_goods"
    },
@@ -45,6 +48,9 @@
    "type": "standard"
   },
   "be": {
+   "igic": {
+    "place_of_supply_scheme": "inbound_goods"
+   },
    "standard": {
     "place_of_supply_scheme": "inbound_goods"
    },
@@ -54,6 +60,9 @@
    "type": "standard"
   },
   "bg": {
+   "igic": {
+    "place_of_supply_scheme": "inbound_goods"
+   },
    "standard": {
     "place_of_supply_scheme": "inbound_goods"
    },
@@ -102,24 +111,36 @@
    "type": "simplified"
   },
   "cy": {
+   "igic": {
+    "place_of_supply_scheme": "inbound_goods"
+   },
    "standard": {
     "place_of_supply_scheme": "inbound_goods"
    },
    "type": "ioss"
   },
   "cz": {
+   "igic": {
+    "place_of_supply_scheme": "inbound_goods"
+   },
    "standard": {
     "place_of_supply_scheme": "inbound_goods"
    },
    "type": "ioss"
   },
   "de": {
+   "igic": {
+    "place_of_supply_scheme": "inbound_goods"
+   },
    "standard": {
     "place_of_supply_scheme": "inbound_goods"
    },
    "type": "ioss"
   },
   "dk": {
+   "igic": {
+    "place_of_supply_scheme": "inbound_goods"
+   },
    "standard": {
     "place_of_supply_scheme": "inbound_goods"
    },
@@ -129,6 +150,9 @@
    "type": "simplified"
   },
   "ee": {
+   "igic": {
+    "place_of_supply_scheme": "inbound_goods"
+   },
    "standard": {
     "place_of_supply_scheme": "inbound_goods"
    },
@@ -138,6 +162,9 @@
    "type": "simplified"
   },
   "es": {
+   "igic": {
+    "place_of_supply_scheme": "inbound_goods"
+   },
    "standard": {
     "place_of_supply_scheme": "inbound_goods"
    },
@@ -147,12 +174,18 @@
    "type": "standard"
   },
   "fi": {
+   "igic": {
+    "place_of_supply_scheme": "inbound_goods"
+   },
    "standard": {
     "place_of_supply_scheme": "inbound_goods"
    },
    "type": "ioss"
   },
   "fr": {
+   "igic": {
+    "place_of_supply_scheme": "inbound_goods"
+   },
    "standard": {
     "place_of_supply_scheme": "inbound_goods"
    },
@@ -171,18 +204,27 @@
    "type": "standard"
   },
   "gr": {
+   "igic": {
+    "place_of_supply_scheme": "inbound_goods"
+   },
    "standard": {
     "place_of_supply_scheme": "inbound_goods"
    },
    "type": "ioss"
   },
   "hr": {
+   "igic": {
+    "place_of_supply_scheme": "inbound_goods"
+   },
    "standard": {
     "place_of_supply_scheme": "inbound_goods"
    },
    "type": "ioss"
   },
   "hu": {
+   "igic": {
+    "place_of_supply_scheme": "inbound_goods"
+   },
    "standard": {
     "place_of_supply_scheme": "inbound_goods"
    },
@@ -192,6 +234,9 @@
    "type": "simplified"
   },
   "ie": {
+   "igic": {
+    "place_of_supply_scheme": "inbound_goods"
+   },
    "standard": {
     "place_of_supply_scheme": "inbound_goods"
    },
@@ -204,6 +249,9 @@
    "type": "standard"
   },
   "it": {
+   "igic": {
+    "place_of_supply_scheme": "inbound_goods"
+   },
    "standard": {
     "place_of_supply_scheme": "inbound_goods"
    },
@@ -237,18 +285,27 @@
    "type": "simplified"
   },
   "lt": {
+   "igic": {
+    "place_of_supply_scheme": "inbound_goods"
+   },
    "standard": {
     "place_of_supply_scheme": "inbound_goods"
    },
    "type": "ioss"
   },
   "lu": {
+   "igic": {
+    "place_of_supply_scheme": "inbound_goods"
+   },
    "standard": {
     "place_of_supply_scheme": "inbound_goods"
    },
    "type": "ioss"
   },
   "lv": {
+   "igic": {
+    "place_of_supply_scheme": "inbound_goods"
+   },
    "standard": {
     "place_of_supply_scheme": "inbound_goods"
    },
@@ -270,6 +327,9 @@
    "type": "standard"
   },
   "mt": {
+   "igic": {
+    "place_of_supply_scheme": "inbound_goods"
+   },
    "standard": {
     "place_of_supply_scheme": "inbound_goods"
    },
@@ -285,6 +345,9 @@
    "type": "simplified"
   },
   "nl": {
+   "igic": {
+    "place_of_supply_scheme": "inbound_goods"
+   },
    "standard": {
     "place_of_supply_scheme": "inbound_goods"
    },
@@ -315,18 +378,27 @@
    "type": "simplified"
   },
   "pl": {
+   "igic": {
+    "place_of_supply_scheme": "inbound_goods"
+   },
    "standard": {
     "place_of_supply_scheme": "inbound_goods"
    },
    "type": "ioss"
   },
   "pt": {
+   "igic": {
+    "place_of_supply_scheme": "inbound_goods"
+   },
    "standard": {
     "place_of_supply_scheme": "inbound_goods"
    },
    "type": "ioss"
   },
   "ro": {
+   "igic": {
+    "place_of_supply_scheme": "inbound_goods"
+   },
    "standard": {
     "place_of_supply_scheme": "inbound_goods"
    },
@@ -342,6 +414,9 @@
    "type": "simplified"
   },
   "se": {
+   "igic": {
+    "place_of_supply_scheme": "inbound_goods"
+   },
    "standard": {
     "place_of_supply_scheme": "inbound_goods"
    },
@@ -354,12 +429,18 @@
    "type": "standard"
   },
   "si": {
+   "igic": {
+    "place_of_supply_scheme": "inbound_goods"
+   },
    "standard": {
     "place_of_supply_scheme": "inbound_goods"
    },
    "type": "ioss"
   },
   "sk": {
+   "igic": {
+    "place_of_supply_scheme": "inbound_goods"
+   },
    "standard": {
     "place_of_supply_scheme": "inbound_goods"
    },

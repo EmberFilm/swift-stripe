@@ -1326,6 +1326,7 @@ extension Stripe.Connect.Account.Create {
             public var addressKana: AddressKana?
             /// The Kanji variation of the company's primary address (Japan only).
             public var addressKanji: AddressKanji?
+            /// The location where the business is administered.
             public var administrativeAddress: AdministrativeAddress?
             /// Whether the company's directors have been provided.
             public var directorsProvided: Bool?
@@ -1351,6 +1352,7 @@ extension Stripe.Connect.Account.Create {
             public var ownershipExemptionReason: OwnershipExemptionReason?
             /// The company's phone number (used for verification).
             public var phone: String?
+            /// The primary location where the business conducts operations.
             public var principalPlaceOfBusiness: PrincipalPlaceOfBusiness?
             /// When the business was incorporated or registered.
             public var registrationDate: Stripe.Clearable<RegistrationDate>?
@@ -1560,6 +1562,7 @@ extension Stripe.Connect.Account.Create {
                 }
             }
 
+            /// The location where the business is administered.
             public struct AdministrativeAddress: Codable, Hashable, Sendable {
                 /// City, district, suburb, town, or village.
                 public var city: String?
@@ -1631,6 +1634,7 @@ extension Stripe.Connect.Account.Create {
                 }
             }
 
+            /// The primary location where the business conducts operations.
             public struct PrincipalPlaceOfBusiness: Codable, Hashable, Sendable {
                 /// City, district, suburb, town, or village.
                 public var city: String?
@@ -4053,6 +4057,7 @@ extension Stripe.Connect.Account.Update {
             public var addressKana: AddressKana?
             /// The Kanji variation of the company's primary address (Japan only).
             public var addressKanji: AddressKanji?
+            /// The location where the business is administered.
             public var administrativeAddress: AdministrativeAddress?
             /// Whether the company's directors have been provided.
             public var directorsProvided: Bool?
@@ -4078,6 +4083,7 @@ extension Stripe.Connect.Account.Update {
             public var ownershipExemptionReason: OwnershipExemptionReason?
             /// The company's phone number (used for verification).
             public var phone: String?
+            /// The primary location where the business conducts operations.
             public var principalPlaceOfBusiness: PrincipalPlaceOfBusiness?
             public var registrationDate: Stripe.Clearable<RegistrationDate>?
             /// The identification number given to a company when it is registered or incorporated, if distinct from the.
@@ -4286,6 +4292,7 @@ extension Stripe.Connect.Account.Update {
                 }
             }
 
+            /// The location where the business is administered.
             public struct AdministrativeAddress: Codable, Hashable, Sendable {
                 /// City, district, suburb, town, or village.
                 public var city: String?
@@ -4357,6 +4364,7 @@ extension Stripe.Connect.Account.Update {
                 }
             }
 
+            /// The primary location where the business conducts operations.
             public struct PrincipalPlaceOfBusiness: Codable, Hashable, Sendable {
                 /// City, district, suburb, town, or village.
                 public var city: String?

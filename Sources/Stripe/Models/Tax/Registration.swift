@@ -442,14 +442,17 @@ extension Stripe.Tax {
             }
 
             public struct At: Codable, Hashable, Sendable {
+                public var igic: Igic?
                 public var standard: Standard?
                 /// Type of registration in an EU country.
                 public var `type`: Type?
 
                 public init(
+                    igic: Igic? = nil,
                     standard: Standard? = nil,
                     `type`: Type? = nil
                 ) {
+                    self.igic = igic
                     self.standard = standard
                     self.`type` = `type`
                 }
@@ -460,6 +463,23 @@ extension Stripe.Tax {
                     case ossNonUnion = "oss_non_union"
                     case ossUnion = "oss_union"
                     case standard
+                }
+
+                public struct Igic: Codable, Hashable, Sendable {
+                    /// Place of supply scheme used in an IGIC registration.
+                    public var placeOfSupplyScheme: PlaceOfSupplyScheme?
+
+                    public init(
+                        placeOfSupplyScheme: PlaceOfSupplyScheme? = nil
+                    ) {
+                        self.placeOfSupplyScheme = placeOfSupplyScheme
+                    }
+
+                    /// Place of supply scheme used in an IGIC registration.
+                    public enum PlaceOfSupplyScheme: String, Codable, Hashable, Sendable {
+                        case inboundGoods = "inbound_goods"
+                        case standard
+                    }
                 }
 
                 public struct Standard: Codable, Hashable, Sendable {
@@ -568,14 +588,17 @@ extension Stripe.Tax {
             }
 
             public struct Be: Codable, Hashable, Sendable {
+                public var igic: Igic?
                 public var standard: Standard?
                 /// Type of registration in an EU country.
                 public var `type`: Type?
 
                 public init(
+                    igic: Igic? = nil,
                     standard: Standard? = nil,
                     `type`: Type? = nil
                 ) {
+                    self.igic = igic
                     self.standard = standard
                     self.`type` = `type`
                 }
@@ -586,6 +609,23 @@ extension Stripe.Tax {
                     case ossNonUnion = "oss_non_union"
                     case ossUnion = "oss_union"
                     case standard
+                }
+
+                public struct Igic: Codable, Hashable, Sendable {
+                    /// Place of supply scheme used in an IGIC registration.
+                    public var placeOfSupplyScheme: PlaceOfSupplyScheme?
+
+                    public init(
+                        placeOfSupplyScheme: PlaceOfSupplyScheme? = nil
+                    ) {
+                        self.placeOfSupplyScheme = placeOfSupplyScheme
+                    }
+
+                    /// Place of supply scheme used in an IGIC registration.
+                    public enum PlaceOfSupplyScheme: String, Codable, Hashable, Sendable {
+                        case inboundGoods = "inbound_goods"
+                        case standard
+                    }
                 }
 
                 public struct Standard: Codable, Hashable, Sendable {
@@ -619,14 +659,17 @@ extension Stripe.Tax {
             }
 
             public struct Bg: Codable, Hashable, Sendable {
+                public var igic: Igic?
                 public var standard: Standard?
                 /// Type of registration in an EU country.
                 public var `type`: Type?
 
                 public init(
+                    igic: Igic? = nil,
                     standard: Standard? = nil,
                     `type`: Type? = nil
                 ) {
+                    self.igic = igic
                     self.standard = standard
                     self.`type` = `type`
                 }
@@ -637,6 +680,23 @@ extension Stripe.Tax {
                     case ossNonUnion = "oss_non_union"
                     case ossUnion = "oss_union"
                     case standard
+                }
+
+                public struct Igic: Codable, Hashable, Sendable {
+                    /// Place of supply scheme used in an IGIC registration.
+                    public var placeOfSupplyScheme: PlaceOfSupplyScheme?
+
+                    public init(
+                        placeOfSupplyScheme: PlaceOfSupplyScheme? = nil
+                    ) {
+                        self.placeOfSupplyScheme = placeOfSupplyScheme
+                    }
+
+                    /// Place of supply scheme used in an IGIC registration.
+                    public enum PlaceOfSupplyScheme: String, Codable, Hashable, Sendable {
+                        case inboundGoods = "inbound_goods"
+                        case standard
+                    }
                 }
 
                 public struct Standard: Codable, Hashable, Sendable {
@@ -832,14 +892,17 @@ extension Stripe.Tax {
             }
 
             public struct Cy: Codable, Hashable, Sendable {
+                public var igic: Igic?
                 public var standard: Standard?
                 /// Type of registration in an EU country.
                 public var `type`: Type?
 
                 public init(
+                    igic: Igic? = nil,
                     standard: Standard? = nil,
                     `type`: Type? = nil
                 ) {
+                    self.igic = igic
                     self.standard = standard
                     self.`type` = `type`
                 }
@@ -850,6 +913,23 @@ extension Stripe.Tax {
                     case ossNonUnion = "oss_non_union"
                     case ossUnion = "oss_union"
                     case standard
+                }
+
+                public struct Igic: Codable, Hashable, Sendable {
+                    /// Place of supply scheme used in an IGIC registration.
+                    public var placeOfSupplyScheme: PlaceOfSupplyScheme?
+
+                    public init(
+                        placeOfSupplyScheme: PlaceOfSupplyScheme? = nil
+                    ) {
+                        self.placeOfSupplyScheme = placeOfSupplyScheme
+                    }
+
+                    /// Place of supply scheme used in an IGIC registration.
+                    public enum PlaceOfSupplyScheme: String, Codable, Hashable, Sendable {
+                        case inboundGoods = "inbound_goods"
+                        case standard
+                    }
                 }
 
                 public struct Standard: Codable, Hashable, Sendable {
@@ -872,14 +952,17 @@ extension Stripe.Tax {
             }
 
             public struct Cz: Codable, Hashable, Sendable {
+                public var igic: Igic?
                 public var standard: Standard?
                 /// Type of registration in an EU country.
                 public var `type`: Type?
 
                 public init(
+                    igic: Igic? = nil,
                     standard: Standard? = nil,
                     `type`: Type? = nil
                 ) {
+                    self.igic = igic
                     self.standard = standard
                     self.`type` = `type`
                 }
@@ -890,6 +973,23 @@ extension Stripe.Tax {
                     case ossNonUnion = "oss_non_union"
                     case ossUnion = "oss_union"
                     case standard
+                }
+
+                public struct Igic: Codable, Hashable, Sendable {
+                    /// Place of supply scheme used in an IGIC registration.
+                    public var placeOfSupplyScheme: PlaceOfSupplyScheme?
+
+                    public init(
+                        placeOfSupplyScheme: PlaceOfSupplyScheme? = nil
+                    ) {
+                        self.placeOfSupplyScheme = placeOfSupplyScheme
+                    }
+
+                    /// Place of supply scheme used in an IGIC registration.
+                    public enum PlaceOfSupplyScheme: String, Codable, Hashable, Sendable {
+                        case inboundGoods = "inbound_goods"
+                        case standard
+                    }
                 }
 
                 public struct Standard: Codable, Hashable, Sendable {
@@ -912,14 +1012,17 @@ extension Stripe.Tax {
             }
 
             public struct De: Codable, Hashable, Sendable {
+                public var igic: Igic?
                 public var standard: Standard?
                 /// Type of registration in an EU country.
                 public var `type`: Type?
 
                 public init(
+                    igic: Igic? = nil,
                     standard: Standard? = nil,
                     `type`: Type? = nil
                 ) {
+                    self.igic = igic
                     self.standard = standard
                     self.`type` = `type`
                 }
@@ -930,6 +1033,23 @@ extension Stripe.Tax {
                     case ossNonUnion = "oss_non_union"
                     case ossUnion = "oss_union"
                     case standard
+                }
+
+                public struct Igic: Codable, Hashable, Sendable {
+                    /// Place of supply scheme used in an IGIC registration.
+                    public var placeOfSupplyScheme: PlaceOfSupplyScheme?
+
+                    public init(
+                        placeOfSupplyScheme: PlaceOfSupplyScheme? = nil
+                    ) {
+                        self.placeOfSupplyScheme = placeOfSupplyScheme
+                    }
+
+                    /// Place of supply scheme used in an IGIC registration.
+                    public enum PlaceOfSupplyScheme: String, Codable, Hashable, Sendable {
+                        case inboundGoods = "inbound_goods"
+                        case standard
+                    }
                 }
 
                 public struct Standard: Codable, Hashable, Sendable {
@@ -952,14 +1072,17 @@ extension Stripe.Tax {
             }
 
             public struct Dk: Codable, Hashable, Sendable {
+                public var igic: Igic?
                 public var standard: Standard?
                 /// Type of registration in an EU country.
                 public var `type`: Type?
 
                 public init(
+                    igic: Igic? = nil,
                     standard: Standard? = nil,
                     `type`: Type? = nil
                 ) {
+                    self.igic = igic
                     self.standard = standard
                     self.`type` = `type`
                 }
@@ -970,6 +1093,23 @@ extension Stripe.Tax {
                     case ossNonUnion = "oss_non_union"
                     case ossUnion = "oss_union"
                     case standard
+                }
+
+                public struct Igic: Codable, Hashable, Sendable {
+                    /// Place of supply scheme used in an IGIC registration.
+                    public var placeOfSupplyScheme: PlaceOfSupplyScheme?
+
+                    public init(
+                        placeOfSupplyScheme: PlaceOfSupplyScheme? = nil
+                    ) {
+                        self.placeOfSupplyScheme = placeOfSupplyScheme
+                    }
+
+                    /// Place of supply scheme used in an IGIC registration.
+                    public enum PlaceOfSupplyScheme: String, Codable, Hashable, Sendable {
+                        case inboundGoods = "inbound_goods"
+                        case standard
+                    }
                 }
 
                 public struct Standard: Codable, Hashable, Sendable {
@@ -1003,14 +1143,17 @@ extension Stripe.Tax {
             }
 
             public struct Ee: Codable, Hashable, Sendable {
+                public var igic: Igic?
                 public var standard: Standard?
                 /// Type of registration in an EU country.
                 public var `type`: Type?
 
                 public init(
+                    igic: Igic? = nil,
                     standard: Standard? = nil,
                     `type`: Type? = nil
                 ) {
+                    self.igic = igic
                     self.standard = standard
                     self.`type` = `type`
                 }
@@ -1021,6 +1164,23 @@ extension Stripe.Tax {
                     case ossNonUnion = "oss_non_union"
                     case ossUnion = "oss_union"
                     case standard
+                }
+
+                public struct Igic: Codable, Hashable, Sendable {
+                    /// Place of supply scheme used in an IGIC registration.
+                    public var placeOfSupplyScheme: PlaceOfSupplyScheme?
+
+                    public init(
+                        placeOfSupplyScheme: PlaceOfSupplyScheme? = nil
+                    ) {
+                        self.placeOfSupplyScheme = placeOfSupplyScheme
+                    }
+
+                    /// Place of supply scheme used in an IGIC registration.
+                    public enum PlaceOfSupplyScheme: String, Codable, Hashable, Sendable {
+                        case inboundGoods = "inbound_goods"
+                        case standard
+                    }
                 }
 
                 public struct Standard: Codable, Hashable, Sendable {
@@ -1054,14 +1214,17 @@ extension Stripe.Tax {
             }
 
             public struct Es: Codable, Hashable, Sendable {
+                public var igic: Igic?
                 public var standard: Standard?
                 /// Type of registration in an EU country.
                 public var `type`: Type?
 
                 public init(
+                    igic: Igic? = nil,
                     standard: Standard? = nil,
                     `type`: Type? = nil
                 ) {
+                    self.igic = igic
                     self.standard = standard
                     self.`type` = `type`
                 }
@@ -1072,6 +1235,23 @@ extension Stripe.Tax {
                     case ossNonUnion = "oss_non_union"
                     case ossUnion = "oss_union"
                     case standard
+                }
+
+                public struct Igic: Codable, Hashable, Sendable {
+                    /// Place of supply scheme used in an IGIC registration.
+                    public var placeOfSupplyScheme: PlaceOfSupplyScheme?
+
+                    public init(
+                        placeOfSupplyScheme: PlaceOfSupplyScheme? = nil
+                    ) {
+                        self.placeOfSupplyScheme = placeOfSupplyScheme
+                    }
+
+                    /// Place of supply scheme used in an IGIC registration.
+                    public enum PlaceOfSupplyScheme: String, Codable, Hashable, Sendable {
+                        case inboundGoods = "inbound_goods"
+                        case standard
+                    }
                 }
 
                 public struct Standard: Codable, Hashable, Sendable {
@@ -1105,14 +1285,17 @@ extension Stripe.Tax {
             }
 
             public struct Fi: Codable, Hashable, Sendable {
+                public var igic: Igic?
                 public var standard: Standard?
                 /// Type of registration in an EU country.
                 public var `type`: Type?
 
                 public init(
+                    igic: Igic? = nil,
                     standard: Standard? = nil,
                     `type`: Type? = nil
                 ) {
+                    self.igic = igic
                     self.standard = standard
                     self.`type` = `type`
                 }
@@ -1123,6 +1306,23 @@ extension Stripe.Tax {
                     case ossNonUnion = "oss_non_union"
                     case ossUnion = "oss_union"
                     case standard
+                }
+
+                public struct Igic: Codable, Hashable, Sendable {
+                    /// Place of supply scheme used in an IGIC registration.
+                    public var placeOfSupplyScheme: PlaceOfSupplyScheme?
+
+                    public init(
+                        placeOfSupplyScheme: PlaceOfSupplyScheme? = nil
+                    ) {
+                        self.placeOfSupplyScheme = placeOfSupplyScheme
+                    }
+
+                    /// Place of supply scheme used in an IGIC registration.
+                    public enum PlaceOfSupplyScheme: String, Codable, Hashable, Sendable {
+                        case inboundGoods = "inbound_goods"
+                        case standard
+                    }
                 }
 
                 public struct Standard: Codable, Hashable, Sendable {
@@ -1145,14 +1345,17 @@ extension Stripe.Tax {
             }
 
             public struct Fr: Codable, Hashable, Sendable {
+                public var igic: Igic?
                 public var standard: Standard?
                 /// Type of registration in an EU country.
                 public var `type`: Type?
 
                 public init(
+                    igic: Igic? = nil,
                     standard: Standard? = nil,
                     `type`: Type? = nil
                 ) {
+                    self.igic = igic
                     self.standard = standard
                     self.`type` = `type`
                 }
@@ -1163,6 +1366,23 @@ extension Stripe.Tax {
                     case ossNonUnion = "oss_non_union"
                     case ossUnion = "oss_union"
                     case standard
+                }
+
+                public struct Igic: Codable, Hashable, Sendable {
+                    /// Place of supply scheme used in an IGIC registration.
+                    public var placeOfSupplyScheme: PlaceOfSupplyScheme?
+
+                    public init(
+                        placeOfSupplyScheme: PlaceOfSupplyScheme? = nil
+                    ) {
+                        self.placeOfSupplyScheme = placeOfSupplyScheme
+                    }
+
+                    /// Place of supply scheme used in an IGIC registration.
+                    public enum PlaceOfSupplyScheme: String, Codable, Hashable, Sendable {
+                        case inboundGoods = "inbound_goods"
+                        case standard
+                    }
                 }
 
                 public struct Standard: Codable, Hashable, Sendable {
@@ -1238,14 +1458,17 @@ extension Stripe.Tax {
             }
 
             public struct Gr: Codable, Hashable, Sendable {
+                public var igic: Igic?
                 public var standard: Standard?
                 /// Type of registration in an EU country.
                 public var `type`: Type?
 
                 public init(
+                    igic: Igic? = nil,
                     standard: Standard? = nil,
                     `type`: Type? = nil
                 ) {
+                    self.igic = igic
                     self.standard = standard
                     self.`type` = `type`
                 }
@@ -1256,6 +1479,23 @@ extension Stripe.Tax {
                     case ossNonUnion = "oss_non_union"
                     case ossUnion = "oss_union"
                     case standard
+                }
+
+                public struct Igic: Codable, Hashable, Sendable {
+                    /// Place of supply scheme used in an IGIC registration.
+                    public var placeOfSupplyScheme: PlaceOfSupplyScheme?
+
+                    public init(
+                        placeOfSupplyScheme: PlaceOfSupplyScheme? = nil
+                    ) {
+                        self.placeOfSupplyScheme = placeOfSupplyScheme
+                    }
+
+                    /// Place of supply scheme used in an IGIC registration.
+                    public enum PlaceOfSupplyScheme: String, Codable, Hashable, Sendable {
+                        case inboundGoods = "inbound_goods"
+                        case standard
+                    }
                 }
 
                 public struct Standard: Codable, Hashable, Sendable {
@@ -1278,14 +1518,17 @@ extension Stripe.Tax {
             }
 
             public struct Hr: Codable, Hashable, Sendable {
+                public var igic: Igic?
                 public var standard: Standard?
                 /// Type of registration in an EU country.
                 public var `type`: Type?
 
                 public init(
+                    igic: Igic? = nil,
                     standard: Standard? = nil,
                     `type`: Type? = nil
                 ) {
+                    self.igic = igic
                     self.standard = standard
                     self.`type` = `type`
                 }
@@ -1296,6 +1539,23 @@ extension Stripe.Tax {
                     case ossNonUnion = "oss_non_union"
                     case ossUnion = "oss_union"
                     case standard
+                }
+
+                public struct Igic: Codable, Hashable, Sendable {
+                    /// Place of supply scheme used in an IGIC registration.
+                    public var placeOfSupplyScheme: PlaceOfSupplyScheme?
+
+                    public init(
+                        placeOfSupplyScheme: PlaceOfSupplyScheme? = nil
+                    ) {
+                        self.placeOfSupplyScheme = placeOfSupplyScheme
+                    }
+
+                    /// Place of supply scheme used in an IGIC registration.
+                    public enum PlaceOfSupplyScheme: String, Codable, Hashable, Sendable {
+                        case inboundGoods = "inbound_goods"
+                        case standard
+                    }
                 }
 
                 public struct Standard: Codable, Hashable, Sendable {
@@ -1318,14 +1578,17 @@ extension Stripe.Tax {
             }
 
             public struct Hu: Codable, Hashable, Sendable {
+                public var igic: Igic?
                 public var standard: Standard?
                 /// Type of registration in an EU country.
                 public var `type`: Type?
 
                 public init(
+                    igic: Igic? = nil,
                     standard: Standard? = nil,
                     `type`: Type? = nil
                 ) {
+                    self.igic = igic
                     self.standard = standard
                     self.`type` = `type`
                 }
@@ -1336,6 +1599,23 @@ extension Stripe.Tax {
                     case ossNonUnion = "oss_non_union"
                     case ossUnion = "oss_union"
                     case standard
+                }
+
+                public struct Igic: Codable, Hashable, Sendable {
+                    /// Place of supply scheme used in an IGIC registration.
+                    public var placeOfSupplyScheme: PlaceOfSupplyScheme?
+
+                    public init(
+                        placeOfSupplyScheme: PlaceOfSupplyScheme? = nil
+                    ) {
+                        self.placeOfSupplyScheme = placeOfSupplyScheme
+                    }
+
+                    /// Place of supply scheme used in an IGIC registration.
+                    public enum PlaceOfSupplyScheme: String, Codable, Hashable, Sendable {
+                        case inboundGoods = "inbound_goods"
+                        case standard
+                    }
                 }
 
                 public struct Standard: Codable, Hashable, Sendable {
@@ -1369,14 +1649,17 @@ extension Stripe.Tax {
             }
 
             public struct Ie: Codable, Hashable, Sendable {
+                public var igic: Igic?
                 public var standard: Standard?
                 /// Type of registration in an EU country.
                 public var `type`: Type?
 
                 public init(
+                    igic: Igic? = nil,
                     standard: Standard? = nil,
                     `type`: Type? = nil
                 ) {
+                    self.igic = igic
                     self.standard = standard
                     self.`type` = `type`
                 }
@@ -1387,6 +1670,23 @@ extension Stripe.Tax {
                     case ossNonUnion = "oss_non_union"
                     case ossUnion = "oss_union"
                     case standard
+                }
+
+                public struct Igic: Codable, Hashable, Sendable {
+                    /// Place of supply scheme used in an IGIC registration.
+                    public var placeOfSupplyScheme: PlaceOfSupplyScheme?
+
+                    public init(
+                        placeOfSupplyScheme: PlaceOfSupplyScheme? = nil
+                    ) {
+                        self.placeOfSupplyScheme = placeOfSupplyScheme
+                    }
+
+                    /// Place of supply scheme used in an IGIC registration.
+                    public enum PlaceOfSupplyScheme: String, Codable, Hashable, Sendable {
+                        case inboundGoods = "inbound_goods"
+                        case standard
+                    }
                 }
 
                 public struct Standard: Codable, Hashable, Sendable {
@@ -1431,14 +1731,17 @@ extension Stripe.Tax {
             }
 
             public struct It: Codable, Hashable, Sendable {
+                public var igic: Igic?
                 public var standard: Standard?
                 /// Type of registration in an EU country.
                 public var `type`: Type?
 
                 public init(
+                    igic: Igic? = nil,
                     standard: Standard? = nil,
                     `type`: Type? = nil
                 ) {
+                    self.igic = igic
                     self.standard = standard
                     self.`type` = `type`
                 }
@@ -1449,6 +1752,23 @@ extension Stripe.Tax {
                     case ossNonUnion = "oss_non_union"
                     case ossUnion = "oss_union"
                     case standard
+                }
+
+                public struct Igic: Codable, Hashable, Sendable {
+                    /// Place of supply scheme used in an IGIC registration.
+                    public var placeOfSupplyScheme: PlaceOfSupplyScheme?
+
+                    public init(
+                        placeOfSupplyScheme: PlaceOfSupplyScheme? = nil
+                    ) {
+                        self.placeOfSupplyScheme = placeOfSupplyScheme
+                    }
+
+                    /// Place of supply scheme used in an IGIC registration.
+                    public enum PlaceOfSupplyScheme: String, Codable, Hashable, Sendable {
+                        case inboundGoods = "inbound_goods"
+                        case standard
+                    }
                 }
 
                 public struct Standard: Codable, Hashable, Sendable {
@@ -1579,14 +1899,17 @@ extension Stripe.Tax {
             }
 
             public struct Lt: Codable, Hashable, Sendable {
+                public var igic: Igic?
                 public var standard: Standard?
                 /// Type of registration in an EU country.
                 public var `type`: Type?
 
                 public init(
+                    igic: Igic? = nil,
                     standard: Standard? = nil,
                     `type`: Type? = nil
                 ) {
+                    self.igic = igic
                     self.standard = standard
                     self.`type` = `type`
                 }
@@ -1597,6 +1920,23 @@ extension Stripe.Tax {
                     case ossNonUnion = "oss_non_union"
                     case ossUnion = "oss_union"
                     case standard
+                }
+
+                public struct Igic: Codable, Hashable, Sendable {
+                    /// Place of supply scheme used in an IGIC registration.
+                    public var placeOfSupplyScheme: PlaceOfSupplyScheme?
+
+                    public init(
+                        placeOfSupplyScheme: PlaceOfSupplyScheme? = nil
+                    ) {
+                        self.placeOfSupplyScheme = placeOfSupplyScheme
+                    }
+
+                    /// Place of supply scheme used in an IGIC registration.
+                    public enum PlaceOfSupplyScheme: String, Codable, Hashable, Sendable {
+                        case inboundGoods = "inbound_goods"
+                        case standard
+                    }
                 }
 
                 public struct Standard: Codable, Hashable, Sendable {
@@ -1619,14 +1959,17 @@ extension Stripe.Tax {
             }
 
             public struct Lu: Codable, Hashable, Sendable {
+                public var igic: Igic?
                 public var standard: Standard?
                 /// Type of registration in an EU country.
                 public var `type`: Type?
 
                 public init(
+                    igic: Igic? = nil,
                     standard: Standard? = nil,
                     `type`: Type? = nil
                 ) {
+                    self.igic = igic
                     self.standard = standard
                     self.`type` = `type`
                 }
@@ -1637,6 +1980,23 @@ extension Stripe.Tax {
                     case ossNonUnion = "oss_non_union"
                     case ossUnion = "oss_union"
                     case standard
+                }
+
+                public struct Igic: Codable, Hashable, Sendable {
+                    /// Place of supply scheme used in an IGIC registration.
+                    public var placeOfSupplyScheme: PlaceOfSupplyScheme?
+
+                    public init(
+                        placeOfSupplyScheme: PlaceOfSupplyScheme? = nil
+                    ) {
+                        self.placeOfSupplyScheme = placeOfSupplyScheme
+                    }
+
+                    /// Place of supply scheme used in an IGIC registration.
+                    public enum PlaceOfSupplyScheme: String, Codable, Hashable, Sendable {
+                        case inboundGoods = "inbound_goods"
+                        case standard
+                    }
                 }
 
                 public struct Standard: Codable, Hashable, Sendable {
@@ -1659,14 +2019,17 @@ extension Stripe.Tax {
             }
 
             public struct Lv: Codable, Hashable, Sendable {
+                public var igic: Igic?
                 public var standard: Standard?
                 /// Type of registration in an EU country.
                 public var `type`: Type?
 
                 public init(
+                    igic: Igic? = nil,
                     standard: Standard? = nil,
                     `type`: Type? = nil
                 ) {
+                    self.igic = igic
                     self.standard = standard
                     self.`type` = `type`
                 }
@@ -1677,6 +2040,23 @@ extension Stripe.Tax {
                     case ossNonUnion = "oss_non_union"
                     case ossUnion = "oss_union"
                     case standard
+                }
+
+                public struct Igic: Codable, Hashable, Sendable {
+                    /// Place of supply scheme used in an IGIC registration.
+                    public var placeOfSupplyScheme: PlaceOfSupplyScheme?
+
+                    public init(
+                        placeOfSupplyScheme: PlaceOfSupplyScheme? = nil
+                    ) {
+                        self.placeOfSupplyScheme = placeOfSupplyScheme
+                    }
+
+                    /// Place of supply scheme used in an IGIC registration.
+                    public enum PlaceOfSupplyScheme: String, Codable, Hashable, Sendable {
+                        case inboundGoods = "inbound_goods"
+                        case standard
+                    }
                 }
 
                 public struct Standard: Codable, Hashable, Sendable {
@@ -1754,14 +2134,17 @@ extension Stripe.Tax {
             }
 
             public struct Mt: Codable, Hashable, Sendable {
+                public var igic: Igic?
                 public var standard: Standard?
                 /// Type of registration in an EU country.
                 public var `type`: Type?
 
                 public init(
+                    igic: Igic? = nil,
                     standard: Standard? = nil,
                     `type`: Type? = nil
                 ) {
+                    self.igic = igic
                     self.standard = standard
                     self.`type` = `type`
                 }
@@ -1772,6 +2155,23 @@ extension Stripe.Tax {
                     case ossNonUnion = "oss_non_union"
                     case ossUnion = "oss_union"
                     case standard
+                }
+
+                public struct Igic: Codable, Hashable, Sendable {
+                    /// Place of supply scheme used in an IGIC registration.
+                    public var placeOfSupplyScheme: PlaceOfSupplyScheme?
+
+                    public init(
+                        placeOfSupplyScheme: PlaceOfSupplyScheme? = nil
+                    ) {
+                        self.placeOfSupplyScheme = placeOfSupplyScheme
+                    }
+
+                    /// Place of supply scheme used in an IGIC registration.
+                    public enum PlaceOfSupplyScheme: String, Codable, Hashable, Sendable {
+                        case inboundGoods = "inbound_goods"
+                        case standard
+                    }
                 }
 
                 public struct Standard: Codable, Hashable, Sendable {
@@ -1827,14 +2227,17 @@ extension Stripe.Tax {
             }
 
             public struct Nl: Codable, Hashable, Sendable {
+                public var igic: Igic?
                 public var standard: Standard?
                 /// Type of registration in an EU country.
                 public var `type`: Type?
 
                 public init(
+                    igic: Igic? = nil,
                     standard: Standard? = nil,
                     `type`: Type? = nil
                 ) {
+                    self.igic = igic
                     self.standard = standard
                     self.`type` = `type`
                 }
@@ -1845,6 +2248,23 @@ extension Stripe.Tax {
                     case ossNonUnion = "oss_non_union"
                     case ossUnion = "oss_union"
                     case standard
+                }
+
+                public struct Igic: Codable, Hashable, Sendable {
+                    /// Place of supply scheme used in an IGIC registration.
+                    public var placeOfSupplyScheme: PlaceOfSupplyScheme?
+
+                    public init(
+                        placeOfSupplyScheme: PlaceOfSupplyScheme? = nil
+                    ) {
+                        self.placeOfSupplyScheme = placeOfSupplyScheme
+                    }
+
+                    /// Place of supply scheme used in an IGIC registration.
+                    public enum PlaceOfSupplyScheme: String, Codable, Hashable, Sendable {
+                        case inboundGoods = "inbound_goods"
+                        case standard
+                    }
                 }
 
                 public struct Standard: Codable, Hashable, Sendable {
@@ -1973,14 +2393,17 @@ extension Stripe.Tax {
             }
 
             public struct Pl: Codable, Hashable, Sendable {
+                public var igic: Igic?
                 public var standard: Standard?
                 /// Type of registration in an EU country.
                 public var `type`: Type?
 
                 public init(
+                    igic: Igic? = nil,
                     standard: Standard? = nil,
                     `type`: Type? = nil
                 ) {
+                    self.igic = igic
                     self.standard = standard
                     self.`type` = `type`
                 }
@@ -1991,6 +2414,23 @@ extension Stripe.Tax {
                     case ossNonUnion = "oss_non_union"
                     case ossUnion = "oss_union"
                     case standard
+                }
+
+                public struct Igic: Codable, Hashable, Sendable {
+                    /// Place of supply scheme used in an IGIC registration.
+                    public var placeOfSupplyScheme: PlaceOfSupplyScheme?
+
+                    public init(
+                        placeOfSupplyScheme: PlaceOfSupplyScheme? = nil
+                    ) {
+                        self.placeOfSupplyScheme = placeOfSupplyScheme
+                    }
+
+                    /// Place of supply scheme used in an IGIC registration.
+                    public enum PlaceOfSupplyScheme: String, Codable, Hashable, Sendable {
+                        case inboundGoods = "inbound_goods"
+                        case standard
+                    }
                 }
 
                 public struct Standard: Codable, Hashable, Sendable {
@@ -2013,14 +2453,17 @@ extension Stripe.Tax {
             }
 
             public struct Pt: Codable, Hashable, Sendable {
+                public var igic: Igic?
                 public var standard: Standard?
                 /// Type of registration in an EU country.
                 public var `type`: Type?
 
                 public init(
+                    igic: Igic? = nil,
                     standard: Standard? = nil,
                     `type`: Type? = nil
                 ) {
+                    self.igic = igic
                     self.standard = standard
                     self.`type` = `type`
                 }
@@ -2031,6 +2474,23 @@ extension Stripe.Tax {
                     case ossNonUnion = "oss_non_union"
                     case ossUnion = "oss_union"
                     case standard
+                }
+
+                public struct Igic: Codable, Hashable, Sendable {
+                    /// Place of supply scheme used in an IGIC registration.
+                    public var placeOfSupplyScheme: PlaceOfSupplyScheme?
+
+                    public init(
+                        placeOfSupplyScheme: PlaceOfSupplyScheme? = nil
+                    ) {
+                        self.placeOfSupplyScheme = placeOfSupplyScheme
+                    }
+
+                    /// Place of supply scheme used in an IGIC registration.
+                    public enum PlaceOfSupplyScheme: String, Codable, Hashable, Sendable {
+                        case inboundGoods = "inbound_goods"
+                        case standard
+                    }
                 }
 
                 public struct Standard: Codable, Hashable, Sendable {
@@ -2053,14 +2513,17 @@ extension Stripe.Tax {
             }
 
             public struct Ro: Codable, Hashable, Sendable {
+                public var igic: Igic?
                 public var standard: Standard?
                 /// Type of registration in an EU country.
                 public var `type`: Type?
 
                 public init(
+                    igic: Igic? = nil,
                     standard: Standard? = nil,
                     `type`: Type? = nil
                 ) {
+                    self.igic = igic
                     self.standard = standard
                     self.`type` = `type`
                 }
@@ -2071,6 +2534,23 @@ extension Stripe.Tax {
                     case ossNonUnion = "oss_non_union"
                     case ossUnion = "oss_union"
                     case standard
+                }
+
+                public struct Igic: Codable, Hashable, Sendable {
+                    /// Place of supply scheme used in an IGIC registration.
+                    public var placeOfSupplyScheme: PlaceOfSupplyScheme?
+
+                    public init(
+                        placeOfSupplyScheme: PlaceOfSupplyScheme? = nil
+                    ) {
+                        self.placeOfSupplyScheme = placeOfSupplyScheme
+                    }
+
+                    /// Place of supply scheme used in an IGIC registration.
+                    public enum PlaceOfSupplyScheme: String, Codable, Hashable, Sendable {
+                        case inboundGoods = "inbound_goods"
+                        case standard
+                    }
                 }
 
                 public struct Standard: Codable, Hashable, Sendable {
@@ -2126,14 +2606,17 @@ extension Stripe.Tax {
             }
 
             public struct Se: Codable, Hashable, Sendable {
+                public var igic: Igic?
                 public var standard: Standard?
                 /// Type of registration in an EU country.
                 public var `type`: Type?
 
                 public init(
+                    igic: Igic? = nil,
                     standard: Standard? = nil,
                     `type`: Type? = nil
                 ) {
+                    self.igic = igic
                     self.standard = standard
                     self.`type` = `type`
                 }
@@ -2144,6 +2627,23 @@ extension Stripe.Tax {
                     case ossNonUnion = "oss_non_union"
                     case ossUnion = "oss_union"
                     case standard
+                }
+
+                public struct Igic: Codable, Hashable, Sendable {
+                    /// Place of supply scheme used in an IGIC registration.
+                    public var placeOfSupplyScheme: PlaceOfSupplyScheme?
+
+                    public init(
+                        placeOfSupplyScheme: PlaceOfSupplyScheme? = nil
+                    ) {
+                        self.placeOfSupplyScheme = placeOfSupplyScheme
+                    }
+
+                    /// Place of supply scheme used in an IGIC registration.
+                    public enum PlaceOfSupplyScheme: String, Codable, Hashable, Sendable {
+                        case inboundGoods = "inbound_goods"
+                        case standard
+                    }
                 }
 
                 public struct Standard: Codable, Hashable, Sendable {
@@ -2197,14 +2697,17 @@ extension Stripe.Tax {
             }
 
             public struct Si: Codable, Hashable, Sendable {
+                public var igic: Igic?
                 public var standard: Standard?
                 /// Type of registration in an EU country.
                 public var `type`: Type?
 
                 public init(
+                    igic: Igic? = nil,
                     standard: Standard? = nil,
                     `type`: Type? = nil
                 ) {
+                    self.igic = igic
                     self.standard = standard
                     self.`type` = `type`
                 }
@@ -2215,6 +2718,23 @@ extension Stripe.Tax {
                     case ossNonUnion = "oss_non_union"
                     case ossUnion = "oss_union"
                     case standard
+                }
+
+                public struct Igic: Codable, Hashable, Sendable {
+                    /// Place of supply scheme used in an IGIC registration.
+                    public var placeOfSupplyScheme: PlaceOfSupplyScheme?
+
+                    public init(
+                        placeOfSupplyScheme: PlaceOfSupplyScheme? = nil
+                    ) {
+                        self.placeOfSupplyScheme = placeOfSupplyScheme
+                    }
+
+                    /// Place of supply scheme used in an IGIC registration.
+                    public enum PlaceOfSupplyScheme: String, Codable, Hashable, Sendable {
+                        case inboundGoods = "inbound_goods"
+                        case standard
+                    }
                 }
 
                 public struct Standard: Codable, Hashable, Sendable {
@@ -2237,14 +2757,17 @@ extension Stripe.Tax {
             }
 
             public struct Sk: Codable, Hashable, Sendable {
+                public var igic: Igic?
                 public var standard: Standard?
                 /// Type of registration in an EU country.
                 public var `type`: Type?
 
                 public init(
+                    igic: Igic? = nil,
                     standard: Standard? = nil,
                     `type`: Type? = nil
                 ) {
+                    self.igic = igic
                     self.standard = standard
                     self.`type` = `type`
                 }
@@ -2255,6 +2778,23 @@ extension Stripe.Tax {
                     case ossNonUnion = "oss_non_union"
                     case ossUnion = "oss_union"
                     case standard
+                }
+
+                public struct Igic: Codable, Hashable, Sendable {
+                    /// Place of supply scheme used in an IGIC registration.
+                    public var placeOfSupplyScheme: PlaceOfSupplyScheme?
+
+                    public init(
+                        placeOfSupplyScheme: PlaceOfSupplyScheme? = nil
+                    ) {
+                        self.placeOfSupplyScheme = placeOfSupplyScheme
+                    }
+
+                    /// Place of supply scheme used in an IGIC registration.
+                    public enum PlaceOfSupplyScheme: String, Codable, Hashable, Sendable {
+                        case inboundGoods = "inbound_goods"
+                        case standard
+                    }
                 }
 
                 public struct Standard: Codable, Hashable, Sendable {

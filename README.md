@@ -3,10 +3,10 @@
 [![CI](https://github.com/EmberFilm/swift-stripe/actions/workflows/main.yml/badge.svg)](https://github.com/EmberFilm/swift-stripe/actions/workflows/main.yml)
 [![Swift 6.3](https://img.shields.io/badge/swift-6.3-orange.svg)](https://swift.org)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
-[![Stripe API 2026-07-29.dahlia](https://img.shields.io/badge/Stripe%20API-2026--07--29.dahlia-635bff.svg)](https://docs.stripe.com/api/versioning)
+[![Stripe API 2026-08-26.dahlia](https://img.shields.io/badge/Stripe%20API-2026--08--26.dahlia-635bff.svg)](https://docs.stripe.com/api/versioning)
 
 A Stripe API client for server-side Swift. Every resource, request type and client is
-generated from Stripe's OpenAPI specification — currently API version **2026-07-29.dahlia** —
+generated from Stripe's OpenAPI specification — currently API version **2026-08-26.dahlia** —
 and checked against it in CI, so the types on your side match the bytes on the wire. Built on
 [AsyncHTTPClient](https://github.com/swift-server/async-http-client), `FoundationEssentials`,
 and strict Swift 6 concurrency.
@@ -262,7 +262,7 @@ Scripts/generate-requests.py spec3.sdk.json    # Sources/Stripe/Requests and Sou
 
 CI regenerates and fails if anything on disk differs, measures each model against the spec
 field by field, and decodes a fixture with every field populated for every resource.
-Requests send that version — `2026-07-29.dahlia`, available as `Stripe.generatedAPIVersion` — as
+Requests send that version — `2026-08-26.dahlia`, available as `Stripe.generatedAPIVersion` — as
 `Stripe-Version`, so a field Stripe has moved between versions is where the model expects it
 whatever the account's default; pass `apiVersion:` to override it.
 

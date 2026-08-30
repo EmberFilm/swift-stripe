@@ -41,6 +41,8 @@ extension Stripe.Billing.Invoice {
         public var discountable: Bool?
         /// The discounts which apply to the invoice item.
         @ExpandableCollection<Stripe.Shared.Discount> public var discounts: [String]?
+        /// Array of field names that can't be modified.
+        public var frozenFields: [FrozenFields]?
         /// The ID of the invoice this invoice item belongs to.
         @Expandable<Stripe.Billing.Invoice, String> public var invoice: String?
         /// If the object exists in live mode, the value is `true`.
@@ -77,6 +79,7 @@ extension Stripe.Billing.Invoice {
             description: String? = nil,
             discountable: Bool? = nil,
             discounts: [String]? = nil,
+            frozenFields: [FrozenFields]? = nil,
             invoice: String? = nil,
             livemode: Bool? = nil,
             metadata: [String: String]? = nil,
@@ -101,6 +104,7 @@ extension Stripe.Billing.Invoice {
             self.description = description
             self.discountable = discountable
             self._discounts = ExpandableCollection(ids: discounts)
+            self.frozenFields = frozenFields
             self._invoice = Expandable(id: invoice)
             self.livemode = livemode
             self.metadata = metadata
@@ -114,6 +118,12 @@ extension Stripe.Billing.Invoice {
             self.quantityDecimal = quantityDecimal
             self.taxRates = taxRates
             self._testClock = Expandable(id: testClock)
+        }
+
+        public enum FrozenFields: String, Codable, Hashable, Sendable {
+            case discounts
+            case pricing
+            case quantity
         }
 
         public struct Parent: Codable, Hashable, Sendable {

@@ -206,14 +206,18 @@ extension Stripe.Billing.Customer.Portal {
                 public struct CancellationReason: Codable, Hashable, Sendable {
                     /// Whether the feature is enabled.
                     public var enabled: Bool?
+                    /// The IDs of custom feedback options configured for this cancellation reason.
+                    @ExpandableCollection<Stripe.Billing.FeedbackOption> public var feedbackOptions: [String]?
                     /// Which cancellation reasons will be given as options to the customer.
                     public var options: [Options]?
 
                     public init(
                         enabled: Bool? = nil,
+                        feedbackOptions: [String]? = nil,
                         options: [Options]? = nil
                     ) {
                         self.enabled = enabled
+                        self._feedbackOptions = ExpandableCollection(ids: feedbackOptions)
                         self.options = options
                     }
 

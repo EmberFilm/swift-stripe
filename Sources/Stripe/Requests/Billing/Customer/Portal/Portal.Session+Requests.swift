@@ -140,6 +140,7 @@ extension Stripe.Billing.Customer.Portal.Session.Create {
             }
 
             public enum `Type`: String, Codable, Hashable, Sendable {
+                case customerUpdate = "customer_update"
                 case paymentMethodUpdate = "payment_method_update"
                 case subscriptionCancel = "subscription_cancel"
                 case subscriptionUpdate = "subscription_update"

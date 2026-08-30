@@ -33,6 +33,7 @@ extension StripeClient {
     public var billingCreditBalanceSummary: BillingCreditBalanceSummaryClient { BillingCreditBalanceSummaryClient(api: api) }
     public var billingCreditBalanceTransactions: BillingCreditBalanceTransactionsClient { BillingCreditBalanceTransactionsClient(api: api) }
     public var billingCreditGrants: BillingCreditGrantsClient { BillingCreditGrantsClient(api: api) }
+    public var billingFeedbackOptions: BillingFeedbackOptionsClient { BillingFeedbackOptionsClient(api: api) }
     public var billingMeterEventAdjustments: BillingMeterEventAdjustmentsClient { BillingMeterEventAdjustmentsClient(api: api) }
     public var billingMeterEventSummaries: BillingMeterEventSummariesClient { BillingMeterEventSummariesClient(api: api) }
     public var billingMeterEvents: BillingMeterEventsClient { BillingMeterEventsClient(api: api) }

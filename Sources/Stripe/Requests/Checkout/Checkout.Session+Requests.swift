@@ -732,7 +732,7 @@ extension Stripe.Checkout.Session.Create {
 
             /// Configuration for `type=dropdown` fields.
             public struct Dropdown: Codable, Hashable, Sendable {
-                /// The value that pre-fills the field on the payment page.Must match a `value` in the `options` array.
+                /// The value that pre-fills the field on the payment page.
                 public var defaultValue: String?
                 /// The options available for the customer to select.
                 public var options: [Options]
@@ -2020,11 +2020,15 @@ extension Stripe.Checkout.Session.Create {
                 public struct Restrictions: Codable, Hashable, Sendable {
                     /// The card brands to block.
                     public var brandsBlocked: [BrandsBlocked]?
+                    /// Card funding types to block for this Checkout Session.
+                    public var fundingTypesBlocked: [FundingTypesBlocked]?
 
                     public init(
-                        brandsBlocked: [BrandsBlocked]? = nil
+                        brandsBlocked: [BrandsBlocked]? = nil,
+                        fundingTypesBlocked: [FundingTypesBlocked]? = nil
                     ) {
                         self.brandsBlocked = brandsBlocked
+                        self.fundingTypesBlocked = fundingTypesBlocked
                     }
 
                     public enum BrandsBlocked: String, Codable, Hashable, Sendable {
@@ -2032,6 +2036,12 @@ extension Stripe.Checkout.Session.Create {
                         case discoverGlobalNetwork = "discover_global_network"
                         case mastercard
                         case visa
+                    }
+
+                    public enum FundingTypesBlocked: String, Codable, Hashable, Sendable {
+                        case credit
+                        case debit
+                        case prepaid
                     }
                 }
             }
