@@ -48,8 +48,12 @@ extension Stripe.Customers.Customer.Session.Create {
 
         /// Configuration for each component.
         public struct Components: Codable, Hashable, Sendable {
+            /// Configuration for active entitlements.
+            public var activeEntitlements: ActiveEntitlements?
             /// Configuration for buy button.
             public var buyButton: BuyButton?
+            /// Configuration for customer portal.
+            public var customerPortal: CustomerPortal?
             /// Configuration for the customer sheet.
             public var customerSheet: CustomerSheet?
             /// Configuration for the mobile payment element.
@@ -60,22 +64,50 @@ extension Stripe.Customers.Customer.Session.Create {
             public var pricingTable: PricingTable?
 
             public init(
+                activeEntitlements: ActiveEntitlements? = nil,
                 buyButton: BuyButton? = nil,
+                customerPortal: CustomerPortal? = nil,
                 customerSheet: CustomerSheet? = nil,
                 mobilePaymentElement: MobilePaymentElement? = nil,
                 paymentElement: PaymentElement? = nil,
                 pricingTable: PricingTable? = nil
             ) {
+                self.activeEntitlements = activeEntitlements
                 self.buyButton = buyButton
+                self.customerPortal = customerPortal
                 self.customerSheet = customerSheet
                 self.mobilePaymentElement = mobilePaymentElement
                 self.paymentElement = paymentElement
                 self.pricingTable = pricingTable
             }
 
+            /// Configuration for active entitlements.
+            public struct ActiveEntitlements: Codable, Hashable, Sendable {
+                /// Whether the active entitlements is enabled.
+                public var enabled: Bool
+
+                public init(
+                    enabled: Bool
+                ) {
+                    self.enabled = enabled
+                }
+            }
+
             /// Configuration for buy button.
             public struct BuyButton: Codable, Hashable, Sendable {
                 /// Whether the buy button is enabled.
+                public var enabled: Bool
+
+                public init(
+                    enabled: Bool
+                ) {
+                    self.enabled = enabled
+                }
+            }
+
+            /// Configuration for customer portal.
+            public struct CustomerPortal: Codable, Hashable, Sendable {
+                /// Whether the customer portal is enabled.
                 public var enabled: Bool
 
                 public init(

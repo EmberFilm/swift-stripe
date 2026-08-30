@@ -54,7 +54,9 @@ public struct StripeFormEncoder: Sendable {
             .joined(separator: "&")
     }
 
-    /// Percent-encoding for form bodies: space becomes `+`, and every byte outside the unreserved. set is escaped.
+    /// Percent-encoding for form bodies.
+    ///
+    /// Space becomes `+`, and every byte outside the unreserved set is escaped.
     ///
     /// `CharacterSet.urlQueryAllowed` is too permissive here — it leaves `&`, `=` and `+` intact.
     ///

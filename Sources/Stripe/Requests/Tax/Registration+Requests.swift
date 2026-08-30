@@ -603,15 +603,19 @@ extension Stripe.Tax.Registration.Create {
 
             /// Options for the registration in AT.
             public struct At: Codable, Hashable, Sendable {
+                /// Options for the IGIC registration.
+                public var igic: Igic?
                 /// Options for the standard registration.
                 public var standard: Standard?
                 /// Type of registration to be created in an EU country.
                 public var `type`: Type
 
                 public init(
+                    igic: Igic? = nil,
                     standard: Standard? = nil,
                     `type`: Type
                 ) {
+                    self.igic = igic
                     self.standard = standard
                     self.`type` = `type`
                 }
@@ -621,6 +625,23 @@ extension Stripe.Tax.Registration.Create {
                     case ossNonUnion = "oss_non_union"
                     case ossUnion = "oss_union"
                     case standard
+                }
+
+                /// Options for the IGIC registration.
+                public struct Igic: Codable, Hashable, Sendable {
+                    /// Place of supply scheme used in an IGIC registration.
+                    public var placeOfSupplyScheme: PlaceOfSupplyScheme
+
+                    public init(
+                        placeOfSupplyScheme: PlaceOfSupplyScheme
+                    ) {
+                        self.placeOfSupplyScheme = placeOfSupplyScheme
+                    }
+
+                    public enum PlaceOfSupplyScheme: String, Codable, Hashable, Sendable {
+                        case inboundGoods = "inbound_goods"
+                        case standard
+                    }
                 }
 
                 /// Options for the standard registration.
@@ -821,15 +842,19 @@ extension Stripe.Tax.Registration.Create {
 
             /// Options for the registration in BE.
             public struct Be: Codable, Hashable, Sendable {
+                /// Options for the IGIC registration.
+                public var igic: Igic?
                 /// Options for the standard registration.
                 public var standard: Standard?
                 /// Type of registration to be created in an EU country.
                 public var `type`: Type
 
                 public init(
+                    igic: Igic? = nil,
                     standard: Standard? = nil,
                     `type`: Type
                 ) {
+                    self.igic = igic
                     self.standard = standard
                     self.`type` = `type`
                 }
@@ -839,6 +864,23 @@ extension Stripe.Tax.Registration.Create {
                     case ossNonUnion = "oss_non_union"
                     case ossUnion = "oss_union"
                     case standard
+                }
+
+                /// Options for the IGIC registration.
+                public struct Igic: Codable, Hashable, Sendable {
+                    /// Place of supply scheme used in an IGIC registration.
+                    public var placeOfSupplyScheme: PlaceOfSupplyScheme
+
+                    public init(
+                        placeOfSupplyScheme: PlaceOfSupplyScheme
+                    ) {
+                        self.placeOfSupplyScheme = placeOfSupplyScheme
+                    }
+
+                    public enum PlaceOfSupplyScheme: String, Codable, Hashable, Sendable {
+                        case inboundGoods = "inbound_goods"
+                        case standard
+                    }
                 }
 
                 /// Options for the standard registration.
@@ -895,15 +937,19 @@ extension Stripe.Tax.Registration.Create {
 
             /// Options for the registration in BG.
             public struct Bg: Codable, Hashable, Sendable {
+                /// Options for the IGIC registration.
+                public var igic: Igic?
                 /// Options for the standard registration.
                 public var standard: Standard?
                 /// Type of registration to be created in an EU country.
                 public var `type`: Type
 
                 public init(
+                    igic: Igic? = nil,
                     standard: Standard? = nil,
                     `type`: Type
                 ) {
+                    self.igic = igic
                     self.standard = standard
                     self.`type` = `type`
                 }
@@ -913,6 +959,23 @@ extension Stripe.Tax.Registration.Create {
                     case ossNonUnion = "oss_non_union"
                     case ossUnion = "oss_union"
                     case standard
+                }
+
+                /// Options for the IGIC registration.
+                public struct Igic: Codable, Hashable, Sendable {
+                    /// Place of supply scheme used in an IGIC registration.
+                    public var placeOfSupplyScheme: PlaceOfSupplyScheme
+
+                    public init(
+                        placeOfSupplyScheme: PlaceOfSupplyScheme
+                    ) {
+                        self.placeOfSupplyScheme = placeOfSupplyScheme
+                    }
+
+                    public enum PlaceOfSupplyScheme: String, Codable, Hashable, Sendable {
+                        case inboundGoods = "inbound_goods"
+                        case standard
+                    }
                 }
 
                 /// Options for the standard registration.
@@ -1186,15 +1249,19 @@ extension Stripe.Tax.Registration.Create {
 
             /// Options for the registration in CY.
             public struct Cy: Codable, Hashable, Sendable {
+                /// Options for the IGIC registration.
+                public var igic: Igic?
                 /// Options for the standard registration.
                 public var standard: Standard?
                 /// Type of registration to be created in an EU country.
                 public var `type`: Type
 
                 public init(
+                    igic: Igic? = nil,
                     standard: Standard? = nil,
                     `type`: Type
                 ) {
+                    self.igic = igic
                     self.standard = standard
                     self.`type` = `type`
                 }
@@ -1204,6 +1271,23 @@ extension Stripe.Tax.Registration.Create {
                     case ossNonUnion = "oss_non_union"
                     case ossUnion = "oss_union"
                     case standard
+                }
+
+                /// Options for the IGIC registration.
+                public struct Igic: Codable, Hashable, Sendable {
+                    /// Place of supply scheme used in an IGIC registration.
+                    public var placeOfSupplyScheme: PlaceOfSupplyScheme
+
+                    public init(
+                        placeOfSupplyScheme: PlaceOfSupplyScheme
+                    ) {
+                        self.placeOfSupplyScheme = placeOfSupplyScheme
+                    }
+
+                    public enum PlaceOfSupplyScheme: String, Codable, Hashable, Sendable {
+                        case inboundGoods = "inbound_goods"
+                        case standard
+                    }
                 }
 
                 /// Options for the standard registration.
@@ -1227,15 +1311,19 @@ extension Stripe.Tax.Registration.Create {
 
             /// Options for the registration in CZ.
             public struct Cz: Codable, Hashable, Sendable {
+                /// Options for the IGIC registration.
+                public var igic: Igic?
                 /// Options for the standard registration.
                 public var standard: Standard?
                 /// Type of registration to be created in an EU country.
                 public var `type`: Type
 
                 public init(
+                    igic: Igic? = nil,
                     standard: Standard? = nil,
                     `type`: Type
                 ) {
+                    self.igic = igic
                     self.standard = standard
                     self.`type` = `type`
                 }
@@ -1245,6 +1333,23 @@ extension Stripe.Tax.Registration.Create {
                     case ossNonUnion = "oss_non_union"
                     case ossUnion = "oss_union"
                     case standard
+                }
+
+                /// Options for the IGIC registration.
+                public struct Igic: Codable, Hashable, Sendable {
+                    /// Place of supply scheme used in an IGIC registration.
+                    public var placeOfSupplyScheme: PlaceOfSupplyScheme
+
+                    public init(
+                        placeOfSupplyScheme: PlaceOfSupplyScheme
+                    ) {
+                        self.placeOfSupplyScheme = placeOfSupplyScheme
+                    }
+
+                    public enum PlaceOfSupplyScheme: String, Codable, Hashable, Sendable {
+                        case inboundGoods = "inbound_goods"
+                        case standard
+                    }
                 }
 
                 /// Options for the standard registration.
@@ -1268,15 +1373,19 @@ extension Stripe.Tax.Registration.Create {
 
             /// Options for the registration in DE.
             public struct De: Codable, Hashable, Sendable {
+                /// Options for the IGIC registration.
+                public var igic: Igic?
                 /// Options for the standard registration.
                 public var standard: Standard?
                 /// Type of registration to be created in an EU country.
                 public var `type`: Type
 
                 public init(
+                    igic: Igic? = nil,
                     standard: Standard? = nil,
                     `type`: Type
                 ) {
+                    self.igic = igic
                     self.standard = standard
                     self.`type` = `type`
                 }
@@ -1286,6 +1395,23 @@ extension Stripe.Tax.Registration.Create {
                     case ossNonUnion = "oss_non_union"
                     case ossUnion = "oss_union"
                     case standard
+                }
+
+                /// Options for the IGIC registration.
+                public struct Igic: Codable, Hashable, Sendable {
+                    /// Place of supply scheme used in an IGIC registration.
+                    public var placeOfSupplyScheme: PlaceOfSupplyScheme
+
+                    public init(
+                        placeOfSupplyScheme: PlaceOfSupplyScheme
+                    ) {
+                        self.placeOfSupplyScheme = placeOfSupplyScheme
+                    }
+
+                    public enum PlaceOfSupplyScheme: String, Codable, Hashable, Sendable {
+                        case inboundGoods = "inbound_goods"
+                        case standard
+                    }
                 }
 
                 /// Options for the standard registration.
@@ -1309,15 +1435,19 @@ extension Stripe.Tax.Registration.Create {
 
             /// Options for the registration in DK.
             public struct Dk: Codable, Hashable, Sendable {
+                /// Options for the IGIC registration.
+                public var igic: Igic?
                 /// Options for the standard registration.
                 public var standard: Standard?
                 /// Type of registration to be created in an EU country.
                 public var `type`: Type
 
                 public init(
+                    igic: Igic? = nil,
                     standard: Standard? = nil,
                     `type`: Type
                 ) {
+                    self.igic = igic
                     self.standard = standard
                     self.`type` = `type`
                 }
@@ -1327,6 +1457,23 @@ extension Stripe.Tax.Registration.Create {
                     case ossNonUnion = "oss_non_union"
                     case ossUnion = "oss_union"
                     case standard
+                }
+
+                /// Options for the IGIC registration.
+                public struct Igic: Codable, Hashable, Sendable {
+                    /// Place of supply scheme used in an IGIC registration.
+                    public var placeOfSupplyScheme: PlaceOfSupplyScheme
+
+                    public init(
+                        placeOfSupplyScheme: PlaceOfSupplyScheme
+                    ) {
+                        self.placeOfSupplyScheme = placeOfSupplyScheme
+                    }
+
+                    public enum PlaceOfSupplyScheme: String, Codable, Hashable, Sendable {
+                        case inboundGoods = "inbound_goods"
+                        case standard
+                    }
                 }
 
                 /// Options for the standard registration.
@@ -1362,15 +1509,19 @@ extension Stripe.Tax.Registration.Create {
 
             /// Options for the registration in EE.
             public struct Ee: Codable, Hashable, Sendable {
+                /// Options for the IGIC registration.
+                public var igic: Igic?
                 /// Options for the standard registration.
                 public var standard: Standard?
                 /// Type of registration to be created in an EU country.
                 public var `type`: Type
 
                 public init(
+                    igic: Igic? = nil,
                     standard: Standard? = nil,
                     `type`: Type
                 ) {
+                    self.igic = igic
                     self.standard = standard
                     self.`type` = `type`
                 }
@@ -1380,6 +1531,23 @@ extension Stripe.Tax.Registration.Create {
                     case ossNonUnion = "oss_non_union"
                     case ossUnion = "oss_union"
                     case standard
+                }
+
+                /// Options for the IGIC registration.
+                public struct Igic: Codable, Hashable, Sendable {
+                    /// Place of supply scheme used in an IGIC registration.
+                    public var placeOfSupplyScheme: PlaceOfSupplyScheme
+
+                    public init(
+                        placeOfSupplyScheme: PlaceOfSupplyScheme
+                    ) {
+                        self.placeOfSupplyScheme = placeOfSupplyScheme
+                    }
+
+                    public enum PlaceOfSupplyScheme: String, Codable, Hashable, Sendable {
+                        case inboundGoods = "inbound_goods"
+                        case standard
+                    }
                 }
 
                 /// Options for the standard registration.
@@ -1415,15 +1583,19 @@ extension Stripe.Tax.Registration.Create {
 
             /// Options for the registration in ES.
             public struct Es: Codable, Hashable, Sendable {
+                /// Options for the IGIC registration.
+                public var igic: Igic?
                 /// Options for the standard registration.
                 public var standard: Standard?
                 /// Type of registration to be created in an EU country.
                 public var `type`: Type
 
                 public init(
+                    igic: Igic? = nil,
                     standard: Standard? = nil,
                     `type`: Type
                 ) {
+                    self.igic = igic
                     self.standard = standard
                     self.`type` = `type`
                 }
@@ -1433,6 +1605,23 @@ extension Stripe.Tax.Registration.Create {
                     case ossNonUnion = "oss_non_union"
                     case ossUnion = "oss_union"
                     case standard
+                }
+
+                /// Options for the IGIC registration.
+                public struct Igic: Codable, Hashable, Sendable {
+                    /// Place of supply scheme used in an IGIC registration.
+                    public var placeOfSupplyScheme: PlaceOfSupplyScheme
+
+                    public init(
+                        placeOfSupplyScheme: PlaceOfSupplyScheme
+                    ) {
+                        self.placeOfSupplyScheme = placeOfSupplyScheme
+                    }
+
+                    public enum PlaceOfSupplyScheme: String, Codable, Hashable, Sendable {
+                        case inboundGoods = "inbound_goods"
+                        case standard
+                    }
                 }
 
                 /// Options for the standard registration.
@@ -1489,15 +1678,19 @@ extension Stripe.Tax.Registration.Create {
 
             /// Options for the registration in FI.
             public struct Fi: Codable, Hashable, Sendable {
+                /// Options for the IGIC registration.
+                public var igic: Igic?
                 /// Options for the standard registration.
                 public var standard: Standard?
                 /// Type of registration to be created in an EU country.
                 public var `type`: Type
 
                 public init(
+                    igic: Igic? = nil,
                     standard: Standard? = nil,
                     `type`: Type
                 ) {
+                    self.igic = igic
                     self.standard = standard
                     self.`type` = `type`
                 }
@@ -1507,6 +1700,23 @@ extension Stripe.Tax.Registration.Create {
                     case ossNonUnion = "oss_non_union"
                     case ossUnion = "oss_union"
                     case standard
+                }
+
+                /// Options for the IGIC registration.
+                public struct Igic: Codable, Hashable, Sendable {
+                    /// Place of supply scheme used in an IGIC registration.
+                    public var placeOfSupplyScheme: PlaceOfSupplyScheme
+
+                    public init(
+                        placeOfSupplyScheme: PlaceOfSupplyScheme
+                    ) {
+                        self.placeOfSupplyScheme = placeOfSupplyScheme
+                    }
+
+                    public enum PlaceOfSupplyScheme: String, Codable, Hashable, Sendable {
+                        case inboundGoods = "inbound_goods"
+                        case standard
+                    }
                 }
 
                 /// Options for the standard registration.
@@ -1530,15 +1740,19 @@ extension Stripe.Tax.Registration.Create {
 
             /// Options for the registration in FR.
             public struct Fr: Codable, Hashable, Sendable {
+                /// Options for the IGIC registration.
+                public var igic: Igic?
                 /// Options for the standard registration.
                 public var standard: Standard?
                 /// Type of registration to be created in an EU country.
                 public var `type`: Type
 
                 public init(
+                    igic: Igic? = nil,
                     standard: Standard? = nil,
                     `type`: Type
                 ) {
+                    self.igic = igic
                     self.standard = standard
                     self.`type` = `type`
                 }
@@ -1548,6 +1762,23 @@ extension Stripe.Tax.Registration.Create {
                     case ossNonUnion = "oss_non_union"
                     case ossUnion = "oss_union"
                     case standard
+                }
+
+                /// Options for the IGIC registration.
+                public struct Igic: Codable, Hashable, Sendable {
+                    /// Place of supply scheme used in an IGIC registration.
+                    public var placeOfSupplyScheme: PlaceOfSupplyScheme
+
+                    public init(
+                        placeOfSupplyScheme: PlaceOfSupplyScheme
+                    ) {
+                        self.placeOfSupplyScheme = placeOfSupplyScheme
+                    }
+
+                    public enum PlaceOfSupplyScheme: String, Codable, Hashable, Sendable {
+                        case inboundGoods = "inbound_goods"
+                        case standard
+                    }
                 }
 
                 /// Options for the standard registration.
@@ -1649,15 +1880,19 @@ extension Stripe.Tax.Registration.Create {
 
             /// Options for the registration in GR.
             public struct Gr: Codable, Hashable, Sendable {
+                /// Options for the IGIC registration.
+                public var igic: Igic?
                 /// Options for the standard registration.
                 public var standard: Standard?
                 /// Type of registration to be created in an EU country.
                 public var `type`: Type
 
                 public init(
+                    igic: Igic? = nil,
                     standard: Standard? = nil,
                     `type`: Type
                 ) {
+                    self.igic = igic
                     self.standard = standard
                     self.`type` = `type`
                 }
@@ -1667,6 +1902,23 @@ extension Stripe.Tax.Registration.Create {
                     case ossNonUnion = "oss_non_union"
                     case ossUnion = "oss_union"
                     case standard
+                }
+
+                /// Options for the IGIC registration.
+                public struct Igic: Codable, Hashable, Sendable {
+                    /// Place of supply scheme used in an IGIC registration.
+                    public var placeOfSupplyScheme: PlaceOfSupplyScheme
+
+                    public init(
+                        placeOfSupplyScheme: PlaceOfSupplyScheme
+                    ) {
+                        self.placeOfSupplyScheme = placeOfSupplyScheme
+                    }
+
+                    public enum PlaceOfSupplyScheme: String, Codable, Hashable, Sendable {
+                        case inboundGoods = "inbound_goods"
+                        case standard
+                    }
                 }
 
                 /// Options for the standard registration.
@@ -1690,15 +1942,19 @@ extension Stripe.Tax.Registration.Create {
 
             /// Options for the registration in HR.
             public struct Hr: Codable, Hashable, Sendable {
+                /// Options for the IGIC registration.
+                public var igic: Igic?
                 /// Options for the standard registration.
                 public var standard: Standard?
                 /// Type of registration to be created in an EU country.
                 public var `type`: Type
 
                 public init(
+                    igic: Igic? = nil,
                     standard: Standard? = nil,
                     `type`: Type
                 ) {
+                    self.igic = igic
                     self.standard = standard
                     self.`type` = `type`
                 }
@@ -1708,6 +1964,23 @@ extension Stripe.Tax.Registration.Create {
                     case ossNonUnion = "oss_non_union"
                     case ossUnion = "oss_union"
                     case standard
+                }
+
+                /// Options for the IGIC registration.
+                public struct Igic: Codable, Hashable, Sendable {
+                    /// Place of supply scheme used in an IGIC registration.
+                    public var placeOfSupplyScheme: PlaceOfSupplyScheme
+
+                    public init(
+                        placeOfSupplyScheme: PlaceOfSupplyScheme
+                    ) {
+                        self.placeOfSupplyScheme = placeOfSupplyScheme
+                    }
+
+                    public enum PlaceOfSupplyScheme: String, Codable, Hashable, Sendable {
+                        case inboundGoods = "inbound_goods"
+                        case standard
+                    }
                 }
 
                 /// Options for the standard registration.
@@ -1731,15 +2004,19 @@ extension Stripe.Tax.Registration.Create {
 
             /// Options for the registration in HU.
             public struct Hu: Codable, Hashable, Sendable {
+                /// Options for the IGIC registration.
+                public var igic: Igic?
                 /// Options for the standard registration.
                 public var standard: Standard?
                 /// Type of registration to be created in an EU country.
                 public var `type`: Type
 
                 public init(
+                    igic: Igic? = nil,
                     standard: Standard? = nil,
                     `type`: Type
                 ) {
+                    self.igic = igic
                     self.standard = standard
                     self.`type` = `type`
                 }
@@ -1749,6 +2026,23 @@ extension Stripe.Tax.Registration.Create {
                     case ossNonUnion = "oss_non_union"
                     case ossUnion = "oss_union"
                     case standard
+                }
+
+                /// Options for the IGIC registration.
+                public struct Igic: Codable, Hashable, Sendable {
+                    /// Place of supply scheme used in an IGIC registration.
+                    public var placeOfSupplyScheme: PlaceOfSupplyScheme
+
+                    public init(
+                        placeOfSupplyScheme: PlaceOfSupplyScheme
+                    ) {
+                        self.placeOfSupplyScheme = placeOfSupplyScheme
+                    }
+
+                    public enum PlaceOfSupplyScheme: String, Codable, Hashable, Sendable {
+                        case inboundGoods = "inbound_goods"
+                        case standard
+                    }
                 }
 
                 /// Options for the standard registration.
@@ -1784,15 +2078,19 @@ extension Stripe.Tax.Registration.Create {
 
             /// Options for the registration in IE.
             public struct Ie: Codable, Hashable, Sendable {
+                /// Options for the IGIC registration.
+                public var igic: Igic?
                 /// Options for the standard registration.
                 public var standard: Standard?
                 /// Type of registration to be created in an EU country.
                 public var `type`: Type
 
                 public init(
+                    igic: Igic? = nil,
                     standard: Standard? = nil,
                     `type`: Type
                 ) {
+                    self.igic = igic
                     self.standard = standard
                     self.`type` = `type`
                 }
@@ -1802,6 +2100,23 @@ extension Stripe.Tax.Registration.Create {
                     case ossNonUnion = "oss_non_union"
                     case ossUnion = "oss_union"
                     case standard
+                }
+
+                /// Options for the IGIC registration.
+                public struct Igic: Codable, Hashable, Sendable {
+                    /// Place of supply scheme used in an IGIC registration.
+                    public var placeOfSupplyScheme: PlaceOfSupplyScheme
+
+                    public init(
+                        placeOfSupplyScheme: PlaceOfSupplyScheme
+                    ) {
+                        self.placeOfSupplyScheme = placeOfSupplyScheme
+                    }
+
+                    public enum PlaceOfSupplyScheme: String, Codable, Hashable, Sendable {
+                        case inboundGoods = "inbound_goods"
+                        case standard
+                    }
                 }
 
                 /// Options for the standard registration.
@@ -1870,15 +2185,19 @@ extension Stripe.Tax.Registration.Create {
 
             /// Options for the registration in IT.
             public struct It: Codable, Hashable, Sendable {
+                /// Options for the IGIC registration.
+                public var igic: Igic?
                 /// Options for the standard registration.
                 public var standard: Standard?
                 /// Type of registration to be created in an EU country.
                 public var `type`: Type
 
                 public init(
+                    igic: Igic? = nil,
                     standard: Standard? = nil,
                     `type`: Type
                 ) {
+                    self.igic = igic
                     self.standard = standard
                     self.`type` = `type`
                 }
@@ -1888,6 +2207,23 @@ extension Stripe.Tax.Registration.Create {
                     case ossNonUnion = "oss_non_union"
                     case ossUnion = "oss_union"
                     case standard
+                }
+
+                /// Options for the IGIC registration.
+                public struct Igic: Codable, Hashable, Sendable {
+                    /// Place of supply scheme used in an IGIC registration.
+                    public var placeOfSupplyScheme: PlaceOfSupplyScheme
+
+                    public init(
+                        placeOfSupplyScheme: PlaceOfSupplyScheme
+                    ) {
+                        self.placeOfSupplyScheme = placeOfSupplyScheme
+                    }
+
+                    public enum PlaceOfSupplyScheme: String, Codable, Hashable, Sendable {
+                        case inboundGoods = "inbound_goods"
+                        case standard
+                    }
                 }
 
                 /// Options for the standard registration.
@@ -2028,15 +2364,19 @@ extension Stripe.Tax.Registration.Create {
 
             /// Options for the registration in LT.
             public struct Lt: Codable, Hashable, Sendable {
+                /// Options for the IGIC registration.
+                public var igic: Igic?
                 /// Options for the standard registration.
                 public var standard: Standard?
                 /// Type of registration to be created in an EU country.
                 public var `type`: Type
 
                 public init(
+                    igic: Igic? = nil,
                     standard: Standard? = nil,
                     `type`: Type
                 ) {
+                    self.igic = igic
                     self.standard = standard
                     self.`type` = `type`
                 }
@@ -2046,6 +2386,23 @@ extension Stripe.Tax.Registration.Create {
                     case ossNonUnion = "oss_non_union"
                     case ossUnion = "oss_union"
                     case standard
+                }
+
+                /// Options for the IGIC registration.
+                public struct Igic: Codable, Hashable, Sendable {
+                    /// Place of supply scheme used in an IGIC registration.
+                    public var placeOfSupplyScheme: PlaceOfSupplyScheme
+
+                    public init(
+                        placeOfSupplyScheme: PlaceOfSupplyScheme
+                    ) {
+                        self.placeOfSupplyScheme = placeOfSupplyScheme
+                    }
+
+                    public enum PlaceOfSupplyScheme: String, Codable, Hashable, Sendable {
+                        case inboundGoods = "inbound_goods"
+                        case standard
+                    }
                 }
 
                 /// Options for the standard registration.
@@ -2069,15 +2426,19 @@ extension Stripe.Tax.Registration.Create {
 
             /// Options for the registration in LU.
             public struct Lu: Codable, Hashable, Sendable {
+                /// Options for the IGIC registration.
+                public var igic: Igic?
                 /// Options for the standard registration.
                 public var standard: Standard?
                 /// Type of registration to be created in an EU country.
                 public var `type`: Type
 
                 public init(
+                    igic: Igic? = nil,
                     standard: Standard? = nil,
                     `type`: Type
                 ) {
+                    self.igic = igic
                     self.standard = standard
                     self.`type` = `type`
                 }
@@ -2087,6 +2448,23 @@ extension Stripe.Tax.Registration.Create {
                     case ossNonUnion = "oss_non_union"
                     case ossUnion = "oss_union"
                     case standard
+                }
+
+                /// Options for the IGIC registration.
+                public struct Igic: Codable, Hashable, Sendable {
+                    /// Place of supply scheme used in an IGIC registration.
+                    public var placeOfSupplyScheme: PlaceOfSupplyScheme
+
+                    public init(
+                        placeOfSupplyScheme: PlaceOfSupplyScheme
+                    ) {
+                        self.placeOfSupplyScheme = placeOfSupplyScheme
+                    }
+
+                    public enum PlaceOfSupplyScheme: String, Codable, Hashable, Sendable {
+                        case inboundGoods = "inbound_goods"
+                        case standard
+                    }
                 }
 
                 /// Options for the standard registration.
@@ -2110,15 +2488,19 @@ extension Stripe.Tax.Registration.Create {
 
             /// Options for the registration in LV.
             public struct Lv: Codable, Hashable, Sendable {
+                /// Options for the IGIC registration.
+                public var igic: Igic?
                 /// Options for the standard registration.
                 public var standard: Standard?
                 /// Type of registration to be created in an EU country.
                 public var `type`: Type
 
                 public init(
+                    igic: Igic? = nil,
                     standard: Standard? = nil,
                     `type`: Type
                 ) {
+                    self.igic = igic
                     self.standard = standard
                     self.`type` = `type`
                 }
@@ -2128,6 +2510,23 @@ extension Stripe.Tax.Registration.Create {
                     case ossNonUnion = "oss_non_union"
                     case ossUnion = "oss_union"
                     case standard
+                }
+
+                /// Options for the IGIC registration.
+                public struct Igic: Codable, Hashable, Sendable {
+                    /// Place of supply scheme used in an IGIC registration.
+                    public var placeOfSupplyScheme: PlaceOfSupplyScheme
+
+                    public init(
+                        placeOfSupplyScheme: PlaceOfSupplyScheme
+                    ) {
+                        self.placeOfSupplyScheme = placeOfSupplyScheme
+                    }
+
+                    public enum PlaceOfSupplyScheme: String, Codable, Hashable, Sendable {
+                        case inboundGoods = "inbound_goods"
+                        case standard
+                    }
                 }
 
                 /// Options for the standard registration.
@@ -2274,15 +2673,19 @@ extension Stripe.Tax.Registration.Create {
 
             /// Options for the registration in MT.
             public struct Mt: Codable, Hashable, Sendable {
+                /// Options for the IGIC registration.
+                public var igic: Igic?
                 /// Options for the standard registration.
                 public var standard: Standard?
                 /// Type of registration to be created in an EU country.
                 public var `type`: Type
 
                 public init(
+                    igic: Igic? = nil,
                     standard: Standard? = nil,
                     `type`: Type
                 ) {
+                    self.igic = igic
                     self.standard = standard
                     self.`type` = `type`
                 }
@@ -2292,6 +2695,23 @@ extension Stripe.Tax.Registration.Create {
                     case ossNonUnion = "oss_non_union"
                     case ossUnion = "oss_union"
                     case standard
+                }
+
+                /// Options for the IGIC registration.
+                public struct Igic: Codable, Hashable, Sendable {
+                    /// Place of supply scheme used in an IGIC registration.
+                    public var placeOfSupplyScheme: PlaceOfSupplyScheme
+
+                    public init(
+                        placeOfSupplyScheme: PlaceOfSupplyScheme
+                    ) {
+                        self.placeOfSupplyScheme = placeOfSupplyScheme
+                    }
+
+                    public enum PlaceOfSupplyScheme: String, Codable, Hashable, Sendable {
+                        case inboundGoods = "inbound_goods"
+                        case standard
+                    }
                 }
 
                 /// Options for the standard registration.
@@ -2351,15 +2771,19 @@ extension Stripe.Tax.Registration.Create {
 
             /// Options for the registration in NL.
             public struct Nl: Codable, Hashable, Sendable {
+                /// Options for the IGIC registration.
+                public var igic: Igic?
                 /// Options for the standard registration.
                 public var standard: Standard?
                 /// Type of registration to be created in an EU country.
                 public var `type`: Type
 
                 public init(
+                    igic: Igic? = nil,
                     standard: Standard? = nil,
                     `type`: Type
                 ) {
+                    self.igic = igic
                     self.standard = standard
                     self.`type` = `type`
                 }
@@ -2369,6 +2793,23 @@ extension Stripe.Tax.Registration.Create {
                     case ossNonUnion = "oss_non_union"
                     case ossUnion = "oss_union"
                     case standard
+                }
+
+                /// Options for the IGIC registration.
+                public struct Igic: Codable, Hashable, Sendable {
+                    /// Place of supply scheme used in an IGIC registration.
+                    public var placeOfSupplyScheme: PlaceOfSupplyScheme
+
+                    public init(
+                        placeOfSupplyScheme: PlaceOfSupplyScheme
+                    ) {
+                        self.placeOfSupplyScheme = placeOfSupplyScheme
+                    }
+
+                    public enum PlaceOfSupplyScheme: String, Codable, Hashable, Sendable {
+                        case inboundGoods = "inbound_goods"
+                        case standard
+                    }
                 }
 
                 /// Options for the standard registration.
@@ -2527,15 +2968,19 @@ extension Stripe.Tax.Registration.Create {
 
             /// Options for the registration in PL.
             public struct Pl: Codable, Hashable, Sendable {
+                /// Options for the IGIC registration.
+                public var igic: Igic?
                 /// Options for the standard registration.
                 public var standard: Standard?
                 /// Type of registration to be created in an EU country.
                 public var `type`: Type
 
                 public init(
+                    igic: Igic? = nil,
                     standard: Standard? = nil,
                     `type`: Type
                 ) {
+                    self.igic = igic
                     self.standard = standard
                     self.`type` = `type`
                 }
@@ -2545,6 +2990,23 @@ extension Stripe.Tax.Registration.Create {
                     case ossNonUnion = "oss_non_union"
                     case ossUnion = "oss_union"
                     case standard
+                }
+
+                /// Options for the IGIC registration.
+                public struct Igic: Codable, Hashable, Sendable {
+                    /// Place of supply scheme used in an IGIC registration.
+                    public var placeOfSupplyScheme: PlaceOfSupplyScheme
+
+                    public init(
+                        placeOfSupplyScheme: PlaceOfSupplyScheme
+                    ) {
+                        self.placeOfSupplyScheme = placeOfSupplyScheme
+                    }
+
+                    public enum PlaceOfSupplyScheme: String, Codable, Hashable, Sendable {
+                        case inboundGoods = "inbound_goods"
+                        case standard
+                    }
                 }
 
                 /// Options for the standard registration.
@@ -2568,15 +3030,19 @@ extension Stripe.Tax.Registration.Create {
 
             /// Options for the registration in PT.
             public struct Pt: Codable, Hashable, Sendable {
+                /// Options for the IGIC registration.
+                public var igic: Igic?
                 /// Options for the standard registration.
                 public var standard: Standard?
                 /// Type of registration to be created in an EU country.
                 public var `type`: Type
 
                 public init(
+                    igic: Igic? = nil,
                     standard: Standard? = nil,
                     `type`: Type
                 ) {
+                    self.igic = igic
                     self.standard = standard
                     self.`type` = `type`
                 }
@@ -2586,6 +3052,23 @@ extension Stripe.Tax.Registration.Create {
                     case ossNonUnion = "oss_non_union"
                     case ossUnion = "oss_union"
                     case standard
+                }
+
+                /// Options for the IGIC registration.
+                public struct Igic: Codable, Hashable, Sendable {
+                    /// Place of supply scheme used in an IGIC registration.
+                    public var placeOfSupplyScheme: PlaceOfSupplyScheme
+
+                    public init(
+                        placeOfSupplyScheme: PlaceOfSupplyScheme
+                    ) {
+                        self.placeOfSupplyScheme = placeOfSupplyScheme
+                    }
+
+                    public enum PlaceOfSupplyScheme: String, Codable, Hashable, Sendable {
+                        case inboundGoods = "inbound_goods"
+                        case standard
+                    }
                 }
 
                 /// Options for the standard registration.
@@ -2609,15 +3092,19 @@ extension Stripe.Tax.Registration.Create {
 
             /// Options for the registration in RO.
             public struct Ro: Codable, Hashable, Sendable {
+                /// Options for the IGIC registration.
+                public var igic: Igic?
                 /// Options for the standard registration.
                 public var standard: Standard?
                 /// Type of registration to be created in an EU country.
                 public var `type`: Type
 
                 public init(
+                    igic: Igic? = nil,
                     standard: Standard? = nil,
                     `type`: Type
                 ) {
+                    self.igic = igic
                     self.standard = standard
                     self.`type` = `type`
                 }
@@ -2627,6 +3114,23 @@ extension Stripe.Tax.Registration.Create {
                     case ossNonUnion = "oss_non_union"
                     case ossUnion = "oss_union"
                     case standard
+                }
+
+                /// Options for the IGIC registration.
+                public struct Igic: Codable, Hashable, Sendable {
+                    /// Place of supply scheme used in an IGIC registration.
+                    public var placeOfSupplyScheme: PlaceOfSupplyScheme
+
+                    public init(
+                        placeOfSupplyScheme: PlaceOfSupplyScheme
+                    ) {
+                        self.placeOfSupplyScheme = placeOfSupplyScheme
+                    }
+
+                    public enum PlaceOfSupplyScheme: String, Codable, Hashable, Sendable {
+                        case inboundGoods = "inbound_goods"
+                        case standard
+                    }
                 }
 
                 /// Options for the standard registration.
@@ -2707,15 +3211,19 @@ extension Stripe.Tax.Registration.Create {
 
             /// Options for the registration in SE.
             public struct Se: Codable, Hashable, Sendable {
+                /// Options for the IGIC registration.
+                public var igic: Igic?
                 /// Options for the standard registration.
                 public var standard: Standard?
                 /// Type of registration to be created in an EU country.
                 public var `type`: Type
 
                 public init(
+                    igic: Igic? = nil,
                     standard: Standard? = nil,
                     `type`: Type
                 ) {
+                    self.igic = igic
                     self.standard = standard
                     self.`type` = `type`
                 }
@@ -2725,6 +3233,23 @@ extension Stripe.Tax.Registration.Create {
                     case ossNonUnion = "oss_non_union"
                     case ossUnion = "oss_union"
                     case standard
+                }
+
+                /// Options for the IGIC registration.
+                public struct Igic: Codable, Hashable, Sendable {
+                    /// Place of supply scheme used in an IGIC registration.
+                    public var placeOfSupplyScheme: PlaceOfSupplyScheme
+
+                    public init(
+                        placeOfSupplyScheme: PlaceOfSupplyScheme
+                    ) {
+                        self.placeOfSupplyScheme = placeOfSupplyScheme
+                    }
+
+                    public enum PlaceOfSupplyScheme: String, Codable, Hashable, Sendable {
+                        case inboundGoods = "inbound_goods"
+                        case standard
+                    }
                 }
 
                 /// Options for the standard registration.
@@ -2781,15 +3306,19 @@ extension Stripe.Tax.Registration.Create {
 
             /// Options for the registration in SI.
             public struct Si: Codable, Hashable, Sendable {
+                /// Options for the IGIC registration.
+                public var igic: Igic?
                 /// Options for the standard registration.
                 public var standard: Standard?
                 /// Type of registration to be created in an EU country.
                 public var `type`: Type
 
                 public init(
+                    igic: Igic? = nil,
                     standard: Standard? = nil,
                     `type`: Type
                 ) {
+                    self.igic = igic
                     self.standard = standard
                     self.`type` = `type`
                 }
@@ -2799,6 +3328,23 @@ extension Stripe.Tax.Registration.Create {
                     case ossNonUnion = "oss_non_union"
                     case ossUnion = "oss_union"
                     case standard
+                }
+
+                /// Options for the IGIC registration.
+                public struct Igic: Codable, Hashable, Sendable {
+                    /// Place of supply scheme used in an IGIC registration.
+                    public var placeOfSupplyScheme: PlaceOfSupplyScheme
+
+                    public init(
+                        placeOfSupplyScheme: PlaceOfSupplyScheme
+                    ) {
+                        self.placeOfSupplyScheme = placeOfSupplyScheme
+                    }
+
+                    public enum PlaceOfSupplyScheme: String, Codable, Hashable, Sendable {
+                        case inboundGoods = "inbound_goods"
+                        case standard
+                    }
                 }
 
                 /// Options for the standard registration.
@@ -2822,15 +3368,19 @@ extension Stripe.Tax.Registration.Create {
 
             /// Options for the registration in SK.
             public struct Sk: Codable, Hashable, Sendable {
+                /// Options for the IGIC registration.
+                public var igic: Igic?
                 /// Options for the standard registration.
                 public var standard: Standard?
                 /// Type of registration to be created in an EU country.
                 public var `type`: Type
 
                 public init(
+                    igic: Igic? = nil,
                     standard: Standard? = nil,
                     `type`: Type
                 ) {
+                    self.igic = igic
                     self.standard = standard
                     self.`type` = `type`
                 }
@@ -2840,6 +3390,23 @@ extension Stripe.Tax.Registration.Create {
                     case ossNonUnion = "oss_non_union"
                     case ossUnion = "oss_union"
                     case standard
+                }
+
+                /// Options for the IGIC registration.
+                public struct Igic: Codable, Hashable, Sendable {
+                    /// Place of supply scheme used in an IGIC registration.
+                    public var placeOfSupplyScheme: PlaceOfSupplyScheme
+
+                    public init(
+                        placeOfSupplyScheme: PlaceOfSupplyScheme
+                    ) {
+                        self.placeOfSupplyScheme = placeOfSupplyScheme
+                    }
+
+                    public enum PlaceOfSupplyScheme: String, Codable, Hashable, Sendable {
+                        case inboundGoods = "inbound_goods"
+                        case standard
+                    }
                 }
 
                 /// Options for the standard registration.

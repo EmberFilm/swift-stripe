@@ -22,8 +22,9 @@ import FoundationEssentials
 import Foundation
 #endif
 
-/// Executes Stripe API requests: builds them, signs them, retries them, and.
-/// decodes the result.
+/// Executes Stripe API requests.
+///
+/// Builds them, signs them, retries them, and decodes the result.
 ///
 /// Resource clients are thin wrappers over this type.
 public struct StripeAPI: Sendable {

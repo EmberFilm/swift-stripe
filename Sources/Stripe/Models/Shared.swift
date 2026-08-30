@@ -360,6 +360,7 @@ extension Stripe.Shared {
             case apiKeyExpired = "api_key_expired"
             case applicationFeesNotAllowed = "application_fees_not_allowed"
             case approvalRequired = "approval_required"
+            case authenticationFailure = "authentication_failure"
             case authenticationRequired = "authentication_required"
             case balanceInsufficient = "balance_insufficient"
             case balanceInvalidParameter = "balance_invalid_parameter"
@@ -372,6 +373,7 @@ extension Stripe.Shared {
             case bankAccountVerificationFailed = "bank_account_verification_failed"
             case billingInvalidMandate = "billing_invalid_mandate"
             case bitcoinUpgradeRequired = "bitcoin_upgrade_required"
+            case capabilityNotActive = "capability_not_active"
             case captureChargeAuthorizationExpired = "capture_charge_authorization_expired"
             case captureUnauthorizedPayment = "capture_unauthorized_payment"
             case cardDeclineRateLimitExceeded = "card_decline_rate_limit_exceeded"
@@ -396,6 +398,7 @@ extension Stripe.Shared {
             case debitNotAuthorized = "debit_not_authorized"
             case emailInvalid = "email_invalid"
             case expiredCard = "expired_card"
+            case expiredPaymentMethod = "expired_payment_method"
             case failedTaxCalculation = "failed_tax_calculation"
             case financialAccountBalanceDoesNotSupportCurrency = "financial_account_balance_does_not_support_currency"
             case financialAccountCapabilityNotEnabled = "financial_account_capability_not_enabled"
@@ -414,6 +417,7 @@ extension Stripe.Shared {
             case incorrectAddress = "incorrect_address"
             case incorrectCvc = "incorrect_cvc"
             case incorrectNumber = "incorrect_number"
+            case incorrectPostalCode = "incorrect_postal_code"
             case incorrectZip = "incorrect_zip"
             case indiaRecurringPaymentMandateCanceled = "india_recurring_payment_mandate_canceled"
             case instantPayoutsConfigDisabled = "instant_payouts_config_disabled"
@@ -423,6 +427,7 @@ extension Stripe.Shared {
             case insufficientFunds = "insufficient_funds"
             case intentInvalidState = "intent_invalid_state"
             case intentVerificationMethodMissing = "intent_verification_method_missing"
+            case invalidCanceledSubscriptionFields = "invalid_canceled_subscription_fields"
             case invalidCardType = "invalid_card_type"
             case invalidCharacters = "invalid_characters"
             case invalidChargeAmount = "invalid_charge_amount"
@@ -482,6 +487,7 @@ extension Stripe.Shared {
             case paymentMethodNotAvailable = "payment_method_not_available"
             case paymentMethodProviderDecline = "payment_method_provider_decline"
             case paymentMethodProviderTimeout = "payment_method_provider_timeout"
+            case paymentMethodRestricted = "payment_method_restricted"
             case paymentMethodUnactivated = "payment_method_unactivated"
             case paymentMethodUnexpectedState = "payment_method_unexpected_state"
             case paymentMethodUnsupportedType = "payment_method_unsupported_type"
@@ -1722,7 +1728,7 @@ extension Stripe.Shared {
     }
 }
 
-// payment_flows_private_payment_methods_financial_connections_common_linked_account_options_filters
+// invoice_payment_method_options_us_bank_account_linked_account_options_filters
 extension Stripe.Shared {
     public struct Filters: Codable, Hashable, Sendable {
         /// The account subcategories to use to filter for possible accounts to link.
@@ -1919,7 +1925,7 @@ extension Stripe.Shared {
     }
 }
 
-// linked_account_options_common
+// invoice_payment_method_options_us_bank_account_linked_account_options
 extension Stripe.Shared {
     public struct FinancialConnections: Codable, Hashable, Sendable {
         public var filters: Stripe.Shared.Filters?
@@ -1927,19 +1933,15 @@ extension Stripe.Shared {
         public var permissions: [Permissions]?
         /// Data features requested to be retrieved upon account creation.
         public var prefetch: [Prefetch]?
-        /// For webview integrations only.
-        public var returnUrl: String?
 
         public init(
             filters: Stripe.Shared.Filters? = nil,
             permissions: [Permissions]? = nil,
-            prefetch: [Prefetch]? = nil,
-            returnUrl: String? = nil
+            prefetch: [Prefetch]? = nil
         ) {
             self.filters = filters
             self.permissions = permissions
             self.prefetch = prefetch
-            self.returnUrl = returnUrl
         }
 
         public enum Permissions: String, Codable, Hashable, Sendable {
@@ -2681,59 +2683,6 @@ extension Stripe.Shared {
     }
 }
 
-// invoice_payment_method_options_us_bank_account_linked_account_options
-extension Stripe.Shared {
-    public struct InvoicePaymentMethodOptionsUsBankAccountLinkedAccountOptions: Codable, Hashable, Sendable {
-        public var filters: Stripe.Shared.InvoicePaymentMethodOptionsUsBankAccountLinkedAccountOptionsFilters?
-        /// The list of permissions to request.
-        public var permissions: [Permissions]?
-        /// Data features requested to be retrieved upon account creation.
-        public var prefetch: [Prefetch]?
-
-        public init(
-            filters: Stripe.Shared.InvoicePaymentMethodOptionsUsBankAccountLinkedAccountOptionsFilters? = nil,
-            permissions: [Permissions]? = nil,
-            prefetch: [Prefetch]? = nil
-        ) {
-            self.filters = filters
-            self.permissions = permissions
-            self.prefetch = prefetch
-        }
-
-        public enum Permissions: String, Codable, Hashable, Sendable {
-            case balances
-            case ownership
-            case paymentMethod = "payment_method"
-            case transactions
-        }
-
-        public enum Prefetch: String, Codable, Hashable, Sendable {
-            case balances
-            case ownership
-            case transactions
-        }
-    }
-}
-
-// invoice_payment_method_options_us_bank_account_linked_account_options_filters
-extension Stripe.Shared {
-    public struct InvoicePaymentMethodOptionsUsBankAccountLinkedAccountOptionsFilters: Codable, Hashable, Sendable {
-        /// The account subcategories to use to filter for possible accounts to link.
-        public var accountSubcategories: [AccountSubcategories]?
-
-        public init(
-            accountSubcategories: [AccountSubcategories]? = nil
-        ) {
-            self.accountSubcategories = accountSubcategories
-        }
-
-        public enum AccountSubcategories: String, Codable, Hashable, Sendable {
-            case checking
-            case savings
-        }
-    }
-}
-
 // invoices_resource_pretax_credit_amount
 extension Stripe.Shared {
     public struct InvoicesResourcePretaxCreditAmount: Codable, Hashable, Sendable {
@@ -2923,6 +2872,44 @@ extension Stripe.Shared {
 extension Stripe.Shared {
     public struct Link: Codable, Hashable, Sendable {
         public init() {}
+    }
+}
+
+// linked_account_options_common
+extension Stripe.Shared {
+    public struct LinkedAccountOptionsCommon: Codable, Hashable, Sendable {
+        public var filters: Stripe.Shared.PaymentFlowsPrivatePaymentMethodsFinancialConnectionsCommonLinkedAccountOptionsFilters?
+        /// The list of permissions to request.
+        public var permissions: [Permissions]?
+        /// Data features requested to be retrieved upon account creation.
+        public var prefetch: [Prefetch]?
+        /// For webview integrations only.
+        public var returnUrl: String?
+
+        public init(
+            filters: Stripe.Shared.PaymentFlowsPrivatePaymentMethodsFinancialConnectionsCommonLinkedAccountOptionsFilters? = nil,
+            permissions: [Permissions]? = nil,
+            prefetch: [Prefetch]? = nil,
+            returnUrl: String? = nil
+        ) {
+            self.filters = filters
+            self.permissions = permissions
+            self.prefetch = prefetch
+            self.returnUrl = returnUrl
+        }
+
+        public enum Permissions: String, Codable, Hashable, Sendable {
+            case balances
+            case ownership
+            case paymentMethod = "payment_method"
+            case transactions
+        }
+
+        public enum Prefetch: String, Codable, Hashable, Sendable {
+            case balances
+            case ownership
+            case transactions
+        }
     }
 }
 
@@ -3178,7 +3165,7 @@ extension Stripe.Shared {
     }
 }
 
-// payment_method_details_nz_bank_account
+// payment_method_nz_bank_account
 extension Stripe.Shared {
     public struct NzBankAccount: Codable, Hashable, Sendable {
         /// The name on the bank account.
@@ -3189,8 +3176,6 @@ extension Stripe.Shared {
         public var bankName: String?
         /// The numeric code for the bank account's bank branch.
         public var branchCode: String?
-        /// Estimated date to debit the customer's bank account.
-        public var expectedDebitDate: String?
         /// Last four digits of the bank account number.
         public var last4: String?
         /// The suffix of the bank account number.
@@ -3201,7 +3186,6 @@ extension Stripe.Shared {
             bankCode: String? = nil,
             bankName: String? = nil,
             branchCode: String? = nil,
-            expectedDebitDate: String? = nil,
             last4: String? = nil,
             suffix: String? = nil
         ) {
@@ -3209,7 +3193,6 @@ extension Stripe.Shared {
             self.bankCode = bankCode
             self.bankName = bankName
             self.branchCode = branchCode
-            self.expectedDebitDate = expectedDebitDate
             self.last4 = last4
             self.suffix = suffix
         }
@@ -3311,6 +3294,25 @@ extension Stripe.Shared {
                 .PaymentsPrimitivesPaymentRecordsResourcePaymentMethodKlarnaDetailsResourcePayerDetailsResourcePayerDetailsAddress? = nil
         ) {
             self.address = address
+        }
+    }
+}
+
+// payment_flows_private_payment_methods_financial_connections_common_linked_account_options_filters
+extension Stripe.Shared {
+    public struct PaymentFlowsPrivatePaymentMethodsFinancialConnectionsCommonLinkedAccountOptionsFilters: Codable, Hashable, Sendable {
+        /// The account subcategories to use to filter for possible accounts to link.
+        public var accountSubcategories: [AccountSubcategories]?
+
+        public init(
+            accountSubcategories: [AccountSubcategories]? = nil
+        ) {
+            self.accountSubcategories = accountSubcategories
+        }
+
+        public enum AccountSubcategories: String, Codable, Hashable, Sendable {
+            case checking
+            case savings
         }
     }
 }
@@ -4413,6 +4415,44 @@ extension Stripe.Shared {
     }
 }
 
+// payment_method_details_payment_record_nz_bank_account
+extension Stripe.Shared {
+    public struct PaymentMethodDetailsPaymentRecordNzBankAccount: Codable, Hashable, Sendable {
+        /// The name on the bank account.
+        public var accountHolderName: String?
+        /// The numeric code for the bank account's bank.
+        public var bankCode: String?
+        /// The name of the bank.
+        public var bankName: String?
+        /// The numeric code for the bank account's bank branch.
+        public var branchCode: String?
+        /// Estimated date to debit the customer's bank account.
+        public var expectedDebitDate: String?
+        /// Last four digits of the bank account number.
+        public var last4: String?
+        /// The suffix of the bank account number.
+        public var suffix: String?
+
+        public init(
+            accountHolderName: String? = nil,
+            bankCode: String? = nil,
+            bankName: String? = nil,
+            branchCode: String? = nil,
+            expectedDebitDate: String? = nil,
+            last4: String? = nil,
+            suffix: String? = nil
+        ) {
+            self.accountHolderName = accountHolderName
+            self.bankCode = bankCode
+            self.bankName = bankName
+            self.branchCode = branchCode
+            self.expectedDebitDate = expectedDebitDate
+            self.last4 = last4
+            self.suffix = suffix
+        }
+    }
+}
+
 // payment_method_details_payment_record_oxxo
 extension Stripe.Shared {
     public struct PaymentMethodDetailsPaymentRecordOxxo: Codable, Hashable, Sendable {
@@ -4557,7 +4597,7 @@ extension Stripe.Shared {
     public struct PaymentMethodDetailsPaymentRecordPix: Codable, Hashable, Sendable {
         /// Unique transaction id generated by BCB.
         public var bankTransactionId: String?
-        /// ID of the multi use Mandate generated by the PaymentIntent.
+        /// ID of the multi use Mandate generated by the PaymentIntent or SetupIntent.
         public var mandate: String?
 
         public init(
@@ -4781,7 +4821,7 @@ extension Stripe.Shared {
 // payment_method_details_payment_record_twint
 extension Stripe.Shared {
     public struct PaymentMethodDetailsPaymentRecordTwint: Codable, Hashable, Sendable {
-        /// ID of the multi use Mandate generated by the PaymentIntent.
+        /// ID of the multi use Mandate generated by the PaymentIntent or SetupIntent.
         public var mandate: String?
 
         public init(
@@ -5097,40 +5137,6 @@ extension Stripe.Shared {
         ) {
             self.email = email
             self.persistentToken = persistentToken
-        }
-    }
-}
-
-// payment_method_nz_bank_account
-extension Stripe.Shared {
-    public struct PaymentMethodNzBankAccount: Codable, Hashable, Sendable {
-        /// The name on the bank account.
-        public var accountHolderName: String?
-        /// The numeric code for the bank account's bank.
-        public var bankCode: String?
-        /// The name of the bank.
-        public var bankName: String?
-        /// The numeric code for the bank account's bank branch.
-        public var branchCode: String?
-        /// Last four digits of the bank account number.
-        public var last4: String?
-        /// The suffix of the bank account number.
-        public var suffix: String?
-
-        public init(
-            accountHolderName: String? = nil,
-            bankCode: String? = nil,
-            bankName: String? = nil,
-            branchCode: String? = nil,
-            last4: String? = nil,
-            suffix: String? = nil
-        ) {
-            self.accountHolderName = accountHolderName
-            self.bankCode = bankCode
-            self.bankName = bankName
-            self.branchCode = branchCode
-            self.last4 = last4
-            self.suffix = suffix
         }
     }
 }
@@ -5834,7 +5840,7 @@ extension Stripe.Shared {
             case mobilepay(Stripe.Shared.PaymentMethodDetailsPaymentRecordMobilepay)
             case multibanco(Stripe.Shared.PaymentMethodDetailsPaymentRecordMultibanco)
             case naverPay(Stripe.Shared.PaymentMethodDetailsPaymentRecordNaverPay)
-            case nzBankAccount(Stripe.Shared.NzBankAccount)
+            case nzBankAccount(Stripe.Shared.PaymentMethodDetailsPaymentRecordNzBankAccount)
             case oxxo(Stripe.Shared.PaymentMethodDetailsPaymentRecordOxxo)
             case p24(Stripe.Shared.PaymentMethodDetailsPaymentRecordP24)
             case payByBank(Stripe.Shared.PaymentMethodDetailsPaymentRecordPayByBank)
@@ -6010,7 +6016,7 @@ extension Stripe.Shared {
                 if case .naverPay(let value) = self { return value }
                 return nil
             }
-            public var nzBankAccount: Stripe.Shared.NzBankAccount? {
+            public var nzBankAccount: Stripe.Shared.PaymentMethodDetailsPaymentRecordNzBankAccount? {
                 if case .nzBankAccount(let value) = self { return value }
                 return nil
             }
@@ -6354,7 +6360,10 @@ extension Stripe.Shared {
                         self = .unknown(type: type)
                     }
                 case "nz_bank_account":
-                    if let value = try container.decodeIfPresent(Stripe.Shared.NzBankAccount.self, forKey: .nzBankAccount) {
+                    if let value = try container.decodeIfPresent(
+                        Stripe.Shared.PaymentMethodDetailsPaymentRecordNzBankAccount.self,
+                        forKey: .nzBankAccount
+                    ) {
                         self = .nzBankAccount(value)
                     } else {
                         self = .unknown(type: type)
@@ -7864,8 +7873,6 @@ extension Stripe.Shared {
     public struct ThreeDSecure: Codable, Hashable, Sendable {
         /// For authenticated transactions: Indicates how the issuing bank authenticated the customer.
         public var authenticationFlow: AuthenticationFlow?
-        /// The 3D Secure cryptogram, also known as the "authentication value" (AAV, CAVV or AEVV).
-        public var cryptogram: String?
         /// The Electronic Commerce Indicator (ECI).
         public var electronicCommerceIndicator: ElectronicCommerceIndicator?
         /// The exemption requested via 3DS and accepted by the issuer at authentication time.
@@ -7881,7 +7888,6 @@ extension Stripe.Shared {
 
         public init(
             authenticationFlow: AuthenticationFlow? = nil,
-            cryptogram: String? = nil,
             electronicCommerceIndicator: ElectronicCommerceIndicator? = nil,
             exemptionIndicator: ExemptionIndicator? = nil,
             exemptionIndicatorApplied: Bool? = nil,
@@ -7890,7 +7896,6 @@ extension Stripe.Shared {
             version: Version? = nil
         ) {
             self.authenticationFlow = authenticationFlow
-            self.cryptogram = cryptogram
             self.electronicCommerceIndicator = electronicCommerceIndicator
             self.exemptionIndicator = exemptionIndicator
             self.exemptionIndicatorApplied = exemptionIndicatorApplied
@@ -8068,12 +8073,12 @@ extension Stripe.Shared {
 // invoice_payment_method_options_us_bank_account
 extension Stripe.Shared {
     public struct UsBankAccount: Codable, Hashable, Sendable {
-        public var financialConnections: Stripe.Shared.InvoicePaymentMethodOptionsUsBankAccountLinkedAccountOptions?
+        public var financialConnections: Stripe.Shared.FinancialConnections?
         /// Bank account verification method.
         public var verificationMethod: VerificationMethod?
 
         public init(
-            financialConnections: Stripe.Shared.InvoicePaymentMethodOptionsUsBankAccountLinkedAccountOptions? = nil,
+            financialConnections: Stripe.Shared.FinancialConnections? = nil,
             verificationMethod: VerificationMethod? = nil
         ) {
             self.financialConnections = financialConnections

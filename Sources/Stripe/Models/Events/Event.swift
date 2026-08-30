@@ -111,8 +111,9 @@ extension Stripe.Events.Event {
     public struct Data: Codable, Hashable, Sendable {
         /// The object the event is about, at the time of the event.
         public var object: Stripe.Events.Event.Object
-        /// On `*.updated` events, the attributes that changed with their previous values, keyed.
-        /// by wire name and shaped as they are on the object.
+        /// On `*.updated` events, the attributes that changed with their previous values.
+        ///
+        /// Keyed by wire name and shaped as they are on the object.
         public var previousAttributes: [String: Stripe.JSONValue]?
 
         public init(object: Stripe.Events.Event.Object, previousAttributes: [String: Stripe.JSONValue]? = nil) {

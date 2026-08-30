@@ -186,7 +186,6 @@
    "network_transaction_id": "network_transaction_id_1",
    "three_d_secure": {
     "authentication_flow": "challenge",
-    "cryptogram": "cryptogram_1",
     "electronic_commerce_indicator": "01",
     "exemption_indicator": "low_risk",
     "exemption_indicator_applied": true,

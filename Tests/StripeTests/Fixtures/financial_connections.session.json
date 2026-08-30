@@ -208,6 +208,7 @@
   "countries": [
    "countries_1"
   ],
+  "country": "country_1",
   "require_payment_method_support": "all"
  },
  "id": "financial_connections.session_1",

@@ -9,6 +9,9 @@
  "discounts": [
   "discount_1"
  ],
+ "frozen_fields": [
+  "discounts"
+ ],
  "id": "invoiceitem_1",
  "invoice": "invoice_1",
  "livemode": true,

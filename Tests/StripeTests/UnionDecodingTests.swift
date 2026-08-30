@@ -22,9 +22,10 @@ import FoundationEssentials
 import Foundation
 #endif
 
-/// The three union shapes the generator expresses: a `type`-selected payload (`Details`), a.
-/// resource union told apart by `object` (`PaymentSource`), and the event catalogue
-/// (`Event.Object`, `Event.Type`).
+/// The three union shapes the generator expresses.
+///
+/// A `type`-selected payload (`Details`), a resource union told apart by `object`
+/// (`PaymentSource`), and the event catalogue (`Event.Object`, `Event.Type`).
 @Suite("Union decoding")
 struct UnionDecodingTests {
     private static func decode<T: Decodable>(_ type: T.Type, _ json: String) throws -> T {

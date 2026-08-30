@@ -232,7 +232,9 @@
     "apple_pay": {},
     "dynamic_last4": "dynamic_last4_1",
     "google_pay": {},
-    "link": {},
+    "link": {
+     "funding_source_group": "funding_source_group_1"
+    },
     "masterpass": {
      "email": "email_1",
      "name": "name_1"
@@ -391,7 +393,8 @@
    "transaction_id": "transaction_id_1"
   },
   "link": {
-   "country": "country_1"
+   "country": "country_1",
+   "funding_source_group": "funding_source_group_1"
   },
   "mb_way": {},
   "mobilepay": {

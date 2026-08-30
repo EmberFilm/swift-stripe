@@ -69,8 +69,9 @@ final class TestHTTPServer: Sendable {
         self.state = state
     }
 
-    /// Starts a server that replies with `responses` in order, repeating the.
-    /// last entry once exhausted.
+    /// Starts a server that replies with `responses` in order.
+    ///
+    /// The last entry repeats once the script is exhausted.
     static func start(responses: [ScriptedResponse]) async throws -> TestHTTPServer {
         let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
         let state = NIOLockedValueBox(State(responses: responses))

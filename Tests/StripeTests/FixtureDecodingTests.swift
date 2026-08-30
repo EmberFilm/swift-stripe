@@ -294,6 +294,9 @@ struct FixtureDecodingTests {
         try Self.decodes("treasury.transaction_entry", as: Stripe.Treasury.TransactionEntry.self)
     }
     @Test("billing.alert") func billingAlert() throws { try Self.decodes("billing.alert", as: Stripe.Billing.Alert.self) }
+    @Test("billing.feedback_option") func billingFeedbackOption() throws {
+        try Self.decodes("billing.feedback_option", as: Stripe.Billing.FeedbackOption.self)
+    }
     @Test("billing.meter") func billingMeter() throws { try Self.decodes("billing.meter", as: Stripe.Billing.Meter.self) }
     @Test("billing.meter_event") func billingMeterEvent() throws { try Self.decodes("billing.meter_event", as: Stripe.Billing.MeterEvent.self) }
     @Test("billing.meter_event_adjustment") func billingMeterEventAdjustment() throws {

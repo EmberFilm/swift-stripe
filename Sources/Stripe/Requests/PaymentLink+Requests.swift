@@ -405,7 +405,7 @@ extension Stripe.PaymentLink.Create {
 
             /// Configuration for `type=dropdown` fields.
             public struct Dropdown: Codable, Hashable, Sendable {
-                /// The value that pre-fills the field on the payment page.Must match a `value` in the `options` array.
+                /// The value that pre-fills the field on the payment page.
                 public var defaultValue: String?
                 /// The options available for the customer to select.
                 public var options: [Options]
@@ -1514,6 +1514,10 @@ extension Stripe.PaymentLink.Update {
         public var afterCompletion: AfterCompletion?
         /// Enables user redeemable promotion codes.
         public var allowPromotionCodes: Bool?
+        /// The amount of the application fee (if any) that will be requested to be applied to the payment and transferred to the.
+        public var applicationFeeAmount: Stripe.Clearable<Int>?
+        /// A non-negative decimal between 0 and 100, with at most two decimal places.
+        public var applicationFeePercent: Stripe.Clearable<Decimal>?
         /// Configuration for automatic tax collection.
         public var automaticTax: AutomaticTax?
         /// Configuration for collecting the customer's billing address.
@@ -1538,6 +1542,8 @@ extension Stripe.PaymentLink.Update {
         public var metadata: [String: String]?
         /// Controls settings applied for collecting the customer's name.
         public var nameCollection: Stripe.Clearable<NameCollection>?
+        /// The account on behalf of which to charge.
+        public var onBehalfOf: String?
         /// A list of optional items the customer can add to their order at checkout.
         public var optionalItems: Stripe.Clearable<[OptionalItems]>?
         /// A subset of parameters to be passed to PaymentIntent creation for Checkout Sessions in `payment` mode.
@@ -1562,11 +1568,15 @@ extension Stripe.PaymentLink.Update {
         public var subscriptionData: SubscriptionData?
         /// Controls tax ID collection during checkout.
         public var taxIdCollection: TaxIdCollection?
+        /// The account (if any) the payments will be attributed to for tax reporting, and where funds from each payment will be.
+        public var transferData: Stripe.Clearable<TransferData>?
 
         public init(
             active: Bool? = nil,
             afterCompletion: AfterCompletion? = nil,
             allowPromotionCodes: Bool? = nil,
+            applicationFeeAmount: Stripe.Clearable<Int>? = nil,
+            applicationFeePercent: Stripe.Clearable<Decimal>? = nil,
             automaticTax: AutomaticTax? = nil,
             billingAddressCollection: BillingAddressCollection? = nil,
             consentCollection: ConsentCollection? = nil,
@@ -1579,6 +1589,7 @@ extension Stripe.PaymentLink.Update {
             lineItems: [LineItems]? = nil,
             metadata: [String: String]? = nil,
             nameCollection: Stripe.Clearable<NameCollection>? = nil,
+            onBehalfOf: String? = nil,
             optionalItems: Stripe.Clearable<[OptionalItems]>? = nil,
             paymentIntentData: PaymentIntentData? = nil,
             paymentMethodCollection: PaymentMethodCollection? = nil,
@@ -1590,11 +1601,14 @@ extension Stripe.PaymentLink.Update {
             shippingOptions: Stripe.Clearable<[ShippingOptions]>? = nil,
             submitType: SubmitType? = nil,
             subscriptionData: SubscriptionData? = nil,
-            taxIdCollection: TaxIdCollection? = nil
+            taxIdCollection: TaxIdCollection? = nil,
+            transferData: Stripe.Clearable<TransferData>? = nil
         ) {
             self.active = active
             self.afterCompletion = afterCompletion
             self.allowPromotionCodes = allowPromotionCodes
+            self.applicationFeeAmount = applicationFeeAmount
+            self.applicationFeePercent = applicationFeePercent
             self.automaticTax = automaticTax
             self.billingAddressCollection = billingAddressCollection
             self.consentCollection = consentCollection
@@ -1607,6 +1621,7 @@ extension Stripe.PaymentLink.Update {
             self.lineItems = lineItems
             self.metadata = metadata
             self.nameCollection = nameCollection
+            self.onBehalfOf = onBehalfOf
             self.optionalItems = optionalItems
             self.paymentIntentData = paymentIntentData
             self.paymentMethodCollection = paymentMethodCollection
@@ -1619,6 +1634,7 @@ extension Stripe.PaymentLink.Update {
             self.submitType = submitType
             self.subscriptionData = subscriptionData
             self.taxIdCollection = taxIdCollection
+            self.transferData = transferData
         }
 
         public enum BillingAddressCollection: String, Codable, Hashable, Sendable {
@@ -1864,7 +1880,7 @@ extension Stripe.PaymentLink.Update {
 
             /// Configuration for `type=dropdown` fields.
             public struct Dropdown: Codable, Hashable, Sendable {
-                /// The value that pre-fills the field on the payment page.Must match a `value` in the `options` array.
+                /// The value that pre-fills the field on the payment page.
                 public var defaultValue: String?
                 /// The options available for the customer to select.
                 public var options: [Options]
@@ -2732,6 +2748,21 @@ extension Stripe.PaymentLink.Update {
             public enum Required: String, Codable, Hashable, Sendable {
                 case ifSupported = "if_supported"
                 case never
+            }
+        }
+
+        public struct TransferData: Codable, Hashable, Sendable {
+            /// The amount that will be transferred automatically when a charge succeeds.
+            public var amount: Stripe.Clearable<Int>?
+            /// If specified, successful charges will be attributed to the destination account for tax reporting, and the funds from.
+            public var destination: String
+
+            public init(
+                amount: Stripe.Clearable<Int>? = nil,
+                destination: String
+            ) {
+                self.amount = amount
+                self.destination = destination
             }
         }
     }

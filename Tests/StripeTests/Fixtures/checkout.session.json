@@ -423,6 +423,9 @@
    "restrictions": {
     "brands_blocked": [
      "american_express"
+    ],
+    "funding_types_blocked": [
+     "credit"
     ]
    },
    "setup_future_usage": "none",

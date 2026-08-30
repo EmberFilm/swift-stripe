@@ -103,7 +103,7 @@ extension Stripe.Checkout {
         @Expandable<Stripe.PaymentIntents.PaymentIntent, String> public var paymentIntent: String?
         /// The ID of the Payment Link that created this Session.
         @Expandable<Stripe.PaymentLink, String> public var paymentLink: String?
-        /// Configure whether a Checkout Session should collect a payment method.
+        /// Configure whether a Checkout Session should collect a payment method for sessions with mode `payment`.
         public var paymentMethodCollection: PaymentMethodCollection?
         /// Information about the payment method configuration used for this Checkout session if using dynamic payment methods.
         public var paymentMethodConfigurationDetails: Stripe.Shared.PaymentMethodConfigurationDetails?
@@ -361,7 +361,7 @@ extension Stripe.Checkout {
             case web
         }
 
-        /// Configure whether a Checkout Session should collect a payment method.
+        /// Configure whether a Checkout Session should collect a payment method for sessions with mode `payment`.
         public enum PaymentMethodCollection: String, Codable, Hashable, Sendable {
             case always
             case ifRequired = "if_required"
@@ -1826,11 +1826,15 @@ extension Stripe.Checkout {
                 public struct Restrictions: Codable, Hashable, Sendable {
                     /// The card brands to block.
                     public var brandsBlocked: [BrandsBlocked]?
+                    /// Card funding types to block for this Checkout Session.
+                    public var fundingTypesBlocked: [FundingTypesBlocked]?
 
                     public init(
-                        brandsBlocked: [BrandsBlocked]? = nil
+                        brandsBlocked: [BrandsBlocked]? = nil,
+                        fundingTypesBlocked: [FundingTypesBlocked]? = nil
                     ) {
                         self.brandsBlocked = brandsBlocked
+                        self.fundingTypesBlocked = fundingTypesBlocked
                     }
 
                     public enum BrandsBlocked: String, Codable, Hashable, Sendable {
@@ -1838,6 +1842,12 @@ extension Stripe.Checkout {
                         case discoverGlobalNetwork = "discover_global_network"
                         case mastercard
                         case visa
+                    }
+
+                    public enum FundingTypesBlocked: String, Codable, Hashable, Sendable {
+                        case credit
+                        case debit
+                        case prepaid
                     }
                 }
             }
@@ -2516,7 +2526,7 @@ extension Stripe.Checkout {
             }
 
             public struct UsBankAccount: Codable, Hashable, Sendable {
-                public var financialConnections: Stripe.Shared.FinancialConnections?
+                public var financialConnections: FinancialConnections?
                 /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
                 public var setupFutureUsage: SetupFutureUsage?
                 /// Controls when Stripe will attempt to debit the funds from the customer's account.
@@ -2525,7 +2535,7 @@ extension Stripe.Checkout {
                 public var verificationMethod: VerificationMethod?
 
                 public init(
-                    financialConnections: Stripe.Shared.FinancialConnections? = nil,
+                    financialConnections: FinancialConnections? = nil,
                     setupFutureUsage: SetupFutureUsage? = nil,
                     targetDate: String? = nil,
                     verificationMethod: VerificationMethod? = nil
@@ -2547,6 +2557,57 @@ extension Stripe.Checkout {
                 public enum VerificationMethod: String, Codable, Hashable, Sendable {
                     case automatic
                     case instant
+                }
+
+                public struct FinancialConnections: Codable, Hashable, Sendable {
+                    public var filters: Filters?
+                    /// The list of permissions to request.
+                    public var permissions: [Permissions]?
+                    /// Data features requested to be retrieved upon account creation.
+                    public var prefetch: [Prefetch]?
+                    /// For webview integrations only.
+                    public var returnUrl: String?
+
+                    public init(
+                        filters: Filters? = nil,
+                        permissions: [Permissions]? = nil,
+                        prefetch: [Prefetch]? = nil,
+                        returnUrl: String? = nil
+                    ) {
+                        self.filters = filters
+                        self.permissions = permissions
+                        self.prefetch = prefetch
+                        self.returnUrl = returnUrl
+                    }
+
+                    public enum Permissions: String, Codable, Hashable, Sendable {
+                        case balances
+                        case ownership
+                        case paymentMethod = "payment_method"
+                        case transactions
+                    }
+
+                    public enum Prefetch: String, Codable, Hashable, Sendable {
+                        case balances
+                        case ownership
+                        case transactions
+                    }
+
+                    public struct Filters: Codable, Hashable, Sendable {
+                        /// The account subcategories to use to filter for possible accounts to link.
+                        public var accountSubcategories: [AccountSubcategories]?
+
+                        public init(
+                            accountSubcategories: [AccountSubcategories]? = nil
+                        ) {
+                            self.accountSubcategories = accountSubcategories
+                        }
+
+                        public enum AccountSubcategories: String, Codable, Hashable, Sendable {
+                            case checking
+                            case savings
+                        }
+                    }
                 }
             }
 

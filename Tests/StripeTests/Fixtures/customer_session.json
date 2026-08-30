@@ -1,7 +1,13 @@
 {
  "client_secret": "client_secret_1",
  "components": {
+  "active_entitlements": {
+   "enabled": true
+  },
   "buy_button": {
+   "enabled": true
+  },
+  "customer_portal": {
    "enabled": true
   },
   "customer_sheet": {

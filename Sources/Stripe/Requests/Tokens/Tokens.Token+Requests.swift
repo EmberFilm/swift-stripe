@@ -101,6 +101,7 @@ extension Stripe.Tokens.Token.Create {
                 public var addressKana: AddressKana?
                 /// The Kanji variation of the company's primary address (Japan only).
                 public var addressKanji: AddressKanji?
+                /// The location where the business is administered.
                 public var administrativeAddress: AdministrativeAddress?
                 /// Whether the company's directors have been provided.
                 public var directorsProvided: Bool?
@@ -128,6 +129,7 @@ extension Stripe.Tokens.Token.Create {
                 public var ownershipExemptionReason: OwnershipExemptionReason?
                 /// The company's phone number (used for verification).
                 public var phone: String?
+                /// The primary location where the business conducts operations.
                 public var principalPlaceOfBusiness: PrincipalPlaceOfBusiness?
                 /// When the business was incorporated or registered.
                 public var registrationDate: Stripe.Clearable<RegistrationDate>?
@@ -339,6 +341,7 @@ extension Stripe.Tokens.Token.Create {
                     }
                 }
 
+                /// The location where the business is administered.
                 public struct AdministrativeAddress: Codable, Hashable, Sendable {
                     /// City, district, suburb, town, or village.
                     public var city: String?
@@ -410,6 +413,7 @@ extension Stripe.Tokens.Token.Create {
                     }
                 }
 
+                /// The primary location where the business conducts operations.
                 public struct PrincipalPlaceOfBusiness: Codable, Hashable, Sendable {
                     /// City, district, suburb, town, or village.
                     public var city: String?

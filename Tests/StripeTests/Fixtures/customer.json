@@ -152,6 +152,7 @@
     "cancellation_details": {
      "comment": "comment_1",
      "feedback": "customer_service",
+     "feedback_option": "billing.feedback_option_1",
      "reason": "canceled_by_retention_policy"
     },
     "collection_method": "charge_automatically",

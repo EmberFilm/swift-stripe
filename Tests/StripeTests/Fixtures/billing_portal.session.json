@@ -13,6 +13,7 @@
    },
    "type": "hosted_confirmation"
   },
+  "customer_update": {},
   "subscription_cancel": {
    "retention": {
     "coupon_offer": {
@@ -41,7 +42,7 @@
    ],
    "subscription": "subscription_1"
   },
-  "type": "payment_method_update"
+  "type": "customer_update"
  },
  "id": "billing_portal.session_1",
  "livemode": true,

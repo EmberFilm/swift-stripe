@@ -12,6 +12,7 @@ Sources/Stripe/Clients/BillingAlertsClient.swift
 Sources/Stripe/Clients/BillingCreditBalanceSummaryClient.swift
 Sources/Stripe/Clients/BillingCreditBalanceTransactionsClient.swift
 Sources/Stripe/Clients/BillingCreditGrantsClient.swift
+Sources/Stripe/Clients/BillingFeedbackOptionsClient.swift
 Sources/Stripe/Clients/BillingMeterEventAdjustmentsClient.swift
 Sources/Stripe/Clients/BillingMeterEventSummariesClient.swift
 Sources/Stripe/Clients/BillingMeterEventsClient.swift
@@ -147,6 +148,7 @@ Sources/Stripe/Models/Billing/CreditNoteLineItem.swift
 Sources/Stripe/Models/Billing/Customer/Balance/Customer.Balance.Transaction.swift
 Sources/Stripe/Models/Billing/Customer/Portal/Portal.Configuration.swift
 Sources/Stripe/Models/Billing/Customer/Portal/Portal.Session.swift
+Sources/Stripe/Models/Billing/FeedbackOption.swift
 Sources/Stripe/Models/Billing/Invoice.swift
 Sources/Stripe/Models/Billing/Invoice/Invoice.Item.swift
 Sources/Stripe/Models/Billing/Invoice/Invoice.LineItem.swift
@@ -296,6 +298,7 @@ Sources/Stripe/Requests/Billing/CreditNoteLineItem+Requests.swift
 Sources/Stripe/Requests/Billing/Customer/Balance/Customer.Balance.Transaction+Requests.swift
 Sources/Stripe/Requests/Billing/Customer/Portal/Portal.Configuration+Requests.swift
 Sources/Stripe/Requests/Billing/Customer/Portal/Portal.Session+Requests.swift
+Sources/Stripe/Requests/Billing/FeedbackOption+Requests.swift
 Sources/Stripe/Requests/Billing/Invoice+Requests.swift
 Sources/Stripe/Requests/Billing/Invoice/Invoice.Item+Requests.swift
 Sources/Stripe/Requests/Billing/Invoice/Invoice.LineItem+Requests.swift

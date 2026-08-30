@@ -189,6 +189,7 @@ extension Webhook.Create {
             case value2026_05_27_dahlia = "2026-05-27.dahlia"
             case value2026_06_24_dahlia = "2026-06-24.dahlia"
             case value2026_07_29_dahlia = "2026-07-29.dahlia"
+            case value2026_08_26_dahlia = "2026-08-26.dahlia"
         }
 
         public enum EnabledEvents: String, Codable, Hashable, Sendable {

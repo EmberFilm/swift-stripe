@@ -1083,6 +1083,7 @@
    "bancontact": {
     "preferred_language": "de"
    },
+   "billie": {},
    "card": {
     "installments": {
      "enabled": true

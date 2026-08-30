@@ -661,6 +661,7 @@ extension Stripe.Billing.Invoice.Create {
                 case auBecsDebit = "au_becs_debit"
                 case bacsDebit = "bacs_debit"
                 case bancontact
+                case billie
                 case boleto
                 case card
                 case cashapp
@@ -708,6 +709,8 @@ extension Stripe.Billing.Invoice.Create {
                 public var acssDebit: Stripe.Clearable<AcssDebit>?
                 /// If paying by `bancontact`, this sub-hash contains details about the Bancontact payment method options to pass to the.
                 public var bancontact: Stripe.Clearable<Bancontact>?
+                /// If paying by `billie`, this sub-hash contains details about the Billie payment method options to pass to the.
+                public var billie: Stripe.Clearable<Billie>?
                 /// If paying by `card`, this sub-hash contains details about the Card payment method options to pass to the invoice’s.
                 public var card: Stripe.Clearable<Card>?
                 /// If paying by `customer_balance`, this sub-hash contains details about the Bank transfer payment method options to.
@@ -728,6 +731,7 @@ extension Stripe.Billing.Invoice.Create {
                 public init(
                     acssDebit: Stripe.Clearable<AcssDebit>? = nil,
                     bancontact: Stripe.Clearable<Bancontact>? = nil,
+                    billie: Stripe.Clearable<Billie>? = nil,
                     card: Stripe.Clearable<Card>? = nil,
                     customerBalance: Stripe.Clearable<CustomerBalance>? = nil,
                     konbini: Stripe.Clearable<Konbini>? = nil,
@@ -739,6 +743,7 @@ extension Stripe.Billing.Invoice.Create {
                 ) {
                     self.acssDebit = acssDebit
                     self.bancontact = bancontact
+                    self.billie = billie
                     self.card = card
                     self.customerBalance = customerBalance
                     self.konbini = konbini
@@ -803,6 +808,10 @@ extension Stripe.Billing.Invoice.Create {
                         case fr
                         case nl
                     }
+                }
+
+                public struct Billie: Codable, Hashable, Sendable {
+                    public init() {}
                 }
 
                 public struct Card: Codable, Hashable, Sendable {
@@ -3556,6 +3565,7 @@ extension Stripe.Billing.Invoice.Update {
                 case auBecsDebit = "au_becs_debit"
                 case bacsDebit = "bacs_debit"
                 case bancontact
+                case billie
                 case boleto
                 case card
                 case cashapp
@@ -3603,6 +3613,8 @@ extension Stripe.Billing.Invoice.Update {
                 public var acssDebit: Stripe.Clearable<AcssDebit>?
                 /// If paying by `bancontact`, this sub-hash contains details about the Bancontact payment method options to pass to the.
                 public var bancontact: Stripe.Clearable<Bancontact>?
+                /// If paying by `billie`, this sub-hash contains details about the Billie payment method options to pass to the.
+                public var billie: Stripe.Clearable<Billie>?
                 /// If paying by `card`, this sub-hash contains details about the Card payment method options to pass to the invoice’s.
                 public var card: Stripe.Clearable<Card>?
                 /// If paying by `customer_balance`, this sub-hash contains details about the Bank transfer payment method options to.
@@ -3623,6 +3635,7 @@ extension Stripe.Billing.Invoice.Update {
                 public init(
                     acssDebit: Stripe.Clearable<AcssDebit>? = nil,
                     bancontact: Stripe.Clearable<Bancontact>? = nil,
+                    billie: Stripe.Clearable<Billie>? = nil,
                     card: Stripe.Clearable<Card>? = nil,
                     customerBalance: Stripe.Clearable<CustomerBalance>? = nil,
                     konbini: Stripe.Clearable<Konbini>? = nil,
@@ -3634,6 +3647,7 @@ extension Stripe.Billing.Invoice.Update {
                 ) {
                     self.acssDebit = acssDebit
                     self.bancontact = bancontact
+                    self.billie = billie
                     self.card = card
                     self.customerBalance = customerBalance
                     self.konbini = konbini
@@ -3698,6 +3712,10 @@ extension Stripe.Billing.Invoice.Update {
                         case fr
                         case nl
                     }
+                }
+
+                public struct Billie: Codable, Hashable, Sendable {
+                    public init() {}
                 }
 
                 public struct Card: Codable, Hashable, Sendable {

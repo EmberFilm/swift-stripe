@@ -596,6 +596,7 @@ extension Stripe.PaymentIntents.PaymentIntent.Confirm {
             case swish
             case tamara
             case testPay = "test_pay"
+            case touchNGo = "touch_n_go"
             case truemoney
             case twint
             case upi
@@ -4602,6 +4603,7 @@ extension Stripe.PaymentIntents.PaymentIntent.Create {
             case swish
             case tamara
             case testPay = "test_pay"
+            case touchNGo = "touch_n_go"
             case truemoney
             case twint
             case upi
@@ -9043,6 +9045,7 @@ extension Stripe.PaymentIntents.PaymentIntent.Update {
             case swish
             case tamara
             case testPay = "test_pay"
+            case touchNGo = "touch_n_go"
             case truemoney
             case twint
             case upi

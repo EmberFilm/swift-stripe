@@ -229,6 +229,7 @@ extension Stripe.Setup {
             case swish
             case tamara
             case testPay = "test_pay"
+            case touchNGo = "touch_n_go"
             case truemoney
             case twint
             case upi
@@ -1000,13 +1001,13 @@ extension Stripe.Setup {
             }
 
             public struct UsBankAccount: Codable, Hashable, Sendable {
-                public var financialConnections: Stripe.Shared.FinancialConnections?
+                public var financialConnections: Stripe.Shared.LinkedAccountOptionsCommon?
                 public var mandateOptions: Stripe.Shared.PaymentMethodOptionsUsBankAccountMandateOptions?
                 /// Bank account verification method.
                 public var verificationMethod: VerificationMethod?
 
                 public init(
-                    financialConnections: Stripe.Shared.FinancialConnections? = nil,
+                    financialConnections: Stripe.Shared.LinkedAccountOptionsCommon? = nil,
                     mandateOptions: Stripe.Shared.PaymentMethodOptionsUsBankAccountMandateOptions? = nil,
                     verificationMethod: VerificationMethod? = nil
                 ) {

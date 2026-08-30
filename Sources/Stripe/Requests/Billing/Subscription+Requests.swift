@@ -60,13 +60,17 @@ extension Stripe.Billing.Subscription.Cancel {
             public var comment: String?
             /// The customer submitted reason for why they canceled, if the subscription was canceled explicitly by the user.
             public var feedback: Feedback?
+            /// Customized feedback options that provide deeper insight into why the subscription was canceled, if the subscription.
+            public var feedbackOption: String?
 
             public init(
                 comment: String? = nil,
-                feedback: Feedback? = nil
+                feedback: Feedback? = nil,
+                feedbackOption: String? = nil
             ) {
                 self.comment = comment
                 self.feedback = feedback
+                self.feedbackOption = feedbackOption
             }
 
             public enum Feedback: String, Codable, Hashable, Sendable {
@@ -103,7 +107,7 @@ extension Stripe.Billing.Subscription.Create {
         public var billingCycleAnchorConfig: BillingCycleAnchorConfig?
         /// Controls how prorations and invoices for subscriptions are calculated and orchestrated.
         public var billingMode: BillingMode?
-        /// Sets the billing schedules for the subscription.
+        /// An array of billing schedules, which allow you to bill customers in advance for multiple service periods.
         public var billingSchedules: [BillingSchedules]?
         /// Define thresholds at which an invoice will be sent, and the subscription advanced to a new billing period.
         public var billingThresholds: Stripe.Clearable<BillingThresholds>?
@@ -881,6 +885,7 @@ extension Stripe.Billing.Subscription.Create {
                 case auBecsDebit = "au_becs_debit"
                 case bacsDebit = "bacs_debit"
                 case bancontact
+                case billie
                 case boleto
                 case card
                 case cashapp
@@ -933,6 +938,8 @@ extension Stripe.Billing.Subscription.Create {
                 public var acssDebit: Stripe.Clearable<AcssDebit>?
                 /// This sub-hash contains details about the Bancontact payment method options to pass to the invoice’s PaymentIntent.
                 public var bancontact: Stripe.Clearable<Bancontact>?
+                /// This sub-hash contains details about the Billie payment method options to pass to the invoice’s PaymentIntent.
+                public var billie: Stripe.Clearable<Billie>?
                 /// This sub-hash contains details about the Card payment method options to pass to the invoice’s PaymentIntent.
                 public var card: Stripe.Clearable<Card>?
                 /// This sub-hash contains details about the Bank transfer payment method options to pass to the invoice’s PaymentIntent.
@@ -953,6 +960,7 @@ extension Stripe.Billing.Subscription.Create {
                 public init(
                     acssDebit: Stripe.Clearable<AcssDebit>? = nil,
                     bancontact: Stripe.Clearable<Bancontact>? = nil,
+                    billie: Stripe.Clearable<Billie>? = nil,
                     card: Stripe.Clearable<Card>? = nil,
                     customerBalance: Stripe.Clearable<CustomerBalance>? = nil,
                     konbini: Stripe.Clearable<Konbini>? = nil,
@@ -964,6 +972,7 @@ extension Stripe.Billing.Subscription.Create {
                 ) {
                     self.acssDebit = acssDebit
                     self.bancontact = bancontact
+                    self.billie = billie
                     self.card = card
                     self.customerBalance = customerBalance
                     self.konbini = konbini
@@ -1028,6 +1037,10 @@ extension Stripe.Billing.Subscription.Create {
                         case fr
                         case nl
                     }
+                }
+
+                public struct Billie: Codable, Hashable, Sendable {
+                    public init() {}
                 }
 
                 public struct Card: Codable, Hashable, Sendable {
@@ -1705,7 +1718,7 @@ extension Stripe.Billing.Subscription.Update {
         public var automaticTax: AutomaticTax?
         /// Either `now` or `unchanged`.
         public var billingCycleAnchor: BillingCycleAnchor?
-        /// Sets the billing schedules for the subscription.
+        /// An array of billing schedules, which allow you to bill customers in advance for multiple service periods.
         public var billingSchedules: Stripe.Clearable<[BillingSchedules]>?
         /// Define thresholds at which an invoice will be sent, and the subscription advanced to a new billing period.
         public var billingThresholds: Stripe.Clearable<BillingThresholds>?
@@ -2180,13 +2193,17 @@ extension Stripe.Billing.Subscription.Update {
             public var comment: String?
             /// The customer submitted reason for why they canceled, if the subscription was canceled explicitly by the user.
             public var feedback: Feedback?
+            /// Customized feedback options that provide deeper insight into why the subscription was canceled, if the subscription.
+            public var feedbackOption: String?
 
             public init(
                 comment: String? = nil,
-                feedback: Feedback? = nil
+                feedback: Feedback? = nil,
+                feedbackOption: String? = nil
             ) {
                 self.comment = comment
                 self.feedback = feedback
+                self.feedbackOption = feedbackOption
             }
 
             public enum Feedback: String, Codable, Hashable, Sendable {
@@ -2477,6 +2494,7 @@ extension Stripe.Billing.Subscription.Update {
                 case auBecsDebit = "au_becs_debit"
                 case bacsDebit = "bacs_debit"
                 case bancontact
+                case billie
                 case boleto
                 case card
                 case cashapp
@@ -2529,6 +2547,8 @@ extension Stripe.Billing.Subscription.Update {
                 public var acssDebit: Stripe.Clearable<AcssDebit>?
                 /// This sub-hash contains details about the Bancontact payment method options to pass to the invoice’s PaymentIntent.
                 public var bancontact: Stripe.Clearable<Bancontact>?
+                /// This sub-hash contains details about the Billie payment method options to pass to the invoice’s PaymentIntent.
+                public var billie: Stripe.Clearable<Billie>?
                 /// This sub-hash contains details about the Card payment method options to pass to the invoice’s PaymentIntent.
                 public var card: Stripe.Clearable<Card>?
                 /// This sub-hash contains details about the Bank transfer payment method options to pass to the invoice’s PaymentIntent.
@@ -2549,6 +2569,7 @@ extension Stripe.Billing.Subscription.Update {
                 public init(
                     acssDebit: Stripe.Clearable<AcssDebit>? = nil,
                     bancontact: Stripe.Clearable<Bancontact>? = nil,
+                    billie: Stripe.Clearable<Billie>? = nil,
                     card: Stripe.Clearable<Card>? = nil,
                     customerBalance: Stripe.Clearable<CustomerBalance>? = nil,
                     konbini: Stripe.Clearable<Konbini>? = nil,
@@ -2560,6 +2581,7 @@ extension Stripe.Billing.Subscription.Update {
                 ) {
                     self.acssDebit = acssDebit
                     self.bancontact = bancontact
+                    self.billie = billie
                     self.card = card
                     self.customerBalance = customerBalance
                     self.konbini = konbini
@@ -2624,6 +2646,10 @@ extension Stripe.Billing.Subscription.Update {
                         case fr
                         case nl
                     }
+                }
+
+                public struct Billie: Codable, Hashable, Sendable {
+                    public init() {}
                 }
 
                 public struct Card: Codable, Hashable, Sendable {

@@ -19,6 +19,7 @@ import Foundation
 #endif
 
 extension Stripe {
+    /// Ephemeral keys give the SDKs (like Stripe's mobile SDKs and Issuing Elements) temporary, scoped access to a specific.
     public struct EphemeralKey: Codable, Hashable, Sendable, Identifiable {
         public typealias ID = String
         public let id: ID

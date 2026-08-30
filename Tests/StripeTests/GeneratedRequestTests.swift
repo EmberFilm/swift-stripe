@@ -22,9 +22,10 @@ import FoundationEssentials
 import Foundation
 #endif
 
-/// The shapes the request generator introduces beyond plain structs: range filters, the.
-/// value-or-keyword unions, `Decimal` amounts, collection operations named on their owner, and
-/// the shared page types every list and search response is.
+/// The shapes the request generator introduces beyond plain structs.
+///
+/// Range filters, the value-or-keyword unions, `Decimal` amounts, collection operations named on
+/// their owner, and the shared page types every list and search response is.
 @Suite("Generated requests")
 struct GeneratedRequestTests {
     private static func pairs(_ request: some Encodable) throws -> [String: String] {

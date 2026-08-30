@@ -21,5 +21,5 @@ import Foundation
 extension Stripe {
     /// The Stripe API version the generated models describe; ``StripeConfiguration`` sends
     /// it as `Stripe-Version` unless told otherwise.
-    public static let generatedAPIVersion = "2026-07-29.dahlia"
+    public static let generatedAPIVersion = "2026-08-26.dahlia"
 }

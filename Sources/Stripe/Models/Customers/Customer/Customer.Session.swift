@@ -59,29 +59,59 @@ extension Stripe.Customers.Customer {
 
         /// Configuration for the components supported by this Customer Session.
         public struct Components: Codable, Hashable, Sendable {
+            public var activeEntitlements: ActiveEntitlements?
             public var buyButton: BuyButton?
+            public var customerPortal: CustomerPortal?
             public var customerSheet: CustomerSheet?
             public var mobilePaymentElement: MobilePaymentElement?
             public var paymentElement: PaymentElement?
             public var pricingTable: PricingTable?
 
             public init(
+                activeEntitlements: ActiveEntitlements? = nil,
                 buyButton: BuyButton? = nil,
+                customerPortal: CustomerPortal? = nil,
                 customerSheet: CustomerSheet? = nil,
                 mobilePaymentElement: MobilePaymentElement? = nil,
                 paymentElement: PaymentElement? = nil,
                 pricingTable: PricingTable? = nil
             ) {
+                self.activeEntitlements = activeEntitlements
                 self.buyButton = buyButton
+                self.customerPortal = customerPortal
                 self.customerSheet = customerSheet
                 self.mobilePaymentElement = mobilePaymentElement
                 self.paymentElement = paymentElement
                 self.pricingTable = pricingTable
             }
 
+            /// This hash contains whether the active entitlements is enabled.
+            public struct ActiveEntitlements: Codable, Hashable, Sendable {
+                /// Whether the active entitlements is enabled.
+                public var enabled: Bool?
+
+                public init(
+                    enabled: Bool? = nil
+                ) {
+                    self.enabled = enabled
+                }
+            }
+
             /// This hash contains whether the buy button is enabled.
             public struct BuyButton: Codable, Hashable, Sendable {
                 /// Whether the buy button is enabled.
+                public var enabled: Bool?
+
+                public init(
+                    enabled: Bool? = nil
+                ) {
+                    self.enabled = enabled
+                }
+            }
+
+            /// This hash contains whether the customer portal is enabled.
+            public struct CustomerPortal: Codable, Hashable, Sendable {
+                /// Whether the customer portal is enabled.
                 public var enabled: Bool?
 
                 public init(

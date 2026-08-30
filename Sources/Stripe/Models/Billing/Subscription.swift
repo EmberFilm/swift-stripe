@@ -372,16 +372,20 @@ extension Stripe.Billing {
             public var comment: String?
             /// The customer submitted reason for why they canceled, if the subscription was canceled explicitly by the user.
             public var feedback: Feedback?
+            /// Customized feedback options that provide deeper insight into why the subscription was canceled, if the subscription.
+            @Expandable<Stripe.Billing.FeedbackOption, String> public var feedbackOption: String?
             /// Why this subscription was canceled.
             public var reason: Reason?
 
             public init(
                 comment: String? = nil,
                 feedback: Feedback? = nil,
+                feedbackOption: String? = nil,
                 reason: Reason? = nil
             ) {
                 self.comment = comment
                 self.feedback = feedback
+                self._feedbackOption = Expandable(id: feedbackOption)
                 self.reason = reason
             }
 
@@ -507,6 +511,7 @@ extension Stripe.Billing {
                 case auBecsDebit = "au_becs_debit"
                 case bacsDebit = "bacs_debit"
                 case bancontact
+                case billie
                 case boleto
                 case card
                 case cashapp
@@ -559,6 +564,8 @@ extension Stripe.Billing {
                 public var acssDebit: Stripe.Shared.AcssDebit?
                 /// This sub-hash contains details about the Bancontact payment method options to pass to invoices created by the.
                 public var bancontact: Stripe.Shared.Bancontact?
+                /// This sub-hash contains details about the Billie payment method options to pass to invoices created by the.
+                public var billie: Billie?
                 /// This sub-hash contains details about the Card payment method options to pass to invoices created by the subscription.
                 @Boxed public var card: Card?
                 /// This sub-hash contains details about the Bank transfer payment method options to pass to invoices created by the.
@@ -579,6 +586,7 @@ extension Stripe.Billing {
                 public init(
                     acssDebit: Stripe.Shared.AcssDebit? = nil,
                     bancontact: Stripe.Shared.Bancontact? = nil,
+                    billie: Billie? = nil,
                     card: Card? = nil,
                     customerBalance: Stripe.Shared.CustomerBalance? = nil,
                     konbini: Stripe.Shared.Konbini? = nil,
@@ -590,6 +598,7 @@ extension Stripe.Billing {
                 ) {
                     self.acssDebit = acssDebit
                     self.bancontact = bancontact
+                    self.billie = billie
                     self._card = Boxed(wrappedValue: card)
                     self.customerBalance = customerBalance
                     self.konbini = konbini
@@ -598,6 +607,10 @@ extension Stripe.Billing {
                     self.sepaDebit = sepaDebit
                     self.upi = upi
                     self.usBankAccount = usBankAccount
+                }
+
+                public struct Billie: Codable, Hashable, Sendable {
+                    public init() {}
                 }
 
                 public struct Card: Codable, Hashable, Sendable {
