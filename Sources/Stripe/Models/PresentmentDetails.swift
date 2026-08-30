@@ -13,7 +13,9 @@
 //===----------------------------------------------------------------------===//
 
 extension Stripe {
-    /// The amount and currency a payment was presented to the customer in, when that differs. from the settlement currency.
+    /// The amount and currency a payment was presented to the customer in.
+    ///
+    /// Present when that differs from the settlement currency.
     ///
     /// Shared by Charge and PaymentIntent, which the spec backs with one schema.
     public struct PresentmentDetails: Codable, Hashable, Sendable {
