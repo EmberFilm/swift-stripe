@@ -1,0 +1,776 @@
+//===----------------------------------------------------------------------===//
+//
+// This source file is part of the swift-stripe open source project
+//
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
+//
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
+
+import StripeCheckout
+import StripeCore
+import StripeIssuing
+import StripeModels
+import StripeProducts
+
+#if canImport(FoundationEssentials)
+import FoundationEssentials
+#else
+import Foundation
+#endif
+
+extension Stripe.Billing.Customer.Portal.Configuration {
+    public enum Create {}
+    public enum List {}
+    public enum Retrieve {}
+    public enum Update {}
+}
+
+// POST /v1/billing_portal/configurations
+extension Stripe.Billing.Customer.Portal.Configuration.Create {
+    public struct Request: Codable, Hashable, Sendable {
+        /// The business information shown to customers in the portal.
+        public var businessProfile: BusinessProfile?
+        /// The default URL to redirect customers to when they click on the portal's link to return to your website.
+        public var defaultReturnUrl: String?
+        /// Specifies which fields in the response should be expanded.
+        public var expand: [String]?
+        /// Information about the features available in the portal.
+        public var features: Features
+        /// The hosted login page for this configuration.
+        public var loginPage: LoginPage?
+        /// Set of key-value pairs that you can attach to an object.
+        public var metadata: [String: String]?
+        /// The name of the configuration.
+        public var name: String?
+
+        public init(
+            businessProfile: BusinessProfile? = nil,
+            defaultReturnUrl: String? = nil,
+            expand: [String]? = nil,
+            features: Features,
+            loginPage: LoginPage? = nil,
+            metadata: [String: String]? = nil,
+            name: String? = nil
+        ) {
+            self.businessProfile = businessProfile
+            self.defaultReturnUrl = defaultReturnUrl
+            self.expand = expand
+            self.features = features
+            self.loginPage = loginPage
+            self.metadata = metadata
+            self.name = name
+        }
+
+        /// The business information shown to customers in the portal.
+        public struct BusinessProfile: Codable, Hashable, Sendable {
+            /// The messaging shown to customers in the portal.
+            public var headline: String?
+            /// A link to the business’s publicly available privacy policy.
+            public var privacyPolicyUrl: String?
+            /// A link to the business’s publicly available terms of service.
+            public var termsOfServiceUrl: String?
+
+            public init(
+                headline: String? = nil,
+                privacyPolicyUrl: String? = nil,
+                termsOfServiceUrl: String? = nil
+            ) {
+                self.headline = headline
+                self.privacyPolicyUrl = privacyPolicyUrl
+                self.termsOfServiceUrl = termsOfServiceUrl
+            }
+        }
+
+        /// Information about the features available in the portal.
+        public struct Features: Codable, Hashable, Sendable {
+            /// Information about updating the customer details in the portal.
+            public var customerUpdate: CustomerUpdate?
+            /// Information about showing the billing history in the portal.
+            public var invoiceHistory: InvoiceHistory?
+            /// Information about updating payment methods in the portal.
+            public var paymentMethodUpdate: PaymentMethodUpdate?
+            /// Information about canceling subscriptions in the portal.
+            public var subscriptionCancel: SubscriptionCancel?
+            /// Information about updating subscriptions in the portal.
+            public var subscriptionUpdate: SubscriptionUpdate?
+
+            public init(
+                customerUpdate: CustomerUpdate? = nil,
+                invoiceHistory: InvoiceHistory? = nil,
+                paymentMethodUpdate: PaymentMethodUpdate? = nil,
+                subscriptionCancel: SubscriptionCancel? = nil,
+                subscriptionUpdate: SubscriptionUpdate? = nil
+            ) {
+                self.customerUpdate = customerUpdate
+                self.invoiceHistory = invoiceHistory
+                self.paymentMethodUpdate = paymentMethodUpdate
+                self.subscriptionCancel = subscriptionCancel
+                self.subscriptionUpdate = subscriptionUpdate
+            }
+
+            /// Information about updating the customer details in the portal.
+            public struct CustomerUpdate: Codable, Hashable, Sendable {
+                /// The types of customer updates that are supported.
+                public var allowedUpdates: Stripe.Clearable<[AllowedUpdates]>?
+                /// Whether the feature is enabled.
+                public var enabled: Bool
+
+                public init(
+                    allowedUpdates: Stripe.Clearable<[AllowedUpdates]>? = nil,
+                    enabled: Bool
+                ) {
+                    self.allowedUpdates = allowedUpdates
+                    self.enabled = enabled
+                }
+
+                public enum AllowedUpdates: String, Codable, Hashable, Sendable {
+                    case address
+                    case email
+                    case name
+                    case phone
+                    case shipping
+                    case taxId = "tax_id"
+                }
+            }
+
+            /// Information about showing the billing history in the portal.
+            public struct InvoiceHistory: Codable, Hashable, Sendable {
+                /// Whether the feature is enabled.
+                public var enabled: Bool
+
+                public init(
+                    enabled: Bool
+                ) {
+                    self.enabled = enabled
+                }
+            }
+
+            /// Information about updating payment methods in the portal.
+            public struct PaymentMethodUpdate: Codable, Hashable, Sendable {
+                /// Whether the feature is enabled.
+                public var enabled: Bool
+                /// The Payment Method Configuration to use for this portal session.
+                public var paymentMethodConfiguration: String?
+
+                public init(
+                    enabled: Bool,
+                    paymentMethodConfiguration: String? = nil
+                ) {
+                    self.enabled = enabled
+                    self.paymentMethodConfiguration = paymentMethodConfiguration
+                }
+            }
+
+            /// Information about canceling subscriptions in the portal.
+            public struct SubscriptionCancel: Codable, Hashable, Sendable {
+                /// Whether the cancellation reasons will be collected in the portal and which options are exposed to the customer.
+                public var cancellationReason: CancellationReason?
+                /// Whether the feature is enabled.
+                public var enabled: Bool
+                /// Whether to cancel subscriptions immediately or at the end of the billing period.
+                public var mode: Mode?
+                /// Whether to create prorations when canceling subscriptions.
+                public var prorationBehavior: ProrationBehavior?
+
+                public init(
+                    cancellationReason: CancellationReason? = nil,
+                    enabled: Bool,
+                    mode: Mode? = nil,
+                    prorationBehavior: ProrationBehavior? = nil
+                ) {
+                    self.cancellationReason = cancellationReason
+                    self.enabled = enabled
+                    self.mode = mode
+                    self.prorationBehavior = prorationBehavior
+                }
+
+                public enum Mode: String, Codable, Hashable, Sendable {
+                    case atPeriodEnd = "at_period_end"
+                    case immediately
+                }
+
+                public enum ProrationBehavior: String, Codable, Hashable, Sendable {
+                    case alwaysInvoice = "always_invoice"
+                    case createProrations = "create_prorations"
+                    case none
+                }
+
+                /// Whether the cancellation reasons will be collected in the portal and which options are exposed to the customer.
+                public struct CancellationReason: Codable, Hashable, Sendable {
+                    /// Whether the feature is enabled.
+                    public var enabled: Bool
+                    /// The IDs of custom feedback options to use for this cancellation reason.
+                    public var feedbackOptions: Stripe.Clearable<[String]>?
+                    /// Which cancellation reasons will be given as options to the customer.
+                    public var options: Stripe.Clearable<[Options]>
+
+                    public init(
+                        enabled: Bool,
+                        feedbackOptions: Stripe.Clearable<[String]>? = nil,
+                        options: Stripe.Clearable<[Options]>
+                    ) {
+                        self.enabled = enabled
+                        self.feedbackOptions = feedbackOptions
+                        self.options = options
+                    }
+
+                    public enum Options: String, Codable, Hashable, Sendable {
+                        case customerService = "customer_service"
+                        case lowQuality = "low_quality"
+                        case missingFeatures = "missing_features"
+                        case other
+                        case switchedService = "switched_service"
+                        case tooComplex = "too_complex"
+                        case tooExpensive = "too_expensive"
+                        case unused
+                    }
+                }
+            }
+
+            /// Information about updating subscriptions in the portal.
+            public struct SubscriptionUpdate: Codable, Hashable, Sendable {
+                /// Determines the value to use for the billing cycle anchor on subscription updates.
+                public var billingCycleAnchor: BillingCycleAnchor?
+                /// The types of subscription updates that are supported.
+                public var defaultAllowedUpdates: Stripe.Clearable<[DefaultAllowedUpdates]>?
+                /// Whether the feature is enabled.
+                public var enabled: Bool
+                /// The list of up to 10 products that support subscription updates.
+                public var products: Stripe.Clearable<[Products]>?
+                /// Determines how to handle prorations resulting from subscription updates.
+                public var prorationBehavior: ProrationBehavior?
+                /// Setting to control when an update should be scheduled at the end of the period instead of applying immediately.
+                public var scheduleAtPeriodEnd: ScheduleAtPeriodEnd?
+                /// The behavior when updating a subscription that is trialing.
+                public var trialUpdateBehavior: TrialUpdateBehavior?
+
+                public init(
+                    billingCycleAnchor: BillingCycleAnchor? = nil,
+                    defaultAllowedUpdates: Stripe.Clearable<[DefaultAllowedUpdates]>? = nil,
+                    enabled: Bool,
+                    products: Stripe.Clearable<[Products]>? = nil,
+                    prorationBehavior: ProrationBehavior? = nil,
+                    scheduleAtPeriodEnd: ScheduleAtPeriodEnd? = nil,
+                    trialUpdateBehavior: TrialUpdateBehavior? = nil
+                ) {
+                    self.billingCycleAnchor = billingCycleAnchor
+                    self.defaultAllowedUpdates = defaultAllowedUpdates
+                    self.enabled = enabled
+                    self.products = products
+                    self.prorationBehavior = prorationBehavior
+                    self.scheduleAtPeriodEnd = scheduleAtPeriodEnd
+                    self.trialUpdateBehavior = trialUpdateBehavior
+                }
+
+                public enum BillingCycleAnchor: String, Codable, Hashable, Sendable {
+                    case now
+                    case unchanged
+                }
+
+                public enum DefaultAllowedUpdates: String, Codable, Hashable, Sendable {
+                    case price
+                    case promotionCode = "promotion_code"
+                    case quantity
+                }
+
+                public enum ProrationBehavior: String, Codable, Hashable, Sendable {
+                    case alwaysInvoice = "always_invoice"
+                    case createProrations = "create_prorations"
+                    case none
+                }
+
+                public enum TrialUpdateBehavior: String, Codable, Hashable, Sendable {
+                    case continueTrial = "continue_trial"
+                    case endTrial = "end_trial"
+                }
+
+                public struct Products: Codable, Hashable, Sendable {
+                    /// Control whether the quantity of the product can be adjusted.
+                    public var adjustableQuantity: AdjustableQuantity?
+                    /// The list of price IDs for the product that a subscription can be updated to.
+                    public var prices: [String]
+                    /// The product id.
+                    public var product: String
+
+                    public init(
+                        adjustableQuantity: AdjustableQuantity? = nil,
+                        prices: [String],
+                        product: String
+                    ) {
+                        self.adjustableQuantity = adjustableQuantity
+                        self.prices = prices
+                        self.product = product
+                    }
+
+                    /// Control whether the quantity of the product can be adjusted.
+                    public struct AdjustableQuantity: Codable, Hashable, Sendable {
+                        /// Set to true if the quantity can be adjusted to any non-negative integer.
+                        public var enabled: Bool
+                        /// The maximum quantity that can be set for the product.
+                        public var maximum: Int?
+                        /// The minimum quantity that can be set for the product.
+                        public var minimum: Int?
+
+                        public init(
+                            enabled: Bool,
+                            maximum: Int? = nil,
+                            minimum: Int? = nil
+                        ) {
+                            self.enabled = enabled
+                            self.maximum = maximum
+                            self.minimum = minimum
+                        }
+                    }
+                }
+
+                /// Setting to control when an update should be scheduled at the end of the period instead of applying immediately.
+                public struct ScheduleAtPeriodEnd: Codable, Hashable, Sendable {
+                    /// List of conditions.
+                    public var conditions: [Conditions]?
+
+                    public init(
+                        conditions: [Conditions]? = nil
+                    ) {
+                        self.conditions = conditions
+                    }
+
+                    public struct Conditions: Codable, Hashable, Sendable {
+                        /// The type of condition.
+                        public var `type`: Type
+
+                        public init(
+                            `type`: Type
+                        ) {
+                            self.`type` = `type`
+                        }
+
+                        public enum `Type`: String, Codable, Hashable, Sendable {
+                            case decreasingItemAmount = "decreasing_item_amount"
+                            case shorteningInterval = "shortening_interval"
+                        }
+                    }
+                }
+            }
+        }
+
+        /// The hosted login page for this configuration.
+        public struct LoginPage: Codable, Hashable, Sendable {
+            /// Set to `true` to generate a shareable URL `login_page.url` that will take your customers to a hosted login page for.
+            public var enabled: Bool
+
+            public init(
+                enabled: Bool
+            ) {
+                self.enabled = enabled
+            }
+        }
+    }
+
+    public typealias Response = Stripe.Billing.Customer.Portal.Configuration
+}
+
+// GET /v1/billing_portal/configurations
+extension Stripe.Billing.Customer.Portal.Configuration.List {
+    public struct Request: Codable, Hashable, Sendable {
+        /// Only return configurations that are active or inactive (e.g., pass `true` to only list active configurations).
+        public var active: Bool?
+        /// A cursor for use in pagination.
+        public var endingBefore: String?
+        /// Specifies which fields in the response should be expanded.
+        public var expand: [String]?
+        /// Only return the default or non-default configurations (e.g., pass `true` to only list the default configuration).
+        public var isDefault: Bool?
+        /// A limit on the number of objects to be returned.
+        public var limit: Int?
+        /// A cursor for use in pagination.
+        public var startingAfter: String?
+
+        public init(
+            active: Bool? = nil,
+            endingBefore: String? = nil,
+            expand: [String]? = nil,
+            isDefault: Bool? = nil,
+            limit: Int? = nil,
+            startingAfter: String? = nil
+        ) {
+            self.active = active
+            self.endingBefore = endingBefore
+            self.expand = expand
+            self.isDefault = isDefault
+            self.limit = limit
+            self.startingAfter = startingAfter
+        }
+    }
+
+    public typealias Response = Stripe.Page<Stripe.Billing.Customer.Portal.Configuration>
+}
+
+// GET /v1/billing_portal/configurations/{configuration}
+extension Stripe.Billing.Customer.Portal.Configuration.Retrieve {
+    public struct Request: Codable, Hashable, Sendable {
+        /// Specifies which fields in the response should be expanded.
+        public var expand: [String]?
+
+        public init(
+            expand: [String]? = nil
+        ) {
+            self.expand = expand
+        }
+    }
+
+    public typealias Response = Stripe.Billing.Customer.Portal.Configuration
+}
+
+// POST /v1/billing_portal/configurations/{configuration}
+extension Stripe.Billing.Customer.Portal.Configuration.Update {
+    public struct Request: Codable, Hashable, Sendable {
+        /// Whether the configuration is active and can be used to create portal sessions.
+        public var active: Bool?
+        /// The business information shown to customers in the portal.
+        public var businessProfile: BusinessProfile?
+        /// The default URL to redirect customers to when they click on the portal's link to return to your website.
+        public var defaultReturnUrl: String?
+        /// Specifies which fields in the response should be expanded.
+        public var expand: [String]?
+        /// Information about the features available in the portal.
+        public var features: Features?
+        /// The hosted login page for this configuration.
+        public var loginPage: LoginPage?
+        /// Set of key-value pairs that you can attach to an object.
+        public var metadata: Stripe.Clearable<[String: String]>?
+        /// The name of the configuration.
+        public var name: String?
+
+        public init(
+            active: Bool? = nil,
+            businessProfile: BusinessProfile? = nil,
+            defaultReturnUrl: String? = nil,
+            expand: [String]? = nil,
+            features: Features? = nil,
+            loginPage: LoginPage? = nil,
+            metadata: Stripe.Clearable<[String: String]>? = nil,
+            name: String? = nil
+        ) {
+            self.active = active
+            self.businessProfile = businessProfile
+            self.defaultReturnUrl = defaultReturnUrl
+            self.expand = expand
+            self.features = features
+            self.loginPage = loginPage
+            self.metadata = metadata
+            self.name = name
+        }
+
+        /// The business information shown to customers in the portal.
+        public struct BusinessProfile: Codable, Hashable, Sendable {
+            /// The messaging shown to customers in the portal.
+            public var headline: String?
+            /// A link to the business’s publicly available privacy policy.
+            public var privacyPolicyUrl: String?
+            /// A link to the business’s publicly available terms of service.
+            public var termsOfServiceUrl: String?
+
+            public init(
+                headline: String? = nil,
+                privacyPolicyUrl: String? = nil,
+                termsOfServiceUrl: String? = nil
+            ) {
+                self.headline = headline
+                self.privacyPolicyUrl = privacyPolicyUrl
+                self.termsOfServiceUrl = termsOfServiceUrl
+            }
+        }
+
+        /// Information about the features available in the portal.
+        public struct Features: Codable, Hashable, Sendable {
+            /// Information about updating the customer details in the portal.
+            public var customerUpdate: CustomerUpdate?
+            /// Information about showing the billing history in the portal.
+            public var invoiceHistory: InvoiceHistory?
+            /// Information about updating payment methods in the portal.
+            public var paymentMethodUpdate: PaymentMethodUpdate?
+            /// Information about canceling subscriptions in the portal.
+            public var subscriptionCancel: SubscriptionCancel?
+            /// Information about updating subscriptions in the portal.
+            public var subscriptionUpdate: SubscriptionUpdate?
+
+            public init(
+                customerUpdate: CustomerUpdate? = nil,
+                invoiceHistory: InvoiceHistory? = nil,
+                paymentMethodUpdate: PaymentMethodUpdate? = nil,
+                subscriptionCancel: SubscriptionCancel? = nil,
+                subscriptionUpdate: SubscriptionUpdate? = nil
+            ) {
+                self.customerUpdate = customerUpdate
+                self.invoiceHistory = invoiceHistory
+                self.paymentMethodUpdate = paymentMethodUpdate
+                self.subscriptionCancel = subscriptionCancel
+                self.subscriptionUpdate = subscriptionUpdate
+            }
+
+            /// Information about updating the customer details in the portal.
+            public struct CustomerUpdate: Codable, Hashable, Sendable {
+                /// The types of customer updates that are supported.
+                public var allowedUpdates: Stripe.Clearable<[AllowedUpdates]>?
+                /// Whether the feature is enabled.
+                public var enabled: Bool?
+
+                public init(
+                    allowedUpdates: Stripe.Clearable<[AllowedUpdates]>? = nil,
+                    enabled: Bool? = nil
+                ) {
+                    self.allowedUpdates = allowedUpdates
+                    self.enabled = enabled
+                }
+
+                public enum AllowedUpdates: String, Codable, Hashable, Sendable {
+                    case address
+                    case email
+                    case name
+                    case phone
+                    case shipping
+                    case taxId = "tax_id"
+                }
+            }
+
+            /// Information about showing the billing history in the portal.
+            public struct InvoiceHistory: Codable, Hashable, Sendable {
+                /// Whether the feature is enabled.
+                public var enabled: Bool
+
+                public init(
+                    enabled: Bool
+                ) {
+                    self.enabled = enabled
+                }
+            }
+
+            /// Information about updating payment methods in the portal.
+            public struct PaymentMethodUpdate: Codable, Hashable, Sendable {
+                /// Whether the feature is enabled.
+                public var enabled: Bool
+                /// The Payment Method Configuration to use for this portal session.
+                public var paymentMethodConfiguration: String?
+
+                public init(
+                    enabled: Bool,
+                    paymentMethodConfiguration: String? = nil
+                ) {
+                    self.enabled = enabled
+                    self.paymentMethodConfiguration = paymentMethodConfiguration
+                }
+            }
+
+            /// Information about canceling subscriptions in the portal.
+            public struct SubscriptionCancel: Codable, Hashable, Sendable {
+                /// Whether the cancellation reasons will be collected in the portal and which options are exposed to the customer.
+                public var cancellationReason: CancellationReason?
+                /// Whether the feature is enabled.
+                public var enabled: Bool?
+                /// Whether to cancel subscriptions immediately or at the end of the billing period.
+                public var mode: Mode?
+                /// Whether to create prorations when canceling subscriptions.
+                public var prorationBehavior: ProrationBehavior?
+
+                public init(
+                    cancellationReason: CancellationReason? = nil,
+                    enabled: Bool? = nil,
+                    mode: Mode? = nil,
+                    prorationBehavior: ProrationBehavior? = nil
+                ) {
+                    self.cancellationReason = cancellationReason
+                    self.enabled = enabled
+                    self.mode = mode
+                    self.prorationBehavior = prorationBehavior
+                }
+
+                public enum Mode: String, Codable, Hashable, Sendable {
+                    case atPeriodEnd = "at_period_end"
+                    case immediately
+                }
+
+                public enum ProrationBehavior: String, Codable, Hashable, Sendable {
+                    case alwaysInvoice = "always_invoice"
+                    case createProrations = "create_prorations"
+                    case none
+                }
+
+                /// Whether the cancellation reasons will be collected in the portal and which options are exposed to the customer.
+                public struct CancellationReason: Codable, Hashable, Sendable {
+                    /// Whether the feature is enabled.
+                    public var enabled: Bool
+                    /// The IDs of custom feedback options to use for this cancellation reason.
+                    public var feedbackOptions: Stripe.Clearable<[String]>?
+                    /// Which cancellation reasons will be given as options to the customer.
+                    public var options: Stripe.Clearable<[Options]>?
+
+                    public init(
+                        enabled: Bool,
+                        feedbackOptions: Stripe.Clearable<[String]>? = nil,
+                        options: Stripe.Clearable<[Options]>? = nil
+                    ) {
+                        self.enabled = enabled
+                        self.feedbackOptions = feedbackOptions
+                        self.options = options
+                    }
+
+                    public enum Options: String, Codable, Hashable, Sendable {
+                        case customerService = "customer_service"
+                        case lowQuality = "low_quality"
+                        case missingFeatures = "missing_features"
+                        case other
+                        case switchedService = "switched_service"
+                        case tooComplex = "too_complex"
+                        case tooExpensive = "too_expensive"
+                        case unused
+                    }
+                }
+            }
+
+            /// Information about updating subscriptions in the portal.
+            public struct SubscriptionUpdate: Codable, Hashable, Sendable {
+                /// Determines the value to use for the billing cycle anchor on subscription updates.
+                public var billingCycleAnchor: BillingCycleAnchor?
+                /// The types of subscription updates that are supported.
+                public var defaultAllowedUpdates: Stripe.Clearable<[DefaultAllowedUpdates]>?
+                /// Whether the feature is enabled.
+                public var enabled: Bool?
+                /// The list of up to 10 products that support subscription updates.
+                public var products: Stripe.Clearable<[Products]>?
+                /// Determines how to handle prorations resulting from subscription updates.
+                public var prorationBehavior: ProrationBehavior?
+                /// Setting to control when an update should be scheduled at the end of the period instead of applying immediately.
+                public var scheduleAtPeriodEnd: ScheduleAtPeriodEnd?
+                /// The behavior when updating a subscription that is trialing.
+                public var trialUpdateBehavior: TrialUpdateBehavior?
+
+                public init(
+                    billingCycleAnchor: BillingCycleAnchor? = nil,
+                    defaultAllowedUpdates: Stripe.Clearable<[DefaultAllowedUpdates]>? = nil,
+                    enabled: Bool? = nil,
+                    products: Stripe.Clearable<[Products]>? = nil,
+                    prorationBehavior: ProrationBehavior? = nil,
+                    scheduleAtPeriodEnd: ScheduleAtPeriodEnd? = nil,
+                    trialUpdateBehavior: TrialUpdateBehavior? = nil
+                ) {
+                    self.billingCycleAnchor = billingCycleAnchor
+                    self.defaultAllowedUpdates = defaultAllowedUpdates
+                    self.enabled = enabled
+                    self.products = products
+                    self.prorationBehavior = prorationBehavior
+                    self.scheduleAtPeriodEnd = scheduleAtPeriodEnd
+                    self.trialUpdateBehavior = trialUpdateBehavior
+                }
+
+                public enum BillingCycleAnchor: String, Codable, Hashable, Sendable {
+                    case now
+                    case unchanged
+                }
+
+                public enum DefaultAllowedUpdates: String, Codable, Hashable, Sendable {
+                    case price
+                    case promotionCode = "promotion_code"
+                    case quantity
+                }
+
+                public enum ProrationBehavior: String, Codable, Hashable, Sendable {
+                    case alwaysInvoice = "always_invoice"
+                    case createProrations = "create_prorations"
+                    case none
+                }
+
+                public enum TrialUpdateBehavior: String, Codable, Hashable, Sendable {
+                    case continueTrial = "continue_trial"
+                    case endTrial = "end_trial"
+                }
+
+                public struct Products: Codable, Hashable, Sendable {
+                    /// Control whether the quantity of the product can be adjusted.
+                    public var adjustableQuantity: AdjustableQuantity?
+                    /// The list of price IDs for the product that a subscription can be updated to.
+                    public var prices: [String]
+                    /// The product id.
+                    public var product: String
+
+                    public init(
+                        adjustableQuantity: AdjustableQuantity? = nil,
+                        prices: [String],
+                        product: String
+                    ) {
+                        self.adjustableQuantity = adjustableQuantity
+                        self.prices = prices
+                        self.product = product
+                    }
+
+                    /// Control whether the quantity of the product can be adjusted.
+                    public struct AdjustableQuantity: Codable, Hashable, Sendable {
+                        /// Set to true if the quantity can be adjusted to any non-negative integer.
+                        public var enabled: Bool
+                        /// The maximum quantity that can be set for the product.
+                        public var maximum: Int?
+                        /// The minimum quantity that can be set for the product.
+                        public var minimum: Int?
+
+                        public init(
+                            enabled: Bool,
+                            maximum: Int? = nil,
+                            minimum: Int? = nil
+                        ) {
+                            self.enabled = enabled
+                            self.maximum = maximum
+                            self.minimum = minimum
+                        }
+                    }
+                }
+
+                /// Setting to control when an update should be scheduled at the end of the period instead of applying immediately.
+                public struct ScheduleAtPeriodEnd: Codable, Hashable, Sendable {
+                    /// List of conditions.
+                    public var conditions: Stripe.Clearable<[Conditions]>?
+
+                    public init(
+                        conditions: Stripe.Clearable<[Conditions]>? = nil
+                    ) {
+                        self.conditions = conditions
+                    }
+
+                    public struct Conditions: Codable, Hashable, Sendable {
+                        /// The type of condition.
+                        public var `type`: Type
+
+                        public init(
+                            `type`: Type
+                        ) {
+                            self.`type` = `type`
+                        }
+
+                        public enum `Type`: String, Codable, Hashable, Sendable {
+                            case decreasingItemAmount = "decreasing_item_amount"
+                            case shorteningInterval = "shortening_interval"
+                        }
+                    }
+                }
+            }
+        }
+
+        /// The hosted login page for this configuration.
+        public struct LoginPage: Codable, Hashable, Sendable {
+            /// Set to `true` to generate a shareable URL `login_page.url` that will take your customers to a hosted login page for.
+            public var enabled: Bool
+
+            public init(
+                enabled: Bool
+            ) {
+                self.enabled = enabled
+            }
+        }
+    }
+
+    public typealias Response = Stripe.Billing.Customer.Portal.Configuration
+}

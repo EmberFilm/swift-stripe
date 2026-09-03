@@ -1,0 +1,391 @@
+//===----------------------------------------------------------------------===//
+//
+// This source file is part of the swift-stripe open source project
+//
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
+//
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
+
+import StripeCore
+import StripeModels
+
+#if canImport(FoundationEssentials)
+import FoundationEssentials
+#else
+import Foundation
+#endif
+
+extension Stripe.Terminal.Locations.Location {
+    public enum Create {}
+    public enum Delete {}
+    public enum List {}
+    public enum Retrieve {}
+    public enum Update {}
+}
+
+// POST /v1/terminal/locations
+extension Stripe.Terminal.Locations.Location.Create {
+    public struct Request: Codable, Hashable, Sendable {
+        /// The full address of the location.
+        public var address: Address?
+        /// The Kana variation of the full address of the location (Japan only).
+        public var addressKana: AddressKana?
+        /// The Kanji variation of the full address of the location (Japan only).
+        public var addressKanji: AddressKanji?
+        /// The ID of a configuration that will be used to customize all readers in this location.
+        public var configurationOverrides: String?
+        /// A name for the location.
+        public var displayName: String?
+        /// The Kana variation of the name for the location (Japan only).
+        public var displayNameKana: String?
+        /// The Kanji variation of the name for the location (Japan only).
+        public var displayNameKanji: String?
+        /// Specifies which fields in the response should be expanded.
+        public var expand: [String]?
+        /// Set of key-value pairs that you can attach to an object.
+        public var metadata: Stripe.Clearable<[String: String]>?
+        /// The phone number for the location.
+        public var phone: String?
+
+        public init(
+            address: Address? = nil,
+            addressKana: AddressKana? = nil,
+            addressKanji: AddressKanji? = nil,
+            configurationOverrides: String? = nil,
+            displayName: String? = nil,
+            displayNameKana: String? = nil,
+            displayNameKanji: String? = nil,
+            expand: [String]? = nil,
+            metadata: Stripe.Clearable<[String: String]>? = nil,
+            phone: String? = nil
+        ) {
+            self.address = address
+            self.addressKana = addressKana
+            self.addressKanji = addressKanji
+            self.configurationOverrides = configurationOverrides
+            self.displayName = displayName
+            self.displayNameKana = displayNameKana
+            self.displayNameKanji = displayNameKanji
+            self.expand = expand
+            self.metadata = metadata
+            self.phone = phone
+        }
+
+        /// The full address of the location.
+        public struct Address: Codable, Hashable, Sendable {
+            /// City, district, suburb, town, or village.
+            public var city: String?
+            /// Two-letter country code (ISO 3166-1 alpha-2).
+            public var country: String
+            /// Address line 1, such as the street, PO Box, or company name.
+            public var line1: String?
+            /// Address line 2, such as the apartment, suite, unit, or building.
+            public var line2: String?
+            /// ZIP or postal code.
+            public var postalCode: String?
+            /// State, county, province, or region (ISO 3166-2).
+            public var state: String?
+
+            public init(
+                city: String? = nil,
+                country: String,
+                line1: String? = nil,
+                line2: String? = nil,
+                postalCode: String? = nil,
+                state: String? = nil
+            ) {
+                self.city = city
+                self.country = country
+                self.line1 = line1
+                self.line2 = line2
+                self.postalCode = postalCode
+                self.state = state
+            }
+        }
+
+        /// The Kana variation of the full address of the location (Japan only).
+        public struct AddressKana: Codable, Hashable, Sendable {
+            /// City or ward.
+            public var city: String?
+            /// Two-letter country code (ISO 3166-1 alpha-2).
+            public var country: String?
+            /// Block or building number.
+            public var line1: String?
+            /// Building details.
+            public var line2: String?
+            /// Postal code.
+            public var postalCode: String?
+            /// Prefecture.
+            public var state: String?
+            /// Town or cho-me.
+            public var town: String?
+
+            public init(
+                city: String? = nil,
+                country: String? = nil,
+                line1: String? = nil,
+                line2: String? = nil,
+                postalCode: String? = nil,
+                state: String? = nil,
+                town: String? = nil
+            ) {
+                self.city = city
+                self.country = country
+                self.line1 = line1
+                self.line2 = line2
+                self.postalCode = postalCode
+                self.state = state
+                self.town = town
+            }
+        }
+
+        /// The Kanji variation of the full address of the location (Japan only).
+        public struct AddressKanji: Codable, Hashable, Sendable {
+            /// City or ward.
+            public var city: String?
+            /// Two-letter country code (ISO 3166-1 alpha-2).
+            public var country: String?
+            /// Block or building number.
+            public var line1: String?
+            /// Building details.
+            public var line2: String?
+            /// Postal code.
+            public var postalCode: String?
+            /// Prefecture.
+            public var state: String?
+            /// Town or cho-me.
+            public var town: String?
+
+            public init(
+                city: String? = nil,
+                country: String? = nil,
+                line1: String? = nil,
+                line2: String? = nil,
+                postalCode: String? = nil,
+                state: String? = nil,
+                town: String? = nil
+            ) {
+                self.city = city
+                self.country = country
+                self.line1 = line1
+                self.line2 = line2
+                self.postalCode = postalCode
+                self.state = state
+                self.town = town
+            }
+        }
+    }
+
+    public typealias Response = Stripe.Terminal.Locations.Location
+}
+
+// DELETE /v1/terminal/locations/{location}
+extension Stripe.Terminal.Locations.Location.Delete {
+    public typealias Response = DeletedObject<Stripe.Terminal.Locations.Location>
+}
+
+// GET /v1/terminal/locations
+extension Stripe.Terminal.Locations.Location.List {
+    public struct Request: Codable, Hashable, Sendable {
+        /// A cursor for use in pagination.
+        public var endingBefore: String?
+        /// Specifies which fields in the response should be expanded.
+        public var expand: [String]?
+        /// A limit on the number of objects to be returned.
+        public var limit: Int?
+        /// A cursor for use in pagination.
+        public var startingAfter: String?
+
+        public init(
+            endingBefore: String? = nil,
+            expand: [String]? = nil,
+            limit: Int? = nil,
+            startingAfter: String? = nil
+        ) {
+            self.endingBefore = endingBefore
+            self.expand = expand
+            self.limit = limit
+            self.startingAfter = startingAfter
+        }
+    }
+
+    public typealias Response = Stripe.Page<Stripe.Terminal.Locations.Location>
+}
+
+// GET /v1/terminal/locations/{location}
+extension Stripe.Terminal.Locations.Location.Retrieve {
+    public struct Request: Codable, Hashable, Sendable {
+        /// Specifies which fields in the response should be expanded.
+        public var expand: [String]?
+
+        public init(
+            expand: [String]? = nil
+        ) {
+            self.expand = expand
+        }
+    }
+
+    public typealias Response = Stripe.Terminal.Locations.Location
+}
+
+// POST /v1/terminal/locations/{location}
+extension Stripe.Terminal.Locations.Location.Update {
+    public struct Request: Codable, Hashable, Sendable {
+        /// The full address of the location.
+        public var address: Address?
+        /// The Kana variation of the full address of the location (Japan only).
+        public var addressKana: AddressKana?
+        /// The Kanji variation of the full address of the location (Japan only).
+        public var addressKanji: AddressKanji?
+        /// The ID of a configuration that will be used to customize all readers in this location.
+        public var configurationOverrides: String?
+        /// A name for the location.
+        public var displayName: String?
+        /// The Kana variation of the name for the location (Japan only).
+        public var displayNameKana: String?
+        /// The Kanji variation of the name for the location (Japan only).
+        public var displayNameKanji: String?
+        /// Specifies which fields in the response should be expanded.
+        public var expand: [String]?
+        /// Set of key-value pairs that you can attach to an object.
+        public var metadata: Stripe.Clearable<[String: String]>?
+        /// The phone number for the location.
+        public var phone: String?
+
+        public init(
+            address: Address? = nil,
+            addressKana: AddressKana? = nil,
+            addressKanji: AddressKanji? = nil,
+            configurationOverrides: String? = nil,
+            displayName: String? = nil,
+            displayNameKana: String? = nil,
+            displayNameKanji: String? = nil,
+            expand: [String]? = nil,
+            metadata: Stripe.Clearable<[String: String]>? = nil,
+            phone: String? = nil
+        ) {
+            self.address = address
+            self.addressKana = addressKana
+            self.addressKanji = addressKanji
+            self.configurationOverrides = configurationOverrides
+            self.displayName = displayName
+            self.displayNameKana = displayNameKana
+            self.displayNameKanji = displayNameKanji
+            self.expand = expand
+            self.metadata = metadata
+            self.phone = phone
+        }
+
+        /// The full address of the location.
+        public struct Address: Codable, Hashable, Sendable {
+            /// City, district, suburb, town, or village.
+            public var city: String?
+            /// Two-letter country code (ISO 3166-1 alpha-2).
+            public var country: String?
+            /// Address line 1, such as the street, PO Box, or company name.
+            public var line1: String?
+            /// Address line 2, such as the apartment, suite, unit, or building.
+            public var line2: String?
+            /// ZIP or postal code.
+            public var postalCode: String?
+            /// State, county, province, or region (ISO 3166-2).
+            public var state: String?
+
+            public init(
+                city: String? = nil,
+                country: String? = nil,
+                line1: String? = nil,
+                line2: String? = nil,
+                postalCode: String? = nil,
+                state: String? = nil
+            ) {
+                self.city = city
+                self.country = country
+                self.line1 = line1
+                self.line2 = line2
+                self.postalCode = postalCode
+                self.state = state
+            }
+        }
+
+        /// The Kana variation of the full address of the location (Japan only).
+        public struct AddressKana: Codable, Hashable, Sendable {
+            /// City or ward.
+            public var city: String?
+            /// Two-letter country code (ISO 3166-1 alpha-2).
+            public var country: String?
+            /// Block or building number.
+            public var line1: String?
+            /// Building details.
+            public var line2: String?
+            /// Postal code.
+            public var postalCode: String?
+            /// Prefecture.
+            public var state: String?
+            /// Town or cho-me.
+            public var town: String?
+
+            public init(
+                city: String? = nil,
+                country: String? = nil,
+                line1: String? = nil,
+                line2: String? = nil,
+                postalCode: String? = nil,
+                state: String? = nil,
+                town: String? = nil
+            ) {
+                self.city = city
+                self.country = country
+                self.line1 = line1
+                self.line2 = line2
+                self.postalCode = postalCode
+                self.state = state
+                self.town = town
+            }
+        }
+
+        /// The Kanji variation of the full address of the location (Japan only).
+        public struct AddressKanji: Codable, Hashable, Sendable {
+            /// City or ward.
+            public var city: String?
+            /// Two-letter country code (ISO 3166-1 alpha-2).
+            public var country: String?
+            /// Block or building number.
+            public var line1: String?
+            /// Building details.
+            public var line2: String?
+            /// Postal code.
+            public var postalCode: String?
+            /// Prefecture.
+            public var state: String?
+            /// Town or cho-me.
+            public var town: String?
+
+            public init(
+                city: String? = nil,
+                country: String? = nil,
+                line1: String? = nil,
+                line2: String? = nil,
+                postalCode: String? = nil,
+                state: String? = nil,
+                town: String? = nil
+            ) {
+                self.city = city
+                self.country = country
+                self.line1 = line1
+                self.line2 = line2
+                self.postalCode = postalCode
+                self.state = state
+                self.town = town
+            }
+        }
+    }
+
+    public typealias Response = Stripe.Terminal.Locations.Location
+}

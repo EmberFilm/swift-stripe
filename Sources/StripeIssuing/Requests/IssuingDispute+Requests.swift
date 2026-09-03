@@ -1,0 +1,792 @@
+//===----------------------------------------------------------------------===//
+//
+// This source file is part of the swift-stripe open source project
+//
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
+//
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
+
+import StripeCore
+import StripeModels
+
+#if canImport(FoundationEssentials)
+import FoundationEssentials
+#else
+import Foundation
+#endif
+
+extension IssuingDispute {
+    public enum Create {}
+    public enum List {}
+    public enum Retrieve {}
+    public enum Submit {}
+    public enum Update {}
+}
+
+// POST /v1/issuing/disputes
+extension IssuingDispute.Create {
+    public struct Request: Codable, Hashable, Sendable {
+        /// The dispute amount in the card's currency and in the smallest currency unit.
+        public var amount: Int?
+        /// Evidence provided for the dispute.
+        public var evidence: Evidence?
+        /// Specifies which fields in the response should be expanded.
+        public var expand: [String]?
+        /// Set of key-value pairs that you can attach to an object.
+        public var metadata: [String: String]?
+        /// The ID of the issuing transaction to create a dispute for.
+        public var transaction: String?
+        /// Params for disputes related to Treasury FinancialAccounts.
+        public var treasury: Treasury?
+
+        public init(
+            amount: Int? = nil,
+            evidence: Evidence? = nil,
+            expand: [String]? = nil,
+            metadata: [String: String]? = nil,
+            transaction: String? = nil,
+            treasury: Treasury? = nil
+        ) {
+            self.amount = amount
+            self.evidence = evidence
+            self.expand = expand
+            self.metadata = metadata
+            self.transaction = transaction
+            self.treasury = treasury
+        }
+
+        /// Evidence provided for the dispute.
+        public struct Evidence: Codable, Hashable, Sendable {
+            /// Evidence provided when `reason` is 'canceled'.
+            public var canceled: Stripe.Clearable<Canceled>?
+            /// Evidence provided when `reason` is 'duplicate'.
+            public var duplicate: Stripe.Clearable<Duplicate>?
+            /// Evidence provided when `reason` is 'fraudulent'.
+            public var fraudulent: Stripe.Clearable<Fraudulent>?
+            /// Evidence provided when `reason` is 'merchandise_not_as_described'.
+            public var merchandiseNotAsDescribed: Stripe.Clearable<MerchandiseNotAsDescribed>?
+            /// Evidence provided when `reason` is 'no_valid_authorization'.
+            public var noValidAuthorization: Stripe.Clearable<NoValidAuthorization>?
+            /// Evidence provided when `reason` is 'not_received'.
+            public var notReceived: Stripe.Clearable<NotReceived>?
+            /// Evidence provided when `reason` is 'other'.
+            public var other: Stripe.Clearable<Other>?
+            /// The reason for filing the dispute.
+            public var reason: Reason?
+            /// Evidence provided when `reason` is 'service_not_as_described'.
+            public var serviceNotAsDescribed: Stripe.Clearable<ServiceNotAsDescribed>?
+
+            public init(
+                canceled: Stripe.Clearable<Canceled>? = nil,
+                duplicate: Stripe.Clearable<Duplicate>? = nil,
+                fraudulent: Stripe.Clearable<Fraudulent>? = nil,
+                merchandiseNotAsDescribed: Stripe.Clearable<MerchandiseNotAsDescribed>? = nil,
+                noValidAuthorization: Stripe.Clearable<NoValidAuthorization>? = nil,
+                notReceived: Stripe.Clearable<NotReceived>? = nil,
+                other: Stripe.Clearable<Other>? = nil,
+                reason: Reason? = nil,
+                serviceNotAsDescribed: Stripe.Clearable<ServiceNotAsDescribed>? = nil
+            ) {
+                self.canceled = canceled
+                self.duplicate = duplicate
+                self.fraudulent = fraudulent
+                self.merchandiseNotAsDescribed = merchandiseNotAsDescribed
+                self.noValidAuthorization = noValidAuthorization
+                self.notReceived = notReceived
+                self.other = other
+                self.reason = reason
+                self.serviceNotAsDescribed = serviceNotAsDescribed
+            }
+
+            public enum Reason: String, Codable, Hashable, Sendable {
+                case canceled
+                case duplicate
+                case fraudulent
+                case merchandiseNotAsDescribed = "merchandise_not_as_described"
+                case noValidAuthorization = "no_valid_authorization"
+                case notReceived = "not_received"
+                case other
+                case serviceNotAsDescribed = "service_not_as_described"
+            }
+
+            public struct Canceled: Codable, Hashable, Sendable {
+                /// Additional documentation supporting the dispute.
+                public var additionalDocumentation: String?
+                /// Date when order was canceled.
+                public var canceledAt: Stripe.Clearable<Date>?
+                /// Whether the cardholder was provided with a cancellation policy.
+                public var cancellationPolicyProvided: Stripe.Clearable<Bool>?
+                /// Reason for canceling the order.
+                public var cancellationReason: String?
+                /// Date when the cardholder expected to receive the product.
+                public var expectedAt: Stripe.Clearable<Date>?
+                /// Explanation of why the cardholder is disputing this transaction.
+                public var explanation: String?
+                /// Description of the merchandise or service that was purchased.
+                public var productDescription: String?
+                /// Whether the product was a merchandise or service.
+                public var productType: ProductType?
+                /// Result of cardholder's attempt to return the product.
+                public var returnStatus: ReturnStatus?
+                /// Date when the product was returned or attempted to be returned.
+                public var returnedAt: Stripe.Clearable<Date>?
+
+                public init(
+                    additionalDocumentation: String? = nil,
+                    canceledAt: Stripe.Clearable<Date>? = nil,
+                    cancellationPolicyProvided: Stripe.Clearable<Bool>? = nil,
+                    cancellationReason: String? = nil,
+                    expectedAt: Stripe.Clearable<Date>? = nil,
+                    explanation: String? = nil,
+                    productDescription: String? = nil,
+                    productType: ProductType? = nil,
+                    returnStatus: ReturnStatus? = nil,
+                    returnedAt: Stripe.Clearable<Date>? = nil
+                ) {
+                    self.additionalDocumentation = additionalDocumentation
+                    self.canceledAt = canceledAt
+                    self.cancellationPolicyProvided = cancellationPolicyProvided
+                    self.cancellationReason = cancellationReason
+                    self.expectedAt = expectedAt
+                    self.explanation = explanation
+                    self.productDescription = productDescription
+                    self.productType = productType
+                    self.returnStatus = returnStatus
+                    self.returnedAt = returnedAt
+                }
+
+                public enum ProductType: String, Codable, Hashable, Sendable {
+                    case value = ""
+                    case merchandise
+                    case service
+                }
+
+                public enum ReturnStatus: String, Codable, Hashable, Sendable {
+                    case value = ""
+                    case merchantRejected = "merchant_rejected"
+                    case successful
+                }
+            }
+
+            public struct Duplicate: Codable, Hashable, Sendable {
+                /// Additional documentation supporting the dispute.
+                public var additionalDocumentation: String?
+                /// Copy of the card statement showing that the product had already been paid for.
+                public var cardStatement: String?
+                /// Copy of the receipt showing that the product had been paid for in cash.
+                public var cashReceipt: String?
+                /// Image of the front and back of the check that was used to pay for the product.
+                public var checkImage: String?
+                /// Explanation of why the cardholder is disputing this transaction.
+                public var explanation: String?
+                /// Transaction (e.g., ipi_...
+                public var originalTransaction: String?
+
+                public init(
+                    additionalDocumentation: String? = nil,
+                    cardStatement: String? = nil,
+                    cashReceipt: String? = nil,
+                    checkImage: String? = nil,
+                    explanation: String? = nil,
+                    originalTransaction: String? = nil
+                ) {
+                    self.additionalDocumentation = additionalDocumentation
+                    self.cardStatement = cardStatement
+                    self.cashReceipt = cashReceipt
+                    self.checkImage = checkImage
+                    self.explanation = explanation
+                    self.originalTransaction = originalTransaction
+                }
+            }
+
+            public struct Fraudulent: Codable, Hashable, Sendable {
+                /// Additional documentation supporting the dispute.
+                public var additionalDocumentation: String?
+                /// Explanation of why the cardholder is disputing this transaction.
+                public var explanation: String?
+
+                public init(
+                    additionalDocumentation: String? = nil,
+                    explanation: String? = nil
+                ) {
+                    self.additionalDocumentation = additionalDocumentation
+                    self.explanation = explanation
+                }
+            }
+
+            public struct MerchandiseNotAsDescribed: Codable, Hashable, Sendable {
+                /// Additional documentation supporting the dispute.
+                public var additionalDocumentation: String?
+                /// Explanation of why the cardholder is disputing this transaction.
+                public var explanation: String?
+                /// Date when the product was received.
+                public var receivedAt: Stripe.Clearable<Date>?
+                /// Description of the cardholder's attempt to return the product.
+                public var returnDescription: String?
+                /// Result of cardholder's attempt to return the product.
+                public var returnStatus: ReturnStatus?
+                /// Date when the product was returned or attempted to be returned.
+                public var returnedAt: Stripe.Clearable<Date>?
+
+                public init(
+                    additionalDocumentation: String? = nil,
+                    explanation: String? = nil,
+                    receivedAt: Stripe.Clearable<Date>? = nil,
+                    returnDescription: String? = nil,
+                    returnStatus: ReturnStatus? = nil,
+                    returnedAt: Stripe.Clearable<Date>? = nil
+                ) {
+                    self.additionalDocumentation = additionalDocumentation
+                    self.explanation = explanation
+                    self.receivedAt = receivedAt
+                    self.returnDescription = returnDescription
+                    self.returnStatus = returnStatus
+                    self.returnedAt = returnedAt
+                }
+
+                public enum ReturnStatus: String, Codable, Hashable, Sendable {
+                    case value = ""
+                    case merchantRejected = "merchant_rejected"
+                    case successful
+                }
+            }
+
+            public struct NoValidAuthorization: Codable, Hashable, Sendable {
+                /// Additional documentation supporting the dispute.
+                public var additionalDocumentation: String?
+                /// Explanation of why the cardholder is disputing this transaction.
+                public var explanation: String?
+
+                public init(
+                    additionalDocumentation: String? = nil,
+                    explanation: String? = nil
+                ) {
+                    self.additionalDocumentation = additionalDocumentation
+                    self.explanation = explanation
+                }
+            }
+
+            public struct NotReceived: Codable, Hashable, Sendable {
+                /// Additional documentation supporting the dispute.
+                public var additionalDocumentation: String?
+                /// Date when the cardholder expected to receive the product.
+                public var expectedAt: Stripe.Clearable<Date>?
+                /// Explanation of why the cardholder is disputing this transaction.
+                public var explanation: String?
+                /// Description of the merchandise or service that was purchased.
+                public var productDescription: String?
+                /// Whether the product was a merchandise or service.
+                public var productType: ProductType?
+
+                public init(
+                    additionalDocumentation: String? = nil,
+                    expectedAt: Stripe.Clearable<Date>? = nil,
+                    explanation: String? = nil,
+                    productDescription: String? = nil,
+                    productType: ProductType? = nil
+                ) {
+                    self.additionalDocumentation = additionalDocumentation
+                    self.expectedAt = expectedAt
+                    self.explanation = explanation
+                    self.productDescription = productDescription
+                    self.productType = productType
+                }
+
+                public enum ProductType: String, Codable, Hashable, Sendable {
+                    case value = ""
+                    case merchandise
+                    case service
+                }
+            }
+
+            public struct Other: Codable, Hashable, Sendable {
+                /// Additional documentation supporting the dispute.
+                public var additionalDocumentation: String?
+                /// Explanation of why the cardholder is disputing this transaction.
+                public var explanation: String?
+                /// Description of the merchandise or service that was purchased.
+                public var productDescription: String?
+                /// Whether the product was a merchandise or service.
+                public var productType: ProductType?
+
+                public init(
+                    additionalDocumentation: String? = nil,
+                    explanation: String? = nil,
+                    productDescription: String? = nil,
+                    productType: ProductType? = nil
+                ) {
+                    self.additionalDocumentation = additionalDocumentation
+                    self.explanation = explanation
+                    self.productDescription = productDescription
+                    self.productType = productType
+                }
+
+                public enum ProductType: String, Codable, Hashable, Sendable {
+                    case value = ""
+                    case merchandise
+                    case service
+                }
+            }
+
+            public struct ServiceNotAsDescribed: Codable, Hashable, Sendable {
+                /// Additional documentation supporting the dispute.
+                public var additionalDocumentation: String?
+                /// Date when order was canceled.
+                public var canceledAt: Stripe.Clearable<Date>?
+                /// Reason for canceling the order.
+                public var cancellationReason: String?
+                /// Explanation of why the cardholder is disputing this transaction.
+                public var explanation: String?
+                /// Date when the product was received.
+                public var receivedAt: Stripe.Clearable<Date>?
+
+                public init(
+                    additionalDocumentation: String? = nil,
+                    canceledAt: Stripe.Clearable<Date>? = nil,
+                    cancellationReason: String? = nil,
+                    explanation: String? = nil,
+                    receivedAt: Stripe.Clearable<Date>? = nil
+                ) {
+                    self.additionalDocumentation = additionalDocumentation
+                    self.canceledAt = canceledAt
+                    self.cancellationReason = cancellationReason
+                    self.explanation = explanation
+                    self.receivedAt = receivedAt
+                }
+            }
+        }
+
+        /// Params for disputes related to Treasury FinancialAccounts.
+        public struct Treasury: Codable, Hashable, Sendable {
+            /// The ID of the ReceivedDebit to initiate an Issuings dispute for.
+            public var receivedDebit: String
+
+            public init(
+                receivedDebit: String
+            ) {
+                self.receivedDebit = receivedDebit
+            }
+        }
+    }
+
+    public typealias Response = IssuingDispute
+}
+
+// GET /v1/issuing/disputes
+extension IssuingDispute.List {
+    public struct Request: Codable, Hashable, Sendable {
+        /// Only return Issuing disputes that were created during the given date interval.
+        public var created: Stripe.RangeQuery?
+        /// A cursor for use in pagination.
+        public var endingBefore: String?
+        /// Specifies which fields in the response should be expanded.
+        public var expand: [String]?
+        /// A limit on the number of objects to be returned.
+        public var limit: Int?
+        /// A cursor for use in pagination.
+        public var startingAfter: String?
+        /// Select Issuing disputes with the given status.
+        public var status: Status?
+        /// Select the Issuing dispute for the given transaction.
+        public var transaction: String?
+
+        public init(
+            created: Stripe.RangeQuery? = nil,
+            endingBefore: String? = nil,
+            expand: [String]? = nil,
+            limit: Int? = nil,
+            startingAfter: String? = nil,
+            status: Status? = nil,
+            transaction: String? = nil
+        ) {
+            self.created = created
+            self.endingBefore = endingBefore
+            self.expand = expand
+            self.limit = limit
+            self.startingAfter = startingAfter
+            self.status = status
+            self.transaction = transaction
+        }
+
+        public enum Status: String, Codable, Hashable, Sendable {
+            case expired
+            case lost
+            case submitted
+            case unsubmitted
+            case won
+        }
+    }
+
+    public typealias Response = Stripe.Page<IssuingDispute>
+}
+
+// GET /v1/issuing/disputes/{dispute}
+extension IssuingDispute.Retrieve {
+    public struct Request: Codable, Hashable, Sendable {
+        /// Specifies which fields in the response should be expanded.
+        public var expand: [String]?
+
+        public init(
+            expand: [String]? = nil
+        ) {
+            self.expand = expand
+        }
+    }
+
+    public typealias Response = IssuingDispute
+}
+
+// POST /v1/issuing/disputes/{dispute}/submit
+extension IssuingDispute.Submit {
+    public struct Request: Codable, Hashable, Sendable {
+        /// Specifies which fields in the response should be expanded.
+        public var expand: [String]?
+        /// Set of key-value pairs that you can attach to an object.
+        public var metadata: Stripe.Clearable<[String: String]>?
+
+        public init(
+            expand: [String]? = nil,
+            metadata: Stripe.Clearable<[String: String]>? = nil
+        ) {
+            self.expand = expand
+            self.metadata = metadata
+        }
+    }
+
+    public typealias Response = IssuingDispute
+}
+
+// POST /v1/issuing/disputes/{dispute}
+extension IssuingDispute.Update {
+    public struct Request: Codable, Hashable, Sendable {
+        /// The dispute amount in the card's currency and in the smallest currency unit.
+        public var amount: Int?
+        /// Evidence provided for the dispute.
+        public var evidence: Evidence?
+        /// Specifies which fields in the response should be expanded.
+        public var expand: [String]?
+        /// Set of key-value pairs that you can attach to an object.
+        public var metadata: Stripe.Clearable<[String: String]>?
+
+        public init(
+            amount: Int? = nil,
+            evidence: Evidence? = nil,
+            expand: [String]? = nil,
+            metadata: Stripe.Clearable<[String: String]>? = nil
+        ) {
+            self.amount = amount
+            self.evidence = evidence
+            self.expand = expand
+            self.metadata = metadata
+        }
+
+        /// Evidence provided for the dispute.
+        public struct Evidence: Codable, Hashable, Sendable {
+            /// Evidence provided when `reason` is 'canceled'.
+            public var canceled: Stripe.Clearable<Canceled>?
+            /// Evidence provided when `reason` is 'duplicate'.
+            public var duplicate: Stripe.Clearable<Duplicate>?
+            /// Evidence provided when `reason` is 'fraudulent'.
+            public var fraudulent: Stripe.Clearable<Fraudulent>?
+            /// Evidence provided when `reason` is 'merchandise_not_as_described'.
+            public var merchandiseNotAsDescribed: Stripe.Clearable<MerchandiseNotAsDescribed>?
+            /// Evidence provided when `reason` is 'no_valid_authorization'.
+            public var noValidAuthorization: Stripe.Clearable<NoValidAuthorization>?
+            /// Evidence provided when `reason` is 'not_received'.
+            public var notReceived: Stripe.Clearable<NotReceived>?
+            /// Evidence provided when `reason` is 'other'.
+            public var other: Stripe.Clearable<Other>?
+            /// The reason for filing the dispute.
+            public var reason: Reason?
+            /// Evidence provided when `reason` is 'service_not_as_described'.
+            public var serviceNotAsDescribed: Stripe.Clearable<ServiceNotAsDescribed>?
+
+            public init(
+                canceled: Stripe.Clearable<Canceled>? = nil,
+                duplicate: Stripe.Clearable<Duplicate>? = nil,
+                fraudulent: Stripe.Clearable<Fraudulent>? = nil,
+                merchandiseNotAsDescribed: Stripe.Clearable<MerchandiseNotAsDescribed>? = nil,
+                noValidAuthorization: Stripe.Clearable<NoValidAuthorization>? = nil,
+                notReceived: Stripe.Clearable<NotReceived>? = nil,
+                other: Stripe.Clearable<Other>? = nil,
+                reason: Reason? = nil,
+                serviceNotAsDescribed: Stripe.Clearable<ServiceNotAsDescribed>? = nil
+            ) {
+                self.canceled = canceled
+                self.duplicate = duplicate
+                self.fraudulent = fraudulent
+                self.merchandiseNotAsDescribed = merchandiseNotAsDescribed
+                self.noValidAuthorization = noValidAuthorization
+                self.notReceived = notReceived
+                self.other = other
+                self.reason = reason
+                self.serviceNotAsDescribed = serviceNotAsDescribed
+            }
+
+            public enum Reason: String, Codable, Hashable, Sendable {
+                case canceled
+                case duplicate
+                case fraudulent
+                case merchandiseNotAsDescribed = "merchandise_not_as_described"
+                case noValidAuthorization = "no_valid_authorization"
+                case notReceived = "not_received"
+                case other
+                case serviceNotAsDescribed = "service_not_as_described"
+            }
+
+            public struct Canceled: Codable, Hashable, Sendable {
+                /// Additional documentation supporting the dispute.
+                public var additionalDocumentation: String?
+                /// Date when order was canceled.
+                public var canceledAt: Stripe.Clearable<Date>?
+                /// Whether the cardholder was provided with a cancellation policy.
+                public var cancellationPolicyProvided: Stripe.Clearable<Bool>?
+                /// Reason for canceling the order.
+                public var cancellationReason: String?
+                /// Date when the cardholder expected to receive the product.
+                public var expectedAt: Stripe.Clearable<Date>?
+                /// Explanation of why the cardholder is disputing this transaction.
+                public var explanation: String?
+                /// Description of the merchandise or service that was purchased.
+                public var productDescription: String?
+                /// Whether the product was a merchandise or service.
+                public var productType: ProductType?
+                /// Result of cardholder's attempt to return the product.
+                public var returnStatus: ReturnStatus?
+                /// Date when the product was returned or attempted to be returned.
+                public var returnedAt: Stripe.Clearable<Date>?
+
+                public init(
+                    additionalDocumentation: String? = nil,
+                    canceledAt: Stripe.Clearable<Date>? = nil,
+                    cancellationPolicyProvided: Stripe.Clearable<Bool>? = nil,
+                    cancellationReason: String? = nil,
+                    expectedAt: Stripe.Clearable<Date>? = nil,
+                    explanation: String? = nil,
+                    productDescription: String? = nil,
+                    productType: ProductType? = nil,
+                    returnStatus: ReturnStatus? = nil,
+                    returnedAt: Stripe.Clearable<Date>? = nil
+                ) {
+                    self.additionalDocumentation = additionalDocumentation
+                    self.canceledAt = canceledAt
+                    self.cancellationPolicyProvided = cancellationPolicyProvided
+                    self.cancellationReason = cancellationReason
+                    self.expectedAt = expectedAt
+                    self.explanation = explanation
+                    self.productDescription = productDescription
+                    self.productType = productType
+                    self.returnStatus = returnStatus
+                    self.returnedAt = returnedAt
+                }
+
+                public enum ProductType: String, Codable, Hashable, Sendable {
+                    case value = ""
+                    case merchandise
+                    case service
+                }
+
+                public enum ReturnStatus: String, Codable, Hashable, Sendable {
+                    case value = ""
+                    case merchantRejected = "merchant_rejected"
+                    case successful
+                }
+            }
+
+            public struct Duplicate: Codable, Hashable, Sendable {
+                /// Additional documentation supporting the dispute.
+                public var additionalDocumentation: String?
+                /// Copy of the card statement showing that the product had already been paid for.
+                public var cardStatement: String?
+                /// Copy of the receipt showing that the product had been paid for in cash.
+                public var cashReceipt: String?
+                /// Image of the front and back of the check that was used to pay for the product.
+                public var checkImage: String?
+                /// Explanation of why the cardholder is disputing this transaction.
+                public var explanation: String?
+                /// Transaction (e.g., ipi_...
+                public var originalTransaction: String?
+
+                public init(
+                    additionalDocumentation: String? = nil,
+                    cardStatement: String? = nil,
+                    cashReceipt: String? = nil,
+                    checkImage: String? = nil,
+                    explanation: String? = nil,
+                    originalTransaction: String? = nil
+                ) {
+                    self.additionalDocumentation = additionalDocumentation
+                    self.cardStatement = cardStatement
+                    self.cashReceipt = cashReceipt
+                    self.checkImage = checkImage
+                    self.explanation = explanation
+                    self.originalTransaction = originalTransaction
+                }
+            }
+
+            public struct Fraudulent: Codable, Hashable, Sendable {
+                /// Additional documentation supporting the dispute.
+                public var additionalDocumentation: String?
+                /// Explanation of why the cardholder is disputing this transaction.
+                public var explanation: String?
+
+                public init(
+                    additionalDocumentation: String? = nil,
+                    explanation: String? = nil
+                ) {
+                    self.additionalDocumentation = additionalDocumentation
+                    self.explanation = explanation
+                }
+            }
+
+            public struct MerchandiseNotAsDescribed: Codable, Hashable, Sendable {
+                /// Additional documentation supporting the dispute.
+                public var additionalDocumentation: String?
+                /// Explanation of why the cardholder is disputing this transaction.
+                public var explanation: String?
+                /// Date when the product was received.
+                public var receivedAt: Stripe.Clearable<Date>?
+                /// Description of the cardholder's attempt to return the product.
+                public var returnDescription: String?
+                /// Result of cardholder's attempt to return the product.
+                public var returnStatus: ReturnStatus?
+                /// Date when the product was returned or attempted to be returned.
+                public var returnedAt: Stripe.Clearable<Date>?
+
+                public init(
+                    additionalDocumentation: String? = nil,
+                    explanation: String? = nil,
+                    receivedAt: Stripe.Clearable<Date>? = nil,
+                    returnDescription: String? = nil,
+                    returnStatus: ReturnStatus? = nil,
+                    returnedAt: Stripe.Clearable<Date>? = nil
+                ) {
+                    self.additionalDocumentation = additionalDocumentation
+                    self.explanation = explanation
+                    self.receivedAt = receivedAt
+                    self.returnDescription = returnDescription
+                    self.returnStatus = returnStatus
+                    self.returnedAt = returnedAt
+                }
+
+                public enum ReturnStatus: String, Codable, Hashable, Sendable {
+                    case value = ""
+                    case merchantRejected = "merchant_rejected"
+                    case successful
+                }
+            }
+
+            public struct NoValidAuthorization: Codable, Hashable, Sendable {
+                /// Additional documentation supporting the dispute.
+                public var additionalDocumentation: String?
+                /// Explanation of why the cardholder is disputing this transaction.
+                public var explanation: String?
+
+                public init(
+                    additionalDocumentation: String? = nil,
+                    explanation: String? = nil
+                ) {
+                    self.additionalDocumentation = additionalDocumentation
+                    self.explanation = explanation
+                }
+            }
+
+            public struct NotReceived: Codable, Hashable, Sendable {
+                /// Additional documentation supporting the dispute.
+                public var additionalDocumentation: String?
+                /// Date when the cardholder expected to receive the product.
+                public var expectedAt: Stripe.Clearable<Date>?
+                /// Explanation of why the cardholder is disputing this transaction.
+                public var explanation: String?
+                /// Description of the merchandise or service that was purchased.
+                public var productDescription: String?
+                /// Whether the product was a merchandise or service.
+                public var productType: ProductType?
+
+                public init(
+                    additionalDocumentation: String? = nil,
+                    expectedAt: Stripe.Clearable<Date>? = nil,
+                    explanation: String? = nil,
+                    productDescription: String? = nil,
+                    productType: ProductType? = nil
+                ) {
+                    self.additionalDocumentation = additionalDocumentation
+                    self.expectedAt = expectedAt
+                    self.explanation = explanation
+                    self.productDescription = productDescription
+                    self.productType = productType
+                }
+
+                public enum ProductType: String, Codable, Hashable, Sendable {
+                    case value = ""
+                    case merchandise
+                    case service
+                }
+            }
+
+            public struct Other: Codable, Hashable, Sendable {
+                /// Additional documentation supporting the dispute.
+                public var additionalDocumentation: String?
+                /// Explanation of why the cardholder is disputing this transaction.
+                public var explanation: String?
+                /// Description of the merchandise or service that was purchased.
+                public var productDescription: String?
+                /// Whether the product was a merchandise or service.
+                public var productType: ProductType?
+
+                public init(
+                    additionalDocumentation: String? = nil,
+                    explanation: String? = nil,
+                    productDescription: String? = nil,
+                    productType: ProductType? = nil
+                ) {
+                    self.additionalDocumentation = additionalDocumentation
+                    self.explanation = explanation
+                    self.productDescription = productDescription
+                    self.productType = productType
+                }
+
+                public enum ProductType: String, Codable, Hashable, Sendable {
+                    case value = ""
+                    case merchandise
+                    case service
+                }
+            }
+
+            public struct ServiceNotAsDescribed: Codable, Hashable, Sendable {
+                /// Additional documentation supporting the dispute.
+                public var additionalDocumentation: String?
+                /// Date when order was canceled.
+                public var canceledAt: Stripe.Clearable<Date>?
+                /// Reason for canceling the order.
+                public var cancellationReason: String?
+                /// Explanation of why the cardholder is disputing this transaction.
+                public var explanation: String?
+                /// Date when the product was received.
+                public var receivedAt: Stripe.Clearable<Date>?
+
+                public init(
+                    additionalDocumentation: String? = nil,
+                    canceledAt: Stripe.Clearable<Date>? = nil,
+                    cancellationReason: String? = nil,
+                    explanation: String? = nil,
+                    receivedAt: Stripe.Clearable<Date>? = nil
+                ) {
+                    self.additionalDocumentation = additionalDocumentation
+                    self.canceledAt = canceledAt
+                    self.cancellationReason = cancellationReason
+                    self.explanation = explanation
+                    self.receivedAt = receivedAt
+                }
+            }
+        }
+    }
+
+    public typealias Response = IssuingDispute
+}

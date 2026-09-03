@@ -1,0 +1,104 @@
+//===----------------------------------------------------------------------===//
+//
+// This source file is part of the swift-stripe open source project
+//
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
+//
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
+
+import NIOHTTP1
+import StripeCore
+import StripeModels
+
+#if canImport(FoundationEssentials)
+import FoundationEssentials
+#else
+import Foundation
+#endif
+
+/// Operations on Stripe.Entitlements.Feature.
+///
+/// A protocol so tests can substitute a double; ``EntitlementsFeaturesClient`` is the implementation that
+/// talks to Stripe.
+public protocol EntitlementsFeaturesAPI: Sendable {
+    func create(
+        _ request: Stripe.Entitlements.Feature.Create.Request,
+        idempotencyKey: String?
+    ) async throws -> Stripe.Entitlements.Feature.Create.Response
+    func list(_ request: Stripe.Entitlements.Feature.List.Request) async throws -> Stripe.Entitlements.Feature.List.Response
+    func retrieve(
+        id: Stripe.Entitlements.Feature.ID,
+        _ request: Stripe.Entitlements.Feature.Retrieve.Request
+    ) async throws -> Stripe.Entitlements.Feature.Retrieve.Response
+    func update(
+        id: Stripe.Entitlements.Feature.ID,
+        _ request: Stripe.Entitlements.Feature.Update.Request,
+        idempotencyKey: String?
+    ) async throws -> Stripe.Entitlements.Feature.Update.Response
+}
+
+public struct EntitlementsFeaturesClient: EntitlementsFeaturesAPI {
+    private let api: StripeAPI
+
+    public init(api: StripeAPI) { self.api = api }
+
+    public func create(
+        _ request: Stripe.Entitlements.Feature.Create.Request,
+        idempotencyKey: String?
+    ) async throws -> Stripe.Entitlements.Feature.Create.Response {
+        try await api.send(.POST, "v1/entitlements/features", body: request, idempotencyKey: idempotencyKey)
+    }
+
+    public func list(_ request: Stripe.Entitlements.Feature.List.Request) async throws -> Stripe.Entitlements.Feature.List.Response {
+        try await api.list("v1/entitlements/features", parameters: request)
+    }
+
+    public func retrieve(
+        id: Stripe.Entitlements.Feature.ID,
+        _ request: Stripe.Entitlements.Feature.Retrieve.Request
+    ) async throws -> Stripe.Entitlements.Feature.Retrieve.Response {
+        try await api.list("v1/entitlements/features/\(id)", parameters: request)
+    }
+
+    public func update(
+        id: Stripe.Entitlements.Feature.ID,
+        _ request: Stripe.Entitlements.Feature.Update.Request,
+        idempotencyKey: String?
+    ) async throws -> Stripe.Entitlements.Feature.Update.Response {
+        try await api.send(.POST, "v1/entitlements/features/\(id)", body: request, idempotencyKey: idempotencyKey)
+    }
+}
+
+// A write with no explicit key behaves as it did before idempotency keys existed: no header,
+// and no retry. See ``StripeAPI/isSafeToRetry(_:)``.
+extension EntitlementsFeaturesAPI {
+    public func create(_ request: Stripe.Entitlements.Feature.Create.Request) async throws -> Stripe.Entitlements.Feature.Create.Response {
+        try await create(request, idempotencyKey: nil)
+    }
+
+    public func list() async throws -> Stripe.Entitlements.Feature.List.Response {
+        try await list(.init())
+    }
+
+    public func retrieve(id: Stripe.Entitlements.Feature.ID) async throws -> Stripe.Entitlements.Feature.Retrieve.Response {
+        try await retrieve(id: id, .init())
+    }
+
+    public func update(
+        id: Stripe.Entitlements.Feature.ID,
+        _ request: Stripe.Entitlements.Feature.Update.Request
+    ) async throws -> Stripe.Entitlements.Feature.Update.Response {
+        try await update(id: id, request, idempotencyKey: nil)
+    }
+
+    public func update(id: Stripe.Entitlements.Feature.ID, idempotencyKey: String? = nil) async throws -> Stripe.Entitlements.Feature.Update.Response
+    {
+        try await update(id: id, .init(), idempotencyKey: idempotencyKey)
+    }
+}
