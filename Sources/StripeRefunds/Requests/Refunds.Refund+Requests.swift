@@ -1,0 +1,250 @@
+//===----------------------------------------------------------------------===//
+//
+// This source file is part of the swift-stripe open source project
+//
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
+//
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
+
+import StripeCore
+import StripeModels
+
+#if canImport(FoundationEssentials)
+import FoundationEssentials
+#else
+import Foundation
+#endif
+
+extension Stripe.Refunds.Refund {
+    public enum Cancel {}
+    public enum Create {}
+    public enum Expire {}
+    public enum List {}
+    public enum ListRefunds {}
+    public enum Retrieve {}
+    public enum RetrieveRefund {}
+    public enum Update {}
+}
+
+// POST /v1/refunds/{refund}/cancel
+extension Stripe.Refunds.Refund.Cancel {
+    public struct Request: Codable, Hashable, Sendable {
+        /// Specifies which fields in the response should be expanded.
+        public var expand: [String]?
+
+        public init(
+            expand: [String]? = nil
+        ) {
+            self.expand = expand
+        }
+    }
+
+    public typealias Response = Stripe.Refunds.Refund
+}
+
+// POST /v1/refunds
+extension Stripe.Refunds.Refund.Create {
+    public struct Request: Codable, Hashable, Sendable {
+        public var amount: Int?
+        /// The identifier of the charge to refund.
+        public var charge: String?
+        /// Three-letter ISO currency code, in lowercase.
+        public var currency: Stripe.Currency?
+        /// Customer whose customer balance to refund from.
+        public var customer: String?
+        /// Specifies which fields in the response should be expanded.
+        public var expand: [String]?
+        /// For payment methods without native refund support (e.g., Konbini, PromptPay), use this email from the customer to.
+        public var instructionsEmail: String?
+        /// Set of key-value pairs that you can attach to an object.
+        public var metadata: Stripe.Clearable<[String: String]>?
+        /// Origin of the refund.
+        public var origin: String?
+        /// The identifier of the PaymentIntent to refund.
+        public var paymentIntent: String?
+        /// String indicating the reason for the refund.
+        public var reason: Reason?
+        /// Boolean indicating whether the application fee should be refunded when refunding this charge.
+        public var refundApplicationFee: Bool?
+        /// Boolean indicating whether the transfer should be reversed when refunding this charge.
+        public var reverseTransfer: Bool?
+
+        public init(
+            amount: Int? = nil,
+            charge: String? = nil,
+            currency: Stripe.Currency? = nil,
+            customer: String? = nil,
+            expand: [String]? = nil,
+            instructionsEmail: String? = nil,
+            metadata: Stripe.Clearable<[String: String]>? = nil,
+            origin: String? = nil,
+            paymentIntent: String? = nil,
+            reason: Reason? = nil,
+            refundApplicationFee: Bool? = nil,
+            reverseTransfer: Bool? = nil
+        ) {
+            self.amount = amount
+            self.charge = charge
+            self.currency = currency
+            self.customer = customer
+            self.expand = expand
+            self.instructionsEmail = instructionsEmail
+            self.metadata = metadata
+            self.origin = origin
+            self.paymentIntent = paymentIntent
+            self.reason = reason
+            self.refundApplicationFee = refundApplicationFee
+            self.reverseTransfer = reverseTransfer
+        }
+
+        public enum Reason: String, Codable, Hashable, Sendable {
+            case duplicate
+            case fraudulent
+            case requestedByCustomer = "requested_by_customer"
+        }
+    }
+
+    public typealias Response = Stripe.Refunds.Refund
+}
+
+// POST /v1/test_helpers/refunds/{refund}/expire
+extension Stripe.Refunds.Refund.Expire {
+    public struct Request: Codable, Hashable, Sendable {
+        /// Specifies which fields in the response should be expanded.
+        public var expand: [String]?
+
+        public init(
+            expand: [String]? = nil
+        ) {
+            self.expand = expand
+        }
+    }
+
+    public typealias Response = Stripe.Refunds.Refund
+}
+
+// GET /v1/refunds
+extension Stripe.Refunds.Refund.List {
+    public struct Request: Codable, Hashable, Sendable {
+        /// Only return refunds for the charge specified by this charge ID.
+        public var charge: String?
+        /// Only return refunds that were created during the given date interval.
+        public var created: Stripe.RangeQuery?
+        /// A cursor for use in pagination.
+        public var endingBefore: String?
+        /// Specifies which fields in the response should be expanded.
+        public var expand: [String]?
+        /// A limit on the number of objects to be returned.
+        public var limit: Int?
+        /// Only return refunds for the PaymentIntent specified by this ID.
+        public var paymentIntent: String?
+        /// A cursor for use in pagination.
+        public var startingAfter: String?
+
+        public init(
+            charge: String? = nil,
+            created: Stripe.RangeQuery? = nil,
+            endingBefore: String? = nil,
+            expand: [String]? = nil,
+            limit: Int? = nil,
+            paymentIntent: String? = nil,
+            startingAfter: String? = nil
+        ) {
+            self.charge = charge
+            self.created = created
+            self.endingBefore = endingBefore
+            self.expand = expand
+            self.limit = limit
+            self.paymentIntent = paymentIntent
+            self.startingAfter = startingAfter
+        }
+    }
+
+    public typealias Response = Stripe.Page<Stripe.Refunds.Refund>
+}
+
+// GET /v1/charges/{charge}/refunds
+extension Stripe.Refunds.Refund.ListRefunds {
+    public struct Request: Codable, Hashable, Sendable {
+        /// A cursor for use in pagination.
+        public var endingBefore: String?
+        /// Specifies which fields in the response should be expanded.
+        public var expand: [String]?
+        /// A limit on the number of objects to be returned.
+        public var limit: Int?
+        /// A cursor for use in pagination.
+        public var startingAfter: String?
+
+        public init(
+            endingBefore: String? = nil,
+            expand: [String]? = nil,
+            limit: Int? = nil,
+            startingAfter: String? = nil
+        ) {
+            self.endingBefore = endingBefore
+            self.expand = expand
+            self.limit = limit
+            self.startingAfter = startingAfter
+        }
+    }
+
+    public typealias Response = Stripe.Page<Stripe.Refunds.Refund>
+}
+
+// GET /v1/refunds/{refund}
+extension Stripe.Refunds.Refund.Retrieve {
+    public struct Request: Codable, Hashable, Sendable {
+        /// Specifies which fields in the response should be expanded.
+        public var expand: [String]?
+
+        public init(
+            expand: [String]? = nil
+        ) {
+            self.expand = expand
+        }
+    }
+
+    public typealias Response = Stripe.Refunds.Refund
+}
+
+// GET /v1/charges/{charge}/refunds/{refund}
+extension Stripe.Refunds.Refund.RetrieveRefund {
+    public struct Request: Codable, Hashable, Sendable {
+        /// Specifies which fields in the response should be expanded.
+        public var expand: [String]?
+
+        public init(
+            expand: [String]? = nil
+        ) {
+            self.expand = expand
+        }
+    }
+
+    public typealias Response = Stripe.Refunds.Refund
+}
+
+// POST /v1/refunds/{refund}
+extension Stripe.Refunds.Refund.Update {
+    public struct Request: Codable, Hashable, Sendable {
+        /// Specifies which fields in the response should be expanded.
+        public var expand: [String]?
+        /// Set of key-value pairs that you can attach to an object.
+        public var metadata: Stripe.Clearable<[String: String]>?
+
+        public init(
+            expand: [String]? = nil,
+            metadata: Stripe.Clearable<[String: String]>? = nil
+        ) {
+            self.expand = expand
+            self.metadata = metadata
+        }
+    }
+
+    public typealias Response = Stripe.Refunds.Refund
+}

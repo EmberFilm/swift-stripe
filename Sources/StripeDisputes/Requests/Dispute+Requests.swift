@@ -1,0 +1,456 @@
+//===----------------------------------------------------------------------===//
+//
+// This source file is part of the swift-stripe open source project
+//
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
+//
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
+
+import StripeCore
+import StripeModels
+
+#if canImport(FoundationEssentials)
+import FoundationEssentials
+#else
+import Foundation
+#endif
+
+extension Stripe.Disputes.Dispute {
+    public enum Close {}
+    public enum List {}
+    public enum Retrieve {}
+    public enum Update {}
+}
+
+// POST /v1/disputes/{dispute}/close
+extension Stripe.Disputes.Dispute.Close {
+    public struct Request: Codable, Hashable, Sendable {
+        /// Specifies which fields in the response should be expanded.
+        public var expand: [String]?
+
+        public init(
+            expand: [String]? = nil
+        ) {
+            self.expand = expand
+        }
+    }
+
+    public typealias Response = Stripe.Disputes.Dispute
+}
+
+// GET /v1/disputes
+extension Stripe.Disputes.Dispute.List {
+    public struct Request: Codable, Hashable, Sendable {
+        /// Only return disputes associated to the charge specified by this charge ID.
+        public var charge: String?
+        /// Only return disputes that were created during the given date interval.
+        public var created: Stripe.RangeQuery?
+        /// A cursor for use in pagination.
+        public var endingBefore: String?
+        /// Specifies which fields in the response should be expanded.
+        public var expand: [String]?
+        /// A limit on the number of objects to be returned.
+        public var limit: Int?
+        /// Only return disputes associated to the PaymentIntent specified by this PaymentIntent ID.
+        public var paymentIntent: String?
+        /// A cursor for use in pagination.
+        public var startingAfter: String?
+
+        public init(
+            charge: String? = nil,
+            created: Stripe.RangeQuery? = nil,
+            endingBefore: String? = nil,
+            expand: [String]? = nil,
+            limit: Int? = nil,
+            paymentIntent: String? = nil,
+            startingAfter: String? = nil
+        ) {
+            self.charge = charge
+            self.created = created
+            self.endingBefore = endingBefore
+            self.expand = expand
+            self.limit = limit
+            self.paymentIntent = paymentIntent
+            self.startingAfter = startingAfter
+        }
+    }
+
+    public typealias Response = Stripe.Page<Stripe.Disputes.Dispute>
+}
+
+// GET /v1/disputes/{dispute}
+extension Stripe.Disputes.Dispute.Retrieve {
+    public struct Request: Codable, Hashable, Sendable {
+        /// Specifies which fields in the response should be expanded.
+        public var expand: [String]?
+
+        public init(
+            expand: [String]? = nil
+        ) {
+            self.expand = expand
+        }
+    }
+
+    public typealias Response = Stripe.Disputes.Dispute
+}
+
+// POST /v1/disputes/{dispute}
+extension Stripe.Disputes.Dispute.Update {
+    public struct Request: Codable, Hashable, Sendable {
+        /// Evidence to upload, to respond to a dispute.
+        public var evidence: Evidence?
+        /// Specifies which fields in the response should be expanded.
+        public var expand: [String]?
+        /// Set of key-value pairs that you can attach to an object.
+        public var metadata: Stripe.Clearable<[String: String]>?
+        /// Whether to immediately submit evidence to the bank.
+        public var submit: Bool?
+
+        public init(
+            evidence: Evidence? = nil,
+            expand: [String]? = nil,
+            metadata: Stripe.Clearable<[String: String]>? = nil,
+            submit: Bool? = nil
+        ) {
+            self.evidence = evidence
+            self.expand = expand
+            self.metadata = metadata
+            self.submit = submit
+        }
+
+        /// Evidence to upload, to respond to a dispute.
+        public struct Evidence: Codable, Hashable, Sendable {
+            /// Any server or activity logs showing proof that the customer accessed or downloaded the purchased digital product.
+            public var accessActivityLog: String?
+            /// The billing address provided by the customer.
+            public var billingAddress: String?
+            /// Your subscription cancellation policy, as shown to the customer.
+            public var cancellationPolicy: String?
+            /// An explanation of how and when the customer was shown your refund policy prior to purchase.
+            public var cancellationPolicyDisclosure: String?
+            /// A justification for why the customer's subscription was not canceled.
+            public var cancellationRebuttal: String?
+            /// Any communication with the customer that you feel is relevant to your case.
+            public var customerCommunication: String?
+            /// The email address of the customer.
+            public var customerEmailAddress: String?
+            /// The name of the customer.
+            public var customerName: String?
+            /// The IP address that the customer used when making the purchase.
+            public var customerPurchaseIp: String?
+            /// A relevant document or contract showing the customer's signature.
+            public var customerSignature: String?
+            /// Documentation for the prior charge that can uniquely identify the charge, such as a receipt, shipping label, work.
+            public var duplicateChargeDocumentation: String?
+            /// An explanation of the difference between the disputed charge versus the prior charge that appears to be a duplicate.
+            public var duplicateChargeExplanation: String?
+            /// The Stripe ID for the prior charge which appears to be a duplicate of the disputed charge.
+            public var duplicateChargeId: String?
+            /// Additional evidence for qualifying evidence programs.
+            public var enhancedEvidence: Stripe.Clearable<EnhancedEvidence>?
+            /// A description of the product or service that was sold.
+            public var productDescription: String?
+            /// Any receipt or message sent to the customer notifying them of the charge.
+            public var receipt: String?
+            /// Your refund policy, as shown to the customer.
+            public var refundPolicy: String?
+            /// Documentation demonstrating that the customer was shown your refund policy prior to purchase.
+            public var refundPolicyDisclosure: String?
+            /// A justification for why the customer is not entitled to a refund.
+            public var refundRefusalExplanation: String?
+            /// The date on which the customer received or began receiving the purchased service, in a clear human-readable format.
+            public var serviceDate: String?
+            /// Documentation showing proof that a service was provided to the customer.
+            public var serviceDocumentation: String?
+            /// The address to which a physical product was shipped.
+            public var shippingAddress: String?
+            /// The delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc.
+            public var shippingCarrier: String?
+            /// The date on which a physical product began its route to the shipping address, in a clear human-readable format.
+            public var shippingDate: String?
+            /// Documentation showing proof that a product was shipped to the customer at the same address the customer provided to.
+            public var shippingDocumentation: String?
+            /// The tracking number for a physical product, obtained from the delivery service.
+            public var shippingTrackingNumber: String?
+            /// Any additional evidence or statements.
+            public var uncategorizedFile: String?
+            /// Any additional evidence or statements.
+            public var uncategorizedText: String?
+
+            public init(
+                accessActivityLog: String? = nil,
+                billingAddress: String? = nil,
+                cancellationPolicy: String? = nil,
+                cancellationPolicyDisclosure: String? = nil,
+                cancellationRebuttal: String? = nil,
+                customerCommunication: String? = nil,
+                customerEmailAddress: String? = nil,
+                customerName: String? = nil,
+                customerPurchaseIp: String? = nil,
+                customerSignature: String? = nil,
+                duplicateChargeDocumentation: String? = nil,
+                duplicateChargeExplanation: String? = nil,
+                duplicateChargeId: String? = nil,
+                enhancedEvidence: Stripe.Clearable<EnhancedEvidence>? = nil,
+                productDescription: String? = nil,
+                receipt: String? = nil,
+                refundPolicy: String? = nil,
+                refundPolicyDisclosure: String? = nil,
+                refundRefusalExplanation: String? = nil,
+                serviceDate: String? = nil,
+                serviceDocumentation: String? = nil,
+                shippingAddress: String? = nil,
+                shippingCarrier: String? = nil,
+                shippingDate: String? = nil,
+                shippingDocumentation: String? = nil,
+                shippingTrackingNumber: String? = nil,
+                uncategorizedFile: String? = nil,
+                uncategorizedText: String? = nil
+            ) {
+                self.accessActivityLog = accessActivityLog
+                self.billingAddress = billingAddress
+                self.cancellationPolicy = cancellationPolicy
+                self.cancellationPolicyDisclosure = cancellationPolicyDisclosure
+                self.cancellationRebuttal = cancellationRebuttal
+                self.customerCommunication = customerCommunication
+                self.customerEmailAddress = customerEmailAddress
+                self.customerName = customerName
+                self.customerPurchaseIp = customerPurchaseIp
+                self.customerSignature = customerSignature
+                self.duplicateChargeDocumentation = duplicateChargeDocumentation
+                self.duplicateChargeExplanation = duplicateChargeExplanation
+                self.duplicateChargeId = duplicateChargeId
+                self.enhancedEvidence = enhancedEvidence
+                self.productDescription = productDescription
+                self.receipt = receipt
+                self.refundPolicy = refundPolicy
+                self.refundPolicyDisclosure = refundPolicyDisclosure
+                self.refundRefusalExplanation = refundRefusalExplanation
+                self.serviceDate = serviceDate
+                self.serviceDocumentation = serviceDocumentation
+                self.shippingAddress = shippingAddress
+                self.shippingCarrier = shippingCarrier
+                self.shippingDate = shippingDate
+                self.shippingDocumentation = shippingDocumentation
+                self.shippingTrackingNumber = shippingTrackingNumber
+                self.uncategorizedFile = uncategorizedFile
+                self.uncategorizedText = uncategorizedText
+            }
+
+            public struct EnhancedEvidence: Codable, Hashable, Sendable {
+                /// Evidence provided for Mastercard compliance evidence submission.
+                public var mastercardCompliance: MastercardCompliance?
+                /// Evidence provided for Visa Compelling Evidence 3.0 evidence submission.
+                public var visaCompellingEvidence3: VisaCompellingEvidence3?
+                /// Evidence provided for Visa compliance evidence submission.
+                public var visaCompliance: VisaCompliance?
+
+                public init(
+                    mastercardCompliance: MastercardCompliance? = nil,
+                    visaCompellingEvidence3: VisaCompellingEvidence3? = nil,
+                    visaCompliance: VisaCompliance? = nil
+                ) {
+                    self.mastercardCompliance = mastercardCompliance
+                    self.visaCompellingEvidence3 = visaCompellingEvidence3
+                    self.visaCompliance = visaCompliance
+                }
+
+                /// Evidence provided for Mastercard compliance evidence submission.
+                public struct MastercardCompliance: Codable, Hashable, Sendable {
+                    /// A field acknowledging the fee incurred when countering a Mastercard compliance dispute.
+                    public var feeAcknowledged: Bool?
+
+                    public init(
+                        feeAcknowledged: Bool? = nil
+                    ) {
+                        self.feeAcknowledged = feeAcknowledged
+                    }
+                }
+
+                /// Evidence provided for Visa Compelling Evidence 3.0 evidence submission.
+                public struct VisaCompellingEvidence3: Codable, Hashable, Sendable {
+                    /// Disputed transaction details for Visa Compelling Evidence 3.0 evidence submission.
+                    public var disputedTransaction: DisputedTransaction?
+                    /// List of exactly two prior undisputed transaction objects for Visa Compelling Evidence 3.0 evidence submission.
+                    public var priorUndisputedTransactions: [PriorUndisputedTransactions]?
+
+                    public init(
+                        disputedTransaction: DisputedTransaction? = nil,
+                        priorUndisputedTransactions: [PriorUndisputedTransactions]? = nil
+                    ) {
+                        self.disputedTransaction = disputedTransaction
+                        self.priorUndisputedTransactions = priorUndisputedTransactions
+                    }
+
+                    /// Disputed transaction details for Visa Compelling Evidence 3.0 evidence submission.
+                    public struct DisputedTransaction: Codable, Hashable, Sendable {
+                        /// User Account ID used to log into business platform.
+                        public var customerAccountId: String?
+                        /// Unique identifier of the cardholder’s device derived from a combination of at least two hardware and software.
+                        public var customerDeviceFingerprint: String?
+                        /// Unique identifier of the cardholder’s device such as a device serial number (e.g., International Mobile Equipment.
+                        public var customerDeviceId: String?
+                        /// The email address of the customer.
+                        public var customerEmailAddress: String?
+                        /// The IP address that the customer used when making the purchase.
+                        public var customerPurchaseIp: String?
+                        /// Categorization of disputed payment.
+                        public var merchandiseOrServices: MerchandiseOrServices?
+                        /// A description of the product or service that was sold.
+                        public var productDescription: String?
+                        /// The address to which a physical product was shipped.
+                        public var shippingAddress: ShippingAddress?
+
+                        public init(
+                            customerAccountId: String? = nil,
+                            customerDeviceFingerprint: String? = nil,
+                            customerDeviceId: String? = nil,
+                            customerEmailAddress: String? = nil,
+                            customerPurchaseIp: String? = nil,
+                            merchandiseOrServices: MerchandiseOrServices? = nil,
+                            productDescription: String? = nil,
+                            shippingAddress: ShippingAddress? = nil
+                        ) {
+                            self.customerAccountId = customerAccountId
+                            self.customerDeviceFingerprint = customerDeviceFingerprint
+                            self.customerDeviceId = customerDeviceId
+                            self.customerEmailAddress = customerEmailAddress
+                            self.customerPurchaseIp = customerPurchaseIp
+                            self.merchandiseOrServices = merchandiseOrServices
+                            self.productDescription = productDescription
+                            self.shippingAddress = shippingAddress
+                        }
+
+                        public enum MerchandiseOrServices: String, Codable, Hashable, Sendable {
+                            case merchandise
+                            case services
+                        }
+
+                        /// The address to which a physical product was shipped.
+                        public struct ShippingAddress: Codable, Hashable, Sendable {
+                            /// City, district, suburb, town, or village.
+                            public var city: String?
+                            /// Two-letter country code (ISO 3166-1 alpha-2).
+                            public var country: String?
+                            /// Address line 1, such as the street, PO Box, or company name.
+                            public var line1: String?
+                            /// Address line 2, such as the apartment, suite, unit, or building.
+                            public var line2: String?
+                            /// ZIP or postal code.
+                            public var postalCode: String?
+                            /// State, county, province, or region (ISO 3166-2).
+                            public var state: String?
+
+                            public init(
+                                city: String? = nil,
+                                country: String? = nil,
+                                line1: String? = nil,
+                                line2: String? = nil,
+                                postalCode: String? = nil,
+                                state: String? = nil
+                            ) {
+                                self.city = city
+                                self.country = country
+                                self.line1 = line1
+                                self.line2 = line2
+                                self.postalCode = postalCode
+                                self.state = state
+                            }
+                        }
+                    }
+
+                    public struct PriorUndisputedTransactions: Codable, Hashable, Sendable {
+                        /// Stripe charge ID for the Visa Compelling Evidence 3.0 eligible prior charge.
+                        public var charge: String
+                        /// User Account ID used to log into business platform.
+                        public var customerAccountId: String?
+                        /// Unique identifier of the cardholder’s device derived from a combination of at least two hardware and software.
+                        public var customerDeviceFingerprint: String?
+                        /// Unique identifier of the cardholder’s device such as a device serial number (e.g., International Mobile Equipment.
+                        public var customerDeviceId: String?
+                        /// The email address of the customer.
+                        public var customerEmailAddress: String?
+                        /// The IP address that the customer used when making the purchase.
+                        public var customerPurchaseIp: String?
+                        /// A description of the product or service that was sold.
+                        public var productDescription: String?
+                        /// The address to which a physical product was shipped.
+                        public var shippingAddress: ShippingAddress?
+
+                        public init(
+                            charge: String,
+                            customerAccountId: String? = nil,
+                            customerDeviceFingerprint: String? = nil,
+                            customerDeviceId: String? = nil,
+                            customerEmailAddress: String? = nil,
+                            customerPurchaseIp: String? = nil,
+                            productDescription: String? = nil,
+                            shippingAddress: ShippingAddress? = nil
+                        ) {
+                            self.charge = charge
+                            self.customerAccountId = customerAccountId
+                            self.customerDeviceFingerprint = customerDeviceFingerprint
+                            self.customerDeviceId = customerDeviceId
+                            self.customerEmailAddress = customerEmailAddress
+                            self.customerPurchaseIp = customerPurchaseIp
+                            self.productDescription = productDescription
+                            self.shippingAddress = shippingAddress
+                        }
+
+                        /// The address to which a physical product was shipped.
+                        public struct ShippingAddress: Codable, Hashable, Sendable {
+                            /// City, district, suburb, town, or village.
+                            public var city: String?
+                            /// Two-letter country code (ISO 3166-1 alpha-2).
+                            public var country: String?
+                            /// Address line 1, such as the street, PO Box, or company name.
+                            public var line1: String?
+                            /// Address line 2, such as the apartment, suite, unit, or building.
+                            public var line2: String?
+                            /// ZIP or postal code.
+                            public var postalCode: String?
+                            /// State, county, province, or region (ISO 3166-2).
+                            public var state: String?
+
+                            public init(
+                                city: String? = nil,
+                                country: String? = nil,
+                                line1: String? = nil,
+                                line2: String? = nil,
+                                postalCode: String? = nil,
+                                state: String? = nil
+                            ) {
+                                self.city = city
+                                self.country = country
+                                self.line1 = line1
+                                self.line2 = line2
+                                self.postalCode = postalCode
+                                self.state = state
+                            }
+                        }
+                    }
+                }
+
+                /// Evidence provided for Visa compliance evidence submission.
+                public struct VisaCompliance: Codable, Hashable, Sendable {
+                    /// A field acknowledging the fee incurred when countering a Visa compliance dispute.
+                    public var feeAcknowledged: Bool?
+
+                    public init(
+                        feeAcknowledged: Bool? = nil
+                    ) {
+                        self.feeAcknowledged = feeAcknowledged
+                    }
+                }
+            }
+        }
+    }
+
+    public typealias Response = Stripe.Disputes.Dispute
+}

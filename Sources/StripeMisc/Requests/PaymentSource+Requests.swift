@@ -1,0 +1,107 @@
+//===----------------------------------------------------------------------===//
+//
+// This source file is part of the swift-stripe open source project
+//
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
+//
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
+
+import StripeCheckout
+import StripeCore
+import StripeIssuing
+import StripeModels
+import StripePromotion
+import StripeReporting
+
+#if canImport(FoundationEssentials)
+import FoundationEssentials
+#else
+import Foundation
+#endif
+
+extension Stripe.PaymentSource {
+    public enum Create {}
+    public enum List {}
+    public enum Retrieve {}
+}
+
+// POST /v1/customers/{customer}/sources
+extension Stripe.PaymentSource.Create {
+    public struct Request: Codable, Hashable, Sendable {
+        /// Specifies which fields in the response should be expanded.
+        public var expand: [String]?
+        /// Set of key-value pairs that you can attach to an object.
+        public var metadata: [String: String]?
+        /// Please refer to full documentation instead.
+        public var source: String
+        public var validate: Bool?
+
+        public init(
+            expand: [String]? = nil,
+            metadata: [String: String]? = nil,
+            source: String,
+            validate: Bool? = nil
+        ) {
+            self.expand = expand
+            self.metadata = metadata
+            self.source = source
+            self.validate = validate
+        }
+    }
+
+    public typealias Response = Stripe.PaymentSource
+}
+
+// GET /v1/customers/{customer}/sources
+extension Stripe.PaymentSource.List {
+    public struct Request: Codable, Hashable, Sendable {
+        /// A cursor for use in pagination.
+        public var endingBefore: String?
+        /// Specifies which fields in the response should be expanded.
+        public var expand: [String]?
+        /// A limit on the number of objects to be returned.
+        public var limit: Int?
+        /// Filter sources according to a particular object type.
+        public var object: String?
+        /// A cursor for use in pagination.
+        public var startingAfter: String?
+
+        public init(
+            endingBefore: String? = nil,
+            expand: [String]? = nil,
+            limit: Int? = nil,
+            object: String? = nil,
+            startingAfter: String? = nil
+        ) {
+            self.endingBefore = endingBefore
+            self.expand = expand
+            self.limit = limit
+            self.object = object
+            self.startingAfter = startingAfter
+        }
+    }
+
+    public typealias Response = Stripe.Page<Stripe.PaymentSource>
+}
+
+// GET /v1/customers/{customer}/sources/{id}
+extension Stripe.PaymentSource.Retrieve {
+    public struct Request: Codable, Hashable, Sendable {
+        /// Specifies which fields in the response should be expanded.
+        public var expand: [String]?
+
+        public init(
+            expand: [String]? = nil
+        ) {
+            self.expand = expand
+        }
+    }
+
+    public typealias Response = Stripe.PaymentSource
+}

@@ -1,0 +1,167 @@
+//===----------------------------------------------------------------------===//
+//
+// This source file is part of the swift-stripe open source project
+//
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
+//
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
+
+import StripeCore
+import StripeModels
+
+#if canImport(FoundationEssentials)
+import FoundationEssentials
+#else
+import Foundation
+#endif
+
+extension Stripe.FileLinks.FileLink {
+    public enum Create {}
+    public enum List {}
+    public enum Retrieve {}
+    public enum Update {}
+}
+
+// POST /v1/file_links
+extension Stripe.FileLinks.FileLink.Create {
+    public struct Request: Codable, Hashable, Sendable {
+        /// Specifies which fields in the response should be expanded.
+        public var expand: [String]?
+        /// The link isn't usable after this future timestamp.
+        public var expiresAt: Date?
+        /// The ID of the file.
+        public var file: String
+        /// Set of key-value pairs that you can attach to an object.
+        public var metadata: Stripe.Clearable<[String: String]>?
+
+        public init(
+            expand: [String]? = nil,
+            expiresAt: Date? = nil,
+            file: String,
+            metadata: Stripe.Clearable<[String: String]>? = nil
+        ) {
+            self.expand = expand
+            self.expiresAt = expiresAt
+            self.file = file
+            self.metadata = metadata
+        }
+    }
+
+    public typealias Response = Stripe.FileLinks.FileLink
+}
+
+// GET /v1/file_links
+extension Stripe.FileLinks.FileLink.List {
+    public struct Request: Codable, Hashable, Sendable {
+        /// Only return links that were created during the given date interval.
+        public var created: Stripe.RangeQuery?
+        /// A cursor for use in pagination.
+        public var endingBefore: String?
+        /// Specifies which fields in the response should be expanded.
+        public var expand: [String]?
+        /// Filter links by their expiration status.
+        public var expired: Bool?
+        /// Only return links for the given file.
+        public var file: String?
+        /// A limit on the number of objects to be returned.
+        public var limit: Int?
+        /// A cursor for use in pagination.
+        public var startingAfter: String?
+
+        public init(
+            created: Stripe.RangeQuery? = nil,
+            endingBefore: String? = nil,
+            expand: [String]? = nil,
+            expired: Bool? = nil,
+            file: String? = nil,
+            limit: Int? = nil,
+            startingAfter: String? = nil
+        ) {
+            self.created = created
+            self.endingBefore = endingBefore
+            self.expand = expand
+            self.expired = expired
+            self.file = file
+            self.limit = limit
+            self.startingAfter = startingAfter
+        }
+    }
+
+    public typealias Response = Stripe.Page<Stripe.FileLinks.FileLink>
+}
+
+// GET /v1/file_links/{link}
+extension Stripe.FileLinks.FileLink.Retrieve {
+    public struct Request: Codable, Hashable, Sendable {
+        /// Specifies which fields in the response should be expanded.
+        public var expand: [String]?
+
+        public init(
+            expand: [String]? = nil
+        ) {
+            self.expand = expand
+        }
+    }
+
+    public typealias Response = Stripe.FileLinks.FileLink
+}
+
+// POST /v1/file_links/{link}
+extension Stripe.FileLinks.FileLink.Update {
+    public struct Request: Codable, Hashable, Sendable {
+        /// Specifies which fields in the response should be expanded.
+        public var expand: [String]?
+        /// A future timestamp after which the link will no longer be usable, or `now` to expire the link immediately.
+        public var expiresAt: ExpiresAt?
+        /// Set of key-value pairs that you can attach to an object.
+        public var metadata: Stripe.Clearable<[String: String]>?
+
+        public init(
+            expand: [String]? = nil,
+            expiresAt: ExpiresAt? = nil,
+            metadata: Stripe.Clearable<[String: String]>? = nil
+        ) {
+            self.expand = expand
+            self.expiresAt = expiresAt
+            self.metadata = metadata
+        }
+
+        /// A future timestamp after which the link will no longer be usable, or `now` to expire the link immediately.
+        public enum ExpiresAt: Codable, Hashable, Sendable {
+            case value(Date)
+            case now
+            /// Unsets the field.
+            case clear
+
+            public init(from decoder: any Decoder) throws {
+                let container = try decoder.singleValueContainer()
+                if let value = try? container.decode(Date.self) {
+                    self = .value(value)
+                    return
+                }
+                switch try container.decode(String.self) {
+                case "now": self = .now
+                case "": self = .clear
+                case let other: throw DecodingError.dataCorruptedError(in: container, debugDescription: "unknown keyword \(other)")
+                }
+            }
+
+            public func encode(to encoder: any Encoder) throws {
+                var container = encoder.singleValueContainer()
+                switch self {
+                case .value(let value): try container.encode(value)
+                case .now: try container.encode("now")
+                case .clear: try container.encode("")
+                }
+            }
+        }
+    }
+
+    public typealias Response = Stripe.FileLinks.FileLink
+}

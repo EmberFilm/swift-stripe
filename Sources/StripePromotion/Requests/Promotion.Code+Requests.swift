@@ -1,0 +1,251 @@
+//===----------------------------------------------------------------------===//
+//
+// This source file is part of the swift-stripe open source project
+//
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
+//
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
+
+import StripeCore
+import StripeModels
+
+#if canImport(FoundationEssentials)
+import FoundationEssentials
+#else
+import Foundation
+#endif
+
+extension Promotion.Code {
+    public enum Create {}
+    public enum List {}
+    public enum Retrieve {}
+    public enum Update {}
+}
+
+// POST /v1/promotion_codes
+extension Promotion.Code.Create {
+    public struct Request: Codable, Hashable, Sendable {
+        /// Whether the promotion code is currently active.
+        public var active: Bool?
+        /// The customer-facing code.
+        public var code: String?
+        /// The customer who can use this promotion code.
+        public var customer: String?
+        /// The account representing the customer who can use this promotion code.
+        public var customerAccount: String?
+        /// Specifies which fields in the response should be expanded.
+        public var expand: [String]?
+        /// The timestamp at which this promotion code will expire.
+        public var expiresAt: Date?
+        /// A positive integer specifying the number of times the promotion code can be redeemed.
+        public var maxRedemptions: Int?
+        /// Set of key-value pairs that you can attach to an object.
+        public var metadata: [String: String]?
+        /// The promotion referenced by this promotion code.
+        public var promotion: Promotion
+        /// Settings that restrict the redemption of the promotion code.
+        public var restrictions: Restrictions?
+
+        public init(
+            active: Bool? = nil,
+            code: String? = nil,
+            customer: String? = nil,
+            customerAccount: String? = nil,
+            expand: [String]? = nil,
+            expiresAt: Date? = nil,
+            maxRedemptions: Int? = nil,
+            metadata: [String: String]? = nil,
+            promotion: Promotion,
+            restrictions: Restrictions? = nil
+        ) {
+            self.active = active
+            self.code = code
+            self.customer = customer
+            self.customerAccount = customerAccount
+            self.expand = expand
+            self.expiresAt = expiresAt
+            self.maxRedemptions = maxRedemptions
+            self.metadata = metadata
+            self.promotion = promotion
+            self.restrictions = restrictions
+        }
+
+        /// The promotion referenced by this promotion code.
+        public struct Promotion: Codable, Hashable, Sendable {
+            /// If promotion `type` is `coupon`, the coupon for this promotion code.
+            public var coupon: String?
+            /// Specifies the type of promotion.
+            public var `type`: String
+
+            public init(
+                coupon: String? = nil,
+                `type`: String
+            ) {
+                self.coupon = coupon
+                self.`type` = `type`
+            }
+        }
+
+        /// Settings that restrict the redemption of the promotion code.
+        public struct Restrictions: Codable, Hashable, Sendable {
+            /// Promotion codes defined in each available currency option.
+            public var currencyOptions: [String: CurrencyOptions]?
+            /// A Boolean indicating if the Promotion Code should only be redeemed for Customers without any successful payments or.
+            public var firstTimeTransaction: Bool?
+            /// Minimum amount required to redeem this Promotion Code into a Coupon (e.g., a purchase must be $100 or more to work).
+            public var minimumAmount: Int?
+            /// Three-letter ISO code for minimum_amount.
+            public var minimumAmountCurrency: Stripe.Currency?
+
+            public init(
+                currencyOptions: [String: CurrencyOptions]? = nil,
+                firstTimeTransaction: Bool? = nil,
+                minimumAmount: Int? = nil,
+                minimumAmountCurrency: Stripe.Currency? = nil
+            ) {
+                self.currencyOptions = currencyOptions
+                self.firstTimeTransaction = firstTimeTransaction
+                self.minimumAmount = minimumAmount
+                self.minimumAmountCurrency = minimumAmountCurrency
+            }
+
+            public struct CurrencyOptions: Codable, Hashable, Sendable {
+                /// Minimum amount required to redeem this Promotion Code into a Coupon (e.g., a purchase must be $100 or more to work).
+                public var minimumAmount: Int?
+
+                public init(
+                    minimumAmount: Int? = nil
+                ) {
+                    self.minimumAmount = minimumAmount
+                }
+            }
+        }
+    }
+
+    public typealias Response = Promotion.Code
+}
+
+// GET /v1/promotion_codes
+extension Promotion.Code.List {
+    public struct Request: Codable, Hashable, Sendable {
+        /// Filter promotion codes by whether they are active.
+        public var active: Bool?
+        /// Only return promotion codes that have this case-insensitive code.
+        public var code: String?
+        /// Only return promotion codes for this coupon.
+        public var coupon: String?
+        /// A filter on the list, based on the object `created` field.
+        public var created: Stripe.RangeQuery?
+        /// Only return promotion codes that are restricted to this customer.
+        public var customer: String?
+        /// Only return promotion codes that are restricted to this account representing the customer.
+        public var customerAccount: String?
+        /// A cursor for use in pagination.
+        public var endingBefore: String?
+        /// Specifies which fields in the response should be expanded.
+        public var expand: [String]?
+        /// A limit on the number of objects to be returned.
+        public var limit: Int?
+        /// A cursor for use in pagination.
+        public var startingAfter: String?
+
+        public init(
+            active: Bool? = nil,
+            code: String? = nil,
+            coupon: String? = nil,
+            created: Stripe.RangeQuery? = nil,
+            customer: String? = nil,
+            customerAccount: String? = nil,
+            endingBefore: String? = nil,
+            expand: [String]? = nil,
+            limit: Int? = nil,
+            startingAfter: String? = nil
+        ) {
+            self.active = active
+            self.code = code
+            self.coupon = coupon
+            self.created = created
+            self.customer = customer
+            self.customerAccount = customerAccount
+            self.endingBefore = endingBefore
+            self.expand = expand
+            self.limit = limit
+            self.startingAfter = startingAfter
+        }
+    }
+
+    public typealias Response = Stripe.Page<Promotion.Code>
+}
+
+// GET /v1/promotion_codes/{promotion_code}
+extension Promotion.Code.Retrieve {
+    public struct Request: Codable, Hashable, Sendable {
+        /// Specifies which fields in the response should be expanded.
+        public var expand: [String]?
+
+        public init(
+            expand: [String]? = nil
+        ) {
+            self.expand = expand
+        }
+    }
+
+    public typealias Response = Promotion.Code
+}
+
+// POST /v1/promotion_codes/{promotion_code}
+extension Promotion.Code.Update {
+    public struct Request: Codable, Hashable, Sendable {
+        /// Whether the promotion code is currently active.
+        public var active: Bool?
+        /// Specifies which fields in the response should be expanded.
+        public var expand: [String]?
+        /// Set of key-value pairs that you can attach to an object.
+        public var metadata: Stripe.Clearable<[String: String]>?
+        /// Settings that restrict the redemption of the promotion code.
+        public var restrictions: Restrictions?
+
+        public init(
+            active: Bool? = nil,
+            expand: [String]? = nil,
+            metadata: Stripe.Clearable<[String: String]>? = nil,
+            restrictions: Restrictions? = nil
+        ) {
+            self.active = active
+            self.expand = expand
+            self.metadata = metadata
+            self.restrictions = restrictions
+        }
+
+        /// Settings that restrict the redemption of the promotion code.
+        public struct Restrictions: Codable, Hashable, Sendable {
+            /// Promotion codes defined in each available currency option.
+            public var currencyOptions: [String: CurrencyOptions]?
+
+            public init(
+                currencyOptions: [String: CurrencyOptions]? = nil
+            ) {
+                self.currencyOptions = currencyOptions
+            }
+
+            public struct CurrencyOptions: Codable, Hashable, Sendable {
+                /// Minimum amount required to redeem this Promotion Code into a Coupon (e.g., a purchase must be $100 or more to work).
+                public var minimumAmount: Int?
+
+                public init(
+                    minimumAmount: Int? = nil
+                ) {
+                    self.minimumAmount = minimumAmount
+                }
+            }
+        }
+    }
+
+    public typealias Response = Promotion.Code
+}

@@ -1,0 +1,1479 @@
+//===----------------------------------------------------------------------===//
+//
+// This source file is part of the swift-stripe open source project
+//
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
+//
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
+
+import StripeCore
+import StripeModels
+
+#if canImport(FoundationEssentials)
+import FoundationEssentials
+#else
+import Foundation
+#endif
+
+extension Stripe.PaymentMethods.PaymentMethod {
+    public enum Attach {}
+    public enum Create {}
+    public enum Detach {}
+    public enum List {}
+    public enum Retrieve {}
+    public enum Update {}
+}
+
+// POST /v1/payment_methods/{payment_method}/attach
+extension Stripe.PaymentMethods.PaymentMethod.Attach {
+    public struct Request: Codable, Hashable, Sendable {
+        /// The ID of the customer to which to attach the PaymentMethod.
+        public var customer: String?
+        /// The ID of the Account representing the customer to which to attach the PaymentMethod.
+        public var customerAccount: String?
+        /// Specifies which fields in the response should be expanded.
+        public var expand: [String]?
+
+        public init(
+            customer: String? = nil,
+            customerAccount: String? = nil,
+            expand: [String]? = nil
+        ) {
+            self.customer = customer
+            self.customerAccount = customerAccount
+            self.expand = expand
+        }
+    }
+
+    public typealias Response = Stripe.PaymentMethods.PaymentMethod
+}
+
+// POST /v1/payment_methods
+extension Stripe.PaymentMethods.PaymentMethod.Create {
+    public struct Request: Codable, Hashable, Sendable {
+        /// If this is an `acss_debit` PaymentMethod, this hash contains details about the ACSS Debit payment method.
+        public var acssDebit: AcssDebit?
+        /// If this is an `affirm` PaymentMethod, this hash contains details about the Affirm payment method.
+        public var affirm: Affirm?
+        /// If this is an `AfterpayClearpay` PaymentMethod, this hash contains details about the AfterpayClearpay payment method.
+        public var afterpayClearpay: AfterpayClearpay?
+        /// If this is an `Alipay` PaymentMethod, this hash contains details about the Alipay payment method.
+        public var alipay: Alipay?
+        /// This field indicates whether this payment method can be shown again to its customer in a checkout flow.
+        public var allowRedisplay: AllowRedisplay?
+        /// If this is a Alma PaymentMethod, this hash contains details about the Alma payment method.
+        public var alma: Alma?
+        /// If this is a AmazonPay PaymentMethod, this hash contains details about the AmazonPay payment method.
+        public var amazonPay: AmazonPay?
+        /// If this is an `au_becs_debit` PaymentMethod, this hash contains details about the bank account.
+        public var auBecsDebit: AuBecsDebit?
+        /// If this is a `bacs_debit` PaymentMethod, this hash contains details about the Bacs Direct Debit bank account.
+        public var bacsDebit: BacsDebit?
+        /// If this is a `bancontact` PaymentMethod, this hash contains details about the Bancontact payment method.
+        public var bancontact: Bancontact?
+        /// If this is a `billie` PaymentMethod, this hash contains details about the Billie payment method.
+        public var billie: Billie?
+        /// Billing information associated with the PaymentMethod that may be used or required by particular types of payment.
+        public var billingDetails: BillingDetails?
+        /// If this is a `bizum` PaymentMethod, this hash contains details about the Bizum payment method.
+        public var bizum: Bizum?
+        /// If this is a `blik` PaymentMethod, this hash contains details about the BLIK payment method.
+        public var blik: Blik?
+        /// If this is a `boleto` PaymentMethod, this hash contains details about the Boleto payment method.
+        public var boleto: Boleto?
+        /// If this is a `card` PaymentMethod, this hash contains the user's card details.
+        public var card: Card?
+        /// If this is a `cashapp` PaymentMethod, this hash contains details about the Cash App Pay payment method.
+        public var cashapp: Cashapp?
+        /// If this is a Crypto PaymentMethod, this hash contains details about the Crypto payment method.
+        public var crypto: Crypto?
+        /// If this is a `custom` PaymentMethod, this hash contains details about the Custom payment method.
+        public var custom: Custom?
+        /// The `Customer` to whom the original PaymentMethod is attached.
+        public var customer: String?
+        /// If this is a `customer_balance` PaymentMethod, this hash contains details about the CustomerBalance payment method.
+        public var customerBalance: CustomerBalance?
+        /// If this is an `eps` PaymentMethod, this hash contains details about the EPS payment method.
+        public var eps: Eps?
+        /// Specifies which fields in the response should be expanded.
+        public var expand: [String]?
+        /// If this is an `fpx` PaymentMethod, this hash contains details about the FPX payment method.
+        public var fpx: Fpx?
+        /// If this is a `giropay` PaymentMethod, this hash contains details about the Giropay payment method.
+        public var giropay: Giropay?
+        /// If this is a `grabpay` PaymentMethod, this hash contains details about the GrabPay payment method.
+        public var grabpay: Grabpay?
+        /// If this is an `ideal` PaymentMethod, this hash contains details about the iDEAL payment method.
+        public var ideal: Ideal?
+        /// If this is an `interac_present` PaymentMethod, this hash contains details about the Interac Present payment method.
+        public var interacPresent: InteracPresent?
+        /// If this is a `kakao_pay` PaymentMethod, this hash contains details about the Kakao Pay payment method.
+        public var kakaoPay: KakaoPay?
+        /// If this is a `klarna` PaymentMethod, this hash contains details about the Klarna payment method.
+        public var klarna: Klarna?
+        /// If this is a `konbini` PaymentMethod, this hash contains details about the Konbini payment method.
+        public var konbini: Konbini?
+        /// If this is a `kr_card` PaymentMethod, this hash contains details about the Korean Card payment method.
+        public var krCard: KrCard?
+        /// If this is an `Link` PaymentMethod, this hash contains details about the Link payment method (Link is also known as.
+        public var link: Link?
+        /// If this is a MB WAY PaymentMethod, this hash contains details about the MB WAY payment method.
+        public var mbWay: MbWay?
+        /// Set of key-value pairs that you can attach to an object.
+        public var metadata: [String: String]?
+        /// If this is a `mobilepay` PaymentMethod, this hash contains details about the MobilePay payment method.
+        public var mobilepay: Mobilepay?
+        /// If this is a `multibanco` PaymentMethod, this hash contains details about the Multibanco payment method.
+        public var multibanco: Multibanco?
+        /// If this is a `naver_pay` PaymentMethod, this hash contains details about the Naver Pay payment method.
+        public var naverPay: NaverPay?
+        /// If this is an nz_bank_account PaymentMethod, this hash contains details about the nz_bank_account payment method.
+        public var nzBankAccount: NzBankAccount?
+        /// If this is an `oxxo` PaymentMethod, this hash contains details about the OXXO payment method.
+        public var oxxo: Oxxo?
+        /// If this is a `p24` PaymentMethod, this hash contains details about the P24 payment method.
+        public var p24: P24?
+        /// If this is a `pay_by_bank` PaymentMethod, this hash contains details about the PayByBank payment method.
+        public var payByBank: PayByBank?
+        /// If this is a `payco` PaymentMethod, this hash contains details about the PAYCO payment method.
+        public var payco: Payco?
+        /// The PaymentMethod to share.
+        public var paymentMethod: String?
+        /// If this is a `paynow` PaymentMethod, this hash contains details about the PayNow payment method.
+        public var paynow: Paynow?
+        /// If this is a `paypal` PaymentMethod, this hash contains details about the PayPal payment method.
+        public var paypal: Paypal?
+        /// If this is a `payto` PaymentMethod, this hash contains details about the PayTo payment method.
+        public var payto: Payto?
+        /// If this is a `pix` PaymentMethod, this hash contains details about the Pix payment method.
+        public var pix: Pix?
+        /// If this is a `promptpay` PaymentMethod, this hash contains details about the PromptPay payment method.
+        public var promptpay: Promptpay?
+        /// Options to configure Radar.
+        public var radarOptions: RadarOptions?
+        /// If this is a `revolut_pay` PaymentMethod, this hash contains details about the Revolut Pay payment method.
+        public var revolutPay: RevolutPay?
+        /// If this is a `samsung_pay` PaymentMethod, this hash contains details about the SamsungPay payment method.
+        public var samsungPay: SamsungPay?
+        /// If this is a `satispay` PaymentMethod, this hash contains details about the Satispay payment method.
+        public var satispay: Satispay?
+        /// If this is a Scalapay PaymentMethod, this hash contains details about the Scalapay payment method.
+        public var scalapay: Scalapay?
+        /// If this is a `sepa_debit` PaymentMethod, this hash contains details about the SEPA debit bank account.
+        public var sepaDebit: SepaDebit?
+        /// If this is a `sofort` PaymentMethod, this hash contains details about the SOFORT payment method.
+        public var sofort: Sofort?
+        /// If this is a `sunbit` PaymentMethod, this hash contains details about the Sunbit payment method.
+        public var sunbit: Sunbit?
+        /// If this is a `swish` PaymentMethod, this hash contains details about the Swish payment method.
+        public var swish: Swish?
+        /// If this is a TWINT PaymentMethod, this hash contains details about the TWINT payment method.
+        public var twint: Twint?
+        /// The type of the PaymentMethod.
+        public var `type`: Type?
+        /// If this is a `upi` PaymentMethod, this hash contains details about the UPI payment method.
+        public var upi: Upi?
+        /// If this is an `us_bank_account` PaymentMethod, this hash contains details about the US bank account payment method.
+        public var usBankAccount: UsBankAccount?
+        /// If this is an `wechat_pay` PaymentMethod, this hash contains details about the wechat_pay payment method.
+        public var wechatPay: WechatPay?
+        /// If this is a `zip` PaymentMethod, this hash contains details about the Zip payment method.
+        public var zip: Zip?
+
+        public init(
+            acssDebit: AcssDebit? = nil,
+            affirm: Affirm? = nil,
+            afterpayClearpay: AfterpayClearpay? = nil,
+            alipay: Alipay? = nil,
+            allowRedisplay: AllowRedisplay? = nil,
+            alma: Alma? = nil,
+            amazonPay: AmazonPay? = nil,
+            auBecsDebit: AuBecsDebit? = nil,
+            bacsDebit: BacsDebit? = nil,
+            bancontact: Bancontact? = nil,
+            billie: Billie? = nil,
+            billingDetails: BillingDetails? = nil,
+            bizum: Bizum? = nil,
+            blik: Blik? = nil,
+            boleto: Boleto? = nil,
+            card: Card? = nil,
+            cashapp: Cashapp? = nil,
+            crypto: Crypto? = nil,
+            custom: Custom? = nil,
+            customer: String? = nil,
+            customerBalance: CustomerBalance? = nil,
+            eps: Eps? = nil,
+            expand: [String]? = nil,
+            fpx: Fpx? = nil,
+            giropay: Giropay? = nil,
+            grabpay: Grabpay? = nil,
+            ideal: Ideal? = nil,
+            interacPresent: InteracPresent? = nil,
+            kakaoPay: KakaoPay? = nil,
+            klarna: Klarna? = nil,
+            konbini: Konbini? = nil,
+            krCard: KrCard? = nil,
+            link: Link? = nil,
+            mbWay: MbWay? = nil,
+            metadata: [String: String]? = nil,
+            mobilepay: Mobilepay? = nil,
+            multibanco: Multibanco? = nil,
+            naverPay: NaverPay? = nil,
+            nzBankAccount: NzBankAccount? = nil,
+            oxxo: Oxxo? = nil,
+            p24: P24? = nil,
+            payByBank: PayByBank? = nil,
+            payco: Payco? = nil,
+            paymentMethod: String? = nil,
+            paynow: Paynow? = nil,
+            paypal: Paypal? = nil,
+            payto: Payto? = nil,
+            pix: Pix? = nil,
+            promptpay: Promptpay? = nil,
+            radarOptions: RadarOptions? = nil,
+            revolutPay: RevolutPay? = nil,
+            samsungPay: SamsungPay? = nil,
+            satispay: Satispay? = nil,
+            scalapay: Scalapay? = nil,
+            sepaDebit: SepaDebit? = nil,
+            sofort: Sofort? = nil,
+            sunbit: Sunbit? = nil,
+            swish: Swish? = nil,
+            twint: Twint? = nil,
+            `type`: Type? = nil,
+            upi: Upi? = nil,
+            usBankAccount: UsBankAccount? = nil,
+            wechatPay: WechatPay? = nil,
+            zip: Zip? = nil
+        ) {
+            self.acssDebit = acssDebit
+            self.affirm = affirm
+            self.afterpayClearpay = afterpayClearpay
+            self.alipay = alipay
+            self.allowRedisplay = allowRedisplay
+            self.alma = alma
+            self.amazonPay = amazonPay
+            self.auBecsDebit = auBecsDebit
+            self.bacsDebit = bacsDebit
+            self.bancontact = bancontact
+            self.billie = billie
+            self.billingDetails = billingDetails
+            self.bizum = bizum
+            self.blik = blik
+            self.boleto = boleto
+            self.card = card
+            self.cashapp = cashapp
+            self.crypto = crypto
+            self.custom = custom
+            self.customer = customer
+            self.customerBalance = customerBalance
+            self.eps = eps
+            self.expand = expand
+            self.fpx = fpx
+            self.giropay = giropay
+            self.grabpay = grabpay
+            self.ideal = ideal
+            self.interacPresent = interacPresent
+            self.kakaoPay = kakaoPay
+            self.klarna = klarna
+            self.konbini = konbini
+            self.krCard = krCard
+            self.link = link
+            self.mbWay = mbWay
+            self.metadata = metadata
+            self.mobilepay = mobilepay
+            self.multibanco = multibanco
+            self.naverPay = naverPay
+            self.nzBankAccount = nzBankAccount
+            self.oxxo = oxxo
+            self.p24 = p24
+            self.payByBank = payByBank
+            self.payco = payco
+            self.paymentMethod = paymentMethod
+            self.paynow = paynow
+            self.paypal = paypal
+            self.payto = payto
+            self.pix = pix
+            self.promptpay = promptpay
+            self.radarOptions = radarOptions
+            self.revolutPay = revolutPay
+            self.samsungPay = samsungPay
+            self.satispay = satispay
+            self.scalapay = scalapay
+            self.sepaDebit = sepaDebit
+            self.sofort = sofort
+            self.sunbit = sunbit
+            self.swish = swish
+            self.twint = twint
+            self.`type` = `type`
+            self.upi = upi
+            self.usBankAccount = usBankAccount
+            self.wechatPay = wechatPay
+            self.zip = zip
+        }
+
+        public enum AllowRedisplay: String, Codable, Hashable, Sendable {
+            case always
+            case limited
+            case unspecified
+        }
+
+        public enum `Type`: String, Codable, Hashable, Sendable {
+            case acssDebit = "acss_debit"
+            case affirm
+            case afterpayClearpay = "afterpay_clearpay"
+            case alipay
+            case alma
+            case amazonPay = "amazon_pay"
+            case auBecsDebit = "au_becs_debit"
+            case bacsDebit = "bacs_debit"
+            case bancontact
+            case billie
+            case bizum
+            case blik
+            case boleto
+            case card
+            case cashapp
+            case crypto
+            case custom
+            case customerBalance = "customer_balance"
+            case eps
+            case fpx
+            case giropay
+            case grabpay
+            case ideal
+            case kakaoPay = "kakao_pay"
+            case klarna
+            case konbini
+            case krCard = "kr_card"
+            case link
+            case mbWay = "mb_way"
+            case mobilepay
+            case multibanco
+            case naverPay = "naver_pay"
+            case nzBankAccount = "nz_bank_account"
+            case oxxo
+            case p24
+            case payByBank = "pay_by_bank"
+            case payco
+            case paynow
+            case paypal
+            case payto
+            case pix
+            case promptpay
+            case revolutPay = "revolut_pay"
+            case samsungPay = "samsung_pay"
+            case satispay
+            case scalapay
+            case sepaDebit = "sepa_debit"
+            case sofort
+            case sunbit
+            case swish
+            case twint
+            case upi
+            case usBankAccount = "us_bank_account"
+            case wechatPay = "wechat_pay"
+            case zip
+        }
+
+        /// If this is an `acss_debit` PaymentMethod, this hash contains details about the ACSS Debit payment method.
+        public struct AcssDebit: Codable, Hashable, Sendable {
+            /// Customer's bank account number.
+            public var accountNumber: String
+            /// Institution number of the customer's bank.
+            public var institutionNumber: String
+            /// Transit number of the customer's bank.
+            public var transitNumber: String
+
+            public init(
+                accountNumber: String,
+                institutionNumber: String,
+                transitNumber: String
+            ) {
+                self.accountNumber = accountNumber
+                self.institutionNumber = institutionNumber
+                self.transitNumber = transitNumber
+            }
+        }
+
+        /// If this is an `affirm` PaymentMethod, this hash contains details about the Affirm payment method.
+        public struct Affirm: Codable, Hashable, Sendable {
+            public init() {}
+        }
+
+        /// If this is an `AfterpayClearpay` PaymentMethod, this hash contains details about the AfterpayClearpay payment method.
+        public struct AfterpayClearpay: Codable, Hashable, Sendable {
+            public init() {}
+        }
+
+        /// If this is an `Alipay` PaymentMethod, this hash contains details about the Alipay payment method.
+        public struct Alipay: Codable, Hashable, Sendable {
+            public init() {}
+        }
+
+        /// If this is a Alma PaymentMethod, this hash contains details about the Alma payment method.
+        public struct Alma: Codable, Hashable, Sendable {
+            public init() {}
+        }
+
+        /// If this is a AmazonPay PaymentMethod, this hash contains details about the AmazonPay payment method.
+        public struct AmazonPay: Codable, Hashable, Sendable {
+            public init() {}
+        }
+
+        /// If this is an `au_becs_debit` PaymentMethod, this hash contains details about the bank account.
+        public struct AuBecsDebit: Codable, Hashable, Sendable {
+            /// The account number for the bank account.
+            public var accountNumber: String
+            /// Bank-State-Branch number of the bank account.
+            public var bsbNumber: String
+
+            public init(
+                accountNumber: String,
+                bsbNumber: String
+            ) {
+                self.accountNumber = accountNumber
+                self.bsbNumber = bsbNumber
+            }
+        }
+
+        /// If this is a `bacs_debit` PaymentMethod, this hash contains details about the Bacs Direct Debit bank account.
+        public struct BacsDebit: Codable, Hashable, Sendable {
+            /// Account number of the bank account that the funds will be debited from.
+            public var accountNumber: String?
+            /// Sort code of the bank account.
+            public var sortCode: String?
+
+            public init(
+                accountNumber: String? = nil,
+                sortCode: String? = nil
+            ) {
+                self.accountNumber = accountNumber
+                self.sortCode = sortCode
+            }
+        }
+
+        /// If this is a `bancontact` PaymentMethod, this hash contains details about the Bancontact payment method.
+        public struct Bancontact: Codable, Hashable, Sendable {
+            public init() {}
+        }
+
+        /// If this is a `billie` PaymentMethod, this hash contains details about the Billie payment method.
+        public struct Billie: Codable, Hashable, Sendable {
+            public init() {}
+        }
+
+        /// Billing information associated with the PaymentMethod that may be used or required by particular types of payment.
+        public struct BillingDetails: Codable, Hashable, Sendable {
+            /// Billing address.
+            public var address: Stripe.Clearable<Address>?
+            /// Email address.
+            public var email: String?
+            /// Full name.
+            public var name: String?
+            /// Billing phone number (including extension).
+            public var phone: String?
+            /// Taxpayer identification number.
+            public var taxId: String?
+
+            public init(
+                address: Stripe.Clearable<Address>? = nil,
+                email: String? = nil,
+                name: String? = nil,
+                phone: String? = nil,
+                taxId: String? = nil
+            ) {
+                self.address = address
+                self.email = email
+                self.name = name
+                self.phone = phone
+                self.taxId = taxId
+            }
+
+            public struct Address: Codable, Hashable, Sendable {
+                /// City, district, suburb, town, or village.
+                public var city: String?
+                /// Two-letter country code (ISO 3166-1 alpha-2).
+                public var country: String?
+                /// Address line 1, such as the street, PO Box, or company name.
+                public var line1: String?
+                /// Address line 2, such as the apartment, suite, unit, or building.
+                public var line2: String?
+                /// ZIP or postal code.
+                public var postalCode: String?
+                /// State, county, province, or region (ISO 3166-2).
+                public var state: String?
+
+                public init(
+                    city: String? = nil,
+                    country: String? = nil,
+                    line1: String? = nil,
+                    line2: String? = nil,
+                    postalCode: String? = nil,
+                    state: String? = nil
+                ) {
+                    self.city = city
+                    self.country = country
+                    self.line1 = line1
+                    self.line2 = line2
+                    self.postalCode = postalCode
+                    self.state = state
+                }
+            }
+        }
+
+        /// If this is a `bizum` PaymentMethod, this hash contains details about the Bizum payment method.
+        public struct Bizum: Codable, Hashable, Sendable {
+            public init() {}
+        }
+
+        /// If this is a `blik` PaymentMethod, this hash contains details about the BLIK payment method.
+        public struct Blik: Codable, Hashable, Sendable {
+            public init() {}
+        }
+
+        /// If this is a `boleto` PaymentMethod, this hash contains details about the Boleto payment method.
+        public struct Boleto: Codable, Hashable, Sendable {
+            /// The tax ID of the customer (CPF for individual consumers or CNPJ for businesses consumers).
+            public var taxId: String
+
+            public init(
+                taxId: String
+            ) {
+                self.taxId = taxId
+            }
+        }
+
+        public struct Card: Codable, Hashable, Sendable {
+            /// The card's CVC.
+            public var cvc: String?
+            /// Two-digit number representing the card's expiration month.
+            public var expMonth: Int
+            /// Four-digit number representing the card's expiration year.
+            public var expYear: Int
+            /// Contains information about card networks used to process the payment.
+            public var networks: Networks?
+            /// The card number, as a string without any separators.
+            public var number: String
+
+            public init(
+                cvc: String? = nil,
+                expMonth: Int,
+                expYear: Int,
+                networks: Networks? = nil,
+                number: String
+            ) {
+                self.cvc = cvc
+                self.expMonth = expMonth
+                self.expYear = expYear
+                self.networks = networks
+                self.number = number
+            }
+
+            /// Contains information about card networks used to process the payment.
+            public struct Networks: Codable, Hashable, Sendable {
+                /// The customer's preferred card network for co-branded cards.
+                public var preferred: Preferred?
+
+                public init(
+                    preferred: Preferred? = nil
+                ) {
+                    self.preferred = preferred
+                }
+
+                public enum Preferred: String, Codable, Hashable, Sendable {
+                    case cartesBancaires = "cartes_bancaires"
+                    case mastercard
+                    case visa
+                }
+            }
+        }
+
+        /// If this is a `cashapp` PaymentMethod, this hash contains details about the Cash App Pay payment method.
+        public struct Cashapp: Codable, Hashable, Sendable {
+            public init() {}
+        }
+
+        /// If this is a Crypto PaymentMethod, this hash contains details about the Crypto payment method.
+        public struct Crypto: Codable, Hashable, Sendable {
+            public init() {}
+        }
+
+        /// If this is a `custom` PaymentMethod, this hash contains details about the Custom payment method.
+        public struct Custom: Codable, Hashable, Sendable {
+            /// ID of the Dashboard-only CustomPaymentMethodType.
+            public var `type`: String
+
+            public init(
+                `type`: String
+            ) {
+                self.`type` = `type`
+            }
+        }
+
+        /// If this is a `customer_balance` PaymentMethod, this hash contains details about the CustomerBalance payment method.
+        public struct CustomerBalance: Codable, Hashable, Sendable {
+            public init() {}
+        }
+
+        /// If this is an `eps` PaymentMethod, this hash contains details about the EPS payment method.
+        public struct Eps: Codable, Hashable, Sendable {
+            /// The customer's bank.
+            public var bank: Bank?
+
+            public init(
+                bank: Bank? = nil
+            ) {
+                self.bank = bank
+            }
+
+            public enum Bank: String, Codable, Hashable, Sendable {
+                case arzteUndApothekerBank = "arzte_und_apotheker_bank"
+                case austrianAnadiBankAg = "austrian_anadi_bank_ag"
+                case bankAustria = "bank_austria"
+                case bankhausCarlSpangler = "bankhaus_carl_spangler"
+                case bankhausSchelhammerUndSchatteraAg = "bankhaus_schelhammer_und_schattera_ag"
+                case bawagPskAg = "bawag_psk_ag"
+                case bksBankAg = "bks_bank_ag"
+                case brullKallmusBankAg = "brull_kallmus_bank_ag"
+                case btvVierLanderBank = "btv_vier_lander_bank"
+                case capitalBankGraweGruppeAg = "capital_bank_grawe_gruppe_ag"
+                case deutscheBankAg = "deutsche_bank_ag"
+                case dolomitenbank
+                case easybankAg = "easybank_ag"
+                case ersteBankUndSparkassen = "erste_bank_und_sparkassen"
+                case hypoAlpeadriabankInternationalAg = "hypo_alpeadriabank_international_ag"
+                case hypoBankBurgenlandAktiengesellschaft = "hypo_bank_burgenland_aktiengesellschaft"
+                case hypoNoeLbFurNiederosterreichUWien = "hypo_noe_lb_fur_niederosterreich_u_wien"
+                case hypoOberosterreichSalzburgSteiermark = "hypo_oberosterreich_salzburg_steiermark"
+                case hypoTirolBankAg = "hypo_tirol_bank_ag"
+                case hypoVorarlbergBankAg = "hypo_vorarlberg_bank_ag"
+                case marchfelderBank = "marchfelder_bank"
+                case oberbankAg = "oberbank_ag"
+                case raiffeisenBankengruppeOsterreich = "raiffeisen_bankengruppe_osterreich"
+                case schoellerbankAg = "schoellerbank_ag"
+                case spardaBankWien = "sparda_bank_wien"
+                case volksbankGruppe = "volksbank_gruppe"
+                case volkskreditbankAg = "volkskreditbank_ag"
+                case vrBankBraunau = "vr_bank_braunau"
+            }
+        }
+
+        /// If this is an `fpx` PaymentMethod, this hash contains details about the FPX payment method.
+        public struct Fpx: Codable, Hashable, Sendable {
+            /// Account holder type for FPX transaction.
+            public var accountHolderType: AccountHolderType?
+            /// The customer's bank.
+            public var bank: Bank
+
+            public init(
+                accountHolderType: AccountHolderType? = nil,
+                bank: Bank
+            ) {
+                self.accountHolderType = accountHolderType
+                self.bank = bank
+            }
+
+            public enum AccountHolderType: String, Codable, Hashable, Sendable {
+                case company
+                case individual
+            }
+
+            public enum Bank: String, Codable, Hashable, Sendable {
+                case affinBank = "affin_bank"
+                case agrobank
+                case allianceBank = "alliance_bank"
+                case ambank
+                case bankIslam = "bank_islam"
+                case bankMuamalat = "bank_muamalat"
+                case bankOfChina = "bank_of_china"
+                case bankRakyat = "bank_rakyat"
+                case bnpParibas = "bnp_paribas"
+                case bsn
+                case cimb
+                case citibank
+                case deutscheBank = "deutsche_bank"
+                case hongLeongBank = "hong_leong_bank"
+                case hsbc
+                case kfh
+                case maybank2e
+                case maybank2u
+                case mbsbBank = "mbsb_bank"
+                case ocbc
+                case pbEnterprise = "pb_enterprise"
+                case publicBank = "public_bank"
+                case rhb
+                case standardChartered = "standard_chartered"
+                case uob
+            }
+        }
+
+        /// If this is a `giropay` PaymentMethod, this hash contains details about the Giropay payment method.
+        public struct Giropay: Codable, Hashable, Sendable {
+            public init() {}
+        }
+
+        /// If this is a `grabpay` PaymentMethod, this hash contains details about the GrabPay payment method.
+        public struct Grabpay: Codable, Hashable, Sendable {
+            public init() {}
+        }
+
+        /// If this is an `ideal` PaymentMethod, this hash contains details about the iDEAL payment method.
+        public struct Ideal: Codable, Hashable, Sendable {
+            /// The customer's bank.
+            public var bank: Bank?
+
+            public init(
+                bank: Bank? = nil
+            ) {
+                self.bank = bank
+            }
+
+            public enum Bank: String, Codable, Hashable, Sendable {
+                case abnAmro = "abn_amro"
+                case adyen
+                case asnBank = "asn_bank"
+                case bunq
+                case buut
+                case finom
+                case handelsbanken
+                case ing
+                case knab
+                case mollie
+                case moneyou
+                case n26
+                case nn
+                case rabobank
+                case regiobank
+                case revolut
+                case snsBank = "sns_bank"
+                case triodosBank = "triodos_bank"
+                case vanLanschot = "van_lanschot"
+                case yoursafe
+            }
+        }
+
+        /// If this is an `interac_present` PaymentMethod, this hash contains details about the Interac Present payment method.
+        public struct InteracPresent: Codable, Hashable, Sendable {
+            public init() {}
+        }
+
+        /// If this is a `kakao_pay` PaymentMethod, this hash contains details about the Kakao Pay payment method.
+        public struct KakaoPay: Codable, Hashable, Sendable {
+            public init() {}
+        }
+
+        /// If this is a `klarna` PaymentMethod, this hash contains details about the Klarna payment method.
+        public struct Klarna: Codable, Hashable, Sendable {
+            /// Customer's date of birth.
+            public var dob: Dob?
+
+            public init(
+                dob: Dob? = nil
+            ) {
+                self.dob = dob
+            }
+
+            /// Customer's date of birth.
+            public struct Dob: Codable, Hashable, Sendable {
+                /// The day of birth, between 1 and 31.
+                public var day: Int
+                /// The month of birth, between 1 and 12.
+                public var month: Int
+                /// The four-digit year of birth.
+                public var year: Int
+
+                public init(
+                    day: Int,
+                    month: Int,
+                    year: Int
+                ) {
+                    self.day = day
+                    self.month = month
+                    self.year = year
+                }
+            }
+        }
+
+        /// If this is a `konbini` PaymentMethod, this hash contains details about the Konbini payment method.
+        public struct Konbini: Codable, Hashable, Sendable {
+            public init() {}
+        }
+
+        /// If this is a `kr_card` PaymentMethod, this hash contains details about the Korean Card payment method.
+        public struct KrCard: Codable, Hashable, Sendable {
+            public init() {}
+        }
+
+        /// If this is an `Link` PaymentMethod, this hash contains details about the Link payment method (Link is also known as.
+        public struct Link: Codable, Hashable, Sendable {
+            public init() {}
+        }
+
+        /// If this is a MB WAY PaymentMethod, this hash contains details about the MB WAY payment method.
+        public struct MbWay: Codable, Hashable, Sendable {
+            public init() {}
+        }
+
+        /// If this is a `mobilepay` PaymentMethod, this hash contains details about the MobilePay payment method.
+        public struct Mobilepay: Codable, Hashable, Sendable {
+            public init() {}
+        }
+
+        /// If this is a `multibanco` PaymentMethod, this hash contains details about the Multibanco payment method.
+        public struct Multibanco: Codable, Hashable, Sendable {
+            public init() {}
+        }
+
+        /// If this is a `naver_pay` PaymentMethod, this hash contains details about the Naver Pay payment method.
+        public struct NaverPay: Codable, Hashable, Sendable {
+            /// Whether to use Naver Pay points or a card to fund this transaction.
+            public var funding: Funding?
+
+            public init(
+                funding: Funding? = nil
+            ) {
+                self.funding = funding
+            }
+
+            public enum Funding: String, Codable, Hashable, Sendable {
+                case card
+                case points
+            }
+        }
+
+        /// If this is an nz_bank_account PaymentMethod, this hash contains details about the nz_bank_account payment method.
+        public struct NzBankAccount: Codable, Hashable, Sendable {
+            /// The name on the bank account.
+            public var accountHolderName: String?
+            /// The account number for the bank account.
+            public var accountNumber: String
+            /// The numeric code for the bank account's bank.
+            public var bankCode: String
+            /// The numeric code for the bank account's bank branch.
+            public var branchCode: String
+            public var reference: String?
+            /// The suffix of the bank account number.
+            public var suffix: String
+
+            public init(
+                accountHolderName: String? = nil,
+                accountNumber: String,
+                bankCode: String,
+                branchCode: String,
+                reference: String? = nil,
+                suffix: String
+            ) {
+                self.accountHolderName = accountHolderName
+                self.accountNumber = accountNumber
+                self.bankCode = bankCode
+                self.branchCode = branchCode
+                self.reference = reference
+                self.suffix = suffix
+            }
+        }
+
+        /// If this is an `oxxo` PaymentMethod, this hash contains details about the OXXO payment method.
+        public struct Oxxo: Codable, Hashable, Sendable {
+            public init() {}
+        }
+
+        /// If this is a `p24` PaymentMethod, this hash contains details about the P24 payment method.
+        public struct P24: Codable, Hashable, Sendable {
+            /// The customer's bank.
+            public var bank: Bank?
+
+            public init(
+                bank: Bank? = nil
+            ) {
+                self.bank = bank
+            }
+
+            public enum Bank: String, Codable, Hashable, Sendable {
+                case aliorBank = "alior_bank"
+                case bankMillennium = "bank_millennium"
+                case bankNowyBfgSa = "bank_nowy_bfg_sa"
+                case bankPekaoSa = "bank_pekao_sa"
+                case bankiSpbdzielcze = "banki_spbdzielcze"
+                case blik
+                case bnpParibas = "bnp_paribas"
+                case boz
+                case citiHandlowy = "citi_handlowy"
+                case creditAgricole = "credit_agricole"
+                case envelobank
+                case etransferPocztowy24 = "etransfer_pocztowy24"
+                case getinBank = "getin_bank"
+                case ideabank
+                case ing
+                case inteligo
+                case mbankMtransfer = "mbank_mtransfer"
+                case nestPrzelew = "nest_przelew"
+                case noblePay = "noble_pay"
+                case pbacZIpko = "pbac_z_ipko"
+                case plusBank = "plus_bank"
+                case santanderPrzelew24 = "santander_przelew24"
+                case tmobileUsbugiBankowe = "tmobile_usbugi_bankowe"
+                case toyotaBank = "toyota_bank"
+                case velobank
+                case volkswagenBank = "volkswagen_bank"
+            }
+        }
+
+        /// If this is a `pay_by_bank` PaymentMethod, this hash contains details about the PayByBank payment method.
+        public struct PayByBank: Codable, Hashable, Sendable {
+            public init() {}
+        }
+
+        /// If this is a `payco` PaymentMethod, this hash contains details about the PAYCO payment method.
+        public struct Payco: Codable, Hashable, Sendable {
+            public init() {}
+        }
+
+        /// If this is a `paynow` PaymentMethod, this hash contains details about the PayNow payment method.
+        public struct Paynow: Codable, Hashable, Sendable {
+            public init() {}
+        }
+
+        /// If this is a `paypal` PaymentMethod, this hash contains details about the PayPal payment method.
+        public struct Paypal: Codable, Hashable, Sendable {
+            public init() {}
+        }
+
+        /// If this is a `payto` PaymentMethod, this hash contains details about the PayTo payment method.
+        public struct Payto: Codable, Hashable, Sendable {
+            /// The account number for the bank account.
+            public var accountNumber: String?
+            /// Bank-State-Branch number of the bank account.
+            public var bsbNumber: String?
+            /// The PayID alias for the bank account.
+            public var payId: String?
+
+            public init(
+                accountNumber: String? = nil,
+                bsbNumber: String? = nil,
+                payId: String? = nil
+            ) {
+                self.accountNumber = accountNumber
+                self.bsbNumber = bsbNumber
+                self.payId = payId
+            }
+        }
+
+        /// If this is a `pix` PaymentMethod, this hash contains details about the Pix payment method.
+        public struct Pix: Codable, Hashable, Sendable {
+            public init() {}
+        }
+
+        /// If this is a `promptpay` PaymentMethod, this hash contains details about the PromptPay payment method.
+        public struct Promptpay: Codable, Hashable, Sendable {
+            public init() {}
+        }
+
+        /// Options to configure Radar.
+        public struct RadarOptions: Codable, Hashable, Sendable {
+            /// A Radar Session is a snapshot of the browser metadata and device details that help Radar make more accurate.
+            public var session: String?
+
+            public init(
+                session: String? = nil
+            ) {
+                self.session = session
+            }
+        }
+
+        /// If this is a `revolut_pay` PaymentMethod, this hash contains details about the Revolut Pay payment method.
+        public struct RevolutPay: Codable, Hashable, Sendable {
+            public init() {}
+        }
+
+        /// If this is a `samsung_pay` PaymentMethod, this hash contains details about the SamsungPay payment method.
+        public struct SamsungPay: Codable, Hashable, Sendable {
+            public init() {}
+        }
+
+        /// If this is a `satispay` PaymentMethod, this hash contains details about the Satispay payment method.
+        public struct Satispay: Codable, Hashable, Sendable {
+            public init() {}
+        }
+
+        /// If this is a Scalapay PaymentMethod, this hash contains details about the Scalapay payment method.
+        public struct Scalapay: Codable, Hashable, Sendable {
+            public init() {}
+        }
+
+        /// If this is a `sepa_debit` PaymentMethod, this hash contains details about the SEPA debit bank account.
+        public struct SepaDebit: Codable, Hashable, Sendable {
+            /// IBAN of the bank account.
+            public var iban: String
+
+            public init(
+                iban: String
+            ) {
+                self.iban = iban
+            }
+        }
+
+        /// If this is a `sofort` PaymentMethod, this hash contains details about the SOFORT payment method.
+        public struct Sofort: Codable, Hashable, Sendable {
+            /// Two-letter ISO code representing the country the bank account is located in.
+            public var country: Country
+
+            public init(
+                country: Country
+            ) {
+                self.country = country
+            }
+
+            public enum Country: String, Codable, Hashable, Sendable {
+                case AT
+                case BE
+                case DE
+                case ES
+                case IT
+                case NL
+            }
+        }
+
+        /// If this is a `sunbit` PaymentMethod, this hash contains details about the Sunbit payment method.
+        public struct Sunbit: Codable, Hashable, Sendable {
+            public init() {}
+        }
+
+        /// If this is a `swish` PaymentMethod, this hash contains details about the Swish payment method.
+        public struct Swish: Codable, Hashable, Sendable {
+            public init() {}
+        }
+
+        /// If this is a TWINT PaymentMethod, this hash contains details about the TWINT payment method.
+        public struct Twint: Codable, Hashable, Sendable {
+            public init() {}
+        }
+
+        /// If this is a `upi` PaymentMethod, this hash contains details about the UPI payment method.
+        public struct Upi: Codable, Hashable, Sendable {
+            /// Configuration options for setting up an eMandate.
+            public var mandateOptions: MandateOptions?
+
+            public init(
+                mandateOptions: MandateOptions? = nil
+            ) {
+                self.mandateOptions = mandateOptions
+            }
+
+            /// Configuration options for setting up an eMandate.
+            public struct MandateOptions: Codable, Hashable, Sendable {
+                /// Amount to be charged for future payments.
+                public var amount: Int?
+                /// One of `fixed` or `maximum`.
+                public var amountType: AmountType?
+                /// A description of the mandate or subscription that is meant to be displayed to the customer.
+                public var description: String?
+                /// End date of the mandate or subscription.
+                public var endDate: Date?
+
+                public init(
+                    amount: Int? = nil,
+                    amountType: AmountType? = nil,
+                    description: String? = nil,
+                    endDate: Date? = nil
+                ) {
+                    self.amount = amount
+                    self.amountType = amountType
+                    self.description = description
+                    self.endDate = endDate
+                }
+
+                public enum AmountType: String, Codable, Hashable, Sendable {
+                    case fixed
+                    case maximum
+                }
+            }
+        }
+
+        /// If this is an `us_bank_account` PaymentMethod, this hash contains details about the US bank account payment method.
+        public struct UsBankAccount: Codable, Hashable, Sendable {
+            /// Account holder type: individual or company.
+            public var accountHolderType: AccountHolderType?
+            /// Account number of the bank account.
+            public var accountNumber: String?
+            /// Account type: checkings or savings.
+            public var accountType: AccountType?
+            /// The ID of a Financial Connections Account to use as a payment method.
+            public var financialConnectionsAccount: String?
+            /// Routing number of the bank account.
+            public var routingNumber: String?
+
+            public init(
+                accountHolderType: AccountHolderType? = nil,
+                accountNumber: String? = nil,
+                accountType: AccountType? = nil,
+                financialConnectionsAccount: String? = nil,
+                routingNumber: String? = nil
+            ) {
+                self.accountHolderType = accountHolderType
+                self.accountNumber = accountNumber
+                self.accountType = accountType
+                self.financialConnectionsAccount = financialConnectionsAccount
+                self.routingNumber = routingNumber
+            }
+
+            public enum AccountHolderType: String, Codable, Hashable, Sendable {
+                case company
+                case individual
+            }
+
+            public enum AccountType: String, Codable, Hashable, Sendable {
+                case checking
+                case savings
+            }
+        }
+
+        /// If this is an `wechat_pay` PaymentMethod, this hash contains details about the wechat_pay payment method.
+        public struct WechatPay: Codable, Hashable, Sendable {
+            public init() {}
+        }
+
+        /// If this is a `zip` PaymentMethod, this hash contains details about the Zip payment method.
+        public struct Zip: Codable, Hashable, Sendable {
+            public init() {}
+        }
+    }
+
+    public typealias Response = Stripe.PaymentMethods.PaymentMethod
+}
+
+// POST /v1/payment_methods/{payment_method}/detach
+extension Stripe.PaymentMethods.PaymentMethod.Detach {
+    public struct Request: Codable, Hashable, Sendable {
+        /// Specifies which fields in the response should be expanded.
+        public var expand: [String]?
+
+        public init(
+            expand: [String]? = nil
+        ) {
+            self.expand = expand
+        }
+    }
+
+    public typealias Response = Stripe.PaymentMethods.PaymentMethod
+}
+
+// GET /v1/payment_methods
+extension Stripe.PaymentMethods.PaymentMethod.List {
+    public struct Request: Codable, Hashable, Sendable {
+        /// This field indicates whether this payment method can be shown again to its customer in a checkout flow.
+        public var allowRedisplay: AllowRedisplay?
+        /// The ID of the customer whose PaymentMethods will be retrieved.
+        public var customer: String?
+        /// The ID of the Account whose PaymentMethods will be retrieved.
+        public var customerAccount: String?
+        /// A cursor for use in pagination.
+        public var endingBefore: String?
+        /// Specifies which fields in the response should be expanded.
+        public var expand: [String]?
+        /// A limit on the number of objects to be returned.
+        public var limit: Int?
+        /// A cursor for use in pagination.
+        public var startingAfter: String?
+        /// Filters the list by the object `type` field.
+        public var `type`: Type?
+
+        public init(
+            allowRedisplay: AllowRedisplay? = nil,
+            customer: String? = nil,
+            customerAccount: String? = nil,
+            endingBefore: String? = nil,
+            expand: [String]? = nil,
+            limit: Int? = nil,
+            startingAfter: String? = nil,
+            `type`: Type? = nil
+        ) {
+            self.allowRedisplay = allowRedisplay
+            self.customer = customer
+            self.customerAccount = customerAccount
+            self.endingBefore = endingBefore
+            self.expand = expand
+            self.limit = limit
+            self.startingAfter = startingAfter
+            self.`type` = `type`
+        }
+
+        public enum AllowRedisplay: String, Codable, Hashable, Sendable {
+            case always
+            case limited
+            case unspecified
+        }
+
+        public enum `Type`: String, Codable, Hashable, Sendable {
+            case acssDebit = "acss_debit"
+            case affirm
+            case afterpayClearpay = "afterpay_clearpay"
+            case alipay
+            case alma
+            case amazonPay = "amazon_pay"
+            case auBecsDebit = "au_becs_debit"
+            case bacsDebit = "bacs_debit"
+            case bancontact
+            case billie
+            case bizum
+            case blik
+            case boleto
+            case card
+            case cashapp
+            case crypto
+            case custom
+            case customerBalance = "customer_balance"
+            case eps
+            case fpx
+            case giropay
+            case grabpay
+            case ideal
+            case kakaoPay = "kakao_pay"
+            case klarna
+            case konbini
+            case krCard = "kr_card"
+            case link
+            case mbWay = "mb_way"
+            case mobilepay
+            case multibanco
+            case naverPay = "naver_pay"
+            case nzBankAccount = "nz_bank_account"
+            case oxxo
+            case p24
+            case payByBank = "pay_by_bank"
+            case payco
+            case paynow
+            case paypal
+            case payto
+            case pix
+            case promptpay
+            case revolutPay = "revolut_pay"
+            case samsungPay = "samsung_pay"
+            case satispay
+            case scalapay
+            case sepaDebit = "sepa_debit"
+            case sofort
+            case sunbit
+            case swish
+            case twint
+            case upi
+            case usBankAccount = "us_bank_account"
+            case wechatPay = "wechat_pay"
+            case zip
+        }
+    }
+
+    public typealias Response = Stripe.Page<Stripe.PaymentMethods.PaymentMethod>
+}
+
+// GET /v1/payment_methods/{payment_method}
+extension Stripe.PaymentMethods.PaymentMethod.Retrieve {
+    public struct Request: Codable, Hashable, Sendable {
+        /// Specifies which fields in the response should be expanded.
+        public var expand: [String]?
+
+        public init(
+            expand: [String]? = nil
+        ) {
+            self.expand = expand
+        }
+    }
+
+    public typealias Response = Stripe.PaymentMethods.PaymentMethod
+}
+
+// POST /v1/payment_methods/{payment_method}
+extension Stripe.PaymentMethods.PaymentMethod.Update {
+    public struct Request: Codable, Hashable, Sendable {
+        /// This field indicates whether this payment method can be shown again to its customer in a checkout flow.
+        public var allowRedisplay: AllowRedisplay?
+        /// Billing information associated with the PaymentMethod that may be used or required by particular types of payment.
+        public var billingDetails: BillingDetails?
+        /// If this is a `card` PaymentMethod, this hash contains the user's card details.
+        public var card: Card?
+        /// Specifies which fields in the response should be expanded.
+        public var expand: [String]?
+        /// Set of key-value pairs that you can attach to an object.
+        public var metadata: Stripe.Clearable<[String: String]>?
+        /// If this is a `payto` PaymentMethod, this hash contains details about the PayTo payment method.
+        public var payto: Payto?
+        /// If this is an `us_bank_account` PaymentMethod, this hash contains details about the US bank account payment method.
+        public var usBankAccount: UsBankAccount?
+
+        public init(
+            allowRedisplay: AllowRedisplay? = nil,
+            billingDetails: BillingDetails? = nil,
+            card: Card? = nil,
+            expand: [String]? = nil,
+            metadata: Stripe.Clearable<[String: String]>? = nil,
+            payto: Payto? = nil,
+            usBankAccount: UsBankAccount? = nil
+        ) {
+            self.allowRedisplay = allowRedisplay
+            self.billingDetails = billingDetails
+            self.card = card
+            self.expand = expand
+            self.metadata = metadata
+            self.payto = payto
+            self.usBankAccount = usBankAccount
+        }
+
+        public enum AllowRedisplay: String, Codable, Hashable, Sendable {
+            case always
+            case limited
+            case unspecified
+        }
+
+        /// Billing information associated with the PaymentMethod that may be used or required by particular types of payment.
+        public struct BillingDetails: Codable, Hashable, Sendable {
+            /// Billing address.
+            public var address: Stripe.Clearable<Address>?
+            /// Email address.
+            public var email: String?
+            /// Full name.
+            public var name: String?
+            /// Billing phone number (including extension).
+            public var phone: String?
+            /// Taxpayer identification number.
+            public var taxId: String?
+
+            public init(
+                address: Stripe.Clearable<Address>? = nil,
+                email: String? = nil,
+                name: String? = nil,
+                phone: String? = nil,
+                taxId: String? = nil
+            ) {
+                self.address = address
+                self.email = email
+                self.name = name
+                self.phone = phone
+                self.taxId = taxId
+            }
+
+            public struct Address: Codable, Hashable, Sendable {
+                /// City, district, suburb, town, or village.
+                public var city: String?
+                /// Two-letter country code (ISO 3166-1 alpha-2).
+                public var country: String?
+                /// Address line 1, such as the street, PO Box, or company name.
+                public var line1: String?
+                /// Address line 2, such as the apartment, suite, unit, or building.
+                public var line2: String?
+                /// ZIP or postal code.
+                public var postalCode: String?
+                /// State, county, province, or region (ISO 3166-2).
+                public var state: String?
+
+                public init(
+                    city: String? = nil,
+                    country: String? = nil,
+                    line1: String? = nil,
+                    line2: String? = nil,
+                    postalCode: String? = nil,
+                    state: String? = nil
+                ) {
+                    self.city = city
+                    self.country = country
+                    self.line1 = line1
+                    self.line2 = line2
+                    self.postalCode = postalCode
+                    self.state = state
+                }
+            }
+        }
+
+        /// If this is a `card` PaymentMethod, this hash contains the user's card details.
+        public struct Card: Codable, Hashable, Sendable {
+            /// Two-digit number representing the card's expiration month.
+            public var expMonth: Int?
+            /// Four-digit number representing the card's expiration year.
+            public var expYear: Int?
+            /// Contains information about card networks used to process the payment.
+            public var networks: Networks?
+
+            public init(
+                expMonth: Int? = nil,
+                expYear: Int? = nil,
+                networks: Networks? = nil
+            ) {
+                self.expMonth = expMonth
+                self.expYear = expYear
+                self.networks = networks
+            }
+
+            /// Contains information about card networks used to process the payment.
+            public struct Networks: Codable, Hashable, Sendable {
+                /// The customer's preferred card network for co-branded cards.
+                public var preferred: Preferred?
+
+                public init(
+                    preferred: Preferred? = nil
+                ) {
+                    self.preferred = preferred
+                }
+
+                public enum Preferred: String, Codable, Hashable, Sendable {
+                    case value = ""
+                    case cartesBancaires = "cartes_bancaires"
+                    case mastercard
+                    case visa
+                }
+            }
+        }
+
+        /// If this is a `payto` PaymentMethod, this hash contains details about the PayTo payment method.
+        public struct Payto: Codable, Hashable, Sendable {
+            /// The account number for the bank account.
+            public var accountNumber: String?
+            /// Bank-State-Branch number of the bank account.
+            public var bsbNumber: String?
+            /// The PayID alias for the bank account.
+            public var payId: String?
+
+            public init(
+                accountNumber: String? = nil,
+                bsbNumber: String? = nil,
+                payId: String? = nil
+            ) {
+                self.accountNumber = accountNumber
+                self.bsbNumber = bsbNumber
+                self.payId = payId
+            }
+        }
+
+        /// If this is an `us_bank_account` PaymentMethod, this hash contains details about the US bank account payment method.
+        public struct UsBankAccount: Codable, Hashable, Sendable {
+            /// Bank account holder type.
+            public var accountHolderType: AccountHolderType?
+            /// Bank account type.
+            public var accountType: AccountType?
+
+            public init(
+                accountHolderType: AccountHolderType? = nil,
+                accountType: AccountType? = nil
+            ) {
+                self.accountHolderType = accountHolderType
+                self.accountType = accountType
+            }
+
+            public enum AccountHolderType: String, Codable, Hashable, Sendable {
+                case company
+                case individual
+            }
+
+            public enum AccountType: String, Codable, Hashable, Sendable {
+                case checking
+                case savings
+            }
+        }
+    }
+
+    public typealias Response = Stripe.PaymentMethods.PaymentMethod
+}

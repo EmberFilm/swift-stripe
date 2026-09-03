@@ -1,0 +1,202 @@
+//===----------------------------------------------------------------------===//
+//
+// This source file is part of the swift-stripe open source project
+//
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
+//
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
+
+import StripeCore
+import StripeIssuing
+import StripeModels
+
+#if canImport(FoundationEssentials)
+import FoundationEssentials
+#else
+import Foundation
+#endif
+
+extension Stripe.Tax.Transaction {
+    public enum CreateFromCalculation {}
+    public enum CreateReversal {}
+    public enum ListLineItems {}
+    public enum Retrieve {}
+}
+
+// POST /v1/tax/transactions/create_from_calculation
+extension Stripe.Tax.Transaction.CreateFromCalculation {
+    public struct Request: Codable, Hashable, Sendable {
+        /// Tax Calculation ID to be used as input when creating the transaction.
+        public var calculation: String
+        /// Specifies which fields in the response should be expanded.
+        public var expand: [String]?
+        /// Set of key-value pairs that you can attach to an object.
+        public var metadata: [String: String]?
+        /// The Unix timestamp representing when the tax liability is assumed or reduced, which determines the liability posting.
+        public var postedAt: Date?
+        /// A custom order or sale identifier, such as 'myOrder_123'.
+        public var reference: String
+
+        public init(
+            calculation: String,
+            expand: [String]? = nil,
+            metadata: [String: String]? = nil,
+            postedAt: Date? = nil,
+            reference: String
+        ) {
+            self.calculation = calculation
+            self.expand = expand
+            self.metadata = metadata
+            self.postedAt = postedAt
+            self.reference = reference
+        }
+    }
+
+    public typealias Response = Stripe.Tax.Transaction
+}
+
+// POST /v1/tax/transactions/create_reversal
+extension Stripe.Tax.Transaction.CreateReversal {
+    public struct Request: Codable, Hashable, Sendable {
+        /// Specifies which fields in the response should be expanded.
+        public var expand: [String]?
+        /// A flat amount to reverse across the entire transaction, in the smallest currency unit in negative.
+        public var flatAmount: Int?
+        /// The line item amounts to reverse.
+        public var lineItems: [LineItems]?
+        /// Set of key-value pairs that you can attach to an object.
+        public var metadata: [String: String]?
+        /// If `partial`, the provided line item or shipping cost amounts are reversed.
+        public var mode: Mode
+        /// The ID of the Transaction to partially or fully reverse.
+        public var originalTransaction: String
+        /// A custom identifier for this reversal, such as `myOrder_123-refund_1`, which must be unique across all transactions.
+        public var reference: String
+        /// The shipping cost to reverse.
+        public var shippingCost: ShippingCost?
+
+        public init(
+            expand: [String]? = nil,
+            flatAmount: Int? = nil,
+            lineItems: [LineItems]? = nil,
+            metadata: [String: String]? = nil,
+            mode: Mode,
+            originalTransaction: String,
+            reference: String,
+            shippingCost: ShippingCost? = nil
+        ) {
+            self.expand = expand
+            self.flatAmount = flatAmount
+            self.lineItems = lineItems
+            self.metadata = metadata
+            self.mode = mode
+            self.originalTransaction = originalTransaction
+            self.reference = reference
+            self.shippingCost = shippingCost
+        }
+
+        public enum Mode: String, Codable, Hashable, Sendable {
+            case full
+            case partial
+        }
+
+        public struct LineItems: Codable, Hashable, Sendable {
+            /// The amount to reverse, in the smallest currency unit in negative.
+            public var amount: Int
+            /// The amount of tax to reverse, in the smallest currency unit in negative.
+            public var amountTax: Int
+            /// Set of key-value pairs that you can attach to an object.
+            public var metadata: [String: String]?
+            /// The `id` of the line item to reverse in the original transaction.
+            public var originalLineItem: String
+            /// The quantity reversed.
+            public var quantity: Int?
+            /// A custom identifier for this line item in the reversal transaction, such as 'L1-refund'.
+            public var reference: String
+
+            public init(
+                amount: Int,
+                amountTax: Int,
+                metadata: [String: String]? = nil,
+                originalLineItem: String,
+                quantity: Int? = nil,
+                reference: String
+            ) {
+                self.amount = amount
+                self.amountTax = amountTax
+                self.metadata = metadata
+                self.originalLineItem = originalLineItem
+                self.quantity = quantity
+                self.reference = reference
+            }
+        }
+
+        /// The shipping cost to reverse.
+        public struct ShippingCost: Codable, Hashable, Sendable {
+            /// The amount to reverse, in the smallest currency unit in negative.
+            public var amount: Int
+            /// The amount of tax to reverse, in the smallest currency unit in negative.
+            public var amountTax: Int
+
+            public init(
+                amount: Int,
+                amountTax: Int
+            ) {
+                self.amount = amount
+                self.amountTax = amountTax
+            }
+        }
+    }
+
+    public typealias Response = Stripe.Tax.Transaction
+}
+
+// GET /v1/tax/transactions/{transaction}/line_items
+extension Stripe.Tax.Transaction.ListLineItems {
+    public struct Request: Codable, Hashable, Sendable {
+        /// A cursor for use in pagination.
+        public var endingBefore: String?
+        /// Specifies which fields in the response should be expanded.
+        public var expand: [String]?
+        /// A limit on the number of objects to be returned.
+        public var limit: Int?
+        /// A cursor for use in pagination.
+        public var startingAfter: String?
+
+        public init(
+            endingBefore: String? = nil,
+            expand: [String]? = nil,
+            limit: Int? = nil,
+            startingAfter: String? = nil
+        ) {
+            self.endingBefore = endingBefore
+            self.expand = expand
+            self.limit = limit
+            self.startingAfter = startingAfter
+        }
+    }
+
+    public typealias Response = Stripe.Page<Stripe.Tax.TransactionLineItem>
+}
+
+// GET /v1/tax/transactions/{transaction}
+extension Stripe.Tax.Transaction.Retrieve {
+    public struct Request: Codable, Hashable, Sendable {
+        /// Specifies which fields in the response should be expanded.
+        public var expand: [String]?
+
+        public init(
+            expand: [String]? = nil
+        ) {
+            self.expand = expand
+        }
+    }
+
+    public typealias Response = Stripe.Tax.Transaction
+}

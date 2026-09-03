@@ -1,0 +1,176 @@
+//===----------------------------------------------------------------------===//
+//
+// This source file is part of the swift-stripe open source project
+//
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
+//
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
+
+import NIOHTTP1
+import StripeCore
+import StripeIssuing
+import StripeModels
+
+#if canImport(FoundationEssentials)
+import FoundationEssentials
+#else
+import Foundation
+#endif
+
+/// Operations on Stripe.Treasury.FinancialAccount.
+///
+/// A protocol so tests can substitute a double; ``TreasuryFinancialAccountsClient`` is the implementation that
+/// talks to Stripe.
+public protocol TreasuryFinancialAccountsAPI: Sendable {
+    func close(
+        id: Stripe.Treasury.FinancialAccount.ID,
+        _ request: Stripe.Treasury.FinancialAccount.Close.Request,
+        idempotencyKey: String?
+    ) async throws -> Stripe.Treasury.FinancialAccount.Close.Response
+    func create(
+        _ request: Stripe.Treasury.FinancialAccount.Create.Request,
+        idempotencyKey: String?
+    ) async throws -> Stripe.Treasury.FinancialAccount.Create.Response
+    func list(_ request: Stripe.Treasury.FinancialAccount.List.Request) async throws -> Stripe.Treasury.FinancialAccount.List.Response
+    func retrieve(
+        id: Stripe.Treasury.FinancialAccount.ID,
+        _ request: Stripe.Treasury.FinancialAccount.Retrieve.Request
+    ) async throws -> Stripe.Treasury.FinancialAccount.Retrieve.Response
+    func retrieveFeatures(
+        id: Stripe.Treasury.FinancialAccount.ID,
+        _ request: Stripe.Treasury.FinancialAccount.RetrieveFeatures.Request
+    ) async throws -> Stripe.Treasury.FinancialAccount.RetrieveFeatures.Response
+    func update(
+        id: Stripe.Treasury.FinancialAccount.ID,
+        _ request: Stripe.Treasury.FinancialAccount.Update.Request,
+        idempotencyKey: String?
+    ) async throws -> Stripe.Treasury.FinancialAccount.Update.Response
+    func updateFeatures(
+        id: Stripe.Treasury.FinancialAccount.ID,
+        _ request: Stripe.Treasury.FinancialAccount.UpdateFeatures.Request,
+        idempotencyKey: String?
+    ) async throws -> Stripe.Treasury.FinancialAccount.UpdateFeatures.Response
+}
+
+public struct TreasuryFinancialAccountsClient: TreasuryFinancialAccountsAPI {
+    private let api: StripeAPI
+
+    public init(api: StripeAPI) { self.api = api }
+
+    public func close(
+        id: Stripe.Treasury.FinancialAccount.ID,
+        _ request: Stripe.Treasury.FinancialAccount.Close.Request,
+        idempotencyKey: String?
+    ) async throws -> Stripe.Treasury.FinancialAccount.Close.Response {
+        try await api.send(.POST, "v1/treasury/financial_accounts/\(id)/close", body: request, idempotencyKey: idempotencyKey)
+    }
+
+    public func create(
+        _ request: Stripe.Treasury.FinancialAccount.Create.Request,
+        idempotencyKey: String?
+    ) async throws -> Stripe.Treasury.FinancialAccount.Create.Response {
+        try await api.send(.POST, "v1/treasury/financial_accounts", body: request, idempotencyKey: idempotencyKey)
+    }
+
+    public func list(_ request: Stripe.Treasury.FinancialAccount.List.Request) async throws -> Stripe.Treasury.FinancialAccount.List.Response {
+        try await api.list("v1/treasury/financial_accounts", parameters: request)
+    }
+
+    public func retrieve(
+        id: Stripe.Treasury.FinancialAccount.ID,
+        _ request: Stripe.Treasury.FinancialAccount.Retrieve.Request
+    ) async throws -> Stripe.Treasury.FinancialAccount.Retrieve.Response {
+        try await api.list("v1/treasury/financial_accounts/\(id)", parameters: request)
+    }
+
+    public func retrieveFeatures(
+        id: Stripe.Treasury.FinancialAccount.ID,
+        _ request: Stripe.Treasury.FinancialAccount.RetrieveFeatures.Request
+    ) async throws -> Stripe.Treasury.FinancialAccount.RetrieveFeatures.Response {
+        try await api.list("v1/treasury/financial_accounts/\(id)/features", parameters: request)
+    }
+
+    public func update(
+        id: Stripe.Treasury.FinancialAccount.ID,
+        _ request: Stripe.Treasury.FinancialAccount.Update.Request,
+        idempotencyKey: String?
+    ) async throws -> Stripe.Treasury.FinancialAccount.Update.Response {
+        try await api.send(.POST, "v1/treasury/financial_accounts/\(id)", body: request, idempotencyKey: idempotencyKey)
+    }
+
+    public func updateFeatures(
+        id: Stripe.Treasury.FinancialAccount.ID,
+        _ request: Stripe.Treasury.FinancialAccount.UpdateFeatures.Request,
+        idempotencyKey: String?
+    ) async throws -> Stripe.Treasury.FinancialAccount.UpdateFeatures.Response {
+        try await api.send(.POST, "v1/treasury/financial_accounts/\(id)/features", body: request, idempotencyKey: idempotencyKey)
+    }
+}
+
+// A write with no explicit key behaves as it did before idempotency keys existed: no header,
+// and no retry. See ``StripeAPI/isSafeToRetry(_:)``.
+extension TreasuryFinancialAccountsAPI {
+    public func close(
+        id: Stripe.Treasury.FinancialAccount.ID,
+        _ request: Stripe.Treasury.FinancialAccount.Close.Request
+    ) async throws -> Stripe.Treasury.FinancialAccount.Close.Response {
+        try await close(id: id, request, idempotencyKey: nil)
+    }
+
+    public func close(
+        id: Stripe.Treasury.FinancialAccount.ID,
+        idempotencyKey: String? = nil
+    ) async throws -> Stripe.Treasury.FinancialAccount.Close.Response {
+        try await close(id: id, .init(), idempotencyKey: idempotencyKey)
+    }
+
+    public func create(_ request: Stripe.Treasury.FinancialAccount.Create.Request) async throws -> Stripe.Treasury.FinancialAccount.Create.Response {
+        try await create(request, idempotencyKey: nil)
+    }
+
+    public func list() async throws -> Stripe.Treasury.FinancialAccount.List.Response {
+        try await list(.init())
+    }
+
+    public func retrieve(id: Stripe.Treasury.FinancialAccount.ID) async throws -> Stripe.Treasury.FinancialAccount.Retrieve.Response {
+        try await retrieve(id: id, .init())
+    }
+
+    public func retrieveFeatures(id: Stripe.Treasury.FinancialAccount.ID) async throws -> Stripe.Treasury.FinancialAccount.RetrieveFeatures.Response {
+        try await retrieveFeatures(id: id, .init())
+    }
+
+    public func update(
+        id: Stripe.Treasury.FinancialAccount.ID,
+        _ request: Stripe.Treasury.FinancialAccount.Update.Request
+    ) async throws -> Stripe.Treasury.FinancialAccount.Update.Response {
+        try await update(id: id, request, idempotencyKey: nil)
+    }
+
+    public func update(
+        id: Stripe.Treasury.FinancialAccount.ID,
+        idempotencyKey: String? = nil
+    ) async throws -> Stripe.Treasury.FinancialAccount.Update.Response {
+        try await update(id: id, .init(), idempotencyKey: idempotencyKey)
+    }
+
+    public func updateFeatures(
+        id: Stripe.Treasury.FinancialAccount.ID,
+        _ request: Stripe.Treasury.FinancialAccount.UpdateFeatures.Request
+    ) async throws -> Stripe.Treasury.FinancialAccount.UpdateFeatures.Response {
+        try await updateFeatures(id: id, request, idempotencyKey: nil)
+    }
+
+    public func updateFeatures(
+        id: Stripe.Treasury.FinancialAccount.ID,
+        idempotencyKey: String? = nil
+    ) async throws -> Stripe.Treasury.FinancialAccount.UpdateFeatures.Response {
+        try await updateFeatures(id: id, .init(), idempotencyKey: idempotencyKey)
+    }
+}

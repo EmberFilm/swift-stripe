@@ -1,0 +1,360 @@
+//===----------------------------------------------------------------------===//
+//
+// This source file is part of the swift-stripe open source project
+//
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
+//
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
+
+import StripeCore
+import StripeIssuing
+import StripeModels
+
+#if canImport(FoundationEssentials)
+import FoundationEssentials
+#else
+import Foundation
+#endif
+
+extension Stripe.Treasury.OutboundTransfer {
+    public enum Cancel {}
+    public enum Create {}
+    public enum Fail {}
+    public enum List {}
+    public enum Post {}
+    public enum Retrieve {}
+    public enum ReturnOutboundTransfer {}
+    public enum Update {}
+}
+
+// POST /v1/treasury/outbound_transfers/{outbound_transfer}/cancel
+extension Stripe.Treasury.OutboundTransfer.Cancel {
+    public struct Request: Codable, Hashable, Sendable {
+        /// Specifies which fields in the response should be expanded.
+        public var expand: [String]?
+
+        public init(
+            expand: [String]? = nil
+        ) {
+            self.expand = expand
+        }
+    }
+
+    public typealias Response = Stripe.Treasury.OutboundTransfer
+}
+
+// POST /v1/treasury/outbound_transfers
+extension Stripe.Treasury.OutboundTransfer.Create {
+    public struct Request: Codable, Hashable, Sendable {
+        /// Amount (in cents) to be transferred.
+        public var amount: Int
+        /// Three-letter ISO currency code, in lowercase.
+        public var currency: Stripe.Currency
+        /// An arbitrary string attached to the object.
+        public var description: String?
+        /// The PaymentMethod to use as the payment instrument for the OutboundTransfer.
+        public var destinationPaymentMethod: String?
+        /// Hash used to generate the PaymentMethod to be used for this OutboundTransfer.
+        public var destinationPaymentMethodData: DestinationPaymentMethodData?
+        /// Hash describing payment method configuration details.
+        public var destinationPaymentMethodOptions: DestinationPaymentMethodOptions?
+        /// Specifies which fields in the response should be expanded.
+        public var expand: [String]?
+        /// The FinancialAccount to pull funds from.
+        public var financialAccount: String
+        /// Set of key-value pairs that you can attach to an object.
+        public var metadata: [String: String]?
+        /// Statement descriptor to be shown on the receiving end of an OutboundTransfer.
+        public var statementDescriptor: String?
+
+        public init(
+            amount: Int,
+            currency: Stripe.Currency,
+            description: String? = nil,
+            destinationPaymentMethod: String? = nil,
+            destinationPaymentMethodData: DestinationPaymentMethodData? = nil,
+            destinationPaymentMethodOptions: DestinationPaymentMethodOptions? = nil,
+            expand: [String]? = nil,
+            financialAccount: String,
+            metadata: [String: String]? = nil,
+            statementDescriptor: String? = nil
+        ) {
+            self.amount = amount
+            self.currency = currency
+            self.description = description
+            self.destinationPaymentMethod = destinationPaymentMethod
+            self.destinationPaymentMethodData = destinationPaymentMethodData
+            self.destinationPaymentMethodOptions = destinationPaymentMethodOptions
+            self.expand = expand
+            self.financialAccount = financialAccount
+            self.metadata = metadata
+            self.statementDescriptor = statementDescriptor
+        }
+
+        /// Hash used to generate the PaymentMethod to be used for this OutboundTransfer.
+        public struct DestinationPaymentMethodData: Codable, Hashable, Sendable {
+            /// Required if type is set to `financial_account`.
+            public var financialAccount: String?
+            /// The type of the destination.
+            public var `type`: String
+
+            public init(
+                financialAccount: String? = nil,
+                `type`: String
+            ) {
+                self.financialAccount = financialAccount
+                self.`type` = `type`
+            }
+        }
+
+        /// Hash describing payment method configuration details.
+        public struct DestinationPaymentMethodOptions: Codable, Hashable, Sendable {
+            /// Optional fields for `us_bank_account`.
+            public var usBankAccount: Stripe.Clearable<UsBankAccount>?
+
+            public init(
+                usBankAccount: Stripe.Clearable<UsBankAccount>? = nil
+            ) {
+                self.usBankAccount = usBankAccount
+            }
+
+            public struct UsBankAccount: Codable, Hashable, Sendable {
+                /// Specifies the network rails to be used.
+                public var network: Network?
+
+                public init(
+                    network: Network? = nil
+                ) {
+                    self.network = network
+                }
+
+                public enum Network: String, Codable, Hashable, Sendable {
+                    case ach
+                    case usDomesticWire = "us_domestic_wire"
+                }
+            }
+        }
+    }
+
+    public typealias Response = Stripe.Treasury.OutboundTransfer
+}
+
+// POST /v1/test_helpers/treasury/outbound_transfers/{outbound_transfer}/fail
+extension Stripe.Treasury.OutboundTransfer.Fail {
+    public struct Request: Codable, Hashable, Sendable {
+        /// Specifies which fields in the response should be expanded.
+        public var expand: [String]?
+
+        public init(
+            expand: [String]? = nil
+        ) {
+            self.expand = expand
+        }
+    }
+
+    public typealias Response = Stripe.Treasury.OutboundTransfer
+}
+
+// GET /v1/treasury/outbound_transfers
+extension Stripe.Treasury.OutboundTransfer.List {
+    public struct Request: Codable, Hashable, Sendable {
+        /// A cursor for use in pagination.
+        public var endingBefore: String?
+        /// Specifies which fields in the response should be expanded.
+        public var expand: [String]?
+        /// Returns objects associated with this FinancialAccount.
+        public var financialAccount: String
+        /// A limit on the number of objects to be returned.
+        public var limit: Int?
+        /// A cursor for use in pagination.
+        public var startingAfter: String?
+        /// Only return OutboundTransfers that have the given status: `processing`, `canceled`, `failed`, `posted`, or `returned`.
+        public var status: Status?
+
+        public init(
+            endingBefore: String? = nil,
+            expand: [String]? = nil,
+            financialAccount: String,
+            limit: Int? = nil,
+            startingAfter: String? = nil,
+            status: Status? = nil
+        ) {
+            self.endingBefore = endingBefore
+            self.expand = expand
+            self.financialAccount = financialAccount
+            self.limit = limit
+            self.startingAfter = startingAfter
+            self.status = status
+        }
+
+        public enum Status: String, Codable, Hashable, Sendable {
+            case canceled
+            case failed
+            case posted
+            case processing
+            case returned
+        }
+    }
+
+    public typealias Response = Stripe.Page<Stripe.Treasury.OutboundTransfer>
+}
+
+// POST /v1/test_helpers/treasury/outbound_transfers/{outbound_transfer}/post
+extension Stripe.Treasury.OutboundTransfer.Post {
+    public struct Request: Codable, Hashable, Sendable {
+        /// Specifies which fields in the response should be expanded.
+        public var expand: [String]?
+
+        public init(
+            expand: [String]? = nil
+        ) {
+            self.expand = expand
+        }
+    }
+
+    public typealias Response = Stripe.Treasury.OutboundTransfer
+}
+
+// GET /v1/treasury/outbound_transfers/{outbound_transfer}
+extension Stripe.Treasury.OutboundTransfer.Retrieve {
+    public struct Request: Codable, Hashable, Sendable {
+        /// Specifies which fields in the response should be expanded.
+        public var expand: [String]?
+
+        public init(
+            expand: [String]? = nil
+        ) {
+            self.expand = expand
+        }
+    }
+
+    public typealias Response = Stripe.Treasury.OutboundTransfer
+}
+
+// POST /v1/test_helpers/treasury/outbound_transfers/{outbound_transfer}/return
+extension Stripe.Treasury.OutboundTransfer.ReturnOutboundTransfer {
+    public struct Request: Codable, Hashable, Sendable {
+        /// Specifies which fields in the response should be expanded.
+        public var expand: [String]?
+        /// Details about a returned OutboundTransfer.
+        public var returnedDetails: ReturnedDetails?
+
+        public init(
+            expand: [String]? = nil,
+            returnedDetails: ReturnedDetails? = nil
+        ) {
+            self.expand = expand
+            self.returnedDetails = returnedDetails
+        }
+
+        /// Details about a returned OutboundTransfer.
+        public struct ReturnedDetails: Codable, Hashable, Sendable {
+            /// Reason for the return.
+            public var code: Code?
+
+            public init(
+                code: Code? = nil
+            ) {
+                self.code = code
+            }
+
+            public enum Code: String, Codable, Hashable, Sendable {
+                case accountClosed = "account_closed"
+                case accountFrozen = "account_frozen"
+                case bankAccountRestricted = "bank_account_restricted"
+                case bankOwnershipChanged = "bank_ownership_changed"
+                case declined
+                case incorrectAccountHolderName = "incorrect_account_holder_name"
+                case invalidAccountNumber = "invalid_account_number"
+                case invalidCurrency = "invalid_currency"
+                case noAccount = "no_account"
+                case other
+            }
+        }
+    }
+
+    public typealias Response = Stripe.Treasury.OutboundTransfer
+}
+
+// POST /v1/test_helpers/treasury/outbound_transfers/{outbound_transfer}
+extension Stripe.Treasury.OutboundTransfer.Update {
+    public struct Request: Codable, Hashable, Sendable {
+        /// Specifies which fields in the response should be expanded.
+        public var expand: [String]?
+        /// Details about network-specific tracking information.
+        public var trackingDetails: TrackingDetails
+
+        public init(
+            expand: [String]? = nil,
+            trackingDetails: TrackingDetails
+        ) {
+            self.expand = expand
+            self.trackingDetails = trackingDetails
+        }
+
+        /// Details about network-specific tracking information.
+        public struct TrackingDetails: Codable, Hashable, Sendable {
+            /// ACH network tracking details.
+            public var ach: Ach?
+            /// The US bank account network used to send funds.
+            public var `type`: Type
+            /// US domestic wire network tracking details.
+            public var usDomesticWire: UsDomesticWire?
+
+            public init(
+                ach: Ach? = nil,
+                `type`: Type,
+                usDomesticWire: UsDomesticWire? = nil
+            ) {
+                self.ach = ach
+                self.`type` = `type`
+                self.usDomesticWire = usDomesticWire
+            }
+
+            public enum `Type`: String, Codable, Hashable, Sendable {
+                case ach
+                case usDomesticWire = "us_domestic_wire"
+            }
+
+            /// ACH network tracking details.
+            public struct Ach: Codable, Hashable, Sendable {
+                /// ACH trace ID for funds sent over the `ach` network.
+                public var traceId: String
+
+                public init(
+                    traceId: String
+                ) {
+                    self.traceId = traceId
+                }
+            }
+
+            /// US domestic wire network tracking details.
+            public struct UsDomesticWire: Codable, Hashable, Sendable {
+                /// CHIPS System Sequence Number (SSN) for funds sent over the `us_domestic_wire` network.
+                public var chips: String?
+                /// IMAD for funds sent over the `us_domestic_wire` network.
+                public var imad: String?
+                /// OMAD for funds sent over the `us_domestic_wire` network.
+                public var omad: String?
+
+                public init(
+                    chips: String? = nil,
+                    imad: String? = nil,
+                    omad: String? = nil
+                ) {
+                    self.chips = chips
+                    self.imad = imad
+                    self.omad = omad
+                }
+            }
+        }
+    }
+
+    public typealias Response = Stripe.Treasury.OutboundTransfer
+}

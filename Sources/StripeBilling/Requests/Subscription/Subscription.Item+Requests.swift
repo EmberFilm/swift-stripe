@@ -1,0 +1,458 @@
+//===----------------------------------------------------------------------===//
+//
+// This source file is part of the swift-stripe open source project
+//
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
+//
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
+
+import StripeCheckout
+import StripeCore
+import StripeIssuing
+import StripeModels
+import StripeProducts
+
+#if canImport(FoundationEssentials)
+import FoundationEssentials
+#else
+import Foundation
+#endif
+
+extension Stripe.Billing.Subscription.Item {
+    public enum Create {}
+    public enum Delete {}
+    public enum List {}
+    public enum Retrieve {}
+    public enum Update {}
+}
+
+// POST /v1/subscription_items
+extension Stripe.Billing.Subscription.Item.Create {
+    public struct Request: Codable, Hashable, Sendable {
+        /// Define thresholds at which an invoice will be sent, and the subscription advanced to a new billing period.
+        public var billingThresholds: Stripe.Clearable<BillingThresholds>?
+        /// The coupons to redeem into discounts for the subscription item.
+        public var discounts: Stripe.Clearable<[Discounts]>?
+        /// Specifies which fields in the response should be expanded.
+        public var expand: [String]?
+        /// Set of key-value pairs that you can attach to an object.
+        public var metadata: [String: String]?
+        /// Controls how Stripe handles payment when a subscription update requires payment and.
+        public var paymentBehavior: PaymentBehavior?
+        /// The identifier of the plan to add to the subscription.
+        public var plan: String?
+        /// The ID of the price object.
+        public var price: String?
+        /// Data used to generate a new Price object inline.
+        public var priceData: PriceData?
+        /// Determines how to handle prorations when the billing cycle changes (e.g., when switching plans, resetting.
+        public var prorationBehavior: ProrationBehavior?
+        /// If set, the proration will be calculated as though the subscription was updated at the given time.
+        public var prorationDate: Date?
+        /// The quantity you'd like to apply to the subscription item you're creating.
+        public var quantity: Int?
+        /// The identifier of the subscription to modify.
+        public var subscription: String
+        /// A list of Tax Rate ids.
+        public var taxRates: Stripe.Clearable<[String]>?
+
+        public init(
+            billingThresholds: Stripe.Clearable<BillingThresholds>? = nil,
+            discounts: Stripe.Clearable<[Discounts]>? = nil,
+            expand: [String]? = nil,
+            metadata: [String: String]? = nil,
+            paymentBehavior: PaymentBehavior? = nil,
+            plan: String? = nil,
+            price: String? = nil,
+            priceData: PriceData? = nil,
+            prorationBehavior: ProrationBehavior? = nil,
+            prorationDate: Date? = nil,
+            quantity: Int? = nil,
+            subscription: String,
+            taxRates: Stripe.Clearable<[String]>? = nil
+        ) {
+            self.billingThresholds = billingThresholds
+            self.discounts = discounts
+            self.expand = expand
+            self.metadata = metadata
+            self.paymentBehavior = paymentBehavior
+            self.plan = plan
+            self.price = price
+            self.priceData = priceData
+            self.prorationBehavior = prorationBehavior
+            self.prorationDate = prorationDate
+            self.quantity = quantity
+            self.subscription = subscription
+            self.taxRates = taxRates
+        }
+
+        public enum PaymentBehavior: String, Codable, Hashable, Sendable {
+            case allowIncomplete = "allow_incomplete"
+            case defaultIncomplete = "default_incomplete"
+            case errorIfIncomplete = "error_if_incomplete"
+            case pendingIfIncomplete = "pending_if_incomplete"
+        }
+
+        public enum ProrationBehavior: String, Codable, Hashable, Sendable {
+            case alwaysInvoice = "always_invoice"
+            case createProrations = "create_prorations"
+            case none
+        }
+
+        public struct BillingThresholds: Codable, Hashable, Sendable {
+            /// Number of units that meets the billing threshold to advance the subscription to a new billing period (e.g., it takes.
+            public var usageGte: Int
+
+            public init(
+                usageGte: Int
+            ) {
+                self.usageGte = usageGte
+            }
+        }
+
+        public struct Discounts: Codable, Hashable, Sendable {
+            /// ID of the coupon to create a new discount for.
+            public var coupon: String?
+            /// ID of an existing discount on the object (or one of its ancestors) to reuse.
+            public var discount: String?
+            /// ID of the promotion code to create a new discount for.
+            public var promotionCode: String?
+
+            public init(
+                coupon: String? = nil,
+                discount: String? = nil,
+                promotionCode: String? = nil
+            ) {
+                self.coupon = coupon
+                self.discount = discount
+                self.promotionCode = promotionCode
+            }
+        }
+
+        /// Data used to generate a new Price object inline.
+        public struct PriceData: Codable, Hashable, Sendable {
+            /// Three-letter ISO currency code, in lowercase.
+            public var currency: Stripe.Currency
+            /// The ID of the Product that this Price will belong to.
+            public var product: String
+            /// The recurring components of a price such as `interval` and `interval_count`.
+            public var recurring: Recurring
+            /// Only required if a default tax behavior) was not provided in the Stripe Tax settings.
+            public var taxBehavior: TaxBehavior?
+            /// A positive integer in cents (or local equivalent) (or 0 for a free price) representing how much to charge.
+            public var unitAmount: Int?
+            /// Same as `unit_amount`, but accepts a decimal value in cents (or local equivalent) with at most 12 decimal places.
+            public var unitAmountDecimal: String?
+
+            public init(
+                currency: Stripe.Currency,
+                product: String,
+                recurring: Recurring,
+                taxBehavior: TaxBehavior? = nil,
+                unitAmount: Int? = nil,
+                unitAmountDecimal: String? = nil
+            ) {
+                self.currency = currency
+                self.product = product
+                self.recurring = recurring
+                self.taxBehavior = taxBehavior
+                self.unitAmount = unitAmount
+                self.unitAmountDecimal = unitAmountDecimal
+            }
+
+            public enum TaxBehavior: String, Codable, Hashable, Sendable {
+                case exclusive
+                case inclusive
+                case unspecified
+            }
+
+            /// The recurring components of a price such as `interval` and `interval_count`.
+            public struct Recurring: Codable, Hashable, Sendable {
+                /// Specifies billing frequency.
+                public var interval: Interval
+                /// The number of intervals between subscription billings.
+                public var intervalCount: Int?
+
+                public init(
+                    interval: Interval,
+                    intervalCount: Int? = nil
+                ) {
+                    self.interval = interval
+                    self.intervalCount = intervalCount
+                }
+
+                public enum Interval: String, Codable, Hashable, Sendable {
+                    case day
+                    case month
+                    case week
+                    case year
+                }
+            }
+        }
+    }
+
+    public typealias Response = Stripe.Billing.Subscription.Item
+}
+
+// DELETE /v1/subscription_items/{item}
+extension Stripe.Billing.Subscription.Item.Delete {
+    public struct Request: Codable, Hashable, Sendable {
+        /// Delete all usage for the given subscription item.
+        public var clearUsage: Bool?
+        /// Controls how Stripe handles payment when a subscription update requires payment and.
+        public var paymentBehavior: PaymentBehavior?
+        /// Determines how to handle prorations when the billing cycle changes (e.g., when switching plans, resetting.
+        public var prorationBehavior: ProrationBehavior?
+        /// If set, the proration will be calculated as though the subscription was updated at the given time.
+        public var prorationDate: Date?
+
+        public init(
+            clearUsage: Bool? = nil,
+            paymentBehavior: PaymentBehavior? = nil,
+            prorationBehavior: ProrationBehavior? = nil,
+            prorationDate: Date? = nil
+        ) {
+            self.clearUsage = clearUsage
+            self.paymentBehavior = paymentBehavior
+            self.prorationBehavior = prorationBehavior
+            self.prorationDate = prorationDate
+        }
+
+        public enum PaymentBehavior: String, Codable, Hashable, Sendable {
+            case allowIncomplete = "allow_incomplete"
+            case defaultIncomplete = "default_incomplete"
+            case errorIfIncomplete = "error_if_incomplete"
+            case pendingIfIncomplete = "pending_if_incomplete"
+        }
+
+        public enum ProrationBehavior: String, Codable, Hashable, Sendable {
+            case alwaysInvoice = "always_invoice"
+            case createProrations = "create_prorations"
+            case none
+        }
+    }
+
+    public typealias Response = DeletedObject<Stripe.Billing.Subscription.Item>
+}
+
+// GET /v1/subscription_items
+extension Stripe.Billing.Subscription.Item.List {
+    public struct Request: Codable, Hashable, Sendable {
+        /// A cursor for use in pagination.
+        public var endingBefore: String?
+        /// Specifies which fields in the response should be expanded.
+        public var expand: [String]?
+        /// A limit on the number of objects to be returned.
+        public var limit: Int?
+        /// A cursor for use in pagination.
+        public var startingAfter: String?
+        /// The ID of the subscription whose items will be retrieved.
+        public var subscription: String
+
+        public init(
+            endingBefore: String? = nil,
+            expand: [String]? = nil,
+            limit: Int? = nil,
+            startingAfter: String? = nil,
+            subscription: String
+        ) {
+            self.endingBefore = endingBefore
+            self.expand = expand
+            self.limit = limit
+            self.startingAfter = startingAfter
+            self.subscription = subscription
+        }
+    }
+
+    public typealias Response = Stripe.Page<Stripe.Billing.Subscription.Item>
+}
+
+// GET /v1/subscription_items/{item}
+extension Stripe.Billing.Subscription.Item.Retrieve {
+    public struct Request: Codable, Hashable, Sendable {
+        /// Specifies which fields in the response should be expanded.
+        public var expand: [String]?
+
+        public init(
+            expand: [String]? = nil
+        ) {
+            self.expand = expand
+        }
+    }
+
+    public typealias Response = Stripe.Billing.Subscription.Item
+}
+
+// POST /v1/subscription_items/{item}
+extension Stripe.Billing.Subscription.Item.Update {
+    public struct Request: Codable, Hashable, Sendable {
+        /// Define thresholds at which an invoice will be sent, and the subscription advanced to a new billing period.
+        public var billingThresholds: Stripe.Clearable<BillingThresholds>?
+        /// The coupons to redeem into discounts for the subscription item.
+        public var discounts: Stripe.Clearable<[Discounts]>?
+        /// Specifies which fields in the response should be expanded.
+        public var expand: [String]?
+        /// Set of key-value pairs that you can attach to an object.
+        public var metadata: Stripe.Clearable<[String: String]>?
+        /// Indicates if a customer is on or off-session while an invoice payment is attempted.
+        public var offSession: Bool?
+        /// Controls how Stripe handles payment when a subscription update requires payment and.
+        public var paymentBehavior: PaymentBehavior?
+        /// The identifier of the new plan for this subscription item.
+        public var plan: String?
+        /// The ID of the price object.
+        public var price: String?
+        /// Data used to generate a new Price object inline.
+        public var priceData: PriceData?
+        /// Determines how to handle prorations when the billing cycle changes (e.g., when switching plans, resetting.
+        public var prorationBehavior: ProrationBehavior?
+        /// If set, the proration will be calculated as though the subscription was updated at the given time.
+        public var prorationDate: Date?
+        /// The quantity you'd like to apply to the subscription item you're creating.
+        public var quantity: Int?
+        /// A list of Tax Rate ids.
+        public var taxRates: Stripe.Clearable<[String]>?
+
+        public init(
+            billingThresholds: Stripe.Clearable<BillingThresholds>? = nil,
+            discounts: Stripe.Clearable<[Discounts]>? = nil,
+            expand: [String]? = nil,
+            metadata: Stripe.Clearable<[String: String]>? = nil,
+            offSession: Bool? = nil,
+            paymentBehavior: PaymentBehavior? = nil,
+            plan: String? = nil,
+            price: String? = nil,
+            priceData: PriceData? = nil,
+            prorationBehavior: ProrationBehavior? = nil,
+            prorationDate: Date? = nil,
+            quantity: Int? = nil,
+            taxRates: Stripe.Clearable<[String]>? = nil
+        ) {
+            self.billingThresholds = billingThresholds
+            self.discounts = discounts
+            self.expand = expand
+            self.metadata = metadata
+            self.offSession = offSession
+            self.paymentBehavior = paymentBehavior
+            self.plan = plan
+            self.price = price
+            self.priceData = priceData
+            self.prorationBehavior = prorationBehavior
+            self.prorationDate = prorationDate
+            self.quantity = quantity
+            self.taxRates = taxRates
+        }
+
+        public enum PaymentBehavior: String, Codable, Hashable, Sendable {
+            case allowIncomplete = "allow_incomplete"
+            case defaultIncomplete = "default_incomplete"
+            case errorIfIncomplete = "error_if_incomplete"
+            case pendingIfIncomplete = "pending_if_incomplete"
+        }
+
+        public enum ProrationBehavior: String, Codable, Hashable, Sendable {
+            case alwaysInvoice = "always_invoice"
+            case createProrations = "create_prorations"
+            case none
+        }
+
+        public struct BillingThresholds: Codable, Hashable, Sendable {
+            /// Number of units that meets the billing threshold to advance the subscription to a new billing period (e.g., it takes.
+            public var usageGte: Int
+
+            public init(
+                usageGte: Int
+            ) {
+                self.usageGte = usageGte
+            }
+        }
+
+        public struct Discounts: Codable, Hashable, Sendable {
+            /// ID of the coupon to create a new discount for.
+            public var coupon: String?
+            /// ID of an existing discount on the object (or one of its ancestors) to reuse.
+            public var discount: String?
+            /// ID of the promotion code to create a new discount for.
+            public var promotionCode: String?
+
+            public init(
+                coupon: String? = nil,
+                discount: String? = nil,
+                promotionCode: String? = nil
+            ) {
+                self.coupon = coupon
+                self.discount = discount
+                self.promotionCode = promotionCode
+            }
+        }
+
+        /// Data used to generate a new Price object inline.
+        public struct PriceData: Codable, Hashable, Sendable {
+            /// Three-letter ISO currency code, in lowercase.
+            public var currency: Stripe.Currency
+            /// The ID of the Product that this Price will belong to.
+            public var product: String
+            /// The recurring components of a price such as `interval` and `interval_count`.
+            public var recurring: Recurring
+            /// Only required if a default tax behavior) was not provided in the Stripe Tax settings.
+            public var taxBehavior: TaxBehavior?
+            /// A positive integer in cents (or local equivalent) (or 0 for a free price) representing how much to charge.
+            public var unitAmount: Int?
+            /// Same as `unit_amount`, but accepts a decimal value in cents (or local equivalent) with at most 12 decimal places.
+            public var unitAmountDecimal: String?
+
+            public init(
+                currency: Stripe.Currency,
+                product: String,
+                recurring: Recurring,
+                taxBehavior: TaxBehavior? = nil,
+                unitAmount: Int? = nil,
+                unitAmountDecimal: String? = nil
+            ) {
+                self.currency = currency
+                self.product = product
+                self.recurring = recurring
+                self.taxBehavior = taxBehavior
+                self.unitAmount = unitAmount
+                self.unitAmountDecimal = unitAmountDecimal
+            }
+
+            public enum TaxBehavior: String, Codable, Hashable, Sendable {
+                case exclusive
+                case inclusive
+                case unspecified
+            }
+
+            /// The recurring components of a price such as `interval` and `interval_count`.
+            public struct Recurring: Codable, Hashable, Sendable {
+                /// Specifies billing frequency.
+                public var interval: Interval
+                /// The number of intervals between subscription billings.
+                public var intervalCount: Int?
+
+                public init(
+                    interval: Interval,
+                    intervalCount: Int? = nil
+                ) {
+                    self.interval = interval
+                    self.intervalCount = intervalCount
+                }
+
+                public enum Interval: String, Codable, Hashable, Sendable {
+                    case day
+                    case month
+                    case week
+                    case year
+                }
+            }
+        }
+    }
+
+    public typealias Response = Stripe.Billing.Subscription.Item
+}

@@ -1,0 +1,117 @@
+//===----------------------------------------------------------------------===//
+//
+// This source file is part of the swift-stripe open source project
+//
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
+//
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
+
+import StripeCore
+import StripeModels
+
+#if canImport(FoundationEssentials)
+import FoundationEssentials
+#else
+import Foundation
+#endif
+
+extension Stripe.Connect.Application.Fee.Refund {
+    public enum Create {}
+    public enum List {}
+    public enum Retrieve {}
+    public enum Update {}
+}
+
+// POST /v1/application_fees/{id}/refunds
+extension Stripe.Connect.Application.Fee.Refund.Create {
+    public struct Request: Codable, Hashable, Sendable {
+        /// A positive integer, in _cents (or local equivalent)_, representing how much of this fee to refund.
+        public var amount: Int?
+        /// Specifies which fields in the response should be expanded.
+        public var expand: [String]?
+        /// Set of key-value pairs that you can attach to an object.
+        public var metadata: [String: String]?
+
+        public init(
+            amount: Int? = nil,
+            expand: [String]? = nil,
+            metadata: [String: String]? = nil
+        ) {
+            self.amount = amount
+            self.expand = expand
+            self.metadata = metadata
+        }
+    }
+
+    public typealias Response = Stripe.Connect.Application.Fee.Refund
+}
+
+// GET /v1/application_fees/{id}/refunds
+extension Stripe.Connect.Application.Fee.Refund.List {
+    public struct Request: Codable, Hashable, Sendable {
+        /// A cursor for use in pagination.
+        public var endingBefore: String?
+        /// Specifies which fields in the response should be expanded.
+        public var expand: [String]?
+        /// A limit on the number of objects to be returned.
+        public var limit: Int?
+        /// A cursor for use in pagination.
+        public var startingAfter: String?
+
+        public init(
+            endingBefore: String? = nil,
+            expand: [String]? = nil,
+            limit: Int? = nil,
+            startingAfter: String? = nil
+        ) {
+            self.endingBefore = endingBefore
+            self.expand = expand
+            self.limit = limit
+            self.startingAfter = startingAfter
+        }
+    }
+
+    public typealias Response = Stripe.Page<Stripe.Connect.Application.Fee.Refund>
+}
+
+// GET /v1/application_fees/{fee}/refunds/{id}
+extension Stripe.Connect.Application.Fee.Refund.Retrieve {
+    public struct Request: Codable, Hashable, Sendable {
+        /// Specifies which fields in the response should be expanded.
+        public var expand: [String]?
+
+        public init(
+            expand: [String]? = nil
+        ) {
+            self.expand = expand
+        }
+    }
+
+    public typealias Response = Stripe.Connect.Application.Fee.Refund
+}
+
+// POST /v1/application_fees/{fee}/refunds/{id}
+extension Stripe.Connect.Application.Fee.Refund.Update {
+    public struct Request: Codable, Hashable, Sendable {
+        /// Specifies which fields in the response should be expanded.
+        public var expand: [String]?
+        /// Set of key-value pairs that you can attach to an object.
+        public var metadata: Stripe.Clearable<[String: String]>?
+
+        public init(
+            expand: [String]? = nil,
+            metadata: Stripe.Clearable<[String: String]>? = nil
+        ) {
+            self.expand = expand
+            self.metadata = metadata
+        }
+    }
+
+    public typealias Response = Stripe.Connect.Application.Fee.Refund
+}

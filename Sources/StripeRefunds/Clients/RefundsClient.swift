@@ -1,0 +1,179 @@
+//===----------------------------------------------------------------------===//
+//
+// This source file is part of the swift-stripe open source project
+//
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
+//
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
+
+import NIOHTTP1
+import StripeCore
+import StripeModels
+
+#if canImport(FoundationEssentials)
+import FoundationEssentials
+#else
+import Foundation
+#endif
+
+/// Operations on Stripe.Refunds.Refund.
+///
+/// A protocol so tests can substitute a double; ``RefundsClient`` is the implementation that
+/// talks to Stripe.
+public protocol RefundsAPI: Sendable {
+    func cancel(
+        id: Stripe.Refunds.Refund.ID,
+        _ request: Stripe.Refunds.Refund.Cancel.Request,
+        idempotencyKey: String?
+    ) async throws -> Stripe.Refunds.Refund.Cancel.Response
+    func create(_ request: Stripe.Refunds.Refund.Create.Request, idempotencyKey: String?) async throws -> Stripe.Refunds.Refund.Create.Response
+    func expire(
+        id: Stripe.Refunds.Refund.ID,
+        _ request: Stripe.Refunds.Refund.Expire.Request,
+        idempotencyKey: String?
+    ) async throws -> Stripe.Refunds.Refund.Expire.Response
+    func list(_ request: Stripe.Refunds.Refund.List.Request) async throws -> Stripe.Refunds.Refund.List.Response
+    func listRefunds(charge: String, _ request: Stripe.Refunds.Refund.ListRefunds.Request) async throws -> Stripe.Refunds.Refund.ListRefunds.Response
+    func retrieve(
+        id: Stripe.Refunds.Refund.ID,
+        _ request: Stripe.Refunds.Refund.Retrieve.Request
+    ) async throws -> Stripe.Refunds.Refund.Retrieve.Response
+    func retrieveRefund(
+        charge: String,
+        refund: Stripe.Refunds.Refund.ID,
+        _ request: Stripe.Refunds.Refund.RetrieveRefund.Request
+    ) async throws -> Stripe.Refunds.Refund.RetrieveRefund.Response
+    func update(
+        id: Stripe.Refunds.Refund.ID,
+        _ request: Stripe.Refunds.Refund.Update.Request,
+        idempotencyKey: String?
+    ) async throws -> Stripe.Refunds.Refund.Update.Response
+}
+
+public struct RefundsClient: RefundsAPI {
+    private let api: StripeAPI
+
+    public init(api: StripeAPI) { self.api = api }
+
+    public func cancel(
+        id: Stripe.Refunds.Refund.ID,
+        _ request: Stripe.Refunds.Refund.Cancel.Request,
+        idempotencyKey: String?
+    ) async throws -> Stripe.Refunds.Refund.Cancel.Response {
+        try await api.send(.POST, "v1/refunds/\(id)/cancel", body: request, idempotencyKey: idempotencyKey)
+    }
+
+    public func create(_ request: Stripe.Refunds.Refund.Create.Request, idempotencyKey: String?) async throws -> Stripe.Refunds.Refund.Create.Response
+    {
+        try await api.send(.POST, "v1/refunds", body: request, idempotencyKey: idempotencyKey)
+    }
+
+    public func expire(
+        id: Stripe.Refunds.Refund.ID,
+        _ request: Stripe.Refunds.Refund.Expire.Request,
+        idempotencyKey: String?
+    ) async throws -> Stripe.Refunds.Refund.Expire.Response {
+        try await api.send(.POST, "v1/test_helpers/refunds/\(id)/expire", body: request, idempotencyKey: idempotencyKey)
+    }
+
+    public func list(_ request: Stripe.Refunds.Refund.List.Request) async throws -> Stripe.Refunds.Refund.List.Response {
+        try await api.list("v1/refunds", parameters: request)
+    }
+
+    public func listRefunds(
+        charge: String,
+        _ request: Stripe.Refunds.Refund.ListRefunds.Request
+    ) async throws -> Stripe.Refunds.Refund.ListRefunds.Response {
+        try await api.list("v1/charges/\(charge)/refunds", parameters: request)
+    }
+
+    public func retrieve(
+        id: Stripe.Refunds.Refund.ID,
+        _ request: Stripe.Refunds.Refund.Retrieve.Request
+    ) async throws -> Stripe.Refunds.Refund.Retrieve.Response {
+        try await api.list("v1/refunds/\(id)", parameters: request)
+    }
+
+    public func retrieveRefund(
+        charge: String,
+        refund: Stripe.Refunds.Refund.ID,
+        _ request: Stripe.Refunds.Refund.RetrieveRefund.Request
+    ) async throws -> Stripe.Refunds.Refund.RetrieveRefund.Response {
+        try await api.list("v1/charges/\(charge)/refunds/\(refund)", parameters: request)
+    }
+
+    public func update(
+        id: Stripe.Refunds.Refund.ID,
+        _ request: Stripe.Refunds.Refund.Update.Request,
+        idempotencyKey: String?
+    ) async throws -> Stripe.Refunds.Refund.Update.Response {
+        try await api.send(.POST, "v1/refunds/\(id)", body: request, idempotencyKey: idempotencyKey)
+    }
+}
+
+// A write with no explicit key behaves as it did before idempotency keys existed: no header,
+// and no retry. See ``StripeAPI/isSafeToRetry(_:)``.
+extension RefundsAPI {
+    public func cancel(
+        id: Stripe.Refunds.Refund.ID,
+        _ request: Stripe.Refunds.Refund.Cancel.Request
+    ) async throws -> Stripe.Refunds.Refund.Cancel.Response {
+        try await cancel(id: id, request, idempotencyKey: nil)
+    }
+
+    public func cancel(id: Stripe.Refunds.Refund.ID, idempotencyKey: String? = nil) async throws -> Stripe.Refunds.Refund.Cancel.Response {
+        try await cancel(id: id, .init(), idempotencyKey: idempotencyKey)
+    }
+
+    public func create(_ request: Stripe.Refunds.Refund.Create.Request) async throws -> Stripe.Refunds.Refund.Create.Response {
+        try await create(request, idempotencyKey: nil)
+    }
+
+    public func create(idempotencyKey: String? = nil) async throws -> Stripe.Refunds.Refund.Create.Response {
+        try await create(.init(), idempotencyKey: idempotencyKey)
+    }
+
+    public func expire(
+        id: Stripe.Refunds.Refund.ID,
+        _ request: Stripe.Refunds.Refund.Expire.Request
+    ) async throws -> Stripe.Refunds.Refund.Expire.Response {
+        try await expire(id: id, request, idempotencyKey: nil)
+    }
+
+    public func expire(id: Stripe.Refunds.Refund.ID, idempotencyKey: String? = nil) async throws -> Stripe.Refunds.Refund.Expire.Response {
+        try await expire(id: id, .init(), idempotencyKey: idempotencyKey)
+    }
+
+    public func list() async throws -> Stripe.Refunds.Refund.List.Response {
+        try await list(.init())
+    }
+
+    public func listRefunds(charge: String) async throws -> Stripe.Refunds.Refund.ListRefunds.Response {
+        try await listRefunds(charge: charge, .init())
+    }
+
+    public func retrieve(id: Stripe.Refunds.Refund.ID) async throws -> Stripe.Refunds.Refund.Retrieve.Response {
+        try await retrieve(id: id, .init())
+    }
+
+    public func retrieveRefund(charge: String, refund: Stripe.Refunds.Refund.ID) async throws -> Stripe.Refunds.Refund.RetrieveRefund.Response {
+        try await retrieveRefund(charge: charge, refund: refund, .init())
+    }
+
+    public func update(
+        id: Stripe.Refunds.Refund.ID,
+        _ request: Stripe.Refunds.Refund.Update.Request
+    ) async throws -> Stripe.Refunds.Refund.Update.Response {
+        try await update(id: id, request, idempotencyKey: nil)
+    }
+
+    public func update(id: Stripe.Refunds.Refund.ID, idempotencyKey: String? = nil) async throws -> Stripe.Refunds.Refund.Update.Response {
+        try await update(id: id, .init(), idempotencyKey: idempotencyKey)
+    }
+}

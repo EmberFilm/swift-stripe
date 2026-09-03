@@ -1,0 +1,126 @@
+//===----------------------------------------------------------------------===//
+//
+// This source file is part of the swift-stripe open source project
+//
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
+//
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
+
+import NIOHTTP1
+import StripeCore
+import StripeModels
+
+#if canImport(FoundationEssentials)
+import FoundationEssentials
+#else
+import Foundation
+#endif
+
+/// Operations on Stripe.Connect.Transfer.Reversal.
+///
+/// A protocol so tests can substitute a double; ``TransferReversalsClient`` is the implementation that
+/// talks to Stripe.
+public protocol TransferReversalsAPI: Sendable {
+    func create(
+        id: Stripe.Connect.Transfer.Reversal.ID,
+        _ request: Stripe.Connect.Transfer.Reversal.Create.Request,
+        idempotencyKey: String?
+    ) async throws -> Stripe.Connect.Transfer.Reversal.Create.Response
+    func list(
+        id: Stripe.Connect.Transfer.Reversal.ID,
+        _ request: Stripe.Connect.Transfer.Reversal.List.Request
+    ) async throws -> Stripe.Connect.Transfer.Reversal.List.Response
+    func retrieve(
+        transfer: String,
+        id: String,
+        _ request: Stripe.Connect.Transfer.Reversal.Retrieve.Request
+    ) async throws -> Stripe.Connect.Transfer.Reversal.Retrieve.Response
+    func update(
+        transfer: String,
+        id: String,
+        _ request: Stripe.Connect.Transfer.Reversal.Update.Request,
+        idempotencyKey: String?
+    ) async throws -> Stripe.Connect.Transfer.Reversal.Update.Response
+}
+
+public struct TransferReversalsClient: TransferReversalsAPI {
+    private let api: StripeAPI
+
+    public init(api: StripeAPI) { self.api = api }
+
+    public func create(
+        id: Stripe.Connect.Transfer.Reversal.ID,
+        _ request: Stripe.Connect.Transfer.Reversal.Create.Request,
+        idempotencyKey: String?
+    ) async throws -> Stripe.Connect.Transfer.Reversal.Create.Response {
+        try await api.send(.POST, "v1/transfers/\(id)/reversals", body: request, idempotencyKey: idempotencyKey)
+    }
+
+    public func list(
+        id: Stripe.Connect.Transfer.Reversal.ID,
+        _ request: Stripe.Connect.Transfer.Reversal.List.Request
+    ) async throws -> Stripe.Connect.Transfer.Reversal.List.Response {
+        try await api.list("v1/transfers/\(id)/reversals", parameters: request)
+    }
+
+    public func retrieve(
+        transfer: String,
+        id: String,
+        _ request: Stripe.Connect.Transfer.Reversal.Retrieve.Request
+    ) async throws -> Stripe.Connect.Transfer.Reversal.Retrieve.Response {
+        try await api.list("v1/transfers/\(transfer)/reversals/\(id)", parameters: request)
+    }
+
+    public func update(
+        transfer: String,
+        id: String,
+        _ request: Stripe.Connect.Transfer.Reversal.Update.Request,
+        idempotencyKey: String?
+    ) async throws -> Stripe.Connect.Transfer.Reversal.Update.Response {
+        try await api.send(.POST, "v1/transfers/\(transfer)/reversals/\(id)", body: request, idempotencyKey: idempotencyKey)
+    }
+}
+
+// A write with no explicit key behaves as it did before idempotency keys existed: no header,
+// and no retry. See ``StripeAPI/isSafeToRetry(_:)``.
+extension TransferReversalsAPI {
+    public func create(
+        id: Stripe.Connect.Transfer.Reversal.ID,
+        _ request: Stripe.Connect.Transfer.Reversal.Create.Request
+    ) async throws -> Stripe.Connect.Transfer.Reversal.Create.Response {
+        try await create(id: id, request, idempotencyKey: nil)
+    }
+
+    public func create(
+        id: Stripe.Connect.Transfer.Reversal.ID,
+        idempotencyKey: String? = nil
+    ) async throws -> Stripe.Connect.Transfer.Reversal.Create.Response {
+        try await create(id: id, .init(), idempotencyKey: idempotencyKey)
+    }
+
+    public func list(id: Stripe.Connect.Transfer.Reversal.ID) async throws -> Stripe.Connect.Transfer.Reversal.List.Response {
+        try await list(id: id, .init())
+    }
+
+    public func retrieve(transfer: String, id: String) async throws -> Stripe.Connect.Transfer.Reversal.Retrieve.Response {
+        try await retrieve(transfer: transfer, id: id, .init())
+    }
+
+    public func update(
+        transfer: String,
+        id: String,
+        _ request: Stripe.Connect.Transfer.Reversal.Update.Request
+    ) async throws -> Stripe.Connect.Transfer.Reversal.Update.Response {
+        try await update(transfer: transfer, id: id, request, idempotencyKey: nil)
+    }
+
+    public func update(transfer: String, id: String, idempotencyKey: String? = nil) async throws -> Stripe.Connect.Transfer.Reversal.Update.Response {
+        try await update(transfer: transfer, id: id, .init(), idempotencyKey: idempotencyKey)
+    }
+}

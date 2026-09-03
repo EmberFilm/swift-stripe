@@ -1,0 +1,184 @@
+//===----------------------------------------------------------------------===//
+//
+// This source file is part of the swift-stripe open source project
+//
+// Copyright (c) 2026 the swift-stripe project authors
+// Licensed under Apache License v2.0
+//
+// See LICENSE for license information
+// See NOTICE for attribution of derived work
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
+
+import NIOHTTP1
+import StripeCore
+import StripeIssuing
+import StripeModels
+
+#if canImport(FoundationEssentials)
+import FoundationEssentials
+#else
+import Foundation
+#endif
+
+/// Operations on Stripe.Treasury.InboundTransfer.
+///
+/// A protocol so tests can substitute a double; ``TreasuryInboundTransfersClient`` is the implementation that
+/// talks to Stripe.
+public protocol TreasuryInboundTransfersAPI: Sendable {
+    func cancel(
+        id: Stripe.Treasury.InboundTransfer.ID,
+        _ request: Stripe.Treasury.InboundTransfer.Cancel.Request,
+        idempotencyKey: String?
+    ) async throws -> Stripe.Treasury.InboundTransfer.Cancel.Response
+    func create(
+        _ request: Stripe.Treasury.InboundTransfer.Create.Request,
+        idempotencyKey: String?
+    ) async throws -> Stripe.Treasury.InboundTransfer.Create.Response
+    func fail(
+        id: Stripe.Treasury.InboundTransfer.ID,
+        _ request: Stripe.Treasury.InboundTransfer.Fail.Request,
+        idempotencyKey: String?
+    ) async throws -> Stripe.Treasury.InboundTransfer.Fail.Response
+    func list(_ request: Stripe.Treasury.InboundTransfer.List.Request) async throws -> Stripe.Treasury.InboundTransfer.List.Response
+    func retrieve(
+        id: Stripe.Treasury.InboundTransfer.ID,
+        _ request: Stripe.Treasury.InboundTransfer.Retrieve.Request
+    ) async throws -> Stripe.Treasury.InboundTransfer.Retrieve.Response
+    func returnInboundTransfer(
+        id: Stripe.Treasury.InboundTransfer.ID,
+        _ request: Stripe.Treasury.InboundTransfer.ReturnInboundTransfer.Request,
+        idempotencyKey: String?
+    ) async throws -> Stripe.Treasury.InboundTransfer.ReturnInboundTransfer.Response
+    func succeed(
+        id: Stripe.Treasury.InboundTransfer.ID,
+        _ request: Stripe.Treasury.InboundTransfer.Succeed.Request,
+        idempotencyKey: String?
+    ) async throws -> Stripe.Treasury.InboundTransfer.Succeed.Response
+}
+
+public struct TreasuryInboundTransfersClient: TreasuryInboundTransfersAPI {
+    private let api: StripeAPI
+
+    public init(api: StripeAPI) { self.api = api }
+
+    public func cancel(
+        id: Stripe.Treasury.InboundTransfer.ID,
+        _ request: Stripe.Treasury.InboundTransfer.Cancel.Request,
+        idempotencyKey: String?
+    ) async throws -> Stripe.Treasury.InboundTransfer.Cancel.Response {
+        try await api.send(.POST, "v1/treasury/inbound_transfers/\(id)/cancel", body: request, idempotencyKey: idempotencyKey)
+    }
+
+    public func create(
+        _ request: Stripe.Treasury.InboundTransfer.Create.Request,
+        idempotencyKey: String?
+    ) async throws -> Stripe.Treasury.InboundTransfer.Create.Response {
+        try await api.send(.POST, "v1/treasury/inbound_transfers", body: request, idempotencyKey: idempotencyKey)
+    }
+
+    public func fail(
+        id: Stripe.Treasury.InboundTransfer.ID,
+        _ request: Stripe.Treasury.InboundTransfer.Fail.Request,
+        idempotencyKey: String?
+    ) async throws -> Stripe.Treasury.InboundTransfer.Fail.Response {
+        try await api.send(.POST, "v1/test_helpers/treasury/inbound_transfers/\(id)/fail", body: request, idempotencyKey: idempotencyKey)
+    }
+
+    public func list(_ request: Stripe.Treasury.InboundTransfer.List.Request) async throws -> Stripe.Treasury.InboundTransfer.List.Response {
+        try await api.list("v1/treasury/inbound_transfers", parameters: request)
+    }
+
+    public func retrieve(
+        id: Stripe.Treasury.InboundTransfer.ID,
+        _ request: Stripe.Treasury.InboundTransfer.Retrieve.Request
+    ) async throws -> Stripe.Treasury.InboundTransfer.Retrieve.Response {
+        try await api.list("v1/treasury/inbound_transfers/\(id)", parameters: request)
+    }
+
+    public func returnInboundTransfer(
+        id: Stripe.Treasury.InboundTransfer.ID,
+        _ request: Stripe.Treasury.InboundTransfer.ReturnInboundTransfer.Request,
+        idempotencyKey: String?
+    ) async throws -> Stripe.Treasury.InboundTransfer.ReturnInboundTransfer.Response {
+        try await api.send(.POST, "v1/test_helpers/treasury/inbound_transfers/\(id)/return", body: request, idempotencyKey: idempotencyKey)
+    }
+
+    public func succeed(
+        id: Stripe.Treasury.InboundTransfer.ID,
+        _ request: Stripe.Treasury.InboundTransfer.Succeed.Request,
+        idempotencyKey: String?
+    ) async throws -> Stripe.Treasury.InboundTransfer.Succeed.Response {
+        try await api.send(.POST, "v1/test_helpers/treasury/inbound_transfers/\(id)/succeed", body: request, idempotencyKey: idempotencyKey)
+    }
+}
+
+// A write with no explicit key behaves as it did before idempotency keys existed: no header,
+// and no retry. See ``StripeAPI/isSafeToRetry(_:)``.
+extension TreasuryInboundTransfersAPI {
+    public func cancel(
+        id: Stripe.Treasury.InboundTransfer.ID,
+        _ request: Stripe.Treasury.InboundTransfer.Cancel.Request
+    ) async throws -> Stripe.Treasury.InboundTransfer.Cancel.Response {
+        try await cancel(id: id, request, idempotencyKey: nil)
+    }
+
+    public func cancel(
+        id: Stripe.Treasury.InboundTransfer.ID,
+        idempotencyKey: String? = nil
+    ) async throws -> Stripe.Treasury.InboundTransfer.Cancel.Response {
+        try await cancel(id: id, .init(), idempotencyKey: idempotencyKey)
+    }
+
+    public func create(_ request: Stripe.Treasury.InboundTransfer.Create.Request) async throws -> Stripe.Treasury.InboundTransfer.Create.Response {
+        try await create(request, idempotencyKey: nil)
+    }
+
+    public func fail(
+        id: Stripe.Treasury.InboundTransfer.ID,
+        _ request: Stripe.Treasury.InboundTransfer.Fail.Request
+    ) async throws -> Stripe.Treasury.InboundTransfer.Fail.Response {
+        try await fail(id: id, request, idempotencyKey: nil)
+    }
+
+    public func fail(
+        id: Stripe.Treasury.InboundTransfer.ID,
+        idempotencyKey: String? = nil
+    ) async throws -> Stripe.Treasury.InboundTransfer.Fail.Response {
+        try await fail(id: id, .init(), idempotencyKey: idempotencyKey)
+    }
+
+    public func retrieve(id: Stripe.Treasury.InboundTransfer.ID) async throws -> Stripe.Treasury.InboundTransfer.Retrieve.Response {
+        try await retrieve(id: id, .init())
+    }
+
+    public func returnInboundTransfer(
+        id: Stripe.Treasury.InboundTransfer.ID,
+        _ request: Stripe.Treasury.InboundTransfer.ReturnInboundTransfer.Request
+    ) async throws -> Stripe.Treasury.InboundTransfer.ReturnInboundTransfer.Response {
+        try await returnInboundTransfer(id: id, request, idempotencyKey: nil)
+    }
+
+    public func returnInboundTransfer(
+        id: Stripe.Treasury.InboundTransfer.ID,
+        idempotencyKey: String? = nil
+    ) async throws -> Stripe.Treasury.InboundTransfer.ReturnInboundTransfer.Response {
+        try await returnInboundTransfer(id: id, .init(), idempotencyKey: idempotencyKey)
+    }
+
+    public func succeed(
+        id: Stripe.Treasury.InboundTransfer.ID,
+        _ request: Stripe.Treasury.InboundTransfer.Succeed.Request
+    ) async throws -> Stripe.Treasury.InboundTransfer.Succeed.Response {
+        try await succeed(id: id, request, idempotencyKey: nil)
+    }
+
+    public func succeed(
+        id: Stripe.Treasury.InboundTransfer.ID,
+        idempotencyKey: String? = nil
+    ) async throws -> Stripe.Treasury.InboundTransfer.Succeed.Response {
+        try await succeed(id: id, .init(), idempotencyKey: idempotencyKey)
+    }
+}
