@@ -22,12 +22,15 @@ let package = Package(
     ],
     targets: [
         .target(name: "StripeModels"),
-        .target(name: "StripeCore", dependencies: [
-            "StripeModels",
-            .product(name: "AsyncHTTPClient", package: "async-http-client"),
-            .product(name: "Crypto", package: "swift-crypto"),
-            .product(name: "Configuration", package: "swift-configuration"),
-        ]),
+        .target(
+            name: "StripeCore",
+            dependencies: [
+                "StripeModels",
+                .product(name: "AsyncHTTPClient", package: "async-http-client"),
+                .product(name: "Crypto", package: "swift-crypto"),
+                .product(name: "Configuration", package: "swift-configuration"),
+            ]
+        ),
         .target(name: "StripeBalance", dependencies: ["StripeModels", "StripeCore", "StripeIssuing"]),
         .target(name: "StripeBilling", dependencies: ["StripeModels", "StripeCore", "StripeCheckout", "StripeIssuing", "StripeProducts"]),
         .target(name: "StripeCharges", dependencies: ["StripeModels", "StripeCore"]),
@@ -46,7 +49,10 @@ let package = Package(
         .target(name: "StripeIdentity", dependencies: ["StripeModels", "StripeCore"]),
         .target(name: "StripeIssuing", dependencies: ["StripeModels", "StripeCore"]),
         .target(name: "StripeMandates", dependencies: ["StripeModels", "StripeCore"]),
-        .target(name: "StripeMisc", dependencies: ["StripeModels", "StripeCore", "StripeCheckout", "StripeIssuing", "StripePromotion", "StripeReporting"]),
+        .target(
+            name: "StripeMisc",
+            dependencies: ["StripeModels", "StripeCore", "StripeCheckout", "StripeIssuing", "StripePromotion", "StripeReporting"]
+        ),
         .target(name: "StripePaymentIntents", dependencies: ["StripeModels", "StripeCore"]),
         .target(name: "StripePaymentMethodConfigurations", dependencies: ["StripeModels", "StripeCore"]),
         .target(name: "StripePaymentMethods", dependencies: ["StripeModels", "StripeCore"]),
@@ -61,11 +67,24 @@ let package = Package(
         .target(name: "StripeTokens", dependencies: ["StripeModels", "StripeCore"]),
         .target(name: "StripeTreasury", dependencies: ["StripeModels", "StripeCore", "StripeIssuing"]),
         .target(name: "StripeWebElements", dependencies: ["StripeModels", "StripeCore"]),
-        .target(name: "StripeWebhooks", dependencies: [
-            "StripeModels", "StripeCore",
-            .product(name: "Crypto", package: "swift-crypto"),
-        ]),
-        .target(name: "Stripe", dependencies: ["StripeModels", "StripeCore", "StripeWebhooks", "StripeBalance", "StripeBilling", "StripeCharges", "StripeCheckout", "StripeClimate", "StripeConnect", "StripeCustomers", "StripeDisputes", "StripeEntitlements", "StripeEvents", "StripeFileLinks", "StripeFiles", "StripeFinancialConnections", "StripeForwarding", "StripeFraud", "StripeIdentity", "StripeIssuing", "StripeMandates", "StripeMisc", "StripePaymentIntents", "StripePaymentMethodConfigurations", "StripePaymentMethods", "StripePayouts", "StripeProducts", "StripePromotion", "StripeRefunds", "StripeReporting", "StripeSetup", "StripeTax", "StripeTerminal", "StripeTokens", "StripeTreasury", "StripeWebElements"]),
+        .target(
+            name: "StripeWebhooks",
+            dependencies: [
+                "StripeModels", "StripeCore",
+                .product(name: "Crypto", package: "swift-crypto"),
+            ]
+        ),
+        .target(
+            name: "Stripe",
+            dependencies: [
+                "StripeModels", "StripeCore", "StripeWebhooks", "StripeBalance", "StripeBilling", "StripeCharges", "StripeCheckout", "StripeClimate",
+                "StripeConnect", "StripeCustomers", "StripeDisputes", "StripeEntitlements", "StripeEvents", "StripeFileLinks", "StripeFiles",
+                "StripeFinancialConnections", "StripeForwarding", "StripeFraud", "StripeIdentity", "StripeIssuing", "StripeMandates", "StripeMisc",
+                "StripePaymentIntents", "StripePaymentMethodConfigurations", "StripePaymentMethods", "StripePayouts", "StripeProducts",
+                "StripePromotion", "StripeRefunds", "StripeReporting", "StripeSetup", "StripeTax", "StripeTerminal", "StripeTokens", "StripeTreasury",
+                "StripeWebElements",
+            ]
+        ),
         .testTarget(
             name: "StripeTests",
             dependencies: ["Stripe"],
